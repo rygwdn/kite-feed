@@ -2,6 +2,8 @@
 
 A static site generator that combines multiple Kagi Kite JSON feeds, filters and merges them, and generates both RSS feeds and HTML pages. The site is automatically updated daily via GitHub Actions and served via GitHub Pages.
 
+🌐 **Live Site**: [https://rygwdn.github.io/kite-feed](https://rygwdn.github.io/kite-feed)
+
 ## Features
 
 - 🔄 **Automated Updates**: Cron-based GitHub Action runs daily at 12:30 PM UTC (30 minutes after Kite updates)
@@ -80,13 +82,14 @@ A static site generator that combines multiple Kagi Kite JSON feeds, filters and
 ├── .github/
 │   └── workflows/
 │       ├── update-feed.yml      # Daily cron job to update feed
-│       └── pages.yml             # GitHub Pages deployment
+│       └── ci.yml                # CI checks (linting, formatting, validation)
 ├── stories/                      # Generated HTML pages (created automatically)
 ├── config.json                   # Configuration file
 ├── process_kite.py               # Main processing script
 ├── generate_rss.py               # RSS feed generator
 ├── generate_html.py              # HTML page generator
 ├── requirements.txt              # Python dependencies
+├── pyproject.toml                # Python tool configuration (black, flake8, mypy)
 ├── feed.xml                      # Generated RSS feed (created automatically)
 ├── index.html                    # Generated index page (created automatically)
 └── README.md                     # This file
