@@ -1,4 +1,4 @@
-name: Update Kite Feed
+name: Update Kite Feed and Deploy
 
 on:
   schedule:
@@ -7,18 +7,25 @@ on:
   workflow_dispatch: # Allow manual triggering
 
 permissions:
-  contents: write
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
-  update-feed:
+  update-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     
     steps:
     - name: Checkout repository
       uses: actions/checkout@v4
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        
+      
     - name: Set up Python
       uses: actions/setup-python@v5
       with:
@@ -40,14 +47,14 @@ jobs:
       run: |
         python3 generate_html.py < processed_stories.json || exit 1
         
-    - name: Commit and push changes
-      run: |
-        git config --local user.email "action@github.com"
-        git config --local user.name "GitHub Action"
-        git add feed.xml index.html stories/ processed_stories.json
-        if git diff --staged --quiet; then
-          echo "No changes to commit"
-        else
-          git commit -m "Update feed: $(date +'%Y-%m-%d %H:%M:%S UTC')"
-          git push
-        fi
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
