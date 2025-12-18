@@ -44,11 +44,11 @@ jobs:
         
     - name: Generate RSS feed
       run: |
-        python3 generate_rss.py < processed_stories.json > feed.xml || exit 1
+        python3 generate_rss.py < processed_stories.json > feed.xml 2>&1 || exit 1
         
     - name: Generate HTML pages
       run: |
-        python3 generate_html.py < processed_stories.json || exit 1
+        python3 generate_html.py < processed_stories.json 2>&1 || exit 1
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
