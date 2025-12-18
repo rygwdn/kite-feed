@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>{{ config.site.title|e }}</title>
+        <link>{{ config.site.base_url }}</link>
+        <description>{{ config.site.description|e }}</description>
+        <language>en-us</language>
+        <lastBuildDate>{{ build_date }}</lastBuildDate>
+        <generator>Kite Feed Generator</generator>
+        <managingEditor>{{ config.site.author|e }}</managingEditor>
+{% for story in stories %}
+    <item>
+        <title>{{ story.title|e }}</title>
+        <link>{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_urls[loop.index0]|e }}</link>
+        <guid isPermaLink="true">{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_urls[loop.index0]|e }}</guid>
+        <pubDate>{{ story.pub_date }}</pubDate>
+        <description><![CDATA[{{ story.summary or story.title }}]]></description>
+        <content:encoded><![CDATA[{% include 'story_content.html' %}]]></content:encoded>
+    </item>
+{% endfor %}
+    </channel>
+</rss>

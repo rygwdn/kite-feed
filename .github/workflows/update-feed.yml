@@ -1,0 +1,63 @@
+name: Update Kite Feed and Deploy
+
+on:
+  schedule:
+    # Run daily at 12:30 PM UTC (30 minutes after Kite updates at 12 PM UTC)
+    - cron: '30 12 * * *'
+  workflow_dispatch: # Allow manual triggering
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  update-and-deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+        
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        
+    - name: Process Kite feeds
+      run: |
+        python3 process_kite.py > processed_stories.json || exit 1
+        
+    - name: Generate RSS feed
+      run: |
+        python3 generate_rss.py < processed_stories.json > feed.xml || exit 1
+        
+    - name: Generate HTML pages
+      run: |
+        python3 generate_html.py < processed_stories.json || exit 1
+        
+    - name: Setup Pages
+      uses: actions/configure-pages@v4
+      
+    - name: Upload artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: '.'
+        
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4

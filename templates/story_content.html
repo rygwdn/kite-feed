@@ -1,0 +1,190 @@
+{# Story Content Template - Shared between RSS and HTML #}
+{# heading_level should be passed as a variable or be part of story object #}
+
+{# Title #}
+{% if story.title %}
+<h{{ story.heading_level|default(1) }}>{{ story.title|e }}</h{{ story.heading_level|default(1) }}>
+{% endif %}
+
+{# Category #}
+{% if story.category %}
+<p class='category'><strong>Category:</strong> {{ story.category|e }}</p>
+{% endif %}
+
+{# Summary #}
+{% if story.summary %}
+<div class='summary'><p>{{ story.summary|e }}</p></div>
+{% endif %}
+
+{# Quote #}
+{% if story.quote %}
+<blockquote><p>{{ story.quote|e }}</p>
+{% if story.quote_author %}
+<cite>— {{ story.quote_author|e }}{% if story.quote_attribution %} ({{ story.quote_attribution|e }}){% endif %}</cite>
+{% endif %}
+</blockquote>
+{% endif %}
+
+{# Did you know #}
+{% if story.did_you_know %}
+<div class='did-you-know'><p><strong>Did you know:</strong> {{ story.did_you_know|e }}</p></div>
+{% endif %}
+
+{# Talking points #}
+{% if story.talking_points %}
+<h{{ (story.heading_level|default(1)) + 1 }}>Key Points</h{{ (story.heading_level|default(1)) + 1 }}><ul>
+{% for point in story.talking_points %}
+<li>{{ point|e }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Perspectives #}
+{% if story.perspectives %}
+<h{{ story.heading_level|default(1) + 1 }}>Perspectives</h{{ story.heading_level|default(1) + 1 }}>
+{% for perspective in story.perspectives %}
+{% if perspective.text %}
+<div class='perspective'><p>{{ perspective.text|e }}</p>
+{% if perspective.sources %}
+<p><strong>Sources:</strong> 
+{% set source_links = [] %}
+{% for source in perspective.sources %}
+{% if source.url %}
+{% set _ = source_links.append('<a href="' + source.url|e + '">' + (source.name|e if source.name else source.url|e) + '</a>') %}
+{% elif source.name %}
+{% set _ = source_links.append(source.name|e) %}
+{% endif %}
+{% endfor %}
+{{ source_links|join(', ') }}
+</p>
+{% endif %}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{# Timeline #}
+{% if story.timeline %}
+<h{{ story.heading_level|default(1) + 1 }}>Timeline</h{{ story.heading_level|default(1) + 1 }}><ul>
+{% for event in story.timeline %}
+{% if event.date and event.content %}
+<li><strong>{{ event.date|e }}:</strong> {{ event.content|e }}</li>
+{% elif event.content %}
+<li>{{ event.content|e }}</li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Technical details #}
+{% if story.technical_details %}
+<h{{ story.heading_level|default(1) + 1 }}>Technical Details</h{{ story.heading_level|default(1) + 1 }}><ul>
+{% for detail in story.technical_details %}
+<li>{{ detail|e }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Industry impact #}
+{% if story.industry_impact %}
+<h{{ story.heading_level|default(1) + 1 }}>Industry Impact</h{{ story.heading_level|default(1) + 1 }}><ul>
+{% for impact in story.industry_impact %}
+<li>{{ impact|e }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Scientific significance #}
+{% if story.scientific_significance %}
+<h{{ story.heading_level|default(1) + 1 }}>Scientific Significance</h{{ story.heading_level|default(1) + 1 }}><ul>
+{% for sig in story.scientific_significance %}
+<li>{{ sig|e }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Historical background #}
+{% if story.historical_background %}
+<h{{ story.heading_level|default(1) + 1 }}>Historical Background</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.historical_background|e }}</p>
+{% endif %}
+
+{# Future outlook #}
+{% if story.future_outlook %}
+<h{{ story.heading_level|default(1) + 1 }}>Future Outlook</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.future_outlook|e }}</p>
+{% endif %}
+
+{# Q&A #}
+{% if story.suggested_qna %}
+<h{{ story.heading_level|default(1) + 1 }}>Q&A</h{{ story.heading_level|default(1) + 1 }}>
+{% for qna in story.suggested_qna %}
+{% if qna.question %}
+<div class='qna'><p><strong>Q:</strong> {{ qna.question|e }}</p>
+{% if qna.answer %}
+<p><strong>A:</strong> {{ qna.answer|e }}</p>
+{% endif %}
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{# User action items #}
+{% if story.user_action_items %}
+<h{{ story.heading_level|default(1) + 1 }}>Action Items</h{{ story.heading_level|default(1) + 1 }}><ul>
+{% for item in story.user_action_items %}
+<li>{{ item|e }}</li>
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Primary image #}
+{% if story.primary_image and story.primary_image.url %}
+<div class='image'>
+{% if story.primary_image.link %}
+<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" /></a>
+{% else %}
+<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" />
+{% endif %}
+{% if story.primary_image.caption %}
+<p class='caption'>{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} <span class='credit'>({{ story.primary_image.credit|e }})</span>{% endif %}</p>
+{% endif %}
+</div>
+{% endif %}
+
+{# Source URLs #}
+{% set primary_url = story.url %}
+{% if primary_url and not primary_url.startswith('hash:') %}
+<p class="sources"><strong>Primary Source:</strong> <a href="{{ primary_url|e }}">{{ primary_url|e }}</a></p>
+{% endif %}
+
+{% set source_urls = story.source_urls or [] %}
+{% if source_urls|length > 1 %}
+<p><strong>Additional Sources:</strong></p><ul>
+{% for url in source_urls %}
+{% if url != primary_url %}
+<li><a href="{{ url|e }}">{{ url|e }}</a></li>
+{% endif %}
+{% endfor %}
+</ul>
+{% endif %}
+
+{# Domains #}
+{% if story.domains %}
+{% set domain_names = [] %}
+{% for domain in story.domains %}
+{% if domain.name %}
+{% set _ = domain_names.append(domain.name) %}
+{% endif %}
+{% endfor %}
+{% if domain_names %}
+<p><strong>Sources:</strong> {{ domain_names|join(', ')|e }}</p>
+{% endif %}
+{% endif %}
+
+{# Metadata #}
+{% set metadata = [] %}
+{% if story.cluster_number is not none %}{% set _ = metadata.append('Cluster #' + story.cluster_number|string) %}{% endif %}
+{% if story.unique_domains is not none %}{% set _ = metadata.append(story.unique_domains|string + ' unique domains') %}{% endif %}
+{% if story.number_of_titles is not none %}{% set _ = metadata.append(story.number_of_titles|string + ' articles') %}{% endif %}
+{% if metadata %}
+<p class='metadata'><strong>Metadata:</strong> {{ metadata|join(', ')|e }}</p>
+{% endif %}
