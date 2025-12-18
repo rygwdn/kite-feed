@@ -59,6 +59,13 @@ def get_source_urls_from_cluster(cluster: Dict[str, Any]) -> List[str]:
     """Extract all source URLs from a cluster."""
     urls = set()
     
+    # Get URLs from articles list (primary source for deduplication)
+    articles = cluster.get("articles", [])
+    for article in articles:
+        article_link = article.get("link")
+        if article_link:
+            urls.add(article_link)
+    
     # Get quote source URL
     quote_url = cluster.get("quote_source_url")
     if quote_url:
@@ -83,17 +90,30 @@ def get_source_urls_from_cluster(cluster: Dict[str, Any]) -> List[str]:
 
 def get_primary_source_url(cluster: Dict[str, Any]) -> str:
     """Get the primary source URL for deduplication."""
-    urls = get_source_urls_from_cluster(cluster)
+    # Prefer first article link (most reliable source)
+    articles = cluster.get("articles", [])
+    if articles and articles[0].get("link"):
+        return articles[0].get("link")
     
-    # Prefer quote_source_url, then first perspective source, then image link
+    # Fallback to quote_source_url
     if cluster.get("quote_source_url"):
         return cluster.get("quote_source_url")
-    elif urls:
-        return urls[0]
-    else:
-        # Generate hash-based ID if no URL found
-        cluster_str = json.dumps(cluster, sort_keys=True)
-        return f"hash:{hashlib.md5(cluster_str.encode()).hexdigest()}"
+    
+    # Fallback to first perspective source
+    perspectives = cluster.get("perspectives", [])
+    if perspectives:
+        sources = perspectives[0].get("sources", [])
+        if sources and sources[0].get("url"):
+            return sources[0].get("url")
+    
+    # Fallback to image link
+    primary_image = cluster.get("primary_image")
+    if primary_image and primary_image.get("link"):
+        return primary_image.get("link")
+    
+    # Generate hash-based ID if no URL found
+    cluster_str = json.dumps(cluster, sort_keys=True)
+    return f"hash:{hashlib.md5(cluster_str.encode()).hexdigest()}"
 
 
 def cluster_to_story(cluster: Dict[str, Any]) -> Dict[str, Any]:
@@ -114,6 +134,7 @@ def cluster_to_story(cluster: Dict[str, Any]) -> Dict[str, Any]:
         "did_you_know": cluster.get("did_you_know", ""),
         "primary_image": cluster.get("primary_image"),
         "domains": cluster.get("domains", []),
+        "articles": cluster.get("articles", []),  # Include articles list
         "technical_details": cluster.get("technical_details", []),
         "scientific_significance": cluster.get("scientific_significance", []),
         "industry_impact": cluster.get("industry_impact", []),
@@ -130,13 +151,15 @@ def cluster_to_story(cluster: Dict[str, Any]) -> Dict[str, Any]:
         "location": cluster.get("location", ""),
     }
     
-    # Set primary source URL
+    # Set primary source URL (prefer first article)
     story["url"] = get_primary_source_url(cluster)
     story["source_urls"] = get_source_urls_from_cluster(cluster)
     
-    # Set published date (use timestamp if available)
+    # Set published date (use timestamp if available, or first article date)
     if "timestamp" in cluster:
         story["published"] = cluster["timestamp"]
+    elif cluster.get("articles") and cluster["articles"][0].get("date"):
+        story["published"] = cluster["articles"][0].get("date")
     
     return story
 
@@ -166,27 +189,49 @@ def apply_filters(stories: List[Dict[str, Any]], config: Dict[str, Any]) -> List
 
 
 def merge_duplicates(stories: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
-    """Merge duplicate stories based on source article URLs."""
+    """Merge duplicate stories based on source article URLs from articles list."""
     seen_urls: Set[str] = {}
     merged = []
     
     for story in stories:
-        source_url = story.get("url", "")
+        # Extract article URLs directly from articles list
+        articles = story.get("articles", [])
+        article_urls = []
+        for article in articles:
+            article_link = article.get("link")
+            if article_link:
+                article_urls.append(article_link)
         
-        # Normalize URL for comparison
-        normalized_url = source_url.lower().strip()
+        # If no articles, fall back to primary URL
+        if not article_urls:
+            primary_url = story.get("url", "")
+            if primary_url and not primary_url.startswith("hash:"):
+                article_urls.append(primary_url)
         
-        # Skip hash-based URLs for deduplication
-        if normalized_url.startswith("hash:"):
-            merged.append(story)
-            continue
+        # Find if any of these article URLs have been seen
+        found_duplicate = False
+        matching_url = None
         
-        if normalized_url not in seen_urls:
-            seen_urls[normalized_url] = story
-            merged.append(story)
-        else:
-            # Merge with existing story (prefer more complete data)
-            existing = seen_urls[normalized_url]
+        for url in article_urls:
+            normalized_url = url.lower().strip()
+            if normalized_url in seen_urls:
+                found_duplicate = True
+                matching_url = normalized_url
+                break
+        
+        if found_duplicate:
+            # Merge with existing story
+            existing = seen_urls[matching_url]
+            # Merge articles lists
+            existing_articles = existing.get("articles", [])
+            new_articles = story.get("articles", [])
+            # Merge articles, avoiding duplicates based on link
+            existing_article_links = {a.get("link") for a in existing_articles if a.get("link")}
+            for article in new_articles:
+                if article.get("link") not in existing_article_links:
+                    existing_articles.append(article)
+            existing["articles"] = existing_articles
+            
             # Merge source URLs
             existing_urls = set(existing.get("source_urls", []))
             new_urls = set(story.get("source_urls", []))
@@ -194,12 +239,19 @@ def merge_duplicates(stories: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
             
             # Merge other fields, preferring non-empty values
             for key in story:
-                if key not in ["url", "source_urls"]:
+                if key not in ["url", "source_urls", "articles"]:
                     if story[key] and not existing.get(key):
                         existing[key] = story[key]
                     elif isinstance(story[key], list) and story[key]:
                         existing_list = existing.get(key, [])
                         existing[key] = list(set(existing_list + story[key]))
+        else:
+            # New story - add all article URLs to seen set
+            merged.append(story)
+            for url in article_urls:
+                normalized_url = url.lower().strip()
+                if normalized_url and not normalized_url.startswith("hash:"):
+                    seen_urls[normalized_url] = story
     
     return merged
 
