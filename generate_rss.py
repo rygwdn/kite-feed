@@ -5,7 +5,7 @@ Generate RSS feed from processed Kagi Kite stories.
 
 import json
 import sys
-from datetime import datetime
+from datetime import datetime, timezone
 from html import escape
 from urllib.parse import quote
 
@@ -30,9 +30,9 @@ def format_date(timestamp) -> str:
                 except ValueError:
                     continue
         # Fallback to current time
-        return datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
+        return datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
     except:
-        return datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
+        return datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
 
 
 def get_story_content(story: dict) -> str:
@@ -256,7 +256,7 @@ def generate_rss(stories: list, config: dict) -> str:
         
         # Get date
         pub_timestamp = story.get("published")
-        pub_date = format_date(pub_timestamp) if pub_timestamp else datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")
+        pub_date = format_date(pub_timestamp) if pub_timestamp else datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
         
         # Get description (summary)
         description_text = story.get("summary", "")
@@ -283,7 +283,7 @@ def generate_rss(stories: list, config: dict) -> str:
         <link>{base_url}</link>
         <description>{escape(description)}</description>
         <language>en-us</language>
-        <lastBuildDate>{datetime.utcnow().strftime("%a, %d %b %Y %H:%M:%S +0000")}</lastBuildDate>
+        <lastBuildDate>{datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")}</lastBuildDate>
         <generator>Kite Feed Generator</generator>
         <managingEditor>{escape(author)}</managingEditor>
 {chr(10).join(rss_items)}

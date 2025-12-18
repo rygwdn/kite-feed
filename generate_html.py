@@ -8,7 +8,7 @@ import sys
 import os
 from html import escape
 from urllib.parse import quote
-from datetime import datetime
+from datetime import datetime, timezone
 
 
 def get_story_content(story: dict) -> str:
