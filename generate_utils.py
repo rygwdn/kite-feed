@@ -7,6 +7,7 @@ import hashlib
 import re
 from datetime import UTC, datetime
 from html import escape
+from typing import Any, Optional
 from urllib.parse import quote
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -55,7 +56,7 @@ def format_date_rss(timestamp) -> str:
         return datetime.now(UTC).strftime("%a, %d %b %Y %H:%M:%S +0000")
 
 
-def get_story_slug(story: dict) -> str:
+def get_story_slug(story: dict[str, Any]) -> str:
     """Generate a URL slug from a story title."""
     title = story.get("title", "Untitled")
     if not title or not isinstance(title, str):
@@ -85,13 +86,13 @@ def get_story_slug(story: dict) -> str:
     return quote(slug, safe="-")
 
 
-def get_story_url(story: dict, base_url: str) -> str:
+def get_story_url(story: dict[str, Any], base_url: str) -> str:
     """Generate the HTML URL for a story."""
     story_slug = get_story_slug(story)
     return f"{base_url}/stories/{story_slug}.html"
 
 
-def process_footnote_references(text: str, story: dict) -> str:
+def process_footnote_references(text: str, story: dict[str, Any]) -> str:
     """
     Convert footnote references like [domain.com#1] to HTML footnote links.
     The number refers to the occurrence index of that domain in the articles list.
@@ -140,8 +141,8 @@ def process_footnote_references(text: str, story: dict) -> str:
         content = match.group(1)  # Content inside brackets
         
         # Check if it's a footnote reference (contains # followed by number)
-        if '#' in content:
-            parts = content.rsplit('#', 1)
+        if "#" in content:
+            parts = content.rsplit("#", 1)
             if len(parts) == 2:
                 domain_part = parts[0].strip()
                 footnote_num_str = parts[1].strip()
@@ -160,14 +161,14 @@ def process_footnote_references(text: str, story: dict) -> str:
                         for occ_num, article_link in occurrences:
                             if occ_num == footnote_num:
                                 footnote_num_escaped = escape(footnote_num_str)
-                                return f'<a href="{article_link}" class="footnote-ref">[{footnote_num_escaped}]</a>'
+                                return f"<a href=\"{article_link}\" class=\"footnote-ref\">[{footnote_num_escaped}]</a>"
         
         # Not a footnote reference, escape and return
         return escape(full_match)
     
     # Split text into parts: footnote references and regular text
     # Match [anything] patterns
-    pattern = r'\[([^\]]+)\]'
+    pattern = r"\[([^\]]+)\]"
     parts = []
     last_end = 0
     
@@ -185,7 +186,7 @@ def process_footnote_references(text: str, story: dict) -> str:
     if last_end < len(text):
         parts.append(escape(text[last_end:]))
     
-    return ''.join(parts)
+    return "".join(parts)
 
 
 def get_jinja_env():
@@ -193,7 +194,7 @@ def get_jinja_env():
     env = Environment(loader=FileSystemLoader("templates"), autoescape=select_autoescape(["html", "xml"]))
     
     # Add custom filter for processing footnote references
-    def process_footnotes_filter(text: str, story: dict = None) -> str:
+    def process_footnotes_filter(text: str, story: Optional[dict[str, Any]] = None) -> str:
         """Jinja2 filter to process footnote references."""
         if not text:
             return text
@@ -201,11 +202,13 @@ def get_jinja_env():
             story = {}
         return process_footnote_references(text, story)
     
-    env.filters['process_footnotes'] = process_footnotes_filter
+    env.filters["process_footnotes"] = process_footnotes_filter
     return env
 
 
-def process_stories_for_output(stories: list, config: dict, date_formatter, heading_level: int = 1):
+def process_stories_for_output(
+    stories: list[dict[str, Any]], config: dict[str, Any], date_formatter, heading_level: int = 1
+) -> tuple[list[dict[str, Any]], list[str]]:
     """
     Process stories for output (HTML or RSS).
 
