@@ -11,6 +11,7 @@ import subprocess
 def run_check():
     """Run all checks."""
     from check_all import main
+
     main()
 
 
@@ -23,6 +24,7 @@ def run_format():
 def run_process():
     """Run the processing workflow."""
     from process_workflow import main
+
     main()
 
 
@@ -31,7 +33,7 @@ if __name__ == "__main__":
         print("Usage: python uv_scripts.py <command>")
         print("Commands: check, format, process")
         sys.exit(1)
-    
+
     command = sys.argv[1]
     if command == "check":
         run_check()

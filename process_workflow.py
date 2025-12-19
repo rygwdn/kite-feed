@@ -24,7 +24,7 @@ def main():
     try:
         config = load_config()
         stories = process_kite_feeds(config)
-        
+
         with open("processed_stories.json", "w", encoding="utf-8") as f:
             json.dump(stories, f, indent=2, ensure_ascii=False)
         print(f"   ✓ Processed {len(stories)} stories saved to processed_stories.json")
@@ -38,7 +38,7 @@ def main():
         with open("processed_stories.json", "r", encoding="utf-8") as f:
             stories = json.load(f)
         config = json.load(open("config.json"))
-        
+
         rss_xml = generate_rss(stories, config)
         with open("feed.xml", "w", encoding="utf-8") as f:
             f.write(rss_xml)
@@ -53,10 +53,10 @@ def main():
         with open("processed_stories.json", "r", encoding="utf-8") as f:
             stories = json.load(f)
         config = json.load(open("config.json"))
-        
+
         # Create stories directory
         os.makedirs("stories", exist_ok=True)
-        
+
         # Generate individual story pages
         for story in stories:
             story_slug = get_story_slug(story)
@@ -64,12 +64,12 @@ def main():
             html = generate_story_html(story, config)
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(html)
-        
+
         # Generate index page
         index_html = generate_index_html(stories, config)
         with open("index.html", "w", encoding="utf-8") as f:
             f.write(index_html)
-        
+
         print(f"   ✓ Generated {len(stories)} story pages and index.html")
     except Exception as e:
         print(f"   ✗ Failed to generate HTML pages: {e}")

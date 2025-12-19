@@ -13,9 +13,7 @@ def run_command(cmd, description, critical=True):
     """Run a command and return success status."""
     print(f"\n{description}...")
     try:
-        result = subprocess.run(
-            cmd, shell=True, capture_output=True, text=True, check=False
-        )
+        result = subprocess.run(cmd, shell=True, capture_output=True, text=True, check=False)
         if result.returncode == 0:
             print(f"  ✓ {description} passed")
             return True
@@ -37,7 +35,7 @@ def main():
 
     checks = [
         (
-            'python -c "import py_compile; [py_compile.compile(f) for f in [\'process_kite.py\', \'generate_rss.py\', \'generate_html.py\', \'generate_utils.py\']]"',
+            "python -c \"import py_compile; [py_compile.compile(f) for f in ['process_kite.py', 'generate_rss.py', 'generate_html.py', 'generate_utils.py']]\"",
             "Python Syntax Check",
             True,
         ),
@@ -62,7 +60,7 @@ def main():
             False,  # Warnings acceptable
         ),
         (
-            'python -c "import json; json.load(open(\'config.json\'))"',
+            "python -c \"import json; json.load(open('config.json'))\"",
             "Config Validation",
             True,
         ),
