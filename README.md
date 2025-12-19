@@ -94,6 +94,44 @@ Edit `config.json` to customize:
 - Filter settings (`filters.enabled`, `filters.min_score`)
 - Site metadata (`site.title`, `site.description`, `site.base_url`, etc.)
 
+## Cursor Background Agents
+
+This repository is configured for use with [Cursor Background Agents](https://cursor.com/docs/cloud-agent).
+
+### Quick Setup
+
+Run the setup script to install dependencies:
+
+```bash
+./setup.sh
+```
+
+Or manually:
+
+```bash
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install project dependencies
+export PATH="$HOME/.local/bin:$PATH"
+uv sync --dev
+
+# Install up CLI tool (see Cursor documentation)
+# https://cursor.com/docs/cloud-agent
+```
+
+### Configuration Files
+
+- `.cursorrules`: Agent instructions and project context
+- `.cursor/config.json`: Cursor background agent configuration
+- `setup.sh`: Automated setup script
+
+### Using Background Agents
+
+1. Ensure the `up` CLI tool is installed (see [Cursor documentation](https://cursor.com/docs/cloud-agent))
+2. Configure your Cursor IDE settings for background agents
+3. Use `up` commands to manage cloud agents
+
 ## CI/CD
 
 The CI workflow (`.github/workflows/ci.yml`) automatically runs `uv run check` on every push and pull request to `main`.
