@@ -98,39 +98,21 @@ Edit `config.json` to customize:
 
 This repository is configured for use with [Cursor Background Agents](https://cursor.com/docs/cloud-agent).
 
-### Quick Setup
-
-Run the setup script to install dependencies:
-
-```bash
-./setup.sh
-```
-
-Or manually:
-
-```bash
-# Install uv (if not already installed)
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Install project dependencies
-export PATH="$HOME/.local/bin:$PATH"
-uv sync --dev
-
-# Install up CLI tool (see Cursor documentation)
-# https://cursor.com/docs/cloud-agent
-```
-
 ### Configuration Files
 
 - `.cursorrules`: Agent instructions and project context
 - `.cursor/config.json`: Cursor background agent configuration
-- `setup.sh`: Automated setup script
+- `.cursor/environment.json`: Environment setup commands (installs `uv` and dependencies)
+
+The `environment.json` file automatically sets up the environment when background agents are initialized:
+- Installs `uv` package manager
+- Installs all project dependencies via `uv sync --dev`
 
 ### Using Background Agents
 
 1. Ensure the `up` CLI tool is installed (see [Cursor documentation](https://cursor.com/docs/cloud-agent))
 2. Configure your Cursor IDE settings for background agents
-3. Use `up` commands to manage cloud agents
+3. The environment will be automatically set up using the commands in `.cursor/environment.json`
 
 ## CI/CD
 
