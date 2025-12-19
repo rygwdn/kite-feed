@@ -41,7 +41,15 @@ This runs:
 uv run format
 ```
 
-### Run Scripts
+### Run Processing Workflow
+
+Run the complete processing workflow (process feeds, generate RSS, generate HTML):
+
+```bash
+uv run process
+```
+
+Or run individual steps:
 
 ```bash
 # Process Kite feeds

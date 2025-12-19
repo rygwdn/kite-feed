@@ -43,17 +43,9 @@ jobs:
       run: |
         uv sync
         
-    - name: Process Kite feeds
+    - name: Run processing workflow
       run: |
-        uv run python3 process_kite.py > processed_stories.json || exit 1
-        
-    - name: Generate RSS feed
-      run: |
-        uv run python3 generate_rss.py < processed_stories.json > feed.xml 2>&1 || exit 1
-        
-    - name: Generate HTML pages
-      run: |
-        uv run python3 generate_html.py < processed_stories.json 2>&1 || exit 1
+        uv run process
         
     - name: Setup Pages
       uses: actions/configure-pages@v4
