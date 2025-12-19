@@ -61,52 +61,79 @@ jobs:
         fi
         
         # Use W3C Feed Validator to validate the RSS feed
-        python3 << 'EOF'
+        uv run python3 << 'EOF'
         import sys
         import os
         sys.path.insert(0, '/tmp/feedvalidator/src')
         
-        import feedvalidator
+        try:
+            import feedvalidator
+        except ImportError as e:
+            print(f"Error importing feedvalidator: {e}")
+            print("Python path:", sys.path)
+            sys.exit(1)
         
         # Read the feed file
-        with open('feed.xml', 'r', encoding='utf-8') as f:
-            feed_content = f.read()
+        try:
+            with open('feed.xml', 'r', encoding='utf-8') as f:
+                feed_content = f.read()
+        except Exception as e:
+            print(f"Error reading feed.xml: {e}")
+            sys.exit(1)
         
         # Validate the feed
-        result = feedvalidator.validateString(feed_content, firstOccurrenceOnly=1)
-        events = result['loggedEvents']
+        try:
+            result = feedvalidator.validateString(feed_content, firstOccurrenceOnly=1)
+            events = result.get('loggedEvents', [])
+        except Exception as e:
+            print(f"Error validating feed: {e}")
+            import traceback
+            traceback.print_exc()
+            sys.exit(1)
         
         # Filter events using compatibility level AA (mimics online validator)
-        from feedvalidator import compatibility
-        events = compatibility.AA(events)
+        try:
+            from feedvalidator import compatibility
+            events = compatibility.AA(events)
+        except Exception as e:
+            print(f"Warning: Could not filter events: {e}")
         
         # Format and display errors/warnings
-        from feedvalidator.formatter.text_plain import Formatter
-        from feedvalidator import logging
-        
-        output = Formatter(events)
-        
-        # Check for errors (severity level ERROR)
-        # The feedvalidator uses logging levels: ERROR, WARNING, INFO
-        has_errors = False
-        for e in events:
-            if hasattr(e, 'severity'):
-                if e.severity == logging.ERROR:
+        try:
+            from feedvalidator.formatter.text_plain import Formatter
+            from feedvalidator import logging
+            
+            output = Formatter(events)
+            
+            # Check for errors (severity level ERROR)
+            # The feedvalidator uses logging levels: ERROR, WARNING, INFO
+            has_errors = False
+            for e in events:
+                if hasattr(e, 'severity'):
+                    if e.severity == logging.ERROR:
+                        has_errors = True
+                        break
+                # Fallback: check class name for Error
+                elif hasattr(e, '__class__') and 'Error' in e.__class__.__name__:
                     has_errors = True
                     break
-            # Fallback: check class name for Error
-            elif hasattr(e, '__class__') and 'Error' in e.__class__.__name__:
-                has_errors = True
-                break
-        
-        if output:
-            print("RSS Feed Validation Results:")
-            print("\n".join(output))
-            if has_errors:
-                print("\n❌ RSS feed validation failed - Errors found")
-                sys.exit(1)
+            
+            if output:
+                print("RSS Feed Validation Results:")
+                print("\n".join(output))
+                if has_errors:
+                    print("\n❌ RSS feed validation failed - Errors found")
+                    sys.exit(1)
+                else:
+                    print("\n⚠️  RSS feed validation passed with warnings (non-blocking)")
             else:
-                print("\n⚠️  RSS feed validation passed with warnings (non-blocking)")
-        else:
-            print("✓ RSS feed validation passed - No errors or warnings")
+                print("✓ RSS feed validation passed - No errors or warnings")
+        except Exception as e:
+            print(f"Error formatting results: {e}")
+            import traceback
+            traceback.print_exc()
+            # If we can't format, at least check if there are events
+            if events:
+                print(f"Found {len(events)} validation events")
+                sys.exit(1)
         EOF
