@@ -13,12 +13,12 @@
 
 {# Summary #}
 {% if story.summary %}
-<div class='summary'><p>{{ story.summary|e }}</p></div>
+<div class='summary'><p>{{ story.summary|process_footnotes(story)|safe }}</p></div>
 {% endif %}
 
 {# Quote #}
 {% if story.quote %}
-<blockquote><p>{{ story.quote|e }}</p>
+<blockquote><p>{{ story.quote|process_footnotes(story)|safe }}</p>
 {% if story.quote_author %}
 <cite>— {{ story.quote_author|e }}{% if story.quote_attribution %} ({{ story.quote_attribution|e }}){% endif %}</cite>
 {% endif %}
@@ -27,14 +27,14 @@
 
 {# Did you know #}
 {% if story.did_you_know %}
-<div class='did-you-know'><p><strong>Did you know:</strong> {{ story.did_you_know|e }}</p></div>
+<div class='did-you-know'><p><strong>Did you know:</strong> {{ story.did_you_know|process_footnotes(story)|safe }}</p></div>
 {% endif %}
 
 {# Talking points #}
 {% if story.talking_points %}
 <h{{ (story.heading_level|default(1)) + 1 }}>Key Points</h{{ (story.heading_level|default(1)) + 1 }}><ul>
 {% for point in story.talking_points %}
-<li>{{ point|e }}</li>
+<li>{{ point|process_footnotes(story)|safe }}</li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -44,7 +44,7 @@
 <h{{ story.heading_level|default(1) + 1 }}>Perspectives</h{{ story.heading_level|default(1) + 1 }}>
 {% for perspective in story.perspectives %}
 {% if perspective.text %}
-<div class='perspective'><p>{{ perspective.text|e }}</p>
+<div class='perspective'><p>{{ perspective.text|process_footnotes(story)|safe }}</p>
 {% if perspective.sources %}
 <p><strong>Sources:</strong> 
 {% set source_links = [] %}
@@ -55,7 +55,7 @@
 {% set _ = source_links.append(source.name|e) %}
 {% endif %}
 {% endfor %}
-{{ source_links|join(', ') }}
+{{ source_links|join(', ')|safe }}
 </p>
 {% endif %}
 </div>
@@ -68,9 +68,9 @@
 <h{{ story.heading_level|default(1) + 1 }}>Timeline</h{{ story.heading_level|default(1) + 1 }}><ul>
 {% for event in story.timeline %}
 {% if event.date and event.content %}
-<li><strong>{{ event.date|e }}:</strong> {{ event.content|e }}</li>
+<li><strong>{{ event.date|e }}:</strong> {{ event.content|process_footnotes(story)|safe }}</li>
 {% elif event.content %}
-<li>{{ event.content|e }}</li>
+<li>{{ event.content|process_footnotes(story)|safe }}</li>
 {% endif %}
 {% endfor %}
 </ul>
@@ -80,7 +80,7 @@
 {% if story.technical_details %}
 <h{{ story.heading_level|default(1) + 1 }}>Technical Details</h{{ story.heading_level|default(1) + 1 }}><ul>
 {% for detail in story.technical_details %}
-<li>{{ detail|e }}</li>
+<li>{{ detail|process_footnotes(story)|safe }}</li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -89,7 +89,7 @@
 {% if story.industry_impact %}
 <h{{ story.heading_level|default(1) + 1 }}>Industry Impact</h{{ story.heading_level|default(1) + 1 }}><ul>
 {% for impact in story.industry_impact %}
-<li>{{ impact|e }}</li>
+<li>{{ impact|process_footnotes(story)|safe }}</li>
 {% endfor %}
 </ul>
 {% endif %}
@@ -98,19 +98,19 @@
 {% if story.scientific_significance %}
 <h{{ story.heading_level|default(1) + 1 }}>Scientific Significance</h{{ story.heading_level|default(1) + 1 }}><ul>
 {% for sig in story.scientific_significance %}
-<li>{{ sig|e }}</li>
+<li>{{ sig|process_footnotes(story)|safe }}</li>
 {% endfor %}
 </ul>
 {% endif %}
 
 {# Historical background #}
 {% if story.historical_background %}
-<h{{ story.heading_level|default(1) + 1 }}>Historical Background</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.historical_background|e }}</p>
+<h{{ story.heading_level|default(1) + 1 }}>Historical Background</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.historical_background|process_footnotes(story)|safe }}</p>
 {% endif %}
 
 {# Future outlook #}
 {% if story.future_outlook %}
-<h{{ story.heading_level|default(1) + 1 }}>Future Outlook</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.future_outlook|e }}</p>
+<h{{ story.heading_level|default(1) + 1 }}>Future Outlook</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.future_outlook|process_footnotes(story)|safe }}</p>
 {% endif %}
 
 {# Q&A #}
@@ -118,9 +118,9 @@
 <h{{ story.heading_level|default(1) + 1 }}>Q&A</h{{ story.heading_level|default(1) + 1 }}>
 {% for qna in story.suggested_qna %}
 {% if qna.question %}
-<div class='qna'><p><strong>Q:</strong> {{ qna.question|e }}</p>
+<div class='qna'><p><strong>Q:</strong> {{ qna.question|process_footnotes(story)|safe }}</p>
 {% if qna.answer %}
-<p><strong>A:</strong> {{ qna.answer|e }}</p>
+<p><strong>A:</strong> {{ qna.answer|process_footnotes(story)|safe }}</p>
 {% endif %}
 </div>
 {% endif %}
@@ -131,7 +131,7 @@
 {% if story.user_action_items %}
 <h{{ story.heading_level|default(1) + 1 }}>Action Items</h{{ story.heading_level|default(1) + 1 }}><ul>
 {% for item in story.user_action_items %}
-<li>{{ item|e }}</li>
+<li>{{ item|process_footnotes(story)|safe }}</li>
 {% endfor %}
 </ul>
 {% endif %}
