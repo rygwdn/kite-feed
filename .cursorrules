@@ -45,15 +45,14 @@ When adding new imports or dependencies:
 
 Always run the check command before committing:
 ```bash
-# Run all checks at once
-./check.sh
+# Run all checks at once (using uv's built-in script support)
+uv run check
 
-# Or using uv directly
-uv sync --dev
-uv run ./check.sh
+# Or format code automatically
+uv run format
 ```
 
-The `check.sh` script runs all validation checks:
+The `uv run check` command runs all validation checks:
 1. Python syntax validation
 2. Black formatting check
 3. Flake8 critical checks
@@ -61,11 +60,6 @@ The `check.sh` script runs all validation checks:
 5. Mypy type checking
 6. Config validation
 7. Import validation
-
-To format code automatically:
-```bash
-uv run black .
-```
 
 ## Development Setup
 

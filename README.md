@@ -24,7 +24,7 @@ uv sync --dev
 Run all linting and validation checks:
 
 ```bash
-./check.sh
+uv run check
 ```
 
 This runs:
@@ -38,7 +38,7 @@ This runs:
 ### Format Code
 
 ```bash
-uv run black .
+uv run format
 ```
 
 ### Run Scripts
@@ -60,10 +60,10 @@ uv run python3 generate_html.py < processed_stories.json
 - `generate_html.py`: Generates HTML pages
 - `generate_rss.py`: Generates RSS feed
 - `generate_utils.py`: Shared utilities (date formatting, story processing, etc.)
-- `check.sh`: Run all validation checks
+- `check_all.py`: Check script run via `uv run check`
 - `config.json`: Configuration file
-- `pyproject.toml`: Project configuration and dependencies
+- `pyproject.toml`: Project configuration, dependencies, and scripts
 
 ## CI/CD
 
-The CI workflow automatically runs `./check.sh` on every push and pull request to `main`.
+The CI workflow automatically runs `uv run check` on every push and pull request to `main`.
