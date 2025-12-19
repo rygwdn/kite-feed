@@ -1,9 +1,16 @@
 # Agent Configuration
 
-Run checks via `uv`:
+Run checks and workflows via `uv`:
 
 ```bash
-uv run check    # Run all checks
-uv run format   # Format code
-uv run process  # Run processing workflow
+# Run checks
+uv run ruff check .          # Linting
+uv run ruff format --check . # Format check
+uv run ty check              # Type checking
+
+# Format code
+uv run ruff format .
+
+# Run processing workflow
+uv run process
 ```

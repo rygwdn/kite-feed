@@ -32,23 +32,23 @@ uv sync --dev
 
 ### Run Checks
 
-Run all linting and validation checks:
+Run linting and validation checks:
 
 ```bash
-uv run check
-```
+# Linting
+uv run ruff check .
 
-This runs:
-- Ruff linting
-- Ruff formatting check
-- Type checking (ty)
-- Config validation
-- Import validation
+# Format check
+uv run ruff format --check .
+
+# Type checking
+uv run ty check
+```
 
 ### Format Code
 
 ```bash
-uv run format
+uv run ruff format .
 ```
 
 ### Run Processing Workflow
