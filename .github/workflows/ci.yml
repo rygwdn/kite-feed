@@ -40,3 +40,100 @@ jobs:
     - name: Run type checking
       run: |
         uv run ty check || true
+        
+    - name: Generate site
+      run: |
+        uv run process
+        
+    - name: Install W3C Feed Validator dependencies
+      run: |
+        uv pip install lxml html5lib rdflib
+        
+    - name: Setup W3C Feed Validator
+      run: |
+        git clone --depth 1 https://github.com/w3c/feedvalidator.git /tmp/feedvalidator
+        
+    - name: Validate RSS feed
+      run: |
+        if [ ! -f "feed.xml" ]; then
+          echo "Error: feed.xml was not generated"
+          exit 1
+        fi
+        
+        # Use W3C Feed Validator to validate the RSS feed
+        uv run python3 << 'EOF'
+        import sys
+        import os
+        sys.path.insert(0, '/tmp/feedvalidator/src')
+        
+        try:
+            import feedvalidator
+        except ImportError as e:
+            print(f"Error importing feedvalidator: {e}")
+            print("Python path:", sys.path)
+            sys.exit(1)
+        
+        # Read the feed file
+        try:
+            with open('feed.xml', 'r', encoding='utf-8') as f:
+                feed_content = f.read()
+        except Exception as e:
+            print(f"Error reading feed.xml: {e}")
+            sys.exit(1)
+        
+        # Validate the feed
+        try:
+            result = feedvalidator.validateString(feed_content, firstOccurrenceOnly=1)
+            events = result.get('loggedEvents', [])
+        except Exception as e:
+            print(f"Error validating feed: {e}")
+            import traceback
+            traceback.print_exc()
+            sys.exit(1)
+        
+        # Filter events using compatibility level AA (mimics online validator)
+        try:
+            from feedvalidator import compatibility
+            events = compatibility.AA(events)
+        except Exception as e:
+            print(f"Warning: Could not filter events: {e}")
+        
+        # Format and display errors/warnings
+        try:
+            from feedvalidator.formatter.text_plain import Formatter
+            from feedvalidator import logging
+            
+            output = Formatter(events)
+            
+            # Check for errors (severity level ERROR)
+            # The feedvalidator uses logging levels: ERROR, WARNING, INFO
+            has_errors = False
+            for e in events:
+                if hasattr(e, 'severity'):
+                    if e.severity == logging.ERROR:
+                        has_errors = True
+                        break
+                # Fallback: check class name for Error
+                elif hasattr(e, '__class__') and 'Error' in e.__class__.__name__:
+                    has_errors = True
+                    break
+            
+            if output:
+                print("RSS Feed Validation Results:")
+                print("\n".join(output))
+                if has_errors:
+                    print("\n❌ RSS feed validation failed - Errors found")
+                    sys.exit(1)
+                else:
+                    print("\n⚠️  RSS feed validation passed with warnings (non-blocking)")
+            else:
+                print("✓ RSS feed validation passed - No errors or warnings")
+        except Exception as e:
+            print(f"Error formatting results: {e}")
+            import traceback
+            traceback.print_exc()
+            # If we can't format, at least check if there are events
+            if events:
+                print(f"Found {len(events)} validation events")
+                sys.exit(1)
+        EOF

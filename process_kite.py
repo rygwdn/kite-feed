@@ -244,7 +244,14 @@ def merge_duplicates(stories: list[dict[str, Any]]) -> list[dict[str, Any]]:
                         existing[key] = story[key]
                     elif isinstance(story[key], list) and story[key]:
                         existing_list = existing.get(key, [])
-                        existing[key] = list(set(existing_list + story[key]))
+                        combined = existing_list + story[key]
+                        # Only use set() if items are hashable (strings, numbers, etc.)
+                        # For lists containing dicts, just concatenate and keep all items
+                        try:
+                            existing[key] = list(set(combined))
+                        except TypeError:
+                            # Items are not hashable (e.g., dicts), just keep the combined list
+                            existing[key] = combined
         else:
             # New story - add all article URLs to seen set
             merged.append(story)
