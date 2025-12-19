@@ -1,28 +1,39 @@
-[tool.black]
-line-length = 127
-target-version = ['py311']
-include = '\.pyi?$'
-extend-exclude = '''
-/(
-  # directories
-  \.eggs
-  | \.git
-  | \.hg
-  | \.mypy_cache
-  | \.tox
-  | \.venv
-  | venv
-  | _build
-  | buck-out
-  | build
-  | dist
-  | stories
-)/
-'''
+[project]
+name = "kite-feed-generator"
+version = "0.1.0"
+description = "Generate HTML and RSS feeds from Kagi Kite stories"
+requires-python = ">=3.11"
+dependencies = [
+    "requests>=2.31.0",
+    "jinja2>=3.1.0",
+]
 
-[tool.flake8]
-max-line-length = 127
-max-complexity = 10
+[project.scripts]
+process = "process_workflow:main"
+
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.14.10",
+    "ty>=0.0.4",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+only-include = [
+    "process_kite.py",
+    "generate_rss.py",
+    "generate_html.py",
+    "generate_utils.py",
+    "process_workflow.py",
+]
+
+[tool.ruff]
+line-length = 127
+target-version = "py311"
 exclude = [
     ".git",
     "__pycache__",
@@ -31,10 +42,21 @@ exclude = [
     "stories",
     "dist",
     "build",
+    ".eggs",
+    ".mypy_cache",
+    ".tox",
 ]
 
-[tool.mypy]
-python_version = "3.11"
-ignore_missing_imports = true
-no_strict_optional = true
-follow_imports = "silent"
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP"]
+ignore = []
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.14.10",
+    "ty>=0.0.4",
+]
