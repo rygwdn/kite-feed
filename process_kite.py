@@ -116,7 +116,7 @@ def get_primary_source_url(cluster: dict[str, Any]) -> str:
     return f"hash:{hashlib.md5(cluster_str.encode()).hexdigest()}"
 
 
-def cluster_to_story(cluster: dict[str, Any]) -> dict[str, Any]:
+def cluster_to_story(cluster: dict[str, Any], file_timestamp: Any = None) -> dict[str, Any]:
     """Convert a cluster to a story format."""
     story = {
         "title": cluster.get("title", "Untitled"),
@@ -155,8 +155,10 @@ def cluster_to_story(cluster: dict[str, Any]) -> dict[str, Any]:
     story["url"] = get_primary_source_url(cluster)
     story["source_urls"] = get_source_urls_from_cluster(cluster)
 
-    # Set published date (use timestamp if available, or first article date)
-    if "timestamp" in cluster:
+    # Set published date (prefer file timestamp, then cluster timestamp, then first article date)
+    if file_timestamp is not None:
+        story["published"] = file_timestamp
+    elif "timestamp" in cluster:
         story["published"] = cluster["timestamp"]
     elif cluster.get("articles") and cluster["articles"][0].get("date"):
         story["published"] = cluster["articles"][0].get("date")
@@ -270,6 +272,7 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
     # Get category names from config
     categories = config.get("feeds", {}).get("categories", [])
     top_n_per_feed = config.get("feeds", {}).get("top_n", 5)
+    top_n_by_category = config.get("feeds", {}).get("top_n_by_category", {})
     base_url = config.get("feeds", {}).get("base_url", "https://kite.kagi.com")
 
     # Fetch kite.json to get category mappings
@@ -308,13 +311,19 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
         clusters = extract_clusters_from_category(category_data)
         print(f"Found {len(clusters)} clusters in {category_name}", file=sys.stderr)
 
+        # Get file-level timestamp (top-level key in JSON)
+        file_timestamp = category_data.get("timestamp")
+
         # Convert clusters to stories
-        category_stories = [cluster_to_story(cluster) for cluster in clusters]
+        category_stories = [cluster_to_story(cluster, file_timestamp) for cluster in clusters]
+
+        # Determine top_n for this category (category-specific or default)
+        category_top_n = top_n_by_category.get(category_name, top_n_per_feed)
 
         # Apply top_n per feed (sort by cluster_number, lower is better)
-        if top_n_per_feed and top_n_per_feed > 0:
+        if category_top_n and category_top_n > 0:
             category_stories.sort(key=lambda x: x.get("cluster_number", 999))
-            category_stories = category_stories[:top_n_per_feed]
+            category_stories = category_stories[:category_top_n]
             print(f"Selected top {len(category_stories)} stories from {category_name}", file=sys.stderr)
 
         all_stories.extend(category_stories)
