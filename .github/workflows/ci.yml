@@ -40,3 +40,42 @@ jobs:
     - name: Run type checking
       run: |
         uv run ty check || true
+        
+    - name: Generate site
+      run: |
+        uv run process
+        
+    - name: Validate RSS feed
+      run: |
+        if [ ! -f "feed.xml" ]; then
+          echo "Error: feed.xml was not generated"
+          exit 1
+        fi
+        
+        # Validate XML structure using xmllint
+        if ! xmllint --noout feed.xml; then
+          echo "Error: feed.xml is not valid XML"
+          exit 1
+        fi
+        
+        # Basic RSS validation - check for required RSS elements
+        if ! grep -q "<rss" feed.xml; then
+          echo "Error: feed.xml does not contain RSS root element"
+          exit 1
+        fi
+        
+        if ! grep -q "<channel>" feed.xml; then
+          echo "Error: feed.xml does not contain channel element"
+          exit 1
+        fi
+        
+        if ! grep -q "<title>" feed.xml; then
+          echo "Error: feed.xml does not contain title element"
+          exit 1
+        fi
+        
+        if ! grep -q "<item>" feed.xml; then
+          echo "Warning: feed.xml does not contain any items"
+        fi
+        
+        echo "✓ RSS feed validation passed"
