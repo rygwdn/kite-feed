@@ -18,9 +18,7 @@ def generate_rss(stories: list, config: dict) -> str:
     env = get_jinja_env()
     template = env.get_template("rss.xml")
 
-    story_data, story_html_urls = process_stories_for_output(
-        stories, config, format_date_rss, heading_level=2
-    )
+    story_data, story_html_urls = process_stories_for_output(stories, config, format_date_rss, heading_level=2)
 
     build_date = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
 

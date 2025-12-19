@@ -71,33 +71,33 @@ def get_jinja_env():
 def process_stories_for_output(stories: list, config: dict, date_formatter, heading_level: int = 1):
     """
     Process stories for output (HTML or RSS).
-    
+
     Args:
         stories: List of story dictionaries
         config: Configuration dictionary
         date_formatter: Function to format dates (format_date_html or format_date_rss)
         heading_level: Heading level to set in story dict (1 for HTML, 2 for RSS)
-    
+
     Returns:
         Tuple of (story_data, story_html_urls)
     """
     site_config = config.get("site", {})
     base_url = site_config.get("base_url", "https://example.com")
-    
+
     story_data = []
     story_html_urls = []
-    
+
     for story in stories:
         story_html_url = get_story_url(story, base_url)
         story_html_urls.append(story_html_url)
-        
+
         # Format publication date
         pub_timestamp = story.get("published")
         pub_date = date_formatter(pub_timestamp)
-        
+
         story_dict = dict(story)
         story_dict["pub_date"] = pub_date
         story_dict["heading_level"] = heading_level
         story_data.append(story_dict)
-    
+
     return story_data, story_html_urls

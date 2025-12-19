@@ -30,9 +30,7 @@ def generate_index_html(stories: list, config: dict) -> str:
     env = get_jinja_env()
     template = env.get_template("index.html")
 
-    story_data, story_html_urls = process_stories_for_output(
-        stories, config, format_date_html, heading_level=1
-    )
+    story_data, story_html_urls = process_stories_for_output(stories, config, format_date_html, heading_level=1)
 
     return template.render(stories=story_data, story_html_urls=story_html_urls, config=config)
 
