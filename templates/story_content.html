@@ -46,16 +46,14 @@
 {% if perspective.text %}
 <div class='perspective'><p>{{ perspective.text|process_footnotes(story)|safe }}</p>
 {% if perspective.sources %}
-<p><strong>Sources:</strong> 
-{% set source_links = [] %}
+<p><strong>Sources:</strong>
 {% for source in perspective.sources %}
 {% if source.url %}
-{% set _ = source_links.append('<a href="' + source.url|e + '">' + (source.name|e if source.name else source.url|e) + '</a>') %}
+<a href="{{ source.url|e }}">{% if source.name %}{{ source.name|e }}{% else %}{{ source.url|e }}{% endif %}</a>{% if not loop.last %}, {% endif %}
 {% elif source.name %}
-{% set _ = source_links.append(source.name|e) %}
+{{ source.name|e }}{% if not loop.last %}, {% endif %}
 {% endif %}
 {% endfor %}
-{{ source_links|join(', ')|safe }}
 </p>
 {% endif %}
 </div>

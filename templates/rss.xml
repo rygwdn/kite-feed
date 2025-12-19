@@ -14,7 +14,7 @@
         <link>{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_urls[loop.index0]|e }}</link>
         <guid isPermaLink="true">{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_urls[loop.index0]|e }}</guid>
         <pubDate>{{ story.pub_date }}</pubDate>
-        <description><![CDATA[{{ story.summary or story.title }}]]></description>
+        <description><![CDATA[{{ (story.summary or story.title)|process_footnotes(story)|safe }}]]></description>
         <content:encoded><![CDATA[{% include 'story_content.html' %}]]></content:encoded>
     </item>
 {% endfor %}
