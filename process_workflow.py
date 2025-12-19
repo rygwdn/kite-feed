@@ -9,10 +9,11 @@ Run the complete processing workflow:
 import json
 import os
 import sys
-from process_kite import load_config, process_kite_feeds
+
+from generate_html import generate_index_html, generate_story_html
 from generate_rss import generate_rss
-from generate_html import generate_story_html, generate_index_html
 from generate_utils import get_story_slug
+from process_kite import load_config, process_kite_feeds
 
 
 def main():
@@ -35,7 +36,7 @@ def main():
     # Step 2: Generate RSS feed
     print("\n2. Generating RSS feed...")
     try:
-        with open("processed_stories.json", "r", encoding="utf-8") as f:
+        with open("processed_stories.json", encoding="utf-8") as f:
             stories = json.load(f)
         config = json.load(open("config.json"))
 
@@ -50,7 +51,7 @@ def main():
     # Step 3: Generate HTML pages
     print("\n3. Generating HTML pages...")
     try:
-        with open("processed_stories.json", "r", encoding="utf-8") as f:
+        with open("processed_stories.json", encoding="utf-8") as f:
             stories = json.load(f)
         config = json.load(open("config.json"))
 

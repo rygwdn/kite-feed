@@ -3,8 +3,9 @@
 Shared utilities for HTML and RSS generation scripts.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from urllib.parse import quote
+
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 
 
@@ -32,7 +33,7 @@ def format_date_html(timestamp) -> str:
 def format_date_rss(timestamp) -> str:
     """Format timestamp for RSS."""
     if timestamp is None:
-        return datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
+        return datetime.now(UTC).strftime("%a, %d %b %Y %H:%M:%S +0000")
     try:
         if isinstance(timestamp, (int, float)):
             dt = datetime.fromtimestamp(timestamp)
@@ -46,9 +47,9 @@ def format_date_rss(timestamp) -> str:
                 except ValueError:
                     continue
         # Fallback to current time
-        return datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
+        return datetime.now(UTC).strftime("%a, %d %b %Y %H:%M:%S +0000")
     except Exception:
-        return datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S +0000")
+        return datetime.now(UTC).strftime("%a, %d %b %Y %H:%M:%S +0000")
 
 
 def get_story_slug(story: dict) -> str:

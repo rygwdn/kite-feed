@@ -1,8 +1,17 @@
 # Kite Feed Generator
 
-Generate HTML and RSS feeds from Kagi Kite stories.
+A static site generator that combines multiple Kagi Kite JSON feeds, filters and merges them, and generates both RSS feeds and HTML pages. The site is automatically updated daily via GitHub Actions and served via GitHub Pages.
 
-This project processes stories from [Kagi Kite](https://kite.kagi.com), combines them from multiple categories, filters duplicates, and generates both HTML pages and an RSS feed for easy consumption.
+🌐 **Live Site**: [https://rygwdn.github.io/kite-feed](https://rygwdn.github.io/kite-feed)
+
+## Features
+
+- **Multi-category aggregation**: Combines stories from multiple Kagi Kite categories
+- **Duplicate detection**: Automatically merges duplicate stories based on source URLs
+- **RSS feed generation**: Creates a standard RSS 2.0 feed for feed readers
+- **HTML pages**: Generates both an index page and individual story pages
+- **Automated updates**: Daily updates via GitHub Actions
+- **GitHub Pages hosting**: Automatically deployed to GitHub Pages
 
 ## Development Setup
 
@@ -30,10 +39,9 @@ uv run check
 ```
 
 This runs:
-- Python syntax validation
-- Black formatting check
-- Flake8 linting
-- Mypy type checking
+- Ruff linting
+- Ruff formatting check
+- Type checking (ty)
 - Config validation
 - Import validation
 
@@ -72,7 +80,7 @@ uv run python3 generate_html.py < processed_stories.json
 - `generate_utils.py`: Shared utilities (date formatting, story processing, URL generation, etc.)
 - `process_workflow.py`: Complete processing workflow that orchestrates all steps
 - `check_all.py`: Validation checks script run via `uv run check`
-- `uv_scripts.py`: Entry points for `uv run` commands
+- `uv_scripts.py`: Entry points for `uv run` commands (`check`, `format`, `process`)
 - `config.json`: Configuration file (categories, filters, site settings)
 - `pyproject.toml`: Project configuration, dependencies, and scripts
 - `.python-version`: Python version pin (3.11)

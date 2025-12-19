@@ -4,8 +4,9 @@ Generate HTML pages for individual stories using Jinja templates.
 """
 
 import json
-import sys
 import os
+import sys
+
 from generate_utils import (
     format_date_html,
     get_jinja_env,

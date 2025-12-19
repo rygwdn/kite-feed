@@ -3,20 +3,21 @@
 Process Kagi Kite JSON files, combine them, filter, and merge duplicates.
 """
 
+import hashlib
 import json
 import sys
-import hashlib
-from typing import List, Dict, Any
+from typing import Any
+
 import requests
 
 
-def load_config(config_path: str = "config.json") -> Dict[str, Any]:
+def load_config(config_path: str = "config.json") -> dict[str, Any]:
     """Load configuration from JSON file."""
-    with open(config_path, "r") as f:
+    with open(config_path) as f:
         return json.load(f)
 
 
-def fetch_json(url: str) -> Dict[str, Any]:
+def fetch_json(url: str) -> dict[str, Any]:
     """Fetch JSON data from a URL."""
     try:
         response = requests.get(url, timeout=30, allow_redirects=True)
@@ -42,7 +43,7 @@ def get_category_file_url(category_name: str, base_url: str = "https://kite.kagi
     return f"{base_url}/{category_lower}.json"
 
 
-def extract_clusters_from_category(data: Dict[str, Any]) -> List[Dict[str, Any]]:
+def extract_clusters_from_category(data: dict[str, Any]) -> list[dict[str, Any]]:
     """Extract clusters from a category JSON file."""
     clusters = data.get("clusters", [])
     category_name = data.get("category", "")
@@ -54,7 +55,7 @@ def extract_clusters_from_category(data: Dict[str, Any]) -> List[Dict[str, Any]]
     return clusters
 
 
-def get_source_urls_from_cluster(cluster: Dict[str, Any]) -> List[str]:
+def get_source_urls_from_cluster(cluster: dict[str, Any]) -> list[str]:
     """Extract all source URLs from a cluster."""
     urls = set()
 
@@ -87,7 +88,7 @@ def get_source_urls_from_cluster(cluster: Dict[str, Any]) -> List[str]:
     return list(urls)
 
 
-def get_primary_source_url(cluster: Dict[str, Any]) -> str:
+def get_primary_source_url(cluster: dict[str, Any]) -> str:
     """Get the primary source URL for deduplication."""
     # Prefer first article link (most reliable source)
     articles = cluster.get("articles", [])
@@ -115,7 +116,7 @@ def get_primary_source_url(cluster: Dict[str, Any]) -> str:
     return f"hash:{hashlib.md5(cluster_str.encode()).hexdigest()}"
 
 
-def cluster_to_story(cluster: Dict[str, Any]) -> Dict[str, Any]:
+def cluster_to_story(cluster: dict[str, Any]) -> dict[str, Any]:
     """Convert a cluster to a story format."""
     story = {
         "title": cluster.get("title", "Untitled"),
@@ -163,7 +164,7 @@ def cluster_to_story(cluster: Dict[str, Any]) -> Dict[str, Any]:
     return story
 
 
-def apply_filters(stories: List[Dict[str, Any]], config: Dict[str, Any]) -> List[Dict[str, Any]]:
+def apply_filters(stories: list[dict[str, Any]], config: dict[str, Any]) -> list[dict[str, Any]]:
     """Apply filters to stories based on configuration."""
     if not config.get("filters", {}).get("enabled", True):
         return stories
@@ -187,9 +188,9 @@ def apply_filters(stories: List[Dict[str, Any]], config: Dict[str, Any]) -> List
     return filtered
 
 
-def merge_duplicates(stories: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+def merge_duplicates(stories: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """Merge duplicate stories based on source article URLs from articles list."""
-    seen_urls: Dict[str, Dict[str, Any]] = {}
+    seen_urls: dict[str, dict[str, Any]] = {}
     merged = []
 
     for story in stories:
@@ -255,7 +256,7 @@ def merge_duplicates(stories: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
     return merged
 
 
-def process_kite_feeds(config: Dict[str, Any]) -> List[Dict[str, Any]]:
+def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
     """Main processing function."""
     all_stories = []
 
