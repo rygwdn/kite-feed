@@ -94,26 +94,6 @@ Edit `config.json` to customize:
 - Filter settings (`filters.enabled`, `filters.min_score`)
 - Site metadata (`site.title`, `site.description`, `site.base_url`, etc.)
 
-## Cursor Background Agents
-
-This repository is configured for use with [Cursor Background Agents](https://cursor.com/docs/cloud-agent).
-
-### Configuration Files
-
-- `.cursorrules`: Agent instructions and project context
-- `.cursor/config.json`: Cursor background agent configuration
-- `.cursor/environment.json`: Environment setup commands (installs `uv` and dependencies)
-
-The `environment.json` file automatically sets up the environment when background agents are initialized:
-- Installs `uv` package manager
-- Installs all project dependencies via `uv sync --dev`
-
-### Using Background Agents
-
-1. Ensure the `up` CLI tool is installed (see [Cursor documentation](https://cursor.com/docs/cloud-agent))
-2. Configure your Cursor IDE settings for background agents
-3. The environment will be automatically set up using the commands in `.cursor/environment.json`
-
 ## CI/CD
 
 The CI workflow (`.github/workflows/ci.yml`) automatically runs `uv run check` on every push and pull request to `main`.
