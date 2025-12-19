@@ -43,24 +43,53 @@ When adding new imports or dependencies:
 
 ## Testing Before Commit
 
-Always run these checks before committing:
+Always run the check command before committing:
 ```bash
-# Syntax check
-python3 -m py_compile process_kite.py generate_rss.py generate_html.py generate_utils.py
+# Run all checks at once
+./check.sh
 
-# Format check
-black --check --diff .
+# Or using uv directly
+uv sync --dev
+uv run ./check.sh
+```
 
-# Lint check
-flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+The `check.sh` script runs all validation checks:
+1. Python syntax validation
+2. Black formatting check
+3. Flake8 critical checks
+4. Flake8 all checks (warnings acceptable)
+5. Mypy type checking
+6. Config validation
+7. Import validation
 
-# Config validation
-python3 -c "import json; json.load(open('config.json'))"
+To format code automatically:
+```bash
+uv run black .
+```
+
+## Development Setup
+
+This project uses `uv` for dependency management:
+
+```bash
+# Install uv (if not already installed)
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Install dependencies (including dev dependencies)
+uv sync --dev
+
+# Run scripts
+uv run python3 process_kite.py
+uv run python3 generate_rss.py
+uv run python3 generate_html.py
+
+# Run all checks
+./check.sh
 ```
 
 ## CI/CD
 
-The CI workflow (`.github/workflows/ci.yml`) runs these checks automatically on:
+The CI workflow (`.github/workflows/ci.yml`) uses `uv` and runs `./check.sh` automatically on:
 - Push to `main` branch
 - Pull requests to `main` branch
 
