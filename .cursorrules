@@ -1,0 +1,67 @@
+# Cursor Rules for Kite Feed Generator
+
+## Code Quality Requirements
+
+Before committing or submitting code, ensure:
+
+1. **Python Syntax Validation**: All Python files must have valid syntax
+   - Run: `python3 -m py_compile *.py`
+   - Files to check: `process_kite.py`, `generate_rss.py`, `generate_html.py`, `generate_utils.py`
+
+2. **Code Formatting**: Code must be formatted with Black
+   - Run: `black --check --diff .`
+   - Configuration: `pyproject.toml` (line-length: 127)
+
+3. **Linting**: Code must pass flake8 checks
+   - Run: `flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics`
+   - Configuration: `.flake8` and `pyproject.toml`
+
+4. **Type Checking**: Type hints should be checked with mypy
+   - Run: `mypy --ignore-missing-imports --no-strict-optional --follow-imports=silent *.py`
+   - Configuration: `pyproject.toml`
+
+5. **Config Validation**: `config.json` must be valid JSON
+   - Run: `python3 -c "import json; json.load(open('config.json'))"`
+
+6. **Script Validation**: All scripts must be importable and executable
+   - Ensure all imports resolve correctly
+   - Ensure scripts can be run with `python3 script.py`
+
+## Import Dependencies
+
+When adding new imports or dependencies:
+- Update `requirements.txt` if adding external packages
+- Ensure all imports are used (no unused imports)
+- Use type hints where appropriate
+
+## File Structure
+
+- `process_kite.py`: Processes Kagi Kite feeds
+- `generate_html.py`: Generates HTML pages
+- `generate_rss.py`: Generates RSS feed
+- `generate_utils.py`: Shared utilities (date formatting, story processing, etc.)
+
+## Testing Before Commit
+
+Always run these checks before committing:
+```bash
+# Syntax check
+python3 -m py_compile process_kite.py generate_rss.py generate_html.py generate_utils.py
+
+# Format check
+black --check --diff .
+
+# Lint check
+flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
+
+# Config validation
+python3 -c "import json; json.load(open('config.json'))"
+```
+
+## CI/CD
+
+The CI workflow (`.github/workflows/ci.yml`) runs these checks automatically on:
+- Push to `main` branch
+- Pull requests to `main` branch
+
+Ensure all CI checks pass before merging.

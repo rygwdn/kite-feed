@@ -36,7 +36,7 @@ jobs:
         
     - name: Type check with mypy
       run: |
-        mypy --ignore-missing-imports --no-strict-optional --follow-imports=silent *.py || true
+        mypy --ignore-missing-imports --no-strict-optional --follow-imports=silent process_kite.py generate_rss.py generate_html.py generate_utils.py || true
 
   validate-scripts:
     name: Validate Scripts
@@ -57,7 +57,11 @@ jobs:
         
     - name: Validate Python syntax
       run: |
-        python3 -m py_compile process_kite.py generate_rss.py generate_html.py
+        python3 -m py_compile process_kite.py generate_rss.py generate_html.py generate_utils.py
+        
+    - name: Validate imports
+      run: |
+        python3 -c "import process_kite; import generate_rss; import generate_html; import generate_utils; print('All imports successful')"
         
     - name: Validate config.json
       run: |
