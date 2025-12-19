@@ -7,7 +7,7 @@ import hashlib
 import re
 from datetime import UTC, datetime
 from html import escape
-from typing import Any, Optional
+from typing import Any
 from urllib.parse import quote
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -97,63 +97,63 @@ def process_footnote_references(text: str, story: dict[str, Any]) -> str:
     Convert footnote references like [domain.com#1] to HTML footnote links.
     The number refers to the occurrence index of that domain in the articles list.
     Escapes the rest of the text for security.
-    
+
     Args:
         text: Text that may contain footnote references
         story: Story dict containing 'articles' list with 'domain', 'title', and 'link' fields
-        
+
     Returns:
         Text with footnote references converted to HTML links, rest escaped
     """
     if not text:
         return ""
-    
+
     articles = story.get("articles", []) if story else []
-    
+
     if not articles:
         return escape(text)
-    
+
     # Create a mapping: (domain, occurrence_number) -> article link
     # Group articles by domain and track occurrence order
     domain_occurrences = {}  # domain -> list of (occurrence_index, article_link)
-    
+
     for article in articles:
         domain = article.get("domain", "")
         link = article.get("link", "")
-        
+
         if not domain or not link:
             continue
-        
+
         # Use domain as-is, no normalization
         domain_key = domain.strip()
-        
+
         if domain_key:
             if domain_key not in domain_occurrences:
                 domain_occurrences[domain_key] = []
-            
+
             # Add this occurrence with its index (1-based)
             occurrence_num = len(domain_occurrences[domain_key]) + 1
             domain_occurrences[domain_key].append((occurrence_num, escape(link)))
-    
+
     # Pattern to match [domain.com#number] BEFORE escaping
     def replace_footnote(match):
         full_match = match.group(0)
         content = match.group(1)  # Content inside brackets
-        
+
         # Check if it's a footnote reference (contains # followed by number)
         if "#" in content:
             parts = content.rsplit("#", 1)
             if len(parts) == 2:
                 domain_part = parts[0].strip()
                 footnote_num_str = parts[1].strip()
-                
+
                 # Verify footnote number is actually numeric
                 if footnote_num_str.isdigit():
                     footnote_num = int(footnote_num_str)
-                    
+
                     # Use domain as-is for matching, no normalization
                     domain_key = domain_part.strip()
-                    
+
                     # Find matching domain and occurrence
                     if domain_key in domain_occurrences:
                         occurrences = domain_occurrences[domain_key]
@@ -161,47 +161,47 @@ def process_footnote_references(text: str, story: dict[str, Any]) -> str:
                         for occ_num, article_link in occurrences:
                             if occ_num == footnote_num:
                                 footnote_num_escaped = escape(footnote_num_str)
-                                return f"<a href=\"{article_link}\" class=\"footnote-ref\">[{footnote_num_escaped}]</a>"
-        
+                                return f'<a href="{article_link}" class="footnote-ref">[{footnote_num_escaped}]</a>'
+
         # Not a footnote reference, escape and return
         return escape(full_match)
-    
+
     # Split text into parts: footnote references and regular text
     # Match [anything] patterns
     pattern = r"\[([^\]]+)\]"
     parts = []
     last_end = 0
-    
+
     for match in re.finditer(pattern, text):
         # Add text before the match (escaped)
         if match.start() > last_end:
-            parts.append(escape(text[last_end:match.start()]))
-        
+            parts.append(escape(text[last_end : match.start()]))
+
         # Process the footnote reference
         replacement = replace_footnote(match)
         parts.append(replacement)
         last_end = match.end()
-    
+
     # Add remaining text (escaped)
     if last_end < len(text):
         parts.append(escape(text[last_end:]))
-    
+
     return "".join(parts)
 
 
 def get_jinja_env():
     """Create and return a Jinja2 environment."""
     env = Environment(loader=FileSystemLoader("templates"), autoescape=select_autoescape(["html", "xml"]))
-    
+
     # Add custom filter for processing footnote references
-    def process_footnotes_filter(text: str, story: Optional[dict[str, Any]] = None) -> str:
+    def process_footnotes_filter(text: str, story: dict[str, Any] | None = None) -> str:
         """Jinja2 filter to process footnote references."""
         if not text:
             return text
         if story is None:
             story = {}
         return process_footnote_references(text, story)
-    
+
     env.filters["process_footnotes"] = process_footnotes_filter
     return env
 
