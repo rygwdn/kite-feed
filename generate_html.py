@@ -44,18 +44,17 @@ if __name__ == "__main__":
 
     # Get the URLs that will be used in the index (to ensure filenames match)
     _, story_html_urls = process_stories_for_output(stories, config, format_date_html, heading_level=1)
-    
+
     # Extract slugs from URLs to ensure consistency
     base_url = config.get("site", {}).get("base_url", "https://example.com")
-    seen_slugs = {}
-    
+
     # Generate individual story pages
     for i, story in enumerate(stories):
         # Extract slug from the URL that will be used in index
         story_url = story_html_urls[i]
         # Remove base_url and /stories/ prefix and .html suffix
         slug_from_url = story_url.replace(f"{base_url}/stories/", "").replace(".html", "")
-        
+
         filename = f"stories/{slug_from_url}.html"
 
         html = generate_story_html(story, config)
