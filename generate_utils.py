@@ -113,11 +113,11 @@ def process_footnote_references(text: str, story: dict[str, Any]) -> str:
     if not articles:
         return escape(text)
 
-    # Create a mapping: (domain, occurrence_number) -> article link
+    # Create a mapping: (domain, occurrence_number) -> (article_index, article_link)
     # Group articles by domain and track occurrence order
-    domain_occurrences = {}  # domain -> list of (occurrence_index, article_link)
+    domain_occurrences = {}  # domain -> list of (occurrence_index, article_index, article_link)
 
-    for article in articles:
+    for idx, article in enumerate(articles):
         domain = article.get("domain", "")
         link = article.get("link", "")
 
@@ -131,9 +131,9 @@ def process_footnote_references(text: str, story: dict[str, Any]) -> str:
             if domain_key not in domain_occurrences:
                 domain_occurrences[domain_key] = []
 
-            # Add this occurrence with its index (1-based)
+            # Add this occurrence with its index (1-based) and article index
             occurrence_num = len(domain_occurrences[domain_key]) + 1
-            domain_occurrences[domain_key].append((occurrence_num, escape(link)))
+            domain_occurrences[domain_key].append((occurrence_num, idx, escape(link)))
 
     # Pattern to match [domain.com#number] BEFORE escaping
     def replace_footnote(match):
@@ -158,10 +158,34 @@ def process_footnote_references(text: str, story: dict[str, Any]) -> str:
                     if domain_key in domain_occurrences:
                         occurrences = domain_occurrences[domain_key]
                         # Find the article with matching occurrence number
-                        for occ_num, article_link in occurrences:
+                        for occ_num, article_idx, article_link in occurrences:
                             if occ_num == footnote_num:
-                                footnote_num_escaped = escape(footnote_num_str)
+                                # Use the article index (1-based) as the replacement
+                                article_index_display = article_idx + 1
+                                footnote_num_escaped = escape(str(article_index_display))
                                 return f'<a href="{article_link}" class="footnote-ref">[{footnote_num_escaped}]</a>'
+
+                    # Fallback: Look for Google.com domains with domain name in title
+                    # Search for articles where domain contains "google.com" and title contains the domain name
+                    domain_lower = domain_key.lower()
+                    google_matches = []  # Track Google.com articles matching this domain
+                    for idx, article in enumerate(articles):
+                        article_domain = article.get("domain", "").lower()
+                        article_title = article.get("title", "").lower()
+                        article_link = article.get("link", "")
+
+                        # Check if this is a Google.com domain and title contains the domain name
+                        if "google.com" in article_domain and domain_lower in article_title:
+                            google_matches.append((len(google_matches) + 1, idx, article_link))
+
+                    # If we found matching Google.com articles, use the occurrence number matching the footnote
+                    if google_matches:
+                        for occ_num, article_idx, article_link in google_matches:
+                            if occ_num == footnote_num:
+                                # Use the article index (1-based) as the replacement
+                                article_index_display = article_idx + 1
+                                footnote_num_escaped = escape(str(article_index_display))
+                                return f'<a href="{escape(article_link)}" class="footnote-ref">[{footnote_num_escaped}]</a>'
 
         # Not a footnote reference, escape and return
         return escape(full_match)
