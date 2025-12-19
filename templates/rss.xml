@@ -20,7 +20,18 @@
         <link>{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_url|e }}</link>
         <guid isPermaLink="true">{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_url|e }}</guid>
         <pubDate>{{ story.pub_date }}</pubDate>
-        <description><![CDATA[{{ (story.summary or story.title)|process_footnotes(story)|safe }}]]></description>
+        <description><![CDATA[{{ (story.summary or story.title)|process_footnotes(story)|safe }}{% if story.primary_image and story.primary_image.url %}
+<div class='image'>
+{% if story.primary_image.link %}
+<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" /></a>
+{% else %}
+<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" />
+{% endif %}
+{% if story.primary_image.caption %}
+<p class='caption'>{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} <span class='credit'>({{ story.primary_image.credit|e }})</span>{% endif %}</p>
+{% endif %}
+</div>
+{% endif %}]]></description>
         <content:encoded><![CDATA[{% include 'story_content.html' %}]]></content:encoded>
     </item>
 {% endfor %}
