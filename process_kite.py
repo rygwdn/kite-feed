@@ -29,6 +29,7 @@ def fetch_json(url: str) -> dict[str, Any]:
     except Exception as e:
         print(f"[LOG] Error fetching {url}: {e}", file=sys.stderr)
         import traceback
+
         traceback.print_exc(file=sys.stderr)
         return {}
 
@@ -308,13 +309,13 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
     if not kite_data:
         print("[LOG] Error: Could not fetch kite.json", file=sys.stderr)
         return []
-    
+
     categories_found = kite_data.get("categories", [])
     print(f"[LOG] Found {len(categories_found)} categories in kite.json", file=sys.stderr)
 
     # Process each category
     for idx, category_name in enumerate(categories):
-        print(f"[LOG] Processing category {idx+1}/{len(categories)}: {category_name}...", file=sys.stderr)
+        print(f"[LOG] Processing category {idx + 1}/{len(categories)}: {category_name}...", file=sys.stderr)
 
         # Find the category file name
         category_file = None
@@ -366,19 +367,26 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
     # Apply filters
     print(f"[LOG] Applying filters to {len(all_stories)} stories...", file=sys.stderr)
     filtered_stories = apply_filters(all_stories, config)
-    print(f"[LOG] After filtering: {len(filtered_stories)} stories (removed {len(all_stories) - len(filtered_stories)})", file=sys.stderr)
+    print(
+        f"[LOG] After filtering: {len(filtered_stories)} stories (removed {len(all_stories) - len(filtered_stories)})",
+        file=sys.stderr,
+    )
 
     # Merge duplicates across categories
     print(f"[LOG] Merging duplicates from {len(filtered_stories)} stories...", file=sys.stderr)
     merged_stories = merge_duplicates(filtered_stories)
-    print(f"[LOG] After merging duplicates: {len(merged_stories)} stories (merged {len(filtered_stories) - len(merged_stories)} duplicates)", file=sys.stderr)
+    duplicates_merged = len(filtered_stories) - len(merged_stories)
+    print(
+        f"[LOG] After merging duplicates: {len(merged_stories)} stories (merged {duplicates_merged} duplicates)",
+        file=sys.stderr,
+    )
 
     # Log final story titles for verification
     if merged_stories:
-        print(f"[LOG] Final story titles:", file=sys.stderr)
+        print("[LOG] Final story titles:", file=sys.stderr)
         for i, story in enumerate(merged_stories[:5]):  # Log first 5
             title = story.get("title", "Untitled")[:60]
-            print(f"[LOG]   {i+1}. {title}", file=sys.stderr)
+            print(f"[LOG]   {i + 1}. {title}", file=sys.stderr)
         if len(merged_stories) > 5:
             print(f"[LOG]   ... and {len(merged_stories) - 5} more", file=sys.stderr)
 
@@ -388,11 +396,11 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
 if __name__ == "__main__":
     import sys
     from datetime import datetime
-    
+
     print(f"[LOG] process_kite.py started at: {datetime.now().isoformat()}", file=sys.stderr)
     config = load_config()
-    print(f"[LOG] Config loaded successfully", file=sys.stderr)
-    
+    print("[LOG] Config loaded successfully", file=sys.stderr)
+
     stories = process_kite_feeds(config)
     print(f"[LOG] Processing complete: {len(stories)} stories ready for output", file=sys.stderr)
 

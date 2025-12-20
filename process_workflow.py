@@ -41,27 +41,28 @@ def log_file_write(filepath: str, content: str, description: str = ""):
         # Write file
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(content)
-        
+
         # Verify write
         file_info = get_file_info(filepath)
         print(f"   [LOG] Wrote {description or filepath}:")
         print(f"   [LOG]   - Size: {file_info.get('size', 0)} bytes")
         print(f"   [LOG]   - Modified: {file_info.get('mtime', 'N/A')}")
         print(f"   [LOG]   - Checksum (first 1KB): {file_info.get('checksum_sample', 'N/A')}")
-        
+
         # Verify content matches
         if os.path.exists(filepath):
-            with open(filepath, "r", encoding="utf-8") as f:
+            with open(filepath, encoding="utf-8") as f:
                 read_content = f.read()
             if read_content == content:
-                print(f"   [LOG]   - Content verification: ✓ PASSED")
+                print("   [LOG]   - Content verification: ✓ PASSED")
             else:
-                print(f"   [LOG]   - Content verification: ✗ FAILED (content mismatch)")
+                print("   [LOG]   - Content verification: ✗ FAILED (content mismatch)")
                 print(f"   [LOG]   - Expected length: {len(content)}, Actual length: {len(read_content)}")
         return True
     except Exception as e:
         print(f"   [LOG]   - Write failed: {e}")
         import traceback
+
         traceback.print_exc()
         return False
 
@@ -89,25 +90,25 @@ def main():
     print("\n1. Processing Kite feeds...")
     try:
         config = load_config()
-        print(f"[LOG] Config loaded from config.json")
+        print("[LOG] Config loaded from config.json")
         stories = process_kite_feeds(config)
         print(f"[LOG] Processed {len(stories)} stories from Kite feeds")
 
         # Check if processed_stories.json exists before writing
         old_file_info = get_file_info("processed_stories.json")
         if old_file_info["exists"]:
-            print(f"[LOG] Existing processed_stories.json found:")
+            print("[LOG] Existing processed_stories.json found:")
             print(f"   [LOG]   - Size: {old_file_info.get('size', 0)} bytes")
             print(f"   [LOG]   - Modified: {old_file_info.get('mtime', 'N/A')}")
 
         # Serialize stories to JSON
         stories_json = json.dumps(stories, indent=2, ensure_ascii=False)
         success = log_file_write("processed_stories.json", stories_json, "processed_stories.json")
-        
+
         if not success:
-            print(f"   ✗ Failed to write processed_stories.json")
+            print("   ✗ Failed to write processed_stories.json")
             sys.exit(1)
-        
+
         # Verify file was created
         new_file_info = get_file_info("processed_stories.json")
         if new_file_info["exists"]:
@@ -116,11 +117,12 @@ def main():
                 size_diff = new_file_info["size"] - old_file_info["size"]
                 print(f"   [LOG] File size change: {size_diff:+d} bytes")
         else:
-            print(f"   ✗ ERROR: processed_stories.json was not created!")
+            print("   ✗ ERROR: processed_stories.json was not created!")
             sys.exit(1)
     except Exception as e:
         print(f"   ✗ Failed to process Kite feeds: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 
@@ -129,32 +131,32 @@ def main():
     try:
         # Verify processed_stories.json exists and is readable
         if not os.path.exists("processed_stories.json"):
-            print(f"   ✗ ERROR: processed_stories.json not found!")
+            print("   ✗ ERROR: processed_stories.json not found!")
             sys.exit(1)
-        
+
         with open("processed_stories.json", encoding="utf-8") as f:
             stories = json.load(f)
         print(f"[LOG] Loaded {len(stories)} stories from processed_stories.json")
-        
+
         config = json.load(open("config.json"))
-        print(f"[LOG] Config reloaded from config.json")
+        print("[LOG] Config reloaded from config.json")
 
         rss_xml = generate_rss(stories, config)
         print(f"[LOG] Generated RSS XML ({len(rss_xml)} characters)")
-        
+
         # Check if feed.xml exists before writing
         old_file_info = get_file_info("feed.xml")
         if old_file_info["exists"]:
-            print(f"[LOG] Existing feed.xml found:")
+            print("[LOG] Existing feed.xml found:")
             print(f"   [LOG]   - Size: {old_file_info.get('size', 0)} bytes")
             print(f"   [LOG]   - Modified: {old_file_info.get('mtime', 'N/A')}")
 
         success = log_file_write("feed.xml", rss_xml, "feed.xml")
-        
+
         if not success:
-            print(f"   ✗ Failed to write feed.xml")
+            print("   ✗ Failed to write feed.xml")
             sys.exit(1)
-        
+
         # Verify file was created
         new_file_info = get_file_info("feed.xml")
         if new_file_info["exists"]:
@@ -163,11 +165,12 @@ def main():
                 size_diff = new_file_info["size"] - old_file_info["size"]
                 print(f"   [LOG] File size change: {size_diff:+d} bytes")
         else:
-            print(f"   ✗ ERROR: feed.xml was not created!")
+            print("   ✗ ERROR: feed.xml was not created!")
             sys.exit(1)
     except Exception as e:
         print(f"   ✗ Failed to generate RSS feed: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 
@@ -176,20 +179,20 @@ def main():
     try:
         # Verify processed_stories.json exists
         if not os.path.exists("processed_stories.json"):
-            print(f"   ✗ ERROR: processed_stories.json not found!")
+            print("   ✗ ERROR: processed_stories.json not found!")
             sys.exit(1)
-        
+
         with open("processed_stories.json", encoding="utf-8") as f:
             stories = json.load(f)
         print(f"[LOG] Loaded {len(stories)} stories from processed_stories.json")
-        
+
         config = json.load(open("config.json"))
 
         # Create stories directory
         stories_dir = "stories"
         os.makedirs(stories_dir, exist_ok=True)
         print(f"[LOG] Stories directory: {stories_dir} (exists: {os.path.exists(stories_dir)})")
-        
+
         # Count existing story files
         existing_stories = []
         if os.path.exists(stories_dir):
@@ -202,14 +205,14 @@ def main():
             story_slug = get_story_slug(story)
             filename = f"{stories_dir}/{story_slug}.html"
             html = generate_story_html(story, config)
-            
+
             # Log first few stories in detail
             if i < 3:
-                print(f"[LOG] Generating story {i+1}/{len(stories)}: {filename}")
+                print(f"[LOG] Generating story {i + 1}/{len(stories)}: {filename}")
                 print(f"   [LOG]   - Title: {story.get('title', 'N/A')[:50]}")
                 print(f"   [LOG]   - HTML size: {len(html)} characters")
-            
-            success = log_file_write(filename, html, f"story page {i+1}: {filename}")
+
+            success = log_file_write(filename, html, f"story page {i + 1}: {filename}")
             if success:
                 generated_count += 1
             else:
@@ -218,22 +221,22 @@ def main():
         print(f"[LOG] Generated {generated_count}/{len(stories)} story pages")
 
         # Generate index page
-        print(f"[LOG] Generating index.html...")
+        print("[LOG] Generating index.html...")
         old_index_info = get_file_info("index.html")
         if old_index_info["exists"]:
-            print(f"[LOG] Existing index.html found:")
+            print("[LOG] Existing index.html found:")
             print(f"   [LOG]   - Size: {old_index_info.get('size', 0)} bytes")
             print(f"   [LOG]   - Modified: {old_index_info.get('mtime', 'N/A')}")
 
         index_html = generate_index_html(stories, config)
         print(f"[LOG] Generated index HTML ({len(index_html)} characters)")
-        
+
         success = log_file_write("index.html", index_html, "index.html")
-        
+
         if not success:
-            print(f"   ✗ Failed to write index.html")
+            print("   ✗ Failed to write index.html")
             sys.exit(1)
-        
+
         # Verify index.html was created
         new_index_info = get_file_info("index.html")
         if new_index_info["exists"]:
@@ -242,11 +245,12 @@ def main():
                 size_diff = new_index_info["size"] - old_index_info["size"]
                 print(f"   [LOG] Index.html size change: {size_diff:+d} bytes")
         else:
-            print(f"   ✗ ERROR: index.html was not created!")
+            print("   ✗ ERROR: index.html was not created!")
             sys.exit(1)
     except Exception as e:
         print(f"   ✗ Failed to generate HTML pages: {e}")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 
@@ -276,12 +280,12 @@ def main():
         else:
             print(f"   [LOG]   ✗ {key_file} MISSING!")
             all_exist = False
-    
+
     if os.path.exists("stories"):
         story_files = [f for f in os.listdir("stories") if f.endswith(".html")]
         print(f"   [LOG]   ✓ stories/ directory exists ({len(story_files)} HTML files)")
     else:
-        print(f"   [LOG]   ✗ stories/ directory MISSING!")
+        print("   [LOG]   ✗ stories/ directory MISSING!")
         all_exist = False
 
     if not all_exist:

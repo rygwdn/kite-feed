@@ -37,12 +37,12 @@ def generate_index_html(stories: list, config: dict) -> str:
 
 if __name__ == "__main__":
     from datetime import datetime
-    
+
     print(f"[LOG] generate_html.py started at: {datetime.now().isoformat()}", file=sys.stderr)
-    
+
     config = json.load(open("config.json"))
-    print(f"[LOG] Config loaded from config.json", file=sys.stderr)
-    
+    print("[LOG] Config loaded from config.json", file=sys.stderr)
+
     stories = json.load(sys.stdin)
     print(f"[LOG] Loaded {len(stories)} stories from stdin", file=sys.stderr)
 
@@ -71,17 +71,17 @@ if __name__ == "__main__":
 
         html = generate_story_html(story, config)
         html_size = len(html)
-        
+
         # Log first few stories
         if i < 3:
-            print(f"[LOG] Generating story {i+1}: {filename}", file=sys.stderr)
+            print(f"[LOG] Generating story {i + 1}: {filename}", file=sys.stderr)
             print(f"[LOG]   - Title: {story.get('title', 'N/A')[:50]}", file=sys.stderr)
             print(f"[LOG]   - HTML size: {html_size} characters", file=sys.stderr)
-        
+
         try:
             with open(filename, "w", encoding="utf-8") as f:
                 f.write(html)
-            
+
             # Verify write
             if os.path.exists(filename):
                 actual_size = os.path.getsize(filename)
@@ -96,31 +96,33 @@ if __name__ == "__main__":
         except Exception as e:
             print(f"[LOG]   - ERROR writing {filename}: {e}", file=sys.stderr)
             import traceback
+
             traceback.print_exc(file=sys.stderr)
 
     print(f"[LOG] Generated {generated_count}/{len(stories)} story pages", file=sys.stderr)
 
     # Generate index page
-    print(f"[LOG] Generating index.html...", file=sys.stderr)
+    print("[LOG] Generating index.html...", file=sys.stderr)
     index_html = generate_index_html(stories, config)
     index_size = len(index_html)
     print(f"[LOG] Index HTML size: {index_size} characters", file=sys.stderr)
-    
+
     try:
         with open("index.html", "w", encoding="utf-8") as f:
             f.write(index_html)
-        
+
         # Verify write
         if os.path.exists("index.html"):
             actual_size = os.path.getsize("index.html")
             print(f"[LOG] index.html written: {actual_size} bytes", file=sys.stderr)
             if actual_size == 0:
-                print(f"[LOG] WARNING: index.html is empty!", file=sys.stderr)
+                print("[LOG] WARNING: index.html is empty!", file=sys.stderr)
         else:
-            print(f"[LOG] ERROR: index.html was not created!", file=sys.stderr)
+            print("[LOG] ERROR: index.html was not created!", file=sys.stderr)
     except Exception as e:
         print(f"[LOG] ERROR writing index.html: {e}", file=sys.stderr)
         import traceback
+
         traceback.print_exc(file=sys.stderr)
 
     print(f"[LOG] Generated {len(stories)} story pages and index.html", file=sys.stderr)
