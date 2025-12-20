@@ -253,13 +253,13 @@ def merge_duplicates(stories: list[dict[str, Any]]) -> list[dict[str, Any]]:
                     existing["feed_category"] = combined_feed_cats[0]
                 elif combined_feed_cats:
                     existing["feed_category"] = ", ".join(sorted(combined_feed_cats))
-            
+
             # Merge item_category: prefer non-empty
             existing_item_cat = existing.get("item_category", "")
             new_item_cat = story.get("item_category", "")
             if new_item_cat and not existing_item_cat:
                 existing["item_category"] = new_item_cat
-            
+
             # Merge other fields, preferring non-empty values
             for key in story:
                 if key not in ["url", "source_urls", "articles", "feed_category", "item_category"]:
