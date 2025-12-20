@@ -121,12 +121,14 @@ def get_primary_source_url(cluster: dict[str, Any]) -> str:
     return f"hash:{hashlib.md5(cluster_str.encode()).hexdigest()}"
 
 
-def cluster_to_story(cluster: dict[str, Any], file_timestamp: Any = None) -> dict[str, Any]:
+def cluster_to_story(cluster: dict[str, Any], file_timestamp: Any = None, feed_category: str = "") -> dict[str, Any]:
     """Convert a cluster to a story format."""
     story = {
         "title": cluster.get("title", "Untitled"),
         "summary": cluster.get("short_summary", ""),
-        "category": cluster.get("_category", cluster.get("category", "")),
+        "feed_category": feed_category or cluster.get("_category", ""),
+        "item_category": cluster.get("category", ""),
+        "category": cluster.get("_category", cluster.get("category", "")),  # Keep for backward compatibility
         "cluster_number": cluster.get("cluster_number"),
         "unique_domains": cluster.get("unique_domains"),
         "number_of_titles": cluster.get("number_of_titles"),
@@ -244,9 +246,28 @@ def merge_duplicates(stories: list[dict[str, Any]]) -> list[dict[str, Any]]:
             new_urls = set(story.get("source_urls", []))
             existing["source_urls"] = list(existing_urls | new_urls)
 
+            # Merge feed_category: combine unique feed categories
+            existing_feed_cats = existing.get("feed_category", "")
+            new_feed_cats = story.get("feed_category", "")
+            if new_feed_cats and new_feed_cats != existing_feed_cats:
+                # Combine feed categories, avoiding duplicates
+                existing_list = [existing_feed_cats] if existing_feed_cats else []
+                new_list = [new_feed_cats] if new_feed_cats else []
+                combined_feed_cats = list(set(existing_list + new_list))
+                if len(combined_feed_cats) == 1:
+                    existing["feed_category"] = combined_feed_cats[0]
+                elif combined_feed_cats:
+                    existing["feed_category"] = ", ".join(sorted(combined_feed_cats))
+
+            # Merge item_category: prefer non-empty
+            existing_item_cat = existing.get("item_category", "")
+            new_item_cat = story.get("item_category", "")
+            if new_item_cat and not existing_item_cat:
+                existing["item_category"] = new_item_cat
+
             # Merge other fields, preferring non-empty values
             for key in story:
-                if key not in ["url", "source_urls", "articles"]:
+                if key not in ["url", "source_urls", "articles", "feed_category", "item_category"]:
                     if story[key] and not existing.get(key):
                         existing[key] = story[key]
                     elif isinstance(story[key], list) and story[key]:
@@ -325,7 +346,7 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
             print(f"[LOG] Category timestamp: {file_timestamp}", file=sys.stderr)
 
         # Convert clusters to stories
-        category_stories = [cluster_to_story(cluster, file_timestamp) for cluster in clusters]
+        category_stories = [cluster_to_story(cluster, file_timestamp, category_name) for cluster in clusters]
         print(f"[LOG] Converted {len(category_stories)} clusters to stories", file=sys.stderr)
 
         # Determine top_n for this category (category-specific or default)
