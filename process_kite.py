@@ -20,11 +20,16 @@ def load_config(config_path: str = "config.json") -> dict[str, Any]:
 def fetch_json(url: str) -> dict[str, Any]:
     """Fetch JSON data from a URL."""
     try:
+        print(f"[LOG] Fetching {url}...", file=sys.stderr)
         response = requests.get(url, timeout=30, allow_redirects=True)
         response.raise_for_status()
-        return response.json()
+        data = response.json()
+        print(f"[LOG] Successfully fetched {url} ({len(str(data))} characters)", file=sys.stderr)
+        return data
     except Exception as e:
-        print(f"Error fetching {url}: {e}", file=sys.stderr)
+        print(f"[LOG] Error fetching {url}: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
         return {}
 
 
@@ -276,16 +281,19 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
     base_url = config.get("feeds", {}).get("base_url", "https://kite.kagi.com")
 
     # Fetch kite.json to get category mappings
-    print(f"Fetching category index from {base_url}/kite.json...", file=sys.stderr)
+    print(f"[LOG] Fetching category index from {base_url}/kite.json...", file=sys.stderr)
     kite_data = fetch_json(f"{base_url}/kite.json")
 
     if not kite_data:
-        print("Error: Could not fetch kite.json", file=sys.stderr)
+        print("[LOG] Error: Could not fetch kite.json", file=sys.stderr)
         return []
+    
+    categories_found = kite_data.get("categories", [])
+    print(f"[LOG] Found {len(categories_found)} categories in kite.json", file=sys.stderr)
 
     # Process each category
-    for category_name in categories:
-        print(f"Processing category: {category_name}...", file=sys.stderr)
+    for idx, category_name in enumerate(categories):
+        print(f"[LOG] Processing category {idx+1}/{len(categories)}: {category_name}...", file=sys.stderr)
 
         # Find the category file name
         category_file = None
@@ -295,53 +303,79 @@ def process_kite_feeds(config: dict[str, Any]) -> list[dict[str, Any]]:
                 break
 
         if not category_file:
-            print(f"Warning: Category '{category_name}' not found in kite.json", file=sys.stderr)
+            print(f"[LOG] Warning: Category '{category_name}' not found in kite.json", file=sys.stderr)
             continue
 
         # Fetch the category file
         category_url = f"{base_url}/{category_file}"
-        print(f"Fetching {category_url}...", file=sys.stderr)
+        print(f"[LOG] Fetching category file: {category_url}...", file=sys.stderr)
         category_data = fetch_json(category_url)
 
         if not category_data:
-            print(f"Warning: Could not fetch {category_url}", file=sys.stderr)
+            print(f"[LOG] Warning: Could not fetch {category_url}", file=sys.stderr)
             continue
 
         # Extract clusters
         clusters = extract_clusters_from_category(category_data)
-        print(f"Found {len(clusters)} clusters in {category_name}", file=sys.stderr)
+        print(f"[LOG] Found {len(clusters)} clusters in {category_name}", file=sys.stderr)
 
         # Get file-level timestamp (top-level key in JSON)
         file_timestamp = category_data.get("timestamp")
+        if file_timestamp:
+            print(f"[LOG] Category timestamp: {file_timestamp}", file=sys.stderr)
 
         # Convert clusters to stories
         category_stories = [cluster_to_story(cluster, file_timestamp) for cluster in clusters]
+        print(f"[LOG] Converted {len(category_stories)} clusters to stories", file=sys.stderr)
 
         # Determine top_n for this category (category-specific or default)
         category_top_n = top_n_by_category.get(category_name, top_n_per_feed)
+        print(f"[LOG] Using top_n={category_top_n} for category {category_name}", file=sys.stderr)
 
         # Apply top_n per feed (sort by cluster_number, lower is better)
         if category_top_n and category_top_n > 0:
             category_stories.sort(key=lambda x: x.get("cluster_number", 999))
+            original_count = len(category_stories)
             category_stories = category_stories[:category_top_n]
-            print(f"Selected top {len(category_stories)} stories from {category_name}", file=sys.stderr)
+            print(f"[LOG] Selected top {len(category_stories)}/{original_count} stories from {category_name}", file=sys.stderr)
 
         all_stories.extend(category_stories)
+        print(f"[LOG] Total stories so far: {len(all_stories)}", file=sys.stderr)
 
     # Apply filters
+    print(f"[LOG] Applying filters to {len(all_stories)} stories...", file=sys.stderr)
     filtered_stories = apply_filters(all_stories, config)
-    print(f"After filtering: {len(filtered_stories)} stories", file=sys.stderr)
+    print(f"[LOG] After filtering: {len(filtered_stories)} stories (removed {len(all_stories) - len(filtered_stories)})", file=sys.stderr)
 
     # Merge duplicates across categories
+    print(f"[LOG] Merging duplicates from {len(filtered_stories)} stories...", file=sys.stderr)
     merged_stories = merge_duplicates(filtered_stories)
-    print(f"After merging duplicates: {len(merged_stories)} stories", file=sys.stderr)
+    print(f"[LOG] After merging duplicates: {len(merged_stories)} stories (merged {len(filtered_stories) - len(merged_stories)} duplicates)", file=sys.stderr)
+
+    # Log final story titles for verification
+    if merged_stories:
+        print(f"[LOG] Final story titles:", file=sys.stderr)
+        for i, story in enumerate(merged_stories[:5]):  # Log first 5
+            title = story.get("title", "Untitled")[:60]
+            print(f"[LOG]   {i+1}. {title}", file=sys.stderr)
+        if len(merged_stories) > 5:
+            print(f"[LOG]   ... and {len(merged_stories) - 5} more", file=sys.stderr)
 
     return merged_stories
 
 
 if __name__ == "__main__":
+    import sys
+    from datetime import datetime
+    
+    print(f"[LOG] process_kite.py started at: {datetime.now().isoformat()}", file=sys.stderr)
     config = load_config()
+    print(f"[LOG] Config loaded successfully", file=sys.stderr)
+    
     stories = process_kite_feeds(config)
+    print(f"[LOG] Processing complete: {len(stories)} stories ready for output", file=sys.stderr)
 
     # Output as JSON
-    print(json.dumps(stories, indent=2, ensure_ascii=False))
+    stories_json = json.dumps(stories, indent=2, ensure_ascii=False)
+    print(f"[LOG] JSON output size: {len(stories_json)} characters", file=sys.stderr)
+    print(stories_json)
