@@ -20,7 +20,7 @@
         <link>{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_url|e }}</link>
         <guid isPermaLink="true">{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_url|e }}</guid>
         <pubDate>{{ story.pub_date }}</pubDate>
-        <author>{{ config.site.author|e }}{% if story.category %} ({{ story.category|e }}){% endif %}</author>
+        <author>{{ config.site.author|e }}{% if story.feed_category or story.item_category %} ({% if story.feed_category %}{{ story.feed_category|e }}{% endif %}{% if story.feed_category and story.item_category %} / {% endif %}{% if story.item_category %}{{ story.item_category|e }}{% endif %}){% endif %}</author>
         <description><![CDATA[{{ (story.summary or story.title)|process_footnotes(story)|safe }}{% if story.primary_image and story.primary_image.url %}
 <div class='image'>
 {% if story.primary_image.link %}
