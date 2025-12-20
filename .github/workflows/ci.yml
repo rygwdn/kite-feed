@@ -45,6 +45,45 @@ jobs:
       run: |
         uv run process
         
+    - name: Verify generated files
+      run: |
+        echo "=== Verifying Generated Files ==="
+        echo ""
+        echo "Checking key files:"
+        for file in processed_stories.json feed.xml index.html; do
+          if [ -f "$file" ]; then
+            size=$(wc -c < "$file" 2>/dev/null || echo "unknown")
+            mtime=$(stat -c%y "$file" 2>/dev/null || stat -f%Sm "$file" 2>/dev/null || echo "unknown")
+            echo "  ✓ $file exists ($size bytes, modified: $mtime)"
+          else
+            echo "  ✗ $file MISSING!"
+            exit 1
+          fi
+        done
+        echo ""
+        echo "Checking stories directory:"
+        if [ -d "stories" ]; then
+          story_count=$(find stories -name "*.html" -type f | wc -l)
+          total_size=$(du -sb stories 2>/dev/null | cut -f1 || echo "unknown")
+          echo "  ✓ stories/ directory exists"
+          echo "  ✓ Found $story_count HTML files (total size: $total_size bytes)"
+          if [ "$story_count" -eq 0 ]; then
+            echo "  ⚠️  WARNING: No story HTML files found!"
+          fi
+        else
+          echo "  ✗ stories/ directory MISSING!"
+          exit 1
+        fi
+        echo ""
+        echo "File sizes summary:"
+        du -h processed_stories.json feed.xml index.html 2>/dev/null || true
+        echo ""
+        echo "Directory listing (first 15 items):"
+        ls -lh | head -15
+        echo ""
+        echo "Stories directory contents (first 10):"
+        ls -lh stories/ 2>/dev/null | head -10 || echo "  (empty or error)"
+        
     - name: Install W3C Feed Validator dependencies
       run: |
         uv pip install lxml html5lib rdflib

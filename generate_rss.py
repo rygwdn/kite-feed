@@ -27,8 +27,24 @@ def generate_rss(stories: list, config: dict) -> str:
 
 
 if __name__ == "__main__":
+    from datetime import datetime
+
+    print(f"[LOG] generate_rss.py started at: {datetime.now().isoformat()}", file=sys.stderr)
+
     config = json.load(open("config.json"))
+    print("[LOG] Config loaded from config.json", file=sys.stderr)
+
     stories = json.load(sys.stdin)
+    print(f"[LOG] Loaded {len(stories)} stories from stdin", file=sys.stderr)
 
     rss_xml = generate_rss(stories, config)
+    rss_size = len(rss_xml)
+    print(f"[LOG] Generated RSS XML: {rss_size} characters", file=sys.stderr)
+
+    # Log first few lines of RSS for verification
+    rss_lines = rss_xml.split("\n")[:5]
+    print("[LOG] RSS preview (first 5 lines):", file=sys.stderr)
+    for line in rss_lines:
+        print(f"[LOG]   {line[:80]}", file=sys.stderr)
+
     print(rss_xml)
