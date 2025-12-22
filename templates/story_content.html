@@ -11,11 +11,7 @@
 <p class='category'><strong>Category:</strong> {{ story.category|e }}</p>
 {% endif %}
 
-{# Summary #}
-{% if story.summary %}
-<div class='summary'><p>{{ story.summary|process_footnotes(story)|safe }}</p>
-{% if story.heading_level|default(1) == 2 %}
-{# For RSS: Add primary image, primary source link, and generated URL link at bottom of summary #}
+{# Primary image - ALWAYS at top, regardless of format #}
 {% if story.primary_image and story.primary_image.url %}
 <div class='image'>
 {% if story.primary_image.link %}
@@ -28,15 +24,10 @@
 {% endif %}
 </div>
 {% endif %}
-{% set primary_url = story.url %}
-{% if primary_url and not primary_url.startswith('hash:') %}
-<p class="sources"><strong>Primary Source:</strong> <a href="{{ primary_url|e }}">{{ primary_url|e }}</a></p>
-{% endif %}
-{% if story_html_url is defined %}
-<p class="sources"><strong>Read more:</strong> <a href="{{ story_html_url|e }}">{{ story_html_url|e }}</a></p>
-{% endif %}
-{% endif %}
-</div>
+
+{# Summary #}
+{% if story.summary %}
+<div class='summary'><p>{{ story.summary|process_footnotes(story)|safe }}</p></div>
 {% endif %}
 
 {# Quote #}
@@ -157,12 +148,20 @@
 </ul>
 {% endif %}
 
-{# Source URLs - Only show for HTML (not RSS) #}
-{% if story.heading_level|default(1) != 2 %}
+{# Source URLs #}
 {% set primary_url = story.url %}
 {% if primary_url and not primary_url.startswith('hash:') %}
-<p class="sources"><strong>Primary Source:</strong> <a href="{{ primary_url|e }}">{{ primary_url|e }}</a></p>
+{% if story.heading_level|default(1) == 2 %}
+{# For RSS: Show at bottom of content with proper link text #}
+<p class="sources"><strong>Primary Source:</strong> <a href="{{ primary_url|e }}">View original article</a></p>
+{% else %}
+{# For HTML: Show with proper link text #}
+<p class="sources"><strong>Primary Source:</strong> <a href="{{ primary_url|e }}">View original article</a></p>
 {% endif %}
+{% endif %}
+{% if story.heading_level|default(1) == 2 and story_html_url is defined %}
+{# For RSS: Add read more link #}
+<p class="sources"><strong>Read more:</strong> <a href="{{ story_html_url|e }}">Full article on {{ config.site.title|e }}</a></p>
 {% endif %}
 
 {% set source_urls = story.source_urls or [] %}
@@ -198,18 +197,16 @@
 <p class='metadata'><strong>Metadata:</strong> {{ metadata|join(', ')|e }}</p>
 {% endif %}
 
-{# Primary image - placed at end for HTML, but moved to summary for RSS #}
-{% if story.heading_level|default(1) != 2 %}
-{% if story.primary_image and story.primary_image.url %}
+{# Secondary image - placed at end #}
+{% if story.secondary_image and story.secondary_image.url %}
 <div class='image'>
-{% if story.primary_image.link %}
-<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" /></a>
+{% if story.secondary_image.link %}
+<a href="{{ story.secondary_image.link|e }}"><img src="{{ story.secondary_image.url|e }}" alt="{{ (story.secondary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" /></a>
 {% else %}
-<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" />
+<img src="{{ story.secondary_image.url|e }}" alt="{{ (story.secondary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" />
 {% endif %}
-{% if story.primary_image.caption %}
-<p class='caption'>{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} <span class='credit'>({{ story.primary_image.credit|e }})</span>{% endif %}</p>
+{% if story.secondary_image.caption %}
+<p class='caption'>{{ story.secondary_image.caption|e }}{% if story.secondary_image.credit %} <span class='credit'>({{ story.secondary_image.credit|e }})</span>{% endif %}</p>
 {% endif %}
 </div>
-{% endif %}
 {% endif %}
