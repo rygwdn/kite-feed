@@ -11,8 +11,7 @@
 <p class='category'><strong>Category:</strong> {{ story.category|e }}</p>
 {% endif %}
 
-{# Primary image - placed at top for HTML pages #}
-{% if story.heading_level|default(1) != 2 %}
+{# Primary image - ALWAYS at top, regardless of format #}
 {% if story.primary_image and story.primary_image.url %}
 <div class='image'>
 {% if story.primary_image.link %}
@@ -24,7 +23,6 @@
 <p class='caption'>{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} <span class='credit'>({{ story.primary_image.credit|e }})</span>{% endif %}</p>
 {% endif %}
 </div>
-{% endif %}
 {% endif %}
 
 {# Summary #}
