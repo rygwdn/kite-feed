@@ -135,6 +135,32 @@
             background-color: #2980b9;
             text-decoration: none;
         }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
         footer {
             margin-top: 40px;
             padding-top: 20px;
@@ -148,6 +174,10 @@
 <body>
     <a href="{{ config.site.base_url }}/index.html" class="back-link">← Back to Feed</a>
     {% include 'story_content.html' with context %}
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{{ story|tojson(indent=2)|e }}</code></pre>
+    </details>
     <footer>
         <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
     </footer>
