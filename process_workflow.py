@@ -67,12 +67,20 @@ def log_file_write(filepath: str, content: str, description: str = ""):
         return False
 
 
-def main():
-    """Run the complete processing workflow."""
+def main(output_dir: str = "."):
+    """Run the complete processing workflow.
+    
+    Args:
+        output_dir: Directory where output files should be written (default: current directory)
+    """
     print("=== Running Processing Workflow ===\n")
     print(f"[LOG] Workflow started at: {datetime.now().isoformat()}")
     print(f"[LOG] Working directory: {os.getcwd()}")
+    print(f"[LOG] Output directory: {output_dir}")
     print(f"[LOG] Python version: {sys.version}\n")
+    
+    # Ensure output directory exists
+    os.makedirs(output_dir, exist_ok=True)
 
     # Log initial directory state
     print("[LOG] Initial directory contents:")
@@ -95,7 +103,8 @@ def main():
         print(f"[LOG] Processed {len(stories)} stories from Kite feeds")
 
         # Check if processed_stories.json exists before writing
-        old_file_info = get_file_info("processed_stories.json")
+        processed_stories_path = os.path.join(output_dir, "processed_stories.json")
+        old_file_info = get_file_info(processed_stories_path)
         if old_file_info["exists"]:
             print("[LOG] Existing processed_stories.json found:")
             print(f"   [LOG]   - Size: {old_file_info.get('size', 0)} bytes")
@@ -103,14 +112,14 @@ def main():
 
         # Serialize stories to JSON
         stories_json = json.dumps(stories, indent=2, ensure_ascii=False)
-        success = log_file_write("processed_stories.json", stories_json, "processed_stories.json")
+        success = log_file_write(processed_stories_path, stories_json, "processed_stories.json")
 
         if not success:
             print("   ✗ Failed to write processed_stories.json")
             sys.exit(1)
 
         # Verify file was created
-        new_file_info = get_file_info("processed_stories.json")
+        new_file_info = get_file_info(processed_stories_path)
         if new_file_info["exists"]:
             print(f"   ✓ Processed {len(stories)} stories saved to processed_stories.json")
             if old_file_info["exists"]:
@@ -130,11 +139,12 @@ def main():
     print("\n2. Generating RSS feed...")
     try:
         # Verify processed_stories.json exists and is readable
-        if not os.path.exists("processed_stories.json"):
+        processed_stories_path = os.path.join(output_dir, "processed_stories.json")
+        if not os.path.exists(processed_stories_path):
             print("   ✗ ERROR: processed_stories.json not found!")
             sys.exit(1)
 
-        with open("processed_stories.json", encoding="utf-8") as f:
+        with open(processed_stories_path, encoding="utf-8") as f:
             stories = json.load(f)
         print(f"[LOG] Loaded {len(stories)} stories from processed_stories.json")
 
@@ -145,20 +155,21 @@ def main():
         print(f"[LOG] Generated RSS XML ({len(rss_xml)} characters)")
 
         # Check if feed.xml exists before writing
-        old_file_info = get_file_info("feed.xml")
+        feed_xml_path = os.path.join(output_dir, "feed.xml")
+        old_file_info = get_file_info(feed_xml_path)
         if old_file_info["exists"]:
             print("[LOG] Existing feed.xml found:")
             print(f"   [LOG]   - Size: {old_file_info.get('size', 0)} bytes")
             print(f"   [LOG]   - Modified: {old_file_info.get('mtime', 'N/A')}")
 
-        success = log_file_write("feed.xml", rss_xml, "feed.xml")
+        success = log_file_write(feed_xml_path, rss_xml, "feed.xml")
 
         if not success:
             print("   ✗ Failed to write feed.xml")
             sys.exit(1)
 
         # Verify file was created
-        new_file_info = get_file_info("feed.xml")
+        new_file_info = get_file_info(feed_xml_path)
         if new_file_info["exists"]:
             print("   ✓ RSS feed saved to feed.xml")
             if old_file_info["exists"]:
@@ -178,18 +189,19 @@ def main():
     print("\n3. Generating HTML pages...")
     try:
         # Verify processed_stories.json exists
-        if not os.path.exists("processed_stories.json"):
+        processed_stories_path = os.path.join(output_dir, "processed_stories.json")
+        if not os.path.exists(processed_stories_path):
             print("   ✗ ERROR: processed_stories.json not found!")
             sys.exit(1)
 
-        with open("processed_stories.json", encoding="utf-8") as f:
+        with open(processed_stories_path, encoding="utf-8") as f:
             stories = json.load(f)
         print(f"[LOG] Loaded {len(stories)} stories from processed_stories.json")
 
         config = json.load(open("config.json"))
 
         # Create stories directory
-        stories_dir = "stories"
+        stories_dir = os.path.join(output_dir, "stories")
         os.makedirs(stories_dir, exist_ok=True)
         print(f"[LOG] Stories directory: {stories_dir} (exists: {os.path.exists(stories_dir)})")
 
@@ -203,7 +215,7 @@ def main():
         generated_count = 0
         for i, story in enumerate(stories):
             story_slug = get_story_slug(story)
-            filename = f"{stories_dir}/{story_slug}.html"
+            filename = os.path.join(stories_dir, f"{story_slug}.html")
             html = generate_story_html(story, config)
 
             # Log first few stories in detail
@@ -222,7 +234,8 @@ def main():
 
         # Generate index page
         print("[LOG] Generating index.html...")
-        old_index_info = get_file_info("index.html")
+        index_html_path = os.path.join(output_dir, "index.html")
+        old_index_info = get_file_info(index_html_path)
         if old_index_info["exists"]:
             print("[LOG] Existing index.html found:")
             print(f"   [LOG]   - Size: {old_index_info.get('size', 0)} bytes")
@@ -231,14 +244,14 @@ def main():
         index_html = generate_index_html(stories, config)
         print(f"[LOG] Generated index HTML ({len(index_html)} characters)")
 
-        success = log_file_write("index.html", index_html, "index.html")
+        success = log_file_write(index_html_path, index_html, "index.html")
 
         if not success:
             print("   ✗ Failed to write index.html")
             sys.exit(1)
 
         # Verify index.html was created
-        new_index_info = get_file_info("index.html")
+        new_index_info = get_file_info(index_html_path)
         if new_index_info["exists"]:
             print(f"   ✓ Generated {len(stories)} story pages and index.html")
             if old_index_info["exists"]:
@@ -255,15 +268,16 @@ def main():
         sys.exit(1)
 
     # Final verification
-    print("\n[LOG] Final directory contents:")
+    print(f"\n[LOG] Final directory contents in {output_dir}:")
     try:
-        for item in sorted(os.listdir(".")):
-            if os.path.isfile(item):
-                size = os.path.getsize(item)
-                mtime = datetime.fromtimestamp(os.path.getmtime(item)).isoformat()
+        for item in sorted(os.listdir(output_dir)):
+            item_path = os.path.join(output_dir, item)
+            if os.path.isfile(item_path):
+                size = os.path.getsize(item_path)
+                mtime = datetime.fromtimestamp(os.path.getmtime(item_path)).isoformat()
                 print(f"   [LOG]   - {item} ({size} bytes, modified: {mtime})")
-            elif os.path.isdir(item):
-                file_count = len([f for f in os.listdir(item) if os.path.isfile(os.path.join(item, f))])
+            elif os.path.isdir(item_path):
+                file_count = len([f for f in os.listdir(item_path) if os.path.isfile(os.path.join(item_path, f))])
                 print(f"   [LOG]   - {item}/ (directory, {file_count} files)")
     except Exception as e:
         print(f"   [LOG]   Error listing directory: {e}")
@@ -273,16 +287,18 @@ def main():
     key_files = ["processed_stories.json", "feed.xml", "index.html"]
     all_exist = True
     for key_file in key_files:
-        exists = os.path.exists(key_file)
+        key_file_path = os.path.join(output_dir, key_file)
+        exists = os.path.exists(key_file_path)
         if exists:
-            size = os.path.getsize(key_file)
+            size = os.path.getsize(key_file_path)
             print(f"   [LOG]   ✓ {key_file} exists ({size} bytes)")
         else:
             print(f"   [LOG]   ✗ {key_file} MISSING!")
             all_exist = False
 
-    if os.path.exists("stories"):
-        story_files = [f for f in os.listdir("stories") if f.endswith(".html")]
+    stories_dir_path = os.path.join(output_dir, "stories")
+    if os.path.exists(stories_dir_path):
+        story_files = [f for f in os.listdir(stories_dir_path) if f.endswith(".html")]
         print(f"   [LOG]   ✓ stories/ directory exists ({len(story_files)} HTML files)")
     else:
         print("   [LOG]   ✗ stories/ directory MISSING!")
@@ -297,4 +313,15 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    
+    parser = argparse.ArgumentParser(description="Process Kite feeds and generate HTML/RSS output")
+    parser.add_argument(
+        "--output-dir",
+        "-o",
+        default=".",
+        help="Directory where output files should be written (default: current directory)"
+    )
+    args = parser.parse_args()
+    
+    main(output_dir=args.output_dir)

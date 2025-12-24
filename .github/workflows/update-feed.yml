@@ -79,47 +79,20 @@ jobs:
       run: |
         uv sync
         
-    - name: Run processing workflow in gh-pages directory
+    - name: Run processing workflow
+      working-directory: main
       run: |
-        echo "=== Running build in gh-pages directory ==="
-        cd gh-pages
+        echo "=== Running build with output to gh-pages directory ==="
         
-        # Count existing stories
-        existing_count=$(ls -1 stories/*.html 2>/dev/null | wc -l || echo "0")
-        echo "Existing stories: $existing_count"
+        # Count existing stories in gh-pages
+        existing_count=$(ls -1 ../gh-pages/stories/*.html 2>/dev/null | wc -l || echo "0")
+        echo "Existing stories in gh-pages: $existing_count"
         
-        # Create stories directory if it doesn't exist
-        mkdir -p stories
+        # Run the processing workflow with output directory set to gh-pages
+        uv run process --output-dir ../gh-pages
         
-        # Copy necessary files from main (config and templates)
-        cp ../main/config.json .
-        cp -r ../main/templates .
-        
-        # Run the processing workflow using main's scripts and dependencies
-        cd ../main
-        uv run python <<EOF
-import os
-import sys
-
-# Change to gh-pages directory where we want output
-os.chdir('../gh-pages')
-
-# Add main directory to path so we can import modules
-sys.path.insert(0, '../main')
-
-# Import and run the main function
-from process_workflow import main
-main()
-EOF
-        
-        cd ../gh-pages
-        
-        # Clean up temporary files (keep generated content)
-        rm -f config.json
-        rm -rf templates
-        
-        echo "Generated files in gh-pages directory"
-        new_count=$(ls -1 stories/*.html 2>/dev/null | wc -l || echo "0")
+        # Count new stories
+        new_count=$(ls -1 ../gh-pages/stories/*.html 2>/dev/null | wc -l || echo "0")
         echo "Total stories now: $new_count (added $((new_count - existing_count)) new)"
         
     - name: Verify generated files
