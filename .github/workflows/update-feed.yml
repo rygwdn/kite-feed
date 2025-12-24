@@ -2,8 +2,8 @@ name: Update Kite Feed and Deploy
 
 on:
   schedule:
-    # Run daily at 12:30 PM UTC (30 minutes after Kite updates at 12 PM UTC)
-    - cron: '30 12 * * *'
+    # Run every 6 hours including 13:00 UTC (at 01:00, 07:00, 13:00, 19:00)
+    - cron: '0 1,7,13,19 * * *'
   workflow_dispatch: # Allow manual triggering
   push:
     branches:
@@ -42,6 +42,34 @@ jobs:
     - name: Install dependencies
       run: |
         uv sync
+        
+    - name: Fetch existing stories from GitHub Pages
+      run: |
+        echo "=== Fetching existing story files from GitHub Pages ==="
+        # Create stories directory if it doesn't exist
+        mkdir -p stories
+        # Try to fetch existing stories from the deployed site
+        # This preserves old story HTML files even after they're removed from the feed
+        REPO_NAME="${{ github.event.repository.name }}"
+        OWNER="${{ github.repository_owner }}"
+        BASE_URL="https://${OWNER}.github.io/${REPO_NAME}"
+        
+        echo "Checking for existing deployment at: ${BASE_URL}"
+        
+        # Try to fetch the index page to get links to story files
+        if curl -f -s "${BASE_URL}/index.html" -o /tmp/index.html 2>/dev/null; then
+          echo "Found existing deployment. Fetching story file list..."
+          # Extract story links from index.html
+          grep -oP 'href="stories/[^"]+\.html"' /tmp/index.html 2>/dev/null | sed 's/href="//;s/"//' | while read story_path; do
+            story_file=$(basename "$story_path")
+            echo "Downloading existing story: $story_file"
+            curl -f -s "${BASE_URL}/${story_path}" -o "stories/$story_file" 2>/dev/null || echo "  Failed to download $story_file"
+          done
+          rm -f /tmp/index.html
+          echo "Existing story files preserved: $(ls -1 stories/*.html 2>/dev/null | wc -l)"
+        else
+          echo "No existing GitHub Pages deployment found. Starting fresh."
+        fi
         
     - name: Run processing workflow
       run: |

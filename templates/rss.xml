@@ -17,19 +17,16 @@
     {% set story_html_url = story_html_urls[loop.index0] %}
     <item>
         <title>{{ story.title|e }}</title>
-        <link>{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_url|e }}</link>
-        <guid isPermaLink="true">{{ story.url|e if story.url and not story.url.startswith('hash:') else story_html_url|e }}</guid>
+        <link>{{ story_html_url|e }}</link>
+        <guid isPermaLink="true">{{ story_html_url|e }}</guid>
         <pubDate>{{ story.pub_date }}</pubDate>
         <author>{{ config.site.author|e }}{% if story.feed_category or story.item_category %} ({% if story.feed_category %}{{ story.feed_category|e }}{% endif %}{% if story.feed_category and story.item_category %} / {% endif %}{% if story.item_category %}{{ story.item_category|e }}{% endif %}){% endif %}</author>
         <description><![CDATA[{% if story.primary_image and story.primary_image.url %}
 <div class='image'>
 {% if story.primary_image.link %}
-<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" /></a>
+<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" title="{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} ({{ story.primary_image.credit|e }}){% endif %}" style="max-width: 100%; height: auto;" /></a>
 {% else %}
-<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" />
-{% endif %}
-{% if story.primary_image.caption %}
-<p class='caption'>{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} <span class='credit'>({{ story.primary_image.credit|e }})</span>{% endif %}</p>
+<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" title="{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} ({{ story.primary_image.credit|e }}){% endif %}" style="max-width: 100%; height: auto;" />
 {% endif %}
 </div>
 {% endif %}{{ (story.summary or story.title)|process_footnotes(story)|safe }}]]></description>
