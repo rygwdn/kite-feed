@@ -312,7 +312,8 @@ def main(output_dir: str = "."):
     print(f"[LOG] Workflow completed at: {datetime.now().isoformat()}")
 
 
-if __name__ == "__main__":
+def cli():
+    """CLI entry point for the process command."""
     import argparse
 
     parser = argparse.ArgumentParser(description="Process Kite feeds and generate HTML/RSS output")
@@ -322,3 +323,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     main(output_dir=args.output_dir)
+
+
+if __name__ == "__main__":
+    cli()
