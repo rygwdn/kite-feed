@@ -40,36 +40,39 @@ jobs:
       run: |
         uv sync
         
-    - name: Checkout gh-pages branch
+    - name: Setup gh-pages worktree
       run: |
-        echo "=== Setting up gh-pages branch ==="
+        echo "=== Setting up gh-pages branch with worktree ==="
+        
+        # Fetch gh-pages branch if it exists
         git fetch origin gh-pages:gh-pages 2>/dev/null || echo "gh-pages branch doesn't exist yet"
         
         # Check if gh-pages branch exists
         if git rev-parse --verify gh-pages >/dev/null 2>&1; then
-          echo "Checking out existing gh-pages branch"
-          git checkout gh-pages
+          echo "Setting up worktree for existing gh-pages branch"
+          git worktree add gh-pages-deploy gh-pages
           
           # Count existing story files
-          if [ -d "stories" ]; then
-            existing_count=$(ls -1 stories/*.html 2>/dev/null | wc -l)
-            echo "Found $existing_count existing story files"
+          if [ -d "gh-pages-deploy/stories" ]; then
+            existing_count=$(ls -1 gh-pages-deploy/stories/*.html 2>/dev/null | wc -l)
+            echo "Found $existing_count existing story files in gh-pages"
+            
+            # Copy existing stories to main branch working directory
+            mkdir -p stories
+            cp -r gh-pages-deploy/stories/* stories/ 2>/dev/null || echo "No stories to copy"
           else
-            echo "No stories directory found, will create it"
-          fi
-          
-          # Switch back to main to get the source code
-          git checkout main
-          
-          # Copy the stories directory from gh-pages
-          if [ -d "stories" ]; then
-            git checkout gh-pages -- stories/ 2>/dev/null || mkdir -p stories
-          else
+            echo "No stories directory found in gh-pages"
             mkdir -p stories
           fi
         else
-          echo "gh-pages branch doesn't exist, will be created"
+          echo "gh-pages branch doesn't exist yet, will be created"
           mkdir -p stories
+          # Create the worktree with orphan branch
+          git worktree add --detach gh-pages-deploy
+          cd gh-pages-deploy
+          git checkout --orphan gh-pages
+          git rm -rf . 2>/dev/null || true
+          cd ..
         fi
         
     - name: Run processing workflow
@@ -123,24 +126,28 @@ jobs:
         git config user.name "github-actions[bot]"
         git config user.email "github-actions[bot]@users.noreply.github.com"
         
-        # Check if gh-pages branch exists
-        if git rev-parse --verify gh-pages >/dev/null 2>&1; then
-          echo "Switching to existing gh-pages branch"
-          git checkout gh-pages
-        else
-          echo "Creating new gh-pages branch"
-          git checkout --orphan gh-pages
-          git rm -rf . 2>/dev/null || true
-        fi
+        # Copy generated files to gh-pages worktree
+        echo "Copying generated files to gh-pages worktree..."
+        cp feed.xml gh-pages-deploy/
+        cp index.html gh-pages-deploy/
+        cp .nojekyll gh-pages-deploy/ 2>/dev/null || touch gh-pages-deploy/.nojekyll
         
-        # Copy generated files from main branch
-        git checkout main -- feed.xml index.html stories/ .nojekyll 2>/dev/null || true
+        # Copy all story files (old + new)
+        mkdir -p gh-pages-deploy/stories
+        cp stories/*.html gh-pages-deploy/stories/ 2>/dev/null || echo "No story files to copy"
         
-        # Make sure .nojekyll exists (prevents Jekyll processing)
-        touch .nojekyll
+        # Change to gh-pages worktree directory
+        cd gh-pages-deploy
         
-        # Add all generated files
-        git add feed.xml index.html stories/ .nojekyll
+        # Show what we're about to commit
+        echo "Files in gh-pages branch:"
+        ls -lh
+        echo ""
+        echo "Story files:"
+        ls -lh stories/ 2>/dev/null | head -10 || echo "No stories directory"
+        
+        # Add all files
+        git add -A
         
         # Check if there are changes to commit
         if git diff --staged --quiet; then
@@ -154,6 +161,12 @@ jobs:
           
           echo "✓ Successfully deployed to gh-pages"
         fi
+        
+        # Back to main directory
+        cd ..
+        
+        # Clean up worktree
+        git worktree remove gh-pages-deploy
         
         # Log deployment info
         REPO_NAME="${{ github.event.repository.name }}"
