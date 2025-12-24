@@ -69,7 +69,7 @@ def log_file_write(filepath: str, content: str, description: str = ""):
 
 def main(output_dir: str = "."):
     """Run the complete processing workflow.
-    
+
     Args:
         output_dir: Directory where output files should be written (default: current directory)
     """
@@ -78,7 +78,7 @@ def main(output_dir: str = "."):
     print(f"[LOG] Working directory: {os.getcwd()}")
     print(f"[LOG] Output directory: {output_dir}")
     print(f"[LOG] Python version: {sys.version}\n")
-    
+
     # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
 
@@ -314,14 +314,11 @@ def main(output_dir: str = "."):
 
 if __name__ == "__main__":
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Process Kite feeds and generate HTML/RSS output")
     parser.add_argument(
-        "--output-dir",
-        "-o",
-        default=".",
-        help="Directory where output files should be written (default: current directory)"
+        "--output-dir", "-o", default=".", help="Directory where output files should be written (default: current directory)"
     )
     args = parser.parse_args()
-    
+
     main(output_dir=args.output_dir)
