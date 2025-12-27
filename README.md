@@ -32,9 +32,13 @@ uv sync --dev
 
 ### Run Checks
 
-Run linting and validation checks:
+Run all validation checks (same as CI):
 
 ```bash
+# Run all checks at once (recommended)
+python3 validate.py
+
+# Or run individual checks:
 # Linting
 uv run ruff check .
 
@@ -43,6 +47,9 @@ uv run ruff format --check .
 
 # Type checking
 uv run ty check
+
+# Generate and verify site
+uv run process
 ```
 
 ### Format Code
@@ -79,8 +86,7 @@ uv run python3 generate_html.py < processed_stories.json
 - `generate_rss.py`: Generates RSS feed XML
 - `generate_utils.py`: Shared utilities (date formatting, story processing, URL generation, etc.)
 - `process_workflow.py`: Complete processing workflow that orchestrates all steps
-- `check_all.py`: Validation checks script run via `uv run check`
-- `uv_scripts.py`: Entry points for `uv run` commands (`check`, `format`, `process`)
+- `validate.py`: Validation script that runs all CI checks locally
 - `config.json`: Configuration file (categories, filters, site settings)
 - `pyproject.toml`: Project configuration, dependencies, and scripts
 - `.python-version`: Python version pin (3.11)
@@ -96,6 +102,25 @@ Edit `config.json` to customize:
 
 ## CI/CD
 
-The CI workflow (`.github/workflows/ci.yml`) automatically runs `uv run check` on every push and pull request to `main`.
+### Validation Script
+
+Before committing, run the validation script to ensure all CI checks will pass:
+
+```bash
+python3 validate.py
+```
+
+This script runs the same checks as CI:
+1. **Ruff Linting**: Checks code for errors and style issues
+2. **Ruff Formatting**: Verifies code formatting
+3. **Type Checking**: Runs static type analysis (non-blocking)
+4. **Site Generation**: Generates the complete site
+5. **File Verification**: Confirms all required files are created
+6. **RSS Feed Validation**: Validates RSS structure and Media RSS namespace
+7. **HTML Semantic Structure**: Verifies semantic HTML elements
+
+### CI Workflow
+
+The CI workflow (`.github/workflows/ci.yml`) automatically runs all validation checks on every push and pull request to `main`.
 
 The update-feed workflow (`.github/workflows/update-feed.yml`) runs daily to process feeds and deploy to GitHub Pages.
