@@ -280,7 +280,7 @@ def process_stories_for_output(
         story_dict = dict(story)
         story_dict["pub_date"] = pub_date
         story_dict["heading_level"] = heading_level
-        
+
         # Extract thumbnail information from primary_image
         primary_image = story.get("primary_image")
         if primary_image and isinstance(primary_image, dict):
@@ -292,7 +292,7 @@ def process_stories_for_output(
                     story_dict["thumbnail_width"] = primary_image["width"]
                 if "height" in primary_image:
                     story_dict["thumbnail_height"] = primary_image["height"]
-        
+
         story_data.append(story_dict)
 
     return story_data, story_html_urls
