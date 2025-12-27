@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
     <channel>
         <title>{{ config.site.title|e }}</title>
         <link>{{ config.site.base_url }}</link>
@@ -21,6 +21,7 @@
         <guid isPermaLink="true">{{ story_html_url|e }}</guid>
         <pubDate>{{ story.pub_date }}</pubDate>
         <author>{{ config.site.author|e }}{% if story.feed_category or story.item_category %} ({% if story.feed_category %}{{ story.feed_category|e }}{% endif %}{% if story.feed_category and story.item_category %} / {% endif %}{% if story.item_category %}{{ story.item_category|e }}{% endif %}){% endif %}</author>
+        {% if story.thumbnail_url %}<media:thumbnail url="{{ story.thumbnail_url|e }}"{% if story.thumbnail_width %} width="{{ story.thumbnail_width }}"{% endif %}{% if story.thumbnail_height %} height="{{ story.thumbnail_height }}"{% endif %} />{% endif %}
         <description><![CDATA[{% if story.primary_image and story.primary_image.url %}
 <div class='image'>
 {% if story.primary_image.link %}

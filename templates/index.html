@@ -39,9 +39,27 @@
             border: 1px solid #e0e0e0;
             border-radius: 4px;
             transition: box-shadow 0.2s;
+            display: flex;
+            gap: 20px;
         }
         .story-item:hover {
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .story-thumbnail {
+            flex-shrink: 0;
+            width: 200px;
+            height: 150px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+        .story-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .story-content {
+            flex: 1;
+            min-width: 0;
         }
         .story-title {
             margin: 0 0 10px 0;
@@ -103,20 +121,27 @@
     <ul class="story-list">
     {% for story in stories %}
         <li class="story-item">
-            <h2 class="story-title">
-                <a href="{{ story_html_urls[loop.index0]|e }}">{{ story.title|e }}</a>
-            </h2>
-            <div class="story-meta">
-                {% if story.category %}
-                <span class="category">{{ story.category|e }}</span>
-                {% endif %}
-                {% if story.pub_date %}
-                <span>{{ story.pub_date|e }}</span>
+            {% if story.thumbnail_url %}
+            <figure class="story-thumbnail">
+                <img src="{{ story.thumbnail_url|e }}" alt="{{ story.title|e }}" loading="lazy">
+            </figure>
+            {% endif %}
+            <div class="story-content">
+                <h2 class="story-title">
+                    <a href="{{ story_html_urls[loop.index0]|e }}">{{ story.title|e }}</a>
+                </h2>
+                <div class="story-meta">
+                    {% if story.category %}
+                    <span class="category">{{ story.category|e }}</span>
+                    {% endif %}
+                    {% if story.pub_date %}
+                    <span>{{ story.pub_date|e }}</span>
+                    {% endif %}
+                </div>
+                {% if story.summary %}
+                <div class="story-summary">{{ story.summary|process_footnotes(story)|safe }}</div>
                 {% endif %}
             </div>
-            {% if story.summary %}
-            <div class="story-summary">{{ story.summary|process_footnotes(story)|safe }}</div>
-            {% endif %}
         </li>
     {% endfor %}
     </ul>

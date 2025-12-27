@@ -13,13 +13,18 @@
 
 {# Primary image - ALWAYS at top, regardless of format #}
 {% if story.primary_image and story.primary_image.url %}
-<div class='image'>
+<figure class='image'>
 {% if story.primary_image.link %}
-<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" title="{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} ({{ story.primary_image.credit|e }}){% endif %}" style="max-width: 100%; height: auto;" /></a>
+<a href="{{ story.primary_image.link|e }}"><img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}"{% if story.primary_image.credit %} title="{{ story.primary_image.caption|e }} ({{ story.primary_image.credit|e }})"{% else %} title="{{ story.primary_image.caption|e }}"{% endif %} style="max-width: 100%; height: auto;" /></a>
 {% else %}
-<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}" title="{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} ({{ story.primary_image.credit|e }}){% endif %}" style="max-width: 100%; height: auto;" />
+<img src="{{ story.primary_image.url|e }}" alt="{{ (story.primary_image.caption or story.title)|e }}"{% if story.primary_image.credit %} title="{{ story.primary_image.caption|e }} ({{ story.primary_image.credit|e }})"{% else %} title="{{ story.primary_image.caption|e }}"{% endif %} style="max-width: 100%; height: auto;" />
 {% endif %}
-</div>
+{% if story.primary_image.caption or story.primary_image.credit %}
+<figcaption class='caption'>
+{{ story.primary_image.caption|e }}{% if story.primary_image.credit %} <span class='credit'>({{ story.primary_image.credit|e }})</span>{% endif %}
+</figcaption>
+{% endif %}
+</figure>
 {% endif %}
 
 {# Summary #}
@@ -197,14 +202,16 @@
 
 {# Secondary image - placed at end #}
 {% if story.secondary_image and story.secondary_image.url %}
-<div class='image'>
+<figure class='image'>
 {% if story.secondary_image.link %}
 <a href="{{ story.secondary_image.link|e }}"><img src="{{ story.secondary_image.url|e }}" alt="{{ (story.secondary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" /></a>
 {% else %}
 <img src="{{ story.secondary_image.url|e }}" alt="{{ (story.secondary_image.caption or story.title)|e }}" style="max-width: 100%; height: auto;" />
 {% endif %}
-{% if story.secondary_image.caption %}
-<p class='caption'>{{ story.secondary_image.caption|e }}{% if story.secondary_image.credit %} <span class='credit'>({{ story.secondary_image.credit|e }})</span>{% endif %}</p>
+{% if story.secondary_image.caption or story.secondary_image.credit %}
+<figcaption class='caption'>
+{{ story.secondary_image.caption|e }}{% if story.secondary_image.credit %} <span class='credit'>({{ story.secondary_image.credit|e }})</span>{% endif %}
+</figcaption>
 {% endif %}
-</div>
+</figure>
 {% endif %}
