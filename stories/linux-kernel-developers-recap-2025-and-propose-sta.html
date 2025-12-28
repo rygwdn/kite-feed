@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Linux kernel developers recap 2025 and propose standby ABI - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Linux kernel developers recap 2025 and propose standby ABI</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Two Linux-focused year-end reads highlight where kernel work is heading: one looks back at the most-followed Linux kernel developments of 2025, spotlighting areas like schedulers, growing Rust-in-kernel work, and commentary from Linus Torvalds <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025" class="footnote-ref">[1]</a>. Separately, a post-Christmas request-for-comments patch series proposes a new “runtime standby” ABI aimed at enabling a Windows-style “Modern Standby” experience on Linux—keeping systems network-connected and quick to wake while the display stays off <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>. Together, the stories point to steady progress on both performance/maintainability and everyday laptop usability, with proposals still moving through the community review process <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025" class="footnote-ref">[1]</a><a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Sysfs (the /sys filesystem) is a standard Linux interface for exposing kernel objects and controls to userspace in a file-like way [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>What the ABI does: The RFC describes a new userspace interface at /sys/power/standby intended to trigger firmware notifications so hardware can “look” asleep (for example, LED behavior) without fully suspending the kernel <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Connected sleep goal: The proposal explicitly mirrors Windows 11 “Modern Standby,” where the system appears to be sleeping but stays online for notifications, media playback, and other background work <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Review status: The runtime-standby work is shared as an RFC patch series on the Linux kernel mailing list, signaling it is early-stage and open to feedback before any potential merge <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Year-end themes: Phoronix’s 2025 recap frames kernel interest around scheduler work, Rust-related efforts, and Torvalds’ remarks, reflecting how both low-level performance and safer code paths keep drawing attention <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Patch author(s) on LKML (via RFC text): The patch series proposes a runtime standby ABI that lets userspace fire firmware notifications to change the device’s “appearance” (like sleep indicators) while the kernel keeps running for basic computations.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby">Slashdot</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Linux kernel news observers: A year-end roundup emphasizes that much of 2025’s attention centered on scheduler developments, Rust-related kernel work, and commentary from Linus Torvalds.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025">Phoronix</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Runtime standby ABI: A proposed kernel userspace interface (“ABI”) that would let userspace request a standby-like state and trigger firmware notifications without suspending the kernel, per the RFC description <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>/sys/power/standby: The documentation patch in the RFC points to a new sysfs control path intended to expose the runtime-standby behavior to userspace <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Windows Modern Standby (reference model): A Windows 11 low-power mode where the display is off, the network remains online, and the system can wake quickly for tasks like notifications and playback—used as the comparison target for the Linux proposal <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Laptop experience: A Linux analogue to “Modern Standby” could improve day-to-day usability—instant wake plus staying connected—by formalizing a kernel/userspace path for standby-like behavior <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Desktop integration: A documented /sys power interface can give desktop environments and power daemons a clearer target for implementing consistent sleep/idle behavior across devices <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Kernel development priorities: The 2025 recap underscores sustained attention to scheduler work and Rust-related kernel efforts, areas that can influence performance and safety across the broader Linux ecosystem <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Modern Standby is Microsoft’s approach on Windows 11 to a low-power, always-connected sleep-like state that can wake quickly for updates and notifications <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>. Linux power management has long used suspend-to-RAM and related mechanisms, and developers often add new /sys interfaces when they want a stable way for userspace to request or configure power states [common]. The new RFC positions itself as a Linux-side mechanism to request a similar “connected standby” behavior via firmware notifications rather than a traditional full suspend <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What hardware or firmware requirements would “runtime standby” depend on?</p>
+
+<p><strong>A:</strong> The RFC frames the feature around firing firmware notifications that change hardware appearance and behavior, implying platform/firmware support will matter, though the articles do not list specific requirements <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> How would desktop environments decide which background work is allowed during standby?</p>
+
+<p><strong>A:</strong> The sources describe the goal (remaining connected and allowing basic computations) but do not detail policy controls; that typically lands in userspace power managers and desktop settings on Linux <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>[common].</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Which scheduler or Rust items drew the most attention in 2025?</p>
+
+<p><strong>A:</strong> Phoronix notes 2025 interest clustered around schedulers, Rust, and Torvalds’ commentary, but the provided article excerpt does not enumerate the top individual items in this prompt <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test the proposed standby interface on a spare machine: If you build kernels, follow the RFC patch series and try the documented /sys/power/standby interface in a test environment, then report results to the Linux kernel mailing list as requested by the RFC process <a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby" class="footnote-ref">[3]</a>.</li>
+
+<li>Check whether your distro tracks these kernel changes: Look at your distribution’s kernel changelog and mailing list references to see whether scheduler, Rust-related, or power-management patches from 2025 are being backported or enabled <a href="https://www.phoronix.com/news/Linux-Kernel-Highlights-2025" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby">https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5RVm5SVHhxSVpjRldPanZSNU5QZHU1ckxuYklhbTZySXdqQXFaMWxFOU5nME93Q0F6NTYyMzdScUprZ05JVHBiMnFDSVBnbEY2ZUNENHQtZEhMWkFaaFBOMHAxM2dtNmpkOXc">https://news.google.com/rss/articles/CBMiakFVX3lxTE5RVm5SVHhxSVpjRldPanZSNU5QZHU1ckxuYklhbTZySXdqQXFaMWxFOU5nME93Q0F6NTYyMzdScUprZ05JVHBiMnFDSVBnbEY2ZUNENHQtZEhMWkFaaFBOMHAxM2dtNmpkOXc</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> phoronix.com, google.com, slashdot.org</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2025-12-27T11:45:00+00:00",
+      "domain": "phoronix.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.phoronix.com/news/Linux-Kernel-Highlights-2025",
+      "title": "Linux Kernel Highlights For 2025: Schedulers, Rust \u0026 Torvalds\u0027 Commentary"
+    },
+    {
+      "date": "2025-12-27T11:45:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5RVm5SVHhxSVpjRldPanZSNU5QZHU1ckxuYklhbTZySXdqQXFaMWxFOU5nME93Q0F6NTYyMzdScUprZ05JVHBiMnFDSVBnbEY2ZUNENHQtZEhMWkFaaFBOMHAxM2dtNmpkOXc",
+      "title": "Linux Kernel Highlights For 2025: Schedulers, Rust \u0026 Torvalds\u0027 Commentary - Phoronix"
+    },
+    {
+      "date": "2025-12-27T22:34:00+00:00",
+      "domain": "slashdot.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby",
+      "title": "New Runtime Standby ABI Proposed for Linux Like Microsoft Windows\u0027 \u0027Modern Standby\u0027"
+    }
+  ],
+  "category": "Technology",
+  "cluster_number": 5,
+  "did_you_know": "Sysfs (the /sys filesystem) is a standard Linux interface for exposing kernel objects and controls to userspace in a file-like way [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/84J8rs3jbX2Bl9sYOnPAvAwzy2GGkY0GotEfg_m9TXfQII7kJ9swJssK5xG1PhSeuznBTmb49P3tz9o7yUa762D5A4KMOXAaiPzYRgEllpkF_w",
+      "name": "phoronix.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/bLOrKNLrR7xQsAXqB33TRIRlBfDKIeL8RU9K6qBNDYVGkQBxAunKCh5UL-KGCpQI1d_JEY-Anud5uolcIWnwaCGt_UEzJVkkmzRi3X5Q1eI",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/uabvO4rkIQDEchNHGw4y21QWMsCvMzgmxxANHhJUbhnU1YKI_6Tx99DdyJFbHSPkwU5vU61VXP9YzH9pcVzFCbENXhei3nt-tj5csIaXuzq48w",
+      "name": "slashdot.org"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udc27",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Modern Standby is Microsoft\u2019s approach on Windows 11 to a low-power, always-connected sleep-like state that can wake quickly for updates and notifications [slashdot.org#1]. Linux power management has long used suspend-to-RAM and related mechanisms, and developers often add new /sys interfaces when they want a stable way for userspace to request or configure power states [common]. The new RFC positions itself as a Linux-side mechanism to request a similar \u201cconnected standby\u201d behavior via firmware notifications rather than a traditional full suspend [slashdot.org#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Laptop experience: A Linux analogue to \u201cModern Standby\u201d could improve day-to-day usability\u2014instant wake plus staying connected\u2014by formalizing a kernel/userspace path for standby-like behavior [slashdot.org#1].",
+    "Desktop integration: A documented /sys power interface can give desktop environments and power daemons a clearer target for implementing consistent sleep/idle behavior across devices [slashdot.org#1].",
+    "Kernel development priorities: The 2025 recap underscores sustained attention to scheduler work and Rust-related kernel efforts, areas that can influence performance and safety across the broader Linux ecosystem [phoronix.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Linux",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Slashdot",
+          "url": "https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby"
+        }
+      ],
+      "text": "Patch author(s) on LKML (via RFC text): The patch series proposes a runtime standby ABI that lets userspace fire firmware notifications to change the device\u2019s \u201cappearance\u201d (like sleep indicators) while the kernel keeps running for basic computations."
+    },
+    {
+      "sources": [
+        {
+          "name": "Phoronix",
+          "url": "https://www.phoronix.com/news/Linux-Kernel-Highlights-2025"
+        }
+      ],
+      "text": "Linux kernel news observers: A year-end roundup emphasizes that much of 2025\u2019s attention centered on scheduler developments, Rust-related kernel work, and commentary from Linus Torvalds."
+    }
+  ],
+  "primary_image": null,
+  "published": 1766917100,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://www.phoronix.com/news/Linux-Kernel-Highlights-2025",
+    "https://linux.slashdot.org/story/25/12/27/2053239/new-runtime-standby-abi-proposed-for-linux-like-microsoft-windows-modern-standby",
+    "https://news.google.com/rss/articles/CBMiakFVX3lxTE5RVm5SVHhxSVpjRldPanZSNU5QZHU1ckxuYklhbTZySXdqQXFaMWxFOU5nME93Q0F6NTYyMzdScUprZ05JVHBiMnFDSVBnbEY2ZUNENHQtZEhMWkFaaFBOMHAxM2dtNmpkOXc"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The RFC frames the feature around firing firmware notifications that change hardware appearance and behavior, implying platform/firmware support will matter, though the articles do not list specific requirements [slashdot.org#1].",
+      "question": "What hardware or firmware requirements would \u201cruntime standby\u201d depend on?"
+    },
+    {
+      "answer": "The sources describe the goal (remaining connected and allowing basic computations) but do not detail policy controls; that typically lands in userspace power managers and desktop settings on Linux [slashdot.org#1][common].",
+      "question": "How would desktop environments decide which background work is allowed during standby?"
+    },
+    {
+      "answer": "Phoronix notes 2025 interest clustered around schedulers, Rust, and Torvalds\u2019 commentary, but the provided article excerpt does not enumerate the top individual items in this prompt [phoronix.com#1].",
+      "question": "Which scheduler or Rust items drew the most attention in 2025?"
+    }
+  ],
+  "summary": "Two Linux-focused year-end reads highlight where kernel work is heading: one looks back at the most-followed Linux kernel developments of 2025, spotlighting areas like schedulers, growing Rust-in-kernel work, and commentary from Linus Torvalds [phoronix.com#1]. Separately, a post-Christmas request-for-comments patch series proposes a new \u201cruntime standby\u201d ABI aimed at enabling a Windows-style \u201cModern Standby\u201d experience on Linux\u2014keeping systems network-connected and quick to wake while the display stays off [slashdot.org#1]. Together, the stories point to steady progress on both performance/maintainability and everyday laptop usability, with proposals still moving through the community review process [phoronix.com#1][slashdot.org#1].",
+  "talking_points": [
+    "What the ABI does: The RFC describes a new userspace interface at /sys/power/standby intended to trigger firmware notifications so hardware can \u201clook\u201d asleep (for example, LED behavior) without fully suspending the kernel [slashdot.org#1].",
+    "Connected sleep goal: The proposal explicitly mirrors Windows 11 \u201cModern Standby,\u201d where the system appears to be sleeping but stays online for notifications, media playback, and other background work [slashdot.org#1].",
+    "Review status: The runtime-standby work is shared as an RFC patch series on the Linux kernel mailing list, signaling it is early-stage and open to feedback before any potential merge [slashdot.org#1].",
+    "Year-end themes: Phoronix\u2019s 2025 recap frames kernel interest around scheduler work, Rust-related efforts, and Torvalds\u2019 remarks, reflecting how both low-level performance and safer code paths keep drawing attention [phoronix.com#1]."
+  ],
+  "technical_details": [
+    "Runtime standby ABI: A proposed kernel userspace interface (\u201cABI\u201d) that would let userspace request a standby-like state and trigger firmware notifications without suspending the kernel, per the RFC description [slashdot.org#1].",
+    "/sys/power/standby: The documentation patch in the RFC points to a new sysfs control path intended to expose the runtime-standby behavior to userspace [slashdot.org#1].",
+    "Windows Modern Standby (reference model): A Windows 11 low-power mode where the display is off, the network remains online, and the system can wake quickly for tasks like notifications and playback\u2014used as the comparison target for the Linux proposal [slashdot.org#1]."
+  ],
+  "timeline": [],
+  "title": "Linux kernel developers recap 2025 and propose standby ABI",
+  "unique_domains": 3,
+  "url": "https://www.phoronix.com/news/Linux-Kernel-Highlights-2025",
+  "user_action_items": [
+    "Test the proposed standby interface on a spare machine: If you build kernels, follow the RFC patch series and try the documented /sys/power/standby interface in a test environment, then report results to the Linux kernel mailing list as requested by the RFC process [slashdot.org#1].",
+    "Check whether your distro tracks these kernel changes: Look at your distribution\u2019s kernel changelog and mailing list references to see whether scheduler, Rust-related, or power-management patches from 2025 are being backported or enabled [phoronix.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
