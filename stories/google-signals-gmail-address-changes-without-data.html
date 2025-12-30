@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Google signals Gmail address changes without data loss - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Google signals Gmail address changes without data loss</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e"><img src="https://kagiproxy.com/img/WeD4fOYya0l6BmPVFBilNofv9erVVa4s3yD-aWu4LP1wBG7DkQ2wDPwSn6yeBlp8c7NHvX7qwIhBzs7gsKOWrr0U0EG54nb-ddpFt-U4VPofvZcqiddbHVSqu0pFSOO3hn7lhiWJZ96_w0Xl8aKOluGw66GPdVSsWZbTuqYGs7hUSYz0W1iEXGixLWjbTt-Uf8KhtYnh8p4NroPYiB1h8DEYZdsihWULmeyfOsPZt1WJ-cN7wlmIoa9CBwfptteiNzskmF6JO8xxeiWXpQjCRI2-FeLP93PL2_DrK9b-XA" alt="Gmail is testing a potential option to change an existing address without losing data." title="Gmail is testing a potential option to change an existing address without losing data." style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Gmail is testing a potential option to change an existing address without losing data.
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Google appears to be gradually rolling out a long-requested option that would let some people change an existing @gmail.com address to a new @gmail.com address while keeping their emails and Google account data intact <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-gmail-users-change-email-address" class="footnote-ref">[6]</a><a href="https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e" class="footnote-ref">[3]</a><a href="https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages" class="footnote-ref">[1]</a><a href="https://techxplore.com/news/2025-12-google-users-swap-gmail.html" class="footnote-ref">[8]</a>. Several outlets say the first clear hint surfaced via updated Google support documentation spotted in non‑English versions (including Hindi), while the English help page still typically says Gmail addresses can’t be changed <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-gmail-users-change-email-address" class="footnote-ref">[6]</a><a href="https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e" class="footnote-ref">[3]</a>. If it reaches everyone, it would be a small but meaningful quality-of-life upgrade for people who outgrew an old handle—without needing to start over with a brand-new inbox <a href="https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages" class="footnote-ref">[1]</a><a href="https://techxplore.com/news/2025-12-google-users-swap-gmail.html" class="footnote-ref">[8]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> One report notes the earliest public clue appeared first on Google’s Hindi-language support page before similar wording showed up in other languages <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Old address stays: Google’s updated help text indicates the prior address would remain linked as an alternate email, so messages sent to either address would arrive in the same inbox and either could be used to sign in to Google services <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a>.</li>
+
+<li>Phishing concerns: TechRepublic warns that scammers may try to exploit the change with convincing “address update” messages, increasing the importance of checking sender details and avoiding unexpected login prompts <a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>.</li>
+
+<li>Rollout limits: TechRepublic says Google plans a strict limit on how often users can change their Gmail address, suggesting the feature is designed for occasional “fixes,” not frequent swapping <a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>.</li>
+
+<li>Where it surfaced: Reports say the earliest public evidence came from an updated Google support page noticed by users and circulating via a Google Pixel Hub Telegram group, before similar language appeared in other languages <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a>.</li>
+
+<li>Not fully confirmed: Multiple outlets emphasize this is still based on support-page signals and reporting rather than a broad, formally announced launch, so availability may vary by account <a href="https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e" class="footnote-ref">[3]</a><a href="https://mashable.com/article/google-gmail-users-change-email-address" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Google support documentation (as observed by reporters): Updated help-page language suggests eligible users can change a Gmail-ending address to a new Gmail-ending address, with the old address remaining as an alternate and data staying in place, but the change appears to be rolling out gradually and unevenly across languages/accounts.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://knowtechie.com/change-gmail-email-address/">KnowTechie</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Consumer tech coverage: Some outlets frame the development cautiously as a “hint” or “possibility,” noting the English-language help page still typically states Gmail addresses usually can’t be changed.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e">CNET</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>IT and security readership: TechRepublic focuses on operational details—like limits on changes—and highlights potential social-engineering and phishing risks that could accompany a widely available address-change feature.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/">TechRepublic</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Alias/alternate address: The described approach keeps the old Gmail address as an alternate tied to the same Google Account, allowing inbound mail to reach the same inbox and enabling sign-in with either address <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a>.</li>
+
+<li>Phishing and social engineering: Security coverage cautions that attackers may impersonate Google or contacts to trick users into “confirming” an address change, making verification of domains and URLs more important during rollout <a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>.</li>
+
+<li>Gradual feature rollout: The help-page wording suggests a staged release where some accounts see the option earlier than others, which is common for large cloud services testing changes at scale <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-gmail-users-change-email-address" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Identity and access management: If widely released, an address-change path could push other consumer email providers to match convenience while adding safeguards, because email addresses function as a de facto identity layer for sign-ins and password resets across the internet [common].</li>
+
+<li>Security tooling: A new wave of “address changed” notifications could increase demand for stronger anti-phishing controls (clearer alerts, better sender authentication, and user education) as flagged by TechRepublic’s warning about scam attempts <a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>.</li>
+
+<li>Creators and small businesses: People who built audiences or business operations around an old Gmail handle could refresh branding without rebuilding storage, history, or access to Google services—assuming eligibility and limits allow it <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://techxplore.com/news/2025-12-google-users-swap-gmail.html" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Gmail historically treated @gmail.com usernames as permanent, pushing people who wanted a different address to create a new account and either forward mail or migrate over time <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-gmail-users-change-email-address" class="footnote-ref">[6]</a>. That “pick it once, live with it” design became increasingly awkward as accounts shifted from casual messaging to long-term identity for work, logins, and cloud storage <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages" class="footnote-ref">[1]</a>. The newly spotted help-page language reflects a broader industry trend toward making account identity more flexible while trying to keep security controls tight [common].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> Will changing a Gmail address affect subscriptions and third-party logins that use the old email?</p>
+
+<p><strong>A:</strong> The reports emphasize that the old address becomes an alternate and continues delivering mail to the same inbox, but they do not fully spell out how every third-party login will behave; many services use the email string as the username, so users may still need to update account emails with key apps over time <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a>[common].</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What kind of user accounts are “eligible” for the change?</p>
+
+<p><strong>A:</strong> The sources describe eligibility limits but do not provide a complete public checklist; availability appears to depend on Google’s staged rollout and account-specific criteria mentioned in the updated support guidance <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a><a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What safeguards might Google use to prevent takeover during an address change?</p>
+
+<p><strong>A:</strong> The coverage highlights phishing risk rather than detailing internal controls; in general, providers rely on re-authentication, device prompts, and security checks for sensitive changes, but the articles do not confirm the exact safeguards for this feature <a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>[common].</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Treat “Gmail address change” emails as suspicious by default: If you receive an unexpected message about an address update, avoid clicking embedded links and instead open Google Account settings directly from a trusted browser session, since scammers may try to capitalize on the rollout <a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/" class="footnote-ref">[2]</a>.</li>
+
+<li>Decide whether you want the old address receiving mail: If the feature appears in your account, consider whether keeping the old address as an alternate might still attract unwanted mail, since the help text indicates messages to both addresses can land in the same inbox <a href="https://knowtechie.com/change-gmail-email-address/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://knowtechie.com/change-gmail-email-address/">https://knowtechie.com/change-gmail-email-address/</a></li>
+
+
+
+<li><a href="https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/">https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/google/comments/1pykp9t/google_may_finally_let_users_change_their_gmail/">https://www.reddit.com/r/google/comments/1pykp9t/google_may_finally_let_users_change_their_gmail/</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1BV0Z4aVVVSWMyXzBwcFdtSDZhdUdfVXN5cGJiTE5zRFhmRnZkWVk4M0JtNExWRHpoOHRMTVJHMUFVLUJUOFlKelZuN3RwbE1waVBvVWk2TzRLY1J4V0YteDVmN2hWZkZwX0kwaWVjLVhUWVVjNmhJ">https://news.google.com/rss/articles/CBMid0FVX3lxTE1BV0Z4aVVVSWMyXzBwcFdtSDZhdUdfVXN5cGJiTE5zRFhmRnZkWVk4M0JtNExWRHpoOHRMTVJHMUFVLUJUOFlKelZuN3RwbE1waVBvVWk2TzRLY1J4V0YteDVmN2hWZkZwX0kwaWVjLVhUWVVjNmhJ</a></li>
+
+
+
+<li><a href="https://techxplore.com/news/2025-12-google-users-swap-gmail.html">https://techxplore.com/news/2025-12-google-users-swap-gmail.html</a></li>
+
+
+
+<li><a href="https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e">https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e</a></li>
+
+
+
+<li><a href="https://mashable.com/article/google-gmail-users-change-email-address">https://mashable.com/article/google-gmail-users-change-email-address</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, techxplore.com, mashable.com, extremetech.com, google.com, techrepublic.com, cnet.com, knowtechie.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 8 unique domains, 8 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2025-12-29T16:45:00+00:00",
+      "domain": "extremetech.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages",
+      "title": "Gmail Will Soon Let You Change Your Email Address Without Losing Messages"
+    },
+    {
+      "date": "2025-12-29T18:23:35+00:00",
+      "domain": "techrepublic.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/",
+      "title": "Google to Finally Let Users Change Their Gmail Address. Here\u2019s How It Works"
+    },
+    {
+      "date": "2025-12-29T18:53:06+00:00",
+      "domain": "cnet.com",
+      "image": "https://kagiproxy.com/img/OdHfDAcMOz3XduAFJZoFq7ugBbI2GFONED_2YETYwUMVQUlx2NbrQOP32G7Bxz1YMqcZVrDocQxmwhLEGA-Kv18fbK3JJFyU_MWkye2ZbNVa9SMyaW4ugaj1hVje-FuPjF8WnTD7Ot6G7xg2UaFfMJa5sIq-wyuif_N7hCrwcZ_GiBWfhF5eA0XhhnAh9Trckc3uDRaX8oEFIf-gyAoOOjKgsjAAnvdnvkbKwR4SEwW6ged8-aMnF2XYlUGXx7OrF6LBCrSXjoDZCvgwA6WrWIHfgLXbMxgHaU_JETdpPA",
+      "image_caption": "",
+      "link": "https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e",
+      "title": "Google Hints at Letting You Change Your Gmail Address Without Losing Your Data"
+    },
+    {
+      "date": "2025-12-29T12:11:00+00:00",
+      "domain": "knowtechie.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://knowtechie.com/change-gmail-email-address/",
+      "title": "Gmail finally lets you fix that cringey old email address"
+    },
+    {
+      "date": "2025-12-29T19:19:51+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1BV0Z4aVVVSWMyXzBwcFdtSDZhdUdfVXN5cGJiTE5zRFhmRnZkWVk4M0JtNExWRHpoOHRMTVJHMUFVLUJUOFlKelZuN3RwbE1waVBvVWk2TzRLY1J4V0YteDVmN2hWZkZwX0kwaWVjLVhUWVVjNmhJ",
+      "title": "Google may let Gmail users change their email addresses - Mashable"
+    },
+    {
+      "date": "2025-12-29T16:17:21+00:00",
+      "domain": "mashable.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mashable.com/article/google-gmail-users-change-email-address",
+      "title": "Google may let Gmail users change their email addresses"
+    },
+    {
+      "date": "2025-12-29T12:09:13+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/google/comments/1pykp9t/google_may_finally_let_users_change_their_gmail/",
+      "title": "Google may finally let users change their Gmail address"
+    },
+    {
+      "date": "2025-12-29T10:51:38+00:00",
+      "domain": "techxplore.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techxplore.com/news/2025-12-google-users-swap-gmail.html",
+      "title": "Google is at last letting users swap out embarrassing Gmail addresses without losing their data"
+    }
+  ],
+  "category": "Technology",
+  "cluster_number": 5,
+  "did_you_know": "One report notes the earliest public clue appeared first on Google\u2019s Hindi-language support page before similar wording showed up in other languages [knowtechie.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/oiLjYnT2djTlAcm6fP_NU8fMBGU5FzRSOEzxf529iWZPR5H83ULh83IEnfKGD7ovaWrWj0U-wmwUEm0RhqwiszIR-0KaXq5y_OZVMPBA-oc",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/sa_3SRhfyAG6n96NkTxDC0T8tgbz5Oy1rRH7CxPsWlCVq5ZqCecvZ3FuQMfWUV_EuQ_0tM3FglWwwEd2Z3m_lV2p-5X_3rSATgqUSlM5LlPKewIG",
+      "name": "techxplore.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/yHtTbTwiMYNz7pSbmFDidZV4vO8ke-5tQOYjDXyo0MWPKZPsSSSQXgXQGXApSOtZfP1EE8HsLsg-MkRUroGx2wNDgGAi_-mFaau7i8moo6YB-A",
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/z3gOmLRrkZP-F-1fZOqp4MXNmrMkoqtM9H8ALAXnuFHsXJtq-uHnKhzTcEcQT1pElQy_6DYP9ifpliL50AjzX28eDdZsUQM5wQauW6_SRjWb9vFJtw",
+      "name": "extremetech.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/YcDCCugXAqJ1C6ZPvUMQipvZQPfaHXB-okPcZyM2nMeikoq2FFlFESqm2yLaW7tZ_Xx-LqJafbMDELk6ptigNqQIO4HP8h-YV47Vwx4iaH4",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/IkfAlEKyJSRUmfXUAuwdF8tMN1ny5hk1j8RB2P-PGmo2OLnko-fPGDYzsZf7BS-pMiQn78A2eOHq3tT8szJr5Ry70G76jxg1atYch-nGV_oQRs9WVw4",
+      "name": "techrepublic.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/82InfBZzQt4RPJYhRdCOsf848prPDPYuoUWf-cquxftQXABiAfSvvRS4C3PShOpVVKrRrMiisdYT1GS2smKkpZ-BFzoIR8d_cATcjAE_",
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/PMMJzvczoRqdbb8uZ4CXqOFnYk32NU1gZ9R6GXYHd_MuVuWZ7YSI1M5xFX44S0xwXjhn--07zzhN5qNGKQ3krWWnn_-B-gyAV0foYILPE2oY1oME",
+      "name": "knowtechie.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udce7",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Gmail historically treated @gmail.com usernames as permanent, pushing people who wanted a different address to create a new account and either forward mail or migrate over time [knowtechie.com#1][mashable.com#1]. That \u201cpick it once, live with it\u201d design became increasingly awkward as accounts shifted from casual messaging to long-term identity for work, logins, and cloud storage [knowtechie.com#1][extremetech.com#1]. The newly spotted help-page language reflects a broader industry trend toward making account identity more flexible while trying to keep security controls tight [common].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Identity and access management: If widely released, an address-change path could push other consumer email providers to match convenience while adding safeguards, because email addresses function as a de facto identity layer for sign-ins and password resets across the internet [common].",
+    "Security tooling: A new wave of \u201caddress changed\u201d notifications could increase demand for stronger anti-phishing controls (clearer alerts, better sender authentication, and user education) as flagged by TechRepublic\u2019s warning about scam attempts [techrepublic.com#1].",
+    "Creators and small businesses: People who built audiences or business operations around an old Gmail handle could refresh branding without rebuilding storage, history, or access to Google services\u2014assuming eligibility and limits allow it [knowtechie.com#1][techxplore.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Email",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 8,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "KnowTechie",
+          "url": "https://knowtechie.com/change-gmail-email-address/"
+        }
+      ],
+      "text": "Google support documentation (as observed by reporters): Updated help-page language suggests eligible users can change a Gmail-ending address to a new Gmail-ending address, with the old address remaining as an alternate and data staying in place, but the change appears to be rolling out gradually and unevenly across languages/accounts."
+    },
+    {
+      "sources": [
+        {
+          "name": "CNET",
+          "url": "https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e"
+        }
+      ],
+      "text": "Consumer tech coverage: Some outlets frame the development cautiously as a \u201chint\u201d or \u201cpossibility,\u201d noting the English-language help page still typically states Gmail addresses usually can\u2019t be changed."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechRepublic",
+          "url": "https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/"
+        }
+      ],
+      "text": "IT and security readership: TechRepublic focuses on operational details\u2014like limits on changes\u2014and highlights potential social-engineering and phishing risks that could accompany a widely available address-change feature."
+    }
+  ],
+  "primary_image": {
+    "caption": "Gmail is testing a potential option to change an existing address without losing data.",
+    "credit": "",
+    "link": "https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e",
+    "url": "https://kagiproxy.com/img/WeD4fOYya0l6BmPVFBilNofv9erVVa4s3yD-aWu4LP1wBG7DkQ2wDPwSn6yeBlp8c7NHvX7qwIhBzs7gsKOWrr0U0EG54nb-ddpFt-U4VPofvZcqiddbHVSqu0pFSOO3hn7lhiWJZ96_w0Xl8aKOluGw66GPdVSsWZbTuqYGs7hUSYz0W1iEXGixLWjbTt-Uf8KhtYnh8p4NroPYiB1h8DEYZdsihWULmeyfOsPZt1WJ-cN7wlmIoa9CBwfptteiNzskmF6JO8xxeiWXpQjCRI2-FeLP93PL2_DrK9b-XA"
+  },
+  "published": 1767090825,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://knowtechie.com/change-gmail-email-address/",
+    "https://www.techrepublic.com/article/news-google-allows-users-to-change-gmail-address/",
+    "https://www.reddit.com/r/google/comments/1pykp9t/google_may_finally_let_users_change_their_gmail/",
+    "https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages",
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE1BV0Z4aVVVSWMyXzBwcFdtSDZhdUdfVXN5cGJiTE5zRFhmRnZkWVk4M0JtNExWRHpoOHRMTVJHMUFVLUJUOFlKelZuN3RwbE1waVBvVWk2TzRLY1J4V0YteDVmN2hWZkZwX0kwaWVjLVhUWVVjNmhJ",
+    "https://techxplore.com/news/2025-12-google-users-swap-gmail.html",
+    "https://www.cnet.com/tech/services-and-software/google-gmail-address-change-without-losing-your-data/#ftag=CAD590a51e",
+    "https://mashable.com/article/google-gmail-users-change-email-address"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The reports emphasize that the old address becomes an alternate and continues delivering mail to the same inbox, but they do not fully spell out how every third-party login will behave; many services use the email string as the username, so users may still need to update account emails with key apps over time [knowtechie.com#1][common].",
+      "question": "Will changing a Gmail address affect subscriptions and third-party logins that use the old email?"
+    },
+    {
+      "answer": "The sources describe eligibility limits but do not provide a complete public checklist; availability appears to depend on Google\u2019s staged rollout and account-specific criteria mentioned in the updated support guidance [knowtechie.com#1][techrepublic.com#1].",
+      "question": "What kind of user accounts are \u201celigible\u201d for the change?"
+    },
+    {
+      "answer": "The coverage highlights phishing risk rather than detailing internal controls; in general, providers rely on re-authentication, device prompts, and security checks for sensitive changes, but the articles do not confirm the exact safeguards for this feature [techrepublic.com#1][common].",
+      "question": "What safeguards might Google use to prevent takeover during an address change?"
+    }
+  ],
+  "summary": "Google appears to be gradually rolling out a long-requested option that would let some people change an existing @gmail.com address to a new @gmail.com address while keeping their emails and Google account data intact [knowtechie.com#1][mashable.com#1][cnet.com#1][extremetech.com#1][techxplore.com#1]. Several outlets say the first clear hint surfaced via updated Google support documentation spotted in non\u2011English versions (including Hindi), while the English help page still typically says Gmail addresses can\u2019t be changed [knowtechie.com#1][mashable.com#1][cnet.com#1]. If it reaches everyone, it would be a small but meaningful quality-of-life upgrade for people who outgrew an old handle\u2014without needing to start over with a brand-new inbox [extremetech.com#1][techxplore.com#1].",
+  "talking_points": [
+    "Old address stays: Google\u2019s updated help text indicates the prior address would remain linked as an alternate email, so messages sent to either address would arrive in the same inbox and either could be used to sign in to Google services [knowtechie.com#1].",
+    "Phishing concerns: TechRepublic warns that scammers may try to exploit the change with convincing \u201caddress update\u201d messages, increasing the importance of checking sender details and avoiding unexpected login prompts [techrepublic.com#1].",
+    "Rollout limits: TechRepublic says Google plans a strict limit on how often users can change their Gmail address, suggesting the feature is designed for occasional \u201cfixes,\u201d not frequent swapping [techrepublic.com#1].",
+    "Where it surfaced: Reports say the earliest public evidence came from an updated Google support page noticed by users and circulating via a Google Pixel Hub Telegram group, before similar language appeared in other languages [knowtechie.com#1].",
+    "Not fully confirmed: Multiple outlets emphasize this is still based on support-page signals and reporting rather than a broad, formally announced launch, so availability may vary by account [cnet.com#1][mashable.com#1]."
+  ],
+  "technical_details": [
+    "Alias/alternate address: The described approach keeps the old Gmail address as an alternate tied to the same Google Account, allowing inbound mail to reach the same inbox and enabling sign-in with either address [knowtechie.com#1].",
+    "Phishing and social engineering: Security coverage cautions that attackers may impersonate Google or contacts to trick users into \u201cconfirming\u201d an address change, making verification of domains and URLs more important during rollout [techrepublic.com#1].",
+    "Gradual feature rollout: The help-page wording suggests a staged release where some accounts see the option earlier than others, which is common for large cloud services testing changes at scale [knowtechie.com#1][mashable.com#1]."
+  ],
+  "timeline": [],
+  "title": "Google signals Gmail address changes without data loss",
+  "unique_domains": 8,
+  "url": "https://www.extremetech.com/internet/gmail-will-soon-let-you-change-your-email-address-without-losing-messages",
+  "user_action_items": [
+    "Treat \u201cGmail address change\u201d emails as suspicious by default: If you receive an unexpected message about an address update, avoid clicking embedded links and instead open Google Account settings directly from a trusted browser session, since scammers may try to capitalize on the rollout [techrepublic.com#1].",
+    "Decide whether you want the old address receiving mail: If the feature appears in your account, consider whether keeping the old address as an alternate might still attract unwanted mail, since the help text indicates messages to both addresses can land in the same inbox [knowtechie.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
