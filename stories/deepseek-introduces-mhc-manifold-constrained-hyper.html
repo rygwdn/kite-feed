@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>DeepSeek introduces mHC manifold-constrained hyper-connections for Transformers - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>DeepSeek introduces mHC manifold-constrained hyper-connections for Transformers</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>DeepSeek has released a research paper introducing “mHC: Manifold-Constrained Hyper-Connections,” a proposed change to how Transformer models mix residual pathways during training <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a><a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>. The work frames residual-path design as an increasingly important lever for scaling neural networks, aiming to make hyper-connections more stable, scalable, and memory-efficient <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a><a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>. Commentators describe the idea as revisiting a long-standing assumption in deep learning—fixed identity-style residual connections—and offering a way for models to dynamically adjust how much they rely on previous layers versus new computation <a href="https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/" class="footnote-ref">[5]</a><a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw" class="footnote-ref">[4]</a>. The optimistic takeaway for practitioners: it’s a math-plus-systems effort that, if it holds up broadly, could make training large base models a bit smoother and more efficient <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> smol.ai says it scanned 12 subreddits, 544 Twitter accounts, and 24 Discords (205 channels) to compile its roundup <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Birkhoff constraint: The approach constrains residual mixing matrices to the Birkhoff polytope, which the coverage highlights as a mechanism intended to improve training stability while keeping hyper-connections’ flexibility <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>Measured overhead: smol.ai reports the method adds about 6.7% training overhead while targeting better stability/performance tradeoffs at scale <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>Systems optimizations: The write-up notes practical engineering pieces—such as fused kernels and activation recomputation—packaged alongside the architectural idea to reduce runtime and memory costs <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>Scaling experiments: Reported experiments include training runs at 3B, 9B, and 27B parameters, with claims of improved stability and better token-scaling curves compared with baselines <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>ResNet linkage: Coverage frames mHC as an “upgrade” direction for the classic residual-connection design popularized by ResNet, positioning it as a broader shift in model development rather than a narrow Transformer tweak <a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>DeepSeek paper (authors): The paper proposes using manifold projections to restore identity mapping while addressing training instability, scalability limits, and memory overhead in hyper-connections <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/">Reddit (r/ArtificialInteligence post linking arXiv)</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>smol.ai (AI engineers lens): smol.ai characterizes residual-path design as a key scaling lever and highlights the mix of advanced math constraints with kernel-level engineering, suggesting the work could modestly improve base-model training efficiency <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.smol.ai/issues/26-01-02-not-much/">smol.ai</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Community deep-dive commenters: A Reddit deep-dive argues residual connections have been treated as “untouchable” since ResNet and that mHC’s value is letting models vary reliance on past layers versus new computation rather than keeping a rigid 1:1 add structure <a href="https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/" class="footnote-ref">[5]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/">Reddit (r/LocalLLaMA)</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Mainstream tech coverage: News coverage presents mHC as a potential fundamental shift in AI model development, explicitly tying it to upgrading ResNet-style residual design <a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE">Google News (syndicated links)</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Hyper-connections: Hyper-connections generalize standard residual connections by allowing the network to adjust the strength of connections between features at different depths, rather than always using a fixed add of input and transformation <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/" class="footnote-ref">[5]</a>.</li>
+
+<li>Manifold projection: mHC uses manifold projections as a tool to “restore identity mapping,” which the paper framing links to avoiding training instability when residual paths become more flexible <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a>.</li>
+
+<li>Birkhoff polytope: smol.ai describes mHC as constraining residual mixing matrices to the Birkhoff polytope, presented as a stability-oriented constraint that still permits learned mixing <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Base model training: If the reported stability and scaling improvements hold, teams training foundation models could see fewer instability-related failures and modest efficiency gains, since the method is presented as improving residual-path behavior with limited extra training overhead <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a>.</li>
+
+<li>Inference vs training: The material emphasizes training-time considerations (stability, overhead, memory techniques like activation recomputation), implying the biggest near-term impact may be on training pipelines rather than user-facing inference features <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>Agent development discourse: Alongside mHC, the same news roundup points to ongoing focus on long-horizon agents and context-management bottlenecks (including “Recursive Language Models”), signaling that architecture work is happening both in base-model scaling and in agentic memory strategies <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Scientific meaning: The sources frame mHC as a refinement of the residual-connection paradigm: it tries to keep the stabilizing “identity mapping” behavior while expanding the model’s ability to learn richer cross-layer mixing via hyper-connections <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a><a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>Method emphasis: The reporting highlights a combined approach—topology/matrix constraints plus low-level kernel work—suggesting progress can come from co-designing theory and systems rather than relying solely on bigger models or longer context windows <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+<li>Evidence so far: Evidence described in the coverage is primarily experimental training results (including multi-scale parameter runs) and efficiency overhead estimates; the articles do not describe independent replication, so confidence hinges on broader reproduction by other groups <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>Residual (skip) connections were popularized by ResNet in 2015 and became a widely used design pattern to ease optimization in very deep neural networks [common]. Over time, the same residual idea was adopted broadly across modern architectures, including Transformers, because the identity-style path helps gradients propagate through depth [common]. The new work and commentary position mHC as part of a line of attempts to generalize residual pathways (hyper-connections) while preserving the practical stability associated with identity mapping <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a><a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What does “restore identity mapping” mean in practice for training dynamics?</p>
+
+<p><strong>A:</strong> In the coverage, identity mapping refers to preserving a stable pass-through path like classic residual connections; mHC uses manifold projections specifically to bring that property back while still using hyper-connections <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a><a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Is mHC presented as Transformer-only, or more general?</p>
+
+<p><strong>A:</strong> The sources discuss it in the context of Transformers and hyper-connections, but mainstream coverage explicitly frames it as an upgrade direction for ResNet-style residual design more broadly <a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw" class="footnote-ref">[4]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What other bottleneck did the roundup highlight besides base-model scaling?</p>
+
+<p><strong>A:</strong> smol.ai also highlights discussion of long-horizon agents and context-management bottlenecks, including an approach it calls Recursive Language Models (RLMs) to manage context dynamically <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Skim the mHC paper’s method and constraints: Read the linked arXiv paper and focus on how manifold projection is used to restore identity mapping and what constraint set is applied to mixing matrices <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/" class="footnote-ref">[1]</a>.</li>
+
+<li>Check whether your stack can support the systems tricks: If you train models, review whether your training framework supports fused kernels and activation recomputation, which smol.ai highlights as part of making the approach practical <a href="https://news.smol.ai/issues/26-01-02-not-much/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.smol.ai/issues/26-01-02-not-much/">https://news.smol.ai/issues/26-01-02-not-much/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE">https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw">https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/">https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, smol.ai</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 3 unique domains, 5 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-02T07:01:21+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/",
+      "title": "\ud83d\udea8 BREAKING: DeepSeek just dropped a fundamental improvement in Transformer architecture"
+    },
+    {
+      "date": "2026-01-02T05:44:39+00:00",
+      "domain": "smol.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.smol.ai/issues/26-01-02-not-much/",
+      "title": "not much happened today"
+    },
+    {
+      "date": "2026-01-02T10:30:15+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE",
+      "title": "DeepSeek proposes fundamental AI shift with \u2018mHC\u2019 architecture to upgrade ResNet - South China Morning Post"
+    },
+    {
+      "date": "2026-01-02T10:30:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw",
+      "title": "DeepSeek proposes shift in AI model development with \u0027mHC\u0027 architecture to upgrade ResNet - MSN"
+    },
+    {
+      "date": "2026-01-02T15:44:21+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/",
+      "title": "A deep dive in DeepSeek\u0027s mHC: They improved things everyone else thought didn\u2019t need improving"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "smol.ai says it scanned 12 subreddits, 544 Twitter accounts, and 24 Discords (205 channels) to compile its roundup [smol.ai#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/GyxRAm0_azffBFCPI3f0qRnUiLS32ewQ3OABUjTCcca0NWYNhr9bLheepW65i-yWnIqxAgg7B2VhO-FmhWVrE5IeOOqctk7bT3kN6jEfOBI",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/Tf9K_avaztH2SXS01EUwMWn68VMLP28HWndd9D6imSu6KN_0lT38hqODhbM_z2Lrx7Jv9Xx-arPCumUZ_yHEo3SPFx47U2YdLb8GqTGzQMA",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/BkU6n9LpY8OME3HBXXcl9fz9K2Z5XfDa3JydQXHiEgceabWa-pGFZhJfKRmDyZVVNxg1YQ3KUhy-fB34hlTbmA0h0ooJrD5ojRu8120",
+      "name": "smol.ai"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Residual (skip) connections were popularized by ResNet in 2015 and became a widely used design pattern to ease optimization in very deep neural networks [common]. Over time, the same residual idea was adopted broadly across modern architectures, including Transformers, because the identity-style path helps gradients propagate through depth [common]. The new work and commentary position mHC as part of a line of attempts to generalize residual pathways (hyper-connections) while preserving the practical stability associated with identity mapping [reddit.com#1][smol.ai#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Base model training: If the reported stability and scaling improvements hold, teams training foundation models could see fewer instability-related failures and modest efficiency gains, since the method is presented as improving residual-path behavior with limited extra training overhead [smol.ai#1][reddit.com#1].",
+    "Inference vs training: The material emphasizes training-time considerations (stability, overhead, memory techniques like activation recomputation), implying the biggest near-term impact may be on training pipelines rather than user-facing inference features [smol.ai#1].",
+    "Agent development discourse: Alongside mHC, the same news roundup points to ongoing focus on long-horizon agents and context-management bottlenecks (including \u201cRecursive Language Models\u201d), signaling that architecture work is happening both in base-model scaling and in agentic memory strategies [smol.ai#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Model Architecture",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 5,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Reddit (r/ArtificialInteligence post linking arXiv)",
+          "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/"
+        }
+      ],
+      "text": "DeepSeek paper (authors): The paper proposes using manifold projections to restore identity mapping while addressing training instability, scalability limits, and memory overhead in hyper-connections [reddit.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "smol.ai",
+          "url": "https://news.smol.ai/issues/26-01-02-not-much/"
+        }
+      ],
+      "text": "smol.ai (AI engineers lens): smol.ai characterizes residual-path design as a key scaling lever and highlights the mix of advanced math constraints with kernel-level engineering, suggesting the work could modestly improve base-model training efficiency [smol.ai#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit (r/LocalLLaMA)",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/"
+        }
+      ],
+      "text": "Community deep-dive commenters: A Reddit deep-dive argues residual connections have been treated as \u201cuntouchable\u201d since ResNet and that mHC\u2019s value is letting models vary reliance on past layers versus new computation rather than keeping a rigid 1:1 add structure [reddit.com#2]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Google News (syndicated links)",
+          "url": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE"
+        }
+      ],
+      "text": "Mainstream tech coverage: News coverage presents mHC as a potential fundamental shift in AI model development, explicitly tying it to upgrading ResNet-style residual design [google.com#1][google.com#2]."
+    }
+  ],
+  "primary_image": null,
+  "published": 1767435676,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Scientific meaning: The sources frame mHC as a refinement of the residual-connection paradigm: it tries to keep the stabilizing \u201cidentity mapping\u201d behavior while expanding the model\u2019s ability to learn richer cross-layer mixing via hyper-connections [reddit.com#1][smol.ai#1].",
+    "Method emphasis: The reporting highlights a combined approach\u2014topology/matrix constraints plus low-level kernel work\u2014suggesting progress can come from co-designing theory and systems rather than relying solely on bigger models or longer context windows [smol.ai#1].",
+    "Evidence so far: Evidence described in the coverage is primarily experimental training results (including multi-scale parameter runs) and efficiency overhead estimates; the articles do not describe independent replication, so confidence hinges on broader reproduction by other groups [smol.ai#1]."
+  ],
+  "source_urls": [
+    "https://news.smol.ai/issues/26-01-02-not-much/",
+    "https://news.google.com/rss/articles/CBMiygFBVV95cUxQS01HWGNCQURnd2lQWDNBR1NRNk1hNnJKMHpTcDZvRUExVGw0RzZVUm1MZWNadmRNT0xkYk1XVzRvN0wzbnB4UUxnLWxkZnBVLWswaGRkZlYwakNub1l6YXJhbjNHS18xZlcxQ0pobzlwclpRdmo2MldiVEtBZ3htc2FLMFowV1dYMjV1b18wSkNGM2xvVUdKLURfS09WM2lVN0NONEZaOVhPdE5OQkVsWEltZ0lyczVVTHBYWE1NTDdOeTFLOVRPaU1B0gHKAUFVX3lxTE1IVFhOQ056MUtpYTFFaWQ0UGlPeWV6aEhlTEMyRXJ2bXdELXl4TUk2R29mNWVhcURiUk9iRmt5T0VDS0hLSXY1cjdnLVV6d2hKazYzV2pyU2Z2WlloWXFRMFRfbG42dGo3dEViTm5mTi1xY2N3RXdGZkxWdXNBdkIwZnZxWm9NemJGcXZsWktJSGFWR0pSeGViOFFIeXFBZTNSMTdPN3VJVXRyazVwbnhFOWhWSW41b2wwM0Z4S2hjZ0tVd2VUMERjQUE",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/",
+    "https://news.google.com/rss/articles/CBMikwJBVV95cUxNSTU4OHA2eTI3Yi03QllsSi1GcXg0dWoxSnFweEZhVEtQb055REtRT1ZvOGNhMEQ2SzNEck1SeDROODZmWDdjdlVCV1ZNQUpQMk5rREpmOHVuWEYzN3FtVU5ONGdkbTNYUktObmROa1RMQmJPdzJMaUl3SWdRQXdKNEpMa0FkdjExRjFNQnZPMHlsTllZckZmWnV1eDRHa0NwVmJpWnVoNEw0b2EzM29WeWZnTEFxTWNORUp0cnIydlVCYmZQY1FiVVJpTmNiV1RaUmJDR3YwcVg4eHAxYnI0enZ2UnFiRXA4eC01SWY5aTlMUE1ZOTJ5NFRSQXlVOEI4NEhLWk10NlVndi0tUE02TGNPcw",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1q21wqw/a_deep_dive_in_deepseeks_mhc_they_improved_things/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "In the coverage, identity mapping refers to preserving a stable pass-through path like classic residual connections; mHC uses manifold projections specifically to bring that property back while still using hyper-connections [reddit.com#1][smol.ai#1].",
+      "question": "What does \u201crestore identity mapping\u201d mean in practice for training dynamics?"
+    },
+    {
+      "answer": "The sources discuss it in the context of Transformers and hyper-connections, but mainstream coverage explicitly frames it as an upgrade direction for ResNet-style residual design more broadly [google.com#1][google.com#2].",
+      "question": "Is mHC presented as Transformer-only, or more general?"
+    },
+    {
+      "answer": "smol.ai also highlights discussion of long-horizon agents and context-management bottlenecks, including an approach it calls Recursive Language Models (RLMs) to manage context dynamically [smol.ai#1].",
+      "question": "What other bottleneck did the roundup highlight besides base-model scaling?"
+    }
+  ],
+  "summary": "DeepSeek has released a research paper introducing \u201cmHC: Manifold-Constrained Hyper-Connections,\u201d a proposed change to how Transformer models mix residual pathways during training [reddit.com#1][smol.ai#1]. The work frames residual-path design as an increasingly important lever for scaling neural networks, aiming to make hyper-connections more stable, scalable, and memory-efficient [reddit.com#1][smol.ai#1]. Commentators describe the idea as revisiting a long-standing assumption in deep learning\u2014fixed identity-style residual connections\u2014and offering a way for models to dynamically adjust how much they rely on previous layers versus new computation [reddit.com#2][google.com#1][google.com#2]. The optimistic takeaway for practitioners: it\u2019s a math-plus-systems effort that, if it holds up broadly, could make training large base models a bit smoother and more efficient [smol.ai#1].",
+  "talking_points": [
+    "Birkhoff constraint: The approach constrains residual mixing matrices to the Birkhoff polytope, which the coverage highlights as a mechanism intended to improve training stability while keeping hyper-connections\u2019 flexibility [smol.ai#1].",
+    "Measured overhead: smol.ai reports the method adds about 6.7% training overhead while targeting better stability/performance tradeoffs at scale [smol.ai#1].",
+    "Systems optimizations: The write-up notes practical engineering pieces\u2014such as fused kernels and activation recomputation\u2014packaged alongside the architectural idea to reduce runtime and memory costs [smol.ai#1].",
+    "Scaling experiments: Reported experiments include training runs at 3B, 9B, and 27B parameters, with claims of improved stability and better token-scaling curves compared with baselines [smol.ai#1].",
+    "ResNet linkage: Coverage frames mHC as an \u201cupgrade\u201d direction for the classic residual-connection design popularized by ResNet, positioning it as a broader shift in model development rather than a narrow Transformer tweak [google.com#1][google.com#2]."
+  ],
+  "technical_details": [
+    "Hyper-connections: Hyper-connections generalize standard residual connections by allowing the network to adjust the strength of connections between features at different depths, rather than always using a fixed add of input and transformation [smol.ai#1][reddit.com#2].",
+    "Manifold projection: mHC uses manifold projections as a tool to \u201crestore identity mapping,\u201d which the paper framing links to avoiding training instability when residual paths become more flexible [reddit.com#1].",
+    "Birkhoff polytope: smol.ai describes mHC as constraining residual mixing matrices to the Birkhoff polytope, presented as a stability-oriented constraint that still permits learned mixing [smol.ai#1]."
+  ],
+  "timeline": [],
+  "title": "DeepSeek introduces mHC manifold-constrained hyper-connections for Transformers",
+  "unique_domains": 3,
+  "url": "https://www.reddit.com/r/ArtificialInteligence/comments/1q1rxix/breaking_deepseek_just_dropped_a_fundamental/",
+  "user_action_items": [
+    "Skim the mHC paper\u2019s method and constraints: Read the linked arXiv paper and focus on how manifold projection is used to restore identity mapping and what constraint set is applied to mixing matrices [reddit.com#1].",
+    "Check whether your stack can support the systems tricks: If you train models, review whether your training framework supports fused kernels and activation recomputation, which smol.ai highlights as part of making the approach practical [smol.ai#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
