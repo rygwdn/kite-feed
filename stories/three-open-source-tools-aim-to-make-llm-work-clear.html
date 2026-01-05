@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Three open-source tools aim to make LLM work clearer - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Three open-source tools aim to make LLM work clearer</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Developers shared three small, practical AI tooling projects aimed at making everyday LLM workflows more reliable and reusable. One project, Delta, focuses on targeted code edits where the engineer chooses what to change and where, with safeguards like parsing, validation, retries, and backups to reduce manual bookkeeping during edits <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>. Another offers a Website-to-Markdown API to convert web pages into Markdown for LLM-friendly ingestion <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>. A third open-source “Skills” project targets agent effectiveness by packaging LLM-engineering capabilities—like prompt reasoning, tool use, evaluation, and iteration—into reusable components designed for agents <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/truefire/delta">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>The core thesis is that agentic discovery is a waste of a model&#x27;s &quot;intelligence budget.&quot;</p>
+
+<cite>— Delta creator (name not provided in snippet) (GitHub / Show HN description)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Markdown was originally designed to make writing for the web easy to read and easy to write, which is one reason it shows up frequently in LLM preprocessing pipelines today [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Less guesswork: Delta’s creator argues that many “agentic” coding tools feel opaque and that letting engineers specify the edit target helps the model spend more effort on correctness rather than exploration <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>.</li>
+
+<li>LLM-ready inputs: Agenty’s tool positions Markdown conversion as a simple API step for preparing web content for downstream LLM tasks such as summarization or retrieval pipelines <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>.</li>
+
+<li>Reusable agent skills: The Skills project describes skills as “reusable, composable capabilities” for Anthropic-style agents and frames them as an emerging standard alongside MCPs <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</li>
+
+<li>Practical curriculum: The open-sourced Skills plugin emphasizes real-world LLM engineering constraints—prompts, tools, evaluation, and iteration—rather than purely theoretical agent behavior <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Delta maintainer: Prefers engineer-directed, targeted edits over opaque agent-driven exploration, and adds guardrails (parsing, validation, retries, backups) to make edits dependable in day-to-day coding <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/truefire/delta">github.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Agenty tool maker: Presents website-to-Markdown conversion as a straightforward API utility for feeding cleaner text into LLM workflows <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://agenty.com/tools/markdown">agenty.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Skills project author: Advocates packaging LLM engineering know-how (prompting, tool use, evaluation, iteration) into composable “skills” so agents can perform more effectively under real constraints <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/">reddit.com</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Targeted code edits: A workflow where a developer specifies the exact file/region or change intent, and the LLM focuses on generating the patch; Delta is built around this idea to avoid broad “agentic discovery” and to apply edits robustly <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>.</li>
+
+<li>Markdown as an interchange format: Markdown provides a lightweight, structured text format that many LLM pipelines use because it strips away complex HTML while keeping headings, lists, and links; Agenty’s API automates turning web pages into this format <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>.</li>
+
+<li>Composable agent skills: “Skills” are described as reusable capabilities that can be combined to extend an agent’s abilities; the shared project targets LLM engineering tasks like prompt iteration and evaluation as modular skills <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Software engineering workflows: Tools that add safeguards around LLM-driven edits—like applying changes robustly and validating outputs—can reduce the operational overhead that often blocks teams from trusting AI-assisted refactors or fixes <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>.</li>
+
+<li>Data preparation tooling: Website-to-Markdown conversion supports a growing ecosystem of LLM applications that depend on cleaner text ingestion, especially for summarization and knowledge-base construction <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>.</li>
+
+<li>Agent ecosystem standardization: Framing skills as composable building blocks suggests a move toward interoperable agent components, which could make it easier for teams to swap or combine capabilities rather than adopting one monolithic agent tool <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Developer-facing LLM tooling has recently expanded from chat interfaces into IDE integrations and agent-style automation, prompting ongoing debate over how much autonomy tools should have versus how much control developers should retain [common]. These projects reflect a broader trend toward smaller, composable utilities—clean input formatting, reusable agent capabilities, and safer code-edit application—that try to reduce friction without requiring full autonomy [common].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of code changes is Delta best suited for (tiny edits vs multi-file refactors)?</p>
+
+<p><strong>A:</strong> The project description emphasizes “targeted code edits” where the engineer specifies what and where to change, implying it is designed around scoped, developer-directed modifications rather than open-ended exploration <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Does the Website-to-Markdown tool handle dynamic pages or paywalled content well?</p>
+
+<p><strong>A:</strong> The provided listing only states it is a Website-to-Markdown API and does not describe handling for dynamic rendering or paywalls, so capabilities may depend on the specific page and implementation details not shown here <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> How are “skills” packaged and invoked inside an agent in this project?</p>
+
+<p><strong>A:</strong> The post describes skills as reusable, composable capabilities for agents (notably Anthropic-style agents) but does not include the concrete invocation interface in the excerpt provided <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Try targeted LLM code edits in a safe sandbox: Clone Delta and test it on a small repo or a throwaway branch first, leaning on its built-in validation/retry/backup features to compare outcomes against manual edits <a href="https://github.com/truefire/delta" class="footnote-ref">[1]</a>.</li>
+
+<li>Convert a page you rely on into Markdown: Use the Website-to-Markdown API to turn a documentation page into Markdown, then feed that text into your preferred LLM workflow (summarization, notes, or search indexing) <a href="https://agenty.com/tools/markdown" class="footnote-ref">[2]</a>.</li>
+
+<li>Experiment with reusable agent “skills”: Review the open-sourced Skills project and integrate one capability (like evaluation or iteration routines) into an agent prototype to see whether modular skills improve your agent’s reliability <a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/">https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/</a></li>
+
+
+
+<li><a href="https://agenty.com/tools/markdown">https://agenty.com/tools/markdown</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> agenty.com, reddit.com, github.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-04T22:27:12+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/truefire/delta",
+      "title": "Show HN: Delta \u2013 LLM tool for targeted code edits"
+    },
+    {
+      "date": "2026-01-04T05:04:14+00:00",
+      "domain": "agenty.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://agenty.com/tools/markdown",
+      "title": "Show HN: Website to Markdown API for LLM"
+    },
+    {
+      "date": "2026-01-05T05:06:28+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/",
+      "title": "Created LLM Engineering Skills for Agents"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "Markdown was originally designed to make writing for the web easy to read and easy to write, which is one reason it shows up frequently in LLM preprocessing pipelines today [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/SBuOxrpEalIFCTd9eav9MwlawdkqQnol8QCgtHZfCPDcSZT5rVwWoHkdF0Yj20zgaPoWt8pjXRvrE_kRLbOss30AhkfgiU0E9C2f77H8gm4",
+      "name": "agenty.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/EDUZXObabiZJ-1DN3ZKkMkZMT8yzDzFxlLxm_TVlFS6Mesp8R4DJOUXfVg1FOvIJJTJtjLLowuC9OYFtxWRBMT_WXvu9gsVP52on6EFlRWM",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/SVQZGDMtRsrw5Ai1niw19V8v5A1k8Ct3QRKfogIDC3wadMktq9caToFGfhp71NHmBaczTBnlnI8m0piHqXknCEtOHlSPtQFDqYFqw3noDjo",
+      "name": "github.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Developer-facing LLM tooling has recently expanded from chat interfaces into IDE integrations and agent-style automation, prompting ongoing debate over how much autonomy tools should have versus how much control developers should retain [common]. These projects reflect a broader trend toward smaller, composable utilities\u2014clean input formatting, reusable agent capabilities, and safer code-edit application\u2014that try to reduce friction without requiring full autonomy [common].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Software engineering workflows: Tools that add safeguards around LLM-driven edits\u2014like applying changes robustly and validating outputs\u2014can reduce the operational overhead that often blocks teams from trusting AI-assisted refactors or fixes [github.com#1].",
+    "Data preparation tooling: Website-to-Markdown conversion supports a growing ecosystem of LLM applications that depend on cleaner text ingestion, especially for summarization and knowledge-base construction [agenty.com#1].",
+    "Agent ecosystem standardization: Framing skills as composable building blocks suggests a move toward interoperable agent components, which could make it easier for teams to swap or combine capabilities rather than adopting one monolithic agent tool [reddit.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "github.com",
+          "url": "https://github.com/truefire/delta"
+        }
+      ],
+      "text": "Delta maintainer: Prefers engineer-directed, targeted edits over opaque agent-driven exploration, and adds guardrails (parsing, validation, retries, backups) to make edits dependable in day-to-day coding [github.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "agenty.com",
+          "url": "https://agenty.com/tools/markdown"
+        }
+      ],
+      "text": "Agenty tool maker: Presents website-to-Markdown conversion as a straightforward API utility for feeding cleaner text into LLM workflows [agenty.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "reddit.com",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/"
+        }
+      ],
+      "text": "Skills project author: Advocates packaging LLM engineering know-how (prompting, tool use, evaluation, iteration) into composable \u201cskills\u201d so agents can perform more effectively under real constraints [reddit.com#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": 1767608595,
+  "quote": "The core thesis is that agentic discovery is a waste of a model\u0027s \"intelligence budget.\"",
+  "quote_attribution": "GitHub / Show HN description",
+  "quote_author": "Delta creator (name not provided in snippet)",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://github.com/truefire/delta",
+    "https://www.reddit.com/r/LLMDevs/comments/1q4crp2/created_llm_engineering_skills_for_agents/",
+    "https://agenty.com/tools/markdown"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The project description emphasizes \u201ctargeted code edits\u201d where the engineer specifies what and where to change, implying it is designed around scoped, developer-directed modifications rather than open-ended exploration [github.com#1].",
+      "question": "What kinds of code changes is Delta best suited for (tiny edits vs multi-file refactors)?"
+    },
+    {
+      "answer": "The provided listing only states it is a Website-to-Markdown API and does not describe handling for dynamic rendering or paywalls, so capabilities may depend on the specific page and implementation details not shown here [agenty.com#1].",
+      "question": "Does the Website-to-Markdown tool handle dynamic pages or paywalled content well?"
+    },
+    {
+      "answer": "The post describes skills as reusable, composable capabilities for agents (notably Anthropic-style agents) but does not include the concrete invocation interface in the excerpt provided [reddit.com#1].",
+      "question": "How are \u201cskills\u201d packaged and invoked inside an agent in this project?"
+    }
+  ],
+  "summary": "Developers shared three small, practical AI tooling projects aimed at making everyday LLM workflows more reliable and reusable. One project, Delta, focuses on targeted code edits where the engineer chooses what to change and where, with safeguards like parsing, validation, retries, and backups to reduce manual bookkeeping during edits [github.com#1]. Another offers a Website-to-Markdown API to convert web pages into Markdown for LLM-friendly ingestion [agenty.com#1]. A third open-source \u201cSkills\u201d project targets agent effectiveness by packaging LLM-engineering capabilities\u2014like prompt reasoning, tool use, evaluation, and iteration\u2014into reusable components designed for agents [reddit.com#1].",
+  "talking_points": [
+    "Less guesswork: Delta\u2019s creator argues that many \u201cagentic\u201d coding tools feel opaque and that letting engineers specify the edit target helps the model spend more effort on correctness rather than exploration [github.com#1].",
+    "LLM-ready inputs: Agenty\u2019s tool positions Markdown conversion as a simple API step for preparing web content for downstream LLM tasks such as summarization or retrieval pipelines [agenty.com#1].",
+    "Reusable agent skills: The Skills project describes skills as \u201creusable, composable capabilities\u201d for Anthropic-style agents and frames them as an emerging standard alongside MCPs [reddit.com#1].",
+    "Practical curriculum: The open-sourced Skills plugin emphasizes real-world LLM engineering constraints\u2014prompts, tools, evaluation, and iteration\u2014rather than purely theoretical agent behavior [reddit.com#1]."
+  ],
+  "technical_details": [
+    "Targeted code edits: A workflow where a developer specifies the exact file/region or change intent, and the LLM focuses on generating the patch; Delta is built around this idea to avoid broad \u201cagentic discovery\u201d and to apply edits robustly [github.com#1].",
+    "Markdown as an interchange format: Markdown provides a lightweight, structured text format that many LLM pipelines use because it strips away complex HTML while keeping headings, lists, and links; Agenty\u2019s API automates turning web pages into this format [agenty.com#1].",
+    "Composable agent skills: \u201cSkills\u201d are described as reusable capabilities that can be combined to extend an agent\u2019s abilities; the shared project targets LLM engineering tasks like prompt iteration and evaluation as modular skills [reddit.com#1]."
+  ],
+  "timeline": [],
+  "title": "Three open-source tools aim to make LLM work clearer",
+  "unique_domains": 3,
+  "url": "https://github.com/truefire/delta",
+  "user_action_items": [
+    "Try targeted LLM code edits in a safe sandbox: Clone Delta and test it on a small repo or a throwaway branch first, leaning on its built-in validation/retry/backup features to compare outcomes against manual edits [github.com#1].",
+    "Convert a page you rely on into Markdown: Use the Website-to-Markdown API to turn a documentation page into Markdown, then feed that text into your preferred LLM workflow (summarization, notes, or search indexing) [agenty.com#1].",
+    "Experiment with reusable agent \u201cskills\u201d: Review the open-sourced Skills project and integrate one capability (like evaluation or iteration routines) into an agent prototype to see whether modular skills improve your agent\u2019s reliability [reddit.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
