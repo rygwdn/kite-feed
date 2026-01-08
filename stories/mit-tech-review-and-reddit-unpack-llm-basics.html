@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>MIT Tech Review and Reddit unpack LLM basics - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>MIT Tech Review and Reddit unpack LLM basics</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A new explainer from MIT Technology Review and two Reddit threads show a shared appetite for “LLM literacy”: what large language models are actually doing under the hood and how builders turn them into useful tools <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/" class="footnote-ref">[4]</a>. The Technology Review piece focuses on the meaning of “parameters” in LLMs and why models end up with so many of them <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a><a href="https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4" class="footnote-ref">[2]</a>. Meanwhile, Reddit discussions from software developers revolve around the familiar “next-word prediction” framing, why it can still produce surprisingly capable behavior, and what practical projects people are building with LLMs today <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> The term “parameter” in machine learning usually refers to a value learned from data during training, as opposed to a “hyperparameter,” which is set by the developer before training [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Parameter focus: MIT Technology Review’s explainer is framed around a basic question—what a “parameter” is in an LLM—reflecting how model size discussions often hinge on parameter counts <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a><a href="https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4" class="footnote-ref">[2]</a>.</li>
+
+<li>Dev mental models: One Reddit thread explicitly contrasts traditional software engineering intuition with the common “predict the next word” description, asking for a clearer way to describe LLM behavior in practice <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</li>
+
+<li>Builder sharing: Another Reddit post invites developers to share concrete, useful things they have built with LLMs, positioning learning as an exchange of real project experience rather than theory alone <a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/" class="footnote-ref">[4]</a>.</li>
+
+<li>Hardware context: The discussion of what ChatGPT “is” includes not just the transformer architecture but also the specialized compute (like GPUs/TPUs) that makes large-scale inference and training feasible <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>MIT Technology Review explainer: The article’s central aim is to demystify what “parameters” are and why they matter when people talk about LLM scale <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/">MIT Technology Review</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Traditional software developers (Reddit): Developers ask for an intuitive description of LLMs that goes beyond jargon and beyond the simplified “autocomplete” metaphor, especially given real-world coding and analysis use cases <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/">Reddit r/LLM</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>LLM builders and learners (Reddit): Community members seek practical examples of LLM applications that are “useful,” emphasizing learning by seeing what others shipped or automated <a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/">Reddit r/LLMDevs</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Parameter (in LLMs): In the MIT Technology Review explainer, “parameters” are presented as the core adjustable values inside a model that are learned during training and collectively determine how the model maps inputs to outputs <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a><a href="https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4" class="footnote-ref">[2]</a>.</li>
+
+<li>Next-token prediction: A Reddit discussion highlights the common mental model that LLMs generate text by predicting the next token/word, a framing people use to reconcile simple training objectives with complex-seeming outputs <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</li>
+
+<li>Transformers and accelerators: One thread describes ChatGPT as transformer-based software paired with specialized hardware (for example GPUs/TPUs) that enables large-scale training and fast generation <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Developer education: The combination of a mainstream explainer on parameters and community Q&amp;A suggests growing demand for approachable AI education materials that help software teams evaluate and use LLMs responsibly <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</li>
+
+<li>Tooling ecosystem: Requests for examples of “useful things built with LLMs” point to an ecosystem where value often comes from application design, data plumbing, and workflow integration—not only from the base model <a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/" class="footnote-ref">[4]</a>[common].</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Scientific meaning: The sources reflect an important scientific reality about LLMs: a relatively simple training objective (predicting the next token) can produce broadly useful representations when scaled, which is why basic concepts like parameters and model architecture keep coming up in public explanations <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a><a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a>.</li>
+
+<li>Limits of shorthand: The Reddit questions illustrate a common communication gap: “it’s just autocomplete” can be technically connected to training, but it often fails as a full explanation of observed capabilities, prompting demand for clearer mental models <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>Modern LLM conversations are shaped by the rise of the transformer architecture and the practice of scaling models up with more data and compute, which made parameter counts a common shorthand for “model size” [common]. As LLMs moved from research labs into products, developers increasingly needed plain-language explanations that connect statistical training to practical behaviors like code assistance and document analysis [common].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> When people compare models by “parameter count,” what does that miss?</p>
+
+<p><strong>A:</strong> Parameter count is only one lens; it doesn’t directly capture training data quality, training process, or how the model is used in an application, which is why explainers focus on what parameters are but not as the sole measure of capability <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Why do developers keep returning to the “next-token prediction” framing?</p>
+
+<p><strong>A:</strong> Because it’s a compact description of the generation mechanism many people first encounter, even if they later look for richer explanations that better match observed behaviors in coding and analysis tasks <a href="https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Build a personal “parameter glossary” for LLM reading: As you read LLM articles, write down each new term (like parameter, token, transformer) and add a one-line definition; MIT Technology Review’s explainer can be a starting reference for the “parameter” entry <a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/" class="footnote-ref">[3]</a>.</li>
+
+<li>Collect three real LLM project examples: Use community prompts like the r/LLMDevs thread to gather examples of shipped or useful LLM projects, then note what data they used, what the model did, and what humans still had to verify <a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4">https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4</a></li>
+
+
+
+<li><a href="https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/">https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/">https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, technologyreview.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 3 unique domains, 4 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-07T17:54:55+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/",
+      "title": "Best way to describe what an LLM is doing?"
+    },
+    {
+      "date": "2026-01-07T11:23:47+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4",
+      "title": "LLMs contain a LOT of parameters. But what\u2019s a parameter? - MIT Technology Review"
+    },
+    {
+      "date": "2026-01-07T11:23:47+00:00",
+      "domain": "technologyreview.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/",
+      "title": "LLMs contain a LOT of parameters. But what\u2019s a parameter?"
+    },
+    {
+      "date": "2026-01-07T14:53:09+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/",
+      "title": "tell me anything useful you built with LLMs"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "The term \u201cparameter\u201d in machine learning usually refers to a value learned from data during training, as opposed to a \u201chyperparameter,\u201d which is set by the developer before training [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/vg6PUrnBbKE3ot5ue4lhRpTPwOwEHXtWBRusru1hsJynKJ4X9JgyxljYeJUtqjkLUApm9Ric9XUu0xBeWcIcJSQWEbBGZKCeZ2ZP2o0MlRo",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/nHYIl0ag6tmf3NOSGQSwJZXjCjbvis-3bvNUAvpfOjlEh0B4EmDepmQxUbSKSl_c-1vreIMzjI7SQCLN4hje-9VVY4tGep-8x19mZjcJLcY",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/HYToogjYk9LPQp6vQwTlbvjU45gKtQo8jov4B3GJm_purWgwMRZeu8gSk1HqrC7bFftt3Sn8HLYtDO5W4P0J3wCTX9T-DqjbjuXjQI288vYUAmUO6zBD_Nw6",
+      "name": "technologyreview.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Modern LLM conversations are shaped by the rise of the transformer architecture and the practice of scaling models up with more data and compute, which made parameter counts a common shorthand for \u201cmodel size\u201d [common]. As LLMs moved from research labs into products, developers increasingly needed plain-language explanations that connect statistical training to practical behaviors like code assistance and document analysis [common].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Developer education: The combination of a mainstream explainer on parameters and community Q\u0026A suggests growing demand for approachable AI education materials that help software teams evaluate and use LLMs responsibly [technologyreview.com#1][reddit.com#1].",
+    "Tooling ecosystem: Requests for examples of \u201cuseful things built with LLMs\u201d point to an ecosystem where value often comes from application design, data plumbing, and workflow integration\u2014not only from the base model [reddit.com#2][common]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Basics",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 4,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "MIT Technology Review",
+          "url": "https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/"
+        }
+      ],
+      "text": "MIT Technology Review explainer: The article\u2019s central aim is to demystify what \u201cparameters\u201d are and why they matter when people talk about LLM scale [technologyreview.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit r/LLM",
+          "url": "https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/"
+        }
+      ],
+      "text": "Traditional software developers (Reddit): Developers ask for an intuitive description of LLMs that goes beyond jargon and beyond the simplified \u201cautocomplete\u201d metaphor, especially given real-world coding and analysis use cases [reddit.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit r/LLMDevs",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/"
+        }
+      ],
+      "text": "LLM builders and learners (Reddit): Community members seek practical examples of LLM applications that are \u201cuseful,\u201d emphasizing learning by seeing what others shipped or automated [reddit.com#2]."
+    }
+  ],
+  "primary_image": null,
+  "published": 1767868070,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Scientific meaning: The sources reflect an important scientific reality about LLMs: a relatively simple training objective (predicting the next token) can produce broadly useful representations when scaled, which is why basic concepts like parameters and model architecture keep coming up in public explanations [reddit.com#1][technologyreview.com#1].",
+    "Limits of shorthand: The Reddit questions illustrate a common communication gap: \u201cit\u2019s just autocomplete\u201d can be technically connected to training, but it often fails as a full explanation of observed capabilities, prompting demand for clearer mental models [reddit.com#1]."
+  ],
+  "source_urls": [
+    "https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/",
+    "https://news.google.com/atom/articles/CBMigwFBVV95cUxOSzBucWFpb0dYQW1FZGw2R3VvRUxYT1lxZ0lpTTF2OVVMcFZ4MV9RTFBaX2R5aWNhN09RWGtRSG1HQl92Z3pkR1VuTjFrdVd3QzVyMkYyZi1rb09FR3hrT2pOelBYNlZkenZtZzhmWi1sOTlpYUJlNFFxS3daMnViN2hLMNIBiAFBVV95cUxOZDBoVFc0T01fck03U3VKRmYyQW11UEhfMGt1SjhzczFzQnVybXpkVmRrdE50X09wUTUzamdDWWU0VWJrODRLTG91OXE2YVhPRnIyT0huUlNVb0dtekIzc3lxbFc3UVZzUHNtOXF4bDg0elBaTnNhUVJjQzhTNThVZVNUbGYwajV4",
+    "https://www.technologyreview.com/2026/01/07/1130795/what-even-is-a-parameter/",
+    "https://www.reddit.com/r/LLMDevs/comments/1q6hejb/tell_me_anything_useful_you_built_with_llms/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "Parameter count is only one lens; it doesn\u2019t directly capture training data quality, training process, or how the model is used in an application, which is why explainers focus on what parameters are but not as the sole measure of capability [technologyreview.com#1].",
+      "question": "When people compare models by \u201cparameter count,\u201d what does that miss?"
+    },
+    {
+      "answer": "Because it\u2019s a compact description of the generation mechanism many people first encounter, even if they later look for richer explanations that better match observed behaviors in coding and analysis tasks [reddit.com#1].",
+      "question": "Why do developers keep returning to the \u201cnext-token prediction\u201d framing?"
+    }
+  ],
+  "summary": "A new explainer from MIT Technology Review and two Reddit threads show a shared appetite for \u201cLLM literacy\u201d: what large language models are actually doing under the hood and how builders turn them into useful tools [technologyreview.com#1][reddit.com#1][reddit.com#2]. The Technology Review piece focuses on the meaning of \u201cparameters\u201d in LLMs and why models end up with so many of them [technologyreview.com#1][google.com#1]. Meanwhile, Reddit discussions from software developers revolve around the familiar \u201cnext-word prediction\u201d framing, why it can still produce surprisingly capable behavior, and what practical projects people are building with LLMs today [reddit.com#1][reddit.com#2].",
+  "talking_points": [
+    "Parameter focus: MIT Technology Review\u2019s explainer is framed around a basic question\u2014what a \u201cparameter\u201d is in an LLM\u2014reflecting how model size discussions often hinge on parameter counts [technologyreview.com#1][google.com#1].",
+    "Dev mental models: One Reddit thread explicitly contrasts traditional software engineering intuition with the common \u201cpredict the next word\u201d description, asking for a clearer way to describe LLM behavior in practice [reddit.com#1].",
+    "Builder sharing: Another Reddit post invites developers to share concrete, useful things they have built with LLMs, positioning learning as an exchange of real project experience rather than theory alone [reddit.com#2].",
+    "Hardware context: The discussion of what ChatGPT \u201cis\u201d includes not just the transformer architecture but also the specialized compute (like GPUs/TPUs) that makes large-scale inference and training feasible [reddit.com#1]."
+  ],
+  "technical_details": [
+    "Parameter (in LLMs): In the MIT Technology Review explainer, \u201cparameters\u201d are presented as the core adjustable values inside a model that are learned during training and collectively determine how the model maps inputs to outputs [technologyreview.com#1][google.com#1].",
+    "Next-token prediction: A Reddit discussion highlights the common mental model that LLMs generate text by predicting the next token/word, a framing people use to reconcile simple training objectives with complex-seeming outputs [reddit.com#1].",
+    "Transformers and accelerators: One thread describes ChatGPT as transformer-based software paired with specialized hardware (for example GPUs/TPUs) that enables large-scale training and fast generation [reddit.com#1]."
+  ],
+  "timeline": [],
+  "title": "MIT Tech Review and Reddit unpack LLM basics",
+  "unique_domains": 3,
+  "url": "https://www.reddit.com/r/LLM/comments/1q6mdxs/best_way_to_describe_what_an_llm_is_doing/",
+  "user_action_items": [
+    "Build a personal \u201cparameter glossary\u201d for LLM reading: As you read LLM articles, write down each new term (like parameter, token, transformer) and add a one-line definition; MIT Technology Review\u2019s explainer can be a starting reference for the \u201cparameter\u201d entry [technologyreview.com#1].",
+    "Collect three real LLM project examples: Use community prompts like the r/LLMDevs thread to gather examples of shipped or useful LLM projects, then note what data they used, what the model did, and what humans still had to verify [reddit.com#2]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
