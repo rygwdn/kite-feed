@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers propose new ways for LLMs to “remember” - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers propose new ways for LLMs to “remember”</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of new write-ups and open-source work focuses on a practical constraint in today’s large language models: how to behave as if they have very large (even “infinite”) context while still running on finite compute and memory <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>. The articles describe approaches that rely on selective storage and retrieval of past information rather than keeping every token in an ever-growing prompt, aiming to make long-running assistants and agents more useful over time <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>. NVIDIA’s developer post frames a related idea as “using context as training data,” so a model can adapt during inference (test time) using the interaction itself, rather than only learning during offline training <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc" class="footnote-ref">[2]</a>. Overall, the optimistic through-line is that better memory mechanisms could make AI tools feel more attentive and consistent for users, while also reducing infrastructure pressure compared with brute-force longer context windows <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> The open-source SimpleMem project is published as a public GitHub repository, making its approach inspectable and reusable for developers experimenting with LLM agents <a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Memory as data: NVIDIA’s post argues that treating the current context as training signal can let models update their behavior at test time, reframing “memory” as a learning process rather than just a bigger prompt buffer <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc" class="footnote-ref">[2]</a>.</li>
+
+<li>Lifelong agents: The SimpleMem project presents an “efficient lifelong memory” design for LLM agents, aiming to help agents store and reuse knowledge across tasks instead of starting fresh each session <a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+<li>Compression angle: Towards Data Science describes techniques for approximating very long context handling with much less memory, emphasizing compression and selective retention over full-token storage <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a>.</li>
+
+<li>Engineering trade-offs: The “finite memory” framing highlights a core design trade-off: systems must choose what to keep, summarize, or retrieve later to maintain usefulness as conversations and documents grow <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Towards Data Science (analysis authors): They emphasize mechanisms that approximate extremely long context by using far less memory, focusing on practical techniques for retaining only the most useful information over time.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/">Towards Data Science</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>NVIDIA Developer (research/engineering view): They highlight “using context as training data” to enable learning at test time, positioning memory as on-the-fly adaptation rather than just retrieval.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc">NVIDIA Developer</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Aiming Lab (open-source implementers): They provide SimpleMem as an open repository aimed at efficient, persistent memory for LLM-based agents, signaling a push toward reproducible tooling rather than only conceptual discussion.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/aiming-lab/SimpleMem">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Context window: The context window is the amount of text (tokens) a model can consider at once; the articles discuss ways to handle effectively much longer histories without keeping all tokens in memory <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>.</li>
+
+<li>Test-time learning: Test-time learning refers to adapting a model during inference using the interaction/context itself; NVIDIA describes this as “using context as training data” to unlock learning at test time <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc" class="footnote-ref">[2]</a>.</li>
+
+<li>Lifelong memory for agents: Lifelong memory systems aim to let an LLM agent store, retrieve, and reuse information across sessions or tasks; SimpleMem positions itself as an efficient approach to that goal <a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI assistants: More capable memory mechanisms could make assistants feel more consistent across long conversations and repeat interactions, a key usability hurdle for agent-like products <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+<li>Infrastructure costs: The emphasis on “finite memory” solutions reflects a push to reduce dependence on brute-force longer context windows, which can be expensive at inference time <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>.</li>
+
+<li>Developer tooling: Open-source memory components like SimpleMem can make it easier for developers to test persistent-agent designs without building storage, retrieval, and updating logic from scratch <a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Scientific meaning: Across the sources, the scientific/engineering message is that “memory” in LLM systems can be built as a system property—through compression, retrieval, and adaptation—rather than only by scaling the model or the raw context length <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc" class="footnote-ref">[2]</a>.</li>
+
+<li>Uncertainty and confidence: These pieces describe approaches and prototypes, but they do not, in the provided text, supply standardized benchmark results or error bars that would let readers compare methods apples-to-apples across tasks and domains <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+<li>Limitations and future work: Because long-horizon memory depends on what gets stored and retrieved, future work typically needs careful evaluation for faithfulness (avoiding distorted summaries), privacy/safety, and robustness when the stored history becomes large and noisy <a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a><a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>Modern LLMs have typically operated with fixed context windows, meaning they can only directly attend to a limited number of recent tokens at once; longer windows raise compute and memory costs because attention scales poorly with sequence length [common]. As LLMs have moved from single-turn Q&amp;A to multi-step “agent” workflows, researchers and builders have increasingly looked to retrieval, summarization, and external memory systems to preserve useful information across longer horizons [common].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What should an agent choose to store versus summarize in long sessions?</p>
+
+<p><strong>A:</strong> The sources emphasize selective retention and compression—keeping what remains useful later rather than everything—because memory is finite even when tasks feel open-ended <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> How does “test-time learning” differ from ordinary retrieval-augmented generation (RAG)?</p>
+
+<p><strong>A:</strong> NVIDIA’s description focuses on using the context as training data so the model can adapt during inference, whereas RAG typically retrieves external information without updating the model’s parameters <a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc" class="footnote-ref">[2]</a>[common].</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What risks come with persistent memory for agents?</p>
+
+<p><strong>A:</strong> Persistent memory can accumulate sensitive data and incorrect or outdated facts if not managed carefully, so implementations need controls for what is stored, for how long, and how it is used <a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Prototype a “memory” layer in your LLM app: Experiment with a lightweight external memory store (e.g., notes + retrieval) and compare behavior against a baseline that only uses the raw prompt, using SimpleMem as a reference implementation <a href="https://github.com/aiming-lab/SimpleMem" class="footnote-ref">[3]</a>.</li>
+
+<li>Stress-test long conversations: Create a test script that runs multi-hour or multi-document interactions and measure when the model starts losing key facts, as suggested by the “finite memory vs infinite context” framing <a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/aiming-lab/SimpleMem">https://github.com/aiming-lab/SimpleMem</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc">https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc</a></li>
+
+
+
+<li><a href="https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/">https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> towardsdatascience.com, github.com, google.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 3 unique domains, 4 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-09T16:30:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ",
+      "title": "How LLMs Handle Infinite Context With Finite Memory - Towards Data Science"
+    },
+    {
+      "date": "2026-01-09T17:33:54+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc",
+      "title": "Reimagining LLM Memory: Using Context as Training Data Unlocks Models That Learn at Test-Time - NVIDIA Developer"
+    },
+    {
+      "date": "2026-01-09T12:21:17+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/aiming-lab/SimpleMem",
+      "title": "SimpleMem: Efficient Lifelong Memory for LLM Agents"
+    },
+    {
+      "date": "2026-01-09T16:30:00+00:00",
+      "domain": "towardsdatascience.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/",
+      "title": "How LLMs Handle Infinite Context With Finite Memory"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "The open-source SimpleMem project is published as a public GitHub repository, making its approach inspectable and reusable for developers experimenting with LLM agents [github.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/8x20646GuHcc9bYmexvb920v_D4IE-U7Ix4dAY07nSsZ9moUaVfAkq7qWZjqwpdE6F7YEJJZfZOGt48OORFipJuR20MsTazFKzmc7AvCtUklsRhp0QSNslKKCZM",
+      "name": "towardsdatascience.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/30aIx0ap9SZFHmRlQxXVdkqQuPo9iB3EsSyc0HnYV_uYSKi1cisZkdDrYTq00ek8hN_Am3LUBD-UQcTPTwZieve0edwssAntqEsaDb3ZwEM",
+      "name": "github.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/DKlrB-Ig01jEXd7GhtAentz2z9VN3ZLThriW5eG8bejhqO_lXHLDr81g13fHh4SLk_Uy8RzXoYgiZ7hFSe8sblhgFUnsttCLlSyHGskPUV4",
+      "name": "google.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Modern LLMs have typically operated with fixed context windows, meaning they can only directly attend to a limited number of recent tokens at once; longer windows raise compute and memory costs because attention scales poorly with sequence length [common]. As LLMs have moved from single-turn Q\u0026A to multi-step \u201cagent\u201d workflows, researchers and builders have increasingly looked to retrieval, summarization, and external memory systems to preserve useful information across longer horizons [common].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI assistants: More capable memory mechanisms could make assistants feel more consistent across long conversations and repeat interactions, a key usability hurdle for agent-like products [towardsdatascience.com#1][github.com#1].",
+    "Infrastructure costs: The emphasis on \u201cfinite memory\u201d solutions reflects a push to reduce dependence on brute-force longer context windows, which can be expensive at inference time [towardsdatascience.com#1][google.com#1].",
+    "Developer tooling: Open-source memory components like SimpleMem can make it easier for developers to test persistent-agent designs without building storage, retrieval, and updating logic from scratch [github.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Memory",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 4,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Towards Data Science",
+          "url": "https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/"
+        }
+      ],
+      "text": "Towards Data Science (analysis authors): They emphasize mechanisms that approximate extremely long context by using far less memory, focusing on practical techniques for retaining only the most useful information over time."
+    },
+    {
+      "sources": [
+        {
+          "name": "NVIDIA Developer",
+          "url": "https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc"
+        }
+      ],
+      "text": "NVIDIA Developer (research/engineering view): They highlight \u201cusing context as training data\u201d to enable learning at test time, positioning memory as on-the-fly adaptation rather than just retrieval."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/aiming-lab/SimpleMem"
+        }
+      ],
+      "text": "Aiming Lab (open-source implementers): They provide SimpleMem as an open repository aimed at efficient, persistent memory for LLM-based agents, signaling a push toward reproducible tooling rather than only conceptual discussion."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768040482,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Scientific meaning: Across the sources, the scientific/engineering message is that \u201cmemory\u201d in LLM systems can be built as a system property\u2014through compression, retrieval, and adaptation\u2014rather than only by scaling the model or the raw context length [towardsdatascience.com#1][google.com#2].",
+    "Uncertainty and confidence: These pieces describe approaches and prototypes, but they do not, in the provided text, supply standardized benchmark results or error bars that would let readers compare methods apples-to-apples across tasks and domains [towardsdatascience.com#1][github.com#1].",
+    "Limitations and future work: Because long-horizon memory depends on what gets stored and retrieved, future work typically needs careful evaluation for faithfulness (avoiding distorted summaries), privacy/safety, and robustness when the stored history becomes large and noisy [google.com#1][github.com#1]."
+  ],
+  "source_urls": [
+    "https://github.com/aiming-lab/SimpleMem",
+    "https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ",
+    "https://news.google.com/rss/articles/CBMixgFBVV95cUxNMk1KWDQ5WldHUzZiX3pVRm9uSFl2QUNlRlZSUFktNkRLZWQzSy1hNl9CelRjSnJVdEZqWFpJTHMxZVdoZXp3OUUtX1ZfUVBzOU1rYWg3aFU3cTdTRVdxSUtMdjZYd1ByRGdqVWk4V1NmZGo5QVdxRzl2b1NlaS11eTBHb2hzZWVib1ViNlNUeHBMLUNPVDluTDlzTnNnVXpMbTFqSXRWaW1XM1BvY3NqRVdjbWNzZHcxb2lMd1dwYk95SlUzWGc",
+    "https://towardsdatascience.com/llms-can-now-process-infinite-context-windows/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The sources emphasize selective retention and compression\u2014keeping what remains useful later rather than everything\u2014because memory is finite even when tasks feel open-ended [towardsdatascience.com#1][google.com#1].",
+      "question": "What should an agent choose to store versus summarize in long sessions?"
+    },
+    {
+      "answer": "NVIDIA\u2019s description focuses on using the context as training data so the model can adapt during inference, whereas RAG typically retrieves external information without updating the model\u2019s parameters [google.com#2][common].",
+      "question": "How does \u201ctest-time learning\u201d differ from ordinary retrieval-augmented generation (RAG)?"
+    },
+    {
+      "answer": "Persistent memory can accumulate sensitive data and incorrect or outdated facts if not managed carefully, so implementations need controls for what is stored, for how long, and how it is used [github.com#1][google.com#1].",
+      "question": "What risks come with persistent memory for agents?"
+    }
+  ],
+  "summary": "A cluster of new write-ups and open-source work focuses on a practical constraint in today\u2019s large language models: how to behave as if they have very large (even \u201cinfinite\u201d) context while still running on finite compute and memory [towardsdatascience.com#1][google.com#1]. The articles describe approaches that rely on selective storage and retrieval of past information rather than keeping every token in an ever-growing prompt, aiming to make long-running assistants and agents more useful over time [towardsdatascience.com#1][github.com#1]. NVIDIA\u2019s developer post frames a related idea as \u201cusing context as training data,\u201d so a model can adapt during inference (test time) using the interaction itself, rather than only learning during offline training [google.com#2]. Overall, the optimistic through-line is that better memory mechanisms could make AI tools feel more attentive and consistent for users, while also reducing infrastructure pressure compared with brute-force longer context windows [towardsdatascience.com#1][google.com#2].",
+  "talking_points": [
+    "Memory as data: NVIDIA\u2019s post argues that treating the current context as training signal can let models update their behavior at test time, reframing \u201cmemory\u201d as a learning process rather than just a bigger prompt buffer [google.com#2].",
+    "Lifelong agents: The SimpleMem project presents an \u201cefficient lifelong memory\u201d design for LLM agents, aiming to help agents store and reuse knowledge across tasks instead of starting fresh each session [github.com#1].",
+    "Compression angle: Towards Data Science describes techniques for approximating very long context handling with much less memory, emphasizing compression and selective retention over full-token storage [towardsdatascience.com#1].",
+    "Engineering trade-offs: The \u201cfinite memory\u201d framing highlights a core design trade-off: systems must choose what to keep, summarize, or retrieve later to maintain usefulness as conversations and documents grow [google.com#1]."
+  ],
+  "technical_details": [
+    "Context window: The context window is the amount of text (tokens) a model can consider at once; the articles discuss ways to handle effectively much longer histories without keeping all tokens in memory [towardsdatascience.com#1][google.com#1].",
+    "Test-time learning: Test-time learning refers to adapting a model during inference using the interaction/context itself; NVIDIA describes this as \u201cusing context as training data\u201d to unlock learning at test time [google.com#2].",
+    "Lifelong memory for agents: Lifelong memory systems aim to let an LLM agent store, retrieve, and reuse information across sessions or tasks; SimpleMem positions itself as an efficient approach to that goal [github.com#1]."
+  ],
+  "timeline": [],
+  "title": "Researchers propose new ways for LLMs to \u201cremember\u201d",
+  "unique_domains": 3,
+  "url": "https://news.google.com/rss/articles/CBMigwFBVV95cUxOaFN1N0ZINXRUZ0psQUI2LXI0ZDJiREV6XzNXMkFpOTBpRUY0R19Uc1R5enQxRFhMeHFaT2ZqdDdmS2wtdmptTmpMbldzZGNyQzMtR1N3Sy1mNHVGd0dybUx1NjZRbUIteXByempKbU0wSFZlU3JBY3kydTRiZkV4bjI4WQ",
+  "user_action_items": [
+    "Prototype a \u201cmemory\u201d layer in your LLM app: Experiment with a lightweight external memory store (e.g., notes + retrieval) and compare behavior against a baseline that only uses the raw prompt, using SimpleMem as a reference implementation [github.com#1].",
+    "Stress-test long conversations: Create a test script that runs multi-hour or multi-document interactions and measure when the model starts losing key facts, as suggested by the \u201cfinite memory vs infinite context\u201d framing [towardsdatascience.com#1][google.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
