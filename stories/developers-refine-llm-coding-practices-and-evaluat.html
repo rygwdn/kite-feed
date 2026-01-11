@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers refine LLM coding practices and evaluation methods - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers refine LLM coding practices and evaluation methods</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of developer-focused AI articles highlights a practical shift in how teams use large language models for software work: treat code generation as an engineered system with guardrails, feedback loops, and clear acceptance tests, rather than a one-off prompt <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a><a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e" class="footnote-ref">[3]</a>. The pieces also reflect growing attention to the “plumbing” of LLM apps—choosing inference engines and operational defaults that fit latency, cost, and deployment constraints <a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a>. Finally, several authors focus on better measurement and product choices: how to evaluate models (including “LLM-as-a-judge”) and whether end users should even be exposed to model selection at all <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a><a href="https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good" class="footnote-ref">[5]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://posthog.com/blog/correct-llm-code-generation">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> In software delivery, automated tests are commonly used to catch regressions and verify behavior before code ships, which makes them a natural companion to AI-assisted coding workflows [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Scale lessons: PostHog frames “correctness at scale” as a workflow problem—emphasizing systematic checks and iteration to keep LLM-generated code reliable as usage grows <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a>.</li>
+
+<li>Workflow habits: Addy Osmani describes a 2026-oriented coding routine that uses LLMs alongside conventional developer practices (like planning and review) rather than replacing them <a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e" class="footnote-ref">[3]</a>.</li>
+
+<li>Inference choice: Red Hat compares vLLM and llama.cpp as different trade-offs for running LLMs, positioning them as options depending on the target environment and requirements <a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a>.</li>
+
+<li>Model selection UX: CodeRabbit argues that letting users pick models can be counterproductive, and proposes that product teams should make model choice a managed, behind-the-scenes decision <a href="https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good" class="footnote-ref">[5]</a>.</li>
+
+<li>Evaluation scrutiny: Giles Thomas digs into “LLM-as-a-judge” results, focusing on what the judging setup can and can’t reliably tell you about model performance <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>PostHog (engineering perspective): LLM code generation works better when teams engineer for correctness with repeatable processes, not just better prompts.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://posthog.com/blog/correct-llm-code-generation">posthog.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Addy Osmani (developer workflow perspective): LLMs fit best as part of a structured coding workflow that still emphasizes developer intent, verification, and iteration.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e">medium.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Red Hat (platform perspective): The inference engine decision (vLLM vs llama.cpp) should follow the use case and deployment constraints rather than a one-size-fits-all default.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case">redhat.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>CodeRabbit (product perspective): Products can improve reliability by centralizing model choice instead of pushing that complexity onto end users.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good">coderabbit.ai</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Giles Thomas (evaluation perspective): “LLM-as-a-judge” needs careful interpretation; the judging method itself can shape the conclusions you draw.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge">gilesthomas.com</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>LLM inference engine: Software that executes a trained model to produce outputs; the Red Hat piece contrasts vLLM and llama.cpp as alternative runtimes chosen based on deployment needs and constraints <a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a>.</li>
+
+<li>LLM-as-a-judge: An evaluation approach where a model scores or compares other model outputs; the Giles Thomas analysis focuses on interpreting these results and understanding how judging choices affect conclusions <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a>.</li>
+
+<li>Guardrails for code generation: Process-level controls—like checks, tests, and iterative feedback—that aim to make AI-generated code more dependable when used broadly in production workflows <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Software engineering teams: More teams are treating LLM code generation as a workflow discipline—pairing model output with verification—rather than assuming prompts alone can guarantee correctness <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a><a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e" class="footnote-ref">[3]</a>.</li>
+
+<li>Platform and infra vendors: Inference-engine choice (e.g., vLLM vs llama.cpp) becomes a differentiator for cost, latency, and deployment fit, nudging organizations to invest in specialized serving stacks <a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a>.</li>
+
+<li>AI product design: Arguments against user-chosen models push vendors toward opinionated defaults and automated routing, shifting model selection into product/ops decisions instead of end-user settings <a href="https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Measurement focus: The attention to “LLM-as-a-judge” underscores that progress in applied AI depends not only on stronger models but also on better measurement practices for quality and usefulness <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a>.</li>
+
+<li>Reproducibility mindset: Engineering-oriented approaches to code generation emphasize repeatable checks and validation, aligning practical LLM use with broader scientific norms around verification and reducing error propagation <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>LLMs moved from novelty to everyday developer tooling after the 2022–2024 wave of chat-based and code-assist products, which made natural-language-to-code workflows widely accessible [common]. As adoption expanded, teams increasingly confronted operational questions—how to run models efficiently, how to validate outputs, and how to measure quality beyond anecdotal wins—setting the stage for today’s emphasis on workflow design, inference infrastructure, and evaluation rigor <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a><a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a><a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What signals should a product team use to decide when model choice belongs behind the scenes?</p>
+
+<p><strong>A:</strong> CodeRabbit’s framing suggests the decision hinges on whether user-visible model selection increases confusion or inconsistency versus delivering predictable outcomes through a managed default <a href="https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good" class="footnote-ref">[5]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> When comparing vLLM and llama.cpp, what operational constraints matter most?</p>
+
+<p><strong>A:</strong> The Red Hat comparison emphasizes selecting based on your deployment environment and requirements, which typically center on runtime fit for your target infrastructure and performance needs <a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of evaluation failures can “LLM-as-a-judge” introduce?</p>
+
+<p><strong>A:</strong> Giles Thomas highlights that the judging method itself can shape results, so teams should scrutinize how the judge is configured and what that implies for the conclusions drawn <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Add an AI-output verification step to PRs: Require generated code to include runnable tests or clear acceptance checks before merging, reflecting the reliability-first approach discussed for LLM code generation at scale <a href="https://posthog.com/blog/correct-llm-code-generation" class="footnote-ref">[1]</a>.</li>
+
+<li>Pilot an inference engine on your target hardware: Benchmark vLLM and llama.cpp against your latency and deployment constraints to select the runtime that best fits your use case <a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case" class="footnote-ref">[4]</a>.</li>
+
+<li>Run a small evaluation bake-off before switching models: If you use LLM-based evaluation, document the judging prompt/setup and sanity-check conclusions, as advised in the discussion of LLM-as-a-judge results <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e">https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e</a></li>
+
+
+
+<li><a href="https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good">https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good</a></li>
+
+
+
+<li><a href="https://rocketup.pages.dev/posts/statistical_analysis_of_llm_advancment/">https://rocketup.pages.dev/posts/statistical_analysis_of_llm_advancment/</a></li>
+
+
+
+<li><a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge">https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge</a></li>
+
+
+
+
+
+<li><a href="https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case">https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> posthog.com, pages.dev, medium.com, gilesthomas.com, coderabbit.ai, redhat.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 6 unique domains, 6 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-11T01:41:56+00:00",
+      "domain": "posthog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://posthog.com/blog/correct-llm-code-generation",
+      "title": "What the AI Wizard taught us about LLM code generation at scale"
+    },
+    {
+      "date": "2026-01-11T09:55:21+00:00",
+      "domain": "pages.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://rocketup.pages.dev/posts/statistical_analysis_of_llm_advancment/",
+      "title": "Analysis of LLM advancement: impactful LLMs in Q3 2027"
+    },
+    {
+      "date": "2026-01-10T21:30:30+00:00",
+      "domain": "medium.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e",
+      "title": "LLM coding workflow going into 2026"
+    },
+    {
+      "date": "2026-01-10T17:51:43+00:00",
+      "domain": "redhat.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case",
+      "title": "VLLM or llama.cpp: Choosing the right LLM inference engine for your use case"
+    },
+    {
+      "date": "2026-01-10T15:41:43+00:00",
+      "domain": "coderabbit.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good",
+      "title": "Why users shouldn\u2019t choose their own LLM models"
+    },
+    {
+      "date": "2026-01-10T06:14:36+00:00",
+      "domain": "gilesthomas.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge",
+      "title": "Digging into the LLM-as-a-Judge Results"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "In software delivery, automated tests are commonly used to catch regressions and verify behavior before code ships, which makes them a natural companion to AI-assisted coding workflows [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/JvBuLY_0xiPsJfBdg6NO_6tGDDplJtedXCHK5uM4jlCUodn9mk5QaSFQFIDvSRv1PX2UF-ExMqph7mfUbHHBNuUvCzkCu_mkgIWK_gPR0fzv",
+      "name": "posthog.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/efiiYXq51H7a5SfYs7WeHn3v_xMkdFAc2DlhQkaijr6WiDGTatQEC4LMdRB5h8liXiHgd-G4CrU916sGQt5H3pgcbrPxKUJW32f4AVygCQ",
+      "name": "pages.dev"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/SA2RlZmMROjivJwJ8PmuTVUYgoBywUO3X1kBbDU9EvvnxowftIB1zi0kC8E-hbo30pBXq_ER6GYKk_yEXvDk2npfz3Fn7gFF4TXzx99Orew",
+      "name": "medium.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/iRcp2ZPjIfOQA0tG4AiH4kGKu0vLRo33u-fH81h69cY3G5kw036yGzD1wk0cTlvz_1iDxE-WGTnDqVMZ7OcC6j1C5lkBPAnknq4RMzPUy0a-P8PMEw",
+      "name": "gilesthomas.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/3iCgbiFv0hlMz3b6ODgph6CKBVm66T9gB0OaVw9TNPbWZB2yuV9BQ_s5-1k27Vf3B0PaGw3TuI7JHgPXbbGvmLowJTbFOf_df5nLKmgEwFkGmxk",
+      "name": "coderabbit.ai"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/TLP1xzmNEWPx7Oo28s4N7aZ4NGHf7EEpIwdDji7jF5VpU9Ut9tKMRcKQ9wbJ259KAjE4S9E9SZlwUJ6eT70OZ_-GoRbLqKHieNdOc7Edv9o",
+      "name": "redhat.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee0\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "LLMs moved from novelty to everyday developer tooling after the 2022\u20132024 wave of chat-based and code-assist products, which made natural-language-to-code workflows widely accessible [common]. As adoption expanded, teams increasingly confronted operational questions\u2014how to run models efficiently, how to validate outputs, and how to measure quality beyond anecdotal wins\u2014setting the stage for today\u2019s emphasis on workflow design, inference infrastructure, and evaluation rigor [posthog.com#1][redhat.com#1][gilesthomas.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Software engineering teams: More teams are treating LLM code generation as a workflow discipline\u2014pairing model output with verification\u2014rather than assuming prompts alone can guarantee correctness [posthog.com#1][medium.com#1].",
+    "Platform and infra vendors: Inference-engine choice (e.g., vLLM vs llama.cpp) becomes a differentiator for cost, latency, and deployment fit, nudging organizations to invest in specialized serving stacks [redhat.com#1].",
+    "AI product design: Arguments against user-chosen models push vendors toward opinionated defaults and automated routing, shifting model selection into product/ops decisions instead of end-user settings [coderabbit.ai#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 6,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "posthog.com",
+          "url": "https://posthog.com/blog/correct-llm-code-generation"
+        }
+      ],
+      "text": "PostHog (engineering perspective): LLM code generation works better when teams engineer for correctness with repeatable processes, not just better prompts."
+    },
+    {
+      "sources": [
+        {
+          "name": "medium.com",
+          "url": "https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e"
+        }
+      ],
+      "text": "Addy Osmani (developer workflow perspective): LLMs fit best as part of a structured coding workflow that still emphasizes developer intent, verification, and iteration."
+    },
+    {
+      "sources": [
+        {
+          "name": "redhat.com",
+          "url": "https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case"
+        }
+      ],
+      "text": "Red Hat (platform perspective): The inference engine decision (vLLM vs llama.cpp) should follow the use case and deployment constraints rather than a one-size-fits-all default."
+    },
+    {
+      "sources": [
+        {
+          "name": "coderabbit.ai",
+          "url": "https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good"
+        }
+      ],
+      "text": "CodeRabbit (product perspective): Products can improve reliability by centralizing model choice instead of pushing that complexity onto end users."
+    },
+    {
+      "sources": [
+        {
+          "name": "gilesthomas.com",
+          "url": "https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge"
+        }
+      ],
+      "text": "Giles Thomas (evaluation perspective): \u201cLLM-as-a-judge\u201d needs careful interpretation; the judging method itself can shape the conclusions you draw."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768126664,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Measurement focus: The attention to \u201cLLM-as-a-judge\u201d underscores that progress in applied AI depends not only on stronger models but also on better measurement practices for quality and usefulness [gilesthomas.com#1].",
+    "Reproducibility mindset: Engineering-oriented approaches to code generation emphasize repeatable checks and validation, aligning practical LLM use with broader scientific norms around verification and reducing error propagation [posthog.com#1]."
+  ],
+  "source_urls": [
+    "https://medium.com/@addyosmani/my-llm-coding-workflow-going-into-2026-52fe1681325e",
+    "https://www.coderabbit.ai/blog/why-users-shouldnt-choose-their-own-llm-models-choice-is-not-always-good",
+    "https://rocketup.pages.dev/posts/statistical_analysis_of_llm_advancment/",
+    "https://www.gilesthomas.com/2026/01/llm-from-scratch-30-digging-into-llm-as-a-judge",
+    "https://posthog.com/blog/correct-llm-code-generation",
+    "https://developers.redhat.com/articles/2025/09/30/vllm-or-llamacpp-choosing-right-llm-inference-engine-your-use-case"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "CodeRabbit\u2019s framing suggests the decision hinges on whether user-visible model selection increases confusion or inconsistency versus delivering predictable outcomes through a managed default [coderabbit.ai#1].",
+      "question": "What signals should a product team use to decide when model choice belongs behind the scenes?"
+    },
+    {
+      "answer": "The Red Hat comparison emphasizes selecting based on your deployment environment and requirements, which typically center on runtime fit for your target infrastructure and performance needs [redhat.com#1].",
+      "question": "When comparing vLLM and llama.cpp, what operational constraints matter most?"
+    },
+    {
+      "answer": "Giles Thomas highlights that the judging method itself can shape results, so teams should scrutinize how the judge is configured and what that implies for the conclusions drawn [gilesthomas.com#1].",
+      "question": "What kinds of evaluation failures can \u201cLLM-as-a-judge\u201d introduce?"
+    }
+  ],
+  "summary": "A cluster of developer-focused AI articles highlights a practical shift in how teams use large language models for software work: treat code generation as an engineered system with guardrails, feedback loops, and clear acceptance tests, rather than a one-off prompt [posthog.com#1][medium.com#1]. The pieces also reflect growing attention to the \u201cplumbing\u201d of LLM apps\u2014choosing inference engines and operational defaults that fit latency, cost, and deployment constraints [redhat.com#1]. Finally, several authors focus on better measurement and product choices: how to evaluate models (including \u201cLLM-as-a-judge\u201d) and whether end users should even be exposed to model selection at all [gilesthomas.com#1][coderabbit.ai#1].",
+  "talking_points": [
+    "Scale lessons: PostHog frames \u201ccorrectness at scale\u201d as a workflow problem\u2014emphasizing systematic checks and iteration to keep LLM-generated code reliable as usage grows [posthog.com#1].",
+    "Workflow habits: Addy Osmani describes a 2026-oriented coding routine that uses LLMs alongside conventional developer practices (like planning and review) rather than replacing them [medium.com#1].",
+    "Inference choice: Red Hat compares vLLM and llama.cpp as different trade-offs for running LLMs, positioning them as options depending on the target environment and requirements [redhat.com#1].",
+    "Model selection UX: CodeRabbit argues that letting users pick models can be counterproductive, and proposes that product teams should make model choice a managed, behind-the-scenes decision [coderabbit.ai#1].",
+    "Evaluation scrutiny: Giles Thomas digs into \u201cLLM-as-a-judge\u201d results, focusing on what the judging setup can and can\u2019t reliably tell you about model performance [gilesthomas.com#1]."
+  ],
+  "technical_details": [
+    "LLM inference engine: Software that executes a trained model to produce outputs; the Red Hat piece contrasts vLLM and llama.cpp as alternative runtimes chosen based on deployment needs and constraints [redhat.com#1].",
+    "LLM-as-a-judge: An evaluation approach where a model scores or compares other model outputs; the Giles Thomas analysis focuses on interpreting these results and understanding how judging choices affect conclusions [gilesthomas.com#1].",
+    "Guardrails for code generation: Process-level controls\u2014like checks, tests, and iterative feedback\u2014that aim to make AI-generated code more dependable when used broadly in production workflows [posthog.com#1]."
+  ],
+  "timeline": [],
+  "title": "Developers refine LLM coding practices and evaluation methods",
+  "unique_domains": 6,
+  "url": "https://posthog.com/blog/correct-llm-code-generation",
+  "user_action_items": [
+    "Add an AI-output verification step to PRs: Require generated code to include runnable tests or clear acceptance checks before merging, reflecting the reliability-first approach discussed for LLM code generation at scale [posthog.com#1].",
+    "Pilot an inference engine on your target hardware: Benchmark vLLM and llama.cpp against your latency and deployment constraints to select the runtime that best fits your use case [redhat.com#1].",
+    "Run a small evaluation bake-off before switching models: If you use LLM-based evaluation, document the judging prompt/setup and sanity-check conclusions, as advised in the discussion of LLM-as-a-judge results [gilesthomas.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
