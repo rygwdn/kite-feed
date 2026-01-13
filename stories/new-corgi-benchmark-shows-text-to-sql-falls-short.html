@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>New CORGI benchmark shows text-to-SQL falls short - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>New CORGI benchmark shows text-to-SQL falls short</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Two new pieces of writing are pushing the text-to-SQL community toward a more practical definition of “working.” An arXiv paper introduces CORGI, a business-focused benchmark that goes beyond straightforward query translation into descriptive, explanatory, predictive, and recommendational tasks, and reports that large language models’ success execution rate drops substantially on these more realistic questions <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>. A companion essay argues that even seemingly high aggregate accuracy can be “useless” in real analytics settings when failures are unacceptable for end users trying to self-serve insights from data <a href="https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/" class="footnote-ref">[1]</a>. Together, they highlight an encouraging path forward: better benchmarks, better evaluation methods, and clearer expectations for where AI can reliably help analysts today <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a><a href="https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> CORGI comes with a public submission website alongside the dataset and evaluation framework to support ongoing benchmarking by other teams <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Business-like tasks: CORGI’s question set is organized into four categories—descriptive, explanatory, predictive, and recommendational—to reflect how real business users ask for forecasts and next-best actions rather than only database lookups <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Synthetic enterprises: The benchmark uses synthetic databases inspired by companies such as DoorDash, Airbnb, and Lululemon to mimic the structure and messiness of enterprise analytics environments <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Execution gap: The authors report an average 33.12% lower success execution rate on CORGI compared with prior benchmarks like BIRD, underscoring how much harder “real questions” are than traditional datasets suggest <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>New scoring idea: CORGI explicitly encourages automatic evaluation methods for open-ended, qualitative responses (e.g., recommendations), not just exact-match SQL, to better grade agent-like answers <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Reliability bar: The essay’s core critique is that a headline accuracy metric can hide failure modes that break self-service analytics workflows, because a single wrong query can produce a confidently wrong chart or decision input <a href="https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>CORGI authors (arXiv): Text-to-SQL should expand from translation into multi-step, business-relevant tasks (including prediction and recommendations), and evaluation should adapt to open-ended outputs as well as SQL execution correctness.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2510.07309">arxiv.org</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Towards Data Science essay: High overall accuracy can still fail users in practice because analytics needs are unforgiving: small error rates can translate into frequent, workflow-breaking mistakes for end users relying on self-serve querying.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/">towardsdatascience.com</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Success execution rate (SER): SER measures whether a generated query (or system output) successfully runs and produces the intended result, which CORGI uses to compare performance against earlier benchmarks; the paper reports a sizable SER drop on CORGI versus BIRD <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Agentic text-to-SQL: CORGI frames harder business questions as multi-step “agentic” work—requiring causal reasoning, temporal forecasting, and strategic recommendations—rather than a single-shot translation from text to SQL <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Evaluating qualitative outputs: Because some CORGI tasks require narrative or recommendational answers, the benchmark promotes new automatic evaluation approaches for open-ended responses, not only exact SQL matching <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Analytics tooling: Benchmarks like CORGI can shift product roadmaps toward reliability on complex business questions (forecasting and recommendations), not just SQL translation, potentially changing how vendors compete and how customers run bake-offs <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Enterprise procurement: The critique that high aggregate accuracy can still fail self-service users may push buyers to demand stricter acceptance tests, human-in-the-loop workflows, and clearer failure handling before broad rollout <a href="https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/" class="footnote-ref">[1]</a>.</li>
+
+<li>Evaluation ecosystem: CORGI’s release of a dataset, evaluation framework, and submission website can help standardize comparisons and accelerate research iteration in the text-to-SQL community <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>What this refines: CORGI reframes text-to-SQL as a broader business reasoning problem—moving beyond simple query translation into explanation, prediction, and recommendation—so it better reflects how decision-support questions show up in practice <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Evidence of difficulty: The paper reports that large language model performance degrades as question complexity increases, and quantifies this with an average 33.12% lower success execution rate on CORGI than on prior benchmarks such as BIRD <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Limits and next steps: Because CORGI includes open-ended, qualitative responses, the authors highlight the need for improved automatic evaluation methods—an area that remains challenging when answers can be reasonable but non-identical in wording or rationale <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>Text-to-SQL research has long used benchmark datasets to measure how well models translate natural language questions into SQL queries [common]. As large language models improved, many deployments shifted toward “self-service analytics” experiences, where non-experts ask questions directly and expect trustworthy results—raising the practical cost of occasional errors [common]. CORGI represents a newer push to make evaluation more like real business decision-making, where queries often require reasoning, forecasting, and recommendations rather than retrieval alone <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What makes a “recommendational” question different from a normal SQL query request?</p>
+
+<p><strong>A:</strong> In CORGI, recommendational prompts can require strategic suggestions or next-best actions (not only retrieving rows), which the authors argue calls for multi-step reasoning beyond straightforward data access <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Why does CORGI use synthetic databases instead of real company data?</p>
+
+<p><strong>A:</strong> The paper describes CORGI as using synthetic enterprise-inspired databases (e.g., DoorDash- or Airbnb-like) to emulate business settings while still being publishable and shareable for research <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Add “hard questions” to your NL-to-SQL evaluation set: When testing text-to-SQL tools internally, include predictive and recommendational prompts (not just retrieval) to mirror CORGI’s harder categories and reveal where systems break <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+<li>Measure execution, not just string match: Track whether generated SQL executes correctly and returns plausible results—an approach aligned with CORGI’s emphasis on success execution rate rather than only exact SQL matching <a href="https://arxiv.org/abs/2510.07309" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/atom/articles/CBMigwFBVV95cUxNbHg4eXVmZEswZzJ1Vllrbnl1R2hxbW90WUxzS2Jld3FkaVBWWFV2ZDhmUzMycWI1aER6dFBPOU1iVFhKOHZMTGIxd2Y4a1piTmw3TDFJMHllekphZHNmNVJ5S1JHVERwbzdBeW1Lc01NSDJZUVg4SG0xWGtGYUFxM1RZNA">https://news.google.com/atom/articles/CBMigwFBVV95cUxNbHg4eXVmZEswZzJ1Vllrbnl1R2hxbW90WUxzS2Jld3FkaVBWWFV2ZDhmUzMycWI1aER6dFBPOU1iVFhKOHZMTGIxd2Y4a1piTmw3TDFJMHllekphZHNmNVJ5S1JHVERwbzdBeW1Lc01NSDJZUVg4SG0xWGtGYUFxM1RZNA</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2510.07309">https://arxiv.org/abs/2510.07309</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> arxiv.org, google.com, towardsdatascience.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-12T15:00:00+00:00",
+      "domain": "towardsdatascience.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/",
+      "title": "Why 90% Accuracy in Text-to-SQL is 100% Useless"
+    },
+    {
+      "date": "2026-01-13T05:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2510.07309",
+      "title": "Agent Bain vs. Agent McKinsey: A New Text-to-SQL Benchmark for the Business Domain"
+    },
+    {
+      "date": "2026-01-12T15:00:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMigwFBVV95cUxNbHg4eXVmZEswZzJ1Vllrbnl1R2hxbW90WUxzS2Jld3FkaVBWWFV2ZDhmUzMycWI1aER6dFBPOU1iVFhKOHZMTGIxd2Y4a1piTmw3TDFJMHllekphZHNmNVJ5S1JHVERwbzdBeW1Lc01NSDJZUVg4SG0xWGtGYUFxM1RZNA",
+      "title": "Why 90% Accuracy in Text-to-SQL is 100% Useless - Towards Data Science"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "CORGI comes with a public submission website alongside the dataset and evaluation framework to support ongoing benchmarking by other teams [arxiv.org#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/lMigGj7RVosdk492Y9jWfJLsJ5JuvszXKfOGbOP5pBC_SWXYBieVn93hEBJsJ4h8ANOwDpncVThqdeRDHxF-WZNpuHZkcZnVBXB162mviQ",
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/dFFXB1Po3FxS5h_MQ9TQnfHrurTGSxkfirIazeX_6IauaxNP66fxeRO2mtmNzvHjgYacDCZu04Ujd1lcEuCdpLcg6QKqIqeadv0TPn_dyJk",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/zqd8G9lxFmfOjNEs-6-kYosKyhZhKMSd9b_6rLQ6GHMQxMEYM-pdDEcc-Ed7Igk9EgahuIXKhLmbQoIZIyzP5y8DzLJXWo5tNByQ5lCSdbXHc3H98liR7eR3AYs",
+      "name": "towardsdatascience.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udcca",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Text-to-SQL research has long used benchmark datasets to measure how well models translate natural language questions into SQL queries [common]. As large language models improved, many deployments shifted toward \u201cself-service analytics\u201d experiences, where non-experts ask questions directly and expect trustworthy results\u2014raising the practical cost of occasional errors [common]. CORGI represents a newer push to make evaluation more like real business decision-making, where queries often require reasoning, forecasting, and recommendations rather than retrieval alone [arxiv.org#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Analytics tooling: Benchmarks like CORGI can shift product roadmaps toward reliability on complex business questions (forecasting and recommendations), not just SQL translation, potentially changing how vendors compete and how customers run bake-offs [arxiv.org#1].",
+    "Enterprise procurement: The critique that high aggregate accuracy can still fail self-service users may push buyers to demand stricter acceptance tests, human-in-the-loop workflows, and clearer failure handling before broad rollout [towardsdatascience.com#1].",
+    "Evaluation ecosystem: CORGI\u2019s release of a dataset, evaluation framework, and submission website can help standardize comparisons and accelerate research iteration in the text-to-SQL community [arxiv.org#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Text-To-Sql",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arxiv.org",
+          "url": "https://arxiv.org/abs/2510.07309"
+        }
+      ],
+      "text": "CORGI authors (arXiv): Text-to-SQL should expand from translation into multi-step, business-relevant tasks (including prediction and recommendations), and evaluation should adapt to open-ended outputs as well as SQL execution correctness."
+    },
+    {
+      "sources": [
+        {
+          "name": "towardsdatascience.com",
+          "url": "https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/"
+        }
+      ],
+      "text": "Towards Data Science essay: High overall accuracy can still fail users in practice because analytics needs are unforgiving: small error rates can translate into frequent, workflow-breaking mistakes for end users relying on self-serve querying."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768300074,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "What this refines: CORGI reframes text-to-SQL as a broader business reasoning problem\u2014moving beyond simple query translation into explanation, prediction, and recommendation\u2014so it better reflects how decision-support questions show up in practice [arxiv.org#1].",
+    "Evidence of difficulty: The paper reports that large language model performance degrades as question complexity increases, and quantifies this with an average 33.12% lower success execution rate on CORGI than on prior benchmarks such as BIRD [arxiv.org#1].",
+    "Limits and next steps: Because CORGI includes open-ended, qualitative responses, the authors highlight the need for improved automatic evaluation methods\u2014an area that remains challenging when answers can be reasonable but non-identical in wording or rationale [arxiv.org#1]."
+  ],
+  "source_urls": [
+    "https://news.google.com/atom/articles/CBMigwFBVV95cUxNbHg4eXVmZEswZzJ1Vllrbnl1R2hxbW90WUxzS2Jld3FkaVBWWFV2ZDhmUzMycWI1aER6dFBPOU1iVFhKOHZMTGIxd2Y4a1piTmw3TDFJMHllekphZHNmNVJ5S1JHVERwbzdBeW1Lc01NSDJZUVg4SG0xWGtGYUFxM1RZNA",
+    "https://arxiv.org/abs/2510.07309",
+    "https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "In CORGI, recommendational prompts can require strategic suggestions or next-best actions (not only retrieving rows), which the authors argue calls for multi-step reasoning beyond straightforward data access [arxiv.org#1].",
+      "question": "What makes a \u201crecommendational\u201d question different from a normal SQL query request?"
+    },
+    {
+      "answer": "The paper describes CORGI as using synthetic enterprise-inspired databases (e.g., DoorDash- or Airbnb-like) to emulate business settings while still being publishable and shareable for research [arxiv.org#1].",
+      "question": "Why does CORGI use synthetic databases instead of real company data?"
+    }
+  ],
+  "summary": "Two new pieces of writing are pushing the text-to-SQL community toward a more practical definition of \u201cworking.\u201d An arXiv paper introduces CORGI, a business-focused benchmark that goes beyond straightforward query translation into descriptive, explanatory, predictive, and recommendational tasks, and reports that large language models\u2019 success execution rate drops substantially on these more realistic questions [arxiv.org#1]. A companion essay argues that even seemingly high aggregate accuracy can be \u201cuseless\u201d in real analytics settings when failures are unacceptable for end users trying to self-serve insights from data [towardsdatascience.com#1]. Together, they highlight an encouraging path forward: better benchmarks, better evaluation methods, and clearer expectations for where AI can reliably help analysts today [arxiv.org#1][towardsdatascience.com#1].",
+  "talking_points": [
+    "Business-like tasks: CORGI\u2019s question set is organized into four categories\u2014descriptive, explanatory, predictive, and recommendational\u2014to reflect how real business users ask for forecasts and next-best actions rather than only database lookups [arxiv.org#1].",
+    "Synthetic enterprises: The benchmark uses synthetic databases inspired by companies such as DoorDash, Airbnb, and Lululemon to mimic the structure and messiness of enterprise analytics environments [arxiv.org#1].",
+    "Execution gap: The authors report an average 33.12% lower success execution rate on CORGI compared with prior benchmarks like BIRD, underscoring how much harder \u201creal questions\u201d are than traditional datasets suggest [arxiv.org#1].",
+    "New scoring idea: CORGI explicitly encourages automatic evaluation methods for open-ended, qualitative responses (e.g., recommendations), not just exact-match SQL, to better grade agent-like answers [arxiv.org#1].",
+    "Reliability bar: The essay\u2019s core critique is that a headline accuracy metric can hide failure modes that break self-service analytics workflows, because a single wrong query can produce a confidently wrong chart or decision input [towardsdatascience.com#1]."
+  ],
+  "technical_details": [
+    "Success execution rate (SER): SER measures whether a generated query (or system output) successfully runs and produces the intended result, which CORGI uses to compare performance against earlier benchmarks; the paper reports a sizable SER drop on CORGI versus BIRD [arxiv.org#1].",
+    "Agentic text-to-SQL: CORGI frames harder business questions as multi-step \u201cagentic\u201d work\u2014requiring causal reasoning, temporal forecasting, and strategic recommendations\u2014rather than a single-shot translation from text to SQL [arxiv.org#1].",
+    "Evaluating qualitative outputs: Because some CORGI tasks require narrative or recommendational answers, the benchmark promotes new automatic evaluation approaches for open-ended responses, not only exact SQL matching [arxiv.org#1]."
+  ],
+  "timeline": [],
+  "title": "New CORGI benchmark shows text-to-SQL falls short",
+  "unique_domains": 3,
+  "url": "https://towardsdatascience.com/why-90-accuracy-in-text-to-sql-is-100-useless/",
+  "user_action_items": [
+    "Add \u201chard questions\u201d to your NL-to-SQL evaluation set: When testing text-to-SQL tools internally, include predictive and recommendational prompts (not just retrieval) to mirror CORGI\u2019s harder categories and reveal where systems break [arxiv.org#1].",
+    "Measure execution, not just string match: Track whether generated SQL executes correctly and returns plausible results\u2014an approach aligned with CORGI\u2019s emphasis on success execution rate rather than only exact SQL matching [arxiv.org#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
