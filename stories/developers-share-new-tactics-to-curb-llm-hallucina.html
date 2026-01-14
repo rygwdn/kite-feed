@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers share new tactics to curb LLM hallucinations - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers share new tactics to curb LLM hallucinations</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of community posts and “Show HN” submissions is focused on a practical challenge in applied AI: preventing large language models from producing fluent but wrong answers in real production systems <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/" class="footnote-ref">[4]</a>. In a Hacker News discussion, practitioners specifically call out failures that can break business rules, cross domain boundaries, or create unsafe downstream assumptions—especially in agentic and tool-using setups <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>. Two showcased projects propose “deterministic” guardrails—Verdic Guard and a separate deterministic logic engine called CausaNova—aiming to make AI outputs more constrained and predictable for real-world use <a href="https://www.verdic.dev" class="footnote-ref">[2]</a><a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf" class="footnote-ref">[3]</a>. A parallel Reddit question asks whether any model can avoid hallucinations at very high reliability (98–99%) and how teams can overcome the issue in practice <a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.ycombinator.com/item">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> A common way to reduce risky free-form outputs is to have models produce structured data (like JSON) that can be validated before use, rather than executing raw natural-language instructions [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Production pain points: The Hacker News prompt highlights that even outputs that look “fluent, structured, and reasonable” can still violate business rules or downstream assumptions, which is why teams seek stronger runtime controls than prompt tweaks alone <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</li>
+
+<li>Controls under debate: The discussion explicitly asks whether teams are using typed or schema-bound outputs, secondary validation models or rule engines, human-in-the-loop gates for certain actions, and pre-execution allow/deny constraints <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</li>
+
+<li>Deterministic guardrails: Verdic Guard is presented as a “Show HN” project focused on deterministic guardrails specifically positioned to prevent hallucinations <a href="https://www.verdic.dev" class="footnote-ref">[2]</a>.</li>
+
+<li>Logic engine approach: CausaNova is shared via a whitepaper as a deterministic logic engine intended to prevent hallucinations, suggesting a more formal reasoning/constraints layer around LLM outputs <a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf" class="footnote-ref">[3]</a>.</li>
+
+<li>Reliability target: A Reddit thread frames the question in quantitative terms—asking whether any model can reach roughly 98–99% non-hallucination behavior and what mitigation methods can close the gap <a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Practitioners running LLMs in production: They emphasize that prompt engineering and basic filters are not enough when outputs can still break business rules or domain boundaries, and they ask for post-mortems and lessons from real usage at scale.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.ycombinator.com/item?id=46610280">Hacker News</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Verdic Guard (project author/pitch): The project positions its approach as deterministic “guardrails” designed to prevent hallucinations.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.verdic.dev">Verdic</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>CausaNova (whitepaper/project): The shared whitepaper presents a deterministic logic engine approach aimed at preventing hallucinations.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Everyday LLM users: A Reddit user asks whether any model can avoid hallucinations nearly all the time (98–99%) and whether there are workable ways to overcome the issue.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Hallucination (LLMs): In this context, hallucinations refer to confident, fluent model outputs that are incorrect or violate constraints, which becomes riskier when systems are “agentic” or can trigger tools/actions <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>[common].</li>
+
+<li>Deterministic guardrails: The showcased tools describe “deterministic” approaches—rules/logic intended to behave predictably—marketed as a way to prevent hallucinations rather than merely reduce them with prompting <a href="https://www.verdic.dev" class="footnote-ref">[2]</a><a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf" class="footnote-ref">[3]</a>.</li>
+
+<li>Execution-time constraints: The HN discussion explicitly considers hard constraints such as allow/deny lists before any action executes, a common safety pattern when LLM output can drive downstream systems <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>[common].</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI product safety: The focus on pre-execution constraints, rule engines, and human gating reflects industry movement toward making tool-using LLMs safer and more predictable in real deployments <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</li>
+
+<li>Governance and compliance: Tools positioned as deterministic guardrails and logic engines suggest a growing market for auditable, policy-driven controls that can demonstrate an AI system stayed within defined boundaries <a href="https://www.verdic.dev" class="footnote-ref">[2]</a><a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf" class="footnote-ref">[3]</a>.</li>
+
+<li>Developer workflows: Public Q&amp;A threads that ask for “practical lessons and post-mortems” show developers increasingly treating hallucinations as an operational reliability problem, not just a model-quality quirk <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Modern LLMs can produce “hallucinations,” meaning plausible-sounding statements not grounded in verified sources, because they generate text by predicting likely sequences rather than retrieving guaranteed facts [common]. As LLMs moved from chat demos into tool-using and agentic workflows, teams increasingly added structured outputs, validators, and execution-time constraints to reduce the chance that a wrong string of text turns into a real action [common]. The posts in this roundup reflect that maturation: community attention is shifting from clever prompts toward more engineered reliability layers <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a><a href="https://www.verdic.dev" class="footnote-ref">[2]</a><a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf" class="footnote-ref">[3]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of failures do teams most often see once LLMs can use tools?</p>
+
+<p><strong>A:</strong> The HN prompt specifically worries about violations of business rules, domain boundaries, and downstream assumptions—suggesting these are common real-world failure modes in tool-using systems <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Do the showcased ‘deterministic’ projects explain how they stay deterministic while using probabilistic LLMs?</p>
+
+<p><strong>A:</strong> Both Verdic Guard and the CausaNova whitepaper are presented as deterministic approaches aimed at preventing hallucinations, but the linked posts here do not detail their mechanisms beyond that positioning <a href="https://www.verdic.dev" class="footnote-ref">[2]</a><a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Is there a single model today that guarantees near-zero hallucinations across all domains?</p>
+
+<p><strong>A:</strong> The Reddit thread asks for a model that “doesn’t hallucinate” (or ~98–99% reliability), implying users do not view this as a solved, universal guarantee today; the provided sources do not name a specific model that meets that promise <a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/" class="footnote-ref">[4]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Add a pre-execution safety gate for tool calls: Before your system executes any LLM-suggested action, enforce allow/deny lists or equivalent hard constraints—an approach explicitly discussed as a production control option in the HN thread <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</li>
+
+<li>Introduce a second validation step for high-stakes outputs: For actions with real consequences, add a separate validator (rules engine or secondary model) to check boundary and business-rule compliance, matching the mitigation strategies raised in the HN prompt <a href="https://news.ycombinator.com/item" class="footnote-ref">[1]</a>.</li>
+
+<li>Set reliability targets by use case: Document what “good enough” means (e.g., 98–99% correctness) for each workflow and test against that bar, echoing the reliability framing raised in the Reddit question <a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf">https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf</a></li>
+
+
+
+<li><a href="https://news.ycombinator.com/item?id=46610280">https://news.ycombinator.com/item?id=46610280</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/">https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/</a></li>
+
+
+
+<li><a href="https://www.verdic.dev">https://www.verdic.dev</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> ycombinator.com, reddit.com, github.com, verdic.dev</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 4 unique domains, 4 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-13T23:52:50+00:00",
+      "domain": "ycombinator.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.ycombinator.com/item",
+      "title": "Ask HN: How are you preventing LLM hallucinations in production systems?"
+    },
+    {
+      "date": "2026-01-13T16:09:34+00:00",
+      "domain": "verdic.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.verdic.dev",
+      "title": "Show HN: Verdic Guard \u2013 Deterministic guardrails to prevent LLM hallucinations"
+    },
+    {
+      "date": "2026-01-13T14:00:56+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf",
+      "title": "Show HN: CausaNova \u2013 A deterministic logic engine to prevent LLM hallucinations [pdf]"
+    },
+    {
+      "date": "2026-01-13T22:27:35+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/",
+      "title": "Question about AI/LLM"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "A common way to reduce risky free-form outputs is to have models produce structured data (like JSON) that can be validated before use, rather than executing raw natural-language instructions [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/cFVQoFFlff_d1NnueatXOx4WTvRk_3fWYZyB3f1bhGHMfJw9mP9nSyGF8cnEXtKra2QMs_iu8mytkSMgg4uJZdwEYvZHoFBfM_hWYw8u5M1fXssLrw",
+      "name": "ycombinator.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/8GmerqZ3rz9sI38vOEonugtyB7ystTOO3-TV3FVYaq40sEhb2BVr37vu-QlMzgs3UGdb_PMGhHPhIRuk4ymkcW8qb1UG65ffClNmuMUumks",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/ZfRS6mBzXt4h4fdmStYA7dSCHSwWN6iuzTEcCcykacGQjeqoi0erGqppJEzhfsSiKBidkEmtKKdaswhrfmWkWM470eimmky8dxTxjPxvV6E",
+      "name": "github.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/_mvWn-0edICFvWSrZyBK0wPPo1-HZ53PnABrc-DcvAVT3NxjtSyKKVnJraYLpz4EoXtB0kglMNUyievE1ZVKPEJMBFb1qHKvC381hCSNY9E",
+      "name": "verdic.dev"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee1\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Modern LLMs can produce \u201challucinations,\u201d meaning plausible-sounding statements not grounded in verified sources, because they generate text by predicting likely sequences rather than retrieving guaranteed facts [common]. As LLMs moved from chat demos into tool-using and agentic workflows, teams increasingly added structured outputs, validators, and execution-time constraints to reduce the chance that a wrong string of text turns into a real action [common]. The posts in this roundup reflect that maturation: community attention is shifting from clever prompts toward more engineered reliability layers [ycombinator.com#1][verdic.dev#1][github.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI product safety: The focus on pre-execution constraints, rule engines, and human gating reflects industry movement toward making tool-using LLMs safer and more predictable in real deployments [ycombinator.com#1].",
+    "Governance and compliance: Tools positioned as deterministic guardrails and logic engines suggest a growing market for auditable, policy-driven controls that can demonstrate an AI system stayed within defined boundaries [verdic.dev#1][github.com#1].",
+    "Developer workflows: Public Q\u0026A threads that ask for \u201cpractical lessons and post-mortems\u201d show developers increasingly treating hallucinations as an operational reliability problem, not just a model-quality quirk [ycombinator.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Reliability",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 4,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Hacker News",
+          "url": "https://news.ycombinator.com/item?id=46610280"
+        }
+      ],
+      "text": "Practitioners running LLMs in production: They emphasize that prompt engineering and basic filters are not enough when outputs can still break business rules or domain boundaries, and they ask for post-mortems and lessons from real usage at scale."
+    },
+    {
+      "sources": [
+        {
+          "name": "Verdic",
+          "url": "https://www.verdic.dev"
+        }
+      ],
+      "text": "Verdic Guard (project author/pitch): The project positions its approach as deterministic \u201cguardrails\u201d designed to prevent hallucinations."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf"
+        }
+      ],
+      "text": "CausaNova (whitepaper/project): The shared whitepaper presents a deterministic logic engine approach aimed at preventing hallucinations."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/"
+        }
+      ],
+      "text": "Everyday LLM users: A Reddit user asks whether any model can avoid hallucinations nearly all the time (98\u201399%) and whether there are workable ways to overcome the issue."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768386655,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://news.ycombinator.com/item",
+    "https://github.com/petzi2311/CausaNova-Whitepaper/blob/main/CausaNova_Whitepaper.pdf",
+    "https://news.ycombinator.com/item?id=46610280",
+    "https://www.reddit.com/r/LLM/comments/1qc5jb6/question_about_aillm/",
+    "https://www.verdic.dev"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The HN prompt specifically worries about violations of business rules, domain boundaries, and downstream assumptions\u2014suggesting these are common real-world failure modes in tool-using systems [ycombinator.com#1].",
+      "question": "What kinds of failures do teams most often see once LLMs can use tools?"
+    },
+    {
+      "answer": "Both Verdic Guard and the CausaNova whitepaper are presented as deterministic approaches aimed at preventing hallucinations, but the linked posts here do not detail their mechanisms beyond that positioning [verdic.dev#1][github.com#1].",
+      "question": "Do the showcased \u2018deterministic\u2019 projects explain how they stay deterministic while using probabilistic LLMs?"
+    },
+    {
+      "answer": "The Reddit thread asks for a model that \u201cdoesn\u2019t hallucinate\u201d (or ~98\u201399% reliability), implying users do not view this as a solved, universal guarantee today; the provided sources do not name a specific model that meets that promise [reddit.com#1].",
+      "question": "Is there a single model today that guarantees near-zero hallucinations across all domains?"
+    }
+  ],
+  "summary": "A cluster of community posts and \u201cShow HN\u201d submissions is focused on a practical challenge in applied AI: preventing large language models from producing fluent but wrong answers in real production systems [ycombinator.com#1][reddit.com#1]. In a Hacker News discussion, practitioners specifically call out failures that can break business rules, cross domain boundaries, or create unsafe downstream assumptions\u2014especially in agentic and tool-using setups [ycombinator.com#1]. Two showcased projects propose \u201cdeterministic\u201d guardrails\u2014Verdic Guard and a separate deterministic logic engine called CausaNova\u2014aiming to make AI outputs more constrained and predictable for real-world use [verdic.dev#1][github.com#1]. A parallel Reddit question asks whether any model can avoid hallucinations at very high reliability (98\u201399%) and how teams can overcome the issue in practice [reddit.com#1].",
+  "talking_points": [
+    "Production pain points: The Hacker News prompt highlights that even outputs that look \u201cfluent, structured, and reasonable\u201d can still violate business rules or downstream assumptions, which is why teams seek stronger runtime controls than prompt tweaks alone [ycombinator.com#1].",
+    "Controls under debate: The discussion explicitly asks whether teams are using typed or schema-bound outputs, secondary validation models or rule engines, human-in-the-loop gates for certain actions, and pre-execution allow/deny constraints [ycombinator.com#1].",
+    "Deterministic guardrails: Verdic Guard is presented as a \u201cShow HN\u201d project focused on deterministic guardrails specifically positioned to prevent hallucinations [verdic.dev#1].",
+    "Logic engine approach: CausaNova is shared via a whitepaper as a deterministic logic engine intended to prevent hallucinations, suggesting a more formal reasoning/constraints layer around LLM outputs [github.com#1].",
+    "Reliability target: A Reddit thread frames the question in quantitative terms\u2014asking whether any model can reach roughly 98\u201399% non-hallucination behavior and what mitigation methods can close the gap [reddit.com#1]."
+  ],
+  "technical_details": [
+    "Hallucination (LLMs): In this context, hallucinations refer to confident, fluent model outputs that are incorrect or violate constraints, which becomes riskier when systems are \u201cagentic\u201d or can trigger tools/actions [ycombinator.com#1][common].",
+    "Deterministic guardrails: The showcased tools describe \u201cdeterministic\u201d approaches\u2014rules/logic intended to behave predictably\u2014marketed as a way to prevent hallucinations rather than merely reduce them with prompting [verdic.dev#1][github.com#1].",
+    "Execution-time constraints: The HN discussion explicitly considers hard constraints such as allow/deny lists before any action executes, a common safety pattern when LLM output can drive downstream systems [ycombinator.com#1][common]."
+  ],
+  "timeline": [],
+  "title": "Developers share new tactics to curb LLM hallucinations",
+  "unique_domains": 4,
+  "url": "https://news.ycombinator.com/item",
+  "user_action_items": [
+    "Add a pre-execution safety gate for tool calls: Before your system executes any LLM-suggested action, enforce allow/deny lists or equivalent hard constraints\u2014an approach explicitly discussed as a production control option in the HN thread [ycombinator.com#1].",
+    "Introduce a second validation step for high-stakes outputs: For actions with real consequences, add a separate validator (rules engine or secondary model) to check boundary and business-rule compliance, matching the mitigation strategies raised in the HN prompt [ycombinator.com#1].",
+    "Set reliability targets by use case: Document what \u201cgood enough\u201d means (e.g., 98\u201399% correctness) for each workflow and test against that bar, echoing the reliability framing raised in the Reddit question [reddit.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
