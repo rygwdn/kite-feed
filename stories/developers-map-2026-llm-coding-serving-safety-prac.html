@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers map 2026 LLM coding, serving, safety practices - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers map 2026 LLM coding, serving, safety practices</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of new developer write-ups and tutorials this week paints a practical picture of where large language models (LLMs) are heading in day-to-day engineering: how people code with them, run them efficiently, and keep them governed and safe <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a><a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a><a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a>. The pieces span everything from “full stack” mental models of an LLM query to token-saving workflows for document analysis, reflecting a shared theme: teams want LLMs that are cheaper to run, easier to reason about, and safer to integrate into real products <a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a><a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>. Several posts also focus on the human side—clearer communication with models and clearer licensing/usage rules—suggesting the ecosystem is maturing from experimentation toward dependable, maintainable systems [chuanqisun.github.io#1]<a href="https://rubenerd.com/llm-licencing/" class="footnote-ref">[6]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Token-based pricing means small changes in how you structure prompts and intermediate steps can materially change the cost of running LLM features at scale [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Token thrift: One approach described uses a REPL-driven workflow for document analysis and reports cutting LLM token usage by about 80%, aiming to reduce costs and latency by doing more work outside the model and sending smaller prompts <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</li>
+
+<li>Serving landscape: A separate survey-style post compares LLM inference/serving options in 2026—Ollama, SGLang, NVIDIA TensorRT, Triton, and vLLM—framing them as different tradeoffs for deployment simplicity, performance tuning, and production operations <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Query stack: A video walkthrough visualizes the end-to-end technology stack involved in an LLM query, helping engineers see where orchestration, retrieval/tools, and inference fit together and where bottlenecks or failures can appear <a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a>.</li>
+
+<li>Authorization patterns: Permify’s documentation outlines “LLM authorization” as a concrete use case, focusing on how applications can gate what an LLM-driven feature is allowed to access or do, rather than treating the model as an all-powerful actor <a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a>.</li>
+
+<li>Speak clearly: A tutorial on “How to Speak LLM” emphasizes prompt/interaction techniques as a learnable skill, positioning better instructions and structure as a way to get more reliable outputs without changing the underlying model [chuanqisun.github.io#1].</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Working developers (LLM-assisted coding): A personal essay argues LLM coding has evolved quickly and will keep changing, encouraging developers to think in terms of what models can and cannot reliably do in real workflows rather than treating them as magic autocomplete <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/">hermandaniel.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Optimization-focused builders: An engineering post presents REPL-driven document analysis as a way to avoid paying for unnecessary tokens, reporting a large reduction in token usage by shifting analysis steps outside the model prompt <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html">yogthos.net</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Platform and infra practitioners: A serving overview frames 2026’s inference tooling as an ecosystem where teams pick among approaches like Ollama, SGLang, TensorRT, Triton, and vLLM depending on operational needs and performance goals <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html">thecanteenapp.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Security/governance teams: Permify’s use-case documentation treats authorization as central for LLM features, describing permission checks as a first-class part of how LLMs should interact with data and actions inside an application <a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://docs.permify.co/use-cases/llm-authorization">permify.co</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Licensing-minded users: A licensing “pack” post highlights that LLM use raises practical licensing questions and offers a structured way to think about permissions and usage terms around models and related assets <a href="https://rubenerd.com/llm-licencing/" class="footnote-ref">[6]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://rubenerd.com/llm-licencing/">rubenerd.com</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>LLM inference serving: “Serving” refers to the systems that host a model and handle requests efficiently; a 2026 overview compares tools such as Ollama, SGLang, TensorRT, Triton, and vLLM as different ways to run LLM inference in practice <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Token usage: Tokens are the text units an LLM processes; reducing tokens can lower operating cost and often improves responsiveness, and one post reports roughly an 80% reduction for a document-analysis workflow by changing how work is staged around the model <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</li>
+
+<li>LLM authorization: Authorization means limiting what an LLM-powered feature can access or execute; Permify’s use case describes applying permission checks so the model’s outputs cannot bypass application policy <a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Developer productivity tooling: The discussion of LLM-assisted coding and “how to speak” to models suggests continued demand for training, workflow design, and tooling that improves reliability in everyday engineering tasks <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a>[chuanqisun.github.io#1].</li>
+
+<li>Inference infrastructure: Comparisons among serving options (Ollama, SGLang, TensorRT, Triton, vLLM) indicate ongoing fragmentation and specialization in how companies deploy LLMs, which can increase demand for platform engineers and managed offerings <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Security and compliance: Emphasis on LLM authorization and licensing frameworks highlights growing attention to policy, permissions, and legal clarity as LLMs touch sensitive data and actions in production environments <a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a><a href="https://rubenerd.com/llm-licencing/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>The rise of transformer-based LLMs in the early 2020s made natural-language interfaces for coding and knowledge work widely accessible, but also introduced practical constraints like token-based costs and the need for guardrails in production apps [common]. As LLMs moved from demos into products, teams increasingly emphasized inference serving stacks, permissioning, and clearer interaction patterns—exactly the themes these 2026 posts cluster around <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a><a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a>[chuanqisun.github.io#1].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> How should a team choose among Ollama, Triton, TensorRT, vLLM, and similar options?</p>
+
+<p><strong>A:</strong> The serving overview frames these tools as different tradeoffs in how you run inference in production, comparing options including Ollama, SGLang, TensorRT, Triton, and vLLM for different deployment and performance needs <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of licensing questions come up around LLM use in products?</p>
+
+<p><strong>A:</strong> A licensing “pack” post specifically focuses on LLM licensing considerations and offers a structured way to think about usage terms and permissions <a href="https://rubenerd.com/llm-licencing/" class="footnote-ref">[6]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What parts of the LLM request path are easiest to optimize first?</p>
+
+<p><strong>A:</strong> The token-reduction post points to prompt size and workflow structure as major levers, reporting large savings by reorganizing document analysis steps so fewer tokens get sent to the model <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit your LLM feature permissions: Use an explicit authorization layer so LLM-driven actions and data access follow the same permission model as the rest of your app, as described in an “LLM authorization” use case <a href="https://docs.permify.co/use-cases/llm-authorization" class="footnote-ref">[5]</a>.</li>
+
+<li>Benchmark token usage in one workflow: Pick a document-analysis task and measure tokens per request before and after moving preprocessing/analysis into a REPL-style loop, following the approach that reports ~80% token reduction <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</li>
+
+<li>Map your LLM query stack: Sketch the end-to-end path of an LLM request (app → tools/RAG → serving/inference) using the “full technology stack” visualization as a guide to identify bottlenecks <a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html">https://yogthos.net/posts/2026-01-16-lattice-mcp.html</a></li>
+
+
+
+<li><a href="https://docs.permify.co/use-cases/llm-authorization">https://docs.permify.co/use-cases/llm-authorization</a></li>
+
+
+
+<li><a href="https://www.youtube.com/watch">https://www.youtube.com/watch</a></li>
+
+
+
+<li><a href="https://rubenerd.com/llm-licencing/">https://rubenerd.com/llm-licencing/</a></li>
+
+
+
+<li><a href="https://chuanqisun.github.io/how-to-speak-llm/">https://chuanqisun.github.io/how-to-speak-llm/</a></li>
+
+
+
+<li><a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html">https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> hermandaniel.com, youtube.com, rubenerd.com, yogthos.net, github.io, thecanteenapp.com, permify.co</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 7 unique domains, 7 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-17T00:02:21+00:00",
+      "domain": "hermandaniel.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/",
+      "title": "The past, present and future of LLM coding"
+    },
+    {
+      "date": "2026-01-16T20:00:50+00:00",
+      "domain": "yogthos.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+      "title": "Cutting LLM token Usage by ~80% using REPL driven document analysis"
+    },
+    {
+      "date": "2026-01-16T18:27:26+00:00",
+      "domain": "thecanteenapp.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html",
+      "title": "The State of LLM Serving in 2026: Ollama, SGLang, TensorRT, Triton, and vLLM"
+    },
+    {
+      "date": "2026-01-16T17:40:13+00:00",
+      "domain": "youtube.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.youtube.com/watch",
+      "title": "Visualizing the full technology stack of an LLM query [video]"
+    },
+    {
+      "date": "2026-01-16T14:16:17+00:00",
+      "domain": "permify.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://docs.permify.co/use-cases/llm-authorization",
+      "title": "LLM Authorization"
+    },
+    {
+      "date": "2026-01-16T11:20:06+00:00",
+      "domain": "rubenerd.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://rubenerd.com/llm-licencing/",
+      "title": "Rubenerd: The Rubenerd LLM Licencing Pac"
+    },
+    {
+      "date": "2026-01-16T03:55:59+00:00",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://chuanqisun.github.io/how-to-speak-llm/",
+      "title": "How to Speak LLM"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "Token-based pricing means small changes in how you structure prompts and intermediate steps can materially change the cost of running LLM features at scale [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/UTBkjtnw4JndqzH_QuwVLcT4tbIbaVCWL6n3fcYWaQBvZhLQrFyevFxV6YkD8X5bFP2-gGJKnStyOkYBpB6JN0_pWtmE6eKPZ9-MrlYKMfZXaTJj0-Y",
+      "name": "hermandaniel.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/zowknhh3a5r_nfoCq1B3JnTHwAqk2tFxuD4kXZNuZkSwqhGA_JkouQAyoHOaxurH2c2QFqLq2VY10YfThYVyMZmcptgnBMXz0s_S528u77Ke",
+      "name": "youtube.com"
+    },
+    {
+      "favicon": "",
+      "name": "rubenerd.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/aI1e0UwhZdCtQLeZncEkOCxdAT4EzzR-yYpUOzGkk79WxJM4rohzrnox1yqEuJapELYu2CQwx9sRps48HShDtKRMDTWE7XzcyYEfgqd4DJXP",
+      "name": "yogthos.net"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/hbjaMLRwNKZxMAD8Wq7v0rP2lBppf-420m4WkNgl1L9tYNL3qhq1cAIV6IAxGMOpzcjj5Jp7ZUvTAqTl00xR1tiF6ilDE-Etuuy8i1T5Mw",
+      "name": "github.io"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/uz6nREtscgFGGEJKQYv8fQQ06vXbCCJuXVwluNLsjgyHfz-530u40s0JLSdaGgT0hGb53Dopet_xfnENuQpb4lyQEkOkj0Mcom2ryI_656As5YmEqs7n",
+      "name": "thecanteenapp.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/qfpeheHo_obi5P08VvOKt-QYT9lmUcV8TRqtXdsxyqYfqt4X-J6A__nqrSMEQBhUIama5htKgmve-33FOLyBz4fmCqZaMVlxqgrvPUWEV2Q",
+      "name": "permify.co"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "The rise of transformer-based LLMs in the early 2020s made natural-language interfaces for coding and knowledge work widely accessible, but also introduced practical constraints like token-based costs and the need for guardrails in production apps [common]. As LLMs moved from demos into products, teams increasingly emphasized inference serving stacks, permissioning, and clearer interaction patterns\u2014exactly the themes these 2026 posts cluster around [thecanteenapp.com#1][permify.co#1][chuanqisun.github.io#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Developer productivity tooling: The discussion of LLM-assisted coding and \u201chow to speak\u201d to models suggests continued demand for training, workflow design, and tooling that improves reliability in everyday engineering tasks [hermandaniel.com#1][chuanqisun.github.io#1].",
+    "Inference infrastructure: Comparisons among serving options (Ollama, SGLang, TensorRT, Triton, vLLM) indicate ongoing fragmentation and specialization in how companies deploy LLMs, which can increase demand for platform engineers and managed offerings [thecanteenapp.com#1].",
+    "Security and compliance: Emphasis on LLM authorization and licensing frameworks highlights growing attention to policy, permissions, and legal clarity as LLMs touch sensitive data and actions in production environments [permify.co#1][rubenerd.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Engineering",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 7,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "hermandaniel.com",
+          "url": "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/"
+        }
+      ],
+      "text": "Working developers (LLM-assisted coding): A personal essay argues LLM coding has evolved quickly and will keep changing, encouraging developers to think in terms of what models can and cannot reliably do in real workflows rather than treating them as magic autocomplete [hermandaniel.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "yogthos.net",
+          "url": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html"
+        }
+      ],
+      "text": "Optimization-focused builders: An engineering post presents REPL-driven document analysis as a way to avoid paying for unnecessary tokens, reporting a large reduction in token usage by shifting analysis steps outside the model prompt [yogthos.net#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "thecanteenapp.com",
+          "url": "https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html"
+        }
+      ],
+      "text": "Platform and infra practitioners: A serving overview frames 2026\u2019s inference tooling as an ecosystem where teams pick among approaches like Ollama, SGLang, TensorRT, Triton, and vLLM depending on operational needs and performance goals [thecanteenapp.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "permify.co",
+          "url": "https://docs.permify.co/use-cases/llm-authorization"
+        }
+      ],
+      "text": "Security/governance teams: Permify\u2019s use-case documentation treats authorization as central for LLM features, describing permission checks as a first-class part of how LLMs should interact with data and actions inside an application [permify.co#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "rubenerd.com",
+          "url": "https://rubenerd.com/llm-licencing/"
+        }
+      ],
+      "text": "Licensing-minded users: A licensing \u201cpack\u201d post highlights that LLM use raises practical licensing questions and offers a structured way to think about permissions and usage terms around models and related assets [rubenerd.com#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768616780,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+    "https://docs.permify.co/use-cases/llm-authorization",
+    "https://www.youtube.com/watch",
+    "https://rubenerd.com/llm-licencing/",
+    "https://chuanqisun.github.io/how-to-speak-llm/",
+    "https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html",
+    "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The serving overview frames these tools as different tradeoffs in how you run inference in production, comparing options including Ollama, SGLang, TensorRT, Triton, and vLLM for different deployment and performance needs [thecanteenapp.com#1].",
+      "question": "How should a team choose among Ollama, Triton, TensorRT, vLLM, and similar options?"
+    },
+    {
+      "answer": "A licensing \u201cpack\u201d post specifically focuses on LLM licensing considerations and offers a structured way to think about usage terms and permissions [rubenerd.com#1].",
+      "question": "What kinds of licensing questions come up around LLM use in products?"
+    },
+    {
+      "answer": "The token-reduction post points to prompt size and workflow structure as major levers, reporting large savings by reorganizing document analysis steps so fewer tokens get sent to the model [yogthos.net#1].",
+      "question": "What parts of the LLM request path are easiest to optimize first?"
+    }
+  ],
+  "summary": "A cluster of new developer write-ups and tutorials this week paints a practical picture of where large language models (LLMs) are heading in day-to-day engineering: how people code with them, run them efficiently, and keep them governed and safe [hermandaniel.com#1][thecanteenapp.com#1][permify.co#1]. The pieces span everything from \u201cfull stack\u201d mental models of an LLM query to token-saving workflows for document analysis, reflecting a shared theme: teams want LLMs that are cheaper to run, easier to reason about, and safer to integrate into real products [youtube.com#1][yogthos.net#1]. Several posts also focus on the human side\u2014clearer communication with models and clearer licensing/usage rules\u2014suggesting the ecosystem is maturing from experimentation toward dependable, maintainable systems [chuanqisun.github.io#1][rubenerd.com#1].",
+  "talking_points": [
+    "Token thrift: One approach described uses a REPL-driven workflow for document analysis and reports cutting LLM token usage by about 80%, aiming to reduce costs and latency by doing more work outside the model and sending smaller prompts [yogthos.net#1].",
+    "Serving landscape: A separate survey-style post compares LLM inference/serving options in 2026\u2014Ollama, SGLang, NVIDIA TensorRT, Triton, and vLLM\u2014framing them as different tradeoffs for deployment simplicity, performance tuning, and production operations [thecanteenapp.com#1].",
+    "Query stack: A video walkthrough visualizes the end-to-end technology stack involved in an LLM query, helping engineers see where orchestration, retrieval/tools, and inference fit together and where bottlenecks or failures can appear [youtube.com#1].",
+    "Authorization patterns: Permify\u2019s documentation outlines \u201cLLM authorization\u201d as a concrete use case, focusing on how applications can gate what an LLM-driven feature is allowed to access or do, rather than treating the model as an all-powerful actor [permify.co#1].",
+    "Speak clearly: A tutorial on \u201cHow to Speak LLM\u201d emphasizes prompt/interaction techniques as a learnable skill, positioning better instructions and structure as a way to get more reliable outputs without changing the underlying model [chuanqisun.github.io#1]."
+  ],
+  "technical_details": [
+    "LLM inference serving: \u201cServing\u201d refers to the systems that host a model and handle requests efficiently; a 2026 overview compares tools such as Ollama, SGLang, TensorRT, Triton, and vLLM as different ways to run LLM inference in practice [thecanteenapp.com#1].",
+    "Token usage: Tokens are the text units an LLM processes; reducing tokens can lower operating cost and often improves responsiveness, and one post reports roughly an 80% reduction for a document-analysis workflow by changing how work is staged around the model [yogthos.net#1].",
+    "LLM authorization: Authorization means limiting what an LLM-powered feature can access or execute; Permify\u2019s use case describes applying permission checks so the model\u2019s outputs cannot bypass application policy [permify.co#1]."
+  ],
+  "timeline": [],
+  "title": "Developers map 2026 LLM coding, serving, safety practices",
+  "unique_domains": 7,
+  "url": "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/",
+  "user_action_items": [
+    "Audit your LLM feature permissions: Use an explicit authorization layer so LLM-driven actions and data access follow the same permission model as the rest of your app, as described in an \u201cLLM authorization\u201d use case [permify.co#1].",
+    "Benchmark token usage in one workflow: Pick a document-analysis task and measure tokens per request before and after moving preprocessing/analysis into a REPL-style loop, following the approach that reports ~80% token reduction [yogthos.net#1].",
+    "Map your LLM query stack: Sketch the end-to-end path of an LLM request (app \u2192 tools/RAG \u2192 serving/inference) using the \u201cfull technology stack\u201d visualization as a guide to identify bottlenecks [youtube.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
