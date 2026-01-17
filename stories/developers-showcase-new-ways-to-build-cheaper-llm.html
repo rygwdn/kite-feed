@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers showcase new ways to build cheaper LLM apps - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers showcase new ways to build cheaper LLM apps</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of developer write-ups this week mapped out how building with large language models is maturing—from how coding workflows have changed, to how teams can cut inference costs and pick serving stacks that fit their constraints <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a><a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a><a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>. One post argues that “LLM coding” has moved through distinct phases and is now best treated as a capability to integrate thoughtfully rather than a magic replacement for engineering discipline <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a>. Another describes a REPL-driven approach to document analysis that aims to reduce token consumption by about 80%, pointing to a practical path for making LLM features more affordable at scale <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>. Complementing that, a landscape overview compares popular 2026-era serving options (Ollama, SGLang, TensorRT, Triton, and vLLM), while a video walks through the end-to-end stack behind a single LLM query—useful context for anyone trying to improve latency, reliability, or cost <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a><a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Some developer tools now aim to make LLM pricing visible at the moment you write prompts—similar to how linters surface issues while you type <a href="https://pricepertoken.com/mcp" class="footnote-ref">[5]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Token thrift: A REPL-driven “document analysis” workflow is presented as a way to avoid repeatedly sending the same large context to a model, with the author reporting roughly an 80% token-usage reduction in their setup <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</li>
+
+<li>Serving choices: A 2026 serving roundup contrasts local-first tooling (Ollama) with higher-throughput server stacks (vLLM, Triton, TensorRT, and SGLang), framing the decision around trade-offs like deployment simplicity versus performance tuning <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Cost visibility: A new MCP tool is pitched to surface LLM pricing directly inside coding environments like Claude Code and Cursor, aiming to make “what will this prompt cost?” a first-class developer feedback loop <a href="https://pricepertoken.com/mcp" class="footnote-ref">[5]</a>.</li>
+
+<li>Stack literacy: A video breaks an LLM request into layers (from app and prompt handling through orchestration and infrastructure), helping developers pinpoint where latency and failures can be introduced—and therefore optimized <a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a>.</li>
+
+<li>Workflow realism: One essay emphasizes that LLM-assisted coding has a “past, present, and future,” arguing that productivity gains depend on how well teams adapt process, review, and ownership rather than just adopting new models <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Independent developer (LLM coding essay): LLM-assisted coding is described as evolving in phases, with the strongest results coming from integrating it into sound engineering practices rather than treating it as an autopilot <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/">hermandaniel.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Independent developer (REPL document analysis): A REPL-driven approach is presented as a pragmatic optimization strategy, focusing on reducing repeated context and lowering token spend for document-centric tasks <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html">yogthos.net</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Serving-stack analyst: The serving landscape is framed as a menu of tools that fit different operational goals—local experiments, GPU-heavy production inference, or highly optimized deployment pipelines <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html">thecanteenapp.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Tool builder (LLM price MCP): The MCP integration is positioned as a developer-experience improvement, bringing model-price checks closer to where prompts are written and iterated <a href="https://pricepertoken.com/mcp" class="footnote-ref">[5]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://pricepertoken.com/mcp">pricepertoken.com</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Token usage: “Tokens” are the chunks of text models process; the REPL-driven document workflow is designed to reduce how many tokens get sent/resent during analysis, which the author reports can cut usage by ~80% in their approach <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</li>
+
+<li>LLM serving stack: Serving refers to the software layer that runs models for users (routing requests, batching, GPU utilization, and deployment); the overview compares options including Ollama, SGLang, TensorRT, Triton, and vLLM for different production needs <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+<li>MCP integrations: MCP is used here as an integration mechanism to connect developer tools to external capabilities; one example is checking LLM prices directly inside Claude Code and Cursor <a href="https://pricepertoken.com/mcp" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Developer productivity: The articles collectively suggest a shift from novelty to craft: better mental models of the LLM stack plus improved coding workflows can translate into steadier, repeatable productivity gains <a href="https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/" class="footnote-ref">[1]</a><a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a>.</li>
+
+<li>Inference economics: Token-reduction strategies and in-editor price checks both push the industry toward cost-aware development, potentially making it easier for smaller teams to ship LLM features without runaway bills <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a><a href="https://pricepertoken.com/mcp" class="footnote-ref">[5]</a>.</li>
+
+<li>Open tooling ecosystem: The serving overview highlights an expanding ecosystem of interchangeable components (e.g., vLLM/Triton/TensorRT alongside local tools like Ollama), giving builders more freedom to choose based on constraints rather than vendor lock-in <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of document tasks benefit most from REPL-driven analysis compared with one-shot prompting?</p>
+
+<p><strong>A:</strong> The write-up focuses on document analysis workflows where you would otherwise resend large context repeatedly; breaking work into iterative steps is presented as the key lever for reducing tokens <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> When would a team prefer a local-first tool over a high-throughput serving stack?</p>
+
+<p><strong>A:</strong> The serving overview frames local tools like Ollama as fitting experimentation and simplicity, while stacks like vLLM/Triton/TensorRT/SGLang are discussed in the context of higher performance and production serving needs <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What developer decisions most strongly affect end-to-end latency for an LLM query?</p>
+
+<p><strong>A:</strong> The stack-visualization video emphasizes that multiple layers contribute to latency (application handling, orchestration, infrastructure), suggesting that bottlenecks can appear outside the model itself <a href="https://www.youtube.com/watch" class="footnote-ref">[4]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit token spend on one real workflow: Pick a document-heavy task you run often and try a REPL-driven “analyze incrementally” approach to reduce repeated context; compare token usage before/after as described in the write-up <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[2]</a>.</li>
+
+<li>Add price checks to your editor loop: If you use Claude Code or Cursor, try the MCP-based price-check workflow so you can see model costs while iterating on prompts <a href="https://pricepertoken.com/mcp" class="footnote-ref">[5]</a>.</li>
+
+<li>Map your serving requirements before choosing a stack: Use the 2026 serving landscape overview as a checklist (local dev vs. production throughput, latency goals, GPU constraints) to narrow down between Ollama, vLLM, Triton, TensorRT, and SGLang <a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.youtube.com/watch">https://www.youtube.com/watch</a></li>
+
+
+
+
+
+<li><a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html">https://yogthos.net/posts/2026-01-16-lattice-mcp.html</a></li>
+
+
+
+<li><a href="https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html">https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html</a></li>
+
+
+
+<li><a href="https://pricepertoken.com/mcp">https://pricepertoken.com/mcp</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> yogthos.net, pricepertoken.com, youtube.com, hermandaniel.com, thecanteenapp.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 5 unique domains, 5 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-17T00:02:21+00:00",
+      "domain": "hermandaniel.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/",
+      "title": "The past, present and future of LLM coding"
+    },
+    {
+      "date": "2026-01-16T20:00:50+00:00",
+      "domain": "yogthos.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+      "title": "Cutting LLM token Usage by ~80% using REPL driven document analysis"
+    },
+    {
+      "date": "2026-01-16T18:27:26+00:00",
+      "domain": "thecanteenapp.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html",
+      "title": "The State of LLM Serving in 2026: Ollama, SGLang, TensorRT, Triton, and vLLM"
+    },
+    {
+      "date": "2026-01-16T17:40:13+00:00",
+      "domain": "youtube.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.youtube.com/watch",
+      "title": "Visualizing the full technology stack of an LLM query [video]"
+    },
+    {
+      "date": "2026-01-16T14:20:41+00:00",
+      "domain": "pricepertoken.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://pricepertoken.com/mcp",
+      "title": "MCP to Check LLM Prices Right from Claude Code and Cursor"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "Some developer tools now aim to make LLM pricing visible at the moment you write prompts\u2014similar to how linters surface issues while you type [pricepertoken.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/4nXI32QjTZdI_49PrrNA6Pvbd1Tc1yjrO9yVV6oxEfpPgk1sWLR3DIOBhI8HCQMek2NP15w-laplpj3fX3BuACTkMF9FG4j5mq8axpr49t5c",
+      "name": "yogthos.net"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/WJK0cwdsUmqk3noO_j2GiFDIhCEWes0m1BkEstI36-Dx1gfIMUpq4MU5qPxbxbbRvZ-mLQnD4W8EXp5560DtgpGjWsvYx43nsrF2pLY6TvbkLncsKTS0",
+      "name": "pricepertoken.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/GrabitopsBBAXQ2rCKQa4JmlBiF8vBRe_yVQtbIl9kgCqLvzZIyNcMso_Fo-b_H1sDicCDrINTpJl4NTYadFgzTLw7a5rHSwRzJzai39yVz9",
+      "name": "youtube.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/GE4M4g6qMVk4RqHOS9NDxrcoOG4hbWkX4x02isBPtUGLnbYY242kCTd7kmIMwFTHGzq7CLipPEQFc2fxyCiIK2rnqeSjp11f92EPYF3_AJN6prqzZco",
+      "name": "hermandaniel.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/Z4KYjvU2ZT6hyXUM78PSa2xHcAPDVZWNKqkYbHkGq_p4F36HoYcCOBxAZGsyH1FEqQKhtvLFmCtxgjy_yXclTawwhg9ojZpLgolbvyv8lZEj65npp3qp",
+      "name": "thecanteenapp.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Developer productivity: The articles collectively suggest a shift from novelty to craft: better mental models of the LLM stack plus improved coding workflows can translate into steadier, repeatable productivity gains [hermandaniel.com#1][youtube.com#1].",
+    "Inference economics: Token-reduction strategies and in-editor price checks both push the industry toward cost-aware development, potentially making it easier for smaller teams to ship LLM features without runaway bills [yogthos.net#1][pricepertoken.com#1].",
+    "Open tooling ecosystem: The serving overview highlights an expanding ecosystem of interchangeable components (e.g., vLLM/Triton/TensorRT alongside local tools like Ollama), giving builders more freedom to choose based on constraints rather than vendor lock-in [thecanteenapp.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Tooling",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 5,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "hermandaniel.com",
+          "url": "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/"
+        }
+      ],
+      "text": "Independent developer (LLM coding essay): LLM-assisted coding is described as evolving in phases, with the strongest results coming from integrating it into sound engineering practices rather than treating it as an autopilot [hermandaniel.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "yogthos.net",
+          "url": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html"
+        }
+      ],
+      "text": "Independent developer (REPL document analysis): A REPL-driven approach is presented as a pragmatic optimization strategy, focusing on reducing repeated context and lowering token spend for document-centric tasks [yogthos.net#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "thecanteenapp.com",
+          "url": "https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html"
+        }
+      ],
+      "text": "Serving-stack analyst: The serving landscape is framed as a menu of tools that fit different operational goals\u2014local experiments, GPU-heavy production inference, or highly optimized deployment pipelines [thecanteenapp.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "pricepertoken.com",
+          "url": "https://pricepertoken.com/mcp"
+        }
+      ],
+      "text": "Tool builder (LLM price MCP): The MCP integration is positioned as a developer-experience improvement, bringing model-price checks closer to where prompts are written and iterated [pricepertoken.com#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768645296,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://www.youtube.com/watch",
+    "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/",
+    "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+    "https://thecanteenapp.com/http:/localhost:4000/analysis/2026/01/03/inference-serving-landscape.html",
+    "https://pricepertoken.com/mcp"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The write-up focuses on document analysis workflows where you would otherwise resend large context repeatedly; breaking work into iterative steps is presented as the key lever for reducing tokens [yogthos.net#1].",
+      "question": "What kinds of document tasks benefit most from REPL-driven analysis compared with one-shot prompting?"
+    },
+    {
+      "answer": "The serving overview frames local tools like Ollama as fitting experimentation and simplicity, while stacks like vLLM/Triton/TensorRT/SGLang are discussed in the context of higher performance and production serving needs [thecanteenapp.com#1].",
+      "question": "When would a team prefer a local-first tool over a high-throughput serving stack?"
+    },
+    {
+      "answer": "The stack-visualization video emphasizes that multiple layers contribute to latency (application handling, orchestration, infrastructure), suggesting that bottlenecks can appear outside the model itself [youtube.com#1].",
+      "question": "What developer decisions most strongly affect end-to-end latency for an LLM query?"
+    }
+  ],
+  "summary": "A cluster of developer write-ups this week mapped out how building with large language models is maturing\u2014from how coding workflows have changed, to how teams can cut inference costs and pick serving stacks that fit their constraints [hermandaniel.com#1][yogthos.net#1][thecanteenapp.com#1]. One post argues that \u201cLLM coding\u201d has moved through distinct phases and is now best treated as a capability to integrate thoughtfully rather than a magic replacement for engineering discipline [hermandaniel.com#1]. Another describes a REPL-driven approach to document analysis that aims to reduce token consumption by about 80%, pointing to a practical path for making LLM features more affordable at scale [yogthos.net#1]. Complementing that, a landscape overview compares popular 2026-era serving options (Ollama, SGLang, TensorRT, Triton, and vLLM), while a video walks through the end-to-end stack behind a single LLM query\u2014useful context for anyone trying to improve latency, reliability, or cost [thecanteenapp.com#1][youtube.com#1].",
+  "talking_points": [
+    "Token thrift: A REPL-driven \u201cdocument analysis\u201d workflow is presented as a way to avoid repeatedly sending the same large context to a model, with the author reporting roughly an 80% token-usage reduction in their setup [yogthos.net#1].",
+    "Serving choices: A 2026 serving roundup contrasts local-first tooling (Ollama) with higher-throughput server stacks (vLLM, Triton, TensorRT, and SGLang), framing the decision around trade-offs like deployment simplicity versus performance tuning [thecanteenapp.com#1].",
+    "Cost visibility: A new MCP tool is pitched to surface LLM pricing directly inside coding environments like Claude Code and Cursor, aiming to make \u201cwhat will this prompt cost?\u201d a first-class developer feedback loop [pricepertoken.com#1].",
+    "Stack literacy: A video breaks an LLM request into layers (from app and prompt handling through orchestration and infrastructure), helping developers pinpoint where latency and failures can be introduced\u2014and therefore optimized [youtube.com#1].",
+    "Workflow realism: One essay emphasizes that LLM-assisted coding has a \u201cpast, present, and future,\u201d arguing that productivity gains depend on how well teams adapt process, review, and ownership rather than just adopting new models [hermandaniel.com#1]."
+  ],
+  "technical_details": [
+    "Token usage: \u201cTokens\u201d are the chunks of text models process; the REPL-driven document workflow is designed to reduce how many tokens get sent/resent during analysis, which the author reports can cut usage by ~80% in their approach [yogthos.net#1].",
+    "LLM serving stack: Serving refers to the software layer that runs models for users (routing requests, batching, GPU utilization, and deployment); the overview compares options including Ollama, SGLang, TensorRT, Triton, and vLLM for different production needs [thecanteenapp.com#1].",
+    "MCP integrations: MCP is used here as an integration mechanism to connect developer tools to external capabilities; one example is checking LLM prices directly inside Claude Code and Cursor [pricepertoken.com#1]."
+  ],
+  "timeline": [],
+  "title": "Developers showcase new ways to build cheaper LLM apps",
+  "unique_domains": 5,
+  "url": "https://www.hermandaniel.com/blog/20260116-my-take-on-LLM-coding/",
+  "user_action_items": [
+    "Audit token spend on one real workflow: Pick a document-heavy task you run often and try a REPL-driven \u201canalyze incrementally\u201d approach to reduce repeated context; compare token usage before/after as described in the write-up [yogthos.net#1].",
+    "Add price checks to your editor loop: If you use Claude Code or Cursor, try the MCP-based price-check workflow so you can see model costs while iterating on prompts [pricepertoken.com#1].",
+    "Map your serving requirements before choosing a stack: Use the 2026 serving landscape overview as a checklist (local dev vs. production throughput, latency goals, GPU constraints) to narrow down between Ollama, vLLM, Triton, TensorRT, and SGLang [thecanteenapp.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
