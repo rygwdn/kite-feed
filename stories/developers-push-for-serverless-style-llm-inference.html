@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers push for serverless-style LLM inference breakthroughs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers push for serverless-style LLM inference breakthroughs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A new cluster of AI discussions and releases this week points to a shared goal: making large language models easier to run, scale, and learn from. One thread argues that LLM inference still lacks a “Lambda-like” experience, calling for fast scale-to-zero, state reuse, and predictable latency under bursts instead of always-on GPU services <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>. Separately, a write-up highlights MIT work on “recursive language models” as an approach aimed at moving beyond fixed context-window limits <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>. And in a hands-on boost for learners, an engineer documenting an “LLM from scratch” series says the resulting models are now available on Hugging Face, lowering the barrier to experimentation <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> The term “serverless” doesn’t mean “no servers”; it usually means the provider abstracts server management while you pay per execution and scale automatically [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Cold-start friction: The Reddit discussion frames today’s pain point as repeated model initialization and KV-cache rebuilds during scale events, which makes bursty traffic harder to serve smoothly than typical serverless functions <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>.</li>
+
+<li>Runtime boundaries: A key proposal is a clearer split between orchestration and the inference runtime—mirroring how AWS Lambda separates the developer-facing function layer from underlying compute management <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>.</li>
+
+<li>Context research: The StartupHub.ai headline emphasizes “recursive language models” as a route to exceed classic context-window constraints, positioning memory/recursion as the mechanism rather than simply increasing a fixed token limit <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>.</li>
+
+<li>Learning by building: The “LLM from scratch” series milestone is distribution: the author reports the project’s models have been published on Hugging Face, making them easier for others to download and test <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Reddit ML practitioners: They argue that for “model = function” to feel real, inference needs scale-from-zero, execution-state reuse, a clean orchestration/runtime separation, and stable latency under spiky demand rather than long-lived, always-on deployments.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/">Reddit r/MachineLearning</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>StartupHub.ai (covering MIT work): It presents “recursive language models” as an MIT-linked approach aimed at breaking through context-window limits, implying an architectural shift in how models handle long-range information.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ">StartupHub.ai via Google News</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Independent builder (Giles Thomas): He highlights an education-first path—implementing an LLM step-by-step—and says the produced models are now shared on Hugging Face so others can reproduce and explore the results more easily.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face">gilesthomas.com</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Scale-to-zero inference: The Reddit post describes a serverless-style requirement where inference can drop to zero active GPUs when idle yet still ramp quickly when requests arrive, avoiding paying for always-on capacity <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>.</li>
+
+<li>KV-cache rebuild: The thread points to repeated KV (key-value) cache rebuilding during scaling as a performance problem; caching in attention-based models stores intermediate attention state to speed subsequent token generation, so rebuilding it adds latency <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>[common].</li>
+
+<li>Recursive language models: The StartupHub.ai headline frames MIT “recursive language models” as a way to push beyond a fixed context window, suggesting recursion/memory mechanisms to handle longer-range information than standard fixed-length prompting <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI platform operations: The Reddit wishlist—fast scale-from-zero, execution-state reuse, and predictable latency—maps directly to lower operational overhead for AI platforms that face spiky demand patterns (for example, chat apps and agent workflows) <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>.</li>
+
+<li>Developer tooling: Publishing “from scratch” models on Hugging Face can make it easier for educators and developers to run experiments locally or in notebooks, supporting reproducible learning and quicker prototyping <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face" class="footnote-ref">[3]</a>.</li>
+
+<li>Model architecture research: If recursive approaches truly extend usable context, they could shift demand away from purely “bigger window” scaling strategies toward new architectures and evaluation standards for long-range reasoning <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Scientific meaning: The highlighted MIT “recursive language models” concept is presented as an architectural attempt to move past hard context-window limits, a central constraint for tasks that require long documents or extended multi-step reasoning <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>.</li>
+
+<li>Uncertainty and confidence: Because the provided item is a headline-style reference without methodology, benchmarks, or error reporting in the excerpt, it does not supply enough detail here to judge empirical strength, comparisons, or reproducibility <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>.</li>
+
+<li>Limitations and future work: To validate any claimed context-window improvements, readers would need the underlying paper/code, evaluation setup, and tests on long-context tasks (retrieval, summarization, long-form QA), none of which are included in the snippet shown <a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>Serverless computing popularized the idea of “code as a function” that can scale automatically with demand, with cold starts and state management as recurring design challenges across platforms [common]. LLM serving brought similar elasticity hopes, but GPUs, model loading time, and attention-cache behavior have made “scale-to-zero” and fast warm-up harder in practice than for typical stateless web functions [common].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What would a “predictable latency” SLO look like for serverless LLMs?</p>
+
+<p><strong>A:</strong> A practical approach is to define p95/p99 token-latency targets and separate cold-start latency budgets from steady-state generation latency, since the thread explicitly calls out bursty traffic and predictable latency as requirements <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> How could state reuse be implemented without pinning whole GPUs?</p>
+
+<p><strong>A:</strong> The post implies keeping reusable execution state available across scale events; one common direction is separating lightweight state (metadata, caches) from heavyweight compute allocation so capacity can be reattached quickly <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>[common].</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Where can readers find the models mentioned in the build-from-scratch series?</p>
+
+<p><strong>A:</strong> The author says the models are now hosted on Hugging Face, with access details provided from the series entry itself <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face" class="footnote-ref">[3]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Stress-test your LLM endpoint for burst traffic: Run a burst load test that measures cold-start latency and tail latency, then compare behavior when scaling up and back down to see whether re-initialization and cache rebuilds dominate response time <a href="https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/" class="footnote-ref">[1]</a>.</li>
+
+<li>Try the published “from scratch” models: Download the author’s released models from Hugging Face (linked from the post) and reproduce a small inference run to understand how training choices affect outputs <a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face">https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ">https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, gilesthomas.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-17T15:54:37+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/",
+      "title": "[D]It feels like LLM inference is missing its AWS Lambda moment."
+    },
+    {
+      "date": "2026-01-17T19:54:04+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ",
+      "title": "MIT Recursive Language Models Shatter the LLM Context Window Limit - StartupHub.ai"
+    },
+    {
+      "date": "2026-01-17T19:58:32+00:00",
+      "domain": "gilesthomas.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face",
+      "title": "Writing an LLM from scratch, part 31 \u2013 the models are now on Hugging Face"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "The term \u201cserverless\u201d doesn\u2019t mean \u201cno servers\u201d; it usually means the provider abstracts server management while you pay per execution and scale automatically [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/1DbsSibpB3sIrQieoZK70TV4khOO7vYo8hio0JHJfQmpPhfFiAoXRytvnsF4J3iILGHUCRC_40W_dRiMOkbtyg73U6xDxP8KjOkbwLp33j4",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/QSBkhuA1NSLTiMAG584t0hkq2vIG5bZuv05eu4_0Ww_4ERPY8EHq5FkRF1gq0JFqKquK2Qm9thnDm9I8pJbf7c4Estc_GiXQpvFtXtdP9FU",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/-6qdlynLypYBJg5pxFcI48sWuLMLKEmq_rsLKCHj7Oj1QHfW_Sge8PHOTOZnGHs_1ub400JerYB_0wKw-wZNxOBLPymlvc8a-WVnJ_gqNjlRUv5eVg",
+      "name": "gilesthomas.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Serverless computing popularized the idea of \u201ccode as a function\u201d that can scale automatically with demand, with cold starts and state management as recurring design challenges across platforms [common]. LLM serving brought similar elasticity hopes, but GPUs, model loading time, and attention-cache behavior have made \u201cscale-to-zero\u201d and fast warm-up harder in practice than for typical stateless web functions [common].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI platform operations: The Reddit wishlist\u2014fast scale-from-zero, execution-state reuse, and predictable latency\u2014maps directly to lower operational overhead for AI platforms that face spiky demand patterns (for example, chat apps and agent workflows) [reddit.com#1].",
+    "Developer tooling: Publishing \u201cfrom scratch\u201d models on Hugging Face can make it easier for educators and developers to run experiments locally or in notebooks, supporting reproducible learning and quicker prototyping [gilesthomas.com#1].",
+    "Model architecture research: If recursive approaches truly extend usable context, they could shift demand away from purely \u201cbigger window\u201d scaling strategies toward new architectures and evaluation standards for long-range reasoning [google.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Inference",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Reddit r/MachineLearning",
+          "url": "https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/"
+        }
+      ],
+      "text": "Reddit ML practitioners: They argue that for \u201cmodel = function\u201d to feel real, inference needs scale-from-zero, execution-state reuse, a clean orchestration/runtime separation, and stable latency under spiky demand rather than long-lived, always-on deployments."
+    },
+    {
+      "sources": [
+        {
+          "name": "StartupHub.ai via Google News",
+          "url": "https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ"
+        }
+      ],
+      "text": "StartupHub.ai (covering MIT work): It presents \u201crecursive language models\u201d as an MIT-linked approach aimed at breaking through context-window limits, implying an architectural shift in how models handle long-range information."
+    },
+    {
+      "sources": [
+        {
+          "name": "gilesthomas.com",
+          "url": "https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face"
+        }
+      ],
+      "text": "Independent builder (Giles Thomas): He highlights an education-first path\u2014implementing an LLM step-by-step\u2014and says the produced models are now shared on Hugging Face so others can reproduce and explore the results more easily."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768731554,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Scientific meaning: The highlighted MIT \u201crecursive language models\u201d concept is presented as an architectural attempt to move past hard context-window limits, a central constraint for tasks that require long documents or extended multi-step reasoning [google.com#1].",
+    "Uncertainty and confidence: Because the provided item is a headline-style reference without methodology, benchmarks, or error reporting in the excerpt, it does not supply enough detail here to judge empirical strength, comparisons, or reproducibility [google.com#1].",
+    "Limitations and future work: To validate any claimed context-window improvements, readers would need the underlying paper/code, evaluation setup, and tests on long-context tasks (retrieval, summarization, long-form QA), none of which are included in the snippet shown [google.com#1]."
+  ],
+  "source_urls": [
+    "https://www.gilesthomas.com/2026/01/llm-from-scratch-31-models-on-hugging-face",
+    "https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/",
+    "https://news.google.com/atom/articles/CBMitgFBVV95cUxQX3VaSFVYODZSQ3V4MllmSGFpV0xub3drbklGd3pSUE1nWGNDa0xGM0RjamdOeG1GeDVsU1pZS25iYkZpNnlYaUVLaGF3T3NTRWFjcm9WNm14YkhyTGxQTjh1VG1wVFowbzE1am1QN0lmaUxiTTlEQjhOWXpwdFZnSUVaOHVVdC1JNnk0MGtiTlhnX3JMckJkbjhmU0VkOWlKYXZ4aFl0Ri13bWpFNEcwdHNtOTFXUQ"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "A practical approach is to define p95/p99 token-latency targets and separate cold-start latency budgets from steady-state generation latency, since the thread explicitly calls out bursty traffic and predictable latency as requirements [reddit.com#1].",
+      "question": "What would a \u201cpredictable latency\u201d SLO look like for serverless LLMs?"
+    },
+    {
+      "answer": "The post implies keeping reusable execution state available across scale events; one common direction is separating lightweight state (metadata, caches) from heavyweight compute allocation so capacity can be reattached quickly [reddit.com#1][common].",
+      "question": "How could state reuse be implemented without pinning whole GPUs?"
+    },
+    {
+      "answer": "The author says the models are now hosted on Hugging Face, with access details provided from the series entry itself [gilesthomas.com#1].",
+      "question": "Where can readers find the models mentioned in the build-from-scratch series?"
+    }
+  ],
+  "summary": "A new cluster of AI discussions and releases this week points to a shared goal: making large language models easier to run, scale, and learn from. One thread argues that LLM inference still lacks a \u201cLambda-like\u201d experience, calling for fast scale-to-zero, state reuse, and predictable latency under bursts instead of always-on GPU services [reddit.com#1]. Separately, a write-up highlights MIT work on \u201crecursive language models\u201d as an approach aimed at moving beyond fixed context-window limits [google.com#1]. And in a hands-on boost for learners, an engineer documenting an \u201cLLM from scratch\u201d series says the resulting models are now available on Hugging Face, lowering the barrier to experimentation [gilesthomas.com#1].",
+  "talking_points": [
+    "Cold-start friction: The Reddit discussion frames today\u2019s pain point as repeated model initialization and KV-cache rebuilds during scale events, which makes bursty traffic harder to serve smoothly than typical serverless functions [reddit.com#1].",
+    "Runtime boundaries: A key proposal is a clearer split between orchestration and the inference runtime\u2014mirroring how AWS Lambda separates the developer-facing function layer from underlying compute management [reddit.com#1].",
+    "Context research: The StartupHub.ai headline emphasizes \u201crecursive language models\u201d as a route to exceed classic context-window constraints, positioning memory/recursion as the mechanism rather than simply increasing a fixed token limit [google.com#1].",
+    "Learning by building: The \u201cLLM from scratch\u201d series milestone is distribution: the author reports the project\u2019s models have been published on Hugging Face, making them easier for others to download and test [gilesthomas.com#1]."
+  ],
+  "technical_details": [
+    "Scale-to-zero inference: The Reddit post describes a serverless-style requirement where inference can drop to zero active GPUs when idle yet still ramp quickly when requests arrive, avoiding paying for always-on capacity [reddit.com#1].",
+    "KV-cache rebuild: The thread points to repeated KV (key-value) cache rebuilding during scaling as a performance problem; caching in attention-based models stores intermediate attention state to speed subsequent token generation, so rebuilding it adds latency [reddit.com#1][common].",
+    "Recursive language models: The StartupHub.ai headline frames MIT \u201crecursive language models\u201d as a way to push beyond a fixed context window, suggesting recursion/memory mechanisms to handle longer-range information than standard fixed-length prompting [google.com#1]."
+  ],
+  "timeline": [],
+  "title": "Developers push for serverless-style LLM inference breakthroughs",
+  "unique_domains": 3,
+  "url": "https://www.reddit.com/r/MachineLearning/comments/1qfgqvy/dit_feels_like_llm_inference_is_missing_its_aws/",
+  "user_action_items": [
+    "Stress-test your LLM endpoint for burst traffic: Run a burst load test that measures cold-start latency and tail latency, then compare behavior when scaling up and back down to see whether re-initialization and cache rebuilds dominate response time [reddit.com#1].",
+    "Try the published \u201cfrom scratch\u201d models: Download the author\u2019s released models from Hugging Face (linked from the post) and reproduce a small inference run to understand how training choices affect outputs [gilesthomas.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>

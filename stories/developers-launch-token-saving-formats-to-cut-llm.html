@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers launch token-saving formats to cut LLM costs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers launch token-saving formats to cut LLM costs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A small cluster of developer write-ups and open-source projects this week focused on a practical, feel-good theme in AI: spending fewer tokens to get the same work done. One post describes a REPL-driven approach to document analysis that reports roughly an 80% reduction in LLM token usage by shifting work into an interactive workflow and sending the model only what’s needed at each step <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a>. Two other pieces propose token-efficient, JSON-compatible encodings—CTON and TOON—aimed at reducing the overhead of verbose JSON in prompts, including a case study claiming an 89% cost reduction for a JSON-rendering workflow by swapping formats <a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>. Together, the articles frame token efficiency as a straightforward way to make AI features cheaper, faster, and easier to run at scale <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a><a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> JSON’s syntax was designed to be human-readable, not token-optimal, which is why compact encodings can reduce repeated structural characters that still count toward LLM tokens [common].</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>REPL workflow: The REPL-driven document analysis approach is presented as a step-by-step loop where the developer iteratively queries and refines what context gets sent to the model, with the author reporting about an ~80% drop in token usage compared with a more dump-the-document approach <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Prompt encoding: CTON is introduced as a JSON-compatible, token-efficient text format intended specifically for LLM prompts, positioning it as a drop-in way to keep structured prompting while shrinking prompt size <a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a>.</li>
+
+<li>JSON rendering costs: The TOON write-up describes applying a compact encoding to a Vercel-related JSON-rendering LLM workflow and reports an 89% reduction in LLM costs from the change <a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Open sharing: All three items are shared in a public, developer-facing way (blog posts and a GitHub repository), making it easier for others to reproduce the techniques and compare tradeoffs in their own pipelines <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a><a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Yogthos blog author: Argues that a REPL-driven, incremental approach to document analysis can dramatically reduce token usage by narrowing what the LLM sees at each interaction, and reports ~80% savings in their setup.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html">yogthos.net</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>CTON project maintainer: Presents CTON as a JSON-compatible, token-efficient text format designed to reduce prompt token count while preserving structured data interchange.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/davidesantangelo/cton">github.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>TOON case-study author: Claims that swapping a JSON-heavy prompt representation for TOON reduced costs in a JSON-render LLM workflow by 89%, emphasizing practical savings from more compact serialization.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html">github.io</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Token usage: Tokens are the chunks of text LLMs process and that many APIs bill against; reducing tokens can lower cost and latency for the same task [common].</li>
+
+<li>REPL-driven analysis: A REPL (read–eval–print loop) supports iterative querying; the described approach uses that loop to progressively focus what document context is sent to the model, reporting about ~80% fewer tokens in the author’s workflow <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Token-efficient serialization: CTON and TOON are presented as compact, JSON-compatible encodings intended to reduce the prompt footprint of structured data compared with plain JSON, with one write-up claiming an 89% cost cut in a JSON-rendering LLM workflow <a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI app unit economics: Token efficiency directly affects per-request costs for LLM-powered features; the posts argue that shrinking payloads via workflow or encoding can materially reduce spend at the same usage volume <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Developer tooling: Projects like CTON and TOON suggest a growing niche for prompt-oriented serialization and tooling that sits between application code and LLM APIs, similar to how compression and protocol formats evolved for web services <a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Platform providers: If more teams adopt compact representations for structured prompts, platforms built around verbose JSON exchanges may see pressure to support more efficient formats or offer built-in compression and schema-aware prompting helpers <a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>[common].</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>As LLM-based features spread into apps, token-based billing and context-window limits have made prompt size a real engineering constraint, pushing developers to compress context and reduce repetitive boilerplate [common]. JSON became a common default for structured prompts because it is widely supported and easy to validate, but its verbosity can translate into higher token usage in LLM interfaces [common]. The three items here fit into that broader, ongoing push toward “do more with fewer tokens” via workflow design (send less) and serialization design (encode tighter) <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a><a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> How do these compact formats handle schema validation and round-tripping back to standard JSON?</p>
+
+<p><strong>A:</strong> CTON is presented as JSON-compatible, implying it is designed to map cleanly to JSON structures, but the repository materials would need to be checked for exact validation and round-trip guarantees <a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of documents or tasks benefit most from the REPL-driven document analysis approach?</p>
+
+<p><strong>A:</strong> The post frames the gains around document analysis workflows where you can progressively narrow context rather than sending whole documents, suggesting the biggest benefits come when only small parts are relevant at a time <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Are the reported cost reductions measured on tokens, dollars, latency, or all three?</p>
+
+<p><strong>A:</strong> One write-up explicitly reports cost reduction (89%) in a JSON-render LLM workflow, while another reports token-usage reduction (~80%); whether latency also improved would depend on request size and model/API behavior <a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a><a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Benchmark your prompt overhead: Pick one representative workflow (like structured JSON prompts) and measure token counts before and after replacing verbose structures with a compact encoding approach like those described for CTON/TOON <a href="https://github.com/davidesantangelo/cton" class="footnote-ref">[2]</a><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html" class="footnote-ref">[3]</a>.</li>
+
+<li>Adopt incremental context sending: Try a REPL-style loop for document tasks: start with a small excerpt or outline, then fetch additional sections only when needed, mirroring the REPL-driven analysis approach described in the token-reduction write-up <a href="https://yogthos.net/posts/2026-01-16-lattice-mcp.html" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://github.com/davidesantangelo/cton">https://github.com/davidesantangelo/cton</a></li>
+
+
+
+<li><a href="https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html">https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> github.io, github.com, yogthos.net</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-18T08:05:32+00:00",
+      "domain": "yogthos.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+      "title": "Cutting LLM token Usage by ~80% using REPL driven document analysis"
+    },
+    {
+      "date": "2026-01-17T16:04:20+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/davidesantangelo/cton",
+      "title": "Show HN: CTON \u2013 JSON-compatible, token-efficient text format for LLM prompts"
+    },
+    {
+      "date": "2026-01-17T14:17:22+00:00",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html",
+      "title": "I Cut Vercel\u0027s JSON-Render LLM Costs by 89% Using Toon"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "JSON\u2019s syntax was designed to be human-readable, not token-optimal, which is why compact encodings can reduce repeated structural characters that still count toward LLM tokens [common].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/8Y46Wa8NhCTv9ZqtBpDSsZvcVqloFmvssCumXmtW8AjU7WgJF8G2sUgC6D7LooLh4wNpUSBNR2UnKZ03H2tWO2BCRhTWltHpDZDUyNVbJQ",
+      "name": "github.io"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/k8EG-MozTOMYFDZMeCSx9dXmiGRfJY1Dph6fY7i1yt0JnplPzrX5xBJtN-jNtGxL4FKktqNJoXfkFgPxruotzn9ml0nP1usjWJ3A4lw1pGQ",
+      "name": "github.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/aHtR4GxP5ghdkrxooMjtQ9YZ60Zi6YWnLEU6mJ5khMCx4KLvq82xRg3R1FdWeuET0Kbvl1J3kTwO-4VdQwzQ-QRb3_S23mWo1bT_pacETPqf",
+      "name": "yogthos.net"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddfe",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "As LLM-based features spread into apps, token-based billing and context-window limits have made prompt size a real engineering constraint, pushing developers to compress context and reduce repetitive boilerplate [common]. JSON became a common default for structured prompts because it is widely supported and easy to validate, but its verbosity can translate into higher token usage in LLM interfaces [common]. The three items here fit into that broader, ongoing push toward \u201cdo more with fewer tokens\u201d via workflow design (send less) and serialization design (encode tighter) [yogthos.net#1][github.com#1][github.io#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI app unit economics: Token efficiency directly affects per-request costs for LLM-powered features; the posts argue that shrinking payloads via workflow or encoding can materially reduce spend at the same usage volume [yogthos.net#1][github.io#1].",
+    "Developer tooling: Projects like CTON and TOON suggest a growing niche for prompt-oriented serialization and tooling that sits between application code and LLM APIs, similar to how compression and protocol formats evolved for web services [github.com#1][github.io#1].",
+    "Platform providers: If more teams adopt compact representations for structured prompts, platforms built around verbose JSON exchanges may see pressure to support more efficient formats or offer built-in compression and schema-aware prompting helpers [github.io#1][common]."
+  ],
+  "international_reactions": [],
+  "item_category": "Prompting",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "yogthos.net",
+          "url": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html"
+        }
+      ],
+      "text": "Yogthos blog author: Argues that a REPL-driven, incremental approach to document analysis can dramatically reduce token usage by narrowing what the LLM sees at each interaction, and reports ~80% savings in their setup."
+    },
+    {
+      "sources": [
+        {
+          "name": "github.com",
+          "url": "https://github.com/davidesantangelo/cton"
+        }
+      ],
+      "text": "CTON project maintainer: Presents CTON as a JSON-compatible, token-efficient text format designed to reduce prompt token count while preserving structured data interchange."
+    },
+    {
+      "sources": [
+        {
+          "name": "github.io",
+          "url": "https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html"
+        }
+      ],
+      "text": "TOON case-study author: Claims that swapping a JSON-heavy prompt representation for TOON reduced costs in a JSON-render LLM workflow by 89%, emphasizing practical savings from more compact serialization."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768731554,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+    "https://github.com/davidesantangelo/cton",
+    "https://mateolafalce.github.io/2026/I%20Cut%20Vercel%27s%20json-render%20LLM%20Costs%20by%2089%25%20Using%20TOON/ICutVercelsjsonrenderLLMCostsby89UsingTOON.html"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "CTON is presented as JSON-compatible, implying it is designed to map cleanly to JSON structures, but the repository materials would need to be checked for exact validation and round-trip guarantees [github.com#1].",
+      "question": "How do these compact formats handle schema validation and round-tripping back to standard JSON?"
+    },
+    {
+      "answer": "The post frames the gains around document analysis workflows where you can progressively narrow context rather than sending whole documents, suggesting the biggest benefits come when only small parts are relevant at a time [yogthos.net#1].",
+      "question": "What kinds of documents or tasks benefit most from the REPL-driven document analysis approach?"
+    },
+    {
+      "answer": "One write-up explicitly reports cost reduction (89%) in a JSON-render LLM workflow, while another reports token-usage reduction (~80%); whether latency also improved would depend on request size and model/API behavior [github.io#1][yogthos.net#1].",
+      "question": "Are the reported cost reductions measured on tokens, dollars, latency, or all three?"
+    }
+  ],
+  "summary": "A small cluster of developer write-ups and open-source projects this week focused on a practical, feel-good theme in AI: spending fewer tokens to get the same work done. One post describes a REPL-driven approach to document analysis that reports roughly an 80% reduction in LLM token usage by shifting work into an interactive workflow and sending the model only what\u2019s needed at each step [yogthos.net#1]. Two other pieces propose token-efficient, JSON-compatible encodings\u2014CTON and TOON\u2014aimed at reducing the overhead of verbose JSON in prompts, including a case study claiming an 89% cost reduction for a JSON-rendering workflow by swapping formats [github.com#1][github.io#1]. Together, the articles frame token efficiency as a straightforward way to make AI features cheaper, faster, and easier to run at scale [yogthos.net#1][github.com#1][github.io#1].",
+  "talking_points": [
+    "REPL workflow: The REPL-driven document analysis approach is presented as a step-by-step loop where the developer iteratively queries and refines what context gets sent to the model, with the author reporting about an ~80% drop in token usage compared with a more dump-the-document approach [yogthos.net#1].",
+    "Prompt encoding: CTON is introduced as a JSON-compatible, token-efficient text format intended specifically for LLM prompts, positioning it as a drop-in way to keep structured prompting while shrinking prompt size [github.com#1].",
+    "JSON rendering costs: The TOON write-up describes applying a compact encoding to a Vercel-related JSON-rendering LLM workflow and reports an 89% reduction in LLM costs from the change [github.io#1].",
+    "Open sharing: All three items are shared in a public, developer-facing way (blog posts and a GitHub repository), making it easier for others to reproduce the techniques and compare tradeoffs in their own pipelines [yogthos.net#1][github.com#1][github.io#1]."
+  ],
+  "technical_details": [
+    "Token usage: Tokens are the chunks of text LLMs process and that many APIs bill against; reducing tokens can lower cost and latency for the same task [common].",
+    "REPL-driven analysis: A REPL (read\u2013eval\u2013print loop) supports iterative querying; the described approach uses that loop to progressively focus what document context is sent to the model, reporting about ~80% fewer tokens in the author\u2019s workflow [yogthos.net#1].",
+    "Token-efficient serialization: CTON and TOON are presented as compact, JSON-compatible encodings intended to reduce the prompt footprint of structured data compared with plain JSON, with one write-up claiming an 89% cost cut in a JSON-rendering LLM workflow [github.com#1][github.io#1]."
+  ],
+  "timeline": [],
+  "title": "Developers launch token-saving formats to cut LLM costs",
+  "unique_domains": 3,
+  "url": "https://yogthos.net/posts/2026-01-16-lattice-mcp.html",
+  "user_action_items": [
+    "Benchmark your prompt overhead: Pick one representative workflow (like structured JSON prompts) and measure token counts before and after replacing verbose structures with a compact encoding approach like those described for CTON/TOON [github.com#1][github.io#1].",
+    "Adopt incremental context sending: Try a REPL-style loop for document tasks: start with a small excerpt or outline, then fetch additional sections only when needed, mirroring the REPL-driven analysis approach described in the token-reduction write-up [yogthos.net#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
