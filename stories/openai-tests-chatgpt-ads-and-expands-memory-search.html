@@ -1,0 +1,622 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>OpenAI tests ChatGPT ads and expands memory search - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>OpenAI tests ChatGPT ads and expands memory search</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/"><img src="https://kagiproxy.com/img/_Z3vgwxNcQrT_QcgFzx0SDPyGWmu3MqKvFQG5bvbAFwxdnOVQbuxjYc8_gkkcqKKZhjMY9mNXngbyDYp3n8ifoiitlWWO4tLyePRSAAIYqq0oRxxcmm8IV_971W-7kUBiAtuvBtvUVPaSxoNNDWyEptI" alt="Illustration image accompanying gHacks coverage of ChatGPT history search." title="Illustration image accompanying gHacks coverage of ChatGPT history search." style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Illustration image accompanying gHacks coverage of ChatGPT history search.
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>OpenAI says it will begin testing advertising in ChatGPT for U.S. users on the Free and new Go tiers, while keeping higher-paid plans ad-free <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a><a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a>. The company frames ads as a way to help fund broader access to more capable AI, and says ads will be separated from chatbot answers and that conversations will not be shared or sold to advertisers <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>. Separately, OpenAI has changed how ChatGPT can use a subscriber’s past conversations, enabling Plus and Pro users to ask questions that reference their full chat history without manually opening old threads <a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>As ChatGPT becomes more capable and widely used, we’re looking at ways to continue offering more intelligence to everyone</p>
+
+<cite>— OpenAI (Mashable)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Some ChatGPT Pro subscriptions are priced at $200 per month, reflecting how expensive premium AI access can be compared with typical consumer app pricing <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Ad placement: OpenAI says the ads are planned to appear at the bottom of queries, aiming to keep the main response area focused on the answer <a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a>.</li>
+
+<li>New Go tier: OpenAI introduced an $8 “ChatGPT Go” tier, positioned as one of the lower-cost plans alongside the free option <a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a>.</li>
+
+<li>Recent backlash: In December, users posted screenshots alleging irrelevant product-like suggestions in responses, and OpenAI characterized them as poorly timed “suggestions” rather than ads <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+<li>Pro user frustration: Some ChatGPT Pro subscribers paying $200 per month also complained that the experience felt off during the period when users suspected ads were appearing <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+<li>Ad experiments: Earlier reporting described internal ad concept tests, including layout and disclosure ideas intended to create “a new type of digital ads” that users would tolerate <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>OpenAI: OpenAI says ads are a trade-off to help expand access, with a “hard line” between answers and advertising and a promise not to share or sell conversations to advertisers <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt">Mashable</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>ChatGPT users: Users have raised concerns about trust and relevance after seeing responses that appeared to recommend unrelated apps, stores, or products <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt">Mashable</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Paying subscribers: Plus and Pro users get expanded functionality that can reference their full chat history, reducing the need to manually reopen older conversations <a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/">gHacks</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>December:</strong> Users shared screenshots of seemingly unrelated product suggestions <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+
+
+<li><strong>Friday:</strong> OpenAI confirmed ad testing for Free and Go tiers <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a><a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Full chat history search: Plus and Pro subscribers can ask questions that reference their entire ChatGPT chat history, including older conversations, without manually opening past threads <a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/" class="footnote-ref">[2]</a>.</li>
+
+<li>Answer–ad separation: OpenAI says it will keep a separation between ChatGPT’s answers and advertising, emphasizing that responses should be “objectively useful” rather than ad-driven <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+<li>Ad disclosures and layout: OpenAI has been testing ad layouts and disclosure approaches internally to reduce user drop-off, according to reporting cited by Mashable <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Digital advertising: Testing ads inside a chat interface signals continued experimentation with “conversational” ad formats and disclosure patterns, which could influence how other AI assistants monetize without disrupting responses <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+<li>Subscription packaging: The addition of an $8 Go tier broadens the pricing ladder and may encourage other AI products to add mid-tier plans that balance cost, features, and monetization <a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a>[common].</li>
+
+<li>User privacy expectations: OpenAI’s promise not to share or sell conversations to advertisers sets a benchmark users may begin to demand from other AI services that introduce ad-supported experiences <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>[common].</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Human-computer interaction: The move highlights a classic HCI challenge for AI assistants: preserving perceived neutrality and user trust while introducing monetization elements like ads and disclosures <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>[common].</li>
+
+<li>Personalization trade-offs: Searching across a user’s full chat history can improve continuity and usefulness, but it also makes privacy controls, data retention choices, and transparency more central to safe product design <a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/" class="footnote-ref">[2]</a>[common].</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>ChatGPT has long used a freemium approach, offering a free plan alongside paid tiers that add features or capacity <a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a>. As AI systems scaled, industry discussion has increasingly focused on funding high compute costs through subscriptions, enterprise offerings, and (for consumer products) advertising [common].</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What will ad labels or disclosures look like inside ChatGPT during the test?</p>
+
+<p><strong>A:</strong> Mashable reports OpenAI has tested different layouts and disclosures internally, but the articles provided do not specify the final labeling design <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Do Business and Enterprise users get the full-history search feature too?</p>
+
+<p><strong>A:</strong> The provided gHacks article only states full chat history referencing for Plus and Pro subscribers, and does not mention Business or Enterprise <a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Will ads appear in all countries once testing ends?</p>
+
+<p><strong>A:</strong> The sources describe an initial rollout to U.S. users and do not confirm a broader international launch plan <a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses" class="footnote-ref">[3]</a><a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Choose an ad experience that fits your use: If you want to avoid ads entirely, use a tier OpenAI says will remain ad-free (Pro, Business, or Enterprise) <a href="https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt" class="footnote-ref">[1]</a>.</li>
+
+<li>Test “history-based” questions carefully: If you have Plus or Pro, try prompts that reference older chats to see what ChatGPT can recall from your history, since it can now search across prior conversations <a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/">https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/</a></li>
+
+
+
+
+
+<li><a href="https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses">https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> mashable.com, ghacks.net, appleinsider.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-18T15:30:00+00:00",
+      "domain": "mashable.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt",
+      "title": "OpenAI to finally bring ads to ChatGPT"
+    },
+    {
+      "date": "2026-01-19T08:58:10+00:00",
+      "domain": "ghacks.net",
+      "image": "https://kagiproxy.com/img/84l-HDcX-lYc2nv4jsykUbE0gDXgJVyf_2DP0OavE4oke6ReaAsgH8kzO3Q57U0fN74mGy3L21ULxqOfMjYQgeKpd88zXAWqDrGrNunY0QmNwOh0-tPJd7Dfmbj236eDhv357hURPYE_mYG-Fj_c7BiY",
+      "image_caption": "",
+      "link": "https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/",
+      "title": "ChatGPT Now Searches Your Full Chat History For Answers"
+    },
+    {
+      "date": "2026-01-18T14:46:36+00:00",
+      "domain": "appleinsider.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses",
+      "title": "ChatGPT will soon start showing ads, but they won\u0027t affect its responses"
+    }
+  ],
+  "category": "Technology",
+  "cluster_number": 5,
+  "did_you_know": "Some ChatGPT Pro subscriptions are priced at $200 per month, reflecting how expensive premium AI access can be compared with typical consumer app pricing [mashable.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/KFRUrBi83ZJTFLJgl9Guy-EC7upOvCkUHVa4DPfn4ZyJrF2nfO79Uy0_sRvk5AM178sKImJqHEoys2wc9NnWXjBYVi3M7psPgNHXqMYeI7x5qQ",
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/bXbzTOuC0yA46N1llf8fidYKDYsg3osN4eMnrrTcu6ymWJQA9ZQgJHMi5SqU6ixUzYk_aAwoklnHxY0d07IcdYDb5jM_WS9sslB840COogA",
+      "name": "ghacks.net"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/-ejev8Lk3hzsOP2w32JkMQ6rQ8Z8EvY2iO-7gqoao8dvP6QCqZUHwLoIY5IwyUpuLCy-ygSYuumHrfLE7DVQ1CEkGE87TcZcW2OXZc2Zy-Wi_N1wXlY",
+      "name": "appleinsider.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "ChatGPT has long used a freemium approach, offering a free plan alongside paid tiers that add features or capacity [appleinsider.com#1]. As AI systems scaled, industry discussion has increasingly focused on funding high compute costs through subscriptions, enterprise offerings, and (for consumer products) advertising [common].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Digital advertising: Testing ads inside a chat interface signals continued experimentation with \u201cconversational\u201d ad formats and disclosure patterns, which could influence how other AI assistants monetize without disrupting responses [mashable.com#1].",
+    "Subscription packaging: The addition of an $8 Go tier broadens the pricing ladder and may encourage other AI products to add mid-tier plans that balance cost, features, and monetization [appleinsider.com#1][common].",
+    "User privacy expectations: OpenAI\u2019s promise not to share or sell conversations to advertisers sets a benchmark users may begin to demand from other AI services that introduce ad-supported experiences [mashable.com#1][common]."
+  ],
+  "international_reactions": [
+    "\ud83c\uddfa\ud83c\uddf8 United States: OpenAI said the initial ad tests will roll out to U.S. users in the coming weeks [appleinsider.com#1]."
+  ],
+  "item_category": "Ai Products",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Mashable",
+          "url": "https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt"
+        }
+      ],
+      "text": "OpenAI: OpenAI says ads are a trade-off to help expand access, with a \u201chard line\u201d between answers and advertising and a promise not to share or sell conversations to advertisers [mashable.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Mashable",
+          "url": "https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt"
+        }
+      ],
+      "text": "ChatGPT users: Users have raised concerns about trust and relevance after seeing responses that appeared to recommend unrelated apps, stores, or products [mashable.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "gHacks",
+          "url": "https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/"
+        }
+      ],
+      "text": "Paying subscribers: Plus and Pro users get expanded functionality that can reference their full chat history, reducing the need to manually reopen older conversations [ghacks.net#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "Illustration image accompanying gHacks coverage of ChatGPT history search.",
+    "credit": "",
+    "link": "https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/",
+    "url": "https://kagiproxy.com/img/_Z3vgwxNcQrT_QcgFzx0SDPyGWmu3MqKvFQG5bvbAFwxdnOVQbuxjYc8_gkkcqKKZhjMY9mNXngbyDYp3n8ifoiitlWWO4tLyePRSAAIYqq0oRxxcmm8IV_971W-7kUBiAtuvBtvUVPaSxoNNDWyEptI"
+  },
+  "published": 1768818269,
+  "quote": "As ChatGPT becomes more capable and widely used, we\u2019re looking at ways to continue offering more intelligence to everyone",
+  "quote_attribution": "Mashable",
+  "quote_author": "OpenAI",
+  "scientific_significance": [
+    "Human-computer interaction: The move highlights a classic HCI challenge for AI assistants: preserving perceived neutrality and user trust while introducing monetization elements like ads and disclosures [mashable.com#1][common].",
+    "Personalization trade-offs: Searching across a user\u2019s full chat history can improve continuity and usefulness, but it also makes privacy controls, data retention choices, and transparency more central to safe product design [ghacks.net#1][common]."
+  ],
+  "source_urls": [
+    "https://www.ghacks.net/2026/01/19/chatgpt-now-searches-your-full-chat-history-for-answers/",
+    "https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt",
+    "https://appleinsider.com/articles/26/01/18/chatgpt-will-soon-start-showing-ads-but-they-wont-affect-its-responses"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "Mashable reports OpenAI has tested different layouts and disclosures internally, but the articles provided do not specify the final labeling design [mashable.com#1].",
+      "question": "What will ad labels or disclosures look like inside ChatGPT during the test?"
+    },
+    {
+      "answer": "The provided gHacks article only states full chat history referencing for Plus and Pro subscribers, and does not mention Business or Enterprise [ghacks.net#1].",
+      "question": "Do Business and Enterprise users get the full-history search feature too?"
+    },
+    {
+      "answer": "The sources describe an initial rollout to U.S. users and do not confirm a broader international launch plan [appleinsider.com#1][mashable.com#1].",
+      "question": "Will ads appear in all countries once testing ends?"
+    }
+  ],
+  "summary": "OpenAI says it will begin testing advertising in ChatGPT for U.S. users on the Free and new Go tiers, while keeping higher-paid plans ad-free [mashable.com#1][appleinsider.com#1]. The company frames ads as a way to help fund broader access to more capable AI, and says ads will be separated from chatbot answers and that conversations will not be shared or sold to advertisers [mashable.com#1]. Separately, OpenAI has changed how ChatGPT can use a subscriber\u2019s past conversations, enabling Plus and Pro users to ask questions that reference their full chat history without manually opening old threads [ghacks.net#1].",
+  "talking_points": [
+    "Ad placement: OpenAI says the ads are planned to appear at the bottom of queries, aiming to keep the main response area focused on the answer [appleinsider.com#1].",
+    "New Go tier: OpenAI introduced an $8 \u201cChatGPT Go\u201d tier, positioned as one of the lower-cost plans alongside the free option [appleinsider.com#1].",
+    "Recent backlash: In December, users posted screenshots alleging irrelevant product-like suggestions in responses, and OpenAI characterized them as poorly timed \u201csuggestions\u201d rather than ads [mashable.com#1].",
+    "Pro user frustration: Some ChatGPT Pro subscribers paying $200 per month also complained that the experience felt off during the period when users suspected ads were appearing [mashable.com#1].",
+    "Ad experiments: Earlier reporting described internal ad concept tests, including layout and disclosure ideas intended to create \u201ca new type of digital ads\u201d that users would tolerate [mashable.com#1]."
+  ],
+  "technical_details": [
+    "Full chat history search: Plus and Pro subscribers can ask questions that reference their entire ChatGPT chat history, including older conversations, without manually opening past threads [ghacks.net#1].",
+    "Answer\u2013ad separation: OpenAI says it will keep a separation between ChatGPT\u2019s answers and advertising, emphasizing that responses should be \u201cobjectively useful\u201d rather than ad-driven [mashable.com#1].",
+    "Ad disclosures and layout: OpenAI has been testing ad layouts and disclosure approaches internally to reduce user drop-off, according to reporting cited by Mashable [mashable.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Users shared screenshots of seemingly unrelated product suggestions [mashable.com#1].",
+      "date": "December"
+    },
+    {
+      "content": "OpenAI confirmed ad testing for Free and Go tiers [mashable.com#1][appleinsider.com#1].",
+      "date": "Friday"
+    }
+  ],
+  "title": "OpenAI tests ChatGPT ads and expands memory search",
+  "unique_domains": 3,
+  "url": "https://mashable.com/article/openai-to-finally-bring-ads-to-chatgpt",
+  "user_action_items": [
+    "Choose an ad experience that fits your use: If you want to avoid ads entirely, use a tier OpenAI says will remain ad-free (Pro, Business, or Enterprise) [mashable.com#1].",
+    "Test \u201chistory-based\u201d questions carefully: If you have Plus or Pro, try prompts that reference older chats to see what ChatGPT can recall from your history, since it can now search across prior conversations [ghacks.net#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
