@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>PCMag writer uses vibe coding to build website - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>PCMag writer uses vibe coding to build website</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A PCMag writer describes trying “vibe coding” despite having no programming experience, using AI assistance to create a custom website and learning by iterating through small missteps and fixes along the way <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>. The piece frames the experiment as a hands-on look at how conversational AI tools can lower the barrier to making simple web projects, even for beginners, while still requiring the user to steer, test, and refine the results <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>. The author reports that, after a few setbacks, they were able to get a working site up quickly, suggesting these tools can be a practical on-ramp to building and understanding software in a more approachable way <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Beginner workflow: The author’s process relied on giving the AI plain-language goals, then adjusting prompts and outputs in response to what didn’t work, treating the tool like an interactive helper rather than a one-shot solution <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+<li>Learning moment: Setbacks in the build are presented as part of the experience, highlighting that AI-assisted creation can still involve debugging and decision-making even when the user doesn’t write much code directly <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+<li>Custom result: The end product is described as a custom website assembled quickly, illustrating how AI-assisted building can help non-coders move from idea to usable prototype without a traditional programming ramp-up <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>PCMag author (non-programmer): The author portrays vibe coding as an accessible way to produce a functional website with AI help, while emphasizing iterative refinement when things go wrong.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well">PCMag</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Readers considering AI tools: The article implicitly positions vibe coding as a low-pressure entry point for people who want to build small projects, showing both quick progress and the need to verify results.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well">PCMag</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Vibe coding: A casual, intent-first approach where a user describes what they want in natural language and relies on an AI assistant to generate and adjust code through back-and-forth iteration <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+<li>Prompt iteration: A practical technique of refining instructions to the AI after observing incorrect or incomplete outputs, which the author uses to work through issues and converge on a working result <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Software accessibility: The experiment highlights how AI assistance can reduce the initial skills barrier for creating simple web projects, potentially shifting more work toward rapid prototyping and iterative editing rather than starting from scratch <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+<li>Developer tooling: By showing that beginners still must test and correct AI-generated outputs, the story underscores the importance of tooling that supports verification, debugging, and safe defaults—not just code generation <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Over the past few years, large language models have enabled conversational coding assistance, making it easier to generate snippets, explain errors, and scaffold simple apps without deep prior knowledge [common]. The article sits within that broader shift toward “natural-language programming,” where users describe intent and tools produce drafts that humans validate and refine <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What kinds of website features did the author focus on beyond a basic page?</p>
+
+<p><strong>A:</strong> The article centers on building a custom website and describes working through small setbacks during creation, but it does not clearly enumerate a full feature checklist in the provided summary information <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> How did the author verify that the AI-generated output actually worked?</p>
+
+<p><strong>A:</strong> The piece frames the process as iterative, with the author testing results and correcting issues after minor setbacks, rather than assuming the first AI output was correct <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Try a tiny website prototype: Pick one page you want (e.g., a portfolio landing page), describe it in plain language to an AI tool, then test each change step-by-step—mirroring the iterative approach described in the experiment <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+<li>Keep a “change log” while iterating: Write down each prompt and what changed in your site after applying it, so you can roll back mistakes and learn which instructions produce the most reliable results <a href="https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTmVNcG54TWVBc1ZINTZRNWVPc0F5T2pmaFBDUzg1VDYzTUhWOVpZRGVwb3ZZSURtQ2RTa1MzY0JqQWk5eDNMWkRHMGNFR0hFYUZ4Z05sMWJhdzh2U2NkMXdOenZ6NUpaNVl4bUptYUc3Y2xJdXIyYTRybC03NDBpWVlmVVNWM3BVUDRDVmhtVnVBLWVSVnVacjJCNjdvMjAwWGRGQVl2Nno">https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTmVNcG54TWVBc1ZINTZRNWVPc0F5T2pmaFBDUzg1VDYzTUhWOVpZRGVwb3ZZSURtQ2RTa1MzY0JqQWk5eDNMWkRHMGNFR0hFYUZ4Z05sMWJhdzh2U2NkMXdOenZ6NUpaNVl4bUptYUc3Y2xJdXIyYTRybC03NDBpWVlmVVNWM3BVUDRDVmhtVnVBLWVSVnVacjJCNjdvMjAwWGRGQVl2Nno</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiqwFBVV95cUxOd0hfNG44QkE2bkZQR1NQYWF6ck1EcW55NS1pN045enM4T0Z3cFNlbklCZjF6YjE1M3ltS3dZR3RQTXk4Q1hrZFNfUHAxMXp0cFRPZnMwbmk2TjY0ZG1pX3RJYkJDRzU4ZEtzTzhmUkF0RjZ5S3pkQUFobE5EN3VkbmtNUlZFd2hpNk1xWFhXbWlRTWVURXdLNXpYX2IwTkl0Z3ZjQ2ZfUENCSjQ">https://news.google.com/rss/articles/CBMiqwFBVV95cUxOd0hfNG44QkE2bkZQR1NQYWF6ck1EcW55NS1pN045enM4T0Z3cFNlbklCZjF6YjE1M3ltS3dZR3RQTXk4Q1hrZFNfUHAxMXp0cFRPZnMwbmk2TjY0ZG1pX3RJYkJDRzU4ZEtzTzhmUkF0RjZ5S3pkQUFobE5EN3VkbmtNUlZFd2hpNk1xWFhXbWlRTWVURXdLNXpYX2IwTkl0Z3ZjQ2ZfUENCSjQ</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> pcmag.com, google.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 2 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-19T23:10:25+00:00",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well",
+      "title": "I Can\u2019t Program at All. My First Vibe Coding Experiment Went Shockingly Well"
+    },
+    {
+      "date": "2026-01-19T23:10:25+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOd0hfNG44QkE2bkZQR1NQYWF6ck1EcW55NS1pN045enM4T0Z3cFNlbklCZjF6YjE1M3ltS3dZR3RQTXk4Q1hrZFNfUHAxMXp0cFRPZnMwbmk2TjY0ZG1pX3RJYkJDRzU4ZEtzTzhmUkF0RjZ5S3pkQUFobE5EN3VkbmtNUlZFd2hpNk1xWFhXbWlRTWVURXdLNXpYX2IwTkl0Z3ZjQ2ZfUENCSjQ",
+      "title": "I Can\u2019t Program at All. My First Vibe Coding Experiment Went Shockingly Well - PCMag Middle East"
+    },
+    {
+      "date": "2026-01-19T23:13:52+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTmVNcG54TWVBc1ZINTZRNWVPc0F5T2pmaFBDUzg1VDYzTUhWOVpZRGVwb3ZZSURtQ2RTa1MzY0JqQWk5eDNMWkRHMGNFR0hFYUZ4Z05sMWJhdzh2U2NkMXdOenZ6NUpaNVl4bUptYUc3Y2xJdXIyYTRybC03NDBpWVlmVVNWM3BVUDRDVmhtVnVBLWVSVnVacjJCNjdvMjAwWGRGQVl2Nno",
+      "title": "I Can\u2019t Program at All. My First Vibe Coding Experiment Went Shockingly Well - PCMag"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/RrXPLtPChGnm8dlDC6H-3p5DLAYa7JYi6Fzblveks6-oDDJwsdt-QbP-4C992uCcAedjRE1YesqjIluQUKcXLGgT3ApcT7xYykchcodGRg",
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/YR8uGpArdRMU11wl-_C47nez4qTOn49JzCqeFVeEjcF4M0w_4mwN__EBSm3Jzxh9uMpYQPkNg2SnKVE1J52S-AUeRSR-q3O-nCvTn9V5OpU",
+      "name": "google.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddd1\u200d\ud83d\udcbb",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Over the past few years, large language models have enabled conversational coding assistance, making it easier to generate snippets, explain errors, and scaffold simple apps without deep prior knowledge [common]. The article sits within that broader shift toward \u201cnatural-language programming,\u201d where users describe intent and tools produce drafts that humans validate and refine [pcmag.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Software accessibility: The experiment highlights how AI assistance can reduce the initial skills barrier for creating simple web projects, potentially shifting more work toward rapid prototyping and iterative editing rather than starting from scratch [pcmag.com#1].",
+    "Developer tooling: By showing that beginners still must test and correct AI-generated outputs, the story underscores the importance of tooling that supports verification, debugging, and safe defaults\u2014not just code generation [pcmag.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Vibe Coding",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "PCMag",
+          "url": "https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well"
+        }
+      ],
+      "text": "PCMag author (non-programmer): The author portrays vibe coding as an accessible way to produce a functional website with AI help, while emphasizing iterative refinement when things go wrong."
+    },
+    {
+      "sources": [
+        {
+          "name": "PCMag",
+          "url": "https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well"
+        }
+      ],
+      "text": "Readers considering AI tools: The article implicitly positions vibe coding as a low-pressure entry point for people who want to build small projects, showing both quick progress and the need to verify results."
+    }
+  ],
+  "primary_image": null,
+  "published": 1768904091,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMiqAFBVV95cUxNTmVNcG54TWVBc1ZINTZRNWVPc0F5T2pmaFBDUzg1VDYzTUhWOVpZRGVwb3ZZSURtQ2RTa1MzY0JqQWk5eDNMWkRHMGNFR0hFYUZ4Z05sMWJhdzh2U2NkMXdOenZ6NUpaNVl4bUptYUc3Y2xJdXIyYTRybC03NDBpWVlmVVNWM3BVUDRDVmhtVnVBLWVSVnVacjJCNjdvMjAwWGRGQVl2Nno",
+    "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOd0hfNG44QkE2bkZQR1NQYWF6ck1EcW55NS1pN045enM4T0Z3cFNlbklCZjF6YjE1M3ltS3dZR3RQTXk4Q1hrZFNfUHAxMXp0cFRPZnMwbmk2TjY0ZG1pX3RJYkJDRzU4ZEtzTzhmUkF0RjZ5S3pkQUFobE5EN3VkbmtNUlZFd2hpNk1xWFhXbWlRTWVURXdLNXpYX2IwTkl0Z3ZjQ2ZfUENCSjQ",
+    "https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "The article centers on building a custom website and describes working through small setbacks during creation, but it does not clearly enumerate a full feature checklist in the provided summary information [pcmag.com#1].",
+      "question": "What kinds of website features did the author focus on beyond a basic page?"
+    },
+    {
+      "answer": "The piece frames the process as iterative, with the author testing results and correcting issues after minor setbacks, rather than assuming the first AI output was correct [pcmag.com#1].",
+      "question": "How did the author verify that the AI-generated output actually worked?"
+    }
+  ],
+  "summary": "A PCMag writer describes trying \u201cvibe coding\u201d despite having no programming experience, using AI assistance to create a custom website and learning by iterating through small missteps and fixes along the way [pcmag.com#1]. The piece frames the experiment as a hands-on look at how conversational AI tools can lower the barrier to making simple web projects, even for beginners, while still requiring the user to steer, test, and refine the results [pcmag.com#1]. The author reports that, after a few setbacks, they were able to get a working site up quickly, suggesting these tools can be a practical on-ramp to building and understanding software in a more approachable way [pcmag.com#1].",
+  "talking_points": [
+    "Beginner workflow: The author\u2019s process relied on giving the AI plain-language goals, then adjusting prompts and outputs in response to what didn\u2019t work, treating the tool like an interactive helper rather than a one-shot solution [pcmag.com#1].",
+    "Learning moment: Setbacks in the build are presented as part of the experience, highlighting that AI-assisted creation can still involve debugging and decision-making even when the user doesn\u2019t write much code directly [pcmag.com#1].",
+    "Custom result: The end product is described as a custom website assembled quickly, illustrating how AI-assisted building can help non-coders move from idea to usable prototype without a traditional programming ramp-up [pcmag.com#1]."
+  ],
+  "technical_details": [
+    "Vibe coding: A casual, intent-first approach where a user describes what they want in natural language and relies on an AI assistant to generate and adjust code through back-and-forth iteration [pcmag.com#1].",
+    "Prompt iteration: A practical technique of refining instructions to the AI after observing incorrect or incomplete outputs, which the author uses to work through issues and converge on a working result [pcmag.com#1]."
+  ],
+  "timeline": [],
+  "title": "PCMag writer uses vibe coding to build website",
+  "unique_domains": 2,
+  "url": "https://www.pcmag.com/articles/i-cant-program-at-all-my-first-vibe-coding-experiment-went-shockingly-well",
+  "user_action_items": [
+    "Try a tiny website prototype: Pick one page you want (e.g., a portfolio landing page), describe it in plain language to an AI tool, then test each change step-by-step\u2014mirroring the iterative approach described in the experiment [pcmag.com#1].",
+    "Keep a \u201cchange log\u201d while iterating: Write down each prompt and what changed in your site after applying it, so you can roll back mistakes and learn which instructions produce the most reliable results [pcmag.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
