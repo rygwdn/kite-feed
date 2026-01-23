@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Google AI Mode adds Gmail and Photos context - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Google AI Mode adds Gmail and Photos context</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html"><img src="https://kagiproxy.com/img/3WMTeljJvem8NZruHLkw4vqpkkRZG5nlb2FSo6zyPZRZfD4BVrMfzu-Ukk1As0TK8KK_5VTpxfPJIVFBhBT3t_3DjwjHnuaXOc_Ward6DeHCVXSl3Ft5d7eWwTmf86q3zqB7_g2_XMA25i6NTxBlAWx7YDN4_r3QrtGBhtjF9aiuvu3vUrWTF97kNAbj36Nwz_HRhyx3rF-RIWSHGgdt4evypDKZnp77rKR-rzjljRM-k-F4jJEWPlZ_OccDuPb25ZEN5jAZowyxsfu2rB92sKQks_14JBpCh4_VNmDsXtUB3_X1frzUVSpwA04Wp75EE4H-BP_cBywS7XDT6C0rdzQBEnQ21-gqvp0-jce7v55Aqk8wG0o" alt="Google Search AI Mode with Personal Intelligence." title="Google Search AI Mode with Personal Intelligence. (engadget.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Google Search AI Mode with Personal Intelligence. <span class='credit'>(engadget.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Google is rolling out an optional “Personal Intelligence” feature in AI Mode for Google Search that can use context from a user’s Gmail and Google Photos to produce more tailored answers <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/" class="footnote-ref">[1]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a><a href="https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088" class="footnote-ref">[5]</a>. The feature starts as an experimental Google Labs rollout for U.S. users in English, with access tied initially to Google AI Pro and Google AI Ultra subscriptions <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a><a href="https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/" class="footnote-ref">[2]</a>. Google says the capability is meant to reduce the effort of re-explaining preferences and plans—like shopping or trip prep—while keeping the connection opt-in and reversible <a href="https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html" class="footnote-ref">[7]</a><a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/" class="footnote-ref">[3]</a><a href="https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/" class="footnote-ref">[9]</a>. At the same time, the update raises familiar privacy tradeoffs because it can draw from sensitive personal information such as email confirmations and photo libraries <a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/" class="footnote-ref">[3]</a><a href="https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088" class="footnote-ref">[5]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Engadget notes Google warns that Personal Intelligence can make inaccurate connections if it misreads context or links unrelated topics <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>How it helps: Examples highlighted by Google and outlets include using email reservations to suggest destination-appropriate shopping picks, and using photo-library context to help locate past vacation memories or inform planning for a future trip <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a><a href="https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/" class="footnote-ref">[1]</a>.</li>
+
+<li>Model and scope: Search’s AI Mode experience is powered by Google’s Gemini 3 model, and this initial Search integration focuses on Gmail and Photos rather than the broader set of connected services described for Gemini’s Personal Intelligence test <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</li>
+
+<li>Data-use claims: Google says it does not train its AI models on data pulled from Gmail or Google Photos for this feature, while it may use prompts and AI Mode responses, and it cautions that connections it makes can sometimes be inaccurate <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a>.</li>
+
+<li>Availability limits: The rollout begins via Labs for personal Google accounts, with Workspace accounts not supported at launch, and subscribers in the U.S. using English automatically see access to connect Gmail and Photos once enabled <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</li>
+
+<li>Privacy tradeoff: Several outlets frame the update as a step toward more relevant results, but also note that “more personalized” answers can require granting Google deeper access to personal data, which some users may prefer to keep separate from search <a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/" class="footnote-ref">[3]</a><a href="https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/" class="footnote-ref">[9]</a><a href="https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Google (product framing): Google presents Personal Intelligence as an opt-in way to make AI Mode responses more useful by referencing a person’s own context from services like Gmail and Photos, aiming to reduce the need to restate preferences <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html">Engadget</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Privacy-minded critics/coverage: Coverage emphasizes that connecting email and photos can make answers more relevant, but it also expands how much personal information can inform Search, creating a clearer privacy-versus-convenience decision for users <a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/">ZDNET</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Mainstream consumer framing: Some reporting describes the feature as a new option that uses people’s habits, interests and travel itineraries to tailor search answers, while underscoring the opt-in nature of the connection <a href="https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088" class="footnote-ref">[5]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088">ABC News</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>Last week:</strong> Google introduced Personal Intelligence as an opt-in Gemini feature <a href="https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/" class="footnote-ref">[2]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a>.</li>
+
+
+
+<li><strong>Starting today:</strong> Google begins Labs rollout bringing Personal Intelligence into Search AI Mode <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Personal Intelligence: An opt-in capability that lets AI Mode reference a user’s connected Google services (initially Gmail and Photos in Search) to tailor answers using personal context <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/" class="footnote-ref">[1]</a><a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/" class="footnote-ref">[3]</a>.</li>
+
+<li>Google Labs gating: Google is shipping the feature as an experimental Labs toggle, meaning users must explicitly enable it even if they are eligible subscribers <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</li>
+
+<li>Training vs. inference: Google says it does not train models on Gmail/Photos content used by Personal Intelligence, while it can use prompts and AI responses—an important distinction between using private data to answer a query and using it to improve future models <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Search competition: By using first-party context from Gmail and Photos, Google can differentiate AI answers from rivals that lack comparable personal-data integration across services <a href="https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html" class="footnote-ref">[7]</a><a href="https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/" class="footnote-ref">[9]</a>.</li>
+
+<li>Privacy tooling: Opt-in design, account-type limits (personal vs Workspace), and explicit warnings about occasional incorrect connections point to a broader industry push to ship “personal” AI while adding guardrails and user controls <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</li>
+
+<li>Retail discovery: If users enable it, AI Mode can incorporate purchase and travel signals from email to shape product suggestions, which could shift how brands compete for discovery beyond keyword-based search <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Google has increasingly positioned generative AI as a core part of its search experience, with AI Mode and Gemini serving as its main consumer-facing AI surfaces <a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a><a href="https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/" class="footnote-ref">[2]</a>. Personal Intelligence first appeared as an opt-in personalization experiment for Gemini that could connect to multiple Google services, and Search is now adopting a narrower version focused on Gmail and Photos <a href="https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/" class="footnote-ref">[2]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> Will the feature work with Google Workspace accounts used at work or school?</p>
+
+<p><strong>A:</strong> Not at launch; Engadget reports the Gmail/Photos connection in AI Mode is available to personal Google accounts, with Workspace accounts not supported yet <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Does connecting Gmail and Photos mean Google trains its models on that content?</p>
+
+<p><strong>A:</strong> Google says it does not train its models using information from Gmail or Google Photos for this feature, though it does use prompts and AI Mode responses <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search" class="footnote-ref">[8]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> What’s the biggest practical source of personal context for AI Mode?</p>
+
+<p><strong>A:</strong> Ars Technica suggests Gmail may contribute the most because many life events create confirmation and reservation emails <a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Try it in a low-stakes query first: Enable Personal Intelligence in Google Labs for AI Mode, connect Gmail/Photos, and start with simple prompts (e.g., finding an old reservation email) to gauge usefulness before relying on it for complex decisions <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/" class="footnote-ref">[11]</a>.</li>
+
+<li>Limit what you share: If you want AI Mode without deeper personalization, leave Gmail/Photos unconnected (the feature is optional) or disable it later in Labs/settings if you change your mind <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a><a href="https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html" class="footnote-ref">[7]</a><a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/" class="footnote-ref">[3]</a>.</li>
+
+<li>Sanity-check outputs: When AI Mode suggests items based on your history, verify key details (dates, reservations, brands) because Google warns the system can make incorrect context links <a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.zdnet.com/article/google-ai-mode-gmail-photos/">https://www.zdnet.com/article/google-ai-mode-gmail-photos/</a></li>
+
+
+
+<li><a href="https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/">https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/</a></li>
+
+
+
+<li><a href="https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/">https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/</a></li>
+
+
+
+<li><a href="https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html">https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html</a></li>
+
+
+
+<li><a href="https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html">https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html</a></li>
+
+
+
+<li><a href="https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/">https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/</a></li>
+
+
+
+<li><a href="https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088">https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088</a></li>
+
+
+
+
+
+<li><a href="https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search">https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search</a></li>
+
+
+
+<li><a href="https://www.droid-life.com/2026/01/22/googles-ai-mode-gets-personal-intelligence/">https://www.droid-life.com/2026/01/22/googles-ai-mode-gets-personal-intelligence/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWjNpTk16MHdiclNpTnVMQnBfbWdtR3RyUDlSSTVNaHlfZ1k5RWtYUkUtYTRLeWhnakIxaXFVNDFzLWlnbkFzWDBoTFRhRFpQX1ozRkV0SFBscnNvUkZGNmt2UHJzb3Buc3BrSmM5N0l4WV90RF8wcUtseHh2OElqc0JvZTg4TWRJYzVfTU14R2tSOU9fcTRhTVA1dXQ4RXdPdFRGeFV4WWNBQ2llU3dudDdRTEFaUlFBdUxB">https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWjNpTk16MHdiclNpTnVMQnBfbWdtR3RyUDlSSTVNaHlfZ1k5RWtYUkUtYTRLeWhnakIxaXFVNDFzLWlnbkFzWDBoTFRhRFpQX1ozRkV0SFBscnNvUkZGNmt2UHJzb3Buc3BrSmM5N0l4WV90RF8wcUtseHh2OElqc0JvZTg4TWRJYzVfTU14R2tSOU9fcTRhTVA1dXQ4RXdPdFRGeFV4WWNBQ2llU3dudDdRTEFaUlFBdUxB</a></li>
+
+
+
+<li><a href="https://www.androidpolice.com/personal-intelligence-ai-mode-google-search/">https://www.androidpolice.com/personal-intelligence-ai-mode-google-search/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> abcnews.go.com, digitaltrends.com, 9to5google.com, cnet.com, zdnet.com, engadget.com, androidheadlines.com, droid-life.com, mashable.com, androidpolice.com, google.com, arstechnica.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 12 unique domains, 12 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-22T22:29:43+00:00",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/",
+      "title": "Google Search can now answer questions using your Gmail and Photos in AI mode"
+    },
+    {
+      "date": "2026-01-22T16:00:00+00:00",
+      "domain": "9to5google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/",
+      "title": "AI Mode rolling out Personal Intelligence to make Google Search \u2018uniquely yours\u2019"
+    },
+    {
+      "date": "2026-01-22T16:52:12+00:00",
+      "domain": "zdnet.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.zdnet.com/article/google-ai-mode-gmail-photos/",
+      "title": "Google\u0027s AI Mode can search your email and photos now too - how it works"
+    },
+    {
+      "date": "2026-01-22T16:00:00+00:00",
+      "domain": "engadget.com",
+      "image": "https://kagiproxy.com/img/XMsr2tUT6hXd5AbhQKoZy5Go-Ba9CZ1MBgiNDpf2-iZkG2lgeLR4dbjq8zkTkCGZhDLdVUmGU3oskjuLplo105VHmuKGTV94kdsJ6CS47fy5a6vl6ZT_D8A718EUOehSpfSyHcLdUQt83LHH24iGZ5ApEfPbJikMSrKrxT3xWAYPjghXY9HvY6cwdi4EO6XBSDS0QKOdXyqiGiY3Kv5A0bPYjKEJ5FM6EbNBQteO3UMsid3ZhVMJ1TtgYKyPBEu87mSc7Y70f8r1xngulXVXWVrc0CwXMsBmij7Gu8eg7JBogE3GYnj2dcT7KvXFAE7xx0ULHaLPOEXABJj4QNk8ah68PYr7x1OiJUrjvn1R98zBX5F1ac0",
+      "image_caption": "Google Search AI Mode with Personal Intelligence.",
+      "link": "https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html",
+      "title": "AI Mode in Google search can now pull context from your other apps"
+    },
+    {
+      "date": "2026-01-22T16:21:56+00:00",
+      "domain": "abcnews.go.com",
+      "image": "https://kagiproxy.com/img/R1e9IMRR96VmSNXfWMZ2aTboz4nt5NPQbQybgRb1Syz64eQUsnMNWeix43MH9XprvZ6vAMEhBaC4UGAm6SZHZ2jK4aDZXAeI4TNTq6dY_zkDy2-ILG50avn7iFUvGv1Sk-k_juLWDxrFkb2vdUiuMYUOfnRSe_z_AkKd",
+      "image_caption": "",
+      "link": "https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088",
+      "title": "Google offers users option to plug AI mode into their photos, email for more personalized answers"
+    },
+    {
+      "date": "2026-01-22T21:08:41+00:00",
+      "domain": "androidpolice.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.androidpolice.com/personal-intelligence-ai-mode-google-search/",
+      "title": "Your photos and emails can now influence your Google Search"
+    },
+    {
+      "date": "2026-01-22T22:02:09+00:00",
+      "domain": "androidheadlines.com",
+      "image": "https://kagiproxy.com/img/_Ifs6sXED9yA5hRGsJAC3xzoIbfPATel5jlCspXvNvXC4lu10d76A_LN3bOrG-JWU02YcWd7LMrKHaYOPrMMIdF-6AmfS4ISCwU1vh-kqo_WFNbkqlcbYYFOtNz6rAPXyA0sR6CCxbvvoFWZZvkvpHDhtQo",
+      "image_caption": "",
+      "link": "https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html",
+      "title": "Google Search Introduces AI Mode Personal Intelligence Update for More Tailored Answers"
+    },
+    {
+      "date": "2026-01-22T16:00:15+00:00",
+      "domain": "mashable.com",
+      "image": "https://kagiproxy.com/img/LFi6k8b385F1sU228IzuqKeHJBdoYZffsdlMWTy5HBJ1oNp399yclJklJZa0qAFpCd1Ji4DgvRBtyID1RxUt1j_84ANcOBv4yxAIs1sKT5-i1or6X2VAM8hiG-y3RYSzaSI1UDyqFAC77jUqqFbVGo_Blcs0WDDVeCQ0d9VsMlSr7_yBpx13VoYZmPIm2FE",
+      "image_caption": "",
+      "link": "https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search",
+      "title": "Google is bringing Personal Intelligence to AI Mode in Google Search"
+    },
+    {
+      "date": "2026-01-22T16:00:39+00:00",
+      "domain": "cnet.com",
+      "image": "https://kagiproxy.com/img/DPJTYSLcbVzLd5Cm3cwqs3uHLoXvd2vR1u14UGsoeHkRJJXY506TiBCTc0JtV5tlfiTxmvdY8pGtzys_FEz63nhdkm0acJKC7t6sLYvr851Y15IrPkdaqmbH-FpbBm6kxR61RxegkXHYfjX2cpIVFkH7X_jC306-3IlmbNvrLSy1VTVEC4TGYMG_wiIsPTSSoPhoLkQXtMQWOAQyN9rjd0UTLp5jA5eSt-sP5BmnH5JPaQZ492EfkZCt0PZVvCjexg37s68kQ_u87WQRAp0",
+      "image_caption": "",
+      "link": "https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/",
+      "title": "Google Is Hoping \u0027Personalized\u0027 AI Will Make Search Results More Relevant for You"
+    },
+    {
+      "date": "2026-01-22T16:00:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWjNpTk16MHdiclNpTnVMQnBfbWdtR3RyUDlSSTVNaHlfZ1k5RWtYUkUtYTRLeWhnakIxaXFVNDFzLWlnbkFzWDBoTFRhRFpQX1ozRkV0SFBscnNvUkZGNmt2UHJzb3Buc3BrSmM5N0l4WV90RF8wcUtseHh2OElqc0JvZTg4TWRJYzVfTU14R2tSOU9fcTRhTVA1dXQ4RXdPdFRGeFV4WWNBQ2llU3dudDdRTEFaUlFBdUxB",
+      "title": "Google\u2019s AI Mode can now tap into your Gmail and Photos to provide tailored responses - TechCrunch"
+    },
+    {
+      "date": "2026-01-22T16:35:41+00:00",
+      "domain": "arstechnica.com",
+      "image": "https://kagiproxy.com/img/mlONqTko9-Zl4lCbs4F73fq8mFxJWoG9W6qFXwzQ4N4tqVVxtpFhYXgbCVU3CD9xmGiu5rnpWoV9HHNak6KKZ17J_nWnn92OLRcADg8XsbsjsrlUez4N_a-7y4Q6-IztecbQ1sbuLw",
+      "image_caption": "",
+      "link": "https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/",
+      "title": "Google adds your Gmail and Photos to AI Mode to enable \"Personal Intelligence\""
+    },
+    {
+      "date": "2026-01-22T17:21:54+00:00",
+      "domain": "droid-life.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.droid-life.com/2026/01/22/googles-ai-mode-gets-personal-intelligence/",
+      "title": "Google\u2019s AI Mode Gets Personal Intelligence"
+    }
+  ],
+  "category": "Technology",
+  "cluster_number": 2,
+  "did_you_know": "Engadget notes Google warns that Personal Intelligence can make inaccurate connections if it misreads context or links unrelated topics [engadget.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/kZHEt-3Z_Oj1ByqGJUCsdTHo_F_6_5Iy4EJH59njHZPGawfRxtnihcRxJpBY5LWh8TX-AvibtjUs0wbuwBigLcTsW1-S1YxVXR0waovm9OjxJ_d_",
+      "name": "abcnews.go.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/tniEsK-qClF-H1zVQ3kvwJjhze2FJZ-3SC3sEmjSJFxi3Vqq8w2bN3GTJVrW_McF8t7cKF1IQBS70gW5xF9vCxRaBIw2SOFtUkRjLOPC305zlrmZvF-9",
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/peNiJAI5uho69nFXbLbN1bBmp3F5WViHgkIkTwtM8_VLlYEzZoZhCn04YnDTfQeCazLIYpUSjcw0zGn1JetGh-v3KDS08qhkiU8pSi6E647Y69F8",
+      "name": "9to5google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/38mVoTugiSYL1L_d5dUPh4iW0DKUaV041pqhMQqb-zzx_Bv2r0SoDGjSMhKmfYhwrM026D5XFMBmIRkfmLgkEWkkbXKysasOiYMXVDKn",
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/EbtELYT9KLvpf-94F8PN-eGxGxtX3uuQ64pVoR7uNJI2c88VhgUltrJgBOKCCQD_0ciAqiIPHsoh7f0RL8HMutzh-P_3QTvq8pg24EIIUw",
+      "name": "zdnet.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/u6s5crJs6JRKBe6lAIUQijKn0VvX9oJacsYbmlgciaDlW2rIOcRewSZWif7MR7XL6sZe0sopOEEZx-KQEKMqfn5uvnTgz69zrlqO7xEICQoPrw",
+      "name": "engadget.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/mTnXyX5Pea5c6Yv79GLXNvgsYk3AAUQIkVvgJqhMnECDivPluQmr3V9kAHreTiMP_Tf3KkH4UYfVsqHR6Kyc6Nbfjs0e6oM_Qv7YnLxFFgX1UpWAbz12M6Xs",
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/xKV55k_DpSFJeLym8cKMyr7hN-n24jc0EVuEOZK7YW1ul4hasAKhG12V-ju6hfZ-m4ABj4If2rdBfdTcbiPpyTuwabqZ0yvQBhynYNuF1hYL1V1F",
+      "name": "droid-life.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/MXiY7UFUq6r-tW1Uk8cKy-lh9-YwkjurHWPw3RtkIbBHS5UC7TiNlSYaGwHlUDB5EU6Tn_WZTYzPgC1bFbFmiHnjiZ6O6aRqh7FVkN0z2CqYOg",
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/KQwYPLEclPrVXn4mYIetR6DtlmGSfTJkevf1vW0MBHFoyrqIERmJfFQSAanp2hJCCpec4JxCizPEbVmwGZudwyJkIcnJW8cDieucHYxY8nxK91hv3I3_",
+      "name": "androidpolice.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/4veLySC1btpEkuzKMOfrT5_M397mlD0CBXiBhsW9AUtF-sIT5Djw5eWVAbh55Uxs__1mR35EM-9sW1y0EdG8HltO2wwf_-3o8XHmChkOE2w",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/Ytgvudj1haHAdsXrZtxdiG8kCG86H11XyVv9rah6xYx-QwfHfkE_VRMQ0zFFEYG6bEuvOBey-EYbpE4XGohgX60ziYvPXvXtYo30esjtbUn03apfeA",
+      "name": "arstechnica.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd0e",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Google has increasingly positioned generative AI as a core part of its search experience, with AI Mode and Gemini serving as its main consumer-facing AI surfaces [arstechnica.com#1][9to5google.com#1]. Personal Intelligence first appeared as an opt-in personalization experiment for Gemini that could connect to multiple Google services, and Search is now adopting a narrower version focused on Gmail and Photos [9to5google.com#1][mashable.com#1][arstechnica.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Search competition: By using first-party context from Gmail and Photos, Google can differentiate AI answers from rivals that lack comparable personal-data integration across services [androidheadlines.com#1][cnet.com#1].",
+    "Privacy tooling: Opt-in design, account-type limits (personal vs Workspace), and explicit warnings about occasional incorrect connections point to a broader industry push to ship \u201cpersonal\u201d AI while adding guardrails and user controls [engadget.com#1][arstechnica.com#1].",
+    "Retail discovery: If users enable it, AI Mode can incorporate purchase and travel signals from email to shape product suggestions, which could shift how brands compete for discovery beyond keyword-based search [engadget.com#1][mashable.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Search",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 12,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Engadget",
+          "url": "https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html"
+        }
+      ],
+      "text": "Google (product framing): Google presents Personal Intelligence as an opt-in way to make AI Mode responses more useful by referencing a person\u2019s own context from services like Gmail and Photos, aiming to reduce the need to restate preferences [engadget.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "ZDNET",
+          "url": "https://www.zdnet.com/article/google-ai-mode-gmail-photos/"
+        }
+      ],
+      "text": "Privacy-minded critics/coverage: Coverage emphasizes that connecting email and photos can make answers more relevant, but it also expands how much personal information can inform Search, creating a clearer privacy-versus-convenience decision for users [zdnet.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "ABC News",
+          "url": "https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088"
+        }
+      ],
+      "text": "Mainstream consumer framing: Some reporting describes the feature as a new option that uses people\u2019s habits, interests and travel itineraries to tailor search answers, while underscoring the opt-in nature of the connection [abcnews.go.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "Google Search AI Mode with Personal Intelligence.",
+    "credit": "engadget.com",
+    "link": "https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html",
+    "url": "https://kagiproxy.com/img/3WMTeljJvem8NZruHLkw4vqpkkRZG5nlb2FSo6zyPZRZfD4BVrMfzu-Ukk1As0TK8KK_5VTpxfPJIVFBhBT3t_3DjwjHnuaXOc_Ward6DeHCVXSl3Ft5d7eWwTmf86q3zqB7_g2_XMA25i6NTxBlAWx7YDN4_r3QrtGBhtjF9aiuvu3vUrWTF97kNAbj36Nwz_HRhyx3rF-RIWSHGgdt4evypDKZnp77rKR-rzjljRM-k-F4jJEWPlZ_OccDuPb25ZEN5jAZowyxsfu2rB92sKQks_14JBpCh4_VNmDsXtUB3_X1frzUVSpwA04Wp75EE4H-BP_cBywS7XDT6C0rdzQBEnQ21-gqvp0-jce7v55Aqk8wG0o"
+  },
+  "published": 1769145275,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://www.zdnet.com/article/google-ai-mode-gmail-photos/",
+    "https://9to5google.com/2026/01/22/google-ai-mode-personal-intelligence/",
+    "https://www.cnet.com/tech/services-and-software/geminis-new-personalized-intelligence-feature/",
+    "https://www.androidheadlines.com/2026/01/google-search-introduces-ai-mode-personal-intelligence-update-for-more-tailored-answers.html",
+    "https://www.engadget.com/ai/ai-mode-in-google-search-can-now-pull-context-from-your-other-apps-160000103.html",
+    "https://arstechnica.com/google/2026/01/google-ai-mode-can-now-customize-responses-with-your-email-and-photos/",
+    "https://abcnews.go.com/Technology/wireStory/google-offers-users-option-plug-ai-mode-photos-129460088",
+    "https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/",
+    "https://mashable.com/article/google-personal-intelligence-roll-out-ai-mode-google-search",
+    "https://www.droid-life.com/2026/01/22/googles-ai-mode-gets-personal-intelligence/",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOWjNpTk16MHdiclNpTnVMQnBfbWdtR3RyUDlSSTVNaHlfZ1k5RWtYUkUtYTRLeWhnakIxaXFVNDFzLWlnbkFzWDBoTFRhRFpQX1ozRkV0SFBscnNvUkZGNmt2UHJzb3Buc3BrSmM5N0l4WV90RF8wcUtseHh2OElqc0JvZTg4TWRJYzVfTU14R2tSOU9fcTRhTVA1dXQ4RXdPdFRGeFV4WWNBQ2llU3dudDdRTEFaUlFBdUxB",
+    "https://www.androidpolice.com/personal-intelligence-ai-mode-google-search/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "Not at launch; Engadget reports the Gmail/Photos connection in AI Mode is available to personal Google accounts, with Workspace accounts not supported yet [engadget.com#1].",
+      "question": "Will the feature work with Google Workspace accounts used at work or school?"
+    },
+    {
+      "answer": "Google says it does not train its models using information from Gmail or Google Photos for this feature, though it does use prompts and AI Mode responses [engadget.com#1][mashable.com#1].",
+      "question": "Does connecting Gmail and Photos mean Google trains its models on that content?"
+    },
+    {
+      "answer": "Ars Technica suggests Gmail may contribute the most because many life events create confirmation and reservation emails [arstechnica.com#1].",
+      "question": "What\u2019s the biggest practical source of personal context for AI Mode?"
+    }
+  ],
+  "summary": "Google is rolling out an optional \u201cPersonal Intelligence\u201d feature in AI Mode for Google Search that can use context from a user\u2019s Gmail and Google Photos to produce more tailored answers [engadget.com#1][digitaltrends.com#1][mashable.com#1][abcnews.go.com#1]. The feature starts as an experimental Google Labs rollout for U.S. users in English, with access tied initially to Google AI Pro and Google AI Ultra subscriptions [engadget.com#1][arstechnica.com#1][9to5google.com#1]. Google says the capability is meant to reduce the effort of re-explaining preferences and plans\u2014like shopping or trip prep\u2014while keeping the connection opt-in and reversible [androidheadlines.com#1][zdnet.com#1][cnet.com#1]. At the same time, the update raises familiar privacy tradeoffs because it can draw from sensitive personal information such as email confirmations and photo libraries [zdnet.com#1][abcnews.go.com#1][arstechnica.com#1].",
+  "talking_points": [
+    "How it helps: Examples highlighted by Google and outlets include using email reservations to suggest destination-appropriate shopping picks, and using photo-library context to help locate past vacation memories or inform planning for a future trip [engadget.com#1][mashable.com#1][digitaltrends.com#1].",
+    "Model and scope: Search\u2019s AI Mode experience is powered by Google\u2019s Gemini 3 model, and this initial Search integration focuses on Gmail and Photos rather than the broader set of connected services described for Gemini\u2019s Personal Intelligence test [engadget.com#1][mashable.com#1][arstechnica.com#1].",
+    "Data-use claims: Google says it does not train its AI models on data pulled from Gmail or Google Photos for this feature, while it may use prompts and AI Mode responses, and it cautions that connections it makes can sometimes be inaccurate [engadget.com#1][mashable.com#1].",
+    "Availability limits: The rollout begins via Labs for personal Google accounts, with Workspace accounts not supported at launch, and subscribers in the U.S. using English automatically see access to connect Gmail and Photos once enabled [engadget.com#1][arstechnica.com#1].",
+    "Privacy tradeoff: Several outlets frame the update as a step toward more relevant results, but also note that \u201cmore personalized\u201d answers can require granting Google deeper access to personal data, which some users may prefer to keep separate from search [zdnet.com#1][cnet.com#1][abcnews.go.com#1]."
+  ],
+  "technical_details": [
+    "Personal Intelligence: An opt-in capability that lets AI Mode reference a user\u2019s connected Google services (initially Gmail and Photos in Search) to tailor answers using personal context [engadget.com#1][digitaltrends.com#1][zdnet.com#1].",
+    "Google Labs gating: Google is shipping the feature as an experimental Labs toggle, meaning users must explicitly enable it even if they are eligible subscribers [engadget.com#1][arstechnica.com#1].",
+    "Training vs. inference: Google says it does not train models on Gmail/Photos content used by Personal Intelligence, while it can use prompts and AI responses\u2014an important distinction between using private data to answer a query and using it to improve future models [engadget.com#1][mashable.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Google introduced Personal Intelligence as an opt-in Gemini feature [9to5google.com#1][mashable.com#1].",
+      "date": "Last week"
+    },
+    {
+      "content": "Google begins Labs rollout bringing Personal Intelligence into Search AI Mode [engadget.com#1][arstechnica.com#1].",
+      "date": "Starting today"
+    }
+  ],
+  "title": "Google AI Mode adds Gmail and Photos context",
+  "unique_domains": 12,
+  "url": "https://www.digitaltrends.com/computing/google-search-can-now-answer-questions-using-your-gmail-and-photos-in-ai-mode/",
+  "user_action_items": [
+    "Try it in a low-stakes query first: Enable Personal Intelligence in Google Labs for AI Mode, connect Gmail/Photos, and start with simple prompts (e.g., finding an old reservation email) to gauge usefulness before relying on it for complex decisions [engadget.com#1][arstechnica.com#1].",
+    "Limit what you share: If you want AI Mode without deeper personalization, leave Gmail/Photos unconnected (the feature is optional) or disable it later in Labs/settings if you change your mind [engadget.com#1][androidheadlines.com#1][zdnet.com#1].",
+    "Sanity-check outputs: When AI Mode suggests items based on your history, verify key details (dates, reservations, brands) because Google warns the system can make incorrect context links [engadget.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
