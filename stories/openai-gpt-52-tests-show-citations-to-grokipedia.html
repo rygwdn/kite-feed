@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>OpenAI GPT-5.2 tests show citations to Grokipedia - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>OpenAI GPT-5.2 tests show citations to Grokipedia</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html"><img src="https://kagiproxy.com/img/vMWCo42akTFp-72ju2BcTcPgasMp6vg-ZoP9cTKKplXnA374DtgyJ94PbMcNhcOOa_Wj5pQ_0kcD2J39ygKaZ0egBVgJpNTsHMkTU1Id4NBM27ArNIJUwCvxEuoGJEycuPbTOgHU1kBWD8FQ9z5nhnvHFjdz7KBBzulOsQuMrKR_xCXAN6Q9u2sRIIAHqdW-NhzlirP-Jq_Ow5kO4_npu9eAbGK4tPLu2OUGa64GZTbSUQP2G6jXwWMg9_GD_dBd4yeej59lHIx7kIIDBlV0jn2f4nz8-Cpp0QOBk9LQcuNrbyKE8MxLbGYoGu2p0hTsxBHhFhG49tdLY81LIJaVcAQi_IZRqTFMX4uwcJWM4SaDgYLVw2CsAFN3pA5TIZ2GExhx" alt="A 3D-printed miniature model of Elon Musk and a ChatGPT logo in an illustration (Feb. 11, 2025)." title="A 3D-printed miniature model of Elon Musk and a ChatGPT logo in an illustration (Feb. 11, 2025). (REUTERS/Dado Ruvic/Illustration)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+A 3D-printed miniature model of Elon Musk and a ChatGPT logo in an illustration (Feb. 11, 2025). <span class='credit'>(REUTERS/Dado Ruvic/Illustration)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Recent tests reported by multiple outlets found OpenAI’s GPT-5.2 model in ChatGPT sometimes cites Grokipedia—an AI-generated encyclopedia associated with xAI—particularly on narrower or more obscure prompts <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a><a href="http://www.techmeme.com/260124/p15#a260124p15" class="footnote-ref">[3]</a>. The reporting highlights a broader reliability challenge for web-browsing chatbots: they can create “recursive” citation loops when AI systems cite other AI-generated material, potentially amplifying errors <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>. OpenAI said GPT-5.2 searches a broad range of public sources and applies safety filters intended to reduce links tied to high-severity harms <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Engadget reports that Grokipedia launched before GPT-5.2 but later drew scrutiny after citations appeared to include neo-Nazi forums <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Topics observed: The Guardian’s tests cited by Engadget and Techmeme found Grokipedia references in answers touching on Iran’s political structures and on Holocaust deniers, including material related to historian Richard Evans’ role in a libel trial involving David Irving <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a><a href="http://www.techmeme.com/260124/p15#a260124p15" class="footnote-ref">[3]</a>.</li>
+
+<li>Selective sourcing: In the same testing described by Engadget, ChatGPT did not cite Grokipedia for some other contentious prompts, including a question about media bias against President Trump <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Model positioning: OpenAI released GPT-5.2 in December and described it as aimed at professional workflows such as spreadsheet creation and other complex tasks <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Why it matters: Tom’s Hardware frames the issue as a risk of “hallucinated or incorrect” information spreading when AI outputs rely on AI-generated sources rather than primary or vetted references <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</li>
+
+<li>Grokipedia scrutiny: Engadget notes Grokipedia faced scrutiny after some citations appeared to point to neo-Nazi forums, and a study by US researchers described its sources as “questionable” and “problematic” <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>OpenAI: OpenAI told the Guardian that GPT-5.2 searches the web across many public sources and viewpoints, while using safety filters meant to reduce surfacing links associated with high-severity harms.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html">Engadget</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>The Guardian (testing): The Guardian’s testing found GPT-5.2 sometimes cited Grokipedia for specific prompts, including queries about Iran and Holocaust deniers.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="http://www.techmeme.com/260124/p15#a260124p15">Techmeme</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Tom’s Hardware (analysis): Tom’s Hardware argues that citing AI-generated sources can create recursive results and increase the risk of propagating hallucinations or inaccuracies.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries">Tom&#39;s Hardware</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Recursive citations: A failure mode where an LLM’s answer cites AI-generated material that itself was produced from LLM outputs, creating a feedback loop that can reinforce mistakes <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</li>
+
+<li>Web browsing plus filters: OpenAI said GPT-5.2 searches publicly available web sources while applying safety filters designed to reduce surfacing links tied to high-severity harms <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</li>
+
+<li>AI-generated encyclopedia: Grokipedia is described as an online encyclopedia powered by xAI, and it has drawn scrutiny over the quality and nature of some cited sources <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI product design: The coverage suggests developers may need stronger provenance controls—such as preferring primary sources or labeling synthetic sources—to avoid AI-to-AI citation loops in consumer and professional chatbots <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</li>
+
+<li>Publishers and web: If chatbots increasingly cite AI-generated reference sites, it could shift traffic and incentives on the open web, intensifying debates about what counts as a trustworthy “source” in search-like experiences <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</li>
+
+<li>AI safety workflows: OpenAI’s emphasis on safety filters highlights that citation quality and harm reduction are intertwined, especially when models pull from a broad range of public webpages <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Large language model chatbots can generate convincing text without guaranteeing accuracy, which is why many systems add web-browsing and citations to ground answers in sources [common]. The current reports underscore a newer twist: as more AI-generated “reference” sites appear, models may inadvertently treat synthetic content as evidence, raising the stakes for provenance checks and source-quality filters <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a><a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</p>
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What practical signals can help spot an AI-generated reference source?</p>
+
+<p><strong>A:</strong> Look for unusually generic prose, missing author/edit history, thin citations, and a heavy reliance on other secondary pages; the reporting flags Grokipedia as an AI-generated encyclopedia, which illustrates why provenance checks matter <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Why might a model cite AI-generated sources more on obscure queries?</p>
+
+<p><strong>A:</strong> Tom’s Hardware notes this tends to show up on more obscure prompts, where high-quality primary sources may be harder to retrieve and ranking systems may surface synthetic summaries more readily <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Does the reporting indicate GPT-5.2 always uses Grokipedia for political questions?</p>
+
+<p><strong>A:</strong> No; Engadget says the Guardian observed Grokipedia citations on some topics (like Iran and Holocaust-denial-related queries), but not on other prompts such as a question about media bias against President Trump <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Double-check citations in sensitive or niche answers: When ChatGPT provides citations, open the linked sources and confirm they are primary or reputable references before relying on the claims, since some answers have cited AI-generated material like Grokipedia <a href="https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html" class="footnote-ref">[1]</a><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</li>
+
+<li>Ask for source diversity: Prompt for multiple independent sources (for example, “cite three non-AI-generated references”) to reduce the chance of a single synthetic source dominating the answer <a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="http://www.techmeme.com/260124/p15#a260124p15">http://www.techmeme.com/260124/p15#a260124p15</a></li>
+
+
+
+<li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries">https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> techmeme.com, tomshardware.com, engadget.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-01-24T19:25:32+00:00",
+      "domain": "engadget.com",
+      "image": "https://kagiproxy.com/img/mmB6LoYoYCvRQlllzg7t0FVc4aoN3AvuM3s-1Di2Sey5nobvscZJHFUufvzsgBEo-xcNhhRVXzawQPa4TwqFFVGj5NN-E4CeoYUcVFRizZxpRNSlHXSfGQLGcguouqm5ocdD3pvZ4jHxHH0ijw_q7mK-ZpIhpcxMIziy_eymaZDqC9kQoa_CiiY0BbEHCeKkgMRqJgR_PjCO99LON8v4c9ktXQbwVattzNgSXwWajhGZXDeFpkRJ1AgcTHHILHoe-ONvHD_V19G0mdjCBr5n1UjFo2bYbQUis0bBeztt1jhWqHTK3bCdLmR43l4PcQYpka6GoRPGpnjzGrAXPQdTGxhlTp9_aOrwUOWEQrLuEmHkkMVGPTBEaNm86O48LskEphVE",
+      "image_caption": "A 3D-printed miniature model of Elon Musk and ChatGPT logo are seen in this illustration taken, February 11, 2025. REUTERS/Dado Ruvic/Illustration",
+      "link": "https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html",
+      "title": "Report reveals that OpenAI\u0027s GPT-5.2 model cites Grokipedia"
+    },
+    {
+      "date": "2026-01-25T13:30:49+00:00",
+      "domain": "tomshardware.com",
+      "image": "https://kagiproxy.com/img/pkAaxup41JSQWFq4gPc6UahcRUDqaspVSjVhxiamBoPn0zDSZAj1ADscN4_Ah-OEmPU4HOiWjM6nD9eyBwMc8TS5nVp1spBJGKqd7TMwDmeXd-5u6J6BSHzY6whx3bUV",
+      "image_caption": "AI LLM chatbot apps on a phone",
+      "link": "https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries",
+      "title": "ChatGPT found to be sourcing data from AI-generated content \u2014 popular LLM uses content from Grokipedia as source for more obscure queries"
+    },
+    {
+      "date": "2026-01-25T01:50:00+00:00",
+      "domain": "techmeme.com",
+      "image": "",
+      "image_caption": "",
+      "link": "http://www.techmeme.com/260124/p15#a260124p15",
+      "title": "Tests show GPT-5.2 on ChatGPT is citing Grokipedia as a source on a wide range of queries, including on political structures in Iran and Holocaust deniers (Aisha Down/The Guardian)"
+    }
+  ],
+  "category": "Technology",
+  "cluster_number": 4,
+  "did_you_know": "Engadget reports that Grokipedia launched before GPT-5.2 but later drew scrutiny after citations appeared to include neo-Nazi forums [engadget.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/2U0Qlc2Bd-QFXXXY9lDxwU9UUc9KBEW9DIN5TzWi4UoRpM2xiT4z2bgBH3eRMM1dOg6s8peTxlJU9R4gz9auEhoB0R6AbB0xcqtJPDOWQcUMag",
+      "name": "techmeme.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/9e890yogsm5zu8Jy8c69HwVBzKK1X8jtBHcgWctFfXZsL0Tf6Y08aS_2foucSu5FI6UlMtyeH6gWO53_zbOwIOXqtbsUb2uH0lzbW9UYBnRdtXSme8k",
+      "name": "tomshardware.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/kgGycqi0BWZXp3j8rjHKyDpktyni451k44ekMqJQ03gcGfYlWDvIRWxoqmT1XtXSpv9DK58o_m2VJGMlXHifs1stXoOs-f-tskKiN0ANae4AMA",
+      "name": "engadget.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Large language model chatbots can generate convincing text without guaranteeing accuracy, which is why many systems add web-browsing and citations to ground answers in sources [common]. The current reports underscore a newer twist: as more AI-generated \u201creference\u201d sites appear, models may inadvertently treat synthetic content as evidence, raising the stakes for provenance checks and source-quality filters [tomshardware.com#1][engadget.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI product design: The coverage suggests developers may need stronger provenance controls\u2014such as preferring primary sources or labeling synthetic sources\u2014to avoid AI-to-AI citation loops in consumer and professional chatbots [tomshardware.com#1].",
+    "Publishers and web: If chatbots increasingly cite AI-generated reference sites, it could shift traffic and incentives on the open web, intensifying debates about what counts as a trustworthy \u201csource\u201d in search-like experiences [engadget.com#1][tomshardware.com#1].",
+    "AI safety workflows: OpenAI\u2019s emphasis on safety filters highlights that citation quality and harm reduction are intertwined, especially when models pull from a broad range of public webpages [engadget.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Artificial Intelligence",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Engadget",
+          "url": "https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html"
+        }
+      ],
+      "text": "OpenAI: OpenAI told the Guardian that GPT-5.2 searches the web across many public sources and viewpoints, while using safety filters meant to reduce surfacing links associated with high-severity harms."
+    },
+    {
+      "sources": [
+        {
+          "name": "Techmeme",
+          "url": "http://www.techmeme.com/260124/p15#a260124p15"
+        }
+      ],
+      "text": "The Guardian (testing): The Guardian\u2019s testing found GPT-5.2 sometimes cited Grokipedia for specific prompts, including queries about Iran and Holocaust deniers."
+    },
+    {
+      "sources": [
+        {
+          "name": "Tom\u0027s Hardware",
+          "url": "https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries"
+        }
+      ],
+      "text": "Tom\u2019s Hardware (analysis): Tom\u2019s Hardware argues that citing AI-generated sources can create recursive results and increase the risk of propagating hallucinations or inaccuracies."
+    }
+  ],
+  "primary_image": {
+    "caption": "A 3D-printed miniature model of Elon Musk and a ChatGPT logo in an illustration (Feb. 11, 2025).",
+    "credit": "REUTERS/Dado Ruvic/Illustration",
+    "link": "https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html",
+    "url": "https://kagiproxy.com/img/vMWCo42akTFp-72ju2BcTcPgasMp6vg-ZoP9cTKKplXnA374DtgyJ94PbMcNhcOOa_Wj5pQ_0kcD2J39ygKaZ0egBVgJpNTsHMkTU1Id4NBM27ArNIJUwCvxEuoGJEycuPbTOgHU1kBWD8FQ9z5nhnvHFjdz7KBBzulOsQuMrKR_xCXAN6Q9u2sRIIAHqdW-NhzlirP-Jq_Ow5kO4_npu9eAbGK4tPLu2OUGa64GZTbSUQP2G6jXwWMg9_GD_dBd4yeej59lHIx7kIIDBlV0jn2f4nz8-Cpp0QOBk9LQcuNrbyKE8MxLbGYoGu2p0hTsxBHhFhG49tdLY81LIJaVcAQi_IZRqTFMX4uwcJWM4SaDgYLVw2CsAFN3pA5TIZ2GExhx"
+  },
+  "published": 1769376341,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "http://www.techmeme.com/260124/p15#a260124p15",
+    "https://www.tomshardware.com/tech-industry/artificial-intelligence/chatgpt-found-to-be-sourcing-data-from-ai-generated-content-popular-llm-uses-content-from-grokipedia-as-source-for-more-obscure-queries",
+    "https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "Look for unusually generic prose, missing author/edit history, thin citations, and a heavy reliance on other secondary pages; the reporting flags Grokipedia as an AI-generated encyclopedia, which illustrates why provenance checks matter [engadget.com#1].",
+      "question": "What practical signals can help spot an AI-generated reference source?"
+    },
+    {
+      "answer": "Tom\u2019s Hardware notes this tends to show up on more obscure prompts, where high-quality primary sources may be harder to retrieve and ranking systems may surface synthetic summaries more readily [tomshardware.com#1].",
+      "question": "Why might a model cite AI-generated sources more on obscure queries?"
+    },
+    {
+      "answer": "No; Engadget says the Guardian observed Grokipedia citations on some topics (like Iran and Holocaust-denial-related queries), but not on other prompts such as a question about media bias against President Trump [engadget.com#1].",
+      "question": "Does the reporting indicate GPT-5.2 always uses Grokipedia for political questions?"
+    }
+  ],
+  "summary": "Recent tests reported by multiple outlets found OpenAI\u2019s GPT-5.2 model in ChatGPT sometimes cites Grokipedia\u2014an AI-generated encyclopedia associated with xAI\u2014particularly on narrower or more obscure prompts [engadget.com#1][tomshardware.com#1][techmeme.com#1]. The reporting highlights a broader reliability challenge for web-browsing chatbots: they can create \u201crecursive\u201d citation loops when AI systems cite other AI-generated material, potentially amplifying errors [tomshardware.com#1]. OpenAI said GPT-5.2 searches a broad range of public sources and applies safety filters intended to reduce links tied to high-severity harms [engadget.com#1].",
+  "talking_points": [
+    "Topics observed: The Guardian\u2019s tests cited by Engadget and Techmeme found Grokipedia references in answers touching on Iran\u2019s political structures and on Holocaust deniers, including material related to historian Richard Evans\u2019 role in a libel trial involving David Irving [engadget.com#1][techmeme.com#1].",
+    "Selective sourcing: In the same testing described by Engadget, ChatGPT did not cite Grokipedia for some other contentious prompts, including a question about media bias against President Trump [engadget.com#1].",
+    "Model positioning: OpenAI released GPT-5.2 in December and described it as aimed at professional workflows such as spreadsheet creation and other complex tasks [engadget.com#1].",
+    "Why it matters: Tom\u2019s Hardware frames the issue as a risk of \u201challucinated or incorrect\u201d information spreading when AI outputs rely on AI-generated sources rather than primary or vetted references [tomshardware.com#1].",
+    "Grokipedia scrutiny: Engadget notes Grokipedia faced scrutiny after some citations appeared to point to neo-Nazi forums, and a study by US researchers described its sources as \u201cquestionable\u201d and \u201cproblematic\u201d [engadget.com#1]."
+  ],
+  "technical_details": [
+    "Recursive citations: A failure mode where an LLM\u2019s answer cites AI-generated material that itself was produced from LLM outputs, creating a feedback loop that can reinforce mistakes [tomshardware.com#1].",
+    "Web browsing plus filters: OpenAI said GPT-5.2 searches publicly available web sources while applying safety filters designed to reduce surfacing links tied to high-severity harms [engadget.com#1].",
+    "AI-generated encyclopedia: Grokipedia is described as an online encyclopedia powered by xAI, and it has drawn scrutiny over the quality and nature of some cited sources [engadget.com#1]."
+  ],
+  "timeline": [],
+  "title": "OpenAI GPT-5.2 tests show citations to Grokipedia",
+  "unique_domains": 3,
+  "url": "https://www.engadget.com/ai/report-reveals-that-openais-gpt-52-model-cites-grokipedia-192532977.html",
+  "user_action_items": [
+    "Double-check citations in sensitive or niche answers: When ChatGPT provides citations, open the linked sources and confirm they are primary or reputable references before relying on the claims, since some answers have cited AI-generated material like Grokipedia [engadget.com#1][tomshardware.com#1].",
+    "Ask for source diversity: Prompt for multiple independent sources (for example, \u201ccite three non-AI-generated references\u201d) to reduce the chance of a single synthetic source dominating the answer [tomshardware.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
