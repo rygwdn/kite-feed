@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers highlight approaches to faster LLM inference, model switching, and LLM API state handling - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers highlight approaches to faster LLM inference, model switching, and LLM API state handling</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Three developer-focused pieces look at different ways to make LLM-powered systems feel faster and more reliable in practice. One post shares two concrete implementation tricks to speed up inference, a new open-source project claims sub-millisecond switching between locally hosted models, and a third essay argues that many LLM API pain points come down to keeping state synchronized across calls and streams <a href="https://www.seangoedecke.com/fast-llm-inference/" class="footnote-ref">[1]</a><a href="https://github.com/snapllm/snapllm" class="footnote-ref">[2]</a><a href="https://lucumr.pocoo.org/2025/11/22/llm-apis/" class="footnote-ref">[3]</a>.
+
+Taken together, they make the case that perceived performance and correctness depend on more than tokens per second. Serving and API design details—like how you juggle multiple models and how clients and servers stay in sync during interactions—can noticeably shape the user experience <a href="https://www.seangoedecke.com/fast-llm-inference/" class="footnote-ref">[1]</a><a href="https://github.com/snapllm/snapllm" class="footnote-ref">[2]</a><a href="https://lucumr.pocoo.org/2025/11/22/llm-apis/" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.seangoedecke.com/fast-llm-inference/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>SnapLLM bills itself as an open-source, GitHub-hosted serving engine that is explicitly “multi-model &amp; multi-modal,” with its main pitch being switching between local models in under 1 ms; the related HN thread has a small amount of discussion (2 comments) <a href="https://github.com/snapllm/snapllm" class="footnote-ref">[2]</a>.</li>
+
+<li>The state-synchronization essay, dated 2025-11-22, explains common LLM API headaches as a client/server state-alignment problem across calls and streaming interactions; the linked HN submission has no comments <a href="https://lucumr.pocoo.org/2025/11/22/llm-apis/" class="footnote-ref">[3]</a>.</li>
+
+<li>The fast-inference post centers on “two different tricks” (not one general tip) for improving inference speed, and its linked HN submission has no comments <a href="https://www.seangoedecke.com/fast-llm-inference/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://lucumr.pocoo.org/2025/11/22/llm-apis/">https://lucumr.pocoo.org/2025/11/22/llm-apis/</a></li>
+
+
+
+
+
+<li><a href="https://github.com/snapllm/snapllm">https://github.com/snapllm/snapllm</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> seangoedecke.com, pocoo.org, github.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-02-14T23:57:50+00:00",
+      "domain": "seangoedecke.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.seangoedecke.com/fast-llm-inference/",
+      "title": "Two different tricks for fast LLM inference"
+    },
+    {
+      "date": "2026-02-14T18:16:34+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/snapllm/snapllm",
+      "title": "SnapLLM: Switch between local LLM in under 1ms Multi-model\u0026-modal serving engine"
+    },
+    {
+      "date": "2026-02-14T05:00:13+00:00",
+      "domain": "pocoo.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://lucumr.pocoo.org/2025/11/22/llm-apis/",
+      "title": "LLM APIs is a State Synchronization Problem"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/yxRe4QSgdhyuaD0FnVUtIzhYTkFmX4Oi6hJMLGCRyWQPI0KCLxDVEL6Ik46Ch5DJD3CnT5c43y2Gt1dKTZ4lqV0tZP2W1LBraBtrHc9-y5ECf42d9j0",
+      "name": "seangoedecke.com"
+    },
+    {
+      "favicon": "",
+      "name": "pocoo.org"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/uK4BjA_6lkAtRmjUMNYVp64EHswNkomj1AmHOV6MUMZpdaXiHeseVRsrERkZijuzZffrvzsIAwQwrW8vg7YXaaxdolj_j3-85hhxDJj7xxo",
+      "name": "github.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\u26a1",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Inference",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [],
+  "primary_image": null,
+  "published": 1771139452,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://lucumr.pocoo.org/2025/11/22/llm-apis/",
+    "https://www.seangoedecke.com/fast-llm-inference/",
+    "https://github.com/snapllm/snapllm"
+  ],
+  "suggested_qna": [],
+  "summary": "Three developer-focused pieces look at different ways to make LLM-powered systems feel faster and more reliable in practice. One post shares two concrete implementation tricks to speed up inference, a new open-source project claims sub-millisecond switching between locally hosted models, and a third essay argues that many LLM API pain points come down to keeping state synchronized across calls and streams [seangoedecke.com#1][github.com#1][pocoo.org#1].\n\nTaken together, they make the case that perceived performance and correctness depend on more than tokens per second. Serving and API design details\u2014like how you juggle multiple models and how clients and servers stay in sync during interactions\u2014can noticeably shape the user experience [seangoedecke.com#1][github.com#1][pocoo.org#1].",
+  "talking_points": [
+    "SnapLLM bills itself as an open-source, GitHub-hosted serving engine that is explicitly \u201cmulti-model \u0026 multi-modal,\u201d with its main pitch being switching between local models in under 1 ms; the related HN thread has a small amount of discussion (2 comments) [github.com#1].",
+    "The state-synchronization essay, dated 2025-11-22, explains common LLM API headaches as a client/server state-alignment problem across calls and streaming interactions; the linked HN submission has no comments [pocoo.org#1].",
+    "The fast-inference post centers on \u201ctwo different tricks\u201d (not one general tip) for improving inference speed, and its linked HN submission has no comments [seangoedecke.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Developers highlight approaches to faster LLM inference, model switching, and LLM API state handling",
+  "unique_domains": 3,
+  "url": "https://www.seangoedecke.com/fast-llm-inference/",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
