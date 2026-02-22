@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic launches Claude Code Security for vulnerability scanning - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic launches Claude Code Security for vulnerability scanning</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Anthropic has introduced Claude Code Security, a security scanning feature built into Claude Code. It’s rolling out as a limited research preview for Enterprise and Team users, with prioritized access for open-source maintainers <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a><a href="https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude" class="footnote-ref">[17]</a><a href="https://news.google.com/atom/articles/CBMihAFBVV95cUxNNmJUTThkb1BXTUFZOVRNOVVMeklvRGJURnRDZ2xmLWRqYjExWEJKYmdvNEZMeTJzSmxVZXhFUUFrNGItLS1XMVctM3kwbFFXTGYtT0xtNXB2aWVMT0V3S2hnS1NpQzJIbTByYTYzeDN5QnRkTzhPWXFndFFVRzZSeHc3V2M" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPNHluci1UN0hJUXJaaTQ1NHE4N0FVVlJ0Znp5N2NyOENqTjNuYXZ3V28tN2dGWlBXSC0wUjYzTkw3ZTBFV2xtYm1XLVoxYzNvd0JiZUpSWEVvNFRXTjdsQnN2aTFPVlM5bjQxS2k5SWg0SGtpbV9kQXVCd0tvMlVNN3NwTjlZQnc" class="footnote-ref">[4]</a>. The tool scans codebases, flags potential vulnerabilities, and proposes targeted patches that developers review before applying—framed as help for reducing vulnerability backlogs, not an automated “push-to-production” fixer <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a><a href="https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude" class="footnote-ref">[17]</a>.
+
+The launch also landed amid a market wobble: multiple cybersecurity-related stocks fell the same day, with some coverage tying the selloff to investor expectations that AI-native scanning features could squeeze existing security tooling vendors. Other analysis pushed back, arguing Claude Code Security isn’t a full replacement for established security platforms <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxQYXAyVkpYRzFjNjBEdzZUaGcyTTV1ZUcwN2pkNlZ3UHNTazNVbGw0Nm53RjNGenhLVVZwNE1HM0lsaTVTY011ME1EalRwelVKY01XSERudkhaYXFSNXBkVFRNLU43dU5RckdnZ2RTSXFNWk05N1pMUkZhM3duUC1oR2FBTURmLTA4Q1ptTEQ5STJPSjlZdFJsQUJGMlpfMWxIWkE" class="footnote-ref">[5]</a><a href="https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240" class="footnote-ref">[12]</a><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF" class="footnote-ref">[7]</a><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOcng1WlY0SjM4MFZ1SEkzcU5EeWh4Y2RJOTNKQlBZQm1oTU9zaFZ6SlE0N0xQUDBYSTBJQmxndjNSUkNjSVloY0lUXzczU1JQVTFaVjRTNnk5Zm5kZVFjTWpuR3B4b3poU0lqWmRtMTVaUEZMc0NPLURxNndOX3B6YUpuanBVWUk2b2ZpY1ljWF9OQlI4aU9r" class="footnote-ref">[9]</a><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPYkN5UTNsMS1PU001elpJelVDS3JiVDA5YTBYQmdtaHBRTlJadF9KczE5ZWZCcWk2Z0NCWDZfZTloYXhPalpzeDg1dGVTZjlLQ3JkZThrNU1ELWEzamdKckdfZ0JUTjVyVk1nUjIzb3ZDM3pjQUNPTU55cVlUeVJNUkNhYS1Kb2F6LXRicFRRUdIBlwFBVV95cUxPdjFONllTSlNDUG0wUTdxU0NhQkdFT1IyT3NMdEo3MVljQUdKTUpmenF3Q0N3SnlDeUpMRUtPWldTUXlGb1JEeGVQbGd6OE0ycEhVenl1Tzc1NUlXdEFaaVRMaVFJOExsZUhlR0F6T25QYXptOWxqc1pucGZnSEN4eXZiOHZuRmFvSTZScElweUxreDF6TkVN" class="footnote-ref">[10]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMihAFBVV95cUxNNmJUTThkb1BXTUFZOVRNOVVMeklvRGJURnRDZ2xmLWRqYjExWEJKYmdvNEZMeTJzSmxVZXhFUUFrNGItLS1XMVctM3kwbFFXTGYtT0xtNXB2aWVMT0V3S2hnS1NpQzJIbTByYTYzeDN5QnRkTzhPWXFndFFVRzZSeHc3V2M">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Model and checks: TestingCatalog says the feature runs on Claude Opus 4.6 and uses a multi-layer verification process, assigning severity and confidence scores to findings <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a>.</li>
+
+<li>Vuln types: The tool aims to catch problems that go beyond rule-based static scanners, including context-dependent business-logic flaws and access-control issues <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a>.</li>
+
+<li>Market response: Multiple reports linked the launch to a same-day dip in some cybersecurity stocks, alongside commentary about competitive pressure on security vendors <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxQYXAyVkpYRzFjNjBEdzZUaGcyTTV1ZUcwN2pkNlZ3UHNTazNVbGw0Nm53RjNGenhLVVZwNE1HM0lsaTVTY011ME1EalRwelVKY01XSERudkhaYXFSNXBkVFRNLU43dU5RckdnZ2RTSXFNWk05N1pMUkZhM3duUC1oR2FBTURmLTA4Q1ptTEQ5STJPSjlZdFJsQUJGMlpfMWxIWkE" class="footnote-ref">[5]</a><a href="https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240" class="footnote-ref">[12]</a><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF" class="footnote-ref">[7]</a><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPYkN5UTNsMS1PU001elpJelVDS3JiVDA5YTBYQmdtaHBRTlJadF9KczE5ZWZCcWk2Z0NCWDZfZTloYXhPalpzeDg1dGVTZjlLQ3JkZThrNU1ELWEzamdKckdfZ0JUTjVyVk1nUjIzb3ZDM3pjQUNPTU55cVlUeVJNUkNhYS1Kb2F6LXRicFRRUdIBlwFBVV95cUxPdjFONllTSlNDUG0wUTdxU0NhQkdFT1IyT3NMdEo3MVljQUdKTUpmenF3Q0N3SnlDeUpMRUtPWldTUXlGb1JEeGVQbGd6OE0ycEhVenl1Tzc1NUlXdEFaaVRMaVFJOExsZUhlR0F6T25QYXptOWxqc1pucGZnSEN4eXZiOHZuRmFvSTZScElweUxreDF6TkVN" class="footnote-ref">[10]</a>.</li>
+
+<li>Not a replacement: CTech argues the tool is unlikely to be a “killer app” that replaces broader cybersecurity products on its own, despite the stock moves <a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5ucURlb3FvejFMNnFEN3lXdzNDNDdHbXFqRlJHU2ZWbjdDdUlNUzVnYkNWaVRicGg0UTBUcVRUVzU1UHRCZzdMbXRNa0I2TXRTbTMtSjl5Xzk1Y1Q4S3Iya1BqWXozT0NiS0E" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Anthropic/Claude team: The company describes Claude Code Security as a research-preview scanner that proposes patches for humans to review. The pitch: help teams catch issues traditional tools miss and help defenders keep up as attackers adopt AI <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/">TestingCatalog</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>PCMag: PCMag calls it an autonomous vulnerability-hunting tool inside Claude Code that scans codebases and suggests targeted fixes, with humans reviewing the recommendations <a href="https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude" class="footnote-ref">[17]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude">PCMag</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Gizmodo: Gizmodo focuses on the trading behavior and the narratives around it, arguing the “SaaSpocalypse is not real” while noting that stock selloffs can still cause real market pain <a href="https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240" class="footnote-ref">[12]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240">Gizmodo</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>CTech: CTech says the selloff may be overdone and frames the moment as both a reckoning and an opportunity for cyber firms to adapt, rather than a clear-cut displacement event <a href="https://news.google.com/rss/articles/CBMiowJBVV95cUxOcG5SdmRqcmxLYWNKV1BLZ0lkQnpxNGJiUS1IOVdydWhYVmpCeGhlYXFPSjBmY2Zhb3Z6bnk1TEFwWTh0ZVdvZml5Tk54anJXRHlTN3NnVjU2aVFHS09ubWc4X21wUE9HeUQ4QWVYRXNkX0Z4RzBzc0lhLUJNNzBfRnFaUVRPRlZ5VGQ0bjJqNmhCR0RfS2pRMDFmV2MzZmRvQUNzT29kT0dKZnY1VnNOTWxhWjBfd3NydUtqRXJHUDZGX1BNZ0ZvaWRsSmlJWlQ5bUFUM2dWZE9sWHhkaWVNamstZjVMdko5OGdqTXdKeVZTWTBiRVVKMkF4N2hCT1Jhc2RmYmlDSzljdmhrRkFSS1BXYjAwTVFzWlQwU3lydlBPMzTSAagCQVVfeXFMTU95bHhfSC11bjNSZlhhR0lnWUtEZ3N5a3VOVHhudXpuTE9HaTZFWmZUWWNxNm1fc3Frd2NCVnQyQ2s3N2NNNUItMmdYemRGWnowX0ZxVl96UGYyV1VGdFk1ZmpNbU52Q3VhdlE3NEdubmNiaXVxSG5rNlZvbHJwQWlVOGM3Rkt4NVg4VEVEMmZoZHE0SjVKY0dsZXpHMnM3N2ZqWEpUMkJPREoweUhBUDFJVDZLTjM3NVRSbU15ODBYVHdyZjRKSUtYblBCQ0gzbWVVbFVKOGdVa2VERlNlZTgwYnNJczdsSmN1YzZYcmZaVVludFR0RW01V3JCeUg3Rk40cTQyY1MtcElaMWN0eGJ0SzBud3Q1X0xNUTBKQjBQWjFBSDhvd1U" class="footnote-ref">[8]</a><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5ucURlb3FvejFMNnFEN3lXdzNDNDdHbXFqRlJHU2ZWbjdDdUlNUzVnYkNWaVRicGg0UTBUcVRUVzU1UHRCZzdMbXRNa0I2TXRTbTMtSjl5Xzk1Y1Q4S3Iya1BqWXozT0NiS0E" class="footnote-ref">[13]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF">CTech</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Pilot AI-assisted code scanning in a non-production repo: If your organization has Claude Code access, try Claude Code Security in a staging or sandbox repository and require human review for any suggested patches, since the preview is positioned as assistive rather than autonomous <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a><a href="https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude" class="footnote-ref">[17]</a>.</li>
+
+<li>Add a triage rubric for AI findings: Use a simple process that leans on severity and confidence scores to decide what to fix first, mirroring the scoring approach described for the tool <a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE9CWG5oRUc0SkJJMG5qanlsbzVfOURHTy1ocndaNnV3WTR5MExDSkduelh5SU42ODlobTJjLUdodFl5dzBuV2E4czlhT0YxNDFycGhyV09SWl8wTE5kMXVYUEUybzU4MUk3YkgtR0g5QmFBQnUzUXpB">https://news.google.com/rss/articles/CBMid0FVX3lxTE9CWG5oRUc0SkJJMG5qanlsbzVfOURHTy1ocndaNnV3WTR5MExDSkduelh5SU42ODlobTJjLUdodFl5dzBuV2E4czlhT0YxNDFycGhyV09SWl8wTE5kMXVYUEUybzU4MUk3YkgtR0g5QmFBQnUzUXpB</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF">https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTE5ucURlb3FvejFMNnFEN3lXdzNDNDdHbXFqRlJHU2ZWbjdDdUlNUzVnYkNWaVRicGg0UTBUcVRUVzU1UHRCZzdMbXRNa0I2TXRTbTMtSjl5Xzk1Y1Q4S3Iya1BqWXozT0NiS0E">https://news.google.com/rss/articles/CBMiakFVX3lxTE5ucURlb3FvejFMNnFEN3lXdzNDNDdHbXFqRlJHU2ZWbjdDdUlNUzVnYkNWaVRicGg0UTBUcVRUVzU1UHRCZzdMbXRNa0I2TXRTbTMtSjl5Xzk1Y1Q4S3Iya1BqWXozT0NiS0E</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPNHluci1UN0hJUXJaaTQ1NHE4N0FVVlJ0Znp5N2NyOENqTjNuYXZ3V28tN2dGWlBXSC0wUjYzTkw3ZTBFV2xtYm1XLVoxYzNvd0JiZUpSWEVvNFRXTjdsQnN2aTFPVlM5bjQxS2k5SWg0SGtpbV9kQXVCd0tvMlVNN3NwTjlZQnc">https://news.google.com/rss/articles/CBMihwFBVV95cUxPNHluci1UN0hJUXJaaTQ1NHE4N0FVVlJ0Znp5N2NyOENqTjNuYXZ3V28tN2dGWlBXSC0wUjYzTkw3ZTBFV2xtYm1XLVoxYzNvd0JiZUpSWEVvNFRXTjdsQnN2aTFPVlM5bjQxS2k5SWg0SGtpbV9kQXVCd0tvMlVNN3NwTjlZQnc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxOVktpZUhyNE5lcWtKOVhqVTZIdDZJUEJQUlB2MHppYW5Rb05wd0NsUDBpMldjLU5SVldrcXU4OUVobThBQTIwaWFybHVBcGpUd3VBQmZGSkZTS1U3b3p3TXZUY1lidGtzWlpiOV9EMV9fQTVBbFdCSzdpNnYza080d3o0bXZORGNXekxlLTFLS0VRUGh5eklxamFoNktaMU5iYy1QOFNMX1pEeExuTjhv0gG3AUFVX3lxTE5OTm9NeGNZZ2YyUmF0T0ZMQUh6NHVxUm1BTzlYYkFmdzN4U09LS1NjMUhnb3Y1eDI1R3k5YkM2N1hOXzg3TVBvajlFVnBpU1N4YTVjejB5anN2OWtiR181LWt0Y3JyQlJFNW1vcFJGbkZjQ24wbHp0azBDXzZMLVZCZFA4VU1xN3dZaklLOFhtWldyOG1qdDRlRlJoUGRxakwtWElBSHB5R0RrWVRpb1k2SUg5UFF1WQ">https://news.google.com/rss/articles/CBMirwFBVV95cUxOVktpZUhyNE5lcWtKOVhqVTZIdDZJUEJQUlB2MHppYW5Rb05wd0NsUDBpMldjLU5SVldrcXU4OUVobThBQTIwaWFybHVBcGpUd3VBQmZGSkZTS1U3b3p3TXZUY1lidGtzWlpiOV9EMV9fQTVBbFdCSzdpNnYza080d3o0bXZORGNXekxlLTFLS0VRUGh5eklxamFoNktaMU5iYy1QOFNMX1pEeExuTjhv0gG3AUFVX3lxTE5OTm9NeGNZZ2YyUmF0T0ZMQUh6NHVxUm1BTzlYYkFmdzN4U09LS1NjMUhnb3Y1eDI1R3k5YkM2N1hOXzg3TVBvajlFVnBpU1N4YTVjejB5anN2OWtiR181LWt0Y3JyQlJFNW1vcFJGbkZjQ24wbHp0azBDXzZMLVZCZFA4VU1xN3dZaklLOFhtWldyOG1qdDRlRlJoUGRxakwtWElBSHB5R0RrWVRpb1k2SUg5UFF1WQ</a></li>
+
+
+
+<li><a href="https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/">https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxPQ1N3SGNHNk1Vai1PT0FOVXViMWNibVJyaS1VV0VGclNFQVJ6Z1gyT2JPWG8tbDBHc3pscVVua2k3a29ma1YzT3BialVFVmwwWFFndDBydFB1aG1lTFBTQVhEMmtWc1JWbE80UnJ1dU1SaXZxOHdsOEhuNGtfVm1OQmlTazhkbkJlemEzaWNFRmZzRHl5OUt4TjFVblEwUVk">https://news.google.com/rss/articles/CBMinwFBVV95cUxPQ1N3SGNHNk1Vai1PT0FOVXViMWNibVJyaS1VV0VGclNFQVJ6Z1gyT2JPWG8tbDBHc3pscVVua2k3a29ma1YzT3BialVFVmwwWFFndDBydFB1aG1lTFBTQVhEMmtWc1JWbE80UnJ1dU1SaXZxOHdsOEhuNGtfVm1OQmlTazhkbkJlemEzaWNFRmZzRHl5OUt4TjFVblEwUVk</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxPYkN5UTNsMS1PU001elpJelVDS3JiVDA5YTBYQmdtaHBRTlJadF9KczE5ZWZCcWk2Z0NCWDZfZTloYXhPalpzeDg1dGVTZjlLQ3JkZThrNU1ELWEzamdKckdfZ0JUTjVyVk1nUjIzb3ZDM3pjQUNPTU55cVlUeVJNUkNhYS1Kb2F6LXRicFRRUdIBlwFBVV95cUxPdjFONllTSlNDUG0wUTdxU0NhQkdFT1IyT3NMdEo3MVljQUdKTUpmenF3Q0N3SnlDeUpMRUtPWldTUXlGb1JEeGVQbGd6OE0ycEhVenl1Tzc1NUlXdEFaaVRMaVFJOExsZUhlR0F6T25QYXptOWxqc1pucGZnSEN4eXZiOHZuRmFvSTZScElweUxreDF6TkVN">https://news.google.com/rss/articles/CBMijwFBVV95cUxPYkN5UTNsMS1PU001elpJelVDS3JiVDA5YTBYQmdtaHBRTlJadF9KczE5ZWZCcWk2Z0NCWDZfZTloYXhPalpzeDg1dGVTZjlLQ3JkZThrNU1ELWEzamdKckdfZ0JUTjVyVk1nUjIzb3ZDM3pjQUNPTU55cVlUeVJNUkNhYS1Kb2F6LXRicFRRUdIBlwFBVV95cUxPdjFONllTSlNDUG0wUTdxU0NhQkdFT1IyT3NMdEo3MVljQUdKTUpmenF3Q0N3SnlDeUpMRUtPWldTUXlGb1JEeGVQbGd6OE0ycEhVenl1Tzc1NUlXdEFaaVRMaVFJOExsZUhlR0F6T25QYXptOWxqc1pucGZnSEN4eXZiOHZuRmFvSTZScElweUxreDF6TkVN</a></li>
+
+
+
+
+
+<li><a href="https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240">https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude">https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuwJBVV95cUxOV09yM202dng0Q0hIcHVHNE0tbTlGQS0xcGZjQlZUeGVPaXc2Nlg3bXUxYlhETU5VYnJocHA3b3oteE5QZjJyOTlBcVVlQ0pzeExKbHRDNGdzdnF0eG1DMFFhSlYxYWNBREtTRVRmSzNUVEVlTUFNVVlvMk1sSzlxZ21iVG1ldWxPeDhKa3F5SWdYVUZsVWVCd1R3S3ZSV016TTBMZlprT3hyQmRhd3NxMG1XN0Rja0ppbzFLN1hQd3RTa1E4UTFwbnhZcVUzbUF0NlY0VG1USXFScGViVWEwaWRoRHB6SWNxci1Va2ppbjNUTWNFS1NSMW1fQW5mS1FUYmFlcDJXbmhrUXcxdlpMaTBJaThVTnZUb0pyb1dFVTVzdU95RDJ1OUZfc0xZbEtHajViLXViZU5wQkHSAcACQVVfeXFMTjdHb3FlSzRqT0hrQ0JUNG5EZ09vSk1McjV5WDY0djU4TzB3ZW42WGF2ZkFnRXhwUTA5a0JKWEQ2NXM2RzZWb0QwbVV0a2t2Yk44SlRsaTBBdnVydWNEV0lqMTJTaXM4VlpMYlBqZS1ERWJQbmdZdnBaN2I0c1Y3SThvZUJjZEJwOGRNcVpuWFE0YzBZN3NYeHZIM01iVWp3aUVlNWFCS0JTQXZyLTlEWmdaS1ZGZ0ZqUUl6cWk5b3h2ZjhJTDctWm05dE1sSFV6QVllcEFzM0ctLWVZVEcyeDdfcGF6SXlmRzlpRjVlaWktRHhubm1tTWkyZlEyNTVLUVdDbnVkR2QtQkdTbW9MZ0tGc2R3OGRiOVFVaDNsZUYzRzQyZWZ1YTl3V3hOTTRjMnZNZm9weVZTVzV1SGZvcGU">https://news.google.com/rss/articles/CBMiuwJBVV95cUxOV09yM202dng0Q0hIcHVHNE0tbTlGQS0xcGZjQlZUeGVPaXc2Nlg3bXUxYlhETU5VYnJocHA3b3oteE5QZjJyOTlBcVVlQ0pzeExKbHRDNGdzdnF0eG1DMFFhSlYxYWNBREtTRVRmSzNUVEVlTUFNVVlvMk1sSzlxZ21iVG1ldWxPeDhKa3F5SWdYVUZsVWVCd1R3S3ZSV016TTBMZlprT3hyQmRhd3NxMG1XN0Rja0ppbzFLN1hQd3RTa1E4UTFwbnhZcVUzbUF0NlY0VG1USXFScGViVWEwaWRoRHB6SWNxci1Va2ppbjNUTWNFS1NSMW1fQW5mS1FUYmFlcDJXbmhrUXcxdlpMaTBJaThVTnZUb0pyb1dFVTVzdU95RDJ1OUZfc0xZbEtHajViLXViZU5wQkHSAcACQVVfeXFMTjdHb3FlSzRqT0hrQ0JUNG5EZ09vSk1McjV5WDY0djU4TzB3ZW42WGF2ZkFnRXhwUTA5a0JKWEQ2NXM2RzZWb0QwbVV0a2t2Yk44SlRsaTBBdnVydWNEV0lqMTJTaXM4VlpMYlBqZS1ERWJQbmdZdnBaN2I0c1Y3SThvZUJjZEJwOGRNcVpuWFE0YzBZN3NYeHZIM01iVWp3aUVlNWFCS0JTQXZyLTlEWmdaS1ZGZ0ZqUUl6cWk5b3h2ZjhJTDctWm05dE1sSFV6QVllcEFzM0ctLWVZVEcyeDdfcGF6SXlmRzlpRjVlaWktRHhubm1tTWkyZlEyNTVLUVdDbnVkR2QtQkdTbW9MZ0tGc2R3OGRiOVFVaDNsZUYzRzQyZWZ1YTl3V3hOTTRjMnZNZm9weVZTVzV1SGZvcGU</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxNaS14QklLS0lZdEpxUExBZU1nbnpOSE1sRThWNjZsQmNxc0lFU1lYNUl6YkFYM0lYdjFpREhteVhCX0N2NmxFTWRaUEUwRkJMa2gwX1pLWklpTjV2aDVTYVlRSjg5SV9jRG1qTFlsTWZzSGFvRkRQWjdhU1c1SXNrNVVsUU9UNUVHOVFTd1ZSdzZJSGVRekZQOTB2cw">https://news.google.com/rss/articles/CBMimwFBVV95cUxNaS14QklLS0lZdEpxUExBZU1nbnpOSE1sRThWNjZsQmNxc0lFU1lYNUl6YkFYM0lYdjFpREhteVhCX0N2NmxFTWRaUEUwRkJMa2gwX1pLWklpTjV2aDVTYVlRSjg5SV9jRG1qTFlsTWZzSGFvRkRQWjdhU1c1SXNrNVVsUU9UNUVHOVFTd1ZSdzZJSGVRekZQOTB2cw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxQYXAyVkpYRzFjNjBEdzZUaGcyTTV1ZUcwN2pkNlZ3UHNTazNVbGw0Nm53RjNGenhLVVZwNE1HM0lsaTVTY011ME1EalRwelVKY01XSERudkhaYXFSNXBkVFRNLU43dU5RckdnZ2RTSXFNWk05N1pMUkZhM3duUC1oR2FBTURmLTA4Q1ptTEQ5STJPSjlZdFJsQUJGMlpfMWxIWkE">https://news.google.com/rss/articles/CBMiogFBVV95cUxQYXAyVkpYRzFjNjBEdzZUaGcyTTV1ZUcwN2pkNlZ3UHNTazNVbGw0Nm53RjNGenhLVVZwNE1HM0lsaTVTY011ME1EalRwelVKY01XSERudkhaYXFSNXBkVFRNLU43dU5RckdnZ2RTSXFNWk05N1pMUkZhM3duUC1oR2FBTURmLTA4Q1ptTEQ5STJPSjlZdFJsQUJGMlpfMWxIWkE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOcng1WlY0SjM4MFZ1SEkzcU5EeWh4Y2RJOTNKQlBZQm1oTU9zaFZ6SlE0N0xQUDBYSTBJQmxndjNSUkNjSVloY0lUXzczU1JQVTFaVjRTNnk5Zm5kZVFjTWpuR3B4b3poU0lqWmRtMTVaUEZMc0NPLURxNndOX3B6YUpuanBVWUk2b2ZpY1ljWF9OQlI4aU9r">https://news.google.com/rss/articles/CBMilwFBVV95cUxOcng1WlY0SjM4MFZ1SEkzcU5EeWh4Y2RJOTNKQlBZQm1oTU9zaFZ6SlE0N0xQUDBYSTBJQmxndjNSUkNjSVloY0lUXzczU1JQVTFaVjRTNnk5Zm5kZVFjTWpuR3B4b3poU0lqWmRtMTVaUEZMc0NPLURxNndOX3B6YUpuanBVWUk2b2ZpY1ljWF9OQlI4aU9r</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiowJBVV95cUxOcG5SdmRqcmxLYWNKV1BLZ0lkQnpxNGJiUS1IOVdydWhYVmpCeGhlYXFPSjBmY2Zhb3Z6bnk1TEFwWTh0ZVdvZml5Tk54anJXRHlTN3NnVjU2aVFHS09ubWc4X21wUE9HeUQ4QWVYRXNkX0Z4RzBzc0lhLUJNNzBfRnFaUVRPRlZ5VGQ0bjJqNmhCR0RfS2pRMDFmV2MzZmRvQUNzT29kT0dKZnY1VnNOTWxhWjBfd3NydUtqRXJHUDZGX1BNZ0ZvaWRsSmlJWlQ5bUFUM2dWZE9sWHhkaWVNamstZjVMdko5OGdqTXdKeVZTWTBiRVVKMkF4N2hCT1Jhc2RmYmlDSzljdmhrRkFSS1BXYjAwTVFzWlQwU3lydlBPMzTSAagCQVVfeXFMTU95bHhfSC11bjNSZlhhR0lnWUtEZ3N5a3VOVHhudXpuTE9HaTZFWmZUWWNxNm1fc3Frd2NCVnQyQ2s3N2NNNUItMmdYemRGWnowX0ZxVl96UGYyV1VGdFk1ZmpNbU52Q3VhdlE3NEdubmNiaXVxSG5rNlZvbHJwQWlVOGM3Rkt4NVg4VEVEMmZoZHE0SjVKY0dsZXpHMnM3N2ZqWEpUMkJPREoweUhBUDFJVDZLTjM3NVRSbU15ODBYVHdyZjRKSUtYblBCQ0gzbWVVbFVKOGdVa2VERlNlZTgwYnNJczdsSmN1YzZYcmZaVVludFR0RW01V3JCeUg3Rk40cTQyY1MtcElaMWN0eGJ0SzBud3Q1X0xNUTBKQjBQWjFBSDhvd1U">https://news.google.com/rss/articles/CBMiowJBVV95cUxOcG5SdmRqcmxLYWNKV1BLZ0lkQnpxNGJiUS1IOVdydWhYVmpCeGhlYXFPSjBmY2Zhb3Z6bnk1TEFwWTh0ZVdvZml5Tk54anJXRHlTN3NnVjU2aVFHS09ubWc4X21wUE9HeUQ4QWVYRXNkX0Z4RzBzc0lhLUJNNzBfRnFaUVRPRlZ5VGQ0bjJqNmhCR0RfS2pRMDFmV2MzZmRvQUNzT29kT0dKZnY1VnNOTWxhWjBfd3NydUtqRXJHUDZGX1BNZ0ZvaWRsSmlJWlQ5bUFUM2dWZE9sWHhkaWVNamstZjVMdko5OGdqTXdKeVZTWTBiRVVKMkF4N2hCT1Jhc2RmYmlDSzljdmhrRkFSS1BXYjAwTVFzWlQwU3lydlBPMzTSAagCQVVfeXFMTU95bHhfSC11bjNSZlhhR0lnWUtEZ3N5a3VOVHhudXpuTE9HaTZFWmZUWWNxNm1fc3Frd2NCVnQyQ2s3N2NNNUItMmdYemRGWnowX0ZxVl96UGYyV1VGdFk1ZmpNbU52Q3VhdlE3NEdubmNiaXVxSG5rNlZvbHJwQWlVOGM3Rkt4NVg4VEVEMmZoZHE0SjVKY0dsZXpHMnM3N2ZqWEpUMkJPREoweUhBUDFJVDZLTjM3NVRSbU15ODBYVHdyZjRKSUtYblBCQ0gzbWVVbFVKOGdVa2VERlNlZTgwYnNJczdsSmN1YzZYcmZaVVludFR0RW01V3JCeUg3Rk40cTQyY1MtcElaMWN0eGJ0SzBud3Q1X0xNUTBKQjBQWjFBSDhvd1U</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPU0pycHpScml2XzBKWUxBNFhicTJBTnM5eHNsYXg5Nkh0OEtGZDN0SHN1aTh4UngxRjRKaDVoNTMwdG9ISlNxNU1BeEZsQ1plbVlkaDdlaWo3cjQwOWxocGIzXzZna1dvWUpjVzBzYTdoZ2MxYUZuX1E2bzhldzZMZ0pjd3JCR1M3MHhGYkZNVFd1VTZubldWVmFibVY4WWV3TGFPRVhOUzcxeW5wQ0R2VVVncEtITHNQNjVYYUhId0E">https://news.google.com/rss/articles/CBMiwAFBVV95cUxPU0pycHpScml2XzBKWUxBNFhicTJBTnM5eHNsYXg5Nkh0OEtGZDN0SHN1aTh4UngxRjRKaDVoNTMwdG9ISlNxNU1BeEZsQ1plbVlkaDdlaWo3cjQwOWxocGIzXzZna1dvWUpjVzBzYTdoZ2MxYUZuX1E2bzhldzZMZ0pjd3JCR1M3MHhGYkZNVFd1VTZubldWVmFibVY4WWV3TGFPRVhOUzcxeW5wQ0R2VVVncEtITHNQNjVYYUhId0E</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> testingcatalog.com, google.com, pcmag.com, gizmodo.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 4 unique domains, 17 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-02-21T07:58:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMihAFBVV95cUxNNmJUTThkb1BXTUFZOVRNOVVMeklvRGJURnRDZ2xmLWRqYjExWEJKYmdvNEZMeTJzSmxVZXhFUUFrNGItLS1XMVctM3kwbFFXTGYtT0xtNXB2aWVMT0V3S2hnS1NpQzJIbTByYTYzeDN5QnRkTzhPWXFndFFVRzZSeHc3V2M",
+      "title": "Anthropic Launches Claude Code Security for AI-Powered Vulnerability Scanning - The Hacker News"
+    },
+    {
+      "date": "2026-02-21T21:01:21+00:00",
+      "domain": "testingcatalog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/",
+      "title": "Anthropic released Claude Code Security as research preview"
+    },
+    {
+      "date": "2026-02-21T13:16:39+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPQ1N3SGNHNk1Vai1PT0FOVXViMWNibVJyaS1VV0VGclNFQVJ6Z1gyT2JPWG8tbDBHc3pscVVua2k3a29ma1YzT3BialVFVmwwWFFndDBydFB1aG1lTFBTQVhEMmtWc1JWbE80UnJ1dU1SaXZxOHdsOEhuNGtfVm1OQmlTazhkbkJlemEzaWNFRmZzRHl5OUt4TjFVblEwUVk",
+      "title": "Anthropic Rolls Out Autonomous Vulnerability-Hunting AI Tool for Claude Code - PCMag"
+    },
+    {
+      "date": "2026-02-21T05:19:21+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPNHluci1UN0hJUXJaaTQ1NHE4N0FVVlJ0Znp5N2NyOENqTjNuYXZ3V28tN2dGWlBXSC0wUjYzTkw3ZTBFV2xtYm1XLVoxYzNvd0JiZUpSWEVvNFRXTjdsQnN2aTFPVlM5bjQxS2k5SWg0SGtpbV9kQXVCd0tvMlVNN3NwTjlZQnc",
+      "title": "Anthropic rolls out embedded security scanning for Claude - CyberScoop"
+    },
+    {
+      "date": "2026-02-20T23:45:14+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxQYXAyVkpYRzFjNjBEdzZUaGcyTTV1ZUcwN2pkNlZ3UHNTazNVbGw0Nm53RjNGenhLVVZwNE1HM0lsaTVTY011ME1EalRwelVKY01XSERudkhaYXFSNXBkVFRNLU43dU5RckdnZ2RTSXFNWk05N1pMUkZhM3duUC1oR2FBTURmLTA4Q1ptTEQ5STJPSjlZdFJsQUJGMlpfMWxIWkE",
+      "title": "Cybersecurity stocks drop after Anthropic debuts Claude Code Security - SiliconANGLE"
+    },
+    {
+      "date": "2026-02-21T09:23:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuwJBVV95cUxOV09yM202dng0Q0hIcHVHNE0tbTlGQS0xcGZjQlZUeGVPaXc2Nlg3bXUxYlhETU5VYnJocHA3b3oteE5QZjJyOTlBcVVlQ0pzeExKbHRDNGdzdnF0eG1DMFFhSlYxYWNBREtTRVRmSzNUVEVlTUFNVVlvMk1sSzlxZ21iVG1ldWxPeDhKa3F5SWdYVUZsVWVCd1R3S3ZSV016TTBMZlprT3hyQmRhd3NxMG1XN0Rja0ppbzFLN1hQd3RTa1E4UTFwbnhZcVUzbUF0NlY0VG1USXFScGViVWEwaWRoRHB6SWNxci1Va2ppbjNUTWNFS1NSMW1fQW5mS1FUYmFlcDJXbmhrUXcxdlpMaTBJaThVTnZUb0pyb1dFVTVzdU95RDJ1OUZfc0xZbEtHajViLXViZU5wQkHSAcACQVVfeXFMTjdHb3FlSzRqT0hrQ0JUNG5EZ09vSk1McjV5WDY0djU4TzB3ZW42WGF2ZkFnRXhwUTA5a0JKWEQ2NXM2RzZWb0QwbVV0a2t2Yk44SlRsaTBBdnVydWNEV0lqMTJTaXM4VlpMYlBqZS1ERWJQbmdZdnBaN2I0c1Y3SThvZUJjZEJwOGRNcVpuWFE0YzBZN3NYeHZIM01iVWp3aUVlNWFCS0JTQXZyLTlEWmdaS1ZGZ0ZqUUl6cWk5b3h2ZjhJTDctWm05dE1sSFV6QVllcEFzM0ctLWVZVEcyeDdfcGF6SXlmRzlpRjVlaWktRHhubm1tTWkyZlEyNTVLUVdDbnVkR2QtQkdTbW9MZ0tGc2R3OGRiOVFVaDNsZUYzRzQyZWZ1YTl3V3hOTTRjMnZNZm9weVZTVzV1SGZvcGU",
+      "title": "As Anthropic\u0027s new tool wipes away billions of dollar from CrowdStrike, Cloudflare, Palo Alto Networks, Z - The Times of India"
+    },
+    {
+      "date": "2026-02-21T17:58:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF",
+      "title": "Cyber stocks plunge, but Anthropic\u2019s security tool isn\u2019t a killer app - CTech"
+    },
+    {
+      "date": "2026-02-22T06:26:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiowJBVV95cUxOcG5SdmRqcmxLYWNKV1BLZ0lkQnpxNGJiUS1IOVdydWhYVmpCeGhlYXFPSjBmY2Zhb3Z6bnk1TEFwWTh0ZVdvZml5Tk54anJXRHlTN3NnVjU2aVFHS09ubWc4X21wUE9HeUQ4QWVYRXNkX0Z4RzBzc0lhLUJNNzBfRnFaUVRPRlZ5VGQ0bjJqNmhCR0RfS2pRMDFmV2MzZmRvQUNzT29kT0dKZnY1VnNOTWxhWjBfd3NydUtqRXJHUDZGX1BNZ0ZvaWRsSmlJWlQ5bUFUM2dWZE9sWHhkaWVNamstZjVMdko5OGdqTXdKeVZTWTBiRVVKMkF4N2hCT1Jhc2RmYmlDSzljdmhrRkFSS1BXYjAwTVFzWlQwU3lydlBPMzTSAagCQVVfeXFMTU95bHhfSC11bjNSZlhhR0lnWUtEZ3N5a3VOVHhudXpuTE9HaTZFWmZUWWNxNm1fc3Frd2NCVnQyQ2s3N2NNNUItMmdYemRGWnowX0ZxVl96UGYyV1VGdFk1ZmpNbU52Q3VhdlE3NEdubmNiaXVxSG5rNlZvbHJwQWlVOGM3Rkt4NVg4VEVEMmZoZHE0SjVKY0dsZXpHMnM3N2ZqWEpUMkJPREoweUhBUDFJVDZLTjM3NVRSbU15ODBYVHdyZjRKSUtYblBCQ0gzbWVVbFVKOGdVa2VERlNlZTgwYnNJczdsSmN1YzZYcmZaVVludFR0RW01V3JCeUg3Rk40cTQyY1MtcElaMWN0eGJ0SzBud3Q1X0xNUTBKQjBQWjFBSDhvd1U",
+      "title": "What is Anthropic\u0027s new AI tool, Claude Code Security, that wiped off billions from cybersecurity stocks - The Times of India"
+    },
+    {
+      "date": "2026-02-21T10:17:07+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOcng1WlY0SjM4MFZ1SEkzcU5EeWh4Y2RJOTNKQlBZQm1oTU9zaFZ6SlE0N0xQUDBYSTBJQmxndjNSUkNjSVloY0lUXzczU1JQVTFaVjRTNnk5Zm5kZVFjTWpuR3B4b3poU0lqWmRtMTVaUEZMc0NPLURxNndOX3B6YUpuanBVWUk2b2ZpY1ljWF9OQlI4aU9r",
+      "title": "Anthropic\u0027s new AI security tool sends cybersecurity stocks tumbling - the-decoder.com"
+    },
+    {
+      "date": "2026-02-21T23:02:02+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxPYkN5UTNsMS1PU001elpJelVDS3JiVDA5YTBYQmdtaHBRTlJadF9KczE5ZWZCcWk2Z0NCWDZfZTloYXhPalpzeDg1dGVTZjlLQ3JkZThrNU1ELWEzamdKckdfZ0JUTjVyVk1nUjIzb3ZDM3pjQUNPTU55cVlUeVJNUkNhYS1Kb2F6LXRicFRRUdIBlwFBVV95cUxPdjFONllTSlNDUG0wUTdxU0NhQkdFT1IyT3NMdEo3MVljQUdKTUpmenF3Q0N3SnlDeUpMRUtPWldTUXlGb1JEeGVQbGd6OE0ycEhVenl1Tzc1NUlXdEFaaVRMaVFJOExsZUhlR0F6T25QYXptOWxqc1pucGZnSEN4eXZiOHZuRmFvSTZScElweUxreDF6TkVN",
+      "title": "Anthropic Debuts AI Vulnerability Hunter for Claude Code - findarticles.com"
+    },
+    {
+      "date": "2026-02-21T17:27:04+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxNaS14QklLS0lZdEpxUExBZU1nbnpOSE1sRThWNjZsQmNxc0lFU1lYNUl6YkFYM0lYdjFpREhteVhCX0N2NmxFTWRaUEUwRkJMa2gwX1pLWklpTjV2aDVTYVlRSjg5SV9jRG1qTFlsTWZzSGFvRkRQWjdhU1c1SXNrNVVsUU9UNUVHOVFTd1ZSdzZJSGVRekZQOTB2cw",
+      "title": "JFrog (FROG) Stock Drops 20% After Anthropic\u2019s Claude Code Security Launch - CoinCentral"
+    },
+    {
+      "date": "2026-02-21T19:11:21+00:00",
+      "domain": "gizmodo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240",
+      "title": "Obedient Traders Respond to Claude Code Cybersecurity Plugin by Selling Cybersecurity Stocks"
+    },
+    {
+      "date": "2026-02-21T17:34:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTE5ucURlb3FvejFMNnFEN3lXdzNDNDdHbXFqRlJHU2ZWbjdDdUlNUzVnYkNWaVRicGg0UTBUcVRUVzU1UHRCZzdMbXRNa0I2TXRTbTMtSjl5Xzk1Y1Q4S3Iya1BqWXozT0NiS0E",
+      "title": "\u201cCyber is on shaky ground, but this is also an opportunity\u201d: Anthropic\u2019s Claude Code Security forces reckoning - CTech"
+    },
+    {
+      "date": "2026-02-21T19:11:21+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPU0pycHpScml2XzBKWUxBNFhicTJBTnM5eHNsYXg5Nkh0OEtGZDN0SHN1aTh4UngxRjRKaDVoNTMwdG9ISlNxNU1BeEZsQ1plbVlkaDdlaWo3cjQwOWxocGIzXzZna1dvWUpjVzBzYTdoZ2MxYUZuX1E2bzhldzZMZ0pjd3JCR1M3MHhGYkZNVFd1VTZubldWVmFibVY4WWV3TGFPRVhOUzcxeW5wQ0R2VVVncEtITHNQNjVYYUhId0E",
+      "title": "Obedient Traders Respond to Claude Code Cybersecurity Plugin by Selling Cybersecurity Stocks - Gizmodo"
+    },
+    {
+      "date": "2026-02-21T04:42:07+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxOVktpZUhyNE5lcWtKOVhqVTZIdDZJUEJQUlB2MHppYW5Rb05wd0NsUDBpMldjLU5SVldrcXU4OUVobThBQTIwaWFybHVBcGpUd3VBQmZGSkZTS1U3b3p3TXZUY1lidGtzWlpiOV9EMV9fQTVBbFdCSzdpNnYza080d3o0bXZORGNXekxlLTFLS0VRUGh5eklxamFoNktaMU5iYy1QOFNMX1pEeExuTjhv0gG3AUFVX3lxTE5OTm9NeGNZZ2YyUmF0T0ZMQUh6NHVxUm1BTzlYYkFmdzN4U09LS1NjMUhnb3Y1eDI1R3k5YkM2N1hOXzg3TVBvajlFVnBpU1N4YTVjejB5anN2OWtiR181LWt0Y3JyQlJFNW1vcFJGbkZjQ24wbHp0azBDXzZMLVZCZFA4VU1xN3dZaklLOFhtWldyOG1qdDRlRlJoUGRxakwtWElBSHB5R0RrWVRpb1k2SUg5UFF1WQ",
+      "title": "Claude Code Security: How Anthropic Is Using AI To Find Software Flaws - NDTV"
+    },
+    {
+      "date": "2026-02-22T02:20:18+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE9CWG5oRUc0SkJJMG5qanlsbzVfOURHTy1ocndaNnV3WTR5MExDSkduelh5SU42ODlobTJjLUdodFl5dzBuV2E4czlhT0YxNDFycGhyV09SWl8wTE5kMXVYUEUybzU4MUk3YkgtR0g5QmFBQnUzUXpB",
+      "title": "Claude Shockwaves Cybersecurity Stocks - varindia.com"
+    },
+    {
+      "date": "2026-02-21T13:16:32+00:00",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude",
+      "title": "Anthropic Rolls Out Autonomous Vulnerability-Hunting AI Tool for Claude Code"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/J7brpPeYb40PA0aXCvTXdskmGHl0ZVj5ewC9ke3uQobaxup8RvCvNH2RvqvULccB2FhCJyPwQ59gnozPT2_pWMTTnSOicEcxtDCqHyW2vtsdM_g9QShMQw",
+      "name": "testingcatalog.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/RZcFKCU_JS-CkxuT8QAmvWbf_57ArRKcWJniqICEWX9mnoX-JW-7J-JhplL-aJtUTXSFVurRVVdkryV2t9une4fX5YNQNNIaBGTLrl_mypQ",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/7vodLXZtFkGIvzAX9C3AK5DeQGZcpT9Do1Q_dSLVefEnpm6-bosYqnRdqtfHsaEwwke4ZHAN0mAcnLkcuKM4jEyc1XlS2fe9PJedsUng6Q",
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/YPW30eIuPo-wGhQJIchlIBWtenitLZHctudBHp3IXr35xv2okzNjxdrdcuaclKPWrFNtHPOky43nEvyEO4oBh75eji0mAmGG0cU3_rNncm9T",
+      "name": "gizmodo.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee1\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Cybersecurity",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 17,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "TestingCatalog",
+          "url": "https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/"
+        }
+      ],
+      "text": "Anthropic/Claude team: The company describes Claude Code Security as a research-preview scanner that proposes patches for humans to review. The pitch: help teams catch issues traditional tools miss and help defenders keep up as attackers adopt AI [testingcatalog.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "PCMag",
+          "url": "https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude"
+        }
+      ],
+      "text": "PCMag: PCMag calls it an autonomous vulnerability-hunting tool inside Claude Code that scans codebases and suggests targeted fixes, with humans reviewing the recommendations [pcmag.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Gizmodo",
+          "url": "https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240"
+        }
+      ],
+      "text": "Gizmodo: Gizmodo focuses on the trading behavior and the narratives around it, arguing the \u201cSaaSpocalypse is not real\u201d while noting that stock selloffs can still cause real market pain [gizmodo.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "CTech",
+          "url": "https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF"
+        }
+      ],
+      "text": "CTech: CTech says the selloff may be overdone and frames the moment as both a reckoning and an opportunity for cyber firms to adapt, rather than a clear-cut displacement event [google.com#7][google.com#11]."
+    }
+  ],
+  "primary_image": null,
+  "published": 1771745368,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE9CWG5oRUc0SkJJMG5qanlsbzVfOURHTy1ocndaNnV3WTR5MExDSkduelh5SU42ODlobTJjLUdodFl5dzBuV2E4czlhT0YxNDFycGhyV09SWl8wTE5kMXVYUEUybzU4MUk3YkgtR0g5QmFBQnUzUXpB",
+    "https://news.google.com/rss/articles/CBMia0FVX3lxTE1nZk93SnJfNEJONG9WVlR4UHZpdnltcjZUY2NPMTBqRDloS1J1S3N0NXJPMjVTcU5GREhZYUZBVnI5VjNhVVNCYVpMOV9xNWRWU2VPaC1WRG1GZ2w1UmU5czdHOGdHYXdnazVF",
+    "https://news.google.com/rss/articles/CBMiakFVX3lxTE5ucURlb3FvejFMNnFEN3lXdzNDNDdHbXFqRlJHU2ZWbjdDdUlNUzVnYkNWaVRicGg0UTBUcVRUVzU1UHRCZzdMbXRNa0I2TXRTbTMtSjl5Xzk1Y1Q4S3Iya1BqWXozT0NiS0E",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxPNHluci1UN0hJUXJaaTQ1NHE4N0FVVlJ0Znp5N2NyOENqTjNuYXZ3V28tN2dGWlBXSC0wUjYzTkw3ZTBFV2xtYm1XLVoxYzNvd0JiZUpSWEVvNFRXTjdsQnN2aTFPVlM5bjQxS2k5SWg0SGtpbV9kQXVCd0tvMlVNN3NwTjlZQnc",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxOVktpZUhyNE5lcWtKOVhqVTZIdDZJUEJQUlB2MHppYW5Rb05wd0NsUDBpMldjLU5SVldrcXU4OUVobThBQTIwaWFybHVBcGpUd3VBQmZGSkZTS1U3b3p3TXZUY1lidGtzWlpiOV9EMV9fQTVBbFdCSzdpNnYza080d3o0bXZORGNXekxlLTFLS0VRUGh5eklxamFoNktaMU5iYy1QOFNMX1pEeExuTjhv0gG3AUFVX3lxTE5OTm9NeGNZZ2YyUmF0T0ZMQUh6NHVxUm1BTzlYYkFmdzN4U09LS1NjMUhnb3Y1eDI1R3k5YkM2N1hOXzg3TVBvajlFVnBpU1N4YTVjejB5anN2OWtiR181LWt0Y3JyQlJFNW1vcFJGbkZjQ24wbHp0azBDXzZMLVZCZFA4VU1xN3dZaklLOFhtWldyOG1qdDRlRlJoUGRxakwtWElBSHB5R0RrWVRpb1k2SUg5UFF1WQ",
+    "https://www.testingcatalog.com/anthropic-released-claude-code-security-as-research-preview/",
+    "https://news.google.com/rss/articles/CBMinwFBVV95cUxPQ1N3SGNHNk1Vai1PT0FOVXViMWNibVJyaS1VV0VGclNFQVJ6Z1gyT2JPWG8tbDBHc3pscVVua2k3a29ma1YzT3BialVFVmwwWFFndDBydFB1aG1lTFBTQVhEMmtWc1JWbE80UnJ1dU1SaXZxOHdsOEhuNGtfVm1OQmlTazhkbkJlemEzaWNFRmZzRHl5OUt4TjFVblEwUVk",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxPYkN5UTNsMS1PU001elpJelVDS3JiVDA5YTBYQmdtaHBRTlJadF9KczE5ZWZCcWk2Z0NCWDZfZTloYXhPalpzeDg1dGVTZjlLQ3JkZThrNU1ELWEzamdKckdfZ0JUTjVyVk1nUjIzb3ZDM3pjQUNPTU55cVlUeVJNUkNhYS1Kb2F6LXRicFRRUdIBlwFBVV95cUxPdjFONllTSlNDUG0wUTdxU0NhQkdFT1IyT3NMdEo3MVljQUdKTUpmenF3Q0N3SnlDeUpMRUtPWldTUXlGb1JEeGVQbGd6OE0ycEhVenl1Tzc1NUlXdEFaaVRMaVFJOExsZUhlR0F6T25QYXptOWxqc1pucGZnSEN4eXZiOHZuRmFvSTZScElweUxreDF6TkVN",
+    "https://news.google.com/atom/articles/CBMihAFBVV95cUxNNmJUTThkb1BXTUFZOVRNOVVMeklvRGJURnRDZ2xmLWRqYjExWEJKYmdvNEZMeTJzSmxVZXhFUUFrNGItLS1XMVctM3kwbFFXTGYtT0xtNXB2aWVMT0V3S2hnS1NpQzJIbTByYTYzeDN5QnRkTzhPWXFndFFVRzZSeHc3V2M",
+    "https://gizmodo.com/obedient-traders-respond-to-claude-code-cybersecurity-plugin-by-selling-cybersecurity-stocks-2000723240",
+    "https://www.pcmag.com/news/anthropic-rolls-out-autonomous-vulnerability-hunting-ai-tool-for-claude",
+    "https://news.google.com/rss/articles/CBMiuwJBVV95cUxOV09yM202dng0Q0hIcHVHNE0tbTlGQS0xcGZjQlZUeGVPaXc2Nlg3bXUxYlhETU5VYnJocHA3b3oteE5QZjJyOTlBcVVlQ0pzeExKbHRDNGdzdnF0eG1DMFFhSlYxYWNBREtTRVRmSzNUVEVlTUFNVVlvMk1sSzlxZ21iVG1ldWxPeDhKa3F5SWdYVUZsVWVCd1R3S3ZSV016TTBMZlprT3hyQmRhd3NxMG1XN0Rja0ppbzFLN1hQd3RTa1E4UTFwbnhZcVUzbUF0NlY0VG1USXFScGViVWEwaWRoRHB6SWNxci1Va2ppbjNUTWNFS1NSMW1fQW5mS1FUYmFlcDJXbmhrUXcxdlpMaTBJaThVTnZUb0pyb1dFVTVzdU95RDJ1OUZfc0xZbEtHajViLXViZU5wQkHSAcACQVVfeXFMTjdHb3FlSzRqT0hrQ0JUNG5EZ09vSk1McjV5WDY0djU4TzB3ZW42WGF2ZkFnRXhwUTA5a0JKWEQ2NXM2RzZWb0QwbVV0a2t2Yk44SlRsaTBBdnVydWNEV0lqMTJTaXM4VlpMYlBqZS1ERWJQbmdZdnBaN2I0c1Y3SThvZUJjZEJwOGRNcVpuWFE0YzBZN3NYeHZIM01iVWp3aUVlNWFCS0JTQXZyLTlEWmdaS1ZGZ0ZqUUl6cWk5b3h2ZjhJTDctWm05dE1sSFV6QVllcEFzM0ctLWVZVEcyeDdfcGF6SXlmRzlpRjVlaWktRHhubm1tTWkyZlEyNTVLUVdDbnVkR2QtQkdTbW9MZ0tGc2R3OGRiOVFVaDNsZUYzRzQyZWZ1YTl3V3hOTTRjMnZNZm9weVZTVzV1SGZvcGU",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxNaS14QklLS0lZdEpxUExBZU1nbnpOSE1sRThWNjZsQmNxc0lFU1lYNUl6YkFYM0lYdjFpREhteVhCX0N2NmxFTWRaUEUwRkJMa2gwX1pLWklpTjV2aDVTYVlRSjg5SV9jRG1qTFlsTWZzSGFvRkRQWjdhU1c1SXNrNVVsUU9UNUVHOVFTd1ZSdzZJSGVRekZQOTB2cw",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxQYXAyVkpYRzFjNjBEdzZUaGcyTTV1ZUcwN2pkNlZ3UHNTazNVbGw0Nm53RjNGenhLVVZwNE1HM0lsaTVTY011ME1EalRwelVKY01XSERudkhaYXFSNXBkVFRNLU43dU5RckdnZ2RTSXFNWk05N1pMUkZhM3duUC1oR2FBTURmLTA4Q1ptTEQ5STJPSjlZdFJsQUJGMlpfMWxIWkE",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOcng1WlY0SjM4MFZ1SEkzcU5EeWh4Y2RJOTNKQlBZQm1oTU9zaFZ6SlE0N0xQUDBYSTBJQmxndjNSUkNjSVloY0lUXzczU1JQVTFaVjRTNnk5Zm5kZVFjTWpuR3B4b3poU0lqWmRtMTVaUEZMc0NPLURxNndOX3B6YUpuanBVWUk2b2ZpY1ljWF9OQlI4aU9r",
+    "https://news.google.com/rss/articles/CBMiowJBVV95cUxOcG5SdmRqcmxLYWNKV1BLZ0lkQnpxNGJiUS1IOVdydWhYVmpCeGhlYXFPSjBmY2Zhb3Z6bnk1TEFwWTh0ZVdvZml5Tk54anJXRHlTN3NnVjU2aVFHS09ubWc4X21wUE9HeUQ4QWVYRXNkX0Z4RzBzc0lhLUJNNzBfRnFaUVRPRlZ5VGQ0bjJqNmhCR0RfS2pRMDFmV2MzZmRvQUNzT29kT0dKZnY1VnNOTWxhWjBfd3NydUtqRXJHUDZGX1BNZ0ZvaWRsSmlJWlQ5bUFUM2dWZE9sWHhkaWVNamstZjVMdko5OGdqTXdKeVZTWTBiRVVKMkF4N2hCT1Jhc2RmYmlDSzljdmhrRkFSS1BXYjAwTVFzWlQwU3lydlBPMzTSAagCQVVfeXFMTU95bHhfSC11bjNSZlhhR0lnWUtEZ3N5a3VOVHhudXpuTE9HaTZFWmZUWWNxNm1fc3Frd2NCVnQyQ2s3N2NNNUItMmdYemRGWnowX0ZxVl96UGYyV1VGdFk1ZmpNbU52Q3VhdlE3NEdubmNiaXVxSG5rNlZvbHJwQWlVOGM3Rkt4NVg4VEVEMmZoZHE0SjVKY0dsZXpHMnM3N2ZqWEpUMkJPREoweUhBUDFJVDZLTjM3NVRSbU15ODBYVHdyZjRKSUtYblBCQ0gzbWVVbFVKOGdVa2VERlNlZTgwYnNJczdsSmN1YzZYcmZaVVludFR0RW01V3JCeUg3Rk40cTQyY1MtcElaMWN0eGJ0SzBud3Q1X0xNUTBKQjBQWjFBSDhvd1U",
+    "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPU0pycHpScml2XzBKWUxBNFhicTJBTnM5eHNsYXg5Nkh0OEtGZDN0SHN1aTh4UngxRjRKaDVoNTMwdG9ISlNxNU1BeEZsQ1plbVlkaDdlaWo3cjQwOWxocGIzXzZna1dvWUpjVzBzYTdoZ2MxYUZuX1E2bzhldzZMZ0pjd3JCR1M3MHhGYkZNVFd1VTZubldWVmFibVY4WWV3TGFPRVhOUzcxeW5wQ0R2VVVncEtITHNQNjVYYUhId0E"
+  ],
+  "suggested_qna": [],
+  "summary": "Anthropic has introduced Claude Code Security, a security scanning feature built into Claude Code. It\u2019s rolling out as a limited research preview for Enterprise and Team users, with prioritized access for open-source maintainers [testingcatalog.com#1][pcmag.com#1][google.com#1][google.com#3]. The tool scans codebases, flags potential vulnerabilities, and proposes targeted patches that developers review before applying\u2014framed as help for reducing vulnerability backlogs, not an automated \u201cpush-to-production\u201d fixer [testingcatalog.com#1][pcmag.com#1].\n\nThe launch also landed amid a market wobble: multiple cybersecurity-related stocks fell the same day, with some coverage tying the selloff to investor expectations that AI-native scanning features could squeeze existing security tooling vendors. Other analysis pushed back, arguing Claude Code Security isn\u2019t a full replacement for established security platforms [google.com#4][gizmodo.com#1][google.com#6][google.com#8][google.com#9].",
+  "talking_points": [
+    "Model and checks: TestingCatalog says the feature runs on Claude Opus 4.6 and uses a multi-layer verification process, assigning severity and confidence scores to findings [testingcatalog.com#1].",
+    "Vuln types: The tool aims to catch problems that go beyond rule-based static scanners, including context-dependent business-logic flaws and access-control issues [testingcatalog.com#1].",
+    "Market response: Multiple reports linked the launch to a same-day dip in some cybersecurity stocks, alongside commentary about competitive pressure on security vendors [google.com#4][gizmodo.com#1][google.com#6][google.com#9].",
+    "Not a replacement: CTech argues the tool is unlikely to be a \u201ckiller app\u201d that replaces broader cybersecurity products on its own, despite the stock moves [google.com#11]."
+  ],
+  "technical_details": null,
+  "timeline": [],
+  "title": "Anthropic launches Claude Code Security for vulnerability scanning",
+  "unique_domains": 4,
+  "url": "https://news.google.com/atom/articles/CBMihAFBVV95cUxNNmJUTThkb1BXTUFZOVRNOVVMeklvRGJURnRDZ2xmLWRqYjExWEJKYmdvNEZMeTJzSmxVZXhFUUFrNGItLS1XMVctM3kwbFFXTGYtT0xtNXB2aWVMT0V3S2hnS1NpQzJIbTByYTYzeDN5QnRkTzhPWXFndFFVRzZSeHc3V2M",
+  "user_action_items": [
+    "Pilot AI-assisted code scanning in a non-production repo: If your organization has Claude Code access, try Claude Code Security in a staging or sandbox repository and require human review for any suggested patches, since the preview is positioned as assistive rather than autonomous [testingcatalog.com#1][pcmag.com#1].",
+    "Add a triage rubric for AI findings: Use a simple process that leans on severity and confidence scores to decide what to fix first, mirroring the scoring approach described for the tool [testingcatalog.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
