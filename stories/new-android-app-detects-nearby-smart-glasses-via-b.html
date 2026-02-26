@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>New Android app detects nearby smart glasses via Bluetooth - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>New Android app detects nearby smart glasses via Bluetooth</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://boingboing.net/2026/02/25/glasses.html"><img src="https://kagiproxy.com/img/8QJhThKb_yLWLz0dWEutaS80qH_cVPjsDDfEqrH_Gwovvv4ioioIW9yIvqxHq4ytvZUM0pcx5ldBXF8UHATDod5YhyS40b3_dXPTTXYZ3BoKRaKoS9se6Eea0Z2fWoX3RJj5tgQZtQ942QkftU7xSOxcyyYQopRrebpIc4aU5nTA-zOZRMbV6FQ" alt="Smart glasses pictured in coverage of the Nearby Glasses detection app." title="Smart glasses pictured in coverage of the Nearby Glasses detection app. (boingboing.net)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Smart glasses pictured in coverage of the Nearby Glasses detection app. <span class='credit'>(boingboing.net)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>A new free, open-source Android app called Nearby Glasses gives people a heads-up when smart glasses may be operating nearby by scanning for telltale Bluetooth Low Energy signals linked to popular models and their makers <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a><a href="https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/" class="footnote-ref">[6]</a><a href="https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html" class="footnote-ref">[7]</a><a href="https://www.digitaltrends.com/wearables/godsend-app-alerts-you-of-smart-glasses-that-might-be-secretly-recording-you/" class="footnote-ref">[8]</a>. Its creator, Yves Jeanrenaud—an academic in sociology and gender studies who codes as a hobby—built the tool amid growing concerns that increasingly subtle smart glasses can be used for covert recording or harassment <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a><a href="https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/" class="footnote-ref">[6]</a><a href="https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/" class="footnote-ref">[2]</a>.
+
+The app arrives as the smart-glasses market grows and devices become harder to spot. Boing Boing notes EssilorLuxottica said it sold seven million pairs in 2025 under its Ray-Ban and Oakley brands, making it tougher for bystanders to know when they might be on camera <a href="https://boingboing.net/2026/02/25/glasses.html" class="footnote-ref">[5]</a>. Futurism adds that features like facial recognition are on the horizon, and some users see tools like this as a practical form of everyday resistance using signals phones can already observe <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Covert recording is a lot about power.</p>
+
+<cite>— Yves Jeanrenaud (Futurism)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Market context: Smart glasses are getting less conspicuous and more common—Boing Boing cites EssilorLuxottica saying it sold seven million in 2025—so more people want simple ways to notice them in public spaces <a href="https://boingboing.net/2026/02/25/glasses.html" class="footnote-ref">[5]</a>.</li>
+
+<li>Future capability concerns: Futurism points to facial recognition as a likely next step for smart glasses, which helps explain why some people want countermeasures now rather than waiting for new rules or hardware <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Yves Jeanrenaud (creator): He linked his motivation to concerns about power dynamics in covert recording and to his exposure to reporting on digital abuse and hate speech over many years <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth">Futurism</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Futurism (product landscape): The outlet frames the app as a response to a flood of models that can be hard to spot at a glance, name-checking examples like Meta Wayfarer G2s, TCL Nxtwear Gs, and RayNeo Air 3s <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth">Futurism</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>TechSpot (what it keys on): TechSpot describes the app as scanning for BLE activity associated with manufacturers such as Meta, Luxottica Group, and Snap, then issuing an alert when it detects a match <a href="https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html" class="footnote-ref">[7]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html">TechSpot</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>MobileSyrup (risk framing): MobileSyrup emphasizes non-consensual filming and harassment as the real-world misuse scenario that makes an alert-style app appealing <a href="https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/">MobileSyrup</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>BLE scanning heuristics: Nearby Glasses scans for Bluetooth Low Energy activity that correlates with smart-glasses devices (and/or their vendor signatures), then sends an alert rather than trying to pinpoint an exact location <a href="https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html" class="footnote-ref">[7]</a><a href="https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/" class="footnote-ref">[6]</a>.</li>
+
+<li>Range variability: The developer said the app can detect devices at roughly 32–50 feet outdoors but only about 10–32 feet indoors in crowds, reflecting how radio propagation and interference shape real-world detection <a href="https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://boingboing.net/2026/02/25/glasses.html">https://boingboing.net/2026/02/25/glasses.html</a></li>
+
+
+
+<li><a href="https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html">https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE1sLVAtdlFhd3FMTlpwN2xkd2NkTzN5WFNjYUVyVGxPYXVWRW9zMmFlbGszekdFTm1XSjg3MW1kTEE1TEppNDE4NEZHbktlbjRScFZsbXg0M1dMWDhBdldYVVZRS2NMc19FeVRPM2hLRmVqUGVSM1c0VWxB">https://news.google.com/rss/articles/CBMiekFVX3lxTE1sLVAtdlFhd3FMTlpwN2xkd2NkTzN5WFNjYUVyVGxPYXVWRW9zMmFlbGszekdFTm1XSjg3MW1kTEE1TEppNDE4NEZHbktlbjRScFZsbXg0M1dMWDhBdldYVVZRS2NMc19FeVRPM2hLRmVqUGVSM1c0VWxB</a></li>
+
+
+
+<li><a href="https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/">https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/</a></li>
+
+
+
+
+
+<li><a href="https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/">https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/gadgets/comments/1rel8q3/want_to_know_if_glassholes_are_using_smart/">https://www.reddit.com/r/gadgets/comments/1rel8q3/want_to_know_if_glassholes_are_using_smart/</a></li>
+
+
+
+<li><a href="https://www.digitaltrends.com/wearables/godsend-app-alerts-you-of-smart-glasses-that-might-be-secretly-recording-you/">https://www.digitaltrends.com/wearables/godsend-app-alerts-you-of-smart-glasses-that-might-be-secretly-recording-you/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> boingboing.net, google.com, mobilesyrup.com, reddit.com, techspot.com, digitaltrends.com, futurism.com, theregister.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 8 unique domains, 8 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-02-25T17:01:32+00:00",
+      "domain": "futurism.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth",
+      "title": "New App Detects the Radio Fingerprint of Smart Glasses and Warns You When Someone Is Using Them Nearby"
+    },
+    {
+      "date": "2026-02-25T21:29:59+00:00",
+      "domain": "mobilesyrup.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/",
+      "title": "Someone made an app to detect nearby smart glasses"
+    },
+    {
+      "date": "2026-02-25T20:13:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1sLVAtdlFhd3FMTlpwN2xkd2NkTzN5WFNjYUVyVGxPYXVWRW9zMmFlbGszekdFTm1XSjg3MW1kTEE1TEppNDE4NEZHbktlbjRScFZsbXg0M1dMWDhBdldYVVZRS2NMc19FeVRPM2hLRmVqUGVSM1c0VWxB",
+      "title": "Hide from Meta\u0027s spyglasses with this new Android app - theregister.com"
+    },
+    {
+      "date": "2026-02-25T18:21:08+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/gadgets/comments/1rel8q3/want_to_know_if_glassholes_are_using_smart/",
+      "title": "Want to Know If Glassholes Are Using Smart Glasses Near You? There\u0027s an App for That"
+    },
+    {
+      "date": "2026-02-26T01:26:55+00:00",
+      "domain": "boingboing.net",
+      "image": "https://kagiproxy.com/img/ZAlcBtI6h5r5Bh1oXkTTRFXu8d-7E7ZL1pnKbohNNYopIHjabfum_2CdTNWP6TZzXz21D0RumKN_aHGbiOcY9ImwqOJiB5DESeXVeA9LRNKTYJm69bNFMOGz6m7RC7PSvRkcDRpIrG9xkLAM9AqSko4GEi8TlFlEiYG2odoCYntCP7r_RiLHyNk",
+      "image_caption": "",
+      "link": "https://boingboing.net/2026/02/25/glasses.html",
+      "title": "Android app detects nearby smart glasses"
+    },
+    {
+      "date": "2026-02-25T20:13:34+00:00",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/",
+      "title": "Hide from Meta\u0027s spyglasses with this new Android app"
+    },
+    {
+      "date": "2026-02-25T14:16:00+00:00",
+      "domain": "techspot.com",
+      "image": "https://kagiproxy.com/img/_OETmFEdXk2jvxrG25-xYhovfw-FoPSz9MiXzSXW1obKeMOSmlKSDx7tzaFa9PN9z8SJEXTN-keAbl4AUmX33HeUJOs-irdF1Va1gQ08Vd-2qqCAS9q8n5--KiFy6D76uNBfrV6rdzU5DsKvw_Ph-8Sg",
+      "image_caption": "",
+      "link": "https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html",
+      "title": "New Android app alerts you when someone nearby is wearing smart glasses"
+    },
+    {
+      "date": "2026-02-25T09:10:30+00:00",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitaltrends.com/wearables/godsend-app-alerts-you-of-smart-glasses-that-might-be-secretly-recording-you/",
+      "title": "Godsend app alerts you of smart glasses that might be secretly recording you"
+    }
+  ],
+  "category": "Technology",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/Z58l3zfOn_RAvvlDVGSHEYAj2SUoXhg3pp3ivurSooHV8Vzp50XWEfc3tLjMyaiI6P0e2NMW4u5FErasmvvsxImOFmUf6uk1gA0K4NGw3s4td6VL",
+      "name": "boingboing.net"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/hllO4lekFadr4qVTozbMIFkXm461vKtOEj1cYMjDxcHuuQS2ffO18uCfChx51Z8qI7zrTKCf7DIMzd4EeNYy3xI0tR3hIzuxaMe5-y4rxlU",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/ZTV0z7HRZqogjHmZYItfqZAaTfOFpceXCRsQ7wYQ9zTcxuF85OXI6Bq6b_d75jh25LFCIYu5a64TbB5TpKNxMZy31-Ct9wew92MWQCwqFxkRA1uRpQ",
+      "name": "mobilesyrup.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/M0PQpkGUxVI2QT-9C7sJ-lq08nsvKziUvQwdarjGfovWk2SRH_chUSREyvVzkkGN8-0zG4TyF1tvoyI2S1YaSZh0MxfwGhbJKAvsUNwJsuU",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/pQ91uWoHesw3gVClM-vL6w8I_L11idwoWAP3_sIXilJOCLmnlo89obVC45LyRgndn0btPujxKCzXH1u2jmi9Xz5uWW6b2JDn1vqTofSVsY5rWA",
+      "name": "techspot.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/weq6arVOUdmWKJBn1J7uDGsyw602iVP2Q-LIDudeg7h-kxINuIlTh0L6yTgVnfB4lWYc8-kink5ohInOtKmKNs7p8nWJxbopU2eNle9mb5U46lrPUADL",
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/4kCvtpWMpBV6MFqvobJUzLtQY8FUURlZ4po-zegSC-J1fAsRGF2667jyfyq69YDgo3ZexGEG1nQcqmPFDBkt46azclUJBgPg0OkrMzTcR_HCmQ",
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/CZQO8oO4ploduu8JinBn3LHseWsS5_hFv5elysKnQEva1heF6twjg_j7aNr3dl-N4hqItWm4PZw-nodfNFkAFJIWO3IzuszrKOTlrVcWySHyAwBBFg",
+      "name": "theregister.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd75\ufe0f",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Privacy",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 8,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Futurism",
+          "url": "https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth"
+        }
+      ],
+      "text": "Yves Jeanrenaud (creator): He linked his motivation to concerns about power dynamics in covert recording and to his exposure to reporting on digital abuse and hate speech over many years [futurism.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Futurism",
+          "url": "https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth"
+        }
+      ],
+      "text": "Futurism (product landscape): The outlet frames the app as a response to a flood of models that can be hard to spot at a glance, name-checking examples like Meta Wayfarer G2s, TCL Nxtwear Gs, and RayNeo Air 3s [futurism.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechSpot",
+          "url": "https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html"
+        }
+      ],
+      "text": "TechSpot (what it keys on): TechSpot describes the app as scanning for BLE activity associated with manufacturers such as Meta, Luxottica Group, and Snap, then issuing an alert when it detects a match [techspot.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "MobileSyrup",
+          "url": "https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/"
+        }
+      ],
+      "text": "MobileSyrup (risk framing): MobileSyrup emphasizes non-consensual filming and harassment as the real-world misuse scenario that makes an alert-style app appealing [mobilesyrup.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "Smart glasses pictured in coverage of the Nearby Glasses detection app.",
+    "credit": "boingboing.net",
+    "link": "https://boingboing.net/2026/02/25/glasses.html",
+    "url": "https://kagiproxy.com/img/8QJhThKb_yLWLz0dWEutaS80qH_cVPjsDDfEqrH_Gwovvv4ioioIW9yIvqxHq4ytvZUM0pcx5ldBXF8UHATDod5YhyS40b3_dXPTTXYZ3BoKRaKoS9se6Eea0Z2fWoX3RJj5tgQZtQ942QkftU7xSOxcyyYQopRrebpIc4aU5nTA-zOZRMbV6FQ"
+  },
+  "published": 1772091969,
+  "quote": "Covert recording is a lot about power.",
+  "quote_attribution": "Futurism",
+  "quote_author": "Yves Jeanrenaud",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://boingboing.net/2026/02/25/glasses.html",
+    "https://www.techspot.com/news/111461-new-android-app-alerts-you-when-someone-nearby.html",
+    "https://news.google.com/rss/articles/CBMiekFVX3lxTE1sLVAtdlFhd3FMTlpwN2xkd2NkTzN5WFNjYUVyVGxPYXVWRW9zMmFlbGszekdFTm1XSjg3MW1kTEE1TEppNDE4NEZHbktlbjRScFZsbXg0M1dMWDhBdldYVVZRS2NMc19FeVRPM2hLRmVqUGVSM1c0VWxB",
+    "https://go.theregister.com/feed/www.theregister.com/2026/02/25/meta_smart_glasses_android_app/",
+    "https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth",
+    "https://mobilesyrup.com/2026/02/25/someone-made-an-app-to-detect-nearby-smart-glasses/",
+    "https://www.reddit.com/r/gadgets/comments/1rel8q3/want_to_know_if_glassholes_are_using_smart/",
+    "https://www.digitaltrends.com/wearables/godsend-app-alerts-you-of-smart-glasses-that-might-be-secretly-recording-you/"
+  ],
+  "suggested_qna": [],
+  "summary": "A new free, open-source Android app called Nearby Glasses gives people a heads-up when smart glasses may be operating nearby by scanning for telltale Bluetooth Low Energy signals linked to popular models and their makers [futurism.com#1][theregister.com#1][techspot.com#1][digitaltrends.com#1]. Its creator, Yves Jeanrenaud\u2014an academic in sociology and gender studies who codes as a hobby\u2014built the tool amid growing concerns that increasingly subtle smart glasses can be used for covert recording or harassment [futurism.com#1][theregister.com#1][mobilesyrup.com#1].\n\nThe app arrives as the smart-glasses market grows and devices become harder to spot. Boing Boing notes EssilorLuxottica said it sold seven million pairs in 2025 under its Ray-Ban and Oakley brands, making it tougher for bystanders to know when they might be on camera [boingboing.net#1]. Futurism adds that features like facial recognition are on the horizon, and some users see tools like this as a practical form of everyday resistance using signals phones can already observe [futurism.com#1].",
+  "talking_points": [
+    "Market context: Smart glasses are getting less conspicuous and more common\u2014Boing Boing cites EssilorLuxottica saying it sold seven million in 2025\u2014so more people want simple ways to notice them in public spaces [boingboing.net#1].",
+    "Future capability concerns: Futurism points to facial recognition as a likely next step for smart glasses, which helps explain why some people want countermeasures now rather than waiting for new rules or hardware [futurism.com#1]."
+  ],
+  "technical_details": [
+    "BLE scanning heuristics: Nearby Glasses scans for Bluetooth Low Energy activity that correlates with smart-glasses devices (and/or their vendor signatures), then sends an alert rather than trying to pinpoint an exact location [techspot.com#1][theregister.com#1].",
+    "Range variability: The developer said the app can detect devices at roughly 32\u201350 feet outdoors but only about 10\u201332 feet indoors in crowds, reflecting how radio propagation and interference shape real-world detection [futurism.com#1]."
+  ],
+  "timeline": [],
+  "title": "New Android app detects nearby smart glasses via Bluetooth",
+  "unique_domains": 8,
+  "url": "https://futurism.com/robots-and-machines/app-smart-glasses-bluetooth",
+  "user_action_items": null
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
