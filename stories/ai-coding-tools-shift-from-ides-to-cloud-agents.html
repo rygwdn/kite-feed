@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI coding tools shift from IDEs to cloud agents - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI coding tools shift from IDEs to cloud agents</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of new reporting and commentary suggests AI-assisted software development is moving past “autocomplete in an editor” and toward always-on, cloud-run coding agents that can take actions, run code, and coordinate work. Cursor’s latest push focuses on cloud agents and a new automation layer that can kick off agent runs based on external developer signals—casting the product as more of an agent platform than a traditional IDE add-on <a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/" class="footnote-ref">[4]</a><a href="https://www.latent.space/p/cursor-third-era" class="footnote-ref">[1]</a>.
+
+Several pieces also highlight the practical upside: people with limited coding experience can prototype websites and apps by describing what they want in plain language—often in minutes—which could widen who gets to build software <a href="https://news.google.com/atom/articles/CBMi3AFBVV95cUxNcmprWTRzUVk4WUZCc2xwaTZndWV6LVpFa2Y3SXdXc055R2hUSFJURWNmbVJudmNLOVBJWWpzX0RLdlhEM2NabWlrX2psblBpYXJINTI5SXVWSm5LcU56ZEQ5QUtOTTdhRmktanoxOVRLSVFWMDh4YmxfLTZ3TzJYdlJFYXZRSThDQ1JPTXRtaUg3ZzdMZWp4MGlPOXFTNHNwUWcyUG9PZTBYTzFabE92dmlYaFMycUpEMnNsalFHWV9ldlhmeVBqamx1VjFCNzI3a1dSWUVpZXRBWWkw" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE" class="footnote-ref">[8]</a>. At the same time, engineers and researchers keep coming back to “trust but verify.” Agentic systems are most useful when they can execute what they write, but they still need disciplined testing, sandboxing, and clear permission boundaries so speed doesn’t turn into risk <a href="https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything" class="footnote-ref">[11]</a><a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming" class="footnote-ref">[10]</a><a href="https://news.google.com/atom/articles/CBMihwFBVV95cUxNNkw1eGNzc3Fycm9DZG0wQ253R3NySkZydnU5TTBzSDREZVBxX0tSbTBDYlA4VHVDa2NmUGszamx3OFprc1ZWQ014SkE2bjFWRUNsZllOQnRCaUZIS0hMQlltbnNNVmtlaWdLSUpNZlVtVlZjdkFmWlhpSnJ3UmxHLVZwX1NGMHM" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.latent.space/p/cursor-third-era">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Continuous automation layer: Cursor’s new “Automations” push is less about a better chat box in an editor and more about keeping agent work running in the background—something triggered by the normal flow of development activity, not just a user prompt <a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxNdVRNRFZSaEFXODJZQ0o5cWdZdzVnQ016S01qekExN1EzMGFRb0RUcUdoaTFXbllhSjhlaTNHejQ3OUMzdmtRSEFvLXJrdnh4Q2c3UXVmQ3kyWUtOb2hMczBLdGNSOHhtYUhhZldjLTdBcTdiNUk4bkJDbmt3c1RfVE4tMk1DTEhqTUNCT1VxQ3RSdw" class="footnote-ref">[7]</a>.</li>
+
+<li>Agent-first workflow framing: Latent Space says Cursor’s “cloud agents” are overtaking its legacy “VSCode fork” usage, pointing to workflows like slash commands and subagents—and tying this release cycle to “computer use” style capabilities that make agents feel more like active teammates than suggestion engines <a href="https://www.latent.space/p/cursor-third-era" class="footnote-ref">[1]</a>.</li>
+
+<li>Delegation progression: A LessWrong write-up describes a stepwise shift from having the model write code, to having it review code, and then reshaping the environment so the developer can safely reduce permission prompts and stop acting as the throughput bottleneck <a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming" class="footnote-ref">[10]</a>.</li>
+
+<li>Speed vs. permissions tradeoff: As agent tools get faster, practitioners are building setups that can tolerate model mistakes (so they don’t need constant human gating). That becomes a prerequisite for granting agents broader execution latitude <a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming" class="footnote-ref">[10]</a>.</li>
+
+<li>Vibe coding lessons: First-person accounts and how-to articles emphasize that rapid “vibe-coded” builds still depend on clear prompts, small incremental changes, and solid verification practices to avoid brittle results <a href="https://news.google.com/atom/articles/CBMiugFBVV95cUxNQjFlMXNCX0NkYlBaNmY0QmRlLW9NMTlDSzc4NHF1VGM3VXJTU1JicWZUVmRuTE1mbzJOMmNfRXp0Z3kxdjh5bU1LT1NHVEhXMld5bFlmQTFzS0lFWk5hTjJoclplbkY4NGZmVktUVkprbHBEdUlaVG9PSFZPNnRoYVlPeE9BX2RNVjNEQ3BFSDF6eXViOFR4LU40S0Z5T015eGE5UzBsamRlNkxCNmY0TS1CajVTcEJVa0E" class="footnote-ref">[6]</a><a href="https://news.google.com/atom/articles/CBMihwFBVV95cUxNNkw1eGNzc3Fycm9DZG0wQ253R3NySkZydnU5TTBzSDREZVBxX0tSbTBDYlA4VHVDa2NmUGszamx3OFprc1ZWQ014SkE2bjFWRUNsZllOQnRCaUZIS0hMQlltbnNNVmtlaWdLSUpNZlVtVlZjdkFmWlhpSnJ3UmxHLVZwX1NGMHM" class="footnote-ref">[2]</a><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNMzY2LVk3bEZwT3J3SnI1dkxWMW5wbktEaWtSWEZ3STN4eE16a2QxZUJyd2Zxa2tPWW9BR2xNNGV4Um1LaVYweDBYTWx1aWFlS2VXcFpYWDNYWXJCX3cxR0lhZ1duX2JrT29GM3JScEZMbm8wMjVDVWxjd3BhRWhraHdLM0wtejMwVTBKVEVLRC1CS2czRm42NlpHUUZ5UQ" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Cursor (product direction): Cursor is positioning its new “Automations” as a move from on-demand, in-editor help to agent runs triggered by external developer signals—nudging the product toward an agent-platform model.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/">TechCrunch</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Latent Space (industry framing): Latent Space reports that Cursor’s cloud agents have surpassed its legacy “VSCode fork” IDE use case, and points to subagents, slash commands, and continual/personalized learning as the next frontier.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.latent.space/p/cursor-third-era">latent.space</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Simon Willison (engineering practice): Willison argues that execution is the defining advantage of coding agents: they can run what they write. But teams should still require manual validation (often performed by the agent), because unit tests alone can miss obvious defects.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything">simonwillison.net</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Independent engineer (LessWrong): An independent engineer describes a workflow focused on removing themselves as the limiting factor—first delegating writing, then review, then changing their setup so models can move faster without constant human intervention, while still managing operational risk <a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming" class="footnote-ref">[10]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming">LessWrong</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Mainstream analysis (app creation): Analysis pieces argue that plain-language app and website generation could lower the barrier for newcomers, raising questions about what people will build when “anyone can code” with AI assistance.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE">The Washington Post (via Google News)</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Add an AI-agent sandbox account: Create a separate OS user for your coding agent with least-privilege tokens/keys and restricted file access, as described in a Claude Code workflow write-up <a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming" class="footnote-ref">[10]</a>.</li>
+
+<li>Adopt an agent testing checklist: Have agents run the code they generate and do at least one “manual” verification step beyond unit tests before merging, following agentic manual testing guidance <a href="https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything" class="footnote-ref">[11]</a>.</li>
+
+<li>Use trigger-based automation cautiously: If you enable event-based agent triggers, start with read-only or advisory actions, then expand permissions gradually to reduce unintended changes <a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/" class="footnote-ref">[4]</a><a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/atom/articles/CBMilwFBVV95cUxNSzQ2YVRzM1R5dGt0RmlKNUI5eEJjcm9VTGU5a2dLWjVqUGd3OHo1a2N4YU9zN2lUeGJVTlpuWmR6VmFXNWVpaDliMEt3YUQ0X2Q2RkI4ZV93V21mQ1hqR1BUWURWcUFDbHpNd3FZanhqWGtFeF9FVUhSMWZXeU9pTDI2VzIxU0ZsR3kxMkFVMkh3djhfWkh3">https://news.google.com/atom/articles/CBMilwFBVV95cUxNSzQ2YVRzM1R5dGt0RmlKNUI5eEJjcm9VTGU5a2dLWjVqUGd3OHo1a2N4YU9zN2lUeGJVTlpuWmR6VmFXNWVpaDliMEt3YUQ0X2Q2RkI4ZV93V21mQ1hqR1BUWURWcUFDbHpNd3FZanhqWGtFeF9FVUhSMWZXeU9pTDI2VzIxU0ZsR3kxMkFVMkh3djhfWkh3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE">https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE</a></li>
+
+
+
+<li><a href="https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything">https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMi3AFBVV95cUxNcmprWTRzUVk4WUZCc2xwaTZndWV6LVpFa2Y3SXdXc055R2hUSFJURWNmbVJudmNLOVBJWWpzX0RLdlhEM2NabWlrX2psblBpYXJINTI5SXVWSm5LcU56ZEQ5QUtOTTdhRmktanoxOVRLSVFWMDh4YmxfLTZ3TzJYdlJFYXZRSThDQ1JPTXRtaUg3ZzdMZWp4MGlPOXFTNHNwUWcyUG9PZTBYTzFabE92dmlYaFMycUpEMnNsalFHWV9ldlhmeVBqamx1VjFCNzI3a1dSWUVpZXRBWWkw">https://news.google.com/atom/articles/CBMi3AFBVV95cUxNcmprWTRzUVk4WUZCc2xwaTZndWV6LVpFa2Y3SXdXc055R2hUSFJURWNmbVJudmNLOVBJWWpzX0RLdlhEM2NabWlrX2psblBpYXJINTI5SXVWSm5LcU56ZEQ5QUtOTTdhRmktanoxOVRLSVFWMDh4YmxfLTZ3TzJYdlJFYXZRSThDQ1JPTXRtaUg3ZzdMZWp4MGlPOXFTNHNwUWcyUG9PZTBYTzFabE92dmlYaFMycUpEMnNsalFHWV9ldlhmeVBqamx1VjFCNzI3a1dSWUVpZXRBWWkw</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMihwFBVV95cUxNNkw1eGNzc3Fycm9DZG0wQ253R3NySkZydnU5TTBzSDREZVBxX0tSbTBDYlA4VHVDa2NmUGszamx3OFprc1ZWQ014SkE2bjFWRUNsZllOQnRCaUZIS0hMQlltbnNNVmtlaWdLSUpNZlVtVlZjdkFmWlhpSnJ3UmxHLVZwX1NGMHM">https://news.google.com/atom/articles/CBMihwFBVV95cUxNNkw1eGNzc3Fycm9DZG0wQ253R3NySkZydnU5TTBzSDREZVBxX0tSbTBDYlA4VHVDa2NmUGszamx3OFprc1ZWQ014SkE2bjFWRUNsZllOQnRCaUZIS0hMQlltbnNNVmtlaWdLSUpNZlVtVlZjdkFmWlhpSnJ3UmxHLVZwX1NGMHM</a></li>
+
+
+
+<li><a href="https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming">https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming</a></li>
+
+
+
+<li><a href="https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/">https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiugFBVV95cUxNQjFlMXNCX0NkYlBaNmY0QmRlLW9NMTlDSzc4NHF1VGM3VXJTU1JicWZUVmRuTE1mbzJOMmNfRXp0Z3kxdjh5bU1LT1NHVEhXMld5bFlmQTFzS0lFWk5hTjJoclplbkY4NGZmVktUVkprbHBEdUlaVG9PSFZPNnRoYVlPeE9BX2RNVjNEQ3BFSDF6eXViOFR4LU40S0Z5T015eGE5UzBsamRlNkxCNmY0TS1CajVTcEJVa0E">https://news.google.com/atom/articles/CBMiugFBVV95cUxNQjFlMXNCX0NkYlBaNmY0QmRlLW9NMTlDSzc4NHF1VGM3VXJTU1JicWZUVmRuTE1mbzJOMmNfRXp0Z3kxdjh5bU1LT1NHVEhXMld5bFlmQTFzS0lFWk5hTjJoclplbkY4NGZmVktUVkprbHBEdUlaVG9PSFZPNnRoYVlPeE9BX2RNVjNEQ3BFSDF6eXViOFR4LU40S0Z5T015eGE5UzBsamRlNkxCNmY0TS1CajVTcEJVa0E</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxNdVRNRFZSaEFXODJZQ0o5cWdZdzVnQ016S01qekExN1EzMGFRb0RUcUdoaTFXbllhSjhlaTNHejQ3OUMzdmtRSEFvLXJrdnh4Q2c3UXVmQ3kyWUtOb2hMczBLdGNSOHhtYUhhZldjLTdBcTdiNUk4bkJDbmt3c1RfVE4tMk1DTEhqTUNCT1VxQ3RSdw">https://news.google.com/rss/articles/CBMikgFBVV95cUxNdVRNRFZSaEFXODJZQ0o5cWdZdzVnQ016S01qekExN1EzMGFRb0RUcUdoaTFXbllhSjhlaTNHejQ3OUMzdmtRSEFvLXJrdnh4Q2c3UXVmQ3kyWUtOb2hMczBLdGNSOHhtYUhhZldjLTdBcTdiNUk4bkJDbmt3c1RfVE4tMk1DTEhqTUNCT1VxQ3RSdw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxNMzY2LVk3bEZwT3J3SnI1dkxWMW5wbktEaWtSWEZ3STN4eE16a2QxZUJyd2Zxa2tPWW9BR2xNNGV4Um1LaVYweDBYTWx1aWFlS2VXcFpYWDNYWXJCX3cxR0lhZ1duX2JrT29GM3JScEZMbm8wMjVDVWxjd3BhRWhraHdLM0wtejMwVTBKVEVLRC1CS2czRm42NlpHUUZ5UQ">https://news.google.com/rss/articles/CBMingFBVV95cUxNMzY2LVk3bEZwT3J3SnI1dkxWMW5wbktEaWtSWEZ3STN4eE16a2QxZUJyd2Zxa2tPWW9BR2xNNGV4Um1LaVYweDBYTWx1aWFlS2VXcFpYWDNYWXJCX3cxR0lhZ1duX2JrT29GM3JScEZMbm8wMjVDVWxjd3BhRWhraHdLM0wtejMwVTBKVEVLRC1CS2czRm42NlpHUUZ5UQ</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> techcrunch.com, lesswrong.com, simonwillison.net, latent.space, google.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 5 unique domains, 11 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-03-06T02:42:37+00:00",
+      "domain": "latent.space",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.latent.space/p/cursor-third-era",
+      "title": "Cursor\u0027s Third Era: Cloud Agents"
+    },
+    {
+      "date": "2026-03-05T11:23:12+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMihwFBVV95cUxNNkw1eGNzc3Fycm9DZG0wQ253R3NySkZydnU5TTBzSDREZVBxX0tSbTBDYlA4VHVDa2NmUGszamx3OFprc1ZWQ014SkE2bjFWRUNsZllOQnRCaUZIS0hMQlltbnNNVmtlaWdLSUpNZlVtVlZjdkFmWlhpSnJ3UmxHLVZwX1NGMHM",
+      "title": "Testing Strategies for LLM-Generated Web Development Code - HackerNoon"
+    },
+    {
+      "date": "2026-03-06T04:00:14+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMi3AFBVV95cUxNcmprWTRzUVk4WUZCc2xwaTZndWV6LVpFa2Y3SXdXc055R2hUSFJURWNmbVJudmNLOVBJWWpzX0RLdlhEM2NabWlrX2psblBpYXJINTI5SXVWSm5LcU56ZEQ5QUtOTTdhRmktanoxOVRLSVFWMDh4YmxfLTZ3TzJYdlJFYXZRSThDQ1JPTXRtaUg3ZzdMZWp4MGlPOXFTNHNwUWcyUG9PZTBYTzFabE92dmlYaFMycUpEMnNsalFHWV9ldlhmeVBqamx1VjFCNzI3a1dSWUVpZXRBWWkw",
+      "title": "Analysis: Recent advances in artificial intelligence allow anyone to build working mobile apps and websites just by describing an idea in plain language. See how creating a working app or website can take just minutes \u2014 no coding skills required. - facebook.com"
+    },
+    {
+      "date": "2026-03-05T17:00:00+00:00",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/",
+      "title": "Cursor is rolling out a new kind of agentic coding tool"
+    },
+    {
+      "date": "2026-03-05T19:07:30+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMilwFBVV95cUxNSzQ2YVRzM1R5dGt0RmlKNUI5eEJjcm9VTGU5a2dLWjVqUGd3OHo1a2N4YU9zN2lUeGJVTlpuWmR6VmFXNWVpaDliMEt3YUQ0X2Q2RkI4ZV93V21mQ1hqR1BUWURWcUFDbHpNd3FZanhqWGtFeF9FVUhSMWZXeU9pTDI2VzIxU0ZsR3kxMkFVMkh3djhfWkh3",
+      "title": "Cursor Goes To War For AI Coding Dominance - Forbes"
+    },
+    {
+      "date": "2026-03-06T05:00:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiugFBVV95cUxNQjFlMXNCX0NkYlBaNmY0QmRlLW9NMTlDSzc4NHF1VGM3VXJTU1JicWZUVmRuTE1mbzJOMmNfRXp0Z3kxdjh5bU1LT1NHVEhXMld5bFlmQTFzS0lFWk5hTjJoclplbkY4NGZmVktUVkprbHBEdUlaVG9PSFZPNnRoYVlPeE9BX2RNVjNEQ3BFSDF6eXViOFR4LU40S0Z5T015eGE5UzBsamRlNkxCNmY0TS1CajVTcEJVa0E",
+      "title": "I vibe coded an app. This is what I learnt about AI - Financial Review"
+    },
+    {
+      "date": "2026-03-05T17:00:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdVRNRFZSaEFXODJZQ0o5cWdZdzVnQ016S01qekExN1EzMGFRb0RUcUdoaTFXbllhSjhlaTNHejQ3OUMzdmtRSEFvLXJrdnh4Q2c3UXVmQ3kyWUtOb2hMczBLdGNSOHhtYUhhZldjLTdBcTdiNUk4bkJDbmt3c1RfVE4tMk1DTEhqTUNCT1VxQ3RSdw",
+      "title": "Cursor is rolling out a new kind of agentic coding tool - TechCrunch"
+    },
+    {
+      "date": "2026-03-05T18:00:28+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE",
+      "title": "Analysis | Anyone can code now. What will you build? - The Washington Post"
+    },
+    {
+      "date": "2026-03-05T23:53:15+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxNMzY2LVk3bEZwT3J3SnI1dkxWMW5wbktEaWtSWEZ3STN4eE16a2QxZUJyd2Zxa2tPWW9BR2xNNGV4Um1LaVYweDBYTWx1aWFlS2VXcFpYWDNYWXJCX3cxR0lhZ1duX2JrT29GM3JScEZMbm8wMjVDVWxjd3BhRWhraHdLM0wtejMwVTBKVEVLRC1CS2czRm42NlpHUUZ5UQ",
+      "title": "The Lessons I Learned From Building 10 Free Claude Code Tools in a Weekend - HackerNoon"
+    },
+    {
+      "date": "2026-03-06T04:27:05+00:00",
+      "domain": "lesswrong.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming",
+      "title": "How I Handle Automated Programming"
+    },
+    {
+      "date": "2026-03-06T05:43:54+00:00",
+      "domain": "simonwillison.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything",
+      "title": "Agentic manual testing"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": null,
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/OKKHNKZ74huQ8d0aMlgeg7JTCZPYWMgsFxAXsTleZ5UnJ9Z-mWcNLiEtoz-zuqDbh3xlJQUipjlpwpsFfHUKdb1iNeZ71XhZMHlVSMC9wuje5aKU",
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/oQYzo8WYZHpIoazIRI2R0YM9nbFv35IZA91HKbNQOLVKrvqlNS7e7Fx1FtEDpgEZO47FAVsuw_Thj2CIixc5gxfxbU6TnVyzZ97CqUJUP0J2EgA",
+      "name": "lesswrong.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/NoYe_uBQ8qE98rmko68meM_0lWnh01IEohqhXVOupEpB7-1oS2w2YuxM5sVzkAw9ndmBIe-oCo8UKJ2hcma5pq7fK23ycAN7llqDTKE4JoUjpQVCsvjp",
+      "name": "simonwillison.net"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/eRM2xwXEGwykdEmOkUXRVB0qipk0Yhup1lZ9h_dU1rOXQY_uGaa6sKUHFpnxF_JSyS44L1skQ0UvOzaDAWdZx71Znm41oIU7kggyacasX40hQQ",
+      "name": "latent.space"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/J1mWAgvDtG0dl9bhzFqBM-ZvTqGz7aKBViTAWObPuxgkMeUIsIdKuVm2oDqY5_CdiPIQPQLvxQcgLA7fOWqjXOQT7kGjtez1OK7I217BesI",
+      "name": "google.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Coding Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 11,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/"
+        }
+      ],
+      "text": "Cursor (product direction): Cursor is positioning its new \u201cAutomations\u201d as a move from on-demand, in-editor help to agent runs triggered by external developer signals\u2014nudging the product toward an agent-platform model."
+    },
+    {
+      "sources": [
+        {
+          "name": "latent.space",
+          "url": "https://www.latent.space/p/cursor-third-era"
+        }
+      ],
+      "text": "Latent Space (industry framing): Latent Space reports that Cursor\u2019s cloud agents have surpassed its legacy \u201cVSCode fork\u201d IDE use case, and points to subagents, slash commands, and continual/personalized learning as the next frontier."
+    },
+    {
+      "sources": [
+        {
+          "name": "simonwillison.net",
+          "url": "https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything"
+        }
+      ],
+      "text": "Simon Willison (engineering practice): Willison argues that execution is the defining advantage of coding agents: they can run what they write. But teams should still require manual validation (often performed by the agent), because unit tests alone can miss obvious defects."
+    },
+    {
+      "sources": [
+        {
+          "name": "LessWrong",
+          "url": "https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming"
+        }
+      ],
+      "text": "Independent engineer (LessWrong): An independent engineer describes a workflow focused on removing themselves as the limiting factor\u2014first delegating writing, then review, then changing their setup so models can move faster without constant human intervention, while still managing operational risk [lesswrong.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "The Washington Post (via Google News)",
+          "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE"
+        }
+      ],
+      "text": "Mainstream analysis (app creation): Analysis pieces argue that plain-language app and website generation could lower the barrier for newcomers, raising questions about what people will build when \u201canyone can code\u201d with AI assistance."
+    }
+  ],
+  "primary_image": null,
+  "published": 1772783138,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://news.google.com/atom/articles/CBMilwFBVV95cUxNSzQ2YVRzM1R5dGt0RmlKNUI5eEJjcm9VTGU5a2dLWjVqUGd3OHo1a2N4YU9zN2lUeGJVTlpuWmR6VmFXNWVpaDliMEt3YUQ0X2Q2RkI4ZV93V21mQ1hqR1BUWURWcUFDbHpNd3FZanhqWGtFeF9FVUhSMWZXeU9pTDI2VzIxU0ZsR3kxMkFVMkh3djhfWkh3",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxNMjVGUTdBU01qajloS0pvbU1CaHlTSVFLYmZITERFUlJ1eFdEWUNZVzNiUzU3VXJORG9qNnBQb0wtaUtwaHRORGNiWEc5YXBiTkRkcXBQVEUwLTIyMW9MS040SW1ORnBydTFRTEtxRXctN1Q3UW1XYndBVjRMV3ZkY1c4SUczNUFmbHhpT1BNWllHUUE",
+    "https://simonwillison.net/guides/agentic-engineering-patterns/agentic-manual-testing/#atom-everything",
+    "https://news.google.com/atom/articles/CBMi3AFBVV95cUxNcmprWTRzUVk4WUZCc2xwaTZndWV6LVpFa2Y3SXdXc055R2hUSFJURWNmbVJudmNLOVBJWWpzX0RLdlhEM2NabWlrX2psblBpYXJINTI5SXVWSm5LcU56ZEQ5QUtOTTdhRmktanoxOVRLSVFWMDh4YmxfLTZ3TzJYdlJFYXZRSThDQ1JPTXRtaUg3ZzdMZWp4MGlPOXFTNHNwUWcyUG9PZTBYTzFabE92dmlYaFMycUpEMnNsalFHWV9ldlhmeVBqamx1VjFCNzI3a1dSWUVpZXRBWWkw",
+    "https://www.latent.space/p/cursor-third-era",
+    "https://news.google.com/atom/articles/CBMihwFBVV95cUxNNkw1eGNzc3Fycm9DZG0wQ253R3NySkZydnU5TTBzSDREZVBxX0tSbTBDYlA4VHVDa2NmUGszamx3OFprc1ZWQ014SkE2bjFWRUNsZllOQnRCaUZIS0hMQlltbnNNVmtlaWdLSUpNZlVtVlZjdkFmWlhpSnJ3UmxHLVZwX1NGMHM",
+    "https://www.lesswrong.com/posts/ZrrFGQjSkgEFG2yfm/how-i-handle-automated-programming",
+    "https://techcrunch.com/2026/03/05/cursor-is-rolling-out-a-new-system-for-agentic-coding/",
+    "https://news.google.com/atom/articles/CBMiugFBVV95cUxNQjFlMXNCX0NkYlBaNmY0QmRlLW9NMTlDSzc4NHF1VGM3VXJTU1JicWZUVmRuTE1mbzJOMmNfRXp0Z3kxdjh5bU1LT1NHVEhXMld5bFlmQTFzS0lFWk5hTjJoclplbkY4NGZmVktUVkprbHBEdUlaVG9PSFZPNnRoYVlPeE9BX2RNVjNEQ3BFSDF6eXViOFR4LU40S0Z5T015eGE5UzBsamRlNkxCNmY0TS1CajVTcEJVa0E",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxNdVRNRFZSaEFXODJZQ0o5cWdZdzVnQ016S01qekExN1EzMGFRb0RUcUdoaTFXbllhSjhlaTNHejQ3OUMzdmtRSEFvLXJrdnh4Q2c3UXVmQ3kyWUtOb2hMczBLdGNSOHhtYUhhZldjLTdBcTdiNUk4bkJDbmt3c1RfVE4tMk1DTEhqTUNCT1VxQ3RSdw",
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxNMzY2LVk3bEZwT3J3SnI1dkxWMW5wbktEaWtSWEZ3STN4eE16a2QxZUJyd2Zxa2tPWW9BR2xNNGV4Um1LaVYweDBYTWx1aWFlS2VXcFpYWDNYWXJCX3cxR0lhZ1duX2JrT29GM3JScEZMbm8wMjVDVWxjd3BhRWhraHdLM0wtejMwVTBKVEVLRC1CS2czRm42NlpHUUZ5UQ"
+  ],
+  "suggested_qna": [],
+  "summary": "A cluster of new reporting and commentary suggests AI-assisted software development is moving past \u201cautocomplete in an editor\u201d and toward always-on, cloud-run coding agents that can take actions, run code, and coordinate work. Cursor\u2019s latest push focuses on cloud agents and a new automation layer that can kick off agent runs based on external developer signals\u2014casting the product as more of an agent platform than a traditional IDE add-on [techcrunch.com#1][latent.space#1].\n\nSeveral pieces also highlight the practical upside: people with limited coding experience can prototype websites and apps by describing what they want in plain language\u2014often in minutes\u2014which could widen who gets to build software [google.com#2][google.com#6]. At the same time, engineers and researchers keep coming back to \u201ctrust but verify.\u201d Agentic systems are most useful when they can execute what they write, but they still need disciplined testing, sandboxing, and clear permission boundaries so speed doesn\u2019t turn into risk [simonwillison.net#1][lesswrong.com#1][google.com#1].",
+  "talking_points": [
+    "Continuous automation layer: Cursor\u2019s new \u201cAutomations\u201d push is less about a better chat box in an editor and more about keeping agent work running in the background\u2014something triggered by the normal flow of development activity, not just a user prompt [techcrunch.com#1][google.com#5].",
+    "Agent-first workflow framing: Latent Space says Cursor\u2019s \u201ccloud agents\u201d are overtaking its legacy \u201cVSCode fork\u201d usage, pointing to workflows like slash commands and subagents\u2014and tying this release cycle to \u201ccomputer use\u201d style capabilities that make agents feel more like active teammates than suggestion engines [latent.space#1].",
+    "Delegation progression: A LessWrong write-up describes a stepwise shift from having the model write code, to having it review code, and then reshaping the environment so the developer can safely reduce permission prompts and stop acting as the throughput bottleneck [lesswrong.com#1].",
+    "Speed vs. permissions tradeoff: As agent tools get faster, practitioners are building setups that can tolerate model mistakes (so they don\u2019t need constant human gating). That becomes a prerequisite for granting agents broader execution latitude [lesswrong.com#1].",
+    "Vibe coding lessons: First-person accounts and how-to articles emphasize that rapid \u201cvibe-coded\u201d builds still depend on clear prompts, small incremental changes, and solid verification practices to avoid brittle results [google.com#4][google.com#1][google.com#7]."
+  ],
+  "technical_details": null,
+  "timeline": [],
+  "title": "AI coding tools shift from IDEs to cloud agents",
+  "unique_domains": 5,
+  "url": "https://www.latent.space/p/cursor-third-era",
+  "user_action_items": [
+    "Add an AI-agent sandbox account: Create a separate OS user for your coding agent with least-privilege tokens/keys and restricted file access, as described in a Claude Code workflow write-up [lesswrong.com#1].",
+    "Adopt an agent testing checklist: Have agents run the code they generate and do at least one \u201cmanual\u201d verification step beyond unit tests before merging, following agentic manual testing guidance [simonwillison.net#1].",
+    "Use trigger-based automation cautiously: If you enable event-based agent triggers, start with read-only or advisory actions, then expand permissions gradually to reduce unintended changes [techcrunch.com#1][lesswrong.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
