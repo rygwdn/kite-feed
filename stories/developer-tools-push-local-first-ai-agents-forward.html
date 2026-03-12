@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developer tools push local-first AI agents forward - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developer tools push local-first AI agents forward</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A cluster of new developer projects and write-ups this week points to a clear theme in AI engineering: moving past “chat with a model” and toward practical, inspectable agents that can run tools, manipulate files, and ship real work—often with local-first or privacy-conscious execution options. OpenAI laid out how it paired its Responses API with a hosted “computer environment,” including a shell tool and a containerized runtime for tool use and stateful tasks <a href="https://openai.com/index/equip-responses-api-computer-environment" class="footnote-ref">[9]</a>.
+
+Across GitHub launches and Ollama community demos, the emphasis was less on prompt-and-reply interfaces and more on agent ergonomics: better visibility into what agents are doing, safer and more isolated execution surfaces, and more structured ways to orchestrate multi-agent workflows and artifacts <a href="https://github.com/simple10/agent-super-spy" class="footnote-ref">[1]</a><a href="https://clawjetty.com/#" class="footnote-ref">[19]</a><a href="https://oblien.com/docs/runtime-api" class="footnote-ref">[21]</a><a href="https://github.com/msitarzewski/agency-agents" class="footnote-ref">[17]</a><a href="https://github.com/sup3rus3r/obsidian-ai" class="footnote-ref">[22]</a><a href="https://github.com/sarfraznawaz2005/lmf" class="footnote-ref">[6]</a><a href="https://github.com/jimthunderbird/curlyprompt" class="footnote-ref">[8]</a><a href="https://www.reddit.com/r/ollama/comments/1rrbrby/i_built_an_autonomous_astronomical_research_agent/" class="footnote-ref">[11]</a><a href="https://www.reddit.com/r/ollama/comments/1rreuy5/i_am_building_an_agent_using_slm_and_can_run_on/" class="footnote-ref">[12]</a><a href="https://www.reddit.com/r/ollama/comments/1rravz9/building_an_oss_generative_ui_framework_that/" class="footnote-ref">[13]</a><a href="https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/" class="footnote-ref">[14]</a>. In a separate thread, one project explored specialization by splitting a large mixture-of-experts model into smaller domain experts <a href="https://github.com/JThomas-CoE/College-of-Experts-AI/tree/main/CoE-Demo-v1.5" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/simple10/agent-super-spy">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Local vs API: One blog post compared running local LLMs with calling hosted APIs, laying out tradeoffs in privacy, cost, latency, and operational complexity for developers choosing how to deploy <a href="https://crimede-coder.com/blogposts/2026/LocalvsAPI" class="footnote-ref">[3]</a>.</li>
+
+<li>Code review: A SitePoint piece argued that self-hosting local models for AI-assisted code review can improve code quality while keeping source code in-house—another sign of growing interest in on-prem and local-first dev workflows <a href="https://news.google.com/atom/articles/CBMidkFVX3lxTE8wWS0zOFZ0NHNFN3pDNVdaU045U0F2a0R1WW5Pd2dZZTZyTHpTYXo1bmNVMDg2YnpibDNhMWNraUg3UnVyQzNDWDVWUUJBMDJBb1FnODlhTjZPU3pXYmRyMDJYWGJvSV92VzlUeW0xR3VEM2VZWFE" class="footnote-ref">[10]</a>.</li>
+
+<li>Science agents: A Reddit demo described a locally run Qwen-based astronomical research agent that downloads telescope data, detects transient events, and performs photometry autonomously, showing how small local models can run end-to-end scientific pipelines <a href="https://www.reddit.com/r/ollama/comments/1rrbrby/i_built_an_autonomous_astronomical_research_agent/" class="footnote-ref">[11]</a>.</li>
+
+<li>Job search tooling: Restailor was open-sourced as an end-to-end resume tailoring and job tracking tool, with support for multiple LLM providers and a scalable web stack (Next.js, FastAPI, Redis, Postgres) <a href="https://github.com/DataDoesYou/Restailor" class="footnote-ref">[23]</a>.</li>
+
+<li>Trading experiment: An open-source “AI quant agent” project described a multi-part design: deterministic indicator calculations alongside an LLM “reasoner,” a volatility-based position-sizing controller, and a human approval step before broker execution <a href="https://github.com/chenjy16/OpenPilot" class="footnote-ref">[20]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>OpenAI: OpenAI described its approach to secure, scalable agents by pairing the Responses API with managed containers plus a shell tool, files, and state inside a hosted computer environment.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://openai.com/index/equip-responses-api-computer-environment">OpenAI</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Oblien (agent runtime vendor): Oblien pitched hardware-isolated cloud VMs that agents control through a REST/WebSocket “Runtime API” (rather than SSH), aimed at making it easier to execute code and manipulate files remotely.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://oblien.com/docs/runtime-api">Oblien docs</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>ClawJetty (agent transparency tool): ClawJetty argued for a simple public progress page with timestamped updates so long-running agent tasks feel more legible—no more “waiting in the dark” during research, debugging, or drafting workflows.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://clawjetty.com/#">ClawJetty</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Local-first privacy advocates (Ollama community): A Reddit post described an open-source mobile app that runs LLMs entirely on-device, with no telemetry and no data leaving the device—built out of concern that people share sensitive information with black-box hosted services.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/">Reddit r/ollama</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Ternary inference in Rust: QORA-LLM-2B is presented as a “pure Rust” implementation that uses ternary inference and claims it needs “no multiplication,” aiming for more compute-efficient inference on certain hardware <a href="https://huggingface.co/qoranet/QORA-LLM-2B" class="footnote-ref">[4]</a>.</li>
+
+<li>Agent execution isolation (API-controlled VM): Oblien’s Runtime API model centers on an internal HTTP/WebSocket server (described as running on port 9990) that exposes command execution (with streaming output for long-running jobs), a file API, a ripgrep-backed /search endpoint, and interactive PTY terminal sessions multiplexed over WebSockets. It also describes streaming filesystem events so an agent can watch directory changes remotely <a href="https://oblien.com/docs/runtime-api" class="footnote-ref">[21]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Prefer isolation for untrusted agent code: Run agent-executed commands in sandboxed or hosted environments built for remote control, rather than executing generated code directly on a developer laptop <a href="https://openai.com/index/equip-responses-api-computer-environment" class="footnote-ref">[9]</a><a href="https://oblien.com/docs/runtime-api" class="footnote-ref">[21]</a>.</li>
+
+<li>Make agent work visible to users: Add progress logs or a lightweight status page so long-running agent tasks show milestones, timestamps, and outcomes as they run <a href="https://clawjetty.com/#" class="footnote-ref">[19]</a><a href="https://github.com/simple10/agent-super-spy" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://oss.vstorm.co/blog/browsecomp-ai-agent-benchmarks/">https://oss.vstorm.co/blog/browsecomp-ai-agent-benchmarks/</a></li>
+
+
+
+<li><a href="https://crimede-coder.com/blogposts/2026/LocalvsAPI">https://crimede-coder.com/blogposts/2026/LocalvsAPI</a></li>
+
+
+
+<li><a href="https://clawjetty.com/#">https://clawjetty.com/#</a></li>
+
+
+
+<li><a href="https://github.com/JThomas-CoE/College-of-Experts-AI/tree/main/CoE-Demo-v1.5">https://github.com/JThomas-CoE/College-of-Experts-AI/tree/main/CoE-Demo-v1.5</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1rreuy5/i_am_building_an_agent_using_slm_and_can_run_on/">https://www.reddit.com/r/ollama/comments/1rreuy5/i_am_building_an_agent_using_slm_and_can_run_on/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/">https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/</a></li>
+
+
+
+<li><a href="https://oblien.com/docs/runtime-api">https://oblien.com/docs/runtime-api</a></li>
+
+
+
+
+
+<li><a href="https://brunelly.com/">https://brunelly.com/</a></li>
+
+
+
+<li><a href="https://github.com/sup3rus3r/obsidian-ai">https://github.com/sup3rus3r/obsidian-ai</a></li>
+
+
+
+<li><a href="https://huggingface.co/qoranet/QORA-LLM-2B">https://huggingface.co/qoranet/QORA-LLM-2B</a></li>
+
+
+
+<li><a href="https://github.com/DataDoesYou/Restailor">https://github.com/DataDoesYou/Restailor</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMidkFVX3lxTE8wWS0zOFZ0NHNFN3pDNVdaU045U0F2a0R1WW5Pd2dZZTZyTHpTYXo1bmNVMDg2YnpibDNhMWNraUg3UnVyQzNDWDVWUUJBMDJBb1FnODlhTjZPU3pXYmRyMDJYWGJvSV92VzlUeW0xR3VEM2VZWFE">https://news.google.com/atom/articles/CBMidkFVX3lxTE8wWS0zOFZ0NHNFN3pDNVdaU045U0F2a0R1WW5Pd2dZZTZyTHpTYXo1bmNVMDg2YnpibDNhMWNraUg3UnVyQzNDWDVWUUJBMDJBb1FnODlhTjZPU3pXYmRyMDJYWGJvSV92VzlUeW0xR3VEM2VZWFE</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1rqpr1k/heres_a_demo_of_my_ai_chatbot_elixir_in_action/">https://www.reddit.com/r/ollama/comments/1rqpr1k/heres_a_demo_of_my_ai_chatbot_elixir_in_action/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1rrbrby/i_built_an_autonomous_astronomical_research_agent/">https://www.reddit.com/r/ollama/comments/1rrbrby/i_built_an_autonomous_astronomical_research_agent/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1rravz9/building_an_oss_generative_ui_framework_that/">https://www.reddit.com/r/ollama/comments/1rravz9/building_an_oss_generative_ui_framework_that/</a></li>
+
+
+
+<li><a href="https://github.com/msitarzewski/agency-agents">https://github.com/msitarzewski/agency-agents</a></li>
+
+
+
+<li><a href="https://github.com/jimthunderbird/curlyprompt">https://github.com/jimthunderbird/curlyprompt</a></li>
+
+
+
+<li><a href="https://openai.com/index/equip-responses-api-computer-environment">https://openai.com/index/equip-responses-api-computer-environment</a></li>
+
+
+
+<li><a href="https://github.com/chenjy16/OpenPilot">https://github.com/chenjy16/OpenPilot</a></li>
+
+
+
+<li><a href="https://analect.dev">https://analect.dev</a></li>
+
+
+
+<li><a href="https://github.com/sarfraznawaz2005/lmf">https://github.com/sarfraznawaz2005/lmf</a></li>
+
+
+
+<li><a href="https://substack.com/sign-in">https://substack.com/sign-in</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> oblien.com, brunelly.com, clawjetty.com, crimede-coder.com, openai.com, huggingface.co, github.com, substack.com, vstorm.co, reddit.com, analect.dev, google.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 12 unique domains, 23 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-03-11T22:47:31+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/simple10/agent-super-spy",
+      "title": "Show HN: LLM Observability Stack for Local Dev \u2013 Agent Super Apy"
+    },
+    {
+      "date": "2026-03-11T19:15:51+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/JThomas-CoE/College-of-Experts-AI/tree/main/CoE-Demo-v1.5",
+      "title": "Slicing an 80B MoE LLM into 40B domain specialists"
+    },
+    {
+      "date": "2026-03-11T16:51:54+00:00",
+      "domain": "crimede-coder.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://crimede-coder.com/blogposts/2026/LocalvsAPI",
+      "title": "Using local LLM models vs. APIs"
+    },
+    {
+      "date": "2026-03-11T15:31:39+00:00",
+      "domain": "huggingface.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://huggingface.co/qoranet/QORA-LLM-2B",
+      "title": "QORA-LLM-2B \u2013 Pure Rust ternary inference, no multiplication needed"
+    },
+    {
+      "date": "2026-03-11T11:29:42+00:00",
+      "domain": "substack.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://substack.com/sign-in",
+      "title": "Bypassing LLM Guardrails via Context Window Saturation"
+    },
+    {
+      "date": "2026-03-11T10:41:10+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/sarfraznawaz2005/lmf",
+      "title": "LMF \u2013 LLM Markup Format"
+    },
+    {
+      "date": "2026-03-11T09:07:35+00:00",
+      "domain": "analect.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://analect.dev",
+      "title": "Analect \u2013 AST and LLM Code Summary and Navigation"
+    },
+    {
+      "date": "2026-03-11T00:45:33+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/jimthunderbird/curlyprompt",
+      "title": "Curly Prompt \u2013 An AI Prompting Language with Local LLM Powered AI Agent"
+    },
+    {
+      "date": "2026-03-11T11:00:00+00:00",
+      "domain": "openai.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://openai.com/index/equip-responses-api-computer-environment",
+      "title": "From model to agent: Equipping the Responses API with a computer environment"
+    },
+    {
+      "date": "2026-03-11T15:45:51+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMidkFVX3lxTE8wWS0zOFZ0NHNFN3pDNVdaU045U0F2a0R1WW5Pd2dZZTZyTHpTYXo1bmNVMDg2YnpibDNhMWNraUg3UnVyQzNDWDVWUUJBMDJBb1FnODlhTjZPU3pXYmRyMDJYWGJvSV92VzlUeW0xR3VEM2VZWFE",
+      "title": "Self-Hosting AI Code Review: Local Models for Better Code Quality - SitePoint"
+    },
+    {
+      "date": "2026-03-12T00:27:43+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1rrbrby/i_built_an_autonomous_astronomical_research_agent/",
+      "title": "I built an autonomous astronomical research agent powered by Qwen 3.5 (4B) running locally \u2014 it downloads real telescope data, detects transients, and does photometry on its own"
+    },
+    {
+      "date": "2026-03-12T02:41:22+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1rreuy5/i_am_building_an_agent_using_slm_and_can_run_on/",
+      "title": "i am building an agent using slm and can run on CPU"
+    },
+    {
+      "date": "2026-03-11T23:52:41+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1rravz9/building_an_oss_generative_ui_framework_that/",
+      "title": "Building an OSS Generative UI framework that makes AI Agents respond with AI"
+    },
+    {
+      "date": "2026-03-11T03:22:05+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/",
+      "title": "What\u0027s your mobile workflow for accessing local LLMs?"
+    },
+    {
+      "date": "2026-03-11T10:09:54+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1rqpr1k/heres_a_demo_of_my_ai_chatbot_elixir_in_action/",
+      "title": "Here\u0027s a demo of my AI chatbot Elixir in action, any thoughts?"
+    },
+    {
+      "date": "2026-03-12T06:31:06+00:00",
+      "domain": "brunelly.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://brunelly.com/",
+      "title": "Brunelly \u2013 AI platform that helps turn ideas into production software"
+    },
+    {
+      "date": "2026-03-12T06:23:53+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/msitarzewski/agency-agents",
+      "title": "Agency Agents: Open-source framework for building multi-agent AI workflows"
+    },
+    {
+      "date": "2026-03-12T06:10:25+00:00",
+      "domain": "vstorm.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://oss.vstorm.co/blog/browsecomp-ai-agent-benchmarks/",
+      "title": "BrowseComp: The Benchmark That Tests What AI Agents Can Find"
+    },
+    {
+      "date": "2026-03-12T06:06:16+00:00",
+      "domain": "clawjetty.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://clawjetty.com/#",
+      "title": "Show HN: ClawJetty: See what your AI Agent is Doing"
+    },
+    {
+      "date": "2026-03-12T05:56:33+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/chenjy16/OpenPilot",
+      "title": "Show HN: An open-source AI Quant Agent trading live with my own $1000"
+    },
+    {
+      "date": "2026-03-12T05:11:59+00:00",
+      "domain": "oblien.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://oblien.com/docs/runtime-api",
+      "title": "Show HN: Cloud VMs with a Built-In REST API for AI Agents"
+    },
+    {
+      "date": "2026-03-12T05:03:53+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/sup3rus3r/obsidian-ai",
+      "title": "Show HN: An Open-source platform for building and orchestrating AI agents"
+    },
+    {
+      "date": "2026-03-12T05:02:06+00:00",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/DataDoesYou/Restailor",
+      "title": "Show HN: Restailor \u2013 open-source AI job fit/resume tailor/job tracker"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/7S3hYyIdnvG7in3wn-pJFEqJyGRYasB0qrD9M9cVSCG5fmz0B_gNzjyL-Wne5VG_q8oYnF2sayC6nCtnUCYxubev0gRWQPnVs2WAKfS5vkY",
+      "name": "oblien.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/he6ap8MMSAvcbTDltQp48CdGdmllGoreJ_W5FoNdkUkDmNrt2yItFlz9St98Zf2hzUdAxmCkqfTihdiHdxHp9Bd5_99XzogLjoylvFykLyzH2Q",
+      "name": "brunelly.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/CO89b75ulRrv0yr8MVW2gnAV46Mewi8kqfj3fRwNXovWZ9CRyFErDn61mK0pgi303Vmemg92zawl2MBASYLa_wsET7eSTGxgCBSybUwgVlzOMLM",
+      "name": "clawjetty.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/2cz_uOg8lmr_q4cJYrrfm1TJX2ICOZ7TvTn2qvAFogL90oqNYXrkrtyuVBDeC6knBBoS4ZTbCbLqt42yfHcJa4vz20_zMm7Net2Hc1iOGfZ7DousYZ0m",
+      "name": "crimede-coder.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/PvZjZ8e38aZkG5u2S-HS7iFa3Wr1IfQ73r4n4aQSxW3oPtExwduyBVRrutwK9uW33ysRrPn2HHN95VbVAeS-zINIpLAim6pbEI_A3RzYqaQ",
+      "name": "openai.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/KIwdgYxDHahlYKl0M2aTCEPghbshRJRfgn2drG-aVnkJYGXZ9JwE4zfhRk4cHUt6wahbXBDc938QJrDrzDgxjw2eLY9Q-BTj8U8aiXrZvPrT0Fpl",
+      "name": "huggingface.co"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/5AtBnn0q2vUim4lOfw-zkpnTRNmdYloaVic7uW6083MlUfxGh6yavyBBbCd-G9o7YIrdT6O62e-atmMzIcBQ2_v1D52iAdo-h5j1OLe8CsM",
+      "name": "github.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/OLgeKqrMJatZ8HrBRFmHolouKm1zSB73uj7P0igqJraLWRhW6FfhJ4-MRYoquOS_JtDeW66vd7Pq0g82gBYqc98-TEw0L1o4008xNsDJAj8LxA",
+      "name": "substack.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/WSXRvpNstLC6CTB-OkV_X1RM907dLbEiHXOWpB9viBBSKVG93pupLHd6MubWaakQ-cEQtFYLPdKfwgsPMEXXQZCyP2nRFJchbuNrXUyy-Q",
+      "name": "vstorm.co"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/CbuNdNI8sMO7JtsGPWLjJG3tVgR2UUFJfyHFEiY7ySUdnRWK13fwi-_u0YKoESBcdOAoeGz2RIxPflauMfrJFwhtJhtfeLdLOnvfEvAAIuo",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/bG-plj6YX_nnxzg7zsDARvdNuwhTDCKfJZ2FMya78-EqUP2ndvgWdPmx2UNNR_ZkaQN2l1ZgK_05APVoV0AwdIDP4CdpXRxFV2Yi9FHcdIQ6",
+      "name": "analect.dev"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/losn9Be9gmFrD6q5L_5Kov7DtQvabiSfVfkce0iY0SS8c90cRSmXLQsEJJiSFiig1sBND1fxuoirJtrB2H2-GFNey71GuAGIYApOa2YYuFk",
+      "name": "google.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 23,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "OpenAI",
+          "url": "https://openai.com/index/equip-responses-api-computer-environment"
+        }
+      ],
+      "text": "OpenAI: OpenAI described its approach to secure, scalable agents by pairing the Responses API with managed containers plus a shell tool, files, and state inside a hosted computer environment."
+    },
+    {
+      "sources": [
+        {
+          "name": "Oblien docs",
+          "url": "https://oblien.com/docs/runtime-api"
+        }
+      ],
+      "text": "Oblien (agent runtime vendor): Oblien pitched hardware-isolated cloud VMs that agents control through a REST/WebSocket \u201cRuntime API\u201d (rather than SSH), aimed at making it easier to execute code and manipulate files remotely."
+    },
+    {
+      "sources": [
+        {
+          "name": "ClawJetty",
+          "url": "https://clawjetty.com/#"
+        }
+      ],
+      "text": "ClawJetty (agent transparency tool): ClawJetty argued for a simple public progress page with timestamped updates so long-running agent tasks feel more legible\u2014no more \u201cwaiting in the dark\u201d during research, debugging, or drafting workflows."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit r/ollama",
+          "url": "https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/"
+        }
+      ],
+      "text": "Local-first privacy advocates (Ollama community): A Reddit post described an open-source mobile app that runs LLMs entirely on-device, with no telemetry and no data leaving the device\u2014built out of concern that people share sensitive information with black-box hosted services."
+    }
+  ],
+  "primary_image": null,
+  "published": 1773302463,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://oss.vstorm.co/blog/browsecomp-ai-agent-benchmarks/",
+    "https://crimede-coder.com/blogposts/2026/LocalvsAPI",
+    "https://clawjetty.com/#",
+    "https://github.com/JThomas-CoE/College-of-Experts-AI/tree/main/CoE-Demo-v1.5",
+    "https://www.reddit.com/r/ollama/comments/1rreuy5/i_am_building_an_agent_using_slm_and_can_run_on/",
+    "https://www.reddit.com/r/ollama/comments/1rqioyi/whats_your_mobile_workflow_for_accessing_local/",
+    "https://oblien.com/docs/runtime-api",
+    "https://github.com/simple10/agent-super-spy",
+    "https://brunelly.com/",
+    "https://github.com/sup3rus3r/obsidian-ai",
+    "https://huggingface.co/qoranet/QORA-LLM-2B",
+    "https://github.com/DataDoesYou/Restailor",
+    "https://news.google.com/atom/articles/CBMidkFVX3lxTE8wWS0zOFZ0NHNFN3pDNVdaU045U0F2a0R1WW5Pd2dZZTZyTHpTYXo1bmNVMDg2YnpibDNhMWNraUg3UnVyQzNDWDVWUUJBMDJBb1FnODlhTjZPU3pXYmRyMDJYWGJvSV92VzlUeW0xR3VEM2VZWFE",
+    "https://www.reddit.com/r/ollama/comments/1rqpr1k/heres_a_demo_of_my_ai_chatbot_elixir_in_action/",
+    "https://www.reddit.com/r/ollama/comments/1rrbrby/i_built_an_autonomous_astronomical_research_agent/",
+    "https://www.reddit.com/r/ollama/comments/1rravz9/building_an_oss_generative_ui_framework_that/",
+    "https://github.com/msitarzewski/agency-agents",
+    "https://github.com/jimthunderbird/curlyprompt",
+    "https://openai.com/index/equip-responses-api-computer-environment",
+    "https://github.com/chenjy16/OpenPilot",
+    "https://analect.dev",
+    "https://github.com/sarfraznawaz2005/lmf",
+    "https://substack.com/sign-in"
+  ],
+  "suggested_qna": [],
+  "summary": "A cluster of new developer projects and write-ups this week points to a clear theme in AI engineering: moving past \u201cchat with a model\u201d and toward practical, inspectable agents that can run tools, manipulate files, and ship real work\u2014often with local-first or privacy-conscious execution options. OpenAI laid out how it paired its Responses API with a hosted \u201ccomputer environment,\u201d including a shell tool and a containerized runtime for tool use and stateful tasks [openai.com#1].\n\nAcross GitHub launches and Ollama community demos, the emphasis was less on prompt-and-reply interfaces and more on agent ergonomics: better visibility into what agents are doing, safer and more isolated execution surfaces, and more structured ways to orchestrate multi-agent workflows and artifacts [github.com#1][clawjetty.com#1][oblien.com#1][github.com#5][github.com#7][github.com#3][github.com#4][reddit.com#1][reddit.com#2][reddit.com#3][reddit.com#4]. In a separate thread, one project explored specialization by splitting a large mixture-of-experts model into smaller domain experts [github.com#2].",
+  "talking_points": [
+    "Local vs API: One blog post compared running local LLMs with calling hosted APIs, laying out tradeoffs in privacy, cost, latency, and operational complexity for developers choosing how to deploy [crimede-coder.com#1].",
+    "Code review: A SitePoint piece argued that self-hosting local models for AI-assisted code review can improve code quality while keeping source code in-house\u2014another sign of growing interest in on-prem and local-first dev workflows [google.com#1].",
+    "Science agents: A Reddit demo described a locally run Qwen-based astronomical research agent that downloads telescope data, detects transient events, and performs photometry autonomously, showing how small local models can run end-to-end scientific pipelines [reddit.com#1].",
+    "Job search tooling: Restailor was open-sourced as an end-to-end resume tailoring and job tracking tool, with support for multiple LLM providers and a scalable web stack (Next.js, FastAPI, Redis, Postgres) [github.com#8].",
+    "Trading experiment: An open-source \u201cAI quant agent\u201d project described a multi-part design: deterministic indicator calculations alongside an LLM \u201creasoner,\u201d a volatility-based position-sizing controller, and a human approval step before broker execution [github.com#6]."
+  ],
+  "technical_details": [
+    "Ternary inference in Rust: QORA-LLM-2B is presented as a \u201cpure Rust\u201d implementation that uses ternary inference and claims it needs \u201cno multiplication,\u201d aiming for more compute-efficient inference on certain hardware [huggingface.co#1].",
+    "Agent execution isolation (API-controlled VM): Oblien\u2019s Runtime API model centers on an internal HTTP/WebSocket server (described as running on port 9990) that exposes command execution (with streaming output for long-running jobs), a file API, a ripgrep-backed /search endpoint, and interactive PTY terminal sessions multiplexed over WebSockets. It also describes streaming filesystem events so an agent can watch directory changes remotely [oblien.com#1]."
+  ],
+  "timeline": [],
+  "title": "Developer tools push local-first AI agents forward",
+  "unique_domains": 12,
+  "url": "https://github.com/simple10/agent-super-spy",
+  "user_action_items": [
+    "Prefer isolation for untrusted agent code: Run agent-executed commands in sandboxed or hosted environments built for remote control, rather than executing generated code directly on a developer laptop [openai.com#1][oblien.com#1].",
+    "Make agent work visible to users: Add progress logs or a lightweight status page so long-running agent tasks show milestones, timestamps, and outcomes as they run [clawjetty.com#1][github.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
