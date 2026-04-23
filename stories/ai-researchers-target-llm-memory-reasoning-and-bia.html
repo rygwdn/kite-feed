@@ -1,0 +1,2098 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI researchers target LLM memory, reasoning, and bias - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI researchers target LLM memory, reasoning, and bias</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A broad set of AI articles published on 2026-04-23 points to a clear theme in large language model research: developers are working to make LLMs more reliable, more efficient, and more useful in real-world agents by improving memory, retrieval, reasoning, evaluation, and safety <a href="https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw" class="footnote-ref">[1]</a><a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow" class="footnote-ref">[2]</a><a href="https://arxiv.org/abs/2604.19766" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2604.19771" class="footnote-ref">[6]</a><a href="https://arxiv.org/abs/2604.20443" class="footnote-ref">[18]</a><a href="https://arxiv.org/abs/2604.20564" class="footnote-ref">[22]</a><a href="https://arxiv.org/abs/2604.19793" class="footnote-ref">[25]</a>. Several papers report encouraging gains on practical bottlenecks such as long-context inference, persistent memory for conversational agents, multilingual retrieval, and project-level code or web generation, often with open-source code or benchmarks that could speed follow-on work <a href="https://arxiv.org/abs/2604.19769" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2604.19771" class="footnote-ref">[6]</a><a href="https://arxiv.org/abs/2604.20199" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.20398" class="footnote-ref">[17]</a><a href="https://arxiv.org/abs/2604.20487" class="footnote-ref">[19]</a><a href="https://arxiv.org/abs/2604.18349" class="footnote-ref">[55]</a><a href="https://arxiv.org/abs/2604.07798" class="footnote-ref">[91]</a>.
+
+At the same time, the day’s research shows why caution still matters. Multiple studies examine hallucinations, cultural and language bias, fairness gaps, unreliable evaluation pipelines, precision-induced behavior differences, and weaknesses in logic, long-term memory, and multimodal grounding <a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow" class="footnote-ref">[2]</a><a href="https://arxiv.org/abs/2604.19768" class="footnote-ref">[4]</a><a href="https://arxiv.org/abs/2604.20048" class="footnote-ref">[11]</a><a href="https://arxiv.org/abs/2604.20006" class="footnote-ref">[9]</a><a href="https://arxiv.org/abs/2604.20331" class="footnote-ref">[16]</a><a href="https://arxiv.org/abs/2604.20443" class="footnote-ref">[18]</a><a href="https://arxiv.org/abs/2604.11581" class="footnote-ref">[52]</a><a href="https://arxiv.org/abs/2604.19790" class="footnote-ref">[70]</a><a href="https://arxiv.org/abs/2604.20811" class="footnote-ref">[76]</a><a href="https://arxiv.org/abs/2604.14785" class="footnote-ref">[92]</a>. Taken together, the coverage suggests the AI field is steadily maturing: researchers are no longer focused only on bigger models, but also on the testing tools, memory systems, and interpretability methods needed to make those models steadier and more broadly useful <a href="https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems" class="footnote-ref">[66]</a><a href="https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/" class="footnote-ref">[67]</a><a href="https://arxiv.org/abs/2604.20133" class="footnote-ref">[72]</a><a href="https://arxiv.org/abs/2504.02181" class="footnote-ref">[90]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> One paper found that LLM-generated texts used tricolons at nearly twice the rate of expert-written texts, while human authors used rhetorical questions at more than twice the LLM rate <a href="https://arxiv.org/abs/2604.19768" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Memory push: Several papers focus on giving agents usable long-term memory, including Cognis for context-aware conversational recall, Memora for benchmarking remembering and forgetting, HiGMem for hierarchical retrieval, LightMem using small language models, and a selective-forgetting framework aimed at efficiency, quality, and security <a href="https://arxiv.org/abs/2604.19771" class="footnote-ref">[6]</a><a href="https://arxiv.org/abs/2604.20006" class="footnote-ref">[9]</a><a href="https://arxiv.org/abs/2604.18349" class="footnote-ref">[55]</a><a href="https://arxiv.org/abs/2604.07798" class="footnote-ref">[91]</a><a href="https://arxiv.org/abs/2604.20300" class="footnote-ref">[74]</a>.</li>
+
+<li>Efficiency gains: Infrastructure work reported sizable speedups. TTKV cut latency by up to 76% and doubled throughput on 128K-context tasks, HaS reduced retrieval latency by 23.74%-36.99% with only a 1%-2% accuracy drop, and BatchLLM outperformed vLLM and SGLang by 1.3x to 10.8x on batched workloads <a href="https://arxiv.org/abs/2604.19769" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2604.20452" class="footnote-ref">[30]</a><a href="https://arxiv.org/abs/2412.03594" class="footnote-ref">[36]</a>.</li>
+
+<li>Bias findings: New studies found systematic language, cultural, and fairness issues, including multilingual rerankers favoring English or the query language, city descriptions clustering around a culturally uneven baseline, and stronger stereotype-aligned accuracy in intersectional fairness tests <a href="https://arxiv.org/abs/2604.20199" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.20048" class="footnote-ref">[11]</a><a href="https://arxiv.org/abs/2604.20677" class="footnote-ref">[23]</a>.</li>
+
+<li>Evaluation rethink: Researchers proposed more rigorous ways to judge models, warning that standard confidence intervals miss variance from prompts, temperature, and judge models. Other work argues that review quality, not simple score prediction, should anchor automated peer-review evaluation <a href="https://arxiv.org/abs/2604.11581" class="footnote-ref">[52]</a><a href="https://arxiv.org/abs/2604.19502" class="footnote-ref">[56]</a><a href="https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems" class="footnote-ref">[66]</a>.</li>
+
+<li>Agent expansion: Agent research is moving beyond chatbots into scientific discovery, robotics, cybersecurity, enterprise workflows, and tool orchestration, with papers on autonomous materials-science agents, robot skill adaptation, threat-hunting benchmarks, and joint optimization of prompts plus tool schemas <a href="https://arxiv.org/abs/2604.19789" class="footnote-ref">[69]</a><a href="https://arxiv.org/abs/2604.20468" class="footnote-ref">[31]</a><a href="https://arxiv.org/abs/2604.19533" class="footnote-ref">[104]</a><a href="https://arxiv.org/abs/2604.19821" class="footnote-ref">[71]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>QUASA Connect: The explainer describes large language models as powerful but failure-prone systems, and stresses that users need to understand not just how LLMs generate text, but also where they commonly break down.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw">QUASA Connect</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Bioengineer.org-covered study: The reported study argues that the way accuracy testing is done can itself trigger hallucinations, suggesting that some benchmark setups may distort how model reliability is measured.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow">Bioengineer.org</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Open-source agent builders: Recent practitioner and survey pieces describe a shift toward explicit planning, persistent memory, harness engineering, and reproducible evaluation as the practical scaffolding needed for dependable LLM agents.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/">deepsense.ai</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Academic evaluators: Several arXiv papers treat current benchmarks as incomplete, arguing that reliable deployment requires measuring hidden sources of variance, richer textual critique quality, and domain-specific performance under real workflows rather than headline accuracy alone.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2604.11581">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>November 2022:</strong> ChatGPT popularized consumer LLM use and exposed memory, safety challenges [common]</li>
+
+
+
+<li><strong>23 April 2026:</strong> New papers reported advances in memory, retrieval and efficiency <a href="https://arxiv.org/abs/2604.19766" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2604.19769" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2604.19771" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>23 April 2026:</strong> Parallel studies flagged bias, hallucination and evaluation weaknesses <a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow" class="footnote-ref">[2]</a><a href="https://arxiv.org/abs/2604.20087" class="footnote-ref">[13]</a><a href="https://arxiv.org/abs/2604.14593" class="footnote-ref">[54]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Temporal-tiered KV cache: TTKV splits cached attention states across fast HBM and slower DRAM, keeps recent states in higher-precision tiers, and uses block-wise streaming attention to overlap communication with computation, cutting cross-tier traffic by 5.94x on 128K-context tasks <a href="https://arxiv.org/abs/2604.19769" class="footnote-ref">[5]</a>.</li>
+
+<li>Search-refine-reason: OThink-SRR1 adds a refinement step between retrieval and reasoning so documents are distilled into concise facts before inference; its GRPO-IR training rewards accurate evidence identification while penalizing excessive retrievals to improve focus and efficiency <a href="https://arxiv.org/abs/2604.19766" class="footnote-ref">[3]</a>.</li>
+
+<li>External key-value injection: Knowledge Capsules compile structured nonparametric memories into attention-compatible key-value representations, letting external knowledge participate directly in attention instead of competing as plain-text tokens in the context window <a href="https://arxiv.org/abs/2604.20556" class="footnote-ref">[21]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Enterprise AI: Research on stateless decision memory argues that regulated sectors such as underwriting, claims adjudication, and tax examination prefer replayable, auditable architectures, and reported DPM was 7-15x faster than summarization-based memory when budgets were tight <a href="https://arxiv.org/abs/2604.20158" class="footnote-ref">[73]</a>.</li>
+
+<li>Model serving: Serving infrastructure papers reported major throughput and latency gains for long contexts and large batched jobs, which could materially lower inference costs for providers running production LLM workloads <a href="https://arxiv.org/abs/2604.19769" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2412.03594" class="footnote-ref">[36]</a>.</li>
+
+<li>Global AI products: Multilingual and multicultural evaluation work suggests product teams need better reranking, benchmarking, and localization if they want systems to serve non-English and non-Western users more evenly <a href="https://arxiv.org/abs/2604.20199" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.20225" class="footnote-ref">[15]</a><a href="https://arxiv.org/abs/2604.20048" class="footnote-ref">[11]</a>.</li>
+
+<li>Developer tooling: Work on reproducible LLM-as-judge setups, tool-prompt optimization, and automated fine-tuning agents points to a growing market for software layers that manage prompts, tools, evaluation, and post-training workflows <a href="https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems" class="footnote-ref">[66]</a><a href="https://arxiv.org/abs/2604.19821" class="footnote-ref">[71]</a><a href="https://arxiv.org/abs/2604.14116" class="footnote-ref">[65]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Field direction: The day’s papers collectively show AI research shifting from pure capability scaling toward system reliability, with a strong emphasis on memory, interpretability, multilingual robustness, and evaluation methodology rather than only next-token performance <a href="https://arxiv.org/abs/2604.19766" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2604.19771" class="footnote-ref">[6]</a><a href="https://arxiv.org/abs/2604.20199" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.11581" class="footnote-ref">[52]</a><a href="https://arxiv.org/abs/2504.02181" class="footnote-ref">[90]</a>.</li>
+
+<li>Evidence quality: Most findings come from benchmarks, controlled experiments, or arXiv preprints rather than long-term real-world deployment studies, so many reported gains remain provisional even when they are quantitatively strong <a href="https://arxiv.org/abs/2604.19766" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2604.19769" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2604.20487" class="footnote-ref">[19]</a><a href="https://arxiv.org/abs/2604.20158" class="footnote-ref">[73]</a>.</li>
+
+<li>Limitations: Several papers explicitly show that current systems still fail under distribution shift, structural logic stress, cultural variation, long-term memory updates, and multimodal grounding, underscoring that progress remains uneven across tasks <a href="https://arxiv.org/abs/2604.20048" class="footnote-ref">[11]</a><a href="https://arxiv.org/abs/2604.20006" class="footnote-ref">[9]</a><a href="https://arxiv.org/abs/2603.23146" class="footnote-ref">[50]</a><a href="https://arxiv.org/abs/2604.20811" class="footnote-ref">[76]</a><a href="https://arxiv.org/abs/2604.14785" class="footnote-ref">[92]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>Transformer-based LLMs moved into the mainstream after the 2017 “Attention Is All You Need” paper introduced the architecture behind most modern systems [common]. The release of ChatGPT in late 2022 accelerated mass adoption of conversational AI and pushed research toward the memory, retrieval, safety, and benchmarking problems exposed by real-world use [common]. Retrieval-augmented generation then became a widely used way to connect models to external knowledge without retraining, but many of today’s papers specifically target its latency, multilingual bias, and long-context weaknesses <a href="https://arxiv.org/abs/2604.19766" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2604.20199" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.20452" class="footnote-ref">[30]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit your AI stack for memory and evaluation gaps: If you deploy LLM applications, review whether they rely only on vector retrieval and single benchmark scores; several new studies suggest adding memory-specific tests, multilingual checks, and measurement-variance analysis before production rollouts <a href="https://arxiv.org/abs/2604.20006" class="footnote-ref">[9]</a><a href="https://arxiv.org/abs/2604.11581" class="footnote-ref">[52]</a><a href="https://arxiv.org/abs/2604.07798" class="footnote-ref">[91]</a>.</li>
+
+<li>Test multilingual behavior separately: Run prompts and retrieval checks across target languages rather than assuming English performance will transfer, because new work found rerankers and cultural baselines can skew outputs by language and region <a href="https://arxiv.org/abs/2604.20199" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.20048" class="footnote-ref">[11]</a>.</li>
+
+<li>Watch open benchmarks and code releases: Several papers released code or benchmarks for explainability, skill learning, threat hunting, and agent training, which can help teams compare systems on practical tasks instead of generic leaderboards <a href="https://arxiv.org/abs/2604.20043" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2604.20087" class="footnote-ref">[13]</a><a href="https://arxiv.org/abs/2604.14116" class="footnote-ref">[65]</a><a href="https://arxiv.org/abs/2604.19533" class="footnote-ref">[104]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://arxiv.org/abs/2408.07295">https://arxiv.org/abs/2408.07295</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2501.03624">https://arxiv.org/abs/2501.03624</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19825">https://arxiv.org/abs/2604.19825</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.13583">https://arxiv.org/abs/2604.13583</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20811">https://arxiv.org/abs/2604.20811</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19775">https://arxiv.org/abs/2604.19775</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19766">https://arxiv.org/abs/2604.19766</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.14896">https://arxiv.org/abs/2601.14896</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.07798">https://arxiv.org/abs/2604.07798</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19821">https://arxiv.org/abs/2604.19821</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20348">https://arxiv.org/abs/2604.20348</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20051">https://arxiv.org/abs/2604.20051</a></li>
+
+
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20199">https://arxiv.org/abs/2604.20199</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.02931">https://arxiv.org/abs/2601.02931</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.07474">https://arxiv.org/abs/2603.07474</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.14116">https://arxiv.org/abs/2604.14116</a></li>
+
+
+
+<li><a href="https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems">https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.18349">https://arxiv.org/abs/2604.18349</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.12036">https://arxiv.org/abs/2602.12036</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.08570">https://arxiv.org/abs/2604.08570</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20300">https://arxiv.org/abs/2604.20300</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow">https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2509.03740">https://arxiv.org/abs/2509.03740</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19966">https://arxiv.org/abs/2604.19966</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20269">https://arxiv.org/abs/2604.20269</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20012">https://arxiv.org/abs/2604.20012</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2511.06209">https://arxiv.org/abs/2511.06209</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2510.26285">https://arxiv.org/abs/2510.26285</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19789">https://arxiv.org/abs/2604.19789</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2411.00585">https://arxiv.org/abs/2411.00585</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20665">https://arxiv.org/abs/2604.20665</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2507.21166">https://arxiv.org/abs/2507.21166</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20549">https://arxiv.org/abs/2604.20549</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19777">https://arxiv.org/abs/2604.19777</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19756">https://arxiv.org/abs/2604.19756</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.09373">https://arxiv.org/abs/2601.09373</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.08224">https://arxiv.org/abs/2604.08224</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19856">https://arxiv.org/abs/2604.19856</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19793">https://arxiv.org/abs/2604.19793</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2412.03594">https://arxiv.org/abs/2412.03594</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2508.07050">https://arxiv.org/abs/2508.07050</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20133">https://arxiv.org/abs/2604.20133</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20398">https://arxiv.org/abs/2604.20398</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19502">https://arxiv.org/abs/2604.19502</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20389">https://arxiv.org/abs/2604.20389</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19839">https://arxiv.org/abs/2604.19839</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19768">https://arxiv.org/abs/2604.19768</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20006">https://arxiv.org/abs/2604.20006</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20087">https://arxiv.org/abs/2604.20087</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.14593">https://arxiv.org/abs/2604.14593</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19844">https://arxiv.org/abs/2604.19844</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2508.09958">https://arxiv.org/abs/2508.09958</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19790">https://arxiv.org/abs/2604.19790</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20727">https://arxiv.org/abs/2604.20727</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20158">https://arxiv.org/abs/2604.20158</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2508.00414">https://arxiv.org/abs/2508.00414</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2504.02181">https://arxiv.org/abs/2504.02181</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.00696">https://arxiv.org/abs/2603.00696</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20472">https://arxiv.org/abs/2604.20472</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20021">https://arxiv.org/abs/2604.20021</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20556">https://arxiv.org/abs/2604.20556</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20598">https://arxiv.org/abs/2604.20598</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19934">https://arxiv.org/abs/2604.19934</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20331">https://arxiv.org/abs/2604.20331</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20048">https://arxiv.org/abs/2604.20048</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.11581">https://arxiv.org/abs/2604.11581</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19278">https://arxiv.org/abs/2604.19278</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.10386">https://arxiv.org/abs/2602.10386</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20452">https://arxiv.org/abs/2604.20452</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2509.25844">https://arxiv.org/abs/2509.25844</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20487">https://arxiv.org/abs/2604.20487</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20316">https://arxiv.org/abs/2604.20316</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2510.21652">https://arxiv.org/abs/2510.21652</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20720">https://arxiv.org/abs/2604.20720</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20714">https://arxiv.org/abs/2604.20714</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20079">https://arxiv.org/abs/2604.20079</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2308.03303">https://arxiv.org/abs/2308.03303</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.12652">https://arxiv.org/abs/2604.12652</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19533">https://arxiv.org/abs/2604.19533</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2506.02132">https://arxiv.org/abs/2506.02132</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.14785">https://arxiv.org/abs/2604.14785</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20523">https://arxiv.org/abs/2604.20523</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.23146">https://arxiv.org/abs/2603.23146</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20677">https://arxiv.org/abs/2604.20677</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2511.15141">https://arxiv.org/abs/2511.15141</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19771">https://arxiv.org/abs/2604.19771</a></li>
+
+
+
+<li><a href="https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/">https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2506.23040">https://arxiv.org/abs/2506.23040</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.19769">https://arxiv.org/abs/2604.19769</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.08948">https://arxiv.org/abs/2604.08948</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20043">https://arxiv.org/abs/2604.20043</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20806">https://arxiv.org/abs/2604.20806</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.16902">https://arxiv.org/abs/2604.16902</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.12078">https://arxiv.org/abs/2601.12078</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20544">https://arxiv.org/abs/2604.20544</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.18803">https://arxiv.org/abs/2604.18803</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.02989">https://arxiv.org/abs/2601.02989</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20098">https://arxiv.org/abs/2604.20098</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.16514">https://arxiv.org/abs/2604.16514</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20564">https://arxiv.org/abs/2604.20564</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20225">https://arxiv.org/abs/2604.20225</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20468">https://arxiv.org/abs/2604.20468</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.03396">https://arxiv.org/abs/2601.03396</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20273">https://arxiv.org/abs/2604.20273</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2508.16676">https://arxiv.org/abs/2508.16676</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.15319">https://arxiv.org/abs/2604.15319</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2510.18471">https://arxiv.org/abs/2510.18471</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20443">https://arxiv.org/abs/2604.20443</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> deepsense.ai, google.com, arxiv.org, nemorize.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 4 unique domains, 109 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": null,
+      "date": "2026-04-23T16:37:41+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw",
+      "title": "LLMs Explained: How Large Language Models Work (and Where They Commonly Fail) - QUASA Connect"
+    },
+    {
+      "author": null,
+      "date": "2026-04-23T10:14:00+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow",
+      "title": "Accuracy Testing Spurs Large Language Model Hallucinations - Bioengineer.org"
+    },
+    {
+      "author": "Haijian Liang, Zenghao Niu, Junjie Wu, Changwang Zhang, Wangchunshu Zhou, Jun Wang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19766",
+      "title": "OThink-SRR1: Search, Refine and Reasoning with Reinforced Learning for Large Language Models"
+    },
+    {
+      "author": "Asim D. Bakhshi",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19768",
+      "title": "Saying More Than They Know: A Framework for Quantifying Epistemic-Rhetorical Miscalibration in Large Language Models"
+    },
+    {
+      "author": "Gradwell Dzikanyanga, Weihao Yang, Hao Huang, Donglei Wu, Shihao Wang, Wen Xia, Sanjeeb K C",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19769",
+      "title": "TTKV: Temporal-Tiered KV Cache for Long-Context LLM Inference"
+    },
+    {
+      "author": "Parshva Daftari, Khush Patel, Shreyas Kapale, Jithin George, Siva Surendira",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19771",
+      "title": "Cognis: Context-Aware Memory for Conversational AI Agents"
+    },
+    {
+      "author": "Hung Ming Liu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19777",
+      "title": "Self-Describing Structured Data with Dual-Layer Guidance: A Lightweight Alternative to RAG for Precision Retrieval in Large-Scale LLM Knowledge Navigation"
+    },
+    {
+      "author": "Nicholas Popovi\\v{c}, Michael F\\\"arber",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19934",
+      "title": "Tracing Relational Knowledge Recall in Large Language Models"
+    },
+    {
+      "author": "Md Nayem Uddin, Kumar Shubham, Eduardo Blanco, Chitta Baral, Gengyu Wang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20006",
+      "title": "From Recall to Forgetting: Benchmarking Long-Term Memory for Personalized Agents"
+    },
+    {
+      "author": "Ziyi Wang, Chen Zhang, Wenjun Peng, Qi Wu, Xinyu Wang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20043",
+      "title": "TriEx: A Game-based Tri-View Framework for Explaining Internal Reasoning in Multi-Agent LLMs"
+    },
+    {
+      "author": "Rong Zhao, Wanqi Liu, Zhizhou Sha, Nanxi Su, Yecheng Zhang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20048",
+      "title": "Large language models perceive cities through a culturally uneven baseline"
+    },
+    {
+      "author": "Chengyu Huang, Sheng-Yen Chou, Zhengxin Zhang, Claire Cardie",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20051",
+      "title": "Bootstrapping Post-training Signals for Open-ended Tasks via Rubric-based Self-play on Pre-training Text"
+    },
+    {
+      "author": "Shanshan Zhong, Yi Lu, Jingjie Ning, Yibing Wan, Lihan Feng, Yuyi Ao, Leonardo F. R. Ribeiro, Markus Dreyer, Sean Ammirati, Chenyan Xiong",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20087",
+      "title": "SkillLearnBench: Benchmarking Continual Learning Methods for Agent Skill Generation on Real-World Tasks"
+    },
+    {
+      "author": "Dan Wang, Guozhao Mo, Yafei Shi, Cheng Zhang, Bo Zheng, Boxi Cao, Xuanang Chen, Yaojie Lu, Hongyu Lin, Ben He, Xianpei Han, Le Sun",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20199",
+      "title": "All Languages Matter: Understanding and Mitigating Language Bias in Multilingual RAG"
+    },
+    {
+      "author": "Yilun Liu, Chunguang Zhao, Mengyao Piao, Lingqi Miao, Shimin Tao, Minggui He, Chenxin Liu, Li Zhang, Hongxia Ma, Jiaxin Guo, Chen Liu, Liqun Deng, Jiansheng Wei, Xiaojun Meng, Fanyi Du, Daimeng Wei, Yanghua Xiao",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20225",
+      "title": "The GaoYao Benchmark: A Comprehensive Framework for Evaluating Multilingual and Multicultural Abilities of Large Language Models"
+    },
+    {
+      "author": "Changho Han (Medical Big Data Research Center, Seoul National University Medical Research Center, Seoul National University College of Medicine, Seoul, Republic of Korea), Songsoo Kim (Department of Biomedical Systems Informatics, Yonsei University College of Medicine, Seoul, Republic of Korea), Dong Won Kim (Department of Biomedical Systems Informatics, Yonsei University College of Medicine, Seoul, Republic of Korea), Leo Anthony Celi (Laboratory for Computational Physiology, Massachusetts Institute of Technology, Cambridge, MA, USA, Department of Biostatistics, Harvard T.H. Chan School of Public Health, Boston, MA, USA), Jaewoong Kim (Department of Biomedical Systems Informatics, Yonsei University College of Medicine, Seoul, Republic of Korea), SungA Bae (Department of Cardiology, Yongin Severance Hospital, Yonsei University College of Medicine, Yongin, Republic of Korea, Center for Digital Health, Yongin Severance Hospital, Yonsei University Health System, Yongin, Republic of Korea), Dukyong Yoon (Department of Biomedical Systems Informatics, Yonsei University College of Medicine, Seoul, Republic of Korea, Institute for Innovation in Digital Healthcare, Severance Hospital, Seoul, Republic of Korea)",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20331",
+      "title": "Surrogate modeling for interpreting black-box LLMs in medical predictions"
+    },
+    {
+      "author": "Juyong Jiang, Chenglin Cai, Chansung Park, Jiasi Shen, Sunghun Kim, Jianguo Li, Yue Wang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20398",
+      "title": "WebGen-R1: Incentivizing Large Language Models to Generate Functional and Aesthetic Websites with Reinforcement Learning"
+    },
+    {
+      "author": "Neemesh Yadav, Palakorn Achananuparp, Jing Jiang, Ee-Peng Lim",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20443",
+      "title": "DialToM: A Theory of Mind Benchmark for Forecasting State-Driven Dialogue Trajectories"
+    },
+    {
+      "author": "Bin Ju, Shenfeng Weng, Danying Zhou, Kunkai Su, Rongkai Xu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20487",
+      "title": "Knowledge Capsules: Structured Nonparametric Memory Units for LLMs"
+    },
+    {
+      "author": "Yassine Turki, Vinko Sabol\\v{c}ec, Bettina Messmer, Martin Jaggi",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20549",
+      "title": "Toward Cross-Lingual Quality Classifiers for Multilingual Pretraining Data Selection"
+    },
+    {
+      "author": "Yuhang Wu, Qinyuan Liu, Qiuyang Zhao, Qingwei Chong",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20556",
+      "title": "LayerTracer: A Joint Task-Particle and Vulnerable-Layer Analysis framework for Arbitrary Large Language Model Architectures"
+    },
+    {
+      "author": "Seunghyun Park, Yuanyuan Lei",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20564",
+      "title": "Where Reasoning Breaks: Logic-Aware Path Selection by Controlling Logical Connectives in LLMs Reasoning Chains"
+    },
+    {
+      "author": "Chaima Boufaied, Ronnie De Souza Santos, Ann Barcomb",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20677",
+      "title": "Intersectional Fairness in Large Language Models"
+    },
+    {
+      "author": "Trilok Padhi, Ramneet Kaur, Krishiv Agarwal, Adam D. Cobb, Daniel Elenius, Manoj Acharya, Colin Samplawski, Alexander M. Berenbeim, Nathaniel D. Bastian, Susmit Jha, Anirban Roy",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19775",
+      "title": "From Actions to Understanding: Conformal Interpretability of Temporal Concepts in LLM Agents"
+    },
+    {
+      "author": "Hao Liu, Dongyu Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19793",
+      "title": "SkillGraph: Graph Foundation Priors for LLM Agent Tool Sequence Recommendation"
+    },
+    {
+      "author": "Yiyang Du, Zhanqiu Guo, Xin Ye, Liu Ren, Chenyan Xiong",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20012",
+      "title": "EmbodiedMidtrain: Bridging the Gap between Vision-Language Models and Vision-Language-Action Models via Mid-training"
+    },
+    {
+      "author": "Baran Atalar, Xutong Liu, Jinhang Zuo, Siwei Wang, Wei Chen, Carlee Joe-Wong",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20021",
+      "title": "Continuous Semantic Caching for Low-Cost LLM Serving"
+    },
+    {
+      "author": "Aarav Gupta, Gururaj Deshpande, Chandreyi Chakraborty",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20079",
+      "title": "On the Quantization Robustness of Diffusion Language Models in Coding Benchmarks"
+    },
+    {
+      "author": "Jan-Philipp Schmidt",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20273",
+      "title": "ActuBench: A Multi-Agent LLM Pipeline for Generation and Evaluation of Actuarial Reasoning Tasks"
+    },
+    {
+      "author": "Peng Peng, Weiwei Lin, Wentai Wu, Xinyang Wang, Yongheng Liu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20452",
+      "title": "HaS: Accelerating RAG through Homology-Aware Speculative Retrieval"
+    },
+    {
+      "author": "Markus Knauer, Edoardo Fiorini, Maximilian M\\\"uhlbauer, Stefan Schneyer, Promwat Angsuratanawech, Florian Samuel Lay, Timo Bachmann, Samuel Bustamante, Korbinian Nottensteiner, Freek Stulp, Alin Albu-Sch\\\"affer, Jo\\~ao Silv\\\u0027erio, Thomas Eiband",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20468",
+      "title": "MOMO: A framework for seamless physical, verbal, and graphical robot skill learning and adaptation"
+    },
+    {
+      "author": "Naizhong Xu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20598",
+      "title": "Self-Aware Vector Embeddings for Retrieval-Augmented Generation: A Neuroscience-Inspired Framework for Temporal, Confidence-Weighted, and Relational Knowledge"
+    },
+    {
+      "author": "Noah Flynn",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20720",
+      "title": "COMPASS: COntinual Multilingual PEFT with Adaptive Semantic Sampling"
+    },
+    {
+      "author": "Qiguang Chen, Chengyu Luan, Jiajun Wu, Qiming Yu, Yi Yang, Yizhuo Li, Jingqi Tong, Xiachong Feng, Libo Qin, Wanxiang Che",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20806",
+      "title": "OMIBench: Benchmarking Olympiad-Level Multi-Image Reasoning in Large Vision-Language Model"
+    },
+    {
+      "author": "Longteng Zhang, Lin Zhang, Shaohuai Shi, Xiaowen Chu, Bo Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2308.03303",
+      "title": "LoRA-FA: Efficient and Effective Low Rank Representation Fine-tuning"
+    },
+    {
+      "author": "Zhen Zheng, Xin Ji, Taosong Fang, Fanghao Zhou, Chuanjie Liu, Gang Peng",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2412.03594",
+      "title": "BatchLLM: Optimizing Large Batched LLM Inference with Global Prefix Sharing and Throughput-oriented Token Batching"
+    },
+    {
+      "author": "Michael Li, Nishant Subramani",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2506.02132",
+      "title": "Model Internal Sleuthing: Finding Lexical Identity and Inflectional Features in Modern Language Models"
+    },
+    {
+      "author": "Baran Atalar, Eddie Zhang, Carlee Joe-Wong",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2508.09958",
+      "title": "Neural Bandit Based Optimal LLM Selection for a Pipeline of Subtasks"
+    },
+    {
+      "author": "Keyu He, Tejas Srinivasan, Brihi Joshi, Xiang Ren, Jesse Thomason, Swabha Swayamdipta",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2509.25844",
+      "title": "Believing without Seeing: Quality Scores for Contextualizing Vision-Language Model Explanations"
+    },
+    {
+      "author": "Michal \\v{S}tef\\\u0027anik, Timothee Mickus, Marek Kadl\\v{c}\\\u0027ik, Bertram H{\\o}jer, Michal Spiegel, Ra\\\u0027ul V\\\u0027azquez, Aman Sinha, Josef Kucha\\v{r}, Philipp Mondorf, Pontus Stenetorp",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2510.26285",
+      "title": "Language Models Learn Universal Representations of Numbers and Here\u0027s Why You Should Care"
+    },
+    {
+      "author": "Yihua Zhu, Qianying Liu, Jiaxin Wang, Fei Cheng, Chaoran Liu, Akiko Aizawa, Sadao Kurohashi, Hidetoshi Shimodaira",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.02931",
+      "title": "Memorization, Emergence, and Explaining Reversal Failures: A Controlled Study of Relational Semantics in LLMs"
+    },
+    {
+      "author": "Hosein Hasani, Mohammadali Banayeeanzade, Ali Nafisi, Sadegh Mohammadian, Fatemeh Askari, Mobin Bagherian, Amirmohammad Izadi, Mahdieh Soleymani Baghshah",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.02989",
+      "title": "Mechanistic Interpretability of Large-Scale Counting in LLMs through a System-2 Strategy"
+    },
+    {
+      "author": "Maan Qraitem, Kate Saenko, Bryan A. Plummer",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.03396",
+      "title": "Breaking the Assistant Mold: Modeling Behavioral Variation in LLM Based Procedural Character Generation"
+    },
+    {
+      "author": "Bolei Ma, Yusuke Miyao",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.09373",
+      "title": "The Imperfective Paradox in Large Language Models"
+    },
+    {
+      "author": "Linfeng Du, Ye Yuan, Zichen Zhao, Fuyuan Lyu, Emiliano Penaloza, Xiuying Chen, Zipeng Sun, Jikun Kang, Laurent Charlin, Xue Liu, Haolun Wu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.12078",
+      "title": "Optimizing User Profiles via Contextual Bandits for Retrieval-Augmented LLM Personalization"
+    },
+    {
+      "author": "Rui Qi, Fengran Mo, Yufeng Chen, Xue Zhang, Shuo Wang, Hongliang Li, Jinan Xu, Meng Jiang, Jian-Yun Nie, Kaiyu Huang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.14896",
+      "title": "Language-Coupled Reinforcement Learning for Multilingual Retrieval-Augmented Generation"
+    },
+    {
+      "author": "Xin Xu, Clive Bai, Kai Yang, Tianhao Chen, Yangkun Chen, Weijie Liu, Hao Chen, Yang Wang, Saiyong Yang, Can Yang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.12036",
+      "title": "Composition-RL: Compose Your Verifiable Prompts for Reinforcement Learning of Large Language Models"
+    },
+    {
+      "author": "Amaia Cardiel, Eloi Zablocki, Elias Ramzi, Eric Gaussier",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.00696",
+      "title": "DRIV-EX: Counterfactual Explanations for Driving LLMs"
+    },
+    {
+      "author": "Tianyang Xu, Marcelo Sandoval-Castaneda, Karen Livescu, Greg Shakhnarovich, Kanishka Misra",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.07474",
+      "title": "Cross-Modal Taxonomic Generalization in (Vision-) Language Models"
+    },
+    {
+      "author": "Shushanta Pudasaini, Luis Miralles-Pechu\\\u0027an, David Lillis, Marisa Llorens Salvador",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.23146",
+      "title": "Why AI-Generated Text Detection Fails: Evidence from Explainable AI Beyond Benchmark Accuracy"
+    },
+    {
+      "author": "Gang Hu, Yating Chen, Haiyan Ding, Wang Gao, Jiajia Huang, Min Peng, Qianqian Xie, Kun Yue",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.08948",
+      "title": "TaxPraBen: A Scalable Benchmark for Structured Evaluation of LLMs in Chinese Real-World Tax Practice"
+    },
+    {
+      "author": "Solomon Messing",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.11581",
+      "title": "Hidden Measurement Error in LLM Pipelines Distorts Annotation, Evaluation, and Benchmarking"
+    },
+    {
+      "author": "Sebastian Nagl, Matthias Grabmair",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.13583",
+      "title": "BenGER: A Collaborative Web Platform for End-to-End Benchmarking of German Legal Tasks"
+    },
+    {
+      "author": "Yitong Shou, Manhao Guan",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.14593",
+      "title": "Mechanistic Decoding of Cognitive Constructs in Large Language Models"
+    },
+    {
+      "author": "Shuqi Cao, Jingyi He, Fei Tan",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.18349",
+      "title": "HiGMem: A Hierarchical and LLM-Guided Memory System for Long-Term Conversational Agents"
+    },
+    {
+      "author": "Bowen Li, Haochen Ma, Yuxin Wang, Jie Yang, Yining Zheng, Xinchi Chen, Xuanjing Huang, Xipeng Qiu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19502",
+      "title": "Beyond Rating: A Comprehensive Evaluation and Benchmark for AI Reviews"
+    },
+    {
+      "author": "Gaoussou Youssouf Kebe, Jeffrey M. Girard, Einat Liebenthal, Justin Baker, Fernando De la Torre, Louis-Philippe Morency",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2501.03624",
+      "title": "LLAMADRS: Evaluating Open-Source LLMs on Real Clinical Interviews--To Reason or Not to Reason?"
+    },
+    {
+      "author": "Tianqing Fang, Zhisong Zhang, Xiaoyang Wang, Rui Wang, Can Qin, Yuxuan Wan, Jun-Yu Ma, Ce Zhang, Jiaqi Chen, Xiyun Li, Yonglin Wang, Jingchen Ni, Tianshi Zheng, Chun Chen, Wenhao Yu, Zhenwen Liang, Hongming Zhang, Haitao Mi, Dong Yu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2508.00414",
+      "title": "Cognitive Kernel-Pro: A Framework for Deep Research Agents and Agent Foundation Models Training"
+    },
+    {
+      "author": "Wenhan Liu, Xinyu Ma, Weiwei Sun, Yutao Zhu, Yuchen Li, Dawei Yin, Zhicheng Dou",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2508.07050",
+      "title": "ReasonRank: Empowering Passage Ranking with Strong Reasoning Ability"
+    },
+    {
+      "author": "Jiacheng Li, Jianchao Tan, Zhidong Yang, Pingwei Sun, Feiye Huo, Jiayu Qin, Xiangyu Zhang, Maoxin He, Yerui Sun, Yuchen Xie, Guangming Tan, Weile Jia, Xunliang Cai, Tong Zhao",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2508.16676",
+      "title": "WISCA: A Lightweight Model Transition Method to Improve LLM Training via Weight Scaling"
+    },
+    {
+      "author": "Taha Koleilat, Hassan Rivaz, Yiming Xiao",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2509.03740",
+      "title": "CLIP-SVD: Efficient and Interpretable Vision-Language Adaptation via Singular Values"
+    },
+    {
+      "author": "Xue Jiang, Yihong Dong, Mengyang Liu, Hongyi Deng, Tian Wang, Yongding Tao, Rongyu Cao, Binhua Li, Zhi Jin, Wenpin Jiao, Fei Huang, Yongbin Li, Ge Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2510.18471",
+      "title": "CodeRL+: Improving Code Generation via Reinforcement with Execution Semantics Alignment"
+    },
+    {
+      "author": "Jonathan Bragg, Mike D\u0027Arcy, Nishant Balepur, Dan Bareket, Bhavana Dalvi, Sergey Feldman, Dany Haddad, Jena D. Hwang, Peter Jansen, Varsha Kishore, Bodhisattwa Prasad Majumder, Aakanksha Naik, Sigal Rahamimov, Kyle Richardson, Amanpreet Singh, Harshit Surana, Aryeh Tiktinsky, Rosni Vasu, Guy Wiener, Chloe Anastasiades, Stefan Candra, Jason Dunkelberger, Dan Emery, Rob Evans, Malachi Hamada, Regan Huff, Rodney Kinney, Matt Latzke, Jaron Lochner, Ruben Lozano-Aguilera, Cecile Nguyen, Smita Rao, Amber Tanaka, Brooke Vlahos, Peter Clark, Doug Downey, Yoav Goldberg, Ashish Sabharwal, Daniel S. Weld",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2510.21652",
+      "title": "AstaBench: Rigorous Benchmarking of AI Agents with a Scientific Research Suite"
+    },
+    {
+      "author": "Jingwei Ni, Ekaterina Fadeeva, Tianyi Wu, Mubashara Akhtar, Jiaheng Zhang, Elliott Ash, Markus Leippold, Timothy Baldwin, See-Kiong Ng, Artem Shelmanov, Mrinmaya Sachan",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2511.06209",
+      "title": "Efficient Test-Time Scaling of Multi-Step Reasoning by Probing Internal States of Large Language Models"
+    },
+    {
+      "author": "Zerun Ma, Guoqiang Wang, Xinchen Xie, Yicheng Chen, He Du, Bowen Li, Yanan Sun, Wenran Liu, Kai Chen, Yining Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.14116",
+      "title": "TREX: Automating LLM Fine-tuning via Agent-Driven Tree-based Exploration"
+    },
+    {
+      "author": "reverseblade2",
+      "date": "2026-04-23T12:00:44+00:00",
+      "domain": "nemorize.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems",
+      "title": "LLM as Judge: Reproducible Evaluation for LLM Systems"
+    },
+    {
+      "author": "Applied_AI",
+      "date": "2026-04-23T10:23:42+00:00",
+      "domain": "deepsense.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/",
+      "title": "Structured planning, execution, and memory for LLM agents (ragbits 1.6)"
+    },
+    {
+      "author": "MemTensor",
+      "date": "2026-04-23T09:48:23+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.08224",
+      "title": "Externalization in LLM Agents: Unified Review of Memory and Harness Engineering"
+    },
+    {
+      "author": "Samuel Onimpa Alfred, Veera Sundararaghavan",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19789",
+      "title": "From Data to Theory: Autonomous Large Language Model Agents for Materials Science"
+    },
+    {
+      "author": "Yifei Wang, Tianlin Li, Xiaohan Zhang, Xiaoyu Zhang, Wei Ma, Mingfei Cheng, Li Pan",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19790",
+      "title": "Hidden Reliability Risks in Large Language Models: Systematic Identification of Precision-Induced Output Disagreements"
+    },
+    {
+      "author": "Sandip Ghoshal, Anshul Mittal, Jyotika Singh, Miguel Ballesteros, Weiyi Sun, Fang Tu, Shailender Singh, Yassine Benajiba, Fahad Shah, Sujeeth Bharadwaj, Sujith Ravi, Dan Roth",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19821",
+      "title": "JTPRO: A Joint Tool-Prompt Reflective Optimization Framework for Language Agents"
+    },
+    {
+      "author": "Aimin Zhang, Jiajing Guo, Fuwei Jia, Chen Lv, Boyu Wang, Fangzheng Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20133",
+      "title": "EvoAgent: An Evolvable Agent Framework with Skill Learning and Multi-Agent Delegation"
+    },
+    {
+      "author": "Vasundra Srinivasan",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20158",
+      "title": "Stateless Decision Memory for Enterprise AI Agents"
+    },
+    {
+      "author": "Yingjie Gu, Bo Xiong, Yijuan Guo, Chao Li, Xiaojing Zhang, Liqiang Wang, Pengcheng Ren, Qi Sun, Jingyao Ma, Shidang Shi",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20300",
+      "title": "FSFM: A Biologically-Inspired Framework for Selective Forgetting of Agent Memory"
+    },
+    {
+      "author": "Shan He, Runze Wang, Zhuoyun Du, Huiyu Bai, Zouying Cao, Yu Cheng, Bo Zheng",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20714",
+      "title": "Learning to Evolve: A Self-Improving Framework for Multi-Agent Systems via Textual Parameter Graph Optimization"
+    },
+    {
+      "author": "Hanqi Li, Lu Chen, Kai Yu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20811",
+      "title": "Diagnosing CFG Interpretation in LLMs"
+    },
+    {
+      "author": "Ruocan Wei, Shufeng Wang, Ziwei Shi",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19756",
+      "title": "WorkflowGen:an adaptive workflow generation mechanism driven by trajectory experience"
+    },
+    {
+      "author": "Woojin Lee, Jin-Xia Huang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19825",
+      "title": "SolidCoder: Bridging the Mental-Reality Gap in LLM Code Generation through Concrete Execution"
+    },
+    {
+      "author": "Jinsik Bang, Jaeyeon Bae, Donggyu Lee, Siyeol Jung, Taehwan Kim",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19839",
+      "title": "Environmental Understanding Vision-Language Model for Embodied Agent"
+    },
+    {
+      "author": "Jiamin Chang, Minhui Xue, Ruoxi Sun, Shuchao Pang, Salil S. Kanhere, Hammond Pearce",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19844",
+      "title": "If you\u0027re waiting for a sign... that might not be it! Mitigating Trust Boundary Confusion from Visual Injections on Vision-Language Agentic Systems"
+    },
+    {
+      "author": "Cagri Eryilmaz",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19856",
+      "title": "ChipCraftBrain: Validation-First RTL Generation via Multi-Agent Orchestration"
+    },
+    {
+      "author": "Divyanshu Goyal, Akhil Eppa, Vanya Bannihatti Kumar",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19966",
+      "title": "DistortBench: Benchmarking Vision Language Models on Image Distortion Identification"
+    },
+    {
+      "author": "Jianxin Gao, Ruohan Lei, Wanli Peng",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20269",
+      "title": "Text Steganography with Dynamic Codebook and Multimodal Large Language Model"
+    },
+    {
+      "author": "Alessio Palma, Indro Spinelli, Vignesh Prasad, Luca Scofano, Yufeng Jin, Georgia Chalvatzaki, Fabio Galasso",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20348",
+      "title": "Bimanual Robot Manipulation via Multi-Agent In-Context Learning"
+    },
+    {
+      "author": "Gustav Keppler, Ghada Elbez, Veit Hagenmeyer",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20389",
+      "title": "CyberCertBench: Evaluating LLMs in Cybersecurity Certification Knowledge"
+    },
+    {
+      "author": "Viet-Man Le, Thi Ngoc Trang Tran, Sebastian Lubos, Alexander Felfernig, Damian Garber",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20523",
+      "title": "Early-Stage Product Line Validation Using LLMs: A Study on Semi-Formal Blueprint Analysis"
+    },
+    {
+      "author": "Zimu Jia, Mingjie Xu, Andrew Estornell, Jiaheng Wei",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20544",
+      "title": "Evian: Towards Explainable Visual Instruction-tuning Data Auditing"
+    },
+    {
+      "author": "Karan Goyal, Dikshant Kukreja",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20665",
+      "title": "The Expense of Seeing: Attaining Trustworthy Multimodal Reasoning Within the Monolithic Paradigm"
+    },
+    {
+      "author": "Young Min Cho, Daniele Bonadiman, Divya Bhargavi, Tamer Alkhouli, Salvatore Romeo, Dongwei Jiang, Khushbu Pahwa, Yubin Ge, Etsuko Ishii, Monica Sunkara, Yi Zhang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20727",
+      "title": "Supplement Generation Training for Enhancing Agentic Task Performance"
+    },
+    {
+      "author": "Zihan Chen, Song Wang, Zhen Tan, Xingbo Fu, Zhenyu Lei, Peng Wang, Huan Liu, Cong Shen, Jundong Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2504.02181",
+      "title": "A Survey of Scaling in Large Language Model Reasoning"
+    },
+    {
+      "author": "Jiaquan Zhang, Chaoning Zhang, Shuxu Chen, Zhenzhen Huang, Pengcheng Zheng, Zhicheng Wang, Ping Guo, Fan Mo, Sung-Ho Bae, Jie Zou, Jiwei Wei, Yang Yang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.07798",
+      "title": "Lightweight LLM Agent Memory with Small Language Models"
+    },
+    {
+      "author": "Shengyu Guo, Tongrui Ye, Jianbo Zhang, Zicheng Zhang, Chunyi Li, Guangtao Zhai",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.14785",
+      "title": "MirrorBench: Evaluating Self-centric Intelligence in MLLMs by Introducing a Mirror"
+    },
+    {
+      "author": "Xinru Yan, Boxi Cao, Yaojie Lu, Hongyu Lin, Weixiang Zhou, Le Sun, Xianpei Han",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.16902",
+      "title": "Beyond Text-Dominance: Understanding Modality Preference of Omni-modal Large Language Models"
+    },
+    {
+      "author": "Suhaib Abdurahman, Etsuko Ishii, Katerina Margatina, Divya Bhargavi, Monica Sunkara, Yi Zhang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19278",
+      "title": "Explicit Trait Inference for Multi-Agent Coordination"
+    },
+    {
+      "author": "Pranay Dugar, Aayam Shrestha, Fangzhou Yu, Bart van Marum, Alan Fern",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2408.07295",
+      "title": "Learning Multi-Modal Whole-Body Control for Real-World Humanoid Robots"
+    },
+    {
+      "author": "Xinyue Li, Zhenpeng Chen, Jie M. Zhang, Ying Xiao, Tianlin Li, Weisong Sun, Yang Liu, Yiling Lou, Xuanzhe Liu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2411.00585",
+      "title": "Fairness Testing of Large Language Models in Role-Playing"
+    },
+    {
+      "author": "Samuel J. Weisenthal",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2506.23040",
+      "title": "Treatment, evidence, imitation, and chat"
+    },
+    {
+      "author": "Ren Zhuang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2507.21166",
+      "title": "The Ratchet Effect in Silico through Interaction-Driven Cumulative Intelligence in Large Language Models"
+    },
+    {
+      "author": "Sunwoo Kim, Geon Lee, Kyungho Kim, Jaemin Yoo, Kijung Shin",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2511.15141",
+      "title": "ItemRAG: Item-Based Retrieval-Augmented Generation for LLM-Based Recommendation"
+    },
+    {
+      "author": "Ali Slim, Haydar Hamieh, Jawad Kotaich, Yehya Ghosn, Mahdi Chehimi, Ammar Mohanna, Hasan Abed Al Kader Hammoud, Bernard Ghanem",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.08570",
+      "title": "QuanBench+: A Unified Multi-Framework Benchmark for LLM-Based Quantum Code Generation"
+    },
+    {
+      "author": "Jinlong Liu, Wanggui He, Peng Zhang, Mushui Liu, Hao Jiang, Pipei Huang",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.12652",
+      "title": "PromptEcho: Annotation-Free Reward from Vision-Language Models for Text-to-Image Reinforcement Learning"
+    },
+    {
+      "author": "Burak Susam, Tingting Mu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.15319",
+      "title": "Explainable Iterative Data Visualisation Refinement via an LLM Agent"
+    },
+    {
+      "author": "Zhiyuan Jiang, Weihao Hong, Xinlei Guan, Tejaswi Dhandu, Miles Q. Li, Meng Xu, Kuan Huang, Umamaheswara Rao Tida, Bingyu Shen, Daehan Kwak, Boyang Li",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.18803",
+      "title": "LLM-as-Judge Framework for Evaluating Tone-Induced Hallucination in Vision-Language Models"
+    },
+    {
+      "author": "Alankrit Chona, Igor Kozlov, Ambuj Kumar",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.19533",
+      "title": "Cyber Defense Benchmark: Agentic Threat Hunting Evaluation for LLMs in SecOps"
+    },
+    {
+      "author": "Nathan Hittesdorf, Marco Salzetta, Lu Cheng",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20098",
+      "title": "Differentiable Conformal Training for LLM Reasoning Factuality"
+    },
+    {
+      "author": "Aijia Cheng, Kailong Wang, Ling Shi, Yongxin Zhao",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20316",
+      "title": "R2IF: Aligning Reasoning with Decisions via Composite Rewards for Interpretable LLM Function Calling"
+    },
+    {
+      "author": "Shelly Francis-Meretzki, Mirco Mutti, Yaniv Romano, Aviv Tamar",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20472",
+      "title": "Temporal Difference Calibration in Sequential Tasks: Application to Vision-Language-Action Models"
+    },
+    {
+      "author": "Angelo Zangari, Peyman Baghershahi, Sourav Medya",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.10386",
+      "title": "Colorful Talks with Graphs: Human-Interpretable Graph Encodings for Large Language Models"
+    },
+    {
+      "author": "Baoyou Chen, Hanchen Xia, Peng Tu, Haojun Shi, Shan Mu, Weihao Yuan, Siyu Zhu",
+      "date": "2026-04-23T04:00:00+00:00",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.16514",
+      "title": "BARD: Bridging AutoRegressive and Diffusion Vision-Language Models Via Highly Efficient Progressive Block Merging and Stage-Wise Distillation"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "One paper found that LLM-generated texts used tricolons at nearly twice the rate of expert-written texts, while human authors used rhetorical questions at more than twice the LLM rate [arxiv.org#2].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/EQv_T0mXm6k-p2OKeJAc2ZFlTIrb41UFIN1afFqqd99SJeWFWW59Hk5qRFvKcsKIh8kelTBJdIW-EvMkgIhynHG-othU6Hnj6dubWW0-eUSSlg",
+      "name": "deepsense.ai"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/Ps7-26cpJIYL2OzFRC6-mMiD-ppR0igoOqFZ90ZOGv3wbQ1t_dI6fTwgsLXbNSRUETZ6822k1fDWoFQqKMlbgZXUq4J3JS5bFwWp7aise18",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/eniRPxQqtNE9kaJDTx4pB29vm45qG2AyuNbNdL0_mNG_dxRsK2ONXn57YumvjfkiA37jWc0e2yQY5Y0RUd8p4mYgqSh0Bhj0QXABx1244A",
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/H6nrmiLdCBhRBE4jS7h8ByCw6GE538DlLhlQ60cz6DQzkkz6w_xVj2cRMNiJLA7seZDFhs7HkFLQIRUcRfGtqzNg4mkgIPAxTsc_AvH2jTXFzA",
+      "name": "nemorize.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Transformer-based LLMs moved into the mainstream after the 2017 \u201cAttention Is All You Need\u201d paper introduced the architecture behind most modern systems [common]. The release of ChatGPT in late 2022 accelerated mass adoption of conversational AI and pushed research toward the memory, retrieval, safety, and benchmarking problems exposed by real-world use [common]. Retrieval-augmented generation then became a widely used way to connect models to external knowledge without retraining, but many of today\u2019s papers specifically target its latency, multilingual bias, and long-context weaknesses [arxiv.org#1][arxiv.org#12][arxiv.org#28].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Enterprise AI: Research on stateless decision memory argues that regulated sectors such as underwriting, claims adjudication, and tax examination prefer replayable, auditable architectures, and reported DPM was 7-15x faster than summarization-based memory when budgets were tight [arxiv.org#69].",
+    "Model serving: Serving infrastructure papers reported major throughput and latency gains for long contexts and large batched jobs, which could materially lower inference costs for providers running production LLM workloads [arxiv.org#3][arxiv.org#34].",
+    "Global AI products: Multilingual and multicultural evaluation work suggests product teams need better reranking, benchmarking, and localization if they want systems to serve non-English and non-Western users more evenly [arxiv.org#12][arxiv.org#13][arxiv.org#9].",
+    "Developer tooling: Work on reproducible LLM-as-judge setups, tool-prompt optimization, and automated fine-tuning agents points to a growing market for software layers that manage prompts, tools, evaluation, and post-training workflows [nemorize.com#1][arxiv.org#67][arxiv.org#63]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Research",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 109,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "QUASA Connect",
+          "url": "https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw"
+        }
+      ],
+      "text": "QUASA Connect: The explainer describes large language models as powerful but failure-prone systems, and stresses that users need to understand not just how LLMs generate text, but also where they commonly break down."
+    },
+    {
+      "sources": [
+        {
+          "name": "Bioengineer.org",
+          "url": "https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow"
+        }
+      ],
+      "text": "Bioengineer.org-covered study: The reported study argues that the way accuracy testing is done can itself trigger hallucinations, suggesting that some benchmark setups may distort how model reliability is measured."
+    },
+    {
+      "sources": [
+        {
+          "name": "deepsense.ai",
+          "url": "https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/"
+        }
+      ],
+      "text": "Open-source agent builders: Recent practitioner and survey pieces describe a shift toward explicit planning, persistent memory, harness engineering, and reproducible evaluation as the practical scaffolding needed for dependable LLM agents."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2604.11581"
+        }
+      ],
+      "text": "Academic evaluators: Several arXiv papers treat current benchmarks as incomplete, arguing that reliable deployment requires measuring hidden sources of variance, richer textual critique quality, and domain-specific performance under real workflows rather than headline accuracy alone."
+    }
+  ],
+  "primary_image": null,
+  "published": 1776967746,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Field direction: The day\u2019s papers collectively show AI research shifting from pure capability scaling toward system reliability, with a strong emphasis on memory, interpretability, multilingual robustness, and evaluation methodology rather than only next-token performance [arxiv.org#1][arxiv.org#4][arxiv.org#12][arxiv.org#50][arxiv.org#86].",
+    "Evidence quality: Most findings come from benchmarks, controlled experiments, or arXiv preprints rather than long-term real-world deployment studies, so many reported gains remain provisional even when they are quantitatively strong [arxiv.org#1][arxiv.org#3][arxiv.org#17][arxiv.org#69].",
+    "Limitations: Several papers explicitly show that current systems still fail under distribution shift, structural logic stress, cultural variation, long-term memory updates, and multimodal grounding, underscoring that progress remains uneven across tasks [arxiv.org#9][arxiv.org#7][arxiv.org#48][arxiv.org#72][arxiv.org#88]."
+  ],
+  "source_urls": [
+    "https://arxiv.org/abs/2408.07295",
+    "https://arxiv.org/abs/2501.03624",
+    "https://arxiv.org/abs/2604.19825",
+    "https://arxiv.org/abs/2604.13583",
+    "https://arxiv.org/abs/2604.20811",
+    "https://arxiv.org/abs/2604.19775",
+    "https://arxiv.org/abs/2604.19766",
+    "https://arxiv.org/abs/2601.14896",
+    "https://arxiv.org/abs/2604.07798",
+    "https://arxiv.org/abs/2604.19821",
+    "https://arxiv.org/abs/2604.20348",
+    "https://arxiv.org/abs/2604.20051",
+    "https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw",
+    "https://arxiv.org/abs/2604.20199",
+    "https://arxiv.org/abs/2601.02931",
+    "https://arxiv.org/abs/2603.07474",
+    "https://arxiv.org/abs/2604.14116",
+    "https://nemorize.com/roadmaps/llm-as-judge-reproducible-evaluation-for-llm-systems",
+    "https://arxiv.org/abs/2604.18349",
+    "https://arxiv.org/abs/2602.12036",
+    "https://arxiv.org/abs/2604.08570",
+    "https://arxiv.org/abs/2604.20300",
+    "https://news.google.com/atom/articles/CBMiiwFBVV95cUxQalBsT29zU2ViRjc0SXB1cU1UZU52Z24xamtBQWlTNG04djhrUXVQaWZwZzBBcjBvcnNxQWNHUjk1ZmhnUE9SX3pMR0l2VmZOQ3pPc0xMZXFpeU9FUzlnSHN0UGFyYjBqVnNKREdYS09DM0VzeWI2RElTM3BJWW53QTJsUUJEUE1IQXow",
+    "https://arxiv.org/abs/2509.03740",
+    "https://arxiv.org/abs/2604.19966",
+    "https://arxiv.org/abs/2604.20269",
+    "https://arxiv.org/abs/2604.20012",
+    "https://arxiv.org/abs/2511.06209",
+    "https://arxiv.org/abs/2510.26285",
+    "https://arxiv.org/abs/2604.19789",
+    "https://arxiv.org/abs/2411.00585",
+    "https://arxiv.org/abs/2604.20665",
+    "https://arxiv.org/abs/2507.21166",
+    "https://arxiv.org/abs/2604.20549",
+    "https://arxiv.org/abs/2604.19777",
+    "https://arxiv.org/abs/2604.19756",
+    "https://arxiv.org/abs/2601.09373",
+    "https://arxiv.org/abs/2604.08224",
+    "https://arxiv.org/abs/2604.19856",
+    "https://arxiv.org/abs/2604.19793",
+    "https://arxiv.org/abs/2412.03594",
+    "https://arxiv.org/abs/2508.07050",
+    "https://arxiv.org/abs/2604.20133",
+    "https://arxiv.org/abs/2604.20398",
+    "https://arxiv.org/abs/2604.19502",
+    "https://arxiv.org/abs/2604.20389",
+    "https://arxiv.org/abs/2604.19839",
+    "https://arxiv.org/abs/2604.19768",
+    "https://arxiv.org/abs/2604.20006",
+    "https://arxiv.org/abs/2604.20087",
+    "https://arxiv.org/abs/2604.14593",
+    "https://arxiv.org/abs/2604.19844",
+    "https://arxiv.org/abs/2508.09958",
+    "https://arxiv.org/abs/2604.19790",
+    "https://arxiv.org/abs/2604.20727",
+    "https://arxiv.org/abs/2604.20158",
+    "https://arxiv.org/abs/2508.00414",
+    "https://arxiv.org/abs/2504.02181",
+    "https://arxiv.org/abs/2603.00696",
+    "https://arxiv.org/abs/2604.20472",
+    "https://arxiv.org/abs/2604.20021",
+    "https://arxiv.org/abs/2604.20556",
+    "https://arxiv.org/abs/2604.20598",
+    "https://arxiv.org/abs/2604.19934",
+    "https://arxiv.org/abs/2604.20331",
+    "https://arxiv.org/abs/2604.20048",
+    "https://arxiv.org/abs/2604.11581",
+    "https://arxiv.org/abs/2604.19278",
+    "https://arxiv.org/abs/2602.10386",
+    "https://arxiv.org/abs/2604.20452",
+    "https://arxiv.org/abs/2509.25844",
+    "https://arxiv.org/abs/2604.20487",
+    "https://arxiv.org/abs/2604.20316",
+    "https://arxiv.org/abs/2510.21652",
+    "https://arxiv.org/abs/2604.20720",
+    "https://arxiv.org/abs/2604.20714",
+    "https://arxiv.org/abs/2604.20079",
+    "https://arxiv.org/abs/2308.03303",
+    "https://arxiv.org/abs/2604.12652",
+    "https://arxiv.org/abs/2604.19533",
+    "https://arxiv.org/abs/2506.02132",
+    "https://arxiv.org/abs/2604.14785",
+    "https://arxiv.org/abs/2604.20523",
+    "https://arxiv.org/abs/2603.23146",
+    "https://arxiv.org/abs/2604.20677",
+    "https://arxiv.org/abs/2511.15141",
+    "https://arxiv.org/abs/2604.19771",
+    "https://deepsense.ai/blog/task-planning-execution-visibility-and-persistent-memory-for-ai-agents-ragbits-1-6-release/",
+    "https://arxiv.org/abs/2506.23040",
+    "https://arxiv.org/abs/2604.19769",
+    "https://arxiv.org/abs/2604.08948",
+    "https://arxiv.org/abs/2604.20043",
+    "https://arxiv.org/abs/2604.20806",
+    "https://arxiv.org/abs/2604.16902",
+    "https://arxiv.org/abs/2601.12078",
+    "https://arxiv.org/abs/2604.20544",
+    "https://arxiv.org/abs/2604.18803",
+    "https://arxiv.org/abs/2601.02989",
+    "https://arxiv.org/abs/2604.20098",
+    "https://arxiv.org/abs/2604.16514",
+    "https://arxiv.org/abs/2604.20564",
+    "https://arxiv.org/abs/2604.20225",
+    "https://arxiv.org/abs/2604.20468",
+    "https://arxiv.org/abs/2601.03396",
+    "https://arxiv.org/abs/2604.20273",
+    "https://arxiv.org/abs/2508.16676",
+    "https://arxiv.org/abs/2604.15319",
+    "https://arxiv.org/abs/2510.18471",
+    "https://arxiv.org/abs/2604.20443"
+  ],
+  "suggested_qna": [],
+  "summary": "A broad set of AI articles published on 2026-04-23 points to a clear theme in large language model research: developers are working to make LLMs more reliable, more efficient, and more useful in real-world agents by improving memory, retrieval, reasoning, evaluation, and safety [google.com#1][google.com#2][arxiv.org#1][arxiv.org#4][arxiv.org#16][arxiv.org#20][arxiv.org#23]. Several papers report encouraging gains on practical bottlenecks such as long-context inference, persistent memory for conversational agents, multilingual retrieval, and project-level code or web generation, often with open-source code or benchmarks that could speed follow-on work [arxiv.org#3][arxiv.org#4][arxiv.org#12][arxiv.org#15][arxiv.org#17][arxiv.org#53][arxiv.org#87].\n\nAt the same time, the day\u2019s research shows why caution still matters. Multiple studies examine hallucinations, cultural and language bias, fairness gaps, unreliable evaluation pipelines, precision-induced behavior differences, and weaknesses in logic, long-term memory, and multimodal grounding [google.com#2][arxiv.org#2][arxiv.org#9][arxiv.org#7][arxiv.org#14][arxiv.org#16][arxiv.org#50][arxiv.org#66][arxiv.org#72][arxiv.org#88]. Taken together, the coverage suggests the AI field is steadily maturing: researchers are no longer focused only on bigger models, but also on the testing tools, memory systems, and interpretability methods needed to make those models steadier and more broadly useful [nemorize.com#1][deepsense.ai#1][arxiv.org#68][arxiv.org#86].",
+  "talking_points": [
+    "Memory push: Several papers focus on giving agents usable long-term memory, including Cognis for context-aware conversational recall, Memora for benchmarking remembering and forgetting, HiGMem for hierarchical retrieval, LightMem using small language models, and a selective-forgetting framework aimed at efficiency, quality, and security [arxiv.org#4][arxiv.org#7][arxiv.org#53][arxiv.org#87][arxiv.org#70].",
+    "Efficiency gains: Infrastructure work reported sizable speedups. TTKV cut latency by up to 76% and doubled throughput on 128K-context tasks, HaS reduced retrieval latency by 23.74%-36.99% with only a 1%-2% accuracy drop, and BatchLLM outperformed vLLM and SGLang by 1.3x to 10.8x on batched workloads [arxiv.org#3][arxiv.org#28][arxiv.org#34].",
+    "Bias findings: New studies found systematic language, cultural, and fairness issues, including multilingual rerankers favoring English or the query language, city descriptions clustering around a culturally uneven baseline, and stronger stereotype-aligned accuracy in intersectional fairness tests [arxiv.org#12][arxiv.org#9][arxiv.org#21].",
+    "Evaluation rethink: Researchers proposed more rigorous ways to judge models, warning that standard confidence intervals miss variance from prompts, temperature, and judge models. Other work argues that review quality, not simple score prediction, should anchor automated peer-review evaluation [arxiv.org#50][arxiv.org#54][nemorize.com#1].",
+    "Agent expansion: Agent research is moving beyond chatbots into scientific discovery, robotics, cybersecurity, enterprise workflows, and tool orchestration, with papers on autonomous materials-science agents, robot skill adaptation, threat-hunting benchmarks, and joint optimization of prompts plus tool schemas [arxiv.org#65][arxiv.org#29][arxiv.org#100][arxiv.org#67]."
+  ],
+  "technical_details": [
+    "Temporal-tiered KV cache: TTKV splits cached attention states across fast HBM and slower DRAM, keeps recent states in higher-precision tiers, and uses block-wise streaming attention to overlap communication with computation, cutting cross-tier traffic by 5.94x on 128K-context tasks [arxiv.org#3].",
+    "Search-refine-reason: OThink-SRR1 adds a refinement step between retrieval and reasoning so documents are distilled into concise facts before inference; its GRPO-IR training rewards accurate evidence identification while penalizing excessive retrievals to improve focus and efficiency [arxiv.org#1].",
+    "External key-value injection: Knowledge Capsules compile structured nonparametric memories into attention-compatible key-value representations, letting external knowledge participate directly in attention instead of competing as plain-text tokens in the context window [arxiv.org#19]."
+  ],
+  "timeline": [
+    {
+      "content": "ChatGPT popularized consumer LLM use and exposed memory, safety challenges [common]",
+      "date": "November 2022",
+      "date_iso": "2022-11"
+    },
+    {
+      "content": "New papers reported advances in memory, retrieval and efficiency [arxiv.org#1][arxiv.org#3][arxiv.org#4]",
+      "date": "23 April 2026",
+      "date_iso": "2026-04-23"
+    },
+    {
+      "content": "Parallel studies flagged bias, hallucination and evaluation weaknesses [google.com#2][arxiv.org#11][arxiv.org#52]",
+      "date": "23 April 2026",
+      "date_iso": "2026-04-23"
+    }
+  ],
+  "title": "AI researchers target LLM memory, reasoning, and bias",
+  "unique_domains": 4,
+  "url": "https://news.google.com/atom/articles/CBMingFBVV95cUxOZWxOSVNkTEVHbWhOSUl0ZXB1TTVOb3FJUEpPUUxRb3NENTJlSmNMbEZ4NnI3SGVVenNEaDFhcGx3UTlzTTl4SEVkRHhIWndvaXpMZXRjUnZtT3FuLUliVTh3eWpsVVdoODlBU2duNmhVV0QwY09FZ2xJQ1Z3V3NVWDJDVVgyOWNObGFjM0tCWGdfdHhGVEZNR1BJa1FOdw",
+  "user_action_items": [
+    "Audit your AI stack for memory and evaluation gaps: If you deploy LLM applications, review whether they rely only on vector retrieval and single benchmark scores; several new studies suggest adding memory-specific tests, multilingual checks, and measurement-variance analysis before production rollouts [arxiv.org#7][arxiv.org#50][arxiv.org#87].",
+    "Test multilingual behavior separately: Run prompts and retrieval checks across target languages rather than assuming English performance will transfer, because new work found rerankers and cultural baselines can skew outputs by language and region [arxiv.org#12][arxiv.org#9].",
+    "Watch open benchmarks and code releases: Several papers released code or benchmarks for explainability, skill learning, threat hunting, and agent training, which can help teams compare systems on practical tasks instead of generic leaderboards [arxiv.org#8][arxiv.org#11][arxiv.org#63][arxiv.org#100]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
