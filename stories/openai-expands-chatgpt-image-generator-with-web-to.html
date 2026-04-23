@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>OpenAI expands ChatGPT image generator with web tools - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>OpenAI expands ChatGPT image generator with web tools</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>OpenAI has rolled out &quot;Images 2.0&quot; across ChatGPT and its API as gpt-image-2, and TestingCatalog says it is also available in Codex, adding web access, multi-image generation, and stronger text handling in generated visuals <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support" class="footnote-ref">[1]</a><a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>. The coverage in the provided sources describes the release as a notable upgrade aimed at making image creation more practical, with PCMag pointing to more realistic outputs and better background and text accuracy <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support" class="footnote-ref">[1]</a><a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.
+
+TestingCatalog says the new system has two operating modes, Instant and Thinking, with the latter able to reason through prompts, browse the web for references, and verify outputs before drawing <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>. The same source also highlights support for generating up to eight images in a batch and better consistency across multiple images, while PCMag emphasizes stronger rendering of background details and on-image text <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support" class="footnote-ref">[1]</a><a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>. PYMNTS, as reflected in the Google News title, describes the release as a meaningful leap that comes with a real price tag <a href="https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Before the official launch, observers tracked the model on LM Arena under codenames including Chestnut, Hazelnut, packingtape-alpha, maskingtape-alpha, and gaffertape-alpha <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Creative workflows: TestingCatalog said users can generate up to eight images in a batch while keeping style and characters consistent, opening the door to manga pages, comic strips, storyboards, and multi-scene marketing kits <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</li>
+
+<li>Text gains: PCMag and TestingCatalog both describe improved text handling as a key part of the upgrade, with PCMag specifically pointing to better background and text accuracy in generated images <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support" class="footnote-ref">[1]</a><a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</li>
+
+<li>Independent testing: Reddit users quickly started probing the model with informal evaluations such as an inline image demo and a &quot;President Test,&quot; showing early community interest in the new system <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1st8fdi/sharing_a_chatgpt_inline_images_demo_research/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>PCMag: PCMag framed the release as an upgrade focused on more realistic outputs, along with better background and text accuracy in generated images.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support">PCMag</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>TestingCatalog: TestingCatalog highlighted the system&#x27;s two-mode design, web-assisted reference gathering in Thinking mode, and its rollout to ChatGPT, Codex, and the API.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/">TestingCatalog</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>PYMNTS: In the Google News listing, PYMNTS described Images 2.0 as a real leap with a real price tag.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE">PYMNTS via Google News</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Early users: Reddit posts centered on hands-on probing, with users sharing demos and stress tests related to hallucinations and prompt behavior.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>December 2025:</strong> TestingCatalog said model tracking on LM Arena began under early codenames <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>21 April 2026:</strong> OpenAI officially launched Images 2.0 across products <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>22 April 2026:</strong> Media coverage highlighted web access, multi-image support, and improved image text handling <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support" class="footnote-ref">[1]</a><a href="https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE" class="footnote-ref">[2]</a><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFBBQngzdnQ3Q2JpNllWNUsyVEtiQUlUcUNGMFIzWUdjcm9HWGhGU2Y3bWZ1NU1ZTVFabmprZmcyNmNScEgzUUhJWU8wSWRjeU9IZVJHSy1SbjJlY2lYUE9GZXhNZTEtVUtxWmJLR3VWOUQzSGVMeVpQanZyVQ" class="footnote-ref">[5]</a></li>
+
+
+
+<li><strong>23 April 2026:</strong> Reddit users shared demos and hallucination tests after rollout <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1st8fdi/sharing_a_chatgpt_inline_images_demo_research/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/" class="footnote-ref">[4]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Instant and Thinking modes: TestingCatalog said the model ships with two execution modes: Instant for faster generation, and Thinking for prompts that need extra reasoning, reference gathering from the web, and self-checking before rendering <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</li>
+
+<li>Aspect ratio span: The supported canvas range reportedly stretches from 3:1 landscape to 1:3 portrait, which matters for banners, phone layouts, posters, and comic panels that need non-square compositions <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Text rendering has long been a weak spot for diffusion-based image generators, which often produced distorted letters or incoherent labels in posters, diagrams, and infographics [common]. OpenAI&#x27;s release follows months of quiet public model tracking on LM Arena under codenames such as Chestnut, Hazelnut, and later tape-themed aliases before the company formally launched the model on April 21, 2026 <a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test multilingual image prompts: If you use AI for slides, ads, or educational graphics, try the new generator with labels or captions in your target language to see whether the improved text rendering meets your needs <a href="https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support" class="footnote-ref">[1]</a><a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1st8fdi/sharing_a_chatgpt_inline_images_demo_research/">https://www.reddit.com/r/ArtificialInteligence/comments/1st8fdi/sharing_a_chatgpt_inline_images_demo_research/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE">https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE</a></li>
+
+
+
+<li><a href="https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/">https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/</a></li>
+
+
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/">https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTFBBQngzdnQ3Q2JpNllWNUsyVEtiQUlUcUNGMFIzWUdjcm9HWGhGU2Y3bWZ1NU1ZTVFabmprZmcyNmNScEgzUUhJWU8wSWRjeU9IZVJHSy1SbjJlY2lYUE9GZXhNZTEtVUtxWmJLR3VWOUQzSGVMeVpQanZyVQ">https://news.google.com/rss/articles/CBMie0FVX3lxTFBBQngzdnQ3Q2JpNllWNUsyVEtiQUlUcUNGMFIzWUdjcm9HWGhGU2Y3bWZ1NU1ZTVFabmprZmcyNmNScEgzUUhJWU8wSWRjeU9IZVJHSy1SbjJlY2lYUE9GZXhNZTEtVUtxWmJLR3VWOUQzSGVMeVpQanZyVQ</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, google.com, testingcatalog.com, pcmag.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 4 unique domains, 6 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": null,
+      "date": "2026-04-22T13:00:43+00:00",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support",
+      "title": "OpenAI Boosts ChatGPT\u0027s Image Generator With Web Access, Multi-Image Support"
+    },
+    {
+      "author": null,
+      "date": "2026-04-22T19:51:08+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE",
+      "title": "OpenAI Images 2.0 Is a Real Leap With a Real Price Tag - PYMNTS.com"
+    },
+    {
+      "author": "/u/National_Actuator_89",
+      "date": "2026-04-23T04:25:46+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1st8fdi/sharing_a_chatgpt_inline_images_demo_research/",
+      "title": "Sharing a ChatGPT Inline Images Demo + Research Conversation Log with an LLM (Taehwa)"
+    },
+    {
+      "author": "/u/LeoRiley6677",
+      "date": "2026-04-22T06:44:59+00:00",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/",
+      "title": "I spent a week running the \u0027President Test\u0027 on GPT-Image-2. Here is what its hallucinations reveal about OpenAI\u0027s reasoning architecture."
+    },
+    {
+      "author": null,
+      "date": "2026-04-22T09:01:57+00:00",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBBQngzdnQ3Q2JpNllWNUsyVEtiQUlUcUNGMFIzWUdjcm9HWGhGU2Y3bWZ1NU1ZTVFabmprZmcyNmNScEgzUUhJWU8wSWRjeU9IZVJHSy1SbjJlY2lYUE9GZXhNZTEtVUtxWmJLR3VWOUQzSGVMeVpQanZyVQ",
+      "title": "Hands-on with ChatGPT\u0027s powerful new image engine - Axios"
+    },
+    {
+      "author": "Alexey Shabanov",
+      "date": "2026-04-22T22:55:13+00:00",
+      "domain": "testingcatalog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/",
+      "title": "ICYMI: OpenAI launches Images 2.0 on ChatGPT, Codex, and API"
+    }
+  ],
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "Before the official launch, observers tracked the model on LM Arena under codenames including Chestnut, Hazelnut, packingtape-alpha, maskingtape-alpha, and gaffertape-alpha [testingcatalog.com#1].",
+  "domains": [
+    {
+      "favicon": "https://kagiproxy.com/img/HqOmM_n6oFctZvnoBU6TrlobrVoePfYz5EQJcrtP52fjM6i-4KHHa4zJiuIxGEfqZDCz69JUfq-_HowOR6SmWCITEttCBA2tjeDTGa1gbSo",
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/qeyOUvC1SFzYR-W9RNwFA59rnQMDlgGwEqIurU8UvVLZLYlqx4dr8eYH_V62HqgdZVTGzESRprPKRYxq8pDDIGba1vAUz2QnSh3VXbBE_NY",
+      "name": "google.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/Qsz3mwOx43s3lKfMUflD-4bw7yqgBsJ37X_XILjAG1jUiQ9TGe6yCnrn4PdxEn5u4lyRRcLgNDRuRkkzRgl83IdUSVZEDCf7qjFwdUqeW8rvHPocGEyfHg",
+      "name": "testingcatalog.com"
+    },
+    {
+      "favicon": "https://kagiproxy.com/img/zXdrS089t2muhhU9-b7C3XD1NElhK5mNwgOsX-RlOSkALS7ody6lg518X0RRSOBNRWiKy0dKqxBeZV3Npqkn9xrKM5G_UM9_d5T-39gbgg",
+      "name": "pcmag.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\uddbc\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Text rendering has long been a weak spot for diffusion-based image generators, which often produced distorted letters or incoherent labels in posters, diagrams, and infographics [common]. OpenAI\u0027s release follows months of quiet public model tracking on LM Arena under codenames such as Chestnut, Hazelnut, and later tape-themed aliases before the company formally launched the model on April 21, 2026 [testingcatalog.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Image Generation",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 6,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "PCMag",
+          "url": "https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support"
+        }
+      ],
+      "text": "PCMag: PCMag framed the release as an upgrade focused on more realistic outputs, along with better background and text accuracy in generated images."
+    },
+    {
+      "sources": [
+        {
+          "name": "TestingCatalog",
+          "url": "https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/"
+        }
+      ],
+      "text": "TestingCatalog: TestingCatalog highlighted the system\u0027s two-mode design, web-assisted reference gathering in Thinking mode, and its rollout to ChatGPT, Codex, and the API."
+    },
+    {
+      "sources": [
+        {
+          "name": "PYMNTS via Google News",
+          "url": "https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE"
+        }
+      ],
+      "text": "PYMNTS: In the Google News listing, PYMNTS described Images 2.0 as a real leap with a real price tag."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/"
+        }
+      ],
+      "text": "Early users: Reddit posts centered on hands-on probing, with users sharing demos and stress tests related to hallucinations and prompt behavior."
+    }
+  ],
+  "primary_image": null,
+  "published": 1776937348,
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "source_urls": [
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1st8fdi/sharing_a_chatgpt_inline_images_demo_research/",
+    "https://news.google.com/atom/articles/CBMirgFBVV95cUxNaUlKcjVoUDhibFplZ0NscXFqTmtmOHg0aUlXbUc0RnB0WXZ3VjZjV1BvMHFKMmVST2dXUm1sQU83eG9KaHpMZ3Mwc2FQbXNZcGdZcnBQSU5kNVBJMmh1UVBmZGV3T3NaTlVtWjJGNEtBbVJPQ2R0WjlsUnByYU5OV2ViNzhsdnpwSXhuYzR4aEdDUzBqZTYySVQtV21SMnRUbnEwSlhiSXFyU040OEE",
+    "https://www.testingcatalog.com/icymi-openai-launches-images-2-0-on-chatgpt-codex-and-api/",
+    "https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support",
+    "https://www.reddit.com/r/LLM/comments/1ssdn0v/i_spent_a_week_running_the_president_test_on/",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTFBBQngzdnQ3Q2JpNllWNUsyVEtiQUlUcUNGMFIzWUdjcm9HWGhGU2Y3bWZ1NU1ZTVFabmprZmcyNmNScEgzUUhJWU8wSWRjeU9IZVJHSy1SbjJlY2lYUE9GZXhNZTEtVUtxWmJLR3VWOUQzSGVMeVpQanZyVQ"
+  ],
+  "suggested_qna": [],
+  "summary": "OpenAI has rolled out \"Images 2.0\" across ChatGPT and its API as gpt-image-2, and TestingCatalog says it is also available in Codex, adding web access, multi-image generation, and stronger text handling in generated visuals [pcmag.com#1][testingcatalog.com#1]. The coverage in the provided sources describes the release as a notable upgrade aimed at making image creation more practical, with PCMag pointing to more realistic outputs and better background and text accuracy [pcmag.com#1][testingcatalog.com#1].\n\nTestingCatalog says the new system has two operating modes, Instant and Thinking, with the latter able to reason through prompts, browse the web for references, and verify outputs before drawing [testingcatalog.com#1]. The same source also highlights support for generating up to eight images in a batch and better consistency across multiple images, while PCMag emphasizes stronger rendering of background details and on-image text [pcmag.com#1][testingcatalog.com#1]. PYMNTS, as reflected in the Google News title, describes the release as a meaningful leap that comes with a real price tag [google.com#1].",
+  "talking_points": [
+    "Creative workflows: TestingCatalog said users can generate up to eight images in a batch while keeping style and characters consistent, opening the door to manga pages, comic strips, storyboards, and multi-scene marketing kits [testingcatalog.com#1].",
+    "Text gains: PCMag and TestingCatalog both describe improved text handling as a key part of the upgrade, with PCMag specifically pointing to better background and text accuracy in generated images [pcmag.com#1][testingcatalog.com#1].",
+    "Independent testing: Reddit users quickly started probing the model with informal evaluations such as an inline image demo and a \"President Test,\" showing early community interest in the new system [reddit.com#1][reddit.com#2]."
+  ],
+  "technical_details": [
+    "Instant and Thinking modes: TestingCatalog said the model ships with two execution modes: Instant for faster generation, and Thinking for prompts that need extra reasoning, reference gathering from the web, and self-checking before rendering [testingcatalog.com#1].",
+    "Aspect ratio span: The supported canvas range reportedly stretches from 3:1 landscape to 1:3 portrait, which matters for banners, phone layouts, posters, and comic panels that need non-square compositions [testingcatalog.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "TestingCatalog said model tracking on LM Arena began under early codenames [testingcatalog.com#1]",
+      "date": "December 2025",
+      "date_iso": "2025-12"
+    },
+    {
+      "content": "OpenAI officially launched Images 2.0 across products [testingcatalog.com#1]",
+      "date": "21 April 2026",
+      "date_iso": "2026-04-21"
+    },
+    {
+      "content": "Media coverage highlighted web access, multi-image support, and improved image text handling [pcmag.com#1][google.com#1][google.com#2]",
+      "date": "22 April 2026",
+      "date_iso": "2026-04-22"
+    },
+    {
+      "content": "Reddit users shared demos and hallucination tests after rollout [reddit.com#1][reddit.com#2]",
+      "date": "23 April 2026",
+      "date_iso": "2026-04-23"
+    }
+  ],
+  "title": "OpenAI expands ChatGPT image generator with web tools",
+  "unique_domains": 4,
+  "url": "https://www.pcmag.com/news/openai-boosts-chatgpts-image-generator-with-web-access-multi-image-support",
+  "user_action_items": [
+    "Test multilingual image prompts: If you use AI for slides, ads, or educational graphics, try the new generator with labels or captions in your target language to see whether the improved text rendering meets your needs [pcmag.com#1][testingcatalog.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://kite.kagi.com">Kagi Kite</a> data</p>
+    </footer>
+</body>
+</html>
