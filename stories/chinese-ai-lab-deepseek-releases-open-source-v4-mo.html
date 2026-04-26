@@ -245,19 +245,19 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 <h2>Key Points</h2><ul>
 
-<li>China stack: Huawei said its new Ascend 950PR and 950DT chips received day-zero adaptation for DeepSeek V4, underscoring tighter software-hardware integration across China’s AI ecosystem <a href="https://www.scmp.com/tech/big-tech/article/3351349/huawei-deepseek-strengthen-chinas-ai-self-reliance-collaboration-v4-model" class="footnote-ref">[25]</a>.</li>
-
-<li>Open access: Unlike the leading frontier models from OpenAI, Anthropic, and xAI, DeepSeek continues to make its flagship system downloadable and modifiable as an open model, according to multiple outlets <a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/" class="footnote-ref">[31]</a>.</li>
-
 <li>Model sizes: VentureBeat described V4-Pro as a 1.6 trillion-parameter model with 49 billion active parameters <a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a>.</li>
 
-<li>Developer controls: Both variants offer Thinking and Non-Thinking modes through the API, and DeepSeek added a reasoning_effort parameter so developers can tune how much deliberation the model uses for each task <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
-
-<li>Community reaction: An early Reddit post in r/LocalLLaMA captured a mixed response, noting less visible hype than around some earlier model launches despite DeepSeek releasing a 284B variant <a href="https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/" class="footnote-ref">[3]</a>.</li>
+<li>Local limits: Even with open weights, the largest files are still demanding to self-host. Simon Willison noted that Pro is about 865GB on Hugging Face and Flash about 160GB <a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything" class="footnote-ref">[15]</a>.</li>
 
 <li>Pricing gap: Mashable reported that DeepSeek V4 Preview costs about 85% less than GPT-5.5, while VentureBeat said V4-Pro API pricing is roughly one-sixth the cost of Anthropic Opus 4.7 and OpenAI GPT-5.5 under comparable usage assumptions <a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a>.</li>
 
-<li>Local limits: Even with open weights, the largest files are still demanding to self-host. Simon Willison noted that Pro is about 865GB on Hugging Face and Flash about 160GB <a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything" class="footnote-ref">[15]</a>.</li>
+<li>Open access: Unlike the leading frontier models from OpenAI, Anthropic, and xAI, DeepSeek continues to make its flagship system downloadable and modifiable as an open model, according to multiple outlets <a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/" class="footnote-ref">[31]</a>.</li>
+
+<li>China stack: Huawei said its new Ascend 950PR and 950DT chips received day-zero adaptation for DeepSeek V4, underscoring tighter software-hardware integration across China’s AI ecosystem <a href="https://www.scmp.com/tech/big-tech/article/3351349/huawei-deepseek-strengthen-chinas-ai-self-reliance-collaboration-v4-model" class="footnote-ref">[25]</a>.</li>
+
+<li>Community reaction: An early Reddit post in r/LocalLLaMA captured a mixed response, noting less visible hype than around some earlier model launches despite DeepSeek releasing a 284B variant <a href="https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/" class="footnote-ref">[3]</a>.</li>
+
+<li>Developer controls: Both variants offer Thinking and Non-Thinking modes through the API, and DeepSeek added a reasoning_effort parameter so developers can tune how much deliberation the model uses for each task <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
 
 <li>Model sizes: V4-Pro has 1.6 trillion total parameters with 49 billion active per token, while V4-Flash has 284 billion total parameters and 13 billion active <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a><a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything" class="footnote-ref">[15]</a>.</li>
 
@@ -439,17 +439,17 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 <h2>Technical Details</h2><ul>
 
-<li>MoE activation: The V4 line uses mixture-of-experts routing, so only a subset of parameters is active for each token; in V4-Pro, 49 billion of 1.6 trillion parameters are active per token, while Flash activates 13 billion of 284 billion <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
-
-<li>Ascend adaptation: Huawei’s day-zero support for V4 on Ascend 950PR and 950DT highlights compatibility with China’s domestic accelerator ecosystem at a time of tighter US semiconductor controls <a href="https://www.scmp.com/tech/big-tech/article/3351349/huawei-deepseek-strengthen-chinas-ai-self-reliance-collaboration-v4-model" class="footnote-ref">[25]</a><a href="https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html" class="footnote-ref">[27]</a>.</li>
+<li>Quantization path: AINews said deployment support includes FP4 and FP8 quantization and cited NVIDIA Blackwell Ultra hardware claims of more than 150 tokens per second per user for V4-serving configurations <a href="https://news.smol.ai/issues/26-04-24-deepseek-v4/" class="footnote-ref">[19]</a>.</li>
 
 <li>Sparse attention design: DeepSeek paired token-level compression with what it calls DeepSeek Sparse Attention, which it says cuts long-context compute and memory costs enough to make a 1 million-token window the default service setting <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
 
 <li>Mixture-of-experts design: VentureBeat described V4-Pro as a 1.6 trillion-parameter mixture-of-experts model with 49 billion active parameters, meaning only part of the network is engaged for each task to improve efficiency relative to its total size <a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a>.</li>
 
+<li>Ascend adaptation: Huawei’s day-zero support for V4 on Ascend 950PR and 950DT highlights compatibility with China’s domestic accelerator ecosystem at a time of tighter US semiconductor controls <a href="https://www.scmp.com/tech/big-tech/article/3351349/huawei-deepseek-strengthen-chinas-ai-self-reliance-collaboration-v4-model" class="footnote-ref">[25]</a><a href="https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html" class="footnote-ref">[27]</a>.</li>
+
 <li>Ultra-long context: DeepSeek said the V4 series supports up to 1 million tokens of context, matching the upper end of OpenAI’s recently announced GPT-5.5 range and allowing much larger documents or longer multi-turn sessions to stay in working memory <a href="https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html" class="footnote-ref">[21]</a><a href="https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/" class="footnote-ref">[8]</a>.</li>
 
-<li>Quantization path: AINews said deployment support includes FP4 and FP8 quantization and cited NVIDIA Blackwell Ultra hardware claims of more than 150 tokens per second per user for V4-serving configurations <a href="https://news.smol.ai/issues/26-04-24-deepseek-v4/" class="footnote-ref">[19]</a>.</li>
+<li>MoE activation: The V4 line uses mixture-of-experts routing, so only a subset of parameters is active for each token; in V4-Pro, 49 billion of 1.6 trillion parameters are active per token, while Flash activates 13 billion of 284 billion <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
 
 </ul>
 
@@ -458,19 +458,19 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 <h2>Industry Impact</h2><ul>
 
-<li>Open-source ecosystem: Because DeepSeek released V4 openly, developers can download and modify the model, potentially speeding up experimentation and third-party tooling around it <a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/" class="footnote-ref">[31]</a>.</li>
-
-<li>Enterprise software: Analysts cited by AFP said lower long-context costs could bring advanced document processing and agent workflows into broader commercial use, not just high-end labs <a href="https://www.dawn.com/news/1994658/chinas-deepseek-releases-long-awaited-new-ai-model" class="footnote-ref">[32]</a>.</li>
-
-<li>API competition: V4’s lower pricing puts direct pressure on commercial AI API markets, where OpenAI, Anthropic, and Google compete on both cost and capability <a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a><a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" class="footnote-ref">[2]</a>.</li>
-
 <li>Developer tooling: DeepSeek’s API accepts both OpenAI Chat Completions and Anthropic-format calls, which could reduce integration friction for existing software teams <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
-
-<li>Open-source competition: Coverage from TechCrunch, MIT Technology Review, and the New York Times framed V4 as more evidence that open-weight AI models, including those from China, are moving closer to frontier closed systems and increasing competitive pressure in the sector <a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" class="footnote-ref">[2]</a><a href="https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/" class="footnote-ref">[8]</a><a href="https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY" class="footnote-ref">[7]</a>.</li>
 
 <li>China semiconductors: DeepSeek’s support for Huawei Ascend chips gives China’s domestic accelerator ecosystem a visible flagship workload at a time of tighter US semiconductor controls <a href="https://www.scmp.com/tech/big-tech/article/3351349/huawei-deepseek-strengthen-chinas-ai-self-reliance-collaboration-v4-model" class="footnote-ref">[25]</a><a href="https://www.digitimes.com/news/a20260424VL216/deepseek-huawei-startup-development-competition.html" class="footnote-ref">[28]</a>.</li>
 
+<li>Open-source ecosystem: Because DeepSeek released V4 openly, developers can download and modify the model, potentially speeding up experimentation and third-party tooling around it <a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/" class="footnote-ref">[31]</a>.</li>
+
 <li>Inference economics: Independent commentary highlighted low published token prices as part of DeepSeek’s competitive positioning, especially for long-context and coding-related workflows <a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything" class="footnote-ref">[15]</a><a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
+
+<li>API competition: V4’s lower pricing puts direct pressure on commercial AI API markets, where OpenAI, Anthropic, and Google compete on both cost and capability <a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a><a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a><a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" class="footnote-ref">[2]</a>.</li>
+
+<li>Enterprise software: Analysts cited by AFP said lower long-context costs could bring advanced document processing and agent workflows into broader commercial use, not just high-end labs <a href="https://www.dawn.com/news/1994658/chinas-deepseek-releases-long-awaited-new-ai-model" class="footnote-ref">[32]</a>.</li>
+
+<li>Open-source competition: Coverage from TechCrunch, MIT Technology Review, and the New York Times framed V4 as more evidence that open-weight AI models, including those from China, are moving closer to frontier closed systems and increasing competitive pressure in the sector <a href="https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/" class="footnote-ref">[2]</a><a href="https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/" class="footnote-ref">[8]</a><a href="https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY" class="footnote-ref">[7]</a>.</li>
 
 </ul>
 
@@ -493,15 +493,15 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 <h2>Action Items</h2><ul>
 
+<li>Check hosting requirements: Before planning a local deployment, compare your available RAM and storage with the reported model sizes of about 160GB for Flash and 865GB for Pro <a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything" class="footnote-ref">[15]</a>.</li>
+
 <li>Test API compatibility: If you already use OpenAI- or Anthropic-style tooling, try V4 in a staging environment because DeepSeek says its API supports both formats <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a>.</li>
-
-<li>Review AI vendor exposure: Teams using paid AI APIs can recalculate project budgets using lower-cost alternatives such as DeepSeek V4 pricing and check whether open-source deployment fits their compliance needs <a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a><a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a>.</li>
-
-<li>Benchmark long-context tasks: Run your own coding or document-heavy prompts against V4’s 1 million-token context window to see whether the architecture improvements help your workflow <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a><a href="https://huggingface.co/blog/deepseekv4" class="footnote-ref">[4]</a>.</li>
 
 <li>Test an open-model workflow: Developers can compare DeepSeek V4 with proprietary models by trying DeepSeek’s chat service or downloading the open model from repositories, then benchmarking cost, latency, and output quality on their own tasks <a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/" class="footnote-ref">[31]</a><a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a><a href="https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html" class="footnote-ref">[21]</a>.</li>
 
-<li>Check hosting requirements: Before planning a local deployment, compare your available RAM and storage with the reported model sizes of about 160GB for Flash and 865GB for Pro <a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything" class="footnote-ref">[15]</a>.</li>
+<li>Benchmark long-context tasks: Run your own coding or document-heavy prompts against V4’s 1 million-token context window to see whether the architecture improvements help your workflow <a href="https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/" class="footnote-ref">[1]</a><a href="https://huggingface.co/blog/deepseekv4" class="footnote-ref">[4]</a>.</li>
+
+<li>Review AI vendor exposure: Teams using paid AI APIs can recalculate project budgets using lower-cost alternatives such as DeepSeek V4 pricing and check whether open-source deployment fits their compliance needs <a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5" class="footnote-ref">[33]</a><a href="https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini" class="footnote-ref">[24]</a>.</li>
 
 </ul>
 
@@ -512,39 +512,15 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 <p><strong>Additional Sources:</strong></p><ul>
 
 
-<li><a href="https://news.google.com/atom/articles/CBMidEFVX3lxTE55Y1R1d1JabXdTbW9oWVZ1bFdUckNlTFNfcDV6dDl0VHUyc1ZmSHd5dmZDN05vamtkb09tVEVVRV9jcWdtZ0FqNVFKV1BzSXhJOG5rMUNkencwUjU3STRWY0N4ZXAxeWRyY2w3NXFFRDJwRlJp">https://news.google.com/atom/articles/CBMidEFVX3lxTE55Y1R1d1JabXdTbW9oWVZ1bFdUckNlTFNfcDV6dDl0VHUyc1ZmSHd5dmZDN05vamtkb09tVEVVRV9jcWdtZ0FqNVFKV1BzSXhJOG5rMUNkencwUjU3STRWY0N4ZXAxeWRyY2w3NXFFRDJwRlJp</a></li>
+<li><a href="https://news.smol.ai/issues/26-04-24-deepseek-v4/">https://news.smol.ai/issues/26-04-24-deepseek-v4/</a></li>
 
 
 
-<li><a href="https://abcnews.com/Technology/wireStory/chinas-deepseek-rolls-long-anticipated-update-ai-model-132338216">https://abcnews.com/Technology/wireStory/chinas-deepseek-rolls-long-anticipated-update-ai-model-132338216</a></li>
-
-
-
-<li><a href="https://gizmodo.com/deepseeks-newest-models-take-on-silicon-valley-at-a-fraction-of-the-cost-2000750486">https://gizmodo.com/deepseeks-newest-models-take-on-silicon-valley-at-a-fraction-of-the-cost-2000750486</a></li>
+<li><a href="https://news.google.com/atom/articles/CBMikAFBVV95cUxPV3o3ajlmcGtrWElIYlRsNHpfdXVRNFV4MmNreTllcnJqVHluQTVjc0FLdHlmZ1plck45WTZsQzkzTkJWd0Y1WFN3Mkg5anM1eDFkUlFJR2ItcFB2Mld1Nk0zSm83Um5LOWYtWjd0UDA0VndHZGZweU0zOE96aC1hRWZRVDhWRnlOWVlCUEJVcXM">https://news.google.com/atom/articles/CBMikAFBVV95cUxPV3o3ajlmcGtrWElIYlRsNHpfdXVRNFV4MmNreTllcnJqVHluQTVjc0FLdHlmZ1plck45WTZsQzkzTkJWd0Y1WFN3Mkg5anM1eDFkUlFJR2ItcFB2Mld1Nk0zSm83Um5LOWYtWjd0UDA0VndHZGZweU0zOE96aC1hRWZRVDhWRnlOWVlCUEJVcXM</a></li>
 
 
 
 <li><a href="https://huggingface.co/blog/deepseekv4">https://huggingface.co/blog/deepseekv4</a></li>
-
-
-
-<li><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLXRWZ1ZVaXI5MDBqdWtjLWc0VFB4Y1hMRl84M0FCQ1haa3JvRjBNVnQtUzlxYm5lcm9ScUx3QXVPV2ZjcGoyRWo5Njk1NnEwdXVIZ09ScDd5aFpJLU1JblpObkRIbENvcFh4ZDl6ZkNSVHVuZW9nLUZzNFdiSThyVWlaeF9JeDlI">https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLXRWZ1ZVaXI5MDBqdWtjLWc0VFB4Y1hMRl84M0FCQ1haa3JvRjBNVnQtUzlxYm5lcm9ScUx3QXVPV2ZjcGoyRWo5Njk1NnEwdXVIZ09ScDd5aFpJLU1JblpObkRIbENvcFh4ZDl6ZkNSVHVuZW9nLUZzNFdiSThyVWlaeF9JeDlI</a></li>
-
-
-
-<li><a href="https://news.google.com/atom/articles/CBMisgFBVV95cUxQYlBaam5rSExHaXJZZEM3WjgydGtwVjJpNjFBY2lkOElwbUEzZS1hSDZVRW9tbVFCdFlfck5iNGJYc21mSTBSbVB1UTREbExCUEFqdDlmZjZiRjh6eVlvTUotTTlPNUcxdUJZWWNUemhGQXVqVmtvdUJZWGJ5V3pLUzNQYlIzWnIzcnFmNFZMbkJxTVZ0Q0xaRzZDRkIzdzZHZmlkMGpZdml3enNNX010dW5B">https://news.google.com/atom/articles/CBMisgFBVV95cUxQYlBaam5rSExHaXJZZEM3WjgydGtwVjJpNjFBY2lkOElwbUEzZS1hSDZVRW9tbVFCdFlfck5iNGJYc21mSTBSbVB1UTREbExCUEFqdDlmZjZiRjh6eVlvTUotTTlPNUcxdUJZWWNUemhGQXVqVmtvdUJZWGJ5V3pLUzNQYlIzWnIzcnFmNFZMbkJxTVZ0Q0xaRzZDRkIzdzZHZmlkMGpZdml3enNNX010dW5B</a></li>
-
-
-
-<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/">https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/</a></li>
-
-
-
-<li><a href="https://news.google.com/atom/articles/CBMipAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuS9IBpAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuSw">https://news.google.com/atom/articles/CBMipAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuS9IBpAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuSw</a></li>
-
-
-
-<li><a href="https://news.google.com/atom/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ">https://news.google.com/atom/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ</a></li>
 
 
 
@@ -556,35 +532,23 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 
 
+<li><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLXRWZ1ZVaXI5MDBqdWtjLWc0VFB4Y1hMRl84M0FCQ1haa3JvRjBNVnQtUzlxYm5lcm9ScUx3QXVPV2ZjcGoyRWo5Njk1NnEwdXVIZ09ScDd5aFpJLU1JblpObkRIbENvcFh4ZDl6ZkNSVHVuZW9nLUZzNFdiSThyVWlaeF9JeDlI">https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLXRWZ1ZVaXI5MDBqdWtjLWc0VFB4Y1hMRl84M0FCQ1haa3JvRjBNVnQtUzlxYm5lcm9ScUx3QXVPV2ZjcGoyRWo5Njk1NnEwdXVIZ09ScDd5aFpJLU1JblpObkRIbENvcFh4ZDl6ZkNSVHVuZW9nLUZzNFdiSThyVWlaeF9JeDlI</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/">https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMidEFVX3lxTE55Y1R1d1JabXdTbW9oWVZ1bFdUckNlTFNfcDV6dDl0VHUyc1ZmSHd5dmZDN05vamtkb09tVEVVRV9jcWdtZ0FqNVFKV1BzSXhJOG5rMUNkencwUjU3STRWY0N4ZXAxeWRyY2w3NXFFRDJwRlJp">https://news.google.com/atom/articles/CBMidEFVX3lxTE55Y1R1d1JabXdTbW9oWVZ1bFdUckNlTFNfcDV6dDl0VHUyc1ZmSHd5dmZDN05vamtkb09tVEVVRV9jcWdtZ0FqNVFKV1BzSXhJOG5rMUNkencwUjU3STRWY0N4ZXAxeWRyY2w3NXFFRDJwRlJp</a></li>
+
+
+
 <li><a href="https://www.techrepublic.com/article/news-apac-deepseek-v4-ai-model-huawei-ascend-chips-support/">https://www.techrepublic.com/article/news-apac-deepseek-v4-ai-model-huawei-ascend-chips-support/</a></li>
 
 
 
-<li><a href="https://go.theregister.com/feed/www.theregister.com/2026/04/24/deepseek_v4/">https://go.theregister.com/feed/www.theregister.com/2026/04/24/deepseek_v4/</a></li>
-
-
-
-<li><a href="https://news.google.com/atom/articles/CBMikAFBVV95cUxPV3o3ajlmcGtrWElIYlRsNHpfdXVRNFV4MmNreTllcnJqVHluQTVjc0FLdHlmZ1plck45WTZsQzkzTkJWd0Y1WFN3Mkg5anM1eDFkUlFJR2ItcFB2Mld1Nk0zSm83Um5LOWYtWjd0UDA0VndHZGZweU0zOE96aC1hRWZRVDhWRnlOWVlCUEJVcXM">https://news.google.com/atom/articles/CBMikAFBVV95cUxPV3o3ajlmcGtrWElIYlRsNHpfdXVRNFV4MmNreTllcnJqVHluQTVjc0FLdHlmZ1plck45WTZsQzkzTkJWd0Y1WFN3Mkg5anM1eDFkUlFJR2ItcFB2Mld1Nk0zSm83Um5LOWYtWjd0UDA0VndHZGZweU0zOE96aC1hRWZRVDhWRnlOWVlCUEJVcXM</a></li>
-
-
-
-<li><a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything">https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything</a></li>
-
-
-
-<li><a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5">https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5</a></li>
-
-
-
-<li><a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/">https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/</a></li>
-
-
-
-<li><a href="https://news.smol.ai/issues/26-04-24-deepseek-v4/">https://news.smol.ai/issues/26-04-24-deepseek-v4/</a></li>
-
-
-
-<li><a href="https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/">https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/</a></li>
+<li><a href="https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html">https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html</a></li>
 
 
 
@@ -592,7 +556,53 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 
 
+<li><a href="https://news.google.com/atom/articles/CBMiqgFBVV95cUxPWTkwWkktandzT2ZKZTFpNVM5czRCYm8zZkpHblJra043c2xmUUpWV0NVZWpLZ1hNNFZWMTd4MFZNTF9saXhWYlJDY2djUGd1SUJONU8zSW13czRzUlFvWktoeW9CWlpJcmFFdGtnSGZzanNsM3REWk55V3FZMjlHUjROVFJ4LVlaU2stcUY4YWpoWDZWcHFLbThwTnpxZlZGV0x3VHhWVWpsdw">https://news.google.com/atom/articles/CBMiqgFBVV95cUxPWTkwWkktandzT2ZKZTFpNVM5czRCYm8zZkpHblJra043c2xmUUpWV0NVZWpLZ1hNNFZWMTd4MFZNTF9saXhWYlJDY2djUGd1SUJONU8zSW13czRzUlFvWktoeW9CWlpJcmFFdGtnSGZzanNsM3REWk55V3FZMjlHUjROVFJ4LVlaU2stcUY4YWpoWDZWcHFLbThwTnpxZlZGV0x3VHhWVWpsdw</a></li>
+
+
+
+<li><a href="https://gizmodo.com/deepseeks-newest-models-take-on-silicon-valley-at-a-fraction-of-the-cost-2000750486">https://gizmodo.com/deepseeks-newest-models-take-on-silicon-valley-at-a-fraction-of-the-cost-2000750486</a></li>
+
+
+
+<li><a href="https://go.theregister.com/feed/www.theregister.com/2026/04/24/deepseek_v4/">https://go.theregister.com/feed/www.theregister.com/2026/04/24/deepseek_v4/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY">https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxOdUV3NjlpMjhla3JxZjZpWkt6LS1WZEtQaDJrUFd5SF9OWjI2LVpvT29ydF9pTndnZ0twWG9JSGJNdEVKT2p0bjlfNDYxSHktVWJGTU12dklqQ0hNZ0RFS3d1VmhVUGRtay03bW93UG1hczlHOWhWeU43LUx1S1FpTWtUZzJHODhUeFJB">https://news.google.com/atom/articles/CBMiiwFBVV95cUxOdUV3NjlpMjhla3JxZjZpWkt6LS1WZEtQaDJrUFd5SF9OWjI2LVpvT29ydF9pTndnZ0twWG9JSGJNdEVKT2p0bjlfNDYxSHktVWJGTU12dklqQ0hNZ0RFS3d1VmhVUGRtay03bW93UG1hczlHOWhWeU43LUx1S1FpTWtUZzJHODhUeFJB</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMikwFBVV95cUxOSFBFV0VKVTFJUEJmemU1VE4yVUVtdGU3R3U2OHNfWkZZdHJJWkZuSnFrZnhxZWZkaXBXVk5BcG1TV2pnSExkYTBlbjhGNENsR3RLamFwTk5hZ0dKODhNbUxJWjd5NXRpV1ZsbS1BdUNMc0QwZEN5aVN0RlB0a0c5Z3RmZzZaamE4c1JYUzJ6aFJGdjQ">https://news.google.com/atom/articles/CBMikwFBVV95cUxOSFBFV0VKVTFJUEJmemU1VE4yVUVtdGU3R3U2OHNfWkZZdHJJWkZuSnFrZnhxZWZkaXBXVk5BcG1TV2pnSExkYTBlbjhGNENsR3RLamFwTk5hZ0dKODhNbUxJWjd5NXRpV1ZsbS1BdUNMc0QwZEN5aVN0RlB0a0c5Z3RmZzZaamE4c1JYUzJ6aFJGdjQ</a></li>
+
+
+
+<li><a href="https://abcnews.com/Technology/wireStory/chinas-deepseek-rolls-long-anticipated-update-ai-model-132338216">https://abcnews.com/Technology/wireStory/chinas-deepseek-rolls-long-anticipated-update-ai-model-132338216</a></li>
+
+
+
+<li><a href="https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html">https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html</a></li>
+
+
+
 <li><a href="https://news.google.com/atom/articles/CBMilwFBVV95cUxQaHhOZ0ctZEUwZlBFaGRGMDZNTkY3X2IxRWpoN18zR0tXNVhJYzdscHpxakpkVG9Za1ltZTg3T2V1UVc2T2pSY2kwUzNhSEtHUFJ2dVRNdkIxUk5iaTJfNWwzTlg3dzh6cjgxdGZUWTc3VGRaaWM2TVNGb1ljel83bHdNejQxYUF3dElsb0RCVlZ5M0VibjVZ">https://news.google.com/atom/articles/CBMilwFBVV95cUxQaHhOZ0ctZEUwZlBFaGRGMDZNTkY3X2IxRWpoN18zR0tXNVhJYzdscHpxakpkVG9Za1ltZTg3T2V1UVc2T2pSY2kwUzNhSEtHUFJ2dVRNdkIxUk5iaTJfNWwzTlg3dzh6cjgxdGZUWTc3VGRaaWM2TVNGb1ljel83bHdNejQxYUF3dElsb0RCVlZ5M0VibjVZ</a></li>
+
+
+
+<li><a href="https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/">https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/</a></li>
+
+
+
+
+
+<li><a href="https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything">https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMipAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuS9IBpAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuSw">https://news.google.com/atom/articles/CBMipAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuS9IBpAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuSw</a></li>
 
 
 
@@ -600,11 +610,23 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 
 
+<li><a href="https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5">https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5</a></li>
+
+
+
+<li><a href="https://www.siliconrepublic.com/machines/chinas-deepseek-unveils-long-awaited-v4-ai-model">https://www.siliconrepublic.com/machines/chinas-deepseek-unveils-long-awaited-v4-ai-model</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMisgFBVV95cUxQYlBaam5rSExHaXJZZEM3WjgydGtwVjJpNjFBY2lkOElwbUEzZS1hSDZVRW9tbVFCdFlfck5iNGJYc21mSTBSbVB1UTREbExCUEFqdDlmZjZiRjh6eVlvTUotTTlPNUcxdUJZWWNUemhGQXVqVmtvdUJZWGJ5V3pLUzNQYlIzWnIzcnFmNFZMbkJxTVZ0Q0xaRzZDRkIzdzZHZmlkMGpZdml3enNNX010dW5B">https://news.google.com/atom/articles/CBMisgFBVV95cUxQYlBaam5rSExHaXJZZEM3WjgydGtwVjJpNjFBY2lkOElwbUEzZS1hSDZVRW9tbVFCdFlfck5iNGJYc21mSTBSbVB1UTREbExCUEFqdDlmZjZiRjh6eVlvTUotTTlPNUcxdUJZWWNUemhGQXVqVmtvdUJZWGJ5V3pLUzNQYlIzWnIzcnFmNFZMbkJxTVZ0Q0xaRzZDRkIzdzZHZmlkMGpZdml3enNNX010dW5B</a></li>
+
+
+
 <li><a href="https://www.digitimes.com/news/a20260424VL216/deepseek-huawei-startup-development-competition.html">https://www.digitimes.com/news/a20260424VL216/deepseek-huawei-startup-development-competition.html</a></li>
 
 
 
-<li><a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxOdUV3NjlpMjhla3JxZjZpWkt6LS1WZEtQaDJrUFd5SF9OWjI2LVpvT29ydF9pTndnZ0twWG9JSGJNdEVKT2p0bjlfNDYxSHktVWJGTU12dklqQ0hNZ0RFS3d1VmhVUGRtay03bW93UG1hczlHOWhWeU43LUx1S1FpTWtUZzJHODhUeFJB">https://news.google.com/atom/articles/CBMiiwFBVV95cUxOdUV3NjlpMjhla3JxZjZpWkt6LS1WZEtQaDJrUFd5SF9OWjI2LVpvT29ydF9pTndnZ0twWG9JSGJNdEVKT2p0bjlfNDYxSHktVWJGTU12dklqQ0hNZ0RFS3d1VmhVUGRtay03bW93UG1hczlHOWhWeU43LUx1S1FpTWtUZzJHODhUeFJB</a></li>
+<li><a href="https://news.google.com/atom/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ">https://news.google.com/atom/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ</a></li>
 
 
 
@@ -616,29 +638,7 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
 
 
 
-<li><a href="https://news.google.com/atom/articles/CBMiqgFBVV95cUxPWTkwWkktandzT2ZKZTFpNVM5czRCYm8zZkpHblJra043c2xmUUpWV0NVZWpLZ1hNNFZWMTd4MFZNTF9saXhWYlJDY2djUGd1SUJONU8zSW13czRzUlFvWktoeW9CWlpJcmFFdGtnSGZzanNsM3REWk55V3FZMjlHUjROVFJ4LVlaU2stcUY4YWpoWDZWcHFLbThwTnpxZlZGV0x3VHhWVWpsdw">https://news.google.com/atom/articles/CBMiqgFBVV95cUxPWTkwWkktandzT2ZKZTFpNVM5czRCYm8zZkpHblJra043c2xmUUpWV0NVZWpLZ1hNNFZWMTd4MFZNTF9saXhWYlJDY2djUGd1SUJONU8zSW13czRzUlFvWktoeW9CWlpJcmFFdGtnSGZzanNsM3REWk55V3FZMjlHUjROVFJ4LVlaU2stcUY4YWpoWDZWcHFLbThwTnpxZlZGV0x3VHhWVWpsdw</a></li>
-
-
-
-
-
-<li><a href="https://news.google.com/atom/articles/CBMikwFBVV95cUxOSFBFV0VKVTFJUEJmemU1VE4yVUVtdGU3R3U2OHNfWkZZdHJJWkZuSnFrZnhxZWZkaXBXVk5BcG1TV2pnSExkYTBlbjhGNENsR3RLamFwTk5hZ0dKODhNbUxJWjd5NXRpV1ZsbS1BdUNMc0QwZEN5aVN0RlB0a0c5Z3RmZzZaamE4c1JYUzJ6aFJGdjQ">https://news.google.com/atom/articles/CBMikwFBVV95cUxOSFBFV0VKVTFJUEJmemU1VE4yVUVtdGU3R3U2OHNfWkZZdHJJWkZuSnFrZnhxZWZkaXBXVk5BcG1TV2pnSExkYTBlbjhGNENsR3RLamFwTk5hZ0dKODhNbUxJWjd5NXRpV1ZsbS1BdUNMc0QwZEN5aVN0RlB0a0c5Z3RmZzZaamE4c1JYUzJ6aFJGdjQ</a></li>
-
-
-
-<li><a href="https://www.siliconrepublic.com/machines/chinas-deepseek-unveils-long-awaited-v4-ai-model">https://www.siliconrepublic.com/machines/chinas-deepseek-unveils-long-awaited-v4-ai-model</a></li>
-
-
-
-<li><a href="https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html">https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html</a></li>
-
-
-
-<li><a href="https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html">https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html</a></li>
-
-
-
-<li><a href="https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY">https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY</a></li>
+<li><a href="https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/">https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/</a></li>
 
 
 </ul>
@@ -1172,13 +1172,13 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
   "historical_background": "DeepSeek\u2019s previous major model generation was V3.2, released in December, making V4 its first major architecture refresh since then [simonwillison.net#1][smol.ai#1]. The company had been expected to release V4 earlier in 2026, but TestingCatalog said earlier February and March target windows slipped before the April 24 preview arrived [testingcatalog.com#1]. The broader backdrop is the rapid rise of open-weight large language models, with labs in China and elsewhere increasingly using open releases to challenge closed-model leaders [technologyreview.com#1][google.com#3].",
   "humanitarian_impact": "",
   "industry_impact": [
-    "Open-source ecosystem: Because DeepSeek released V4 openly, developers can download and modify the model, potentially speeding up experimentation and third-party tooling around it [mashable.com#1][technode.com#1].",
-    "Enterprise software: Analysts cited by AFP said lower long-context costs could bring advanced document processing and agent workflows into broader commercial use, not just high-end labs [dawn.com#1].",
-    "API competition: V4\u2019s lower pricing puts direct pressure on commercial AI API markets, where OpenAI, Anthropic, and Google compete on both cost and capability [venturebeat.com#1][mashable.com#1][techcrunch.com#1].",
     "Developer tooling: DeepSeek\u2019s API accepts both OpenAI Chat Completions and Anthropic-format calls, which could reduce integration friction for existing software teams [testingcatalog.com#1].",
-    "Open-source competition: Coverage from TechCrunch, MIT Technology Review, and the New York Times framed V4 as more evidence that open-weight AI models, including those from China, are moving closer to frontier closed systems and increasing competitive pressure in the sector [techcrunch.com#1][technologyreview.com#1][google.com#3].",
     "China semiconductors: DeepSeek\u2019s support for Huawei Ascend chips gives China\u2019s domestic accelerator ecosystem a visible flagship workload at a time of tighter US semiconductor controls [scmp.com#1][digitimes.com#1].",
-    "Inference economics: Independent commentary highlighted low published token prices as part of DeepSeek\u2019s competitive positioning, especially for long-context and coding-related workflows [simonwillison.net#1][testingcatalog.com#1]."
+    "Open-source ecosystem: Because DeepSeek released V4 openly, developers can download and modify the model, potentially speeding up experimentation and third-party tooling around it [mashable.com#1][technode.com#1].",
+    "Inference economics: Independent commentary highlighted low published token prices as part of DeepSeek\u2019s competitive positioning, especially for long-context and coding-related workflows [simonwillison.net#1][testingcatalog.com#1].",
+    "API competition: V4\u2019s lower pricing puts direct pressure on commercial AI API markets, where OpenAI, Anthropic, and Google compete on both cost and capability [venturebeat.com#1][mashable.com#1][techcrunch.com#1].",
+    "Enterprise software: Analysts cited by AFP said lower long-context costs could bring advanced document processing and agent workflows into broader commercial use, not just high-end labs [dawn.com#1].",
+    "Open-source competition: Coverage from TechCrunch, MIT Technology Review, and the New York Times framed V4 as more evidence that open-weight AI models, including those from China, are moving closer to frontier closed systems and increasing competitive pressure in the sector [techcrunch.com#1][technologyreview.com#1][google.com#3]."
   ],
   "international_reactions": [
     "\ud83c\uddfa\ud83c\uddf8 United States: Some US federal agencies previously banned DeepSeek on government-owned devices over national security concerns, according to Engadget [engadget.com#1].",
@@ -1284,59 +1284,59 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
   "quote_author": "Kyle Wiggers",
   "scientific_significance": [],
   "source_urls": [
-    "https://news.google.com/atom/articles/CBMidEFVX3lxTE55Y1R1d1JabXdTbW9oWVZ1bFdUckNlTFNfcDV6dDl0VHUyc1ZmSHd5dmZDN05vamtkb09tVEVVRV9jcWdtZ0FqNVFKV1BzSXhJOG5rMUNkencwUjU3STRWY0N4ZXAxeWRyY2w3NXFFRDJwRlJp",
-    "https://abcnews.com/Technology/wireStory/chinas-deepseek-rolls-long-anticipated-update-ai-model-132338216",
-    "https://gizmodo.com/deepseeks-newest-models-take-on-silicon-valley-at-a-fraction-of-the-cost-2000750486",
+    "https://news.smol.ai/issues/26-04-24-deepseek-v4/",
+    "https://news.google.com/atom/articles/CBMikAFBVV95cUxPV3o3ajlmcGtrWElIYlRsNHpfdXVRNFV4MmNreTllcnJqVHluQTVjc0FLdHlmZ1plck45WTZsQzkzTkJWd0Y1WFN3Mkg5anM1eDFkUlFJR2ItcFB2Mld1Nk0zSm83Um5LOWYtWjd0UDA0VndHZGZweU0zOE96aC1hRWZRVDhWRnlOWVlCUEJVcXM",
     "https://huggingface.co/blog/deepseekv4",
-    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLXRWZ1ZVaXI5MDBqdWtjLWc0VFB4Y1hMRl84M0FCQ1haa3JvRjBNVnQtUzlxYm5lcm9ScUx3QXVPV2ZjcGoyRWo5Njk1NnEwdXVIZ09ScDd5aFpJLU1JblpObkRIbENvcFh4ZDl6ZkNSVHVuZW9nLUZzNFdiSThyVWlaeF9JeDlI",
-    "https://news.google.com/atom/articles/CBMisgFBVV95cUxQYlBaam5rSExHaXJZZEM3WjgydGtwVjJpNjFBY2lkOElwbUEzZS1hSDZVRW9tbVFCdFlfck5iNGJYc21mSTBSbVB1UTREbExCUEFqdDlmZjZiRjh6eVlvTUotTTlPNUcxdUJZWWNUemhGQXVqVmtvdUJZWGJ5V3pLUzNQYlIzWnIzcnFmNFZMbkJxTVZ0Q0xaRzZDRkIzdzZHZmlkMGpZdml3enNNX010dW5B",
-    "https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/",
-    "https://news.google.com/atom/articles/CBMipAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuS9IBpAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuSw",
-    "https://news.google.com/atom/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ",
     "https://www.dawn.com/news/1994658/chinas-deepseek-releases-long-awaited-new-ai-model",
     "https://www.chinatechnews.com/2026/04/25/120485-chinas-deepseek-rolls-out-a-long-anticipated-update-of-its-ai-model",
+    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNLXRWZ1ZVaXI5MDBqdWtjLWc0VFB4Y1hMRl84M0FCQ1haa3JvRjBNVnQtUzlxYm5lcm9ScUx3QXVPV2ZjcGoyRWo5Njk1NnEwdXVIZ09ScDd5aFpJLU1JblpObkRIbENvcFh4ZDl6ZkNSVHVuZW9nLUZzNFdiSThyVWlaeF9JeDlI",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1sv4ci5/is_deepseek_v4_really_out/",
+    "https://news.google.com/atom/articles/CBMidEFVX3lxTE55Y1R1d1JabXdTbW9oWVZ1bFdUckNlTFNfcDV6dDl0VHUyc1ZmSHd5dmZDN05vamtkb09tVEVVRV9jcWdtZ0FqNVFKV1BzSXhJOG5rMUNkencwUjU3STRWY0N4ZXAxeWRyY2w3NXFFRDJwRlJp",
     "https://www.techrepublic.com/article/news-apac-deepseek-v4-ai-model-huawei-ascend-chips-support/",
-    "https://go.theregister.com/feed/www.theregister.com/2026/04/24/deepseek_v4/",
-    "https://news.google.com/atom/articles/CBMikAFBVV95cUxPV3o3ajlmcGtrWElIYlRsNHpfdXVRNFV4MmNreTllcnJqVHluQTVjc0FLdHlmZ1plck45WTZsQzkzTkJWd0Y1WFN3Mkg5anM1eDFkUlFJR2ItcFB2Mld1Nk0zSm83Um5LOWYtWjd0UDA0VndHZGZweU0zOE96aC1hRWZRVDhWRnlOWVlCUEJVcXM",
-    "https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything",
-    "https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5",
-    "https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/",
-    "https://news.smol.ai/issues/26-04-24-deepseek-v4/",
-    "https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/",
+    "https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html",
     "https://news.google.com/atom/articles/CBMifkFVX3lxTE1HV2liRWlDR0N2QUQwbXNVR0kwamV5c0tjc3QwQWk1ekJOcXJGUzRVc2k2dmlnTUo1Vk16SzR0dDRrWHc4cUpIZUZrR29sTGpmUU9CZTVDTkV4enN5UUR1WjRsZm5tYnZGSjFJbkphdEMxOHl2M3QzNXFvY05Qdw",
-    "https://news.google.com/atom/articles/CBMilwFBVV95cUxQaHhOZ0ctZEUwZlBFaGRGMDZNTkY3X2IxRWpoN18zR0tXNVhJYzdscHpxakpkVG9Za1ltZTg3T2V1UVc2T2pSY2kwUzNhSEtHUFJ2dVRNdkIxUk5iaTJfNWwzTlg3dzh6cjgxdGZUWTc3VGRaaWM2TVNGb1ljel83bHdNejQxYUF3dElsb0RCVlZ5M0VibjVZ",
-    "https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/",
-    "https://www.digitimes.com/news/a20260424VL216/deepseek-huawei-startup-development-competition.html",
+    "https://news.google.com/atom/articles/CBMiqgFBVV95cUxPWTkwWkktandzT2ZKZTFpNVM5czRCYm8zZkpHblJra043c2xmUUpWV0NVZWpLZ1hNNFZWMTd4MFZNTF9saXhWYlJDY2djUGd1SUJONU8zSW13czRzUlFvWktoeW9CWlpJcmFFdGtnSGZzanNsM3REWk55V3FZMjlHUjROVFJ4LVlaU2stcUY4YWpoWDZWcHFLbThwTnpxZlZGV0x3VHhWVWpsdw",
+    "https://gizmodo.com/deepseeks-newest-models-take-on-silicon-valley-at-a-fraction-of-the-cost-2000750486",
+    "https://go.theregister.com/feed/www.theregister.com/2026/04/24/deepseek_v4/",
+    "https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY",
     "https://news.google.com/atom/articles/CBMiiwFBVV95cUxOdUV3NjlpMjhla3JxZjZpWkt6LS1WZEtQaDJrUFd5SF9OWjI2LVpvT29ydF9pTndnZ0twWG9JSGJNdEVKT2p0bjlfNDYxSHktVWJGTU12dklqQ0hNZ0RFS3d1VmhVUGRtay03bW93UG1hczlHOWhWeU43LUx1S1FpTWtUZzJHODhUeFJB",
+    "https://news.google.com/atom/articles/CBMikwFBVV95cUxOSFBFV0VKVTFJUEJmemU1VE4yVUVtdGU3R3U2OHNfWkZZdHJJWkZuSnFrZnhxZWZkaXBXVk5BcG1TV2pnSExkYTBlbjhGNENsR3RLamFwTk5hZ0dKODhNbUxJWjd5NXRpV1ZsbS1BdUNMc0QwZEN5aVN0RlB0a0c5Z3RmZzZaamE4c1JYUzJ6aFJGdjQ",
+    "https://abcnews.com/Technology/wireStory/chinas-deepseek-rolls-long-anticipated-update-ai-model-132338216",
+    "https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html",
+    "https://news.google.com/atom/articles/CBMilwFBVV95cUxQaHhOZ0ctZEUwZlBFaGRGMDZNTkY3X2IxRWpoN18zR0tXNVhJYzdscHpxakpkVG9Za1ltZTg3T2V1UVc2T2pSY2kwUzNhSEtHUFJ2dVRNdkIxUk5iaTJfNWwzTlg3dzh6cjgxdGZUWTc3VGRaaWM2TVNGb1ljel83bHdNejQxYUF3dElsb0RCVlZ5M0VibjVZ",
+    "https://technode.com/2026/04/24/deepseek-v4-preview-now-available-with-open-source-access/",
+    "https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/",
+    "https://simonwillison.net/2026/Apr/24/deepseek-v4/#atom-everything",
+    "https://news.google.com/atom/articles/CBMipAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuS9IBpAFBVV95cUxNZnZwTTZrYzk5U1pFLXB0cUxFYUlJTXc5MUF3alV2MU1ZSFVWdS1TM3VHbWw1MDJMSXpVbFBteDNjZFM1VUZieDQyTWxNNndmanJFSVBnSXpUenNEaWQ5YW1jRkl5a1FCRnZtMlNPN3I3WHdtY0JzQVBmem1lc0hDZW9NV3prWXQtbm9samZqNGRpQTFYRkJwanpESEp6Y3I5dmhuSw",
+    "https://techcrunch.com/2026/04/24/deepseek-previews-new-ai-model-that-closes-the-gap-with-frontier-models/",
+    "https://venturebeat.com/technology/deepseek-v4-arrives-with-near-state-of-the-art-intelligence-at-1-6th-the-cost-of-opus-4-7-gpt-5-5",
+    "https://www.siliconrepublic.com/machines/chinas-deepseek-unveils-long-awaited-v4-ai-model",
+    "https://news.google.com/atom/articles/CBMisgFBVV95cUxQYlBaam5rSExHaXJZZEM3WjgydGtwVjJpNjFBY2lkOElwbUEzZS1hSDZVRW9tbVFCdFlfck5iNGJYc21mSTBSbVB1UTREbExCUEFqdDlmZjZiRjh6eVlvTUotTTlPNUcxdUJZWWNUemhGQXVqVmtvdUJZWGJ5V3pLUzNQYlIzWnIzcnFmNFZMbkJxTVZ0Q0xaRzZDRkIzdzZHZmlkMGpZdml3enNNX010dW5B",
+    "https://www.digitimes.com/news/a20260424VL216/deepseek-huawei-startup-development-competition.html",
+    "https://news.google.com/atom/articles/CBMimAFBVV95cUxPd3BGX1RVY2NmcVZoZnpqQ0hDTmdhem9nVE5wLWlKN2lIYzNuVjJtUjdqeU9oWWIxVjY4WG1BU0ctMm5VNURWZmhnU05IQTVnakRJUFJSeHI5dFB0WThCb1h1Q2Fnb3k5aUwyTUd6NEZ3bU1LRWs5OHZvTi1MQlJpVzNMbnRzcDd6UkZxdFlsX0FycjU5SVc4ONIBngFBVV95cUxQWWFDRGp5MGRYM2FYZ0lvN0Y5cTVOSm56QmZQeENWTzdUQzVXOVZIQjVZZy1OcnJLeEFzSklFVEpWdWV6d05POWktN2JIbkJzQnhSZDdtRm1VQzBEbjR3ZjNyQ0VjSkVpenFrWGM5MnFWdndlVTg5OGgwMUpJa0RONnF2em9hdGhycjNGdmpmZHlQSEdudTMyRm1mdjVQUQ",
     "https://mashable.com/article/deepseek-v4-preview-comparison-chatgpt-claude-gemini",
     "https://www.scmp.com/tech/big-tech/article/3351349/huawei-deepseek-strengthen-chinas-ai-self-reliance-collaboration-v4-model",
-    "https://news.google.com/atom/articles/CBMiqgFBVV95cUxPWTkwWkktandzT2ZKZTFpNVM5czRCYm8zZkpHblJra043c2xmUUpWV0NVZWpLZ1hNNFZWMTd4MFZNTF9saXhWYlJDY2djUGd1SUJONU8zSW13czRzUlFvWktoeW9CWlpJcmFFdGtnSGZzanNsM3REWk55V3FZMjlHUjROVFJ4LVlaU2stcUY4YWpoWDZWcHFLbThwTnpxZlZGV0x3VHhWVWpsdw",
-    "https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/",
-    "https://news.google.com/atom/articles/CBMikwFBVV95cUxOSFBFV0VKVTFJUEJmemU1VE4yVUVtdGU3R3U2OHNfWkZZdHJJWkZuSnFrZnhxZWZkaXBXVk5BcG1TV2pnSExkYTBlbjhGNENsR3RLamFwTk5hZ0dKODhNbUxJWjd5NXRpV1ZsbS1BdUNMc0QwZEN5aVN0RlB0a0c5Z3RmZzZaamE4c1JYUzJ6aFJGdjQ",
-    "https://www.siliconrepublic.com/machines/chinas-deepseek-unveils-long-awaited-v4-ai-model",
-    "https://www.androidheadlines.com/2026/04/deepseek-v4-launch-huawei-chips-ai-autonomy.html",
-    "https://www.engadget.com/ai/deepseek-promises-its-new-ai-model-has-world-class-reasoning-115733512.html",
-    "https://news.google.com/atom/articles/CBMihAFBVV95cUxQbkpGZmlkWGZOcUstU2VNMFNGcjdsTWFuM2hCNGFYVXl0Y0dJN0o0ZkQ5QVJDbTNKeGNFb2lTb3hhR0Z1elU4andwUGRsYkswN3JxaWhha01rbG83WktKLXBXRzRiTUY5a3JvR2xSX0p1eTRNMmQ4V3BQSzR2VzBJZ3ljOWY"
+    "https://www.technologyreview.com/2026/04/24/1136422/why-deepseeks-v4-matters/"
   ],
   "suggested_qna": [],
   "summary": "DeepSeek, an AI lab based in Hangzhou, released a preview of its new open-source V4 model family on April 24, introducing DeepSeek-V4-Pro and DeepSeek-V4-Flash with a default 1 million-token context window and open weights [testingcatalog.com#1][techcrunch.com#1][huggingface.co#1][technologyreview.com#1]. The company says the new series uses architectural changes, including a new sparse attention approach, to cut the compute and memory costs of long-context work. It also positions the models as closer to leading open and closed systems on reasoning benchmarks [testingcatalog.com#1][techcrunch.com#1][technologyreview.com#1].\n\nWhat stands out across coverage is the mix of frontier-scale ambition and broader access: DeepSeek published the models openly, offered API support for OpenAI Chat Completions and Anthropic-format calls, and leaned into long-context and developer use cases [testingcatalog.com#1][huggingface.co#1]. Several outlets highlighted the competitive angle as China\u2019s open-model ecosystem keeps pushing forward, while independent commentary said V4 looks especially notable for long-context work and comparatively low pricing. Even so, some analysts and community members said it still falls short of the very top closed models in overall performance [techcrunch.com#1][technologyreview.com#1][simonwillison.net#1][smol.ai#1].",
   "talking_points": [
-    "China stack: Huawei said its new Ascend 950PR and 950DT chips received day-zero adaptation for DeepSeek V4, underscoring tighter software-hardware integration across China\u2019s AI ecosystem [scmp.com#1].",
-    "Open access: Unlike the leading frontier models from OpenAI, Anthropic, and xAI, DeepSeek continues to make its flagship system downloadable and modifiable as an open model, according to multiple outlets [mashable.com#1][technode.com#1].",
     "Model sizes: VentureBeat described V4-Pro as a 1.6 trillion-parameter model with 49 billion active parameters [venturebeat.com#1].",
-    "Developer controls: Both variants offer Thinking and Non-Thinking modes through the API, and DeepSeek added a reasoning_effort parameter so developers can tune how much deliberation the model uses for each task [testingcatalog.com#1].",
-    "Community reaction: An early Reddit post in r/LocalLLaMA captured a mixed response, noting less visible hype than around some earlier model launches despite DeepSeek releasing a 284B variant [reddit.com#1].",
-    "Pricing gap: Mashable reported that DeepSeek V4 Preview costs about 85% less than GPT-5.5, while VentureBeat said V4-Pro API pricing is roughly one-sixth the cost of Anthropic Opus 4.7 and OpenAI GPT-5.5 under comparable usage assumptions [mashable.com#1][venturebeat.com#1].",
     "Local limits: Even with open weights, the largest files are still demanding to self-host. Simon Willison noted that Pro is about 865GB on Hugging Face and Flash about 160GB [simonwillison.net#1].",
+    "Pricing gap: Mashable reported that DeepSeek V4 Preview costs about 85% less than GPT-5.5, while VentureBeat said V4-Pro API pricing is roughly one-sixth the cost of Anthropic Opus 4.7 and OpenAI GPT-5.5 under comparable usage assumptions [mashable.com#1][venturebeat.com#1].",
+    "Open access: Unlike the leading frontier models from OpenAI, Anthropic, and xAI, DeepSeek continues to make its flagship system downloadable and modifiable as an open model, according to multiple outlets [mashable.com#1][technode.com#1].",
+    "China stack: Huawei said its new Ascend 950PR and 950DT chips received day-zero adaptation for DeepSeek V4, underscoring tighter software-hardware integration across China\u2019s AI ecosystem [scmp.com#1].",
+    "Community reaction: An early Reddit post in r/LocalLLaMA captured a mixed response, noting less visible hype than around some earlier model launches despite DeepSeek releasing a 284B variant [reddit.com#1].",
+    "Developer controls: Both variants offer Thinking and Non-Thinking modes through the API, and DeepSeek added a reasoning_effort parameter so developers can tune how much deliberation the model uses for each task [testingcatalog.com#1].",
     "Model sizes: V4-Pro has 1.6 trillion total parameters with 49 billion active per token, while V4-Flash has 284 billion total parameters and 13 billion active [testingcatalog.com#1][simonwillison.net#1]."
   ],
   "technical_details": [
-    "MoE activation: The V4 line uses mixture-of-experts routing, so only a subset of parameters is active for each token; in V4-Pro, 49 billion of 1.6 trillion parameters are active per token, while Flash activates 13 billion of 284 billion [testingcatalog.com#1].",
-    "Ascend adaptation: Huawei\u2019s day-zero support for V4 on Ascend 950PR and 950DT highlights compatibility with China\u2019s domestic accelerator ecosystem at a time of tighter US semiconductor controls [scmp.com#1][androidheadlines.com#1].",
+    "Quantization path: AINews said deployment support includes FP4 and FP8 quantization and cited NVIDIA Blackwell Ultra hardware claims of more than 150 tokens per second per user for V4-serving configurations [smol.ai#1].",
     "Sparse attention design: DeepSeek paired token-level compression with what it calls DeepSeek Sparse Attention, which it says cuts long-context compute and memory costs enough to make a 1 million-token window the default service setting [testingcatalog.com#1].",
     "Mixture-of-experts design: VentureBeat described V4-Pro as a 1.6 trillion-parameter mixture-of-experts model with 49 billion active parameters, meaning only part of the network is engaged for each task to improve efficiency relative to its total size [venturebeat.com#1].",
+    "Ascend adaptation: Huawei\u2019s day-zero support for V4 on Ascend 950PR and 950DT highlights compatibility with China\u2019s domestic accelerator ecosystem at a time of tighter US semiconductor controls [scmp.com#1][androidheadlines.com#1].",
     "Ultra-long context: DeepSeek said the V4 series supports up to 1 million tokens of context, matching the upper end of OpenAI\u2019s recently announced GPT-5.5 range and allowing much larger documents or longer multi-turn sessions to stay in working memory [engadget.com#1][technologyreview.com#1].",
-    "Quantization path: AINews said deployment support includes FP4 and FP8 quantization and cited NVIDIA Blackwell Ultra hardware claims of more than 150 tokens per second per user for V4-serving configurations [smol.ai#1]."
+    "MoE activation: The V4 line uses mixture-of-experts routing, so only a subset of parameters is active for each token; in V4-Pro, 49 billion of 1.6 trillion parameters are active per token, while Flash activates 13 billion of 284 billion [testingcatalog.com#1]."
   ],
   "timeline": [
     {
@@ -1384,11 +1384,11 @@ What stands out across coverage is the mix of frontier-scale ambition and broade
   "unique_domains": 8,
   "url": "https://www.testingcatalog.com/deepseek-released-3-new-open-source-v4-models/",
   "user_action_items": [
+    "Check hosting requirements: Before planning a local deployment, compare your available RAM and storage with the reported model sizes of about 160GB for Flash and 865GB for Pro [simonwillison.net#1].",
     "Test API compatibility: If you already use OpenAI- or Anthropic-style tooling, try V4 in a staging environment because DeepSeek says its API supports both formats [testingcatalog.com#1].",
-    "Review AI vendor exposure: Teams using paid AI APIs can recalculate project budgets using lower-cost alternatives such as DeepSeek V4 pricing and check whether open-source deployment fits their compliance needs [venturebeat.com#1][mashable.com#1].",
-    "Benchmark long-context tasks: Run your own coding or document-heavy prompts against V4\u2019s 1 million-token context window to see whether the architecture improvements help your workflow [testingcatalog.com#1][huggingface.co#1].",
     "Test an open-model workflow: Developers can compare DeepSeek V4 with proprietary models by trying DeepSeek\u2019s chat service or downloading the open model from repositories, then benchmarking cost, latency, and output quality on their own tasks [technode.com#1][venturebeat.com#1][engadget.com#1].",
-    "Check hosting requirements: Before planning a local deployment, compare your available RAM and storage with the reported model sizes of about 160GB for Flash and 865GB for Pro [simonwillison.net#1]."
+    "Benchmark long-context tasks: Run your own coding or document-heavy prompts against V4\u2019s 1 million-token context window to see whether the architecture improvements help your workflow [testingcatalog.com#1][huggingface.co#1].",
+    "Review AI vendor exposure: Teams using paid AI APIs can recalculate project budgets using lower-cost alternatives such as DeepSeek V4 pricing and check whether open-source deployment fits their compliance needs [venturebeat.com#1][mashable.com#1]."
   ]
 }</code></pre>
     </details>
