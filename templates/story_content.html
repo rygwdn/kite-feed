@@ -138,9 +138,60 @@
 <h{{ story.heading_level|default(1) + 1 }}>Historical Background</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.historical_background|process_footnotes(story)|safe }}</p>
 {% endif %}
 
+{# Geopolitical context #}
+{% if story.geopolitical_context %}
+<h{{ story.heading_level|default(1) + 1 }}>Geopolitical Context</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.geopolitical_context is string %}<p>{{ story.geopolitical_context|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.geopolitical_context %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
+{# Humanitarian impact #}
+{% if story.humanitarian_impact %}
+<h{{ story.heading_level|default(1) + 1 }}>Humanitarian Impact</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.humanitarian_impact is string %}<p>{{ story.humanitarian_impact|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.humanitarian_impact %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
+{# Economic implications #}
+{% if story.economic_implications %}
+<h{{ story.heading_level|default(1) + 1 }}>Economic Implications</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.economic_implications is string %}<p>{{ story.economic_implications|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.economic_implications %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
+{# Business angle #}
+{% if story.business_angle %}
+<h{{ story.heading_level|default(1) + 1 }}>Business Angle</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.business_angle is string %}<p>{{ story.business_angle|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.business_angle %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
+{# International reactions #}
+{% if story.international_reactions %}
+<h{{ story.heading_level|default(1) + 1 }}>International Reactions</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.international_reactions is string %}<p>{{ story.international_reactions|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.international_reactions %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
+{# Key players #}
+{% if story.key_players %}
+<h{{ story.heading_level|default(1) + 1 }}>Key Players</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.key_players is string %}<p>{{ story.key_players|e }}</p>
+{% else %}<ul>{% for player in story.key_players %}<li>{{ player|e }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
 {# Future outlook #}
 {% if story.future_outlook %}
-<h{{ story.heading_level|default(1) + 1 }}>Future Outlook</h{{ story.heading_level|default(1) + 1 }}><p>{{ story.future_outlook|process_footnotes(story)|safe }}</p>
+<h{{ story.heading_level|default(1) + 1 }}>Future Outlook</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.future_outlook is string %}<p>{{ story.future_outlook|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.future_outlook %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+
+{# Travel advisory #}
+{% if story.travel_advisory %}
+<h{{ story.heading_level|default(1) + 1 }}>Travel Advisory</h{{ story.heading_level|default(1) + 1 }}>
+{% if story.travel_advisory is string %}<p>{{ story.travel_advisory|process_footnotes(story)|safe }}</p>
+{% else %}<ul>{% for item in story.travel_advisory %}<li>{{ item|process_footnotes(story)|safe }}</li>{% endfor %}</ul>{% endif %}
 {% endif %}
 
 {# Q&A #}
