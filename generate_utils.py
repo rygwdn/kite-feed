@@ -23,7 +23,7 @@ def format_date_html(timestamp) -> str:
             return dt.strftime("%Y-%m-%d")
         elif isinstance(timestamp, str):
             # Try parsing various date formats
-            for fmt in ["%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%Y-%m-%d %H:%M:%S"]:
+            for fmt in ["%Y-%m-%dT%H:%M:%S.%fZ", "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%Y-%m-%d %H:%M:%S"]:
                 try:
                     dt = datetime.strptime(timestamp, fmt)
                     return dt.strftime("%Y-%m-%d")
@@ -44,7 +44,7 @@ def format_date_rss(timestamp) -> str:
             return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
         elif isinstance(timestamp, str):
             # Try parsing various date formats
-            for fmt in ["%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%Y-%m-%d %H:%M:%S"]:
+            for fmt in ["%Y-%m-%dT%H:%M:%S.%fZ", "%Y-%m-%dT%H:%M:%SZ", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d", "%Y-%m-%d %H:%M:%S"]:
                 try:
                     dt = datetime.strptime(timestamp, fmt)
                     return dt.strftime("%a, %d %b %Y %H:%M:%S +0000")
