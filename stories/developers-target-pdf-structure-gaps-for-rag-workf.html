@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers target PDF structure gaps for RAG workflows - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers target PDF structure gaps for RAG workflows</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI practitioners are discussing a document-ingestion problem that often precedes retrieval-augmented generation: converting complex PDFs into structured text. A Reddit user asked the LocalLLaMA community on June 22 for workflows that can turn PDFs with tables and floating boxes into Markdown <a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/" class="footnote-ref">[1]</a>.
+
+A Towards Data Science article described methods for reconstructing a table of contents when a PDF includes a printed contents page but exposes no outline, allowing RAG systems to scope retrieval by section <a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/" class="footnote-ref">[3]</a><a href="https://news.google.com/atom/articles/CBMiuAFBVV95cUxNay1Sd29zZE5wc3dIQnZtYUZTYVdKLWxVMmxqTGJaUDJWN3RueXhlNVUzRVdCTGV2R2ZWZS1GSm9VUTVmVXJNQmloWWU2cTVqb2d4ME96bVU4UnJBd1hZYnRTOVkzeUVrWGZHLVU5dHU0TklYbkdYdEVXZkFYblNETkZlcWxqU0E1MkR0cG9mbjhqcktzYWg0U3lMWV9nbmRHakpMdjBMMkFaMEZaOFgxTUxDS0xKSVJs" class="footnote-ref">[2]</a>. The article, part of an enterprise document intelligence series, said it covers two methods for restoring structure and a page-alignment step <a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Existing tools: The Reddit post said the user had already tried markitdown, Docling and Mineru before asking for alternatives <a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>LocalLLaMA Reddit user: The user asked for community-tested alternatives to markitdown, Docling and Mineru and said the workflow needs to handle tables and floating boxes.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Towards Data Science author: The article, part of an enterprise document intelligence series, said page alignment is an overlooked step when reconstructing PDF structure for RAG.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/">Towards Data Science</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Document-ingestion tools that preserve layout and section hierarchy can reduce RAG errors before model inference costs are incurred <a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/" class="footnote-ref">[1]</a><a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/" class="footnote-ref">[3]</a>.</li><li>Vendors competing in enterprise document intelligence may need to show they can handle tables, floating boxes and missing outlines, not just generic PDF parsing <a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/" class="footnote-ref">[1]</a><a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/" class="footnote-ref">[3]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test parser output on difficult PDF layouts: Use documents containing tables, floating boxes and missing outlines as evaluation cases before choosing a PDF-to-Markdown workflow <a href="https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/" class="footnote-ref">[1]</a><a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/" class="footnote-ref">[3]</a>.</li>
+
+<li>Check section mapping before RAG indexing: Verify that reconstructed contents entries align with the pages or sections your retrieval system queries <a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/">https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiuAFBVV95cUxNay1Sd29zZE5wc3dIQnZtYUZTYVdKLWxVMmxqTGJaUDJWN3RueXhlNVUzRVdCTGV2R2ZWZS1GSm9VUTVmVXJNQmloWWU2cTVqb2d4ME96bVU4UnJBd1hZYnRTOVkzeUVrWGZHLVU5dHU0TklYbkdYdEVXZkFYblNETkZlcWxqU0E1MkR0cG9mbjhqcktzYWg0U3lMWV9nbmRHakpMdjBMMkFaMEZaOFgxTUxDS0xKSVJs">https://news.google.com/atom/articles/CBMiuAFBVV95cUxNay1Sd29zZE5wc3dIQnZtYUZTYVdKLWxVMmxqTGJaUDJWN3RueXhlNVUzRVdCTGV2R2ZWZS1GSm9VUTVmVXJNQmloWWU2cTVqb2d4ME96bVU4UnJBd1hZYnRTOVkzeUVrWGZHLVU5dHU0TklYbkdYdEVXZkFYblNETkZlcWxqU0E1MkR0cG9mbjhqcktzYWg0U3lMWV9nbmRHakpMdjBMMkFaMEZaOFgxTUxDS0xKSVJs</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, towardsdatascience.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/chibop1",
+      "date": "2026-06-22T01:07:59.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/",
+      "title": "Your Favorite Workflow to Convert PDF with Complex Structure to Markdown?"
+    },
+    {
+      "date": "2026-06-21T15:00:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiuAFBVV95cUxNay1Sd29zZE5wc3dIQnZtYUZTYVdKLWxVMmxqTGJaUDJWN3RueXhlNVUzRVdCTGV2R2ZWZS1GSm9VUTVmVXJNQmloWWU2cTVqb2d4ME96bVU4UnJBd1hZYnRTOVkzeUVrWGZHLVU5dHU0TklYbkdYdEVXZkFYblNETkZlcWxqU0E1MkR0cG9mbjhqcktzYWg0U3lMWV9nbmRHakpMdjBMMkFaMEZaOFgxTUxDS0xKSVJs",
+      "title": "Reconstructing the Table of Contents a PDF Forgot to Ship, So RAG Can Scope by Section - Towards Data Science"
+    },
+    {
+      "author": "Kezhan Shi",
+      "date": "2026-06-21T15:00:00.000Z",
+      "domain": "towardsdatascience.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/",
+      "title": "Reconstructing the Table of Contents a PDF Forgot to Ship, So RAG Can Scope by Section"
+    }
+  ],
+  "business_angle": [
+    "Document-ingestion tools that preserve layout and section hierarchy can reduce RAG errors before model inference costs are incurred [reddit.com#1][towardsdatascience.com#1].",
+    "Vendors competing in enterprise document intelligence may need to show they can handle tables, floating boxes and missing outlines, not just generic PDF parsing [reddit.com#1][towardsdatascience.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=towardsdatascience.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "towardsdatascience.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udcc4",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Document Ai",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/"
+        }
+      ],
+      "text": "LocalLLaMA Reddit user: The user asked for community-tested alternatives to markitdown, Docling and Mineru and said the workflow needs to handle tables and floating boxes."
+    },
+    {
+      "sources": [
+        {
+          "name": "Towards Data Science",
+          "url": "https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/"
+        }
+      ],
+      "text": "Towards Data Science author: The article, part of an enterprise document intelligence series, said page alignment is an overlooked step when reconstructing PDF structure for RAG."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-06-22T12:00:13.862Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://towardsdatascience.com/reconstructing-the-table-of-contents-a-pdf-forgot-to-ship-so-rag-can-scope-by-section/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/",
+    "https://news.google.com/atom/articles/CBMiuAFBVV95cUxNay1Sd29zZE5wc3dIQnZtYUZTYVdKLWxVMmxqTGJaUDJWN3RueXhlNVUzRVdCTGV2R2ZWZS1GSm9VUTVmVXJNQmloWWU2cTVqb2d4ME96bVU4UnJBd1hZYnRTOVkzeUVrWGZHLVU5dHU0TklYbkdYdEVXZkFYblNETkZlcWxqU0E1MkR0cG9mbjhqcktzYWg0U3lMWV9nbmRHakpMdjBMMkFaMEZaOFgxTUxDS0xKSVJs"
+  ],
+  "suggested_qna": [],
+  "summary": "AI practitioners are discussing a document-ingestion problem that often precedes retrieval-augmented generation: converting complex PDFs into structured text. A Reddit user asked the LocalLLaMA community on June 22 for workflows that can turn PDFs with tables and floating boxes into Markdown [reddit.com#1].\n\nA Towards Data Science article described methods for reconstructing a table of contents when a PDF includes a printed contents page but exposes no outline, allowing RAG systems to scope retrieval by section [towardsdatascience.com#1][google.com#1]. The article, part of an enterprise document intelligence series, said it covers two methods for restoring structure and a page-alignment step [towardsdatascience.com#1].",
+  "talking_points": [
+    "Existing tools: The Reddit post said the user had already tried markitdown, Docling and Mineru before asking for alternatives [reddit.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Developers target PDF structure gaps for RAG workflows",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://www.reddit.com/r/LocalLLaMA/comments/1uc6mp1/your_favorite_workflow_to_convert_pdf_with/",
+  "user_action_items": [
+    "Test parser output on difficult PDF layouts: Use documents containing tables, floating boxes and missing outlines as evaluation cases before choosing a PDF-to-Markdown workflow [reddit.com#1][towardsdatascience.com#1].",
+    "Check section mapping before RAG indexing: Verify that reconstructed contents entries align with the pages or sections your retrieval system queries [towardsdatascience.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
