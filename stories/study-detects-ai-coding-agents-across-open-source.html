@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Study detects AI coding agents across open-source repositories - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Study detects AI coding agents across open-source repositories</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A new arXiv paper says generative AI coding agents are already leaving measurable traces in the open-source software supply chain, but standard detection methods miss most of the activity. Researchers Arsham Khosravani and Audris Mockus introduced a multi-method census across World of Code’s 180 million-plus Git repositories, combining configuration-file scans, commit-message analysis, author-identity matching and bot-signature lookup <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>. In one snapshot, the approach identified 850,157 Claude Code commits, while bot-account lookup found only 28,154, or 3.3%, a 30x relative-recall gap <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>.
+
+The paper says commit-attributed agents generated more than 320,000 commits per month across snapshots from December 2024 to April 2026 <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>. Project pages reviewed for the story described developer tools for agent operations: Hezo offers self-hosted teams of agents with secret isolation, Zedra provides remote control for coding agents, swarm-test analyzes multi-agent topology before production, and OntoCortex separates typed LLM intent from deterministic execution <a href="https://hezo.ai" class="footnote-ref">[4]</a><a href="https://zedra.dev/" class="footnote-ref">[6]</a><a href="https://github.com/surajkumar811/swarm-test" class="footnote-ref">[8]</a><a href="https://github.com/gabert/ontocortex" class="footnote-ref">[11]</a>.
+
+Other projects focused on reducing LLM bills and choosing models. AI Gateway claims semantic caching can cut LLM API costs by 40%-70%, Cascade says its C++ proxy routes predictable prompts to cheaper models after 4.59 milliseconds of tokenization, embedding and prediction, Wayfinder Router makes offline prompt-complexity routing decisions without an LLM call, and ModelFit runs repository-specific coding probes to find cheaper backup models for a codebase <a href="https://github.com/Arnab758/ai-gateway" class="footnote-ref">[5]</a><a href="https://cascade-router.github.io/cascade-router/" class="footnote-ref">[16]</a><a href="https://github.com/itsthelore/wayfinder-router" class="footnote-ref">[18]</a><a href="https://github.com/kwadwoadu/modelfit" class="footnote-ref">[15]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://arxiv.org/abs/2606.24429">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Every one of those is output tokens, the ones that cost several times more (3x to 5x!!!) than input tokens in API pricing.</p>
+
+<cite>— Jim Mont (JimMont.com)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> One implementation runs the smallest llama2.c model inside Scratch/TurboWarp by compiling C inference code into Scratch blocks and streaming tokens into a sprite speech bubble <a href="https://github.com/Broyojo/llm_from_scratch" class="footnote-ref">[14]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Cloning template: A website-cloning template on GitHub had 19.7k stars, 2.9k forks and instructions for using a URL plus a /clone-website command to reconstruct a site as a Next.js codebase <a href="https://github.com/JCodesMore/ai-website-cloner-template" class="footnote-ref">[3]</a>.</li>
+
+<li>Reliability testing: swarm-test says it performs static reliability testing for CrewAI, LangGraph, AutoGen and custom agent systems without live LLM calls or API cost <a href="https://github.com/surajkumar811/swarm-test" class="footnote-ref">[8]</a>.</li>
+
+<li>Prompt optimization: dspyer says it transpiles standard Python functions, Pydantic schemas and agent graphs into optimized dspy.Module instances to add typed outputs, self-correction and prompt tuning <a href="https://github.com/theramkm/dspyer" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Arsham Khosravani and Audris Mockus: The researchers say pull-request and commit-based censuses capture nearly disjoint agent populations, so no single channel gives a representative view of agent work.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2606.24429">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Hezo: The project describes a self-hosted agent workforce in which agents run in separate containers, see placeholders instead of real secrets, use per-agent budget caps, and return consequential actions for approval.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://hezo.ai">Hezo</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>ModelFit: The project rejects generic coding benchmarks as the primary selection tool and instead runs repository-specific probes, blind rubric grading, and correctness-first ranking before cost and latency.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/kwadwoadu/modelfit">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>December 2024:</strong> First census snapshot window begins <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>April 2026:</strong> Final reported census snapshot window ends <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>23 June 2026:</strong> AI coding-agent census submitted to arXiv <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Prompt-complexity routing: Cascade says its routing path covers tokenization, ONNX embedding and ML prediction in 4.59 milliseconds before choosing a cost-effective LLM tier <a href="https://cascade-router.github.io/cascade-router/" class="footnote-ref">[16]</a>.</li>
+
+<li>Semantic caching: AI Gateway describes a semantic cache that maps similar repeat questions to cached answers, turning repeated prompts into fewer provider calls without application code changes <a href="https://github.com/Arnab758/ai-gateway" class="footnote-ref">[5]</a>.</li>
+
+<li>Scratch model packing: The Scratch LLM project quantizes weight matrices to Q8_0 with group size 4 and packs four signed int8 values into one unsigned 32-bit value for Scratch list storage <a href="https://github.com/Broyojo/llm_from_scratch" class="footnote-ref">[14]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Measurement validity: The arXiv paper validates each detection pattern by hand with 495 labels and reports per-cell precision with Wilson confidence intervals, instead of relying only on raw repository keyword searches <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>.</li>
+
+<li>Sampling bias: The study finds that bot-account lookup recovered only 28,154 of 850,157 Claude Code commits in one snapshot; the authors say that proxy can produce substantially biased prevalence estimates <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>.</li>
+
+<li>External comparison: Against the independent AIDev pull-request census, the authors report that pull-request tracking missed 79% of commit-detected Claude Code adopters and essentially all Codex adopters <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit repositories for agent traces: Compare commit authorship, configuration files, commit messages and bot signatures rather than relying only on bot-account labels <a href="https://arxiv.org/abs/2606.24429" class="footnote-ref">[1]</a>.</li>
+
+<li>Test model routing on local workloads: Run benchmark prompts or probes from your own codebase before routing work to cheaper or backup models <a href="https://github.com/kwadwoadu/modelfit" class="footnote-ref">[15]</a><a href="https://github.com/itsthelore/wayfinder-router" class="footnote-ref">[18]</a>.</li>
+
+<li>Add approval gates for agents: Use tools or policies that keep real secrets out of agent context and require approval for sensitive actions <a href="https://hezo.ai" class="footnote-ref">[4]</a><a href="https://github.com/gabert/ontocortex" class="footnote-ref">[11]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/surajkumar811/swarm-test">https://github.com/surajkumar811/swarm-test</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/opensource/comments/1ueqh9k/moomacha_opensource_agent_control_plane_that/">https://www.reddit.com/r/opensource/comments/1ueqh9k/moomacha_opensource_agent_control_plane_that/</a></li>
+
+
+
+<li><a href="https://hezo.ai">https://hezo.ai</a></li>
+
+
+
+<li><a href="https://github.com/kwadwoadu/modelfit">https://github.com/kwadwoadu/modelfit</a></li>
+
+
+
+<li><a href="https://hamanlp.org/small-kernels.html">https://hamanlp.org/small-kernels.html</a></li>
+
+
+
+<li><a href="https://cascade-router.github.io/cascade-router/">https://cascade-router.github.io/cascade-router/</a></li>
+
+
+
+<li><a href="https://github.com/gabert/ontocortex">https://github.com/gabert/ontocortex</a></li>
+
+
+
+<li><a href="https://unihongo.com">https://unihongo.com</a></li>
+
+
+
+<li><a href="https://www.jimmont.com/llm-style-token-costs">https://www.jimmont.com/llm-style-token-costs</a></li>
+
+
+
+<li><a href="https://github.com/itsthelore/wayfinder-router">https://github.com/itsthelore/wayfinder-router</a></li>
+
+
+
+
+
+<li><a href="https://github.com/RayFromBoston/AI-Source-Engine">https://github.com/RayFromBoston/AI-Source-Engine</a></li>
+
+
+
+<li><a href="https://github.com/sebmellen/git-temp">https://github.com/sebmellen/git-temp</a></li>
+
+
+
+<li><a href="https://github.com/Arnab758/ai-gateway">https://github.com/Arnab758/ai-gateway</a></li>
+
+
+
+<li><a href="https://zedra.dev/">https://zedra.dev/</a></li>
+
+
+
+<li><a href="https://github.com/JCodesMore/ai-website-cloner-template">https://github.com/JCodesMore/ai-website-cloner-template</a></li>
+
+
+
+<li><a href="https://github.com/theramkm/dspyer">https://github.com/theramkm/dspyer</a></li>
+
+
+
+<li><a href="https://dromeas.ai/blog/code-review-evolved">https://dromeas.ai/blog/code-review-evolved</a></li>
+
+
+
+<li><a href="https://github.com/Broyojo/llm_from_scratch">https://github.com/Broyojo/llm_from_scratch</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, arxiv.org, unihongo.com, github.com, hezo.ai, zedra.dev, jimmont.com, dromeas.ai, github.io, hamanlp.org</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 10 unique domains, 19 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Arsham Khosravani, Audris Mockus",
+      "date": "2026-06-25T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.24429",
+      "title": "Detecting AI Coding Agents in Open Source: A Validated Multi-Method Census of 180 Million Repositories"
+    },
+    {
+      "author": "trinhngocdieu",
+      "date": "2026-06-25T06:10:30.000Z",
+      "domain": "unihongo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://unihongo.com",
+      "title": "Show HN: Japanese Language AI Tutor in 3D classroom"
+    },
+    {
+      "author": "vantareed",
+      "date": "2026-06-25T06:00:22.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/JCodesMore/ai-website-cloner-template",
+      "title": "AI-website-cloner-template: Clone any website using AI coding agents"
+    },
+    {
+      "author": "hiddentao",
+      "date": "2026-06-25T04:50:17.000Z",
+      "domain": "hezo.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hezo.ai",
+      "title": "Show HN: Hezo \u2013 Self-hosted teams of AI agents that never see your real secrets"
+    },
+    {
+      "author": "arnab777",
+      "date": "2026-06-25T04:14:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Arnab758/ai-gateway",
+      "title": "Show HN: Built AI-Gateway reverse proxy to reduce LLM API costs and token burn"
+    },
+    {
+      "author": "tanlethanh",
+      "date": "2026-06-25T04:12:49.000Z",
+      "domain": "zedra.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://zedra.dev/",
+      "title": "Show HN: Zedra \u2013 Remote control for AI coding agents"
+    },
+    {
+      "author": "sebmellen",
+      "date": "2026-06-25T04:07:55.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/sebmellen/git-temp",
+      "title": "Show HN: Git-temp (local scratchpad for AI agents that won\u0027t clutter Git status)"
+    },
+    {
+      "author": "surajkumar001",
+      "date": "2026-06-25T03:57:45.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/surajkumar811/swarm-test",
+      "title": "Show HN: Find where multi-agent AI systems break before production"
+    },
+    {
+      "author": "RayfromBoston",
+      "date": "2026-06-24T23:01:41.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/RayFromBoston/AI-Source-Engine",
+      "title": "Al-1.0 \u2013 A lightweight attribution logging engine for transformers"
+    },
+    {
+      "author": "jimmont",
+      "date": "2026-06-25T00:52:40.000Z",
+      "domain": "jimmont.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.jimmont.com/llm-style-token-costs",
+      "title": "What I\u0027m Finding About LLM Code Style and Token Costs"
+    },
+    {
+      "author": "gabert",
+      "date": "2026-06-24T21:12:04.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/gabert/ontocortex",
+      "title": "Show HN: An LLM agent that emits typed intent"
+    },
+    {
+      "author": "ramkm",
+      "date": "2026-06-24T21:08:30.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/theramkm/dspyer",
+      "title": "Show HN: Dspyer \u2013 self-correcting, optimizable LLM steps for DSPy and LangGraph"
+    },
+    {
+      "author": "manos-saratsis",
+      "date": "2026-06-24T20:38:29.000Z",
+      "domain": "dromeas.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://dromeas.ai/blog/code-review-evolved",
+      "title": "Code review powered by an LLM council"
+    },
+    {
+      "author": "alexkranias",
+      "date": "2026-06-24T17:03:04.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Broyojo/llm_from_scratch",
+      "title": "LLM from Scratch: a small LLM running inside MIT\u0027s Scratch"
+    },
+    {
+      "author": "kwadwoadu",
+      "date": "2026-06-24T16:18:31.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/kwadwoadu/modelfit",
+      "title": "ModelFit \u2013 find the cheapest LLM that can back up your main coding model"
+    },
+    {
+      "author": "AmixxM",
+      "date": "2026-06-24T16:17:33.000Z",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cascade-router.github.io/cascade-router/",
+      "title": "Show HN: Cascade \u2013 A bare-metal C++ proxy that cuts LLM API bills by 70%"
+    },
+    {
+      "author": "boodleboodle",
+      "date": "2026-06-24T13:08:26.000Z",
+      "domain": "hamanlp.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hamanlp.org/small-kernels.html",
+      "title": "Lean Zig by building an LLM from scratch"
+    },
+    {
+      "author": "tcballard",
+      "date": "2026-06-24T06:20:00.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/itsthelore/wayfinder-router",
+      "title": "I built an LLM router that doesn\u0027t use an LLM"
+    },
+    {
+      "author": "/u/Fapplet",
+      "date": "2026-06-24T21:24:47.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/opensource/comments/1ueqh9k/moomacha_opensource_agent_control_plane_that/",
+      "title": "Moomacha: open-source agent control plane that deploys AI agents into Zulip alongside your team"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "One implementation runs the smallest llama2.c model inside Scratch/TurboWarp by compiling C inference code into Scratch blocks and streaming tokens into a sprite speech bubble [github.com#8].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=unihongo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "unihongo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hezo.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hezo.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=zedra.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zedra.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=jimmont.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "jimmont.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dromeas.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dromeas.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hamanlp.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hamanlp.org"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Coding Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 19,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2606.24429"
+        }
+      ],
+      "text": "Arsham Khosravani and Audris Mockus: The researchers say pull-request and commit-based censuses capture nearly disjoint agent populations, so no single channel gives a representative view of agent work."
+    },
+    {
+      "sources": [
+        {
+          "name": "Hezo",
+          "url": "https://hezo.ai"
+        }
+      ],
+      "text": "Hezo: The project describes a self-hosted agent workforce in which agents run in separate containers, see placeholders instead of real secrets, use per-agent budget caps, and return consequential actions for approval."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/kwadwoadu/modelfit"
+        }
+      ],
+      "text": "ModelFit: The project rejects generic coding benchmarks as the primary selection tool and instead runs repository-specific probes, blind rubric grading, and correctness-first ranking before cost and latency."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-06-25T12:00:13.962Z",
+  "quote": "Every one of those is output tokens, the ones that cost several times more (3x to 5x!!!) than input tokens in API pricing.",
+  "quote_attribution": "JimMont.com",
+  "quote_author": "Jim Mont",
+  "scientific_significance": [
+    "Measurement validity: The arXiv paper validates each detection pattern by hand with 495 labels and reports per-cell precision with Wilson confidence intervals, instead of relying only on raw repository keyword searches [arxiv.org#1].",
+    "Sampling bias: The study finds that bot-account lookup recovered only 28,154 of 850,157 Claude Code commits in one snapshot; the authors say that proxy can produce substantially biased prevalence estimates [arxiv.org#1].",
+    "External comparison: Against the independent AIDev pull-request census, the authors report that pull-request tracking missed 79% of commit-detected Claude Code adopters and essentially all Codex adopters [arxiv.org#1]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/surajkumar811/swarm-test",
+    "https://www.reddit.com/r/opensource/comments/1ueqh9k/moomacha_opensource_agent_control_plane_that/",
+    "https://hezo.ai",
+    "https://github.com/kwadwoadu/modelfit",
+    "https://hamanlp.org/small-kernels.html",
+    "https://cascade-router.github.io/cascade-router/",
+    "https://github.com/gabert/ontocortex",
+    "https://unihongo.com",
+    "https://www.jimmont.com/llm-style-token-costs",
+    "https://github.com/itsthelore/wayfinder-router",
+    "https://arxiv.org/abs/2606.24429",
+    "https://github.com/RayFromBoston/AI-Source-Engine",
+    "https://github.com/sebmellen/git-temp",
+    "https://github.com/Arnab758/ai-gateway",
+    "https://zedra.dev/",
+    "https://github.com/JCodesMore/ai-website-cloner-template",
+    "https://github.com/theramkm/dspyer",
+    "https://dromeas.ai/blog/code-review-evolved",
+    "https://github.com/Broyojo/llm_from_scratch"
+  ],
+  "suggested_qna": [],
+  "summary": "A new arXiv paper says generative AI coding agents are already leaving measurable traces in the open-source software supply chain, but standard detection methods miss most of the activity. Researchers Arsham Khosravani and Audris Mockus introduced a multi-method census across World of Code\u2019s 180 million-plus Git repositories, combining configuration-file scans, commit-message analysis, author-identity matching and bot-signature lookup [arxiv.org#1]. In one snapshot, the approach identified 850,157 Claude Code commits, while bot-account lookup found only 28,154, or 3.3%, a 30x relative-recall gap [arxiv.org#1].\n\nThe paper says commit-attributed agents generated more than 320,000 commits per month across snapshots from December 2024 to April 2026 [arxiv.org#1]. Project pages reviewed for the story described developer tools for agent operations: Hezo offers self-hosted teams of agents with secret isolation, Zedra provides remote control for coding agents, swarm-test analyzes multi-agent topology before production, and OntoCortex separates typed LLM intent from deterministic execution [hezo.ai#1][zedra.dev#1][github.com#4][github.com#6].\n\nOther projects focused on reducing LLM bills and choosing models. AI Gateway claims semantic caching can cut LLM API costs by 40%-70%, Cascade says its C++ proxy routes predictable prompts to cheaper models after 4.59 milliseconds of tokenization, embedding and prediction, Wayfinder Router makes offline prompt-complexity routing decisions without an LLM call, and ModelFit runs repository-specific coding probes to find cheaper backup models for a codebase [github.com#2][github.io#1][github.com#10][github.com#9].",
+  "talking_points": [
+    "Cloning template: A website-cloning template on GitHub had 19.7k stars, 2.9k forks and instructions for using a URL plus a /clone-website command to reconstruct a site as a Next.js codebase [github.com#1].",
+    "Reliability testing: swarm-test says it performs static reliability testing for CrewAI, LangGraph, AutoGen and custom agent systems without live LLM calls or API cost [github.com#4].",
+    "Prompt optimization: dspyer says it transpiles standard Python functions, Pydantic schemas and agent graphs into optimized dspy.Module instances to add typed outputs, self-correction and prompt tuning [github.com#7]."
+  ],
+  "technical_details": [
+    "Prompt-complexity routing: Cascade says its routing path covers tokenization, ONNX embedding and ML prediction in 4.59 milliseconds before choosing a cost-effective LLM tier [github.io#1].",
+    "Semantic caching: AI Gateway describes a semantic cache that maps similar repeat questions to cached answers, turning repeated prompts into fewer provider calls without application code changes [github.com#2].",
+    "Scratch model packing: The Scratch LLM project quantizes weight matrices to Q8_0 with group size 4 and packs four signed int8 values into one unsigned 32-bit value for Scratch list storage [github.com#8]."
+  ],
+  "timeline": [
+    {
+      "content": "First census snapshot window begins [arxiv.org#1]",
+      "date": "December 2024",
+      "date_iso": "2024-12"
+    },
+    {
+      "content": "Final reported census snapshot window ends [arxiv.org#1]",
+      "date": "April 2026",
+      "date_iso": "2026-04"
+    },
+    {
+      "content": "AI coding-agent census submitted to arXiv [arxiv.org#1]",
+      "date": "23 June 2026",
+      "date_iso": "2026-06-23"
+    }
+  ],
+  "title": "Study detects AI coding agents across open-source repositories",
+  "travel_advisory": "",
+  "unique_domains": 10,
+  "url": "https://arxiv.org/abs/2606.24429",
+  "user_action_items": [
+    "Audit repositories for agent traces: Compare commit authorship, configuration files, commit messages and bot signatures rather than relying only on bot-account labels [arxiv.org#1].",
+    "Test model routing on local workloads: Run benchmark prompts or probes from your own codebase before routing work to cheaper or backup models [github.com#9][github.com#10].",
+    "Add approval gates for agents: Use tools or policies that keep real secrets out of agent context and require approval for sensitive actions [hezo.ai#1][github.com#6]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
