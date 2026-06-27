@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers weigh self-hosted LLM deployment options - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers weigh self-hosted LLM deployment options</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html"><img src="https://kagiproxy.com/img/Z6X2eqVXELaUO7q6_fbaFSaNu6Irkf6Q9eANghro1qw3bq6dSHIqw2oDMs755hEDDZT4hd4FN0n8MCtBUR-P9qq8YgLd2f-Z5bcDWpVV9l02Mh-Nz5RMBAWI_UohbH8" alt="Visual Studio Code workflow for using a local LLM" title="Visual Studio Code workflow for using a local LLM (computerwoche.de)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Visual Studio Code workflow for using a local LLM <span class='credit'>(computerwoche.de)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Developers and toolmakers are focusing on private, self-hosted LLM infrastructure, with discussions centered on owning the full application stack, fine-tuning open-source models and avoiding low-level CUDA or Transformers setup work <a href="https://www.reddit.com/r/LLMDevs/comments/1ug0bzt/howre_you_deploying_llms_in_production_nowadays/" class="footnote-ref">[2]</a><a href="https://www.reddit.com/r/MachineLearning/comments/1ufyuph/howre_you_deploying_llms_in_production_nowadays/" class="footnote-ref">[7]</a>. Tools described this week target different parts of that workflow: Mantis offers a self-hosted LLM gateway for routing, failover, caching, guardrails and observability, while Hugging Face showed how to launch a private, OpenAI-compatible vLLM endpoint on its Jobs infrastructure with one command <a href="https://github.com/mantis-llm-gateway" class="footnote-ref">[3]</a><a href="https://huggingface.co/blog/vllm-jobs" class="footnote-ref">[6]</a>.
+
+Computerwoche described five ways to run LLMs locally and said the main practical hurdle is choosing a model that fits the task and available hardware, after testing options on a Windows PC with an Intel i9, 64 GB RAM and a 12 GB Nvidia GeForce GPU, plus a Mac with an M1 chip and 16 GB RAM <a href="https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html" class="footnote-ref">[8]</a>. A separate Computerwoche article said Visual Studio Code 1.122 adds a bring-your-own-key mode without GitHub login, enabling chat, tools and MCP servers in restricted environments and supporting offline workflows with local models such as Ollama <a href="https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html" class="footnote-ref">[9]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/LLMDevs/comments/1ugkghj/self_hosting_the_modern_llm_stack/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Gateway scope: Mantis exposes one stable chat-completions API and centralizes weighted targets, fallback chains, retries, timeouts, cooldowns, exact prompt caching and optional semantic caching <a href="https://github.com/mantis-llm-gateway" class="footnote-ref">[3]</a>.</li>
+
+<li>Cloud shortcut: Hugging Face&#x27;s example uses the official vllm/vllm-openai image, an A10G-large GPU flavor, exposed port 8000 and Qwen/Qwen3-4B for a two-hour vLLM server job <a href="https://huggingface.co/blog/vllm-jobs" class="footnote-ref">[6]</a>.</li>
+
+<li>Editor integration: VS Code still does not host local models itself, so Computerwoche points users to external hosts such as LM Studio when using BYOK mode with local LLMs <a href="https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html" class="footnote-ref">[9]</a>.</li>
+
+<li>Scale concerns: One Reddit discussion about LiteLLM alternatives cited growing traffic, overhead, multi-provider support, cost and usage tracking as reasons teams reassess the model-traffic layer before committing further <a href="https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>A Reddit development team scaling its LLM traffic: The team had been using LiteLLM in front of its model traffic, but said higher traffic brought overhead, missing features and doubts about whether it was the right long-term tool, prompting a search for alternatives with better multi-provider support, cost tracking and usage monitoring.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Mantis maintainers: The project says it is built for small teams that want gateway features while keeping control over infrastructure and data, and packages a FastAPI service, React dashboard, Terraform infrastructure and Python SDK.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/mantis-llm-gateway">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Hugging Face: Hugging Face describes Jobs as a quick pay-per-hardware route for tests, evaluations and batch generation, while directing users needing a managed production service to Inference Endpoints.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://huggingface.co/blog/vllm-jobs">Hugging Face</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Computerwoche: Computerwoche says local LLMs can help prevent external applications from processing sensitive data or using it to train underlying models, but warns that laptop-scale models often do not match the best-known commercial GenAI tools.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html">Computerwoche</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>AWS-native gateway deployment: Mantis documents deployment through Terraform, ECS Fargate, an application load balancer, ElastiCache, Parameter Store, S3, IAM and CloudWatch, tying runtime traffic control to AWS infrastructure primitives <a href="https://github.com/mantis-llm-gateway" class="footnote-ref">[3]</a>.</li>
+
+<li>HF Jobs port exposure: The Hugging Face walkthrough exposes vLLM&#x27;s port 8000 through the public Jobs proxy and requires an HF token with read access to reach the generated job URL <a href="https://huggingface.co/blog/vllm-jobs" class="footnote-ref">[6]</a>.</li>
+
+<li>BYOK isolation: VS Code 1.122&#x27;s BYOK mode works without GitHub login and is designed for isolated or restricted environments using chat, tools and MCP servers, including local-model workflows <a href="https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Developer tooling: VS Code 1.122&#x27;s BYOK mode allows AI coding workflows with providers other than GitHub Copilot and with local hosts in the editor <a href="https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html" class="footnote-ref">[9]</a>.</li>
+
+<li>Scaling challenges: Teams using proxy layers such as LiteLLM are reporting overhead and feature gaps as traffic grows and are looking for alternatives with multi-provider support, cost tracking and usage monitoring <a href="https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>OpenAI-compatible endpoints let applications send traffic to multiple providers or self-hosted systems with less integration work <a href="https://huggingface.co/blog/vllm-jobs" class="footnote-ref">[6]</a>[common].</li><li>Gateway products are packaging routing, caching, guardrails and observability for teams operating multiple models <a href="https://github.com/mantis-llm-gateway" class="footnote-ref">[3]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test a short-lived private endpoint: Use Hugging Face&#x27;s documented hf jobs run command with vllm/vllm-openai, a selected GPU flavor and a timeout so the test server shuts down after the chosen duration <a href="https://huggingface.co/blog/vllm-jobs" class="footnote-ref">[6]</a>.</li>
+
+<li>Check local hardware before choosing a model: Match the model to the task and machine constraints, since Computerwoche identifies model fit on available hardware as the main obstacle for local LLM use <a href="https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1ughcl0/local_llm_peeps/">https://www.reddit.com/r/LocalLLaMA/comments/1ughcl0/local_llm_peeps/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiXEFVX3lxTFBsQmNRSVdJZDZEcVYyVnM3SWxwWWFoR0VDU3Qtbjk0bUc2QkhUNzhnM1RMM2x5a3lURTRtaTJraVowSExHYklFX3NCVzdpcjhLcF91SWhKWXliVEFR">https://news.google.com/atom/articles/CBMiXEFVX3lxTFBsQmNRSVdJZDZEcVYyVnM3SWxwWWFoR0VDU3Qtbjk0bUc2QkhUNzhnM1RMM2x5a3lURTRtaTJraVowSExHYklFX3NCVzdpcjhLcF91SWhKWXliVEFR</a></li>
+
+
+
+<li><a href="https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html">https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html</a></li>
+
+
+
+<li><a href="https://huggingface.co/blog/vllm-jobs">https://huggingface.co/blog/vllm-jobs</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/">https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/</a></li>
+
+
+
+<li><a href="https://github.com/mantis-llm-gateway">https://github.com/mantis-llm-gateway</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/MachineLearning/comments/1ufyuph/howre_you_deploying_llms_in_production_nowadays/">https://www.reddit.com/r/MachineLearning/comments/1ufyuph/howre_you_deploying_llms_in_production_nowadays/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1ug0bzt/howre_you_deploying_llms_in_production_nowadays/">https://www.reddit.com/r/LLMDevs/comments/1ug0bzt/howre_you_deploying_llms_in_production_nowadays/</a></li>
+
+
+
+
+
+<li><a href="https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html">https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, github.com, google.com, huggingface.co, computerwoche.de</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 5 unique domains, 10 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/raiyanyahya",
+      "date": "2026-06-26T22:01:17.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1ugkghj/self_hosting_the_modern_llm_stack/",
+      "title": "Self hosting the modern LLM stack."
+    },
+    {
+      "author": "/u/Necessary_Gazelle211",
+      "date": "2026-06-26T07:54:36.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1ug0bzt/howre_you_deploying_llms_in_production_nowadays/",
+      "title": "How\u0027re you deploying LLMs in production now-a-days? What\u0027s the best and most affordable way?"
+    },
+    {
+      "author": "rizsyed1",
+      "date": "2026-06-26T19:15:04.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/mantis-llm-gateway",
+      "title": "Show HN: Mantis, A self-hosted LLM gateway"
+    },
+    {
+      "author": "/u/CreamPitiful4295",
+      "date": "2026-06-26T20:01:23.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1ughcl0/local_llm_peeps/",
+      "title": "Local LLM Peeps"
+    },
+    {
+      "date": "2026-06-27T00:58:03.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiXEFVX3lxTFBsQmNRSVdJZDZEcVYyVnM3SWxwWWFoR0VDU3Qtbjk0bUc2QkhUNzhnM1RMM2x5a3lURTRtaTJraVowSExHYklFX3NCVzdpcjhLcF91SWhKWXliVEFR",
+      "title": "llm-d: Distributed LLM Inference on Kubernetes - YouTube"
+    },
+    {
+      "date": "2026-06-26T00:00:00.000Z",
+      "domain": "huggingface.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://huggingface.co/blog/vllm-jobs",
+      "title": "Run a vLLM Server on HF Jobs in One Command"
+    },
+    {
+      "author": "/u/Necessary_Gazelle211",
+      "date": "2026-06-26T06:29:59.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/MachineLearning/comments/1ufyuph/howre_you_deploying_llms_in_production_nowadays/",
+      "title": "How\u0027re you deploying LLMs in production now-a-days? What\u0027s the best and most affordable way? [D]"
+    },
+    {
+      "date": "2026-06-27T03:57:00.000Z",
+      "domain": "computerwoche.de",
+      "image": "https://kagiproxy.com/img/ZTuLUBclCr4lZ6gNNSnvlEktMeIhkA0Ay1q-KPDm7qoggqOnus0SXwMrFQgYIiaNoH52ibKrhzJWQt08y86UbqRU-23sq02-UyTgxfvHd85ces4",
+      "image_caption": "",
+      "link": "https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html",
+      "title": "Large-Language-Model-Tutorial: 5 Wege, LLMs lokal auszuf\u00fchren"
+    },
+    {
+      "date": "2026-06-26T04:00:00.000Z",
+      "domain": "computerwoche.de",
+      "image": "https://kagiproxy.com/img/4zRl0Jz5f9kSJnbO3JhEylYE1lFZXxIzPZsMDxt5EuxmneVVrzSd0CVwaCqP6KpKAEILx0XLcACGnaA_rTULy4ulzKgdNYg08Ha-GnmC4xMCHT3JoQETKhtjwt9cAA0",
+      "image_caption": "",
+      "link": "https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html",
+      "title": "Visual Studio Code mit lokalem LLM nutzen \u2013 so geht\u2018s"
+    },
+    {
+      "author": "/u/soleilmistt",
+      "date": "2026-06-26T03:48:13.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/",
+      "title": "Looking for a LiteLLM Alternative, What Are You Running Instead?"
+    }
+  ],
+  "business_angle": [
+    "OpenAI-compatible endpoints let applications send traffic to multiple providers or self-hosted systems with less integration work [huggingface.co#1][common].",
+    "Gateway products are packaging routing, caching, guardrails and observability for teams operating multiple models [github.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=huggingface.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "huggingface.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerwoche.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerwoche.de"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udda5\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Developer tooling: VS Code 1.122\u0027s BYOK mode allows AI coding workflows with providers other than GitHub Copilot and with local hosts in the editor [computerwoche.de#2].",
+    "Scaling challenges: Teams using proxy layers such as LiteLLM are reporting overhead and feature gaps as traffic grows and are looking for alternatives with multi-provider support, cost tracking and usage monitoring [reddit.com#5]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Deployment",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 10,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/"
+        }
+      ],
+      "text": "A Reddit development team scaling its LLM traffic: The team had been using LiteLLM in front of its model traffic, but said higher traffic brought overhead, missing features and doubts about whether it was the right long-term tool, prompting a search for alternatives with better multi-provider support, cost tracking and usage monitoring."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/mantis-llm-gateway"
+        }
+      ],
+      "text": "Mantis maintainers: The project says it is built for small teams that want gateway features while keeping control over infrastructure and data, and packages a FastAPI service, React dashboard, Terraform infrastructure and Python SDK."
+    },
+    {
+      "sources": [
+        {
+          "name": "Hugging Face",
+          "url": "https://huggingface.co/blog/vllm-jobs"
+        }
+      ],
+      "text": "Hugging Face: Hugging Face describes Jobs as a quick pay-per-hardware route for tests, evaluations and batch generation, while directing users needing a managed production service to Inference Endpoints."
+    },
+    {
+      "sources": [
+        {
+          "name": "Computerwoche",
+          "url": "https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html"
+        }
+      ],
+      "text": "Computerwoche: Computerwoche says local LLMs can help prevent external applications from processing sensitive data or using it to train underlying models, but warns that laptop-scale models often do not match the best-known commercial GenAI tools."
+    }
+  ],
+  "primary_image": {
+    "caption": "Visual Studio Code workflow for using a local LLM",
+    "credit": "computerwoche.de",
+    "link": "https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html",
+    "url": "https://kagiproxy.com/img/Z6X2eqVXELaUO7q6_fbaFSaNu6Irkf6Q9eANghro1qw3bq6dSHIqw2oDMs755hEDDZT4hd4FN0n8MCtBUR-P9qq8YgLd2f-Z5bcDWpVV9l02Mh-Nz5RMBAWI_UohbH8"
+  },
+  "published": "2026-06-27T12:00:12.068Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.reddit.com/r/LocalLLaMA/comments/1ughcl0/local_llm_peeps/",
+    "https://news.google.com/atom/articles/CBMiXEFVX3lxTFBsQmNRSVdJZDZEcVYyVnM3SWxwWWFoR0VDU3Qtbjk0bUc2QkhUNzhnM1RMM2x5a3lURTRtaTJraVowSExHYklFX3NCVzdpcjhLcF91SWhKWXliVEFR",
+    "https://www.computerwoche.de/article/4189455/visual-studio-code-mit-lokalem-llm-nutzen-so-gehts.html",
+    "https://huggingface.co/blog/vllm-jobs",
+    "https://www.reddit.com/r/LLMDevs/comments/1ufvpu9/looking_for_a_litellm_alternative_what_are_you/",
+    "https://github.com/mantis-llm-gateway",
+    "https://www.reddit.com/r/MachineLearning/comments/1ufyuph/howre_you_deploying_llms_in_production_nowadays/",
+    "https://www.reddit.com/r/LLMDevs/comments/1ug0bzt/howre_you_deploying_llms_in_production_nowadays/",
+    "https://www.reddit.com/r/LLMDevs/comments/1ugkghj/self_hosting_the_modern_llm_stack/",
+    "https://www.computerwoche.de/article/2830445/5-wege-llms-lokal-auszufuehren.html"
+  ],
+  "suggested_qna": [],
+  "summary": "Developers and toolmakers are focusing on private, self-hosted LLM infrastructure, with discussions centered on owning the full application stack, fine-tuning open-source models and avoiding low-level CUDA or Transformers setup work [reddit.com#2][reddit.com#4]. Tools described this week target different parts of that workflow: Mantis offers a self-hosted LLM gateway for routing, failover, caching, guardrails and observability, while Hugging Face showed how to launch a private, OpenAI-compatible vLLM endpoint on its Jobs infrastructure with one command [github.com#1][huggingface.co#1].\n\nComputerwoche described five ways to run LLMs locally and said the main practical hurdle is choosing a model that fits the task and available hardware, after testing options on a Windows PC with an Intel i9, 64 GB RAM and a 12 GB Nvidia GeForce GPU, plus a Mac with an M1 chip and 16 GB RAM [computerwoche.de#1]. A separate Computerwoche article said Visual Studio Code 1.122 adds a bring-your-own-key mode without GitHub login, enabling chat, tools and MCP servers in restricted environments and supporting offline workflows with local models such as Ollama [computerwoche.de#2].",
+  "talking_points": [
+    "Gateway scope: Mantis exposes one stable chat-completions API and centralizes weighted targets, fallback chains, retries, timeouts, cooldowns, exact prompt caching and optional semantic caching [github.com#1].",
+    "Cloud shortcut: Hugging Face\u0027s example uses the official vllm/vllm-openai image, an A10G-large GPU flavor, exposed port 8000 and Qwen/Qwen3-4B for a two-hour vLLM server job [huggingface.co#1].",
+    "Editor integration: VS Code still does not host local models itself, so Computerwoche points users to external hosts such as LM Studio when using BYOK mode with local LLMs [computerwoche.de#2].",
+    "Scale concerns: One Reddit discussion about LiteLLM alternatives cited growing traffic, overhead, multi-provider support, cost and usage tracking as reasons teams reassess the model-traffic layer before committing further [reddit.com#5]."
+  ],
+  "technical_details": [
+    "AWS-native gateway deployment: Mantis documents deployment through Terraform, ECS Fargate, an application load balancer, ElastiCache, Parameter Store, S3, IAM and CloudWatch, tying runtime traffic control to AWS infrastructure primitives [github.com#1].",
+    "HF Jobs port exposure: The Hugging Face walkthrough exposes vLLM\u0027s port 8000 through the public Jobs proxy and requires an HF token with read access to reach the generated job URL [huggingface.co#1].",
+    "BYOK isolation: VS Code 1.122\u0027s BYOK mode works without GitHub login and is designed for isolated or restricted environments using chat, tools and MCP servers, including local-model workflows [computerwoche.de#2]."
+  ],
+  "timeline": [],
+  "title": "Developers weigh self-hosted LLM deployment options",
+  "travel_advisory": "",
+  "unique_domains": 5,
+  "url": "https://www.reddit.com/r/LLMDevs/comments/1ugkghj/self_hosting_the_modern_llm_stack/",
+  "user_action_items": [
+    "Test a short-lived private endpoint: Use Hugging Face\u0027s documented hf jobs run command with vllm/vllm-openai, a selected GPU flavor and a timeout so the test server shuts down after the chosen duration [huggingface.co#1].",
+    "Check local hardware before choosing a model: Match the model to the task and machine constraints, since Computerwoche identifies model fit on available hardware as the main obstacle for local LLM use [computerwoche.de#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
