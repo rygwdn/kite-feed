@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Open-source AI tools target privacy, drift and evaluation - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Open-source AI tools target privacy, drift and evaluation</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI developer projects and research published around July 3-4 focused on auditing, privacy and reliability in LLM applications. Repo-Slopscore says it scanned 5,222 repositories for possible AI contributions via commit analysis, while Gavio describes an open-source gateway that routes LLM requests through pre- and post-call interceptors for PII protection, retries, cost tracking and audit logging <a href="https://slopscan.ava.pet/" class="footnote-ref">[8]</a><a href="https://github.com/lotus-data/lotus" class="footnote-ref">[3]</a>. PrivAiTe offers a self-hosted proxy that reversibly redacts personal data before LLM calls, and Seismograph describes an early-warning system for silent model API drift when providers change behavior without changing model names or endpoints <a href="https://github.com/crp4222/PrivAiTe" class="footnote-ref">[6]</a><a href="https://github.com/surfgolfski-dev/billy" class="footnote-ref">[9]</a>.
+
+Other sources in the batch address agent evaluation and large-scale LLM workflows. GroundEval, an arXiv paper revised July 2, proposes deterministic agent evaluation based on what an agent searched, fetched, cited and was allowed to access; in one case study, two frontier LLM judges scored a plausible response at 0.85 or higher while GroundEval scored it 0.000 because the trace showed the agent never retrieved the artifact its answer depended on <a href="https://arxiv.org/abs/2606.22737" class="footnote-ref">[2]</a>. LOTUS, from Stanford University and UC Berkeley, describes semantic operators for bulk LLM processing over datasets, while OpenLLMStack’s 2026 statistics roundup cites more than 2 million public model repositories on Hugging Face <a href="https://github.com/manojmallick/gavio" class="footnote-ref">[10]</a><a href="https://openllmstack.com/blog/open-source-llm-statistics/" class="footnote-ref">[5]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/Tania-coder/SEISMOGRAPH">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> Lenny the LLM explains model weights by presenting an 80-billion-parameter model as a character with one internal dial for every number it contains <a href="https://www.ivokund.com/lenny-the-llm-life-as-a-language-model/" class="footnote-ref">[7]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Gateway design: Gavio says its API works in Python, Java and JavaScript, with provider-agnostic routing across OpenAI, Anthropic, Gemini, Azure, Ollama and mock providers <a href="https://github.com/lotus-data/lotus" class="footnote-ref">[3]</a>.</li>
+
+<li>Redaction scope: PrivAiTe says its proxy redacts names, emails, phone numbers, cards, IBANs, secrets and passwords, including data inside tool-call arguments and multimodal content <a href="https://github.com/crp4222/PrivAiTe" class="footnote-ref">[6]</a>.</li>
+
+<li>Drift monitoring: Seismograph describes a live dashboard for four production models and says its probe SDK requires Python 3.11 or newer <a href="https://github.com/surfgolfski-dev/billy" class="footnote-ref">[9]</a>.</li>
+
+<li>Agent memory: Context Warp Drive’s author says long-running agents face tradeoffs between 1M-2M token context windows and LLM-based summarization that can drop identifiers such as UUIDs, paths and hashes <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1umrogw/context_warp_drive_deterministic_context_folding/" class="footnote-ref">[11]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>GroundEval author Jeffrey Flynt argues that final-answer and LLM-judge evaluations cannot detect invalid evidence paths by construction, so GroundEval scores both the answer and the recorded trajectory that produced it.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2606.22737">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>OpenLLMStack author Sherlock Xu says the statistics roundup prioritizes first-party reports, research papers, official documentation and original datasets from sources such as Stanford AI Index, Hugging Face, Meta, OpenRouter and Stack Overflow.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://openllmstack.com/blog/open-source-llm-statistics/">OpenLLMStack</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>22 June 2026:</strong> GroundEval paper first submitted to arXiv <a href="https://arxiv.org/abs/2606.22737" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>2 July 2026:</strong> GroundEval revised to version two on arXiv <a href="https://arxiv.org/abs/2606.22737" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>3 July 2026:</strong> PrivAiTe GitHub listing published in source feed <a href="https://github.com/crp4222/PrivAiTe" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>4 July 2026:</strong> Repo-Slopscore listed recent scans of major repositories <a href="https://slopscan.ava.pet/" class="footnote-ref">[8]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Reversible redaction: PrivAiTe replaces detected sensitive values with placeholders before provider calls and restores the real values in the response, including across text, tool-call arguments and multimodal content <a href="https://github.com/crp4222/PrivAiTe" class="footnote-ref">[6]</a>.</li>
+
+<li>Interceptor chain: Gavio places composable pre- and post-call interceptors around provider requests, so controls such as PII guards, secret scanning, retries, fallback routing, cost tracking and audits run as pipeline steps <a href="https://github.com/lotus-data/lotus" class="footnote-ref">[3]</a>.</li>
+
+<li>Trace-grounded scoring: GroundEval scores an agent’s final answer and recorded tool trajectory, including searched, fetched, cited and access-permitted evidence <a href="https://arxiv.org/abs/2606.22737" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Methodological transparency: The paper uses structured per-question diagnostics to make each score inspectable through tool activity and turn-level narration rather than relying only on a judge model’s reported score <a href="https://arxiv.org/abs/2606.22737" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Before sending sensitive prompts, test privacy coverage: Route representative prompts with names, emails, cards, IBANs, secrets and tool-call arguments through a local redaction proxy such as PrivAiTe, then inspect whether placeholders replace the original values before provider calls <a href="https://github.com/crp4222/PrivAiTe" class="footnote-ref">[6]</a>.</li>
+
+<li>Add drift checks to production LLM workflows: Use a fixed probe set and compare current model responses with a stored baseline, the approach Seismograph describes for detecting silent behavior changes <a href="https://github.com/surfgolfski-dev/billy" class="footnote-ref">[9]</a>.</li>
+
+<li>Audit agent answers against traces: Record what an agent searched, fetched and cited, then verify that final claims rely only on accessible evidence rather than judging the answer text alone <a href="https://arxiv.org/abs/2606.22737" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1umrogw/context_warp_drive_deterministic_context_folding/">https://www.reddit.com/r/ArtificialInteligence/comments/1umrogw/context_warp_drive_deterministic_context_folding/</a></li>
+
+
+
+<li><a href="https://www.ivokund.com/lenny-the-llm-life-as-a-language-model/">https://www.ivokund.com/lenny-the-llm-life-as-a-language-model/</a></li>
+
+
+
+<li><a href="https://github.com/manojmallick/gavio">https://github.com/manojmallick/gavio</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.22737">https://arxiv.org/abs/2606.22737</a></li>
+
+
+
+<li><a href="https://slopscan.ava.pet/">https://slopscan.ava.pet/</a></li>
+
+
+
+<li><a href="https://github.com/crp4222/PrivAiTe">https://github.com/crp4222/PrivAiTe</a></li>
+
+
+
+<li><a href="https://steenbok.space/blog/ai-etiquette/">https://steenbok.space/blog/ai-etiquette/</a></li>
+
+
+
+<li><a href="https://github.com/surfgolfski-dev/billy">https://github.com/surfgolfski-dev/billy</a></li>
+
+
+
+
+
+<li><a href="https://openllmstack.com/blog/open-source-llm-statistics/">https://openllmstack.com/blog/open-source-llm-statistics/</a></li>
+
+
+
+<li><a href="https://github.com/lotus-data/lotus">https://github.com/lotus-data/lotus</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> github.com, arxiv.org, steenbok.space, openllmstack.com, ivokund.com, ava.pet, reddit.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 7 unique domains, 11 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "tania-coder",
+      "date": "2026-07-03T11:57:06.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Tania-coder/SEISMOGRAPH",
+      "title": "Seismograph \u2013 open-source early warning for silent LLM API drift"
+    },
+    {
+      "author": "jflynt76",
+      "date": "2026-07-03T04:51:43.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.22737",
+      "title": "A Deterministic Replacement for LLM-as-Judge in Stateful Agent Evaluation"
+    },
+    {
+      "author": "handfuloflight",
+      "date": "2026-07-03T02:35:05.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/lotus-data/lotus",
+      "title": "Lotus: Optimized Agentic and LLM Bulk Processing"
+    },
+    {
+      "author": "sporkl_l",
+      "date": "2026-07-03T01:39:37.000Z",
+      "domain": "steenbok.space",
+      "image": "",
+      "image_caption": "",
+      "link": "https://steenbok.space/blog/ai-etiquette/",
+      "title": "Some Basic LLM Etiquette"
+    },
+    {
+      "author": "sherlockxu",
+      "date": "2026-07-03T01:24:00.000Z",
+      "domain": "openllmstack.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://openllmstack.com/blog/open-source-llm-statistics/",
+      "title": "Open Source LLM Statistics and Trends (2026)"
+    },
+    {
+      "author": "crp4222",
+      "date": "2026-07-03T15:12:39.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/crp4222/PrivAiTe",
+      "title": "PrivAiTe: Self-hosted proxy that redacts PII from LLM calls, incl. tool-calls"
+    },
+    {
+      "author": "ikund",
+      "date": "2026-07-03T12:17:55.000Z",
+      "domain": "ivokund.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ivokund.com/lenny-the-llm-life-as-a-language-model/",
+      "title": "Lenny the LLM \u2013 You will learn how LLMs work from this fun short story"
+    },
+    {
+      "author": "birdculture",
+      "date": "2026-07-04T00:05:37.000Z",
+      "domain": "ava.pet",
+      "image": "",
+      "image_caption": "",
+      "link": "https://slopscan.ava.pet/",
+      "title": "Repo-Slopscore: Detecting AI Contributions in Git Repositories via Commit"
+    },
+    {
+      "author": "tmblwd73",
+      "date": "2026-07-04T00:02:23.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/surfgolfski-dev/billy",
+      "title": "How HN: Billy \u2013 a self-hosted AI assistant that lives in your Telegram"
+    },
+    {
+      "author": "cees007",
+      "date": "2026-07-04T00:04:06.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/manojmallick/gavio",
+      "title": "Show HN: Gavio: open-source interceptor pipeline for production LLM applications"
+    },
+    {
+      "author": "/u/MusicToThyEars",
+      "date": "2026-07-03T22:10:58.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1umrogw/context_warp_drive_deterministic_context_folding/",
+      "title": "Context Warp Drive: deterministic context folding for long-running AI agents"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "Lenny the LLM explains model weights by presenting an 80-billion-parameter model as a character with one internal dial for every number it contains [ivokund.com#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=steenbok.space\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "steenbok.space"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=openllmstack.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "openllmstack.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ivokund.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ivokund.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ava.pet\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ava.pet"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee0\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Infrastructure",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 11,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2606.22737"
+        }
+      ],
+      "text": "GroundEval author Jeffrey Flynt argues that final-answer and LLM-judge evaluations cannot detect invalid evidence paths by construction, so GroundEval scores both the answer and the recorded trajectory that produced it."
+    },
+    {
+      "sources": [
+        {
+          "name": "OpenLLMStack",
+          "url": "https://openllmstack.com/blog/open-source-llm-statistics/"
+        }
+      ],
+      "text": "OpenLLMStack author Sherlock Xu says the statistics roundup prioritizes first-party reports, research papers, official documentation and original datasets from sources such as Stanford AI Index, Hugging Face, Meta, OpenRouter and Stack Overflow."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-04T12:00:12.111Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Methodological transparency: The paper uses structured per-question diagnostics to make each score inspectable through tool activity and turn-level narration rather than relying only on a judge model\u2019s reported score [arxiv.org#1]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1umrogw/context_warp_drive_deterministic_context_folding/",
+    "https://www.ivokund.com/lenny-the-llm-life-as-a-language-model/",
+    "https://github.com/manojmallick/gavio",
+    "https://arxiv.org/abs/2606.22737",
+    "https://slopscan.ava.pet/",
+    "https://github.com/crp4222/PrivAiTe",
+    "https://steenbok.space/blog/ai-etiquette/",
+    "https://github.com/surfgolfski-dev/billy",
+    "https://github.com/Tania-coder/SEISMOGRAPH",
+    "https://openllmstack.com/blog/open-source-llm-statistics/",
+    "https://github.com/lotus-data/lotus"
+  ],
+  "suggested_qna": [],
+  "summary": "AI developer projects and research published around July 3-4 focused on auditing, privacy and reliability in LLM applications. Repo-Slopscore says it scanned 5,222 repositories for possible AI contributions via commit analysis, while Gavio describes an open-source gateway that routes LLM requests through pre- and post-call interceptors for PII protection, retries, cost tracking and audit logging [ava.pet#1][github.com#2]. PrivAiTe offers a self-hosted proxy that reversibly redacts personal data before LLM calls, and Seismograph describes an early-warning system for silent model API drift when providers change behavior without changing model names or endpoints [github.com#3][github.com#4].\n\nOther sources in the batch address agent evaluation and large-scale LLM workflows. GroundEval, an arXiv paper revised July 2, proposes deterministic agent evaluation based on what an agent searched, fetched, cited and was allowed to access; in one case study, two frontier LLM judges scored a plausible response at 0.85 or higher while GroundEval scored it 0.000 because the trace showed the agent never retrieved the artifact its answer depended on [arxiv.org#1]. LOTUS, from Stanford University and UC Berkeley, describes semantic operators for bulk LLM processing over datasets, while OpenLLMStack\u2019s 2026 statistics roundup cites more than 2 million public model repositories on Hugging Face [github.com#5][openllmstack.com#1].",
+  "talking_points": [
+    "Gateway design: Gavio says its API works in Python, Java and JavaScript, with provider-agnostic routing across OpenAI, Anthropic, Gemini, Azure, Ollama and mock providers [github.com#2].",
+    "Redaction scope: PrivAiTe says its proxy redacts names, emails, phone numbers, cards, IBANs, secrets and passwords, including data inside tool-call arguments and multimodal content [github.com#3].",
+    "Drift monitoring: Seismograph describes a live dashboard for four production models and says its probe SDK requires Python 3.11 or newer [github.com#4].",
+    "Agent memory: Context Warp Drive\u2019s author says long-running agents face tradeoffs between 1M-2M token context windows and LLM-based summarization that can drop identifiers such as UUIDs, paths and hashes [reddit.com#1]."
+  ],
+  "technical_details": [
+    "Reversible redaction: PrivAiTe replaces detected sensitive values with placeholders before provider calls and restores the real values in the response, including across text, tool-call arguments and multimodal content [github.com#3].",
+    "Interceptor chain: Gavio places composable pre- and post-call interceptors around provider requests, so controls such as PII guards, secret scanning, retries, fallback routing, cost tracking and audits run as pipeline steps [github.com#2].",
+    "Trace-grounded scoring: GroundEval scores an agent\u2019s final answer and recorded tool trajectory, including searched, fetched, cited and access-permitted evidence [arxiv.org#1]."
+  ],
+  "timeline": [
+    {
+      "content": "GroundEval paper first submitted to arXiv [arxiv.org#1]",
+      "date": "22 June 2026",
+      "date_iso": "2026-06-22"
+    },
+    {
+      "content": "GroundEval revised to version two on arXiv [arxiv.org#1]",
+      "date": "2 July 2026",
+      "date_iso": "2026-07-02"
+    },
+    {
+      "content": "PrivAiTe GitHub listing published in source feed [github.com#3]",
+      "date": "3 July 2026",
+      "date_iso": "2026-07-03"
+    },
+    {
+      "content": "Repo-Slopscore listed recent scans of major repositories [ava.pet#1]",
+      "date": "4 July 2026",
+      "date_iso": "2026-07-04"
+    }
+  ],
+  "title": "Open-source AI tools target privacy, drift and evaluation",
+  "travel_advisory": "",
+  "unique_domains": 7,
+  "url": "https://github.com/Tania-coder/SEISMOGRAPH",
+  "user_action_items": [
+    "Before sending sensitive prompts, test privacy coverage: Route representative prompts with names, emails, cards, IBANs, secrets and tool-call arguments through a local redaction proxy such as PrivAiTe, then inspect whether placeholders replace the original values before provider calls [github.com#3].",
+    "Add drift checks to production LLM workflows: Use a fixed probe set and compare current model responses with a stored baseline, the approach Seismograph describes for detecting silent behavior changes [github.com#4].",
+    "Audit agent answers against traces: Record what an agent searched, fetched and cited, then verify that final claims rely only on accessible evidence rather than judging the answer text alone [arxiv.org#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
