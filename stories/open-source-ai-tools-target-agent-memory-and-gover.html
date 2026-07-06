@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Open-source AI tools target agent memory and governance - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Open-source AI tools target agent memory and governance</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Developers released or promoted several open-source and self-hosted AI tools, many of them focused on AI agents that keep context, coordinate work, or run under local control. The projects include an MCP server for persistent video memory, a Chrome extension for saving ChatGPT and Claude conversations, a Cursor workflow plugin, a self-hosted LLM gateway with RBAC, Omnigent as a meta-harness for several coding agents, and Gas Town for coordinating AI coding agents with persistent work tracking <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1uoj6uh/i_built_an_opensource_mcp_server_that_gives_ai/" class="footnote-ref">[2]</a><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1uogl85/i_built_a_chrome_extension_because_i_got_tired_of/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1unwrtc/built_a_plugin_that_gives_cursor_agents/" class="footnote-ref">[4]</a><a href="https://github.com/openai/codex-plugin-cc" class="footnote-ref">[1]</a><a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/" class="footnote-ref">[24]</a><a href="https://github.com/Zackriya-Solutions/meetily" class="footnote-ref">[25]</a>.
+
+The software targets recurring workflow problems around lost context, fragmented agent interfaces, cloud dependence, and governance gaps. Several projects describe local or self-hosted operation, including Goldseam for repairing Cypress selectors without vendor-cloud execution, Meetily for meeting transcription and summaries on local infrastructure, Athanor Lite for local model management with no telemetry after model download, and Promptly as a self-hosted multi-user AI chat app <a href="https://github.com/SakanaAI/fugu" class="footnote-ref">[9]</a><a href="https://github.com/prahladyeri/gubbi" class="footnote-ref">[12]</a><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/" class="footnote-ref">[17]</a><a href="https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/" class="footnote-ref">[16]</a>.
+
+Several projects also address agent orchestration and controls: OpenAI published a Codex plugin for Claude Code, SakanaAI’s Fugu presents a multi-agent system as a single API, AKM-CLR sits above OpenAI-compatible LLM serving engines to forward, fall back, or block requests before inference, and the.NET team’s skills repository provides curated agent skills for coding agents <a href="https://github.com/dotnet/skills" class="footnote-ref">[27]</a><a href="https://github.com/bharadwaj-pendyala/sidenote" class="footnote-ref">[8]</a><a href="https://github.com/croit/llm-gateway" class="footnote-ref">[6]</a><a href="https://github.com/gastownhall/gastown" class="footnote-ref">[26]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/openai/codex-plugin-cc">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Governance controls: Omnigent applies policies to shell commands, file edits and token spend, while AKM-CLR adds tenant/task authorization, routing policy, blocking before inference, fallback handling, output-guard checks and audit traces <a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/" class="footnote-ref">[24]</a><a href="https://github.com/croit/llm-gateway" class="footnote-ref">[6]</a>.</li>
+
+<li>Local operation: Goldseam lets users bring Claude Code CLI, Ollama, an OpenAI-compatible endpoint or any command-line model runner, while Athanor Lite says it scans GPU and VRAM to recommend local models <a href="https://github.com/SakanaAI/fugu" class="footnote-ref">[9]</a><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/" class="footnote-ref">[17]</a>.</li>
+
+<li>Coding workflows: Sidenote turns comments on rendered markdown into reviewable git diffs, and MAS Workflow Kit installs a multi-agent dev workflow into any Cursor project, with sub-agents for implementation, testing, PR review, and architecture audits <a href="https://github.com/irenee28/akm-clr-governance-layer" class="footnote-ref">[7]</a><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1unwrtc/built_a_plugin_that_gives_cursor_agents/" class="footnote-ref">[4]</a>.</li>
+
+<li>Repository metrics: Meetily’s repository listed 17.8k stars and 556 commits, Gas Town listed 16.5k stars and 7,655 commits, and OpenAI’s Codex plugin listed 25.8k stars and 28 commits in the provided GitHub snapshots <a href="https://github.com/prahladyeri/gubbi" class="footnote-ref">[12]</a><a href="https://github.com/Zackriya-Solutions/meetily" class="footnote-ref">[25]</a><a href="https://github.com/dotnet/skills" class="footnote-ref">[27]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Omnigent: The project describes a common layer above Claude Code, Codex, Cursor, OpenCode, Hermes, Pi and YAML-defined agents, with policies that can allow, block or pause actions for approval.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/">Help Net Security</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Goldseam: The project describes itself as a bring-your-own-model alternative to Cypress Cloud’s cy.prompt(), with each selector repair converted into a reviewed file diff.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/adam-s/goldseam">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>AKM-CLR: The governance-layer prototype says vLLM handles fast serving while AKM-CLR governs whether tenant requests should reach the backend at all.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/irenee28/akm-clr-governance-layer">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Gas Town: The project says persistent git-backed hooks, mailboxes, identities and handoffs address AI agents losing context on restart and becoming hard to coordinate.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/gastownhall/gastown">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Policy stacking: Omnigent policies stack at server-wide, per-agent and per-session levels, and the article says a person in a session can tighten but not loosen rules inherited from higher levels <a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/" class="footnote-ref">[24]</a>.</li>
+
+<li>Closed-loop training: UATC combines a Kalman filter, PID controller with anti-windup, Smith predictor, Schmitt triggers, dynamic data pruner and tiered recovery subsystem for OOM and NaN/Inf events <a href="https://github.com/adam-s/goldseam" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI coding tools: OpenAI’s Codex plugin lets Claude Code users launch Codex reviews and delegated tasks from their existing Claude Code workflow, tying two competing coding-agent environments into one command surface <a href="https://github.com/dotnet/skills" class="footnote-ref">[27]</a>.</li>
+
+<li>Enterprise controls: LLM Gateway combines OpenAI-compatible endpoints with OIDC login, per-user API tokens and RBAC-gated server-side tools for administrators of shared model access <a href="https://github.com/openai/codex-plugin-cc" class="footnote-ref">[1]</a>.</li>
+
+<li>Testing automation: Goldseam targets Cypress users by turning broken selector failures into redacted captures, model-proposed minimal fixes, a verification ladder and a one-line diff for review <a href="https://github.com/SakanaAI/fugu" class="footnote-ref">[9]</a>.</li>
+
+<li>Meeting software: Meetily offers meeting capture, real-time transcription and summaries without sending meeting data outside users’ own infrastructure <a href="https://github.com/prahladyeri/gubbi" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Gateway automation: LLM Gateway includes scheduled actions and per-user MCP connectors in addition to access-proxy functions <a href="https://github.com/openai/codex-plugin-cc" class="footnote-ref">[1]</a>.</li><li>Governance layers include spend caps, approval gates and audit trails for agent actions <a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/" class="footnote-ref">[24]</a><a href="https://github.com/croit/llm-gateway" class="footnote-ref">[6]</a>.</li><li>Local-first tools let users route work through Ollama, local endpoints or their own OpenAI-compatible gateways <a href="https://github.com/SakanaAI/fugu" class="footnote-ref">[9]</a><a href="https://www.reddit.com/r/ollama/comments/1uoaylz/web_agent_powered_by_ollama_that_navigates_and/" class="footnote-ref">[15]</a><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/" class="footnote-ref">[17]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test self-hosted gateway controls: Review LLM Gateway’s OIDC, per-user token and RBAC configuration before exposing shared model endpoints to a team <a href="https://github.com/openai/codex-plugin-cc" class="footnote-ref">[1]</a>.</li>
+
+<li>Pilot agent policies: Run a small Omnigent or AKM-CLR evaluation with approval gates, spend limits and audit traces enabled before allowing agents to edit production repositories <a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/" class="footnote-ref">[24]</a><a href="https://github.com/croit/llm-gateway" class="footnote-ref">[6]</a>.</li>
+
+<li>Review local-first privacy claims: Verify network behavior and model-routing settings for local tools such as Athanor Lite, Goldseam and Meetily before using them with sensitive code or meetings <a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/" class="footnote-ref">[17]</a><a href="https://github.com/SakanaAI/fugu" class="footnote-ref">[9]</a><a href="https://github.com/prahladyeri/gubbi" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/prahladyeri/gubbi">https://github.com/prahladyeri/gubbi</a></li>
+
+
+
+<li><a href="https://github.com/dotnet/skills">https://github.com/dotnet/skills</a></li>
+
+
+
+<li><a href="https://cewsco.com/">https://cewsco.com/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1uoj6uh/i_built_an_opensource_mcp_server_that_gives_ai/">https://www.reddit.com/r/ArtificialInteligence/comments/1uoj6uh/i_built_an_opensource_mcp_server_that_gives_ai/</a></li>
+
+
+
+<li><a href="https://github.com/croit/llm-gateway">https://github.com/croit/llm-gateway</a></li>
+
+
+
+<li><a href="https://github.com/sajjaddoda72-design/UATC">https://github.com/sajjaddoda72-design/UATC</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/">https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uohfzu/chabot_with_ollama/">https://www.reddit.com/r/ollama/comments/1uohfzu/chabot_with_ollama/</a></li>
+
+
+
+<li><a href="https://github.com/gastownhall/gastown">https://github.com/gastownhall/gastown</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1unwrtc/built_a_plugin_that_gives_cursor_agents/">https://www.reddit.com/r/ArtificialInteligence/comments/1unwrtc/built_a_plugin_that_gives_cursor_agents/</a></li>
+
+
+
+<li><a href="https://github.com/bharadwaj-pendyala/sidenote">https://github.com/bharadwaj-pendyala/sidenote</a></li>
+
+
+
+<li><a href="https://github.com/irenee28/akm-clr-governance-layer">https://github.com/irenee28/akm-clr-governance-layer</a></li>
+
+
+
+<li><a href="https://github.com/adam-s/goldseam">https://github.com/adam-s/goldseam</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1uogl85/i_built_a_chrome_extension_because_i_got_tired_of/">https://www.reddit.com/r/ArtificialInteligence/comments/1uogl85/i_built_a_chrome_extension_because_i_got_tired_of/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uoaylz/web_agent_powered_by_ollama_that_navigates_and/">https://www.reddit.com/r/ollama/comments/1uoaylz/web_agent_powered_by_ollama_that_navigates_and/</a></li>
+
+
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1uom9zb/as_promised_here_is_the_github_link_for_my_100/">https://www.reddit.com/r/LocalLLaMA/comments/1uom9zb/as_promised_here_is_the_github_link_for_my_100/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uoomle/gostaria_de_um_feedback/">https://www.reddit.com/r/LLMDevs/comments/1uoomle/gostaria_de_um_feedback/</a></li>
+
+
+
+<li><a href="https://github.com/SakanaAI/fugu">https://github.com/SakanaAI/fugu</a></li>
+
+
+
+<li><a href="https://claimmateai.pro/">https://claimmateai.pro/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uo04pe/my_claude_code_setup_as_an_mit_skeleton/">https://www.reddit.com/r/LLMDevs/comments/1uo04pe/my_claude_code_setup_as_an_mit_skeleton/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1uobe9d/congressional_oversight_powered_by_claude/">https://www.reddit.com/r/ArtificialInteligence/comments/1uobe9d/congressional_oversight_powered_by_claude/</a></li>
+
+
+
+<li><a href="https://aischoolbuilder.com/school/school-1786">https://aischoolbuilder.com/school/school-1786</a></li>
+
+
+
+<li><a href="https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/">https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/</a></li>
+
+
+
+<li><a href="https://cachepilot.serveousercontent.com">https://cachepilot.serveousercontent.com</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1uo7b61/i_built_a_native_reddit_app_where_a_council_of_5/">https://www.reddit.com/r/ArtificialInteligence/comments/1uo7b61/i_built_a_native_reddit_app_where_a_council_of_5/</a></li>
+
+
+
+<li><a href="https://github.com/Zackriya-Solutions/meetily">https://github.com/Zackriya-Solutions/meetily</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/">https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, github.com, serveousercontent.com, claimmateai.pro, aischoolbuilder.com, cewsco.com, helpnetsecurity.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 7 unique domains, 28 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-07-06T07:04:15.504Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/openai/codex-plugin-cc",
+      "title": "openai/codex-plugin-cc"
+    },
+    {
+      "author": "/u/Fearless-Role-2707",
+      "date": "2026-07-06T01:11:29.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1uoj6uh/i_built_an_opensource_mcp_server_that_gives_ai/",
+      "title": "I built an open-source MCP server that gives AI agents persistent memory for videos"
+    },
+    {
+      "author": "/u/Last-Bluejay-4443",
+      "date": "2026-07-05T23:14:47.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1uogl85/i_built_a_chrome_extension_because_i_got_tired_of/",
+      "title": "I built a Chrome extension because I got tired of losing my best ChatGPT and Claude conversations"
+    },
+    {
+      "author": "/u/PurchaseFront4196",
+      "date": "2026-07-05T08:25:36.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1unwrtc/built_a_plugin_that_gives_cursor_agents/",
+      "title": "Built a plugin that gives Cursor agents persistent multi-agent workflow (plan \u2192 implement \u2192 test \u2192 PR) \u2014 open source"
+    },
+    {
+      "author": "/u/HarrisonAIx",
+      "date": "2026-07-05T16:59:33.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1uo7b61/i_built_a_native_reddit_app_where_a_council_of_5/",
+      "title": "I built a native Reddit app where a council of 5 AI agents debate and roast your project ideas"
+    },
+    {
+      "author": "Mave83",
+      "date": "2026-07-06T05:29:35.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/croit/llm-gateway",
+      "title": "Self Hosted LLM Gateway and Feature Rich Chat UI with RBAC"
+    },
+    {
+      "author": "akili2805",
+      "date": "2026-07-05T21:58:11.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/irenee28/akm-clr-governance-layer",
+      "title": "AKM-CLR \u2013 pre-inference governance for vLLM-style LLM serving"
+    },
+    {
+      "author": "bharadwajp",
+      "date": "2026-07-05T20:39:11.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/bharadwaj-pendyala/sidenote",
+      "title": "Show HN: Sidenote \u2013 comment on your rendered blog, an LLM writes the Git diff"
+    },
+    {
+      "author": "terminalchai",
+      "date": "2026-07-05T20:13:11.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/SakanaAI/fugu",
+      "title": "Fugu \u2013 A multi-agent LLM orchestrator delivered as a single API"
+    },
+    {
+      "author": "dataviz1000",
+      "date": "2026-07-05T17:27:15.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/adam-s/goldseam",
+      "title": "Show HN: Goldseam \u2013 heal broken Cypress selectors with a local LLM"
+    },
+    {
+      "author": "L_u_u_6",
+      "date": "2026-07-05T13:24:38.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/sajjaddoda72-design/UATC",
+      "title": "Show HN: UATC-Closed-loop VRAM control and dynamic data pruning for LLM training"
+    },
+    {
+      "author": "pyeri",
+      "date": "2026-07-05T12:08:20.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/prahladyeri/gubbi",
+      "title": "Show HN: Gubbi \u2013 Minimalist LLM Chatbot"
+    },
+    {
+      "author": "/u/TenDragonBR",
+      "date": "2026-07-06T05:48:24.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uoomle/gostaria_de_um_feedback/",
+      "title": "Gostaria de um feedback!"
+    },
+    {
+      "author": "/u/sidhunt",
+      "date": "2026-07-05T11:45:37.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uo04pe/my_claude_code_setup_as_an_mit_skeleton/",
+      "title": "My Claude Code setup as an MIT skeleton: local-Ollama task router \u2192 free tiers, cross-session persistence, secret-scan gate (bash + stdlib Python)"
+    },
+    {
+      "author": "/u/FindingDistinct86",
+      "date": "2026-07-05T19:22:35.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uoaylz/web_agent_powered_by_ollama_that_navigates_and/",
+      "title": "Web agent powered by Ollama that navigates and interacts with websites for you"
+    },
+    {
+      "author": "/u/No-Turnover3316",
+      "date": "2026-07-06T04:58:53.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/",
+      "title": "Promptly: a self-hosted, multi-user AI chat app with shared workspaces, research agents, and local voice"
+    },
+    {
+      "author": "/u/BBASecure",
+      "date": "2026-07-05T23:51:55.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/",
+      "title": "Athanor Lite \u2014 free local AI model manager, no cloud, no accounts, no telemetry"
+    },
+    {
+      "author": "/u/saku_3",
+      "date": "2026-07-05T23:52:18.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uohfzu/chabot_with_ollama/",
+      "title": "Chabot with ollama"
+    },
+    {
+      "author": "koaw_moi",
+      "date": "2026-07-06T06:27:02.000Z",
+      "domain": "serveousercontent.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cachepilot.serveousercontent.com",
+      "title": "CachePilot \u2013 Drop-in AI API caching proxy (pay 20% of savings)"
+    },
+    {
+      "author": "hfhfdhf",
+      "date": "2026-07-06T05:03:39.000Z",
+      "domain": "claimmateai.pro",
+      "image": "",
+      "image_caption": "",
+      "link": "https://claimmateai.pro/",
+      "title": "ClaimMate AI \u2013 We\u0027d Love Your Feedback"
+    },
+    {
+      "author": "bokeke1",
+      "date": "2026-07-06T03:41:28.000Z",
+      "domain": "aischoolbuilder.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://aischoolbuilder.com/school/school-1786",
+      "title": "Learn Faster with Your Personal AI Teacher"
+    },
+    {
+      "author": "kalkalka",
+      "date": "2026-07-06T03:20:43.000Z",
+      "domain": "cewsco.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cewsco.com/",
+      "title": "Cewsco \u2013 a multimodal AI assistant powered by Dravik"
+    },
+    {
+      "author": "/u/Responsible_Fig_1271",
+      "date": "2026-07-06T03:44:55.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1uom9zb/as_promised_here_is_the_github_link_for_my_100/",
+      "title": "As promised, here is the GitHub link for my 100% local voice-to-voice assistant"
+    },
+    {
+      "author": "Sinisa Markovic",
+      "date": "2026-07-06T05:30:53.000Z",
+      "domain": "helpnetsecurity.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/",
+      "title": "Omnigent: Open-source AI agent framework and meta-harness"
+    },
+    {
+      "date": "2026-07-06T07:04:14.943Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Zackriya-Solutions/meetily",
+      "title": "Zackriya-Solutions/meetily"
+    },
+    {
+      "date": "2026-07-06T07:04:29.423Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/gastownhall/gastown",
+      "title": "gastownhall/gastown"
+    },
+    {
+      "date": "2026-07-06T07:04:29.564Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/dotnet/skills",
+      "title": "dotnet/skills"
+    },
+    {
+      "author": "/u/Able_Ad9364",
+      "date": "2026-07-05T19:39:45.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1uobe9d/congressional_oversight_powered_by_claude/",
+      "title": "Congressional \ud83c\uddfa\ud83c\uddf8 Oversight \u26a1\ufe0fPowered \ud83d\udd0bBy \ud83e\udd16Claude"
+    }
+  ],
+  "business_angle": [
+    "Gateway automation: LLM Gateway includes scheduled actions and per-user MCP connectors in addition to access-proxy functions [github.com#1].",
+    "Governance layers include spend caps, approval gates and audit trails for agent actions [helpnetsecurity.com#1][github.com#2].",
+    "Local-first tools let users route work through Ollama, local endpoints or their own OpenAI-compatible gateways [github.com#5][reddit.com#7][reddit.com#9]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=serveousercontent.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "serveousercontent.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=claimmateai.pro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "claimmateai.pro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aischoolbuilder.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aischoolbuilder.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cewsco.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cewsco.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=helpnetsecurity.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "helpnetsecurity.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI coding tools: OpenAI\u2019s Codex plugin lets Claude Code users launch Codex reviews and delegated tasks from their existing Claude Code workflow, tying two competing coding-agent environments into one command surface [github.com#11].",
+    "Enterprise controls: LLM Gateway combines OpenAI-compatible endpoints with OIDC login, per-user API tokens and RBAC-gated server-side tools for administrators of shared model access [github.com#1].",
+    "Testing automation: Goldseam targets Cypress users by turning broken selector failures into redacted captures, model-proposed minimal fixes, a verification ladder and a one-line diff for review [github.com#5].",
+    "Meeting software: Meetily offers meeting capture, real-time transcription and summaries without sending meeting data outside users\u2019 own infrastructure [github.com#8]."
+  ],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 28,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Help Net Security",
+          "url": "https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/"
+        }
+      ],
+      "text": "Omnigent: The project describes a common layer above Claude Code, Codex, Cursor, OpenCode, Hermes, Pi and YAML-defined agents, with policies that can allow, block or pause actions for approval."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/adam-s/goldseam"
+        }
+      ],
+      "text": "Goldseam: The project describes itself as a bring-your-own-model alternative to Cypress Cloud\u2019s cy.prompt(), with each selector repair converted into a reviewed file diff."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/irenee28/akm-clr-governance-layer"
+        }
+      ],
+      "text": "AKM-CLR: The governance-layer prototype says vLLM handles fast serving while AKM-CLR governs whether tenant requests should reach the backend at all."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/gastownhall/gastown"
+        }
+      ],
+      "text": "Gas Town: The project says persistent git-backed hooks, mailboxes, identities and handoffs address AI agents losing context on restart and becoming hard to coordinate."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-06T12:00:24.037Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/prahladyeri/gubbi",
+    "https://github.com/dotnet/skills",
+    "https://cewsco.com/",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1uoj6uh/i_built_an_opensource_mcp_server_that_gives_ai/",
+    "https://github.com/croit/llm-gateway",
+    "https://github.com/sajjaddoda72-design/UATC",
+    "https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/",
+    "https://www.reddit.com/r/ollama/comments/1uohfzu/chabot_with_ollama/",
+    "https://github.com/gastownhall/gastown",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1unwrtc/built_a_plugin_that_gives_cursor_agents/",
+    "https://github.com/bharadwaj-pendyala/sidenote",
+    "https://github.com/irenee28/akm-clr-governance-layer",
+    "https://github.com/adam-s/goldseam",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1uogl85/i_built_a_chrome_extension_because_i_got_tired_of/",
+    "https://www.reddit.com/r/ollama/comments/1uoaylz/web_agent_powered_by_ollama_that_navigates_and/",
+    "https://github.com/openai/codex-plugin-cc",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1uom9zb/as_promised_here_is_the_github_link_for_my_100/",
+    "https://www.reddit.com/r/LLMDevs/comments/1uoomle/gostaria_de_um_feedback/",
+    "https://github.com/SakanaAI/fugu",
+    "https://claimmateai.pro/",
+    "https://www.reddit.com/r/LLMDevs/comments/1uo04pe/my_claude_code_setup_as_an_mit_skeleton/",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1uobe9d/congressional_oversight_powered_by_claude/",
+    "https://aischoolbuilder.com/school/school-1786",
+    "https://www.helpnetsecurity.com/2026/07/06/omnigent-open-source-ai-agent-framework/",
+    "https://cachepilot.serveousercontent.com",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1uo7b61/i_built_a_native_reddit_app_where_a_council_of_5/",
+    "https://github.com/Zackriya-Solutions/meetily",
+    "https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/"
+  ],
+  "suggested_qna": [],
+  "summary": "Developers released or promoted several open-source and self-hosted AI tools, many of them focused on AI agents that keep context, coordinate work, or run under local control. The projects include an MCP server for persistent video memory, a Chrome extension for saving ChatGPT and Claude conversations, a Cursor workflow plugin, a self-hosted LLM gateway with RBAC, Omnigent as a meta-harness for several coding agents, and Gas Town for coordinating AI coding agents with persistent work tracking [reddit.com#1][reddit.com#2][reddit.com#3][github.com#1][helpnetsecurity.com#1][github.com#9].\n\nThe software targets recurring workflow problems around lost context, fragmented agent interfaces, cloud dependence, and governance gaps. Several projects describe local or self-hosted operation, including Goldseam for repairing Cypress selectors without vendor-cloud execution, Meetily for meeting transcription and summaries on local infrastructure, Athanor Lite for local model management with no telemetry after model download, and Promptly as a self-hosted multi-user AI chat app [github.com#5][github.com#8][reddit.com#9][reddit.com#8].\n\nSeveral projects also address agent orchestration and controls: OpenAI published a Codex plugin for Claude Code, SakanaAI\u2019s Fugu presents a multi-agent system as a single API, AKM-CLR sits above OpenAI-compatible LLM serving engines to forward, fall back, or block requests before inference, and the.NET team\u2019s skills repository provides curated agent skills for coding agents [github.com#11][github.com#4][github.com#2][github.com#10].",
+  "talking_points": [
+    "Governance controls: Omnigent applies policies to shell commands, file edits and token spend, while AKM-CLR adds tenant/task authorization, routing policy, blocking before inference, fallback handling, output-guard checks and audit traces [helpnetsecurity.com#1][github.com#2].",
+    "Local operation: Goldseam lets users bring Claude Code CLI, Ollama, an OpenAI-compatible endpoint or any command-line model runner, while Athanor Lite says it scans GPU and VRAM to recommend local models [github.com#5][reddit.com#9].",
+    "Coding workflows: Sidenote turns comments on rendered markdown into reviewable git diffs, and MAS Workflow Kit installs a multi-agent dev workflow into any Cursor project, with sub-agents for implementation, testing, PR review, and architecture audits [github.com#3][reddit.com#3].",
+    "Repository metrics: Meetily\u2019s repository listed 17.8k stars and 556 commits, Gas Town listed 16.5k stars and 7,655 commits, and OpenAI\u2019s Codex plugin listed 25.8k stars and 28 commits in the provided GitHub snapshots [github.com#8][github.com#9][github.com#11]."
+  ],
+  "technical_details": [
+    "Policy stacking: Omnigent policies stack at server-wide, per-agent and per-session levels, and the article says a person in a session can tighten but not loosen rules inherited from higher levels [helpnetsecurity.com#1].",
+    "Closed-loop training: UATC combines a Kalman filter, PID controller with anti-windup, Smith predictor, Schmitt triggers, dynamic data pruner and tiered recovery subsystem for OOM and NaN/Inf events [github.com#6]."
+  ],
+  "timeline": [],
+  "title": "Open-source AI tools target agent memory and governance",
+  "travel_advisory": "",
+  "unique_domains": 7,
+  "url": "https://github.com/openai/codex-plugin-cc",
+  "user_action_items": [
+    "Test self-hosted gateway controls: Review LLM Gateway\u2019s OIDC, per-user token and RBAC configuration before exposing shared model endpoints to a team [github.com#1].",
+    "Pilot agent policies: Run a small Omnigent or AKM-CLR evaluation with approval gates, spend limits and audit traces enabled before allowing agents to edit production repositories [helpnetsecurity.com#1][github.com#2].",
+    "Review local-first privacy claims: Verify network behavior and model-routing settings for local tools such as Athanor Lite, Goldseam and Meetily before using them with sensitive code or meetings [reddit.com#9][github.com#5][github.com#8]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

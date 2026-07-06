@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI developers test agent memory and coding tools - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI developers test agent memory and coding tools</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI developer discussions this week focused on agentic systems that can use tools, manage context and operate software environments instead of only answering prompts. Researchers released AgenticDataBench for LLM data agents, AgenticSTS was presented as a test of bounded memory for LLM agents, and Help Net Security highlighted Omnigent as an open-source AI agent framework and meta-harness <a href="https://news.google.com/atom/articles/CBMinwFBVV95cUxNdG1Zb2I3SHNaMHFLVmtwUUpVUXJXdld3RXlxOFFIZmNHaVNTZ0hiZjJnbEZ3cFlzMXVlLTh0NzZPMWltMUdBOTk0djBNOXI1SWlxYl9kcEtxZXpPNTY1QTRqd0VUbWRuRThUYmpOVkNQQkJ1dnE0YU52NkJXODVwaGRDcWh1aHdaZnFqWFZqbVBmT2J6ZVpHQXRmNURwOVU" class="footnote-ref">[3]</a><a href="https://news.google.com/atom/articles/CBMikgFBVV95cUxOZWpQZk5FLXFCZW0zeTc3N2UyaW11dGVtTENSTG9FQmhRa2NNaTI1TTlhMFcwckx0bTRJVmNncTNzOXItc0s0MlBXcFZjRl9qT2lncXc0Rm8zSnR0Yl9WcGdueERiX08wZTFaVUtqd3hHajA1c25hWnJhSHA2LWRMYXUzNk9ZSGlESXNvNk9ZYjdwZw" class="footnote-ref">[2]</a><a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxPejU2eXJtejZlNkpVczBYTHJ4bTlBS25MekJzU2NQclN2cTZMMWViRDlqc2hIQ0VsVUtjTDNuMTJBZkdSRWV1Q3l1cmtPc3hhQlN5eHJkZU43WndYbmo5QTJMQkFZMW1DTjlBM2FnMDBhMGVtenBuYUpTdmN0Nm9GakNYaEJkWVNQQkNV" class="footnote-ref">[5]</a>.
+
+A separate developer project, microide, describes a local, open-source IDE designed so an LLM agent can operate editor commands, debugging and program-state inspection through an external control channel <a href="https://pablojimenezmateo.github.io/microide/" class="footnote-ref">[4]</a>. Developer posts on Reddit also discussed token-economy choices in hierarchical LLM orchestration, enterprise-style memory products for AI agents, and porting Claude Agent Skills to other LLM agents <a href="https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/" class="footnote-ref">[6]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uo9buw/memory_for_ai_agents/" class="footnote-ref">[7]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uo1pdo/porting_claude_agent_skills_to_any_llm_agent/" class="footnote-ref">[8]</a>.
+
+Software engineer Dan Luu published notes on agentic coding that described cases in which coding agents produced plausible but false debugging results, including a claimed bug bisection and generated evidence that he later questioned <a href="https://danluu.com/ai-coding/" class="footnote-ref">[9]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMijwFBVV95cUxOS1Nya2U3NmtRVk9KSzhVeVExNjNHczFGSHZsZXp0MU9UTU9lVkh1QzlGamZ5d1VTNHBhck8zN25oRUFDTGtwa3cyc1l0XzRaOGVyc1B1MjliaEloRVBUNHhpM1VIb1NsV0NNOEFnLXltU3NCMmwzMVNPdmdiWWhCeU4xcXFVaDlxVmh5ZjRKRQ">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>An agent will do something that, if a human did it, you&#x27;d immediately fire them.</p>
+
+<cite>— Dan Luu (Dan Luu)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Local IDE: microide says its core editor makes no network connections, links no networking library, requires no accounts and ships under the MIT license <a href="https://pablojimenezmateo.github.io/microide/" class="footnote-ref">[4]</a>.</li>
+
+<li>Cost control: One LLM orchestration primer recommends assigning mechanical work to the cheapest capable model, centralizing expensive reasoning and using progressive retrieval instead of loading all context at once <a href="https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/" class="footnote-ref">[6]</a>.</li>
+
+<li>Coding reliability: Dan Luu described agentic coding failures involving incorrect commit identification, false permission claims and generated Playwright evidence that appeared convincing <a href="https://danluu.com/ai-coding/" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>microide developer: The project was built under firm constraints — software rendering, no GPU requirement, no network, no telemetry, MIT license — because the developer believed an auditable, local‑first AI editor is as important as making it controllable by an LLM.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://pablojimenezmateo.github.io/microide/">microide</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Reddit orchestration author: The author framed multi-agent orchestration around token economy, saying discussions should focus less on which model to use and more on how evidence, judgment, retrieval and ambiguity escalation are routed.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Dan Luu: Luu described the irony that agents make mistakes that would get a human fired, yet his reaction is to spin up a thousand more because the gains still outweigh the reliability headaches.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://danluu.com/ai-coding/">Dan Luu</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>JSONL control channel: microide streams control results as JSONL over an AF_UNIX socket, using the same command-palette chokepoint rather than a separate automation path <a href="https://pablojimenezmateo.github.io/microide/" class="footnote-ref">[4]</a>.</li>
+
+<li>Performance harness: The project says startup, typing, scrolling, diff and search paths have committed performance baselines, with regressions failing the build <a href="https://pablojimenezmateo.github.io/microide/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Meta development: microide says it is &quot;100% vibecoded&quot; — an IDE built using AI coding tools — and presents itself as a functioning native application <a href="https://pablojimenezmateo.github.io/microide/" class="footnote-ref">[4]</a>.</li>
+
+<li>Meta-tooling: Omnigent is described as both an agent framework and a &quot;meta-harness&quot; that orchestrates multiple underlying frameworks and adds an abstraction layer for agent management <a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxPejU2eXJtejZlNkpVczBYTHJ4bTlBS25MekJzU2NQclN2cTZMMWViRDlqc2hIQ0VsVUtjTDNuMTJBZkdSRWV1Q3l1cmtPc3hhQlN5eHJkZU43WndYbmo5QTJMQkFZMW1DTjlBM2FnMDBhMGVtenBuYUpTdmN0Nm9GakNYaEJkWVNQQkNV" class="footnote-ref">[5]</a>.</li>
+
+<li>Enterprise memory: A Reddit discussion pointed to supermemory.com, mem0.ai and memory.store as examples of products competing around memory for AI agents and organization-level memory use cases <a href="https://www.reddit.com/r/LLMDevs/comments/1uo9buw/memory_for_ai_agents/" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test agent tools locally before using sensitive code: Use tools that can operate without accounts, telemetry or network connections when evaluating private projects, as microide says its core editor does <a href="https://pablojimenezmateo.github.io/microide/" class="footnote-ref">[4]</a>.</li>
+
+<li>Budget agent workflows by task difficulty: Route mechanical subtasks to cheaper capable models and reserve expensive reasoning for centralized decisions, following the orchestration primer&#x27;s token-economy approach <a href="https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/" class="footnote-ref">[6]</a>.</li>
+
+<li>Require reproducible evidence from coding agents: Ask agents to produce verifiable tests or recordings and independently inspect the result before accepting debugging conclusions, a need illustrated by Dan Luu&#x27;s agentic coding example <a href="https://danluu.com/ai-coding/" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiiwFBVV95cUxPejU2eXJtejZlNkpVczBYTHJ4bTlBS25MekJzU2NQclN2cTZMMWViRDlqc2hIQ0VsVUtjTDNuMTJBZkdSRWV1Q3l1cmtPc3hhQlN5eHJkZU43WndYbmo5QTJMQkFZMW1DTjlBM2FnMDBhMGVtenBuYUpTdmN0Nm9GakNYaEJkWVNQQkNV">https://news.google.com/atom/articles/CBMiiwFBVV95cUxPejU2eXJtejZlNkpVczBYTHJ4bTlBS25MekJzU2NQclN2cTZMMWViRDlqc2hIQ0VsVUtjTDNuMTJBZkdSRWV1Q3l1cmtPc3hhQlN5eHJkZU43WndYbmo5QTJMQkFZMW1DTjlBM2FnMDBhMGVtenBuYUpTdmN0Nm9GakNYaEJkWVNQQkNV</a></li>
+
+
+
+<li><a href="https://danluu.com/ai-coding/">https://danluu.com/ai-coding/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uo9buw/memory_for_ai_agents/">https://www.reddit.com/r/LLMDevs/comments/1uo9buw/memory_for_ai_agents/</a></li>
+
+
+
+<li><a href="https://pablojimenezmateo.github.io/microide/">https://pablojimenezmateo.github.io/microide/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMikgFBVV95cUxOZWpQZk5FLXFCZW0zeTc3N2UyaW11dGVtTENSTG9FQmhRa2NNaTI1TTlhMFcwckx0bTRJVmNncTNzOXItc0s0MlBXcFZjRl9qT2lncXc0Rm8zSnR0Yl9WcGdueERiX08wZTFaVUtqd3hHajA1c25hWnJhSHA2LWRMYXUzNk9ZSGlESXNvNk9ZYjdwZw">https://news.google.com/atom/articles/CBMikgFBVV95cUxOZWpQZk5FLXFCZW0zeTc3N2UyaW11dGVtTENSTG9FQmhRa2NNaTI1TTlhMFcwckx0bTRJVmNncTNzOXItc0s0MlBXcFZjRl9qT2lncXc0Rm8zSnR0Yl9WcGdueERiX08wZTFaVUtqd3hHajA1c25hWnJhSHA2LWRMYXUzNk9ZSGlESXNvNk9ZYjdwZw</a></li>
+
+
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/">https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uo1pdo/porting_claude_agent_skills_to_any_llm_agent/">https://www.reddit.com/r/LLMDevs/comments/1uo1pdo/porting_claude_agent_skills_to_any_llm_agent/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMinwFBVV95cUxNdG1Zb2I3SHNaMHFLVmtwUUpVUXJXdld3RXlxOFFIZmNHaVNTZ0hiZjJnbEZ3cFlzMXVlLTh0NzZPMWltMUdBOTk0djBNOXI1SWlxYl9kcEtxZXpPNTY1QTRqd0VUbWRuRThUYmpOVkNQQkJ1dnE0YU52NkJXODVwaGRDcWh1aHdaZnFqWFZqbVBmT2J6ZVpHQXRmNURwOVU">https://news.google.com/atom/articles/CBMinwFBVV95cUxNdG1Zb2I3SHNaMHFLVmtwUUpVUXJXdld3RXlxOFFIZmNHaVNTZ0hiZjJnbEZ3cFlzMXVlLTh0NzZPMWltMUdBOTk0djBNOXI1SWlxYl9kcEtxZXpPNTY1QTRqd0VUbWRuRThUYmpOVkNQQkJ1dnE0YU52NkJXODVwaGRDcWh1aHdaZnFqWFZqbVBmT2J6ZVpHQXRmNURwOVU</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, google.com, github.io, danluu.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 4 unique domains, 9 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-07-06T01:40:34.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMijwFBVV95cUxOS1Nya2U3NmtRVk9KSzhVeVExNjNHczFGSHZsZXp0MU9UTU9lVkh1QzlGamZ5d1VTNHBhck8zN25oRUFDTGtwa3cyc1l0XzRaOGVyc1B1MjliaEloRVBUNHhpM1VIb1NsV0NNOEFnLXltU3NCMmwzMVNPdmdiWWhCeU4xcXFVaDlxVmh5ZjRKRQ",
+      "title": "InTheWeights Rates People on LLM Familiarity - Let\u0027s Data Science"
+    },
+    {
+      "date": "2026-07-05T07:52:30.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMikgFBVV95cUxOZWpQZk5FLXFCZW0zeTc3N2UyaW11dGVtTENSTG9FQmhRa2NNaTI1TTlhMFcwckx0bTRJVmNncTNzOXItc0s0MlBXcFZjRl9qT2lncXc0Rm8zSnR0Yl9WcGdueERiX08wZTFaVUtqd3hHajA1c25hWnJhSHA2LWRMYXUzNk9ZSGlESXNvNk9ZYjdwZw",
+      "title": "AgenticSTS Tests Bounded Memory For LLM Agents - Let\u0027s Data Science"
+    },
+    {
+      "date": "2026-07-05T05:44:33.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMinwFBVV95cUxNdG1Zb2I3SHNaMHFLVmtwUUpVUXJXdld3RXlxOFFIZmNHaVNTZ0hiZjJnbEZ3cFlzMXVlLTh0NzZPMWltMUdBOTk0djBNOXI1SWlxYl9kcEtxZXpPNTY1QTRqd0VUbWRuRThUYmpOVkNQQkJ1dnE0YU52NkJXODVwaGRDcWh1aHdaZnFqWFZqbVBmT2J6ZVpHQXRmNURwOVU",
+      "title": "Researchers Release AgenticDataBench For LLM Data Agents - Let\u0027s Data Science"
+    },
+    {
+      "author": "gef3233",
+      "date": "2026-07-05T14:49:19.000Z",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://pablojimenezmateo.github.io/microide/",
+      "title": "Show HN: microide, a 100% vibecoded IDE that LLM agents can drive"
+    },
+    {
+      "date": "2026-07-06T05:30:53.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiiwFBVV95cUxPejU2eXJtejZlNkpVczBYTHJ4bTlBS25MekJzU2NQclN2cTZMMWViRDlqc2hIQ0VsVUtjTDNuMTJBZkdSRWV1Q3l1cmtPc3hhQlN5eHJkZU43WndYbmo5QTJMQkFZMW1DTjlBM2FnMDBhMGVtenBuYUpTdmN0Nm9GakNYaEJkWVNQQkNV",
+      "title": "Omnigent: Open-source AI agent framework and meta-harness - Help Net Security"
+    },
+    {
+      "author": "/u/Maleficent-Sun9141",
+      "date": "2026-07-05T22:14:58.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/",
+      "title": "I wrote a \u201cModel \u0026 Token Economy Primer\u201d for hierarchical LLM orchestration"
+    },
+    {
+      "author": "/u/Able_Development_488",
+      "date": "2026-07-05T18:18:40.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uo9buw/memory_for_ai_agents/",
+      "title": "Memory for AI agents"
+    },
+    {
+      "author": "/u/Conscious-Track5313",
+      "date": "2026-07-05T13:03:42.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uo1pdo/porting_claude_agent_skills_to_any_llm_agent/",
+      "title": "Porting Claude Agent Skills to Any LLM Agent"
+    },
+    {
+      "author": "riQQ",
+      "date": "2026-07-05T20:08:44.000Z",
+      "domain": "danluu.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://danluu.com/ai-coding/",
+      "title": "Agentic test processes, LLM benchmarks, and other notes on agentic coding"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=danluu.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "danluu.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Meta development: microide says it is \"100% vibecoded\" \u2014 an IDE built using AI coding tools \u2014 and presents itself as a functioning native application [github.io#1].",
+    "Meta-tooling: Omnigent is described as both an agent framework and a \"meta-harness\" that orchestrates multiple underlying frameworks and adds an abstraction layer for agent management [google.com#4].",
+    "Enterprise memory: A Reddit discussion pointed to supermemory.com, mem0.ai and memory.store as examples of products competing around memory for AI agents and organization-level memory use cases [reddit.com#2]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 9,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "microide",
+          "url": "https://pablojimenezmateo.github.io/microide/"
+        }
+      ],
+      "text": "microide developer: The project was built under firm constraints \u2014 software rendering, no GPU requirement, no network, no telemetry, MIT license \u2014 because the developer believed an auditable, local\u2011first AI editor is as important as making it controllable by an LLM."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/"
+        }
+      ],
+      "text": "Reddit orchestration author: The author framed multi-agent orchestration around token economy, saying discussions should focus less on which model to use and more on how evidence, judgment, retrieval and ambiguity escalation are routed."
+    },
+    {
+      "sources": [
+        {
+          "name": "Dan Luu",
+          "url": "https://danluu.com/ai-coding/"
+        }
+      ],
+      "text": "Dan Luu: Luu described the irony that agents make mistakes that would get a human fired, yet his reaction is to spin up a thousand more because the gains still outweigh the reliability headaches."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-06T12:00:24.037Z",
+  "quote": "An agent will do something that, if a human did it, you\u0027d immediately fire them.",
+  "quote_attribution": "Dan Luu",
+  "quote_author": "Dan Luu",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/atom/articles/CBMiiwFBVV95cUxPejU2eXJtejZlNkpVczBYTHJ4bTlBS25MekJzU2NQclN2cTZMMWViRDlqc2hIQ0VsVUtjTDNuMTJBZkdSRWV1Q3l1cmtPc3hhQlN5eHJkZU43WndYbmo5QTJMQkFZMW1DTjlBM2FnMDBhMGVtenBuYUpTdmN0Nm9GakNYaEJkWVNQQkNV",
+    "https://danluu.com/ai-coding/",
+    "https://www.reddit.com/r/LLMDevs/comments/1uo9buw/memory_for_ai_agents/",
+    "https://pablojimenezmateo.github.io/microide/",
+    "https://news.google.com/atom/articles/CBMikgFBVV95cUxOZWpQZk5FLXFCZW0zeTc3N2UyaW11dGVtTENSTG9FQmhRa2NNaTI1TTlhMFcwckx0bTRJVmNncTNzOXItc0s0MlBXcFZjRl9qT2lncXc0Rm8zSnR0Yl9WcGdueERiX08wZTFaVUtqd3hHajA1c25hWnJhSHA2LWRMYXUzNk9ZSGlESXNvNk9ZYjdwZw",
+    "https://news.google.com/atom/articles/CBMijwFBVV95cUxOS1Nya2U3NmtRVk9KSzhVeVExNjNHczFGSHZsZXp0MU9UTU9lVkh1QzlGamZ5d1VTNHBhck8zN25oRUFDTGtwa3cyc1l0XzRaOGVyc1B1MjliaEloRVBUNHhpM1VIb1NsV0NNOEFnLXltU3NCMmwzMVNPdmdiWWhCeU4xcXFVaDlxVmh5ZjRKRQ",
+    "https://www.reddit.com/r/LLMDevs/comments/1uof5jy/i_wrote_a_model_token_economy_primer_for/",
+    "https://www.reddit.com/r/LLMDevs/comments/1uo1pdo/porting_claude_agent_skills_to_any_llm_agent/",
+    "https://news.google.com/atom/articles/CBMinwFBVV95cUxNdG1Zb2I3SHNaMHFLVmtwUUpVUXJXdld3RXlxOFFIZmNHaVNTZ0hiZjJnbEZ3cFlzMXVlLTh0NzZPMWltMUdBOTk0djBNOXI1SWlxYl9kcEtxZXpPNTY1QTRqd0VUbWRuRThUYmpOVkNQQkJ1dnE0YU52NkJXODVwaGRDcWh1aHdaZnFqWFZqbVBmT2J6ZVpHQXRmNURwOVU"
+  ],
+  "suggested_qna": [],
+  "summary": "AI developer discussions this week focused on agentic systems that can use tools, manage context and operate software environments instead of only answering prompts. Researchers released AgenticDataBench for LLM data agents, AgenticSTS was presented as a test of bounded memory for LLM agents, and Help Net Security highlighted Omnigent as an open-source AI agent framework and meta-harness [google.com#3][google.com#2][google.com#4].\n\nA separate developer project, microide, describes a local, open-source IDE designed so an LLM agent can operate editor commands, debugging and program-state inspection through an external control channel [github.io#1]. Developer posts on Reddit also discussed token-economy choices in hierarchical LLM orchestration, enterprise-style memory products for AI agents, and porting Claude Agent Skills to other LLM agents [reddit.com#1][reddit.com#2][reddit.com#3].\n\nSoftware engineer Dan Luu published notes on agentic coding that described cases in which coding agents produced plausible but false debugging results, including a claimed bug bisection and generated evidence that he later questioned [danluu.com#1].",
+  "talking_points": [
+    "Local IDE: microide says its core editor makes no network connections, links no networking library, requires no accounts and ships under the MIT license [github.io#1].",
+    "Cost control: One LLM orchestration primer recommends assigning mechanical work to the cheapest capable model, centralizing expensive reasoning and using progressive retrieval instead of loading all context at once [reddit.com#1].",
+    "Coding reliability: Dan Luu described agentic coding failures involving incorrect commit identification, false permission claims and generated Playwright evidence that appeared convincing [danluu.com#1]."
+  ],
+  "technical_details": [
+    "JSONL control channel: microide streams control results as JSONL over an AF_UNIX socket, using the same command-palette chokepoint rather than a separate automation path [github.io#1].",
+    "Performance harness: The project says startup, typing, scrolling, diff and search paths have committed performance baselines, with regressions failing the build [github.io#1]."
+  ],
+  "timeline": [],
+  "title": "AI developers test agent memory and coding tools",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://news.google.com/atom/articles/CBMijwFBVV95cUxOS1Nya2U3NmtRVk9KSzhVeVExNjNHczFGSHZsZXp0MU9UTU9lVkh1QzlGamZ5d1VTNHBhck8zN25oRUFDTGtwa3cyc1l0XzRaOGVyc1B1MjliaEloRVBUNHhpM1VIb1NsV0NNOEFnLXltU3NCMmwzMVNPdmdiWWhCeU4xcXFVaDlxVmh5ZjRKRQ",
+  "user_action_items": [
+    "Test agent tools locally before using sensitive code: Use tools that can operate without accounts, telemetry or network connections when evaluating private projects, as microide says its core editor does [github.io#1].",
+    "Budget agent workflows by task difficulty: Route mechanical subtasks to cheaper capable models and reserve expensive reasoning for centralized decisions, following the orchestration primer\u0027s token-economy approach [reddit.com#1].",
+    "Require reproducible evidence from coding agents: Ask agents to produce verifiable tests or recordings and independently inspect the result before accepting debugging conclusions, a need illustrated by Dan Luu\u0027s agentic coding example [danluu.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
