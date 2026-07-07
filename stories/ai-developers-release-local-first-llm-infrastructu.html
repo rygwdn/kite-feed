@@ -1,0 +1,819 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI developers release local-first LLM infrastructure tools - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI developers release local-first LLM infrastructure tools</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI developers and startups released several new or updated tools for running, routing, monitoring and controlling large language model systems. Mozilla.ai launched Otari, an open-source LLM control plane that routes requests across providers through one endpoint, enforces budgets, centralizes API keys and supports hosted or self-hosted deployment <a href="https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/" class="footnote-ref">[8]</a><a href="https://github.com/mozilla-ai/otari" class="footnote-ref">[3]</a>. Other projects released OpenAI-compatible gateways, including a self-hosted LLM Gateway with OIDC login, per-user API tokens, RBAC-gated server-side tools and a built-in chat UI, and BurstyRouter, which sends requests to a local machine first before routing overflow to an encrypted gateway <a href="https://github.com/croit/llm-gateway" class="footnote-ref">[9]</a><a href="https://github.com/Lore-Hex/BurstyRouter" class="footnote-ref">[7]</a>.
+
+Several projects targeted developer oversight and local operation. Panoptes says it records AI agent activity across frameworks into a queryable audit trail and can block dangerous actions through policies <a href="https://github.com/miggy-code/Panoptes" class="footnote-ref">[11]</a>. Tokentap tracks token usage for LLM command-line tools with a live terminal dashboard and saved prompt logs <a href="https://github.com/jmuncor/tokentap" class="footnote-ref">[4]</a>. Stitch, Meetily, Stet and Athanor Lite focused on local or user-controlled workflows, including local meeting transcription, desktop AI workspace automation, AI edit review and local model management without cloud accounts or telemetry <a href="https://www.usestitch.ai/" class="footnote-ref">[12]</a><a href="https://github.com/Zackriya-Solutions/meetily" class="footnote-ref">[17]</a><a href="https://www.getstet.app/" class="footnote-ref">[14]</a><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/" class="footnote-ref">[16]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/R6410418/Jackrong-llm-finetuning-guide">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Accessing language models is no longer the challenge. Operating LLM infrastructure effectively is.</p>
+
+<cite>— Mus Himdi and Anushri Gupta (Mozilla.ai)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Training resources: The Jackrong LLM Fine-Tuning Guide positions itself as an educational repository for supervised fine-tuning, reinforcement-learning workflows including GRPO and GSPO, dataset distillation, GGUF deployment and Qwen MTP conversion <a href="https://github.com/R6410418/Jackrong-llm-finetuning-guide" class="footnote-ref">[1]</a>.</li>
+
+<li>Code mapping: Onboard-CLI uses Tree-sitter AST parsing to generate topology graphs across Go, JavaScript, TypeScript, Python and Java, then displays code paths and dependencies on a local React Flow canvas <a href="https://github.com/animesh-94/Onboard-CLI" class="footnote-ref">[5]</a>.</li>
+
+<li>Context control: Context-clipper 0.1.0 offers a zero-dependency Python library that preserves sticky messages, sheds low-priority items through a min-heap and summarizes intermediate turns for LLM context-window management <a href="https://pypi.org/project/context-clipper/" class="footnote-ref">[6]</a>.</li>
+
+<li>Coding agents: Pi Agent Rust describes a single-binary AI coding assistant with instant startup, stable streaming and eight built-in tools, using the asupersync and rich_rust Rust libraries <a href="https://github.com/Dicklesworthstone/pi_agent_rust" class="footnote-ref">[13]</a>.</li>
+
+<li>Adoption signals: Meetily’s GitHub repository showed 19.8k stars and 2k forks, while the Pi Agent Rust repository showed 1.3k stars and 149 forks at publication time <a href="https://github.com/Zackriya-Solutions/meetily" class="footnote-ref">[17]</a><a href="https://github.com/Dicklesworthstone/pi_agent_rust" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Mozilla.ai: Mozilla.ai said developers should not have to integrate separate agent frameworks; Otari includes Agent Harnesses with built-in tools and orchestration so teams can build agent-ready applications without additional infrastructure.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/">Mozilla.ai</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>BurstyRouter maintainers: BurstyRouter’s maintainers cited privacy as the main design issue, saying prompts stay local by default and overflow requests go to TrustedRouter rather than a router that can log them.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/Lore-Hex/BurstyRouter">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Panoptes maintainer: Panoptes’ maintainer identified auditability gaps in AI coding agents, citing unanswered questions about agent file access, shell commands and production credential exposure.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/miggy-code/Panoptes">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Stet developer: Stet’s developer described AI edits as proposals rather than final text, requiring paragraph-level accept-or-reject review before changes enter a Markdown document.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.getstet.app/">Stet</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Priority heap packing: Context-clipper uses Python standard-library components including dataclasses, heapq and functools to implement priority-based message shedding without LangChain, LlamaIndex or Pydantic dependencies <a href="https://pypi.org/project/context-clipper/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>LLM operations: Otari includes Agent Harnesses that provide built-in tools and orchestration for building agent-ready applications, while handling routing, budgets and failovers across multiple providers <a href="https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/" class="footnote-ref">[8]</a><a href="https://github.com/mozilla-ai/otari" class="footnote-ref">[3]</a>.</li>
+
+<li>Agent governance: Panoptes supports Claude Code, OpenAI Codex, Google Antigravity and Hermes Agent, then normalizes their activity into one queryable database with a policy engine <a href="https://github.com/miggy-code/Panoptes" class="footnote-ref">[11]</a>.</li>
+
+<li>Developer productivity: Brunelly’s beta platform connects planning, code generation, testing, review and security into one auditable AI software-development workflow <a href="https://brunelly.com/" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Governance and budget enforcement could become more valuable than raw model access as teams use multiple providers and need centralized controls <a href="https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/" class="footnote-ref">[8]</a><a href="https://github.com/mozilla-ai/otari" class="footnote-ref">[3]</a>.</li><li>Open-source gateways can pressure margins for proprietary middleware unless vendors add stronger enterprise support, compliance or hosted operations <a href="https://github.com/mozilla-ai/otari" class="footnote-ref">[3]</a><a href="https://github.com/croit/llm-gateway" class="footnote-ref">[9]</a>[common].</li><li>Local-first tools address privacy-sensitive workflows, but they may face slower monetization if users prefer free, self-hosted or bring-your-own-key software <a href="https://www.usestitch.ai/" class="footnote-ref">[12]</a><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/" class="footnote-ref">[16]</a>[common].</li><li>Developer adoption signals such as GitHub stars are useful but do not prove revenue, retention or pricing power <a href="https://github.com/Zackriya-Solutions/meetily" class="footnote-ref">[17]</a><a href="https://github.com/Dicklesworthstone/pi_agent_rust" class="footnote-ref">[13]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test a self-hosted gateway: Point an OpenAI-compatible SDK at Otari, BurstyRouter or the self-hosted LLM Gateway if you need one endpoint for multiple LLM backends <a href="https://github.com/mozilla-ai/otari" class="footnote-ref">[3]</a><a href="https://github.com/Lore-Hex/BurstyRouter" class="footnote-ref">[7]</a><a href="https://github.com/croit/llm-gateway" class="footnote-ref">[9]</a>.</li>
+
+<li>Audit agent activity: Use Panoptes when coding agents have filesystem, shell or API access and you need a searchable record of file reads, modifications and commands <a href="https://github.com/miggy-code/Panoptes" class="footnote-ref">[11]</a>.</li>
+
+<li>Measure token usage: Install Tokentap with pip and run its dashboard to inspect context-window usage and saved prompts from LLM CLI tools <a href="https://github.com/jmuncor/tokentap" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://www.usestitch.ai/">https://www.usestitch.ai/</a></li>
+
+
+
+<li><a href="https://brunelly.com/">https://brunelly.com/</a></li>
+
+
+
+<li><a href="https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/">https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/</a></li>
+
+
+
+<li><a href="https://github.com/miggy-code/Panoptes">https://github.com/miggy-code/Panoptes</a></li>
+
+
+
+<li><a href="https://github.com/ninjahawk/Subtext">https://github.com/ninjahawk/Subtext</a></li>
+
+
+
+<li><a href="https://github.com/croit/llm-gateway">https://github.com/croit/llm-gateway</a></li>
+
+
+
+<li><a href="https://www.getstet.app/">https://www.getstet.app/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/">https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/</a></li>
+
+
+
+<li><a href="https://github.com/Dicklesworthstone/pi_agent_rust">https://github.com/Dicklesworthstone/pi_agent_rust</a></li>
+
+
+
+<li><a href="https://github.com/mozilla-ai/otari">https://github.com/mozilla-ai/otari</a></li>
+
+
+
+<li><a href="https://github.com/Zackriya-Solutions/meetily">https://github.com/Zackriya-Solutions/meetily</a></li>
+
+
+
+<li><a href="https://github.com/jmuncor/tokentap">https://github.com/jmuncor/tokentap</a></li>
+
+
+
+<li><a href="https://pypi.org/project/context-clipper/">https://pypi.org/project/context-clipper/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/">https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/</a></li>
+
+
+
+<li><a href="https://github.com/Lore-Hex/BurstyRouter">https://github.com/Lore-Hex/BurstyRouter</a></li>
+
+
+
+<li><a href="https://github.com/animesh-94/Onboard-CLI">https://github.com/animesh-94/Onboard-CLI</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, github.com, pypi.org, mozilla.ai, brunelly.com, usestitch.ai, getstet.app</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 7 unique domains, 17 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "verdverm",
+      "date": "2026-07-07T00:16:33.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/R6410418/Jackrong-llm-finetuning-guide",
+      "title": "Jackrong LLM Fine-Tuning Guide"
+    },
+    {
+      "author": "ninjahawk1",
+      "date": "2026-07-06T23:34:27.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/ninjahawk/Subtext",
+      "title": "Show HN: LLM Thought Visualization"
+    },
+    {
+      "author": "angpt",
+      "date": "2026-07-06T21:08:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/mozilla-ai/otari",
+      "title": "Show HN: Otari: your open-source LLM control plane"
+    },
+    {
+      "author": "jmuncor",
+      "date": "2026-07-06T20:27:02.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/jmuncor/tokentap",
+      "title": "Tokentap \u2013 Print what your LLM is thinking"
+    },
+    {
+      "author": "yr_animesh",
+      "date": "2026-07-06T20:14:00.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/animesh-94/Onboard-CLI",
+      "title": "Show HN: Onboard CLI uses LLM to filter out nodes and AST to visualize codebase"
+    },
+    {
+      "author": "lpratheesh",
+      "date": "2026-07-06T15:34:02.000Z",
+      "domain": "pypi.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://pypi.org/project/context-clipper/",
+      "title": "Context-clipper \u2013 a priority min-heap for LLM context windows, zero deps"
+    },
+    {
+      "author": "ljlolel",
+      "date": "2026-07-06T13:41:18.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Lore-Hex/BurstyRouter",
+      "title": "Show HN: BurstyRouter: local LLM first then burst to end-to-end encrypted LLM"
+    },
+    {
+      "author": "ilreb",
+      "date": "2026-07-06T13:35:16.000Z",
+      "domain": "mozilla.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/",
+      "title": "Otari: The Open-Source LLM Control Plane"
+    },
+    {
+      "author": "Mave83",
+      "date": "2026-07-06T05:29:35.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/croit/llm-gateway",
+      "title": "Self Hosted LLM Gateway and Feature Rich Chat UI with RBAC"
+    },
+    {
+      "author": "RihabAI",
+      "date": "2026-07-07T04:51:07.000Z",
+      "domain": "brunelly.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://brunelly.com/",
+      "title": "Show HN: Brunelly AI Native Platform v26.06"
+    },
+    {
+      "author": "mpadilla",
+      "date": "2026-07-07T02:56:32.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/miggy-code/Panoptes",
+      "title": "Panoptes \u2013 AI audit and alignment layer"
+    },
+    {
+      "author": "tomEdison",
+      "date": "2026-07-07T02:33:00.000Z",
+      "domain": "usestitch.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.usestitch.ai/",
+      "title": "OSS Local AI Workspace"
+    },
+    {
+      "author": "rsyring",
+      "date": "2026-07-07T01:54:19.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Dicklesworthstone/pi_agent_rust",
+      "title": "Pi (Rust): High-performance AI coding agent CLI written in Rust"
+    },
+    {
+      "author": "DrewRaines",
+      "date": "2026-07-07T01:48:36.000Z",
+      "domain": "getstet.app",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.getstet.app/",
+      "title": "Stet \u2013 a Markdown editor where every AI edit needs your sign-off"
+    },
+    {
+      "author": "/u/No-Turnover3316",
+      "date": "2026-07-06T04:58:53.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/",
+      "title": "Promptly: a self-hosted, multi-user AI chat app with shared workspaces, research agents, and local voice"
+    },
+    {
+      "author": "/u/BBASecure",
+      "date": "2026-07-05T23:51:55.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/",
+      "title": "Athanor Lite \u2014 free local AI model manager, no cloud, no accounts, no telemetry"
+    },
+    {
+      "date": "2026-07-07T07:05:26.805Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Zackriya-Solutions/meetily",
+      "title": "Zackriya-Solutions/meetily"
+    }
+  ],
+  "business_angle": [
+    "Governance and budget enforcement could become more valuable than raw model access as teams use multiple providers and need centralized controls [mozilla.ai#1][github.com#3].",
+    "Open-source gateways can pressure margins for proprietary middleware unless vendors add stronger enterprise support, compliance or hosted operations [github.com#3][github.com#7][common].",
+    "Local-first tools address privacy-sensitive workflows, but they may face slower monetization if users prefer free, self-hosted or bring-your-own-key software [usestitch.ai#1][reddit.com#2][common].",
+    "Developer adoption signals such as GitHub stars are useful but do not prove revenue, retention or pricing power [github.com#10][github.com#9][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pypi.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pypi.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mozilla.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mozilla.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=brunelly.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "brunelly.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=usestitch.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "usestitch.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=getstet.app\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "getstet.app"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee0\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "LLM operations: Otari includes Agent Harnesses that provide built-in tools and orchestration for building agent-ready applications, while handling routing, budgets and failovers across multiple providers [mozilla.ai#1][github.com#3].",
+    "Agent governance: Panoptes supports Claude Code, OpenAI Codex, Google Antigravity and Hermes Agent, then normalizes their activity into one queryable database with a policy engine [github.com#8].",
+    "Developer productivity: Brunelly\u2019s beta platform connects planning, code generation, testing, review and security into one auditable AI software-development workflow [brunelly.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 17,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Mozilla.ai",
+          "url": "https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/"
+        }
+      ],
+      "text": "Mozilla.ai: Mozilla.ai said developers should not have to integrate separate agent frameworks; Otari includes Agent Harnesses with built-in tools and orchestration so teams can build agent-ready applications without additional infrastructure."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/Lore-Hex/BurstyRouter"
+        }
+      ],
+      "text": "BurstyRouter maintainers: BurstyRouter\u2019s maintainers cited privacy as the main design issue, saying prompts stay local by default and overflow requests go to TrustedRouter rather than a router that can log them."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/miggy-code/Panoptes"
+        }
+      ],
+      "text": "Panoptes maintainer: Panoptes\u2019 maintainer identified auditability gaps in AI coding agents, citing unanswered questions about agent file access, shell commands and production credential exposure."
+    },
+    {
+      "sources": [
+        {
+          "name": "Stet",
+          "url": "https://www.getstet.app/"
+        }
+      ],
+      "text": "Stet developer: Stet\u2019s developer described AI edits as proposals rather than final text, requiring paragraph-level accept-or-reject review before changes enter a Markdown document."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-07T12:00:09.384Z",
+  "quote": "Accessing language models is no longer the challenge. Operating LLM infrastructure effectively is.",
+  "quote_attribution": "Mozilla.ai",
+  "quote_author": "Mus Himdi and Anushri Gupta",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/R6410418/Jackrong-llm-finetuning-guide",
+    "https://www.usestitch.ai/",
+    "https://brunelly.com/",
+    "https://blog.mozilla.ai/introducing-otari-the-open-source-llm-control-plane/",
+    "https://github.com/miggy-code/Panoptes",
+    "https://github.com/ninjahawk/Subtext",
+    "https://github.com/croit/llm-gateway",
+    "https://www.getstet.app/",
+    "https://www.reddit.com/r/ollama/comments/1uohfp5/athanor_lite_free_local_ai_model_manager_no_cloud/",
+    "https://github.com/Dicklesworthstone/pi_agent_rust",
+    "https://github.com/mozilla-ai/otari",
+    "https://github.com/Zackriya-Solutions/meetily",
+    "https://github.com/jmuncor/tokentap",
+    "https://pypi.org/project/context-clipper/",
+    "https://www.reddit.com/r/ollama/comments/1uonq4m/promptly_a_selfhosted_multiuser_ai_chat_app_with/",
+    "https://github.com/Lore-Hex/BurstyRouter",
+    "https://github.com/animesh-94/Onboard-CLI"
+  ],
+  "suggested_qna": [],
+  "summary": "AI developers and startups released several new or updated tools for running, routing, monitoring and controlling large language model systems. Mozilla.ai launched Otari, an open-source LLM control plane that routes requests across providers through one endpoint, enforces budgets, centralizes API keys and supports hosted or self-hosted deployment [mozilla.ai#1][github.com#3]. Other projects released OpenAI-compatible gateways, including a self-hosted LLM Gateway with OIDC login, per-user API tokens, RBAC-gated server-side tools and a built-in chat UI, and BurstyRouter, which sends requests to a local machine first before routing overflow to an encrypted gateway [github.com#7][github.com#6].\n\nSeveral projects targeted developer oversight and local operation. Panoptes says it records AI agent activity across frameworks into a queryable audit trail and can block dangerous actions through policies [github.com#8]. Tokentap tracks token usage for LLM command-line tools with a live terminal dashboard and saved prompt logs [github.com#4]. Stitch, Meetily, Stet and Athanor Lite focused on local or user-controlled workflows, including local meeting transcription, desktop AI workspace automation, AI edit review and local model management without cloud accounts or telemetry [usestitch.ai#1][github.com#10][getstet.app#1][reddit.com#2].",
+  "talking_points": [
+    "Training resources: The Jackrong LLM Fine-Tuning Guide positions itself as an educational repository for supervised fine-tuning, reinforcement-learning workflows including GRPO and GSPO, dataset distillation, GGUF deployment and Qwen MTP conversion [github.com#1].",
+    "Code mapping: Onboard-CLI uses Tree-sitter AST parsing to generate topology graphs across Go, JavaScript, TypeScript, Python and Java, then displays code paths and dependencies on a local React Flow canvas [github.com#5].",
+    "Context control: Context-clipper 0.1.0 offers a zero-dependency Python library that preserves sticky messages, sheds low-priority items through a min-heap and summarizes intermediate turns for LLM context-window management [pypi.org#1].",
+    "Coding agents: Pi Agent Rust describes a single-binary AI coding assistant with instant startup, stable streaming and eight built-in tools, using the asupersync and rich_rust Rust libraries [github.com#9].",
+    "Adoption signals: Meetily\u2019s GitHub repository showed 19.8k stars and 2k forks, while the Pi Agent Rust repository showed 1.3k stars and 149 forks at publication time [github.com#10][github.com#9]."
+  ],
+  "technical_details": [
+    "Priority heap packing: Context-clipper uses Python standard-library components including dataclasses, heapq and functools to implement priority-based message shedding without LangChain, LlamaIndex or Pydantic dependencies [pypi.org#1]."
+  ],
+  "timeline": [],
+  "title": "AI developers release local-first LLM infrastructure tools",
+  "travel_advisory": "",
+  "unique_domains": 7,
+  "url": "https://github.com/R6410418/Jackrong-llm-finetuning-guide",
+  "user_action_items": [
+    "Test a self-hosted gateway: Point an OpenAI-compatible SDK at Otari, BurstyRouter or the self-hosted LLM Gateway if you need one endpoint for multiple LLM backends [github.com#3][github.com#6][github.com#7].",
+    "Audit agent activity: Use Panoptes when coding agents have filesystem, shell or API access and you need a searchable record of file reads, modifications and commands [github.com#8].",
+    "Measure token usage: Install Tokentap with pip and run its dashboard to inspect context-window usage and saved prompts from LLM CLI tools [github.com#4]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
