@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic adds Claude Reflect dashboard for AI use - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic adds Claude Reflect dashboard for AI use</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/"><img src="https://kagiproxy.com/img/nVqYC3rQAyLEihxax9Xwjq4H07sPAuabMmk9bxrQApDDYFr880EbYa5BQNDtbbGBj82xwgAIKQIKifLwcRqcoIGdtWIY0cdGK--RiZeeUlnRNI9wcwLFb4s5K0axv0ShO5pIbgGyJJ0Y" alt="Anthropic&#39;s Claude Reflect feature." title="Anthropic&#39;s Claude Reflect feature. (Anthropic)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Anthropic&#39;s Claude Reflect feature. <span class='credit'>(Anthropic)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Anthropic introduced Reflect, a beta dashboard in Claude that lets users review their chatbot use over selected one-, three-, six- or 12-month periods <a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/" class="footnote-ref">[8]</a><a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://mashable.com/tech/reflect-with-claude-anthropic-feature" class="footnote-ref">[21]</a>. The tool summarizes recurring topics, task types and usage patterns, and adds controls for quiet hours and break nudges after a chosen amount of Claude use <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a>.
+
+Reflect is available to Free, Pro and Max users with Memory turned on, through Claude&#x27;s web and desktop apps <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>. Anthropic said future updates will add a view of total time spent using Claude <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>. MacRumors reported that Reflect excludes incognito chats, underlying files from connected tools and conversations tied to health integrations, and that the displayed information is not used for other purposes <a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMiugFBVV95cUxPTVBLbm9aTGI4dlBYeGpyT2N4c3Zja214TUt2QllUQmswUzJTeXR4aWlsU25ibnJCaVlaZVFuMUtBbjBSQ0JEcjZfMnA1UE94cDBBdlBfbnZFY3RLR1Y0MjJrbVJNNjB6OUwyUTJRWXlYT1gtYTI2eGRDaDd1WThvZFYxaERDOEVYeS1UbU5iS0VjSmhUTExhajBDelFQSjUwdjFJd2ZoOEhkRmRBazZaYnRidzRlLUFEOHfSAb8BQVVfeXFMUFhtUFdVa1lqQk8zdFU3NE5QLTdrY0lFdERFRnRGNmtWMjNSdFhNSTF0M29qQnUweWc0Qm9HVEh3aWtGZUNuLVZHN3FmckxCZDJMYmY2ZC1OR0N0R1ZMcG5RU2tFdFlXYms3aEVyTjN2emh2YUVGUlRQRjh1MzBiMi1SUjlEOGVBUTlhaENnbS1lZXBHS3FvMS15YnFtdFZBa2xjQ3RqeWNCUHpOandrQnI1RjZSd2ZzN0RLXzZodm8">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>What&#x27;s one thing you want to keep doing yourself, even if Claude could do it faster?</p>
+
+<cite>— Anthropic (MacRumors)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> ITC reported that Anthropic developed Reflect with MIT Media Lab, the Digital Wellness Lab at Boston Children&#x27;s Hospital and the Family Online Safety Institute <a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Availability gap: Engadget said Reflect is limited to Claude&#x27;s web client and desktop app at launch and did not describe mobile availability <a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a>.</li>
+
+<li>Coming support: TestingCatalog said support for cowork conversations is not live yet and is listed as coming soon <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>.</li>
+
+<li>Reflection prompt: Anthropic&#x27;s example prompt asks, &quot;What&#x27;s one thing you want to keep doing yourself, even if Claude could do it faster?&quot; <a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/" class="footnote-ref">[8]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>.</li>
+
+<li>AI fluency: The dashboard maps usage to Anthropic&#x27;s 4D AI Fluency Framework: Delegation, Description, Discernment and Diligence <a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>.</li>
+
+<li>Privacy limits: Reflect does not draw from incognito chats, underlying files from connected tools or conversations tied to health integration tools, and Anthropic says it does not use Reflect information for other purposes <a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>.</li>
+
+<li>Fluency framework: Reflect maps activity to Anthropic&#x27;s 4D AI Fluency Framework: delegation, description, discernment and diligence <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://hk.news.yahoo.com/claude-ai-%E6%B8%AC%E8%A9%A6%E5%8F%8D%E6%80%9D%E5%8A%9F%E8%83%BD-%E6%8F%90%E9%86%92%E7%94%A8%E6%88%B6%E9%81%BF%E5%85%8D%E9%81%8E%E5%BA%A6%E4%BE%9D%E8%B3%B4-141116883.html" class="footnote-ref">[27]</a>.</li>
+
+<li>Interface metrics: Engadget reported that the dashboard shows a user&#x27;s most active day, peak hour and total chats for the selected period, plus topic breakdowns with percentages <a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a>.</li>
+
+<li>Access limits: TestingCatalog reported that cowork conversation support is not yet available and is listed as coming soon <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Anthropic: The company said Reflect is meant to help users consider whether they use Claude effectively, too often, or for tasks they may prefer to handle themselves.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mashable.com/tech/reflect-with-claude-anthropic-feature">Mashable</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>TechCrunch: TechCrunch described Reflect as more than an analytics feature and said it frames Claude as both a productivity tool and a technology that can be used mindfully.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/">TechCrunch</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>CNET: CNET said sharing data with AI can be concerning, while describing Reflect as a feature that returns some of that information to users in a potentially useful form.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/">CNET</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Anthropic: Anthropic said Reflect invites users to step back and examine the role Claude plays in their lives, including whether they are using it effectively, too often, or for tasks better handled without AI.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mashable.com/tech/reflect-with-claude-anthropic-feature">Mashable</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>TechCrunch: TechCrunch framed Reflect as more than analytics, saying that showing a user&#x27;s Claude-assisted work can make the chatbot look like an everyday workflow tool while also presenting AI use as something users can manage mindfully.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/">TechCrunch</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>CNET: CNET said AI companies have an incentive to help users get more value from their products so they keep using them, while describing Reflect as a way to return some usage information to users.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/">CNET</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI product design: Reflect adds user-facing analytics and self-management controls to a chatbot. Several technology publications compared it with Spotify Wrapped, Digital Wellbeing and Screen Time <a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a><a href="https://www.androidauthority.com/claude-reflect-3685917/" class="footnote-ref">[19]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://www.bug.hr/umjetna-inteligencija/stigao-je-claude-wrapped-61300" class="footnote-ref">[22]</a>.</li>
+
+<li>Digital wellness: ITC reported that Anthropic developed the feature with MIT Media Lab, the Digital Wellness Lab at Boston Children&#x27;s Hospital and the Family Online Safety Institute, giving Claude&#x27;s usage controls an explicit digital-wellness framing <a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Spotify Wrapped popularized annual activity recaps, and similar summaries have spread to services including YouTube and Uber <a href="https://www.bug.hr/umjetna-inteligencija/stigao-je-claude-wrapped-61300" class="footnote-ref">[22]</a>. Apple introduced Screen Time in iOS 12 in 2018, giving users device-use tracking and app-limit tools [common]. Engadget compared Reflect with Spotify Wrapped and Apple&#x27;s Screen Time <a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Reflect shows users recurring Claude use cases and prompts them to revisit the product through periodic summaries <a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/" class="footnote-ref">[8]</a><a href="https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/" class="footnote-ref">[24]</a>.</li><li>Built-in data exclusions address sensitive AI interactions, including incognito chats, files from connected tools and conversations tied to health integrations <a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/" class="footnote-ref">[20]</a>.</li><li>TestingCatalog said cowork conversation tracking is listed as coming soon, indicating the beta does not yet cover that use case <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>.</li><li>Reflect shows users concrete patterns in how Claude fits into recurring work <a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/" class="footnote-ref">[8]</a><a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>.</li><li>Quiet hours and break nudges address concerns about chatbot overuse <a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://mashable.com/tech/reflect-with-claude-anthropic-feature" class="footnote-ref">[21]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Open Reflect: In Claude on the web or desktop app, go to Settings and select the Reflect tab; Free, Pro and Max accounts must have memory enabled <a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>.</li>
+
+<li>Set usage boundaries: Use Reflect or the Time and focus tab to configure quiet hours or break reminders, which users can dismiss during active work <a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a><a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a>.</li>
+
+<li>Set usage boundaries: Use Reflect or Claude&#x27;s Time and focus tab to configure quiet hours or break nudges after a chosen amount of use <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/" class="footnote-ref">[26]</a>.</li>
+
+<li>Open Reflect: If you are a Free, Pro or Max user with Memory enabled, open Claude on the web or desktop app and go to Settings, then Reflect <a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/" class="footnote-ref">[9]</a><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/" class="footnote-ref">[18]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/">https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/</a></li>
+
+
+
+<li><a href="https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/">https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMijAFBVV95cUxPTWpReTUtUm5JakdXUFUyaTNXMEx0VjU1WFlPZHhySzNlZ3lSM1FWN0Q4RlZwcWM3S3hpQUt3anlfQmhvMkU2THhpN3BmTzQ1WEJQY3ZOWHQzM0NUNWdxTnhITlhmS056NzRydTlNejZReVEwemZjRlMydURNSThRbDFfOHVXVE0zSVozNQ">https://news.google.com/rss/articles/CBMijAFBVV95cUxPTWpReTUtUm5JakdXUFUyaTNXMEx0VjU1WFlPZHhySzNlZ3lSM1FWN0Q4RlZwcWM3S3hpQUt3anlfQmhvMkU2THhpN3BmTzQ1WEJQY3ZOWHQzM0NUNWdxTnhITlhmS056NzRydTlNejZReVEwemZjRlMydURNSThRbDFfOHVXVE0zSVozNQ</a></li>
+
+
+
+<li><a href="https://mashable.com/tech/reflect-with-claude-anthropic-feature">https://mashable.com/tech/reflect-with-claude-anthropic-feature</a></li>
+
+
+
+<li><a href="https://www.youtube.com/shorts/dHJoc-9aM0Y">https://www.youtube.com/shorts/dHJoc-9aM0Y</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMickFVX3lxTE1HM0ZPUkgwUjBHRzRydkJRSUVpdnVUMmwzbFJ6Y0N3VmVzWGdPekN4aWNyQW5QRlNiVTdHb3hCMkhfZkE0eHJOUTdydkd1blg2RlA2dEd2eDhXeFB6bXN4VUhTWWdReUFKTlItWUpHTFlzUQ">https://news.google.com/rss/articles/CBMickFVX3lxTE1HM0ZPUkgwUjBHRzRydkJRSUVpdnVUMmwzbFJ6Y0N3VmVzWGdPekN4aWNyQW5QRlNiVTdHb3hCMkhfZkE0eHJOUTdydkd1blg2RlA2dEd2eDhXeFB6bXN4VUhTWWdReUFKTlItWUpHTFlzUQ</a></li>
+
+
+
+<li><a href="https://www.bug.hr/umjetna-inteligencija/stigao-je-claude-wrapped-61300">https://www.bug.hr/umjetna-inteligencija/stigao-je-claude-wrapped-61300</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxQS1hwWVF1c3dZWEdjQWs1c2JlVFFFNExXTktFRHRXbEIxWFlXYTRCN3B2TTNpTEwxQVhHckdBUEZDbElULXBJdGhpMWRDNGxkQ05tclRqbDZyaEFHVmpUYXlwc1lJMFlJMU5nLUQtTWhKZWhTYXBBZXRranZGVkZ4UUdHR3NNY28">https://news.google.com/rss/articles/CBMihwFBVV95cUxQS1hwWVF1c3dZWEdjQWs1c2JlVFFFNExXTktFRHRXbEIxWFlXYTRCN3B2TTNpTEwxQVhHckdBUEZDbElULXBJdGhpMWRDNGxkQ05tclRqbDZyaEFHVmpUYXlwc1lJMFlJMU5nLUQtTWhKZWhTYXBBZXRranZGVkZ4UUdHR3NNY28</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMibkFVX3lxTE11T1VMdTZnLVgwREExcTFNdnYyYXlEOGdnQldWWW1URHRCc2dUbUJHeno5RVhFY1lkamFNb0E5cW1vVUgyTzNtNlplTU91RnpBbkRha0gxT1VxMmp6a3dhQVk5bjBVVlk4Nkd6aS1R">https://news.google.com/rss/articles/CBMibkFVX3lxTE11T1VMdTZnLVgwREExcTFNdnYyYXlEOGdnQldWWW1URHRCc2dUbUJHeno5RVhFY1lkamFNb0E5cW1vVUgyTzNtNlplTU91RnpBbkRha0gxT1VxMmp6a3dhQVk5bjBVVlk4Nkd6aS1R</a></li>
+
+
+
+<li><a href="https://tweakers.net/nieuws/249914/anthropic-maakt-dashboard-waarin-gebruikers-claude-gebruik-kunnen-zien.html">https://tweakers.net/nieuws/249914/anthropic-maakt-dashboard-waarin-gebruikers-claude-gebruik-kunnen-zien.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPall3b29yUlBVejdiN3JNVHNIUDd6R2xrVDNERE84S1NBMHo2WmVlMDlfTkpNb1ZfZW9YMGs3eU40YnQ0aFdZT3B6c3ZiZ3luOFFQS1dXalpfelpzRE5kRGNkbWdadXlkeUhZZFlZZFg0WEN2bndKdTdnc3hsMlhrY3JKQVpPX0dqc1psR045R3E3TWpXOGhZaXRoZ3F3SWtVcml0aTR3">https://news.google.com/rss/articles/CBMipgFBVV95cUxPall3b29yUlBVejdiN3JNVHNIUDd6R2xrVDNERE84S1NBMHo2WmVlMDlfTkpNb1ZfZW9YMGs3eU40YnQ0aFdZT3B6c3ZiZ3luOFFQS1dXalpfelpzRE5kRGNkbWdadXlkeUhZZFlZZFg0WEN2bndKdTdnc3hsMlhrY3JKQVpPX0dqc1psR045R3E3TWpXOGhZaXRoZ3F3SWtVcml0aTR3</a></li>
+
+
+
+
+
+<li><a href="https://hk.news.yahoo.com/claude-ai-%E6%B8%AC%E8%A9%A6%E5%8F%8D%E6%80%9D%E5%8A%9F%E8%83%BD-%E6%8F%90%E9%86%92%E7%94%A8%E6%88%B6%E9%81%BF%E5%85%8D%E9%81%8E%E5%BA%A6%E4%BE%9D%E8%B3%B4-141116883.html">https://hk.news.yahoo.com/claude-ai-%E6%B8%AC%E8%A9%A6%E5%8F%8D%E6%80%9D%E5%8A%9F%E8%83%BD-%E6%8F%90%E9%86%92%E7%94%A8%E6%88%B6%E9%81%BF%E5%85%8D%E9%81%8E%E5%BA%A6%E4%BE%9D%E8%B3%B4-141116883.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uQmgzMW5SUGNxN3VQLUJmU3YtcEhCVXpyUl9aOVRMVEFDZU94NGJyVS1yV1NUMGoyY2Fycm1iamhuNVBNUlFEQjd2djFiRGRXSmRiZW14akhXdS1XZlNB">https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uQmgzMW5SUGNxN3VQLUJmU3YtcEhCVXpyUl9aOVRMVEFDZU94NGJyVS1yV1NUMGoyY2Fycm1iamhuNVBNUlFEQjd2djFiRGRXSmRiZW14akhXdS1XZlNB</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTFBKWXJOODhiTGVVSHVxYml3SDJiTkFXd0RGSTZBQ2R2SVdPRTllQ1RoT0N4S05uQlF0Z3NxcFZnVFF2NG1OdXhBVA">https://news.google.com/rss/articles/CBMiSEFVX3lxTFBKWXJOODhiTGVVSHVxYml3SDJiTkFXd0RGSTZBQ2R2SVdPRTllQ1RoT0N4S05uQlF0Z3NxcFZnVFF2NG1OdXhBVA</a></li>
+
+
+
+<li><a href="https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/">https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/</a></li>
+
+
+
+<li><a href="https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/">https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxQQURCQzdlRlEwU1lERFMtYzhhQng1UWxMTjRyRklGZlZvcUhHQ0pQRUpNRDNZN19FZC16aFpmWlNZSHUta3lWeEpTY1htTTNiNG1rQ3p3WVBNTVVibEU0R1pid3BEVFJZbTRwYWxXU05Yc29ZN3A0X0gzV0ZhdVZDWXRJSml4U3hxWnlFMXNEV1ZLdGFqNjkzaTZDMnZTcl9IcDFIWTFNTzBXbUVHUHlNT1BIVHhLVG8">https://news.google.com/rss/articles/CBMitwFBVV95cUxQQURCQzdlRlEwU1lERFMtYzhhQng1UWxMTjRyRklGZlZvcUhHQ0pQRUpNRDNZN19FZC16aFpmWlNZSHUta3lWeEpTY1htTTNiNG1rQ3p3WVBNTVVibEU0R1pid3BEVFJZbTRwYWxXU05Yc29ZN3A0X0gzV0ZhdVZDWXRJSml4U3hxWnlFMXNEV1ZLdGFqNjkzaTZDMnZTcl9IcDFIWTFNTzBXbUVHUHlNT1BIVHhLVG8</a></li>
+
+
+
+<li><a href="https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/">https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxOb2NaQ1M3VWIxd2NUamtRS0YxcjhSLXUyYllGbTY3b3FPSndseTRLdVVHcjRJTEpTd1N0azA5ZF81bkpVRFg2d2JYWFRTTlVhbTZBVGd0cWJ0V012VkU5dzNoRWUyMGFvT3pocTJyVlUtckpYX1A4dFpmUHlPWlVRWGM2ZXFFZmdTeXhMNW5rOTg2cjY5cnBOTQ">https://news.google.com/rss/articles/CBMimAFBVV95cUxOb2NaQ1M3VWIxd2NUamtRS0YxcjhSLXUyYllGbTY3b3FPSndseTRLdVVHcjRJTEpTd1N0azA5ZF81bkpVRFg2d2JYWFRTTlVhbTZBVGd0cWJ0V012VkU5dzNoRWUyMGFvT3pocTJyVlUtckpYX1A4dFpmUHlPWlVRWGM2ZXFFZmdTeXhMNW5rOTg2cjY5cnBOTQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE95dFNCNl83ZEpCclpYdzROOGt3XzFhOUl3U3lUQmt5MjdHci0yYmJlcERlTmUyTTczcXBCdGJUczY2TnlFczJINjh6cVdVZ0l3eWxUX2JyUDE3SGJYQlJURi1qa0xMQlB6ZmNyNTNSTXM">https://news.google.com/rss/articles/CBMicEFVX3lxTE95dFNCNl83ZEpCclpYdzROOGt3XzFhOUl3U3lUQmt5MjdHci0yYmJlcERlTmUyTTczcXBCdGJUczY2TnlFczJINjh6cVdVZ0l3eWxUX2JyUDE3SGJYQlJURi1qa0xMQlB6ZmNyNTNSTXM</a></li>
+
+
+
+<li><a href="https://www.androidauthority.com/claude-reflect-3685917/">https://www.androidauthority.com/claude-reflect-3685917/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxQM1ZidHdpV1RrUFBsckRFbnJEMG5TbnhZUFh5X3hPemNaSWhwbXlsOEdySFZZOGg5aDJYNkk4cjFPcG0tMGtlNnlDaXNuSnVTbWdkX29FSzFLYWtMeVIxY2VsaHNaNmd1WVVHSHpiaGVvbHRmNnRaektsYnRmc2J2dDEzQmNsNnRPQmZ4aEI4dEJJRXB5d3JRUFN3LXo">https://news.google.com/rss/articles/CBMinAFBVV95cUxQM1ZidHdpV1RrUFBsckRFbnJEMG5TbnhZUFh5X3hPemNaSWhwbXlsOEdySFZZOGg5aDJYNkk4cjFPcG0tMGtlNnlDaXNuSnVTbWdkX29FSzFLYWtMeVIxY2VsaHNaNmd1WVVHSHpiaGVvbHRmNnRaektsYnRmc2J2dDEzQmNsNnRPQmZ4aEI4dEJJRXB5d3JRUFN3LXo</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi_gFBVV95cUxOd1dtanlSdnM0dl90T3QxbkEzMkE2VUVWSGlpRTIzaTNHczVrd09FbHhzUHlhLVhnNFVNZ3Jqd1JJTU9PNmMyOWl2RFZ2LWMzTUpHT3puZEJCSnh6Q0Npektma1hrZTRCTXdtZUpnc2JseGs1aHd1MVlmRVlGMjdQSmFGZERIdmFMNC1WSkdkeFByYzlLVG9uTE5WQlhfbWpjUHNmaVRKMHM4LTlSUnVlOWhBaFVSaElFcVhTZVZvdkF4aThKSl9KbC1PR1ZOODZZY1EtbXdSdWMyWjZWaHJRYVhSMjBTM1JzUmRJSWlNS1dwTkh1Nm85WDNRanNrUdIBgwJBVV95cUxQeGNKaXE2MmRvcTJaOEJNQmM3OUxfSW1lLWNibkJuTkdjbmgycGdyN3FpdVNCY293SEl5SnBZcFJ2cXcweFZzR1N6V2ZtZ0JaT1FtdkdvYm94c2s1ckcwTDJWTGtTVGZkbHd0TG5mVkppZ2FKME50cTAzS0w3UlFiNjFKOV9ocEdobGJnb0E1QzViZ1gwc1lIOEtiVE0zX056b003S0JnWENkSllZVndhVkZaUERQcUFFdkJOTjVseUVjTHVpNHg5WFpQM0x6RllfQ2dlX2poWExCT2tYVFNfZml2ajhzdTFVZTNZTThvOHVONnZ1VTl6d1k3NHBucGRZWHg0">https://news.google.com/rss/articles/CBMi_gFBVV95cUxOd1dtanlSdnM0dl90T3QxbkEzMkE2VUVWSGlpRTIzaTNHczVrd09FbHhzUHlhLVhnNFVNZ3Jqd1JJTU9PNmMyOWl2RFZ2LWMzTUpHT3puZEJCSnh6Q0Npektma1hrZTRCTXdtZUpnc2JseGs1aHd1MVlmRVlGMjdQSmFGZERIdmFMNC1WSkdkeFByYzlLVG9uTE5WQlhfbWpjUHNmaVRKMHM4LTlSUnVlOWhBaFVSaElFcVhTZVZvdkF4aThKSl9KbC1PR1ZOODZZY1EtbXdSdWMyWjZWaHJRYVhSMjBTM1JzUmRJSWlNS1dwTkh1Nm85WDNRanNrUdIBgwJBVV95cUxQeGNKaXE2MmRvcTJaOEJNQmM3OUxfSW1lLWNibkJuTkdjbmgycGdyN3FpdVNCY293SEl5SnBZcFJ2cXcweFZzR1N6V2ZtZ0JaT1FtdkdvYm94c2s1ckcwTDJWTGtTVGZkbHd0TG5mVkppZ2FKME50cTAzS0w3UlFiNjFKOV9ocEdobGJnb0E1QzViZ1gwc1lIOEtiVE0zX056b003S0JnWENkSllZVndhVkZaUERQcUFFdkJOTjVseUVjTHVpNHg5WFpQM0x6RllfQ2dlX2poWExCT2tYVFNfZml2ajhzdTFVZTNZTThvOHVONnZ1VTl6d1k3NHBucGRZWHg0</a></li>
+
+
+
+<li><a href="https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/">https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE93eWd4S2k4NjFrRVRRVGRwQlppZDlvSnhuQlVFdWMwbUl5YWR6NGdMWWZlWGdxVVFrWUZHTEtaRzNSSHI5VWNPaWJ5YUpYelNEY3B0Wll0WVd1a0dCcGZCS0JvdzJrWWk5UktfTHUxTXFQTkd1M0dMalcyRQ">https://news.google.com/rss/articles/CBMie0FVX3lxTE93eWd4S2k4NjFrRVRRVGRwQlppZDlvSnhuQlVFdWMwbUl5YWR6NGdMWWZlWGdxVVFrWUZHTEtaRzNSSHI5VWNPaWJ5YUpYelNEY3B0Wll0WVd1a0dCcGZCS0JvdzJrWWk5UktfTHUxTXFQTkd1M0dMalcyRQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE5ER1FHSFRaY3NHUEtFWkV2aGpid3hnU1E4MEpoTXRyemo1ekc1WFZ0a0lBVkctYzFVaURkckc2elI2NktLaTRMek01Q0ZuM1prdHRiX2tKQW9yek44MGpkVFBzWE1rWUJvRlNFN1lTdVMxWjE5SGs4">https://news.google.com/rss/articles/CBMid0FVX3lxTE5ER1FHSFRaY3NHUEtFWkV2aGpid3hnU1E4MEpoTXRyemo1ekc1WFZ0a0lBVkctYzFVaURkckc2elI2NktLaTRMek01Q0ZuM1prdHRiX2tKQW9yek44MGpkVFBzWE1rWUJvRlNFN1lTdVMxWjE5SGs4</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa2VrbFEwR0R5Y202aExPYXhXUEZJdUdWb1JRV2o1Rnd5Wll6WWhzRHhnX3JpZ3lsdU40U2tQQzN6bUhzaWM4RjFDbUg3SXMtVUo4d05DenFWV0dvOTFfMjFwTnRKNWdldGZDV0NKZkQyNGZ0ekZwdzBPa1Z4TzJQenNLWnF3ZE91M0ZlR0lPeEplWlJwZ1pYMVNLSGJvSE5yZjB1bW1mR1ZxYU0tOFJnemdKWkN1c1N4c3pTZWw5SDY5QQ">https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa2VrbFEwR0R5Y202aExPYXhXUEZJdUdWb1JRV2o1Rnd5Wll6WWhzRHhnX3JpZ3lsdU40U2tQQzN6bUhzaWM4RjFDbUg3SXMtVUo4d05DenFWV0dvOTFfMjFwTnRKNWdldGZDV0NKZkQyNGZ0ekZwdzBPa1Z4TzJQenNLWnF3ZE91M0ZlR0lPeEplWlJwZ1pYMVNLSGJvSE5yZjB1bW1mR1ZxYU0tOFJnemdKWkN1c1N4c3pTZWw5SDY5QQ</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, techcrunch.com, testingcatalog.com, macrumors.com, engadget.com, yahoo.com, cnet.com, androidauthority.com, tweakers.net, itc.ua, mashable.com, bug.hr, youtube.com, techcrunch.com, mashable.com, engadget.com, macrumors.com, androidauthority.com, cnet.com, testingcatalog.com, google.com, tweakers.net, bug.hr, youtube.com, itc.ua</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 13 unique domains, 28 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-07-09T20:22:28.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPTVBLbm9aTGI4dlBYeGpyT2N4c3Zja214TUt2QllUQmswUzJTeXR4aWlsU25ibnJCaVlaZVFuMUtBbjBSQ0JEcjZfMnA1UE94cDBBdlBfbnZFY3RLR1Y0MjJrbVJNNjB6OUwyUTJRWXlYT1gtYTI2eGRDaDd1WThvZFYxaERDOEVYeS1UbU5iS0VjSmhUTExhajBDelFQSjUwdjFJd2ZoOEhkRmRBazZaYnRidzRlLUFEOHfSAb8BQVVfeXFMUFhtUFdVa1lqQk8zdFU3NE5QLTdrY0lFdERFRnRGNmtWMjNSdFhNSTF0M29qQnUweWc0Qm9HVEh3aWtGZUNuLVZHN3FmckxCZDJMYmY2ZC1OR0N0R1ZMcG5RU2tFdFlXYms3aEVyTjN2emh2YUVGUlRQRjh1MzBiMi1SUjlEOGVBUTlhaENnbS1lZXBHS3FvMS15YnFtdFZBa2xjQ3RqeWNCUHpOandrQnI1RjZSd2ZzN0RLXzZodm8",
+      "title": "Anthropic found a hidden space where Claude puzzles over concepts - MIT Technology Review"
+    },
+    {
+      "date": "2026-07-09T13:30:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPall3b29yUlBVejdiN3JNVHNIUDd6R2xrVDNERE84S1NBMHo2WmVlMDlfTkpNb1ZfZW9YMGs3eU40YnQ0aFdZT3B6c3ZiZ3luOFFQS1dXalpfelpzRE5kRGNkbWdadXlkeUhZZFlZZFg0WEN2bndKdTdnc3hsMlhrY3JKQVpPX0dqc1psR045R3E3TWpXOGhZaXRoZ3F3SWtVcml0aTR3",
+      "title": "Say hello to Claude Wrapped - The Verge"
+    },
+    {
+      "date": "2026-07-09T14:53:09.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxOb2NaQ1M3VWIxd2NUamtRS0YxcjhSLXUyYllGbTY3b3FPSndseTRLdVVHcjRJTEpTd1N0azA5ZF81bkpVRFg2d2JYWFRTTlVhbTZBVGd0cWJ0V012VkU5dzNoRWUyMGFvT3pocTJyVlUtckpYX1A4dFpmUHlPWlVRWGM2ZXFFZmdTeXhMNW5rOTg2cjY5cnBOTQ",
+      "title": "Anthropic\u2019s new Claude feature is quietly selling you on AI - TechCrunch"
+    },
+    {
+      "date": "2026-07-09T13:31:02.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uQmgzMW5SUGNxN3VQLUJmU3YtcEhCVXpyUl9aOVRMVEFDZU94NGJyVS1yV1NUMGoyY2Fycm1iamhuNVBNUlFEQjd2djFiRGRXSmRiZW14akhXdS1XZlNB",
+      "title": "A new way to reflect on how you use Claude - Anthropic"
+    },
+    {
+      "date": "2026-07-09T20:52:37.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE93eWd4S2k4NjFrRVRRVGRwQlppZDlvSnhuQlVFdWMwbUl5YWR6NGdMWWZlWGdxVVFrWUZHTEtaRzNSSHI5VWNPaWJ5YUpYelNEY3B0Wll0WVd1a0dCcGZCS0JvdzJrWWk5UktfTHUxTXFQTkd1M0dMalcyRQ",
+      "title": "Anthropic Adds \u0027Reflect\u0027 Feature to Claude for Tracking Your Usage - MacRumors"
+    },
+    {
+      "date": "2026-07-09T13:35:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxQM1ZidHdpV1RrUFBsckRFbnJEMG5TbnhZUFh5X3hPemNaSWhwbXlsOEdySFZZOGg5aDJYNkk4cjFPcG0tMGtlNnlDaXNuSnVTbWdkX29FSzFLYWtMeVIxY2VsaHNaNmd1WVVHSHpiaGVvbHRmNnRaektsYnRmc2J2dDEzQmNsNnRPQmZ4aEI4dEJJRXB5d3JRUFN3LXo",
+      "title": "Anthropic\u0027s \u0027Reflection\u0027 Beta Tracks Your Habits to Improve How You Use Claude - CNET"
+    },
+    {
+      "date": "2026-07-10T04:34:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi_gFBVV95cUxOd1dtanlSdnM0dl90T3QxbkEzMkE2VUVWSGlpRTIzaTNHczVrd09FbHhzUHlhLVhnNFVNZ3Jqd1JJTU9PNmMyOWl2RFZ2LWMzTUpHT3puZEJCSnh6Q0Npektma1hrZTRCTXdtZUpnc2JseGs1aHd1MVlmRVlGMjdQSmFGZERIdmFMNC1WSkdkeFByYzlLVG9uTE5WQlhfbWpjUHNmaVRKMHM4LTlSUnVlOWhBaFVSaElFcVhTZVZvdkF4aThKSl9KbC1PR1ZOODZZY1EtbXdSdWMyWjZWaHJRYVhSMjBTM1JzUmRJSWlNS1dwTkh1Nm85WDNRanNrUdIBgwJBVV95cUxQeGNKaXE2MmRvcTJaOEJNQmM3OUxfSW1lLWNibkJuTkdjbmgycGdyN3FpdVNCY293SEl5SnBZcFJ2cXcweFZzR1N6V2ZtZ0JaT1FtdkdvYm94c2s1ckcwTDJWTGtTVGZkbHd0TG5mVkppZ2FKME50cTAzS0w3UlFiNjFKOV9ocEdobGJnb0E1QzViZ1gwc1lIOEtiVE0zX056b003S0JnWENkSllZVndhVkZaUERQcUFFdkJOTjVseUVjTHVpNHg5WFpQM0x6RllfQ2dlX2poWExCT2tYVFNfZml2ajhzdTFVZTNZTThvOHVONnZ1VTl6d1k3NHBucGRZWHg0",
+      "title": "Anthropic built a dashboard so Claude can tell you how much Claude you\u0027ve been Clauding - The Times of India"
+    },
+    {
+      "author": "Sarah Perez",
+      "date": "2026-07-09T14:53:09.000Z",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/",
+      "title": "Anthropic\u2019s new Claude feature is quietly selling you on AI"
+    },
+    {
+      "author": "Alexey Shabanov",
+      "date": "2026-07-09T15:29:16.000Z",
+      "domain": "testingcatalog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/",
+      "title": "Anthropic adds usage reflection dashboard to Claude for all users"
+    },
+    {
+      "date": "2026-07-09T13:30:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPTWpReTUtUm5JakdXUFUyaTNXMEx0VjU1WFlPZHhySzNlZ3lSM1FWN0Q4RlZwcWM3S3hpQUt3anlfQmhvMkU2THhpN3BmTzQ1WEJQY3ZOWHQzM0NUNWdxTnhITlhmS056NzRydTlNejZReVEwemZjRlMydURNSThRbDFfOHVXVE0zSVozNQ",
+      "title": "Claude\u0027s New Reflect Dashboard Wants To Help You Log Off Of Claude - Engadget"
+    },
+    {
+      "date": "2026-07-09T13:42:20.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE95dFNCNl83ZEpCclpYdzROOGt3XzFhOUl3U3lUQmt5MjdHci0yYmJlcERlTmUyTTczcXBCdGJUczY2TnlFczJINjh6cVdVZ0l3eWxUX2JyUDE3SGJYQlJURi1qa0xMQlB6ZmNyNTNSTXM",
+      "title": "\u0027Reflect\u0027 with Claude gives users insight into chatbot habits - Mashable"
+    },
+    {
+      "date": "2026-07-09T14:05:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxQS1hwWVF1c3dZWEdjQWs1c2JlVFFFNExXTktFRHRXbEIxWFlXYTRCN3B2TTNpTEwxQVhHckdBUEZDbElULXBJdGhpMWRDNGxkQ05tclRqbDZyaEFHVmpUYXlwc1lJMFlJMU5nLUQtTWhKZWhTYXBBZXRranZGVkZ4UUdHR3NNY28",
+      "title": "Claude AI may ask you if you\u2019re using it too much - 9to5Mac"
+    },
+    {
+      "date": "2026-07-09T18:41:22.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa2VrbFEwR0R5Y202aExPYXhXUEZJdUdWb1JRV2o1Rnd5Wll6WWhzRHhnX3JpZ3lsdU40U2tQQzN6bUhzaWM4RjFDbUg3SXMtVUo4d05DenFWV0dvOTFfMjFwTnRKNWdldGZDV0NKZkQyNGZ0ekZwdzBPa1Z4TzJQenNLWnF3ZE91M0ZlR0lPeEplWlJwZ1pYMVNLSGJvSE5yZjB1bW1mR1ZxYU0tOFJnemdKWkN1c1N4c3pTZWw5SDY5QQ",
+      "title": "Claude Just Got Its Own Spotify Wrapped. Here\u2019s What It Reveals About How You Use AI - inc.com"
+    },
+    {
+      "date": "2026-07-09T17:05:09.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBKWXJOODhiTGVVSHVxYml3SDJiTkFXd0RGSTZBQ2R2SVdPRTllQ1RoT0N4S05uQlF0Z3NxcFZnVFF2NG1OdXhBVA",
+      "title": "Anthropic Launches Claude Reflect Beta to Track AI Habits - SQ Magazine"
+    },
+    {
+      "date": "2026-07-09T19:24:11.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMibkFVX3lxTE11T1VMdTZnLVgwREExcTFNdnYyYXlEOGdnQldWWW1URHRCc2dUbUJHeno5RVhFY1lkamFNb0E5cW1vVUgyTzNtNlplTU91RnpBbkRha0gxT1VxMmp6a3dhQVk5bjBVVlk4Nkd6aS1R",
+      "title": "Claude Now Wants You To Audit Your AI Habits - WeRSM"
+    },
+    {
+      "date": "2026-07-09T15:00:13.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQURCQzdlRlEwU1lERFMtYzhhQng1UWxMTjRyRklGZlZvcUhHQ0pQRUpNRDNZN19FZC16aFpmWlNZSHUta3lWeEpTY1htTTNiNG1rQ3p3WVBNTVVibEU0R1pid3BEVFJZbTRwYWxXU05Yc29ZN3A0X0gzV0ZhdVZDWXRJSml4U3hxWnlFMXNEV1ZLdGFqNjkzaTZDMnZTcl9IcDFIWTFNTzBXbUVHUHlNT1BIVHhLVG8",
+      "title": "Claude Reflect is here. It\u2019s your usual yearly Wrapped, but with Anthropic\u2019s AI - Digital Trends"
+    },
+    {
+      "date": "2026-07-09T15:36:14.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMickFVX3lxTE1HM0ZPUkgwUjBHRzRydkJRSUVpdnVUMmwzbFJ6Y0N3VmVzWGdPekN4aWNyQW5QRlNiVTdHb3hCMkhfZkE0eHJOUTdydkd1blg2RlA2dEd2eDhXeFB6bXN4VUhTWWdReUFKTlItWUpHTFlzUQ",
+      "title": "Anthropic launches Reflect in Claude to visualize AI use and encourage mindful workflows - \u041c\u0435\u0436\u0430. \u041d\u043e\u0432\u0438\u043d\u0438 \u0423\u043a\u0440\u0430\u0457\u043d\u0438."
+    },
+    {
+      "author": "Juli Clover",
+      "date": "2026-07-09T20:52:44.000Z",
+      "domain": "macrumors.com",
+      "image": "https://kagiproxy.com/img/YQeI6lBrD5yR26vM1jFis2QJtdj2PTjvlDnafbrRJNLcsUE7SPGQ85gCHEHBvvV1kTuijEJdCxfjk7epIL7VwIoXB2dHD-bi5bZ3W1FwLHPMl9l2dlSjUmcMlJnqAZjEJRuqoTF9JGej",
+      "image_caption": "",
+      "link": "https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/",
+      "title": "Anthropic Adds \u0027Reflect\u0027 Feature to Claude for Tracking Your Usage"
+    },
+    {
+      "author": "Stephen Schenck",
+      "date": "2026-07-09T17:02:55.000Z",
+      "domain": "androidauthority.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.androidauthority.com/claude-reflect-3685917/",
+      "title": "Anthropic\u2019s new Claude Reflect is basically Spotify Wrapped crossed with Digital Wellbeing"
+    },
+    {
+      "author": "\u0428\u0430\u0434\u0440\u0456\u043d \u0410\u043d\u0434\u0440\u0456\u0439",
+      "date": "2026-07-10T04:00:32.000Z",
+      "domain": "itc.ua",
+      "image": "",
+      "image_caption": "",
+      "link": "https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/",
+      "title": "Anthropic \u0437\u0430\u043f\u0443\u0441\u0442\u0438\u043b\u0430 Claude Reflect: \u0432\u0456\u043d \u043f\u0440\u043e\u0430\u043d\u0430\u043b\u0456\u0437\u0443\u0454 \u0432\u0430\u0448\u0456 \u0437\u0432\u0438\u0447\u043a\u0438 \u0442\u0430 \u043d\u0430\u0432\u0447\u0438\u0442\u044c \u043c\u0435\u043d\u0448\u0435 \u0437\u0430\u043b\u0435\u0436\u0430\u0442\u0438 \u0432\u0456\u0434 \u0441\u0435\u0431\u0435"
+    },
+    {
+      "date": "2026-07-09T13:30:00.000Z",
+      "domain": "mashable.com",
+      "image": "https://kagiproxy.com/img/WATbpJFk7X3YMVr6_kfddhnxxp_CTrgFV0DHl9XUiowBKx70cHtFGHwy85GJaAj_NdBKbkbZLHnqFjHyM3BrGA5pF-HSH9ZG_lBCtQApnpVacgRFVmHCAQC7a4HWnSAbWA2cG9HU3VHjdDatueOFAL2K4aUwPLda30e0b5hLws_pbzOqlc0Loq45S-Ddcsg",
+      "image_caption": "",
+      "link": "https://mashable.com/tech/reflect-with-claude-anthropic-feature",
+      "title": "Claude will now let you reflect on how much youre using Claude"
+    },
+    {
+      "date": "2026-07-10T05:33:00.000Z",
+      "domain": "bug.hr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bug.hr/umjetna-inteligencija/stigao-je-claude-wrapped-61300",
+      "title": "Stigao je Claude Wrapped"
+    },
+    {
+      "author": "The Verge",
+      "date": "2026-07-09T20:04:28.000Z",
+      "domain": "youtube.com",
+      "image": "",
+      "image_caption": "Say hello to Claude Wrapped, ChatGPT\u2019s upgraded voice mode is better at shutting up, and Character.AI wants a piece of the microdrama pie. Here are today\u2019s top headlines. Subscribe: http://goo.gl/G5RXGs Like The Verge on Facebook: https://goo.gl/2P1aGc Follow on Twitter: https://goo.gl/XTWX61 Follow on Instagram: https://goo.gl/7ZeLv Watch The Vergecast on YouTube: https://bit.ly/40RFRkg The Vergecast Podcast: https://bit.ly/3WQDexZ Decoder with Nilay Patel: http://apple.co/3v29nDc More about our podcasts: https://www.theverge.com/podcasts Read More: http://www.theverge.com Community guidelines: http://bit.ly/2D0hlAv Wallpapers from The Verge: https://bit.ly/2xQXYJr Shop our Verge merch store here: https://bit.ly/4kPCmEc Subscribe to The Verge: https://bit.ly/3FT6n5S Subscribe to The Vergecast on YouTube, new episodes on Tuesday and Friday: https://bit.ly/3I6nJtz If you buy something from a Verge link, Vox Media may receive a commission without exerting any influence on editorial content. For more information about our ethics policy, visit: https://bit.ly/3ZWTlLs",
+      "link": "https://www.youtube.com/shorts/dHJoc-9aM0Y",
+      "title": "Anthropic\u0027s new \"reflect\" feature for Claude #Vergecast"
+    },
+    {
+      "author": "Blake Stimac",
+      "date": "2026-07-09T13:35:58.000Z",
+      "domain": "cnet.com",
+      "image": "https://kagiproxy.com/img/qK1sALuICTD3mn8RNj2AIr13CTLJQ4ikjTuWfTcx2QKtLnl4_Tj53xUpkuKV9rd4uB0V5jvToTXP9HoNgXj1ziZ_TeIaXf_ivqI05z753QqsXWykhYVhZ1xeMKKFR0NtuFf7yfS8MNSVG_1u-SeFpHSkWnPphQ9D54WGP2mQCOsDnDg35bBezev_WrRkSn16ftuexg_oXjJqEkBp_dO_mVyHGsIDzgxNfpKfBug6roL--uX5g3VV36nVxO1Q1GVvd8GqjAkSLRq3T4NxGlD5yISczFxrlHwJLKihUYKOuVv6rWNYn-N8oA",
+      "image_caption": "",
+      "link": "https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/",
+      "title": "Anthropic\u0027s \u0027Reflection\u0027 Beta Tracks Your Habits to Improve How You Use Claude"
+    },
+    {
+      "author": "Arnoud Wokke",
+      "date": "2026-07-09T17:24:00.000Z",
+      "domain": "tweakers.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tweakers.net/nieuws/249914/anthropic-maakt-dashboard-waarin-gebruikers-claude-gebruik-kunnen-zien.html",
+      "title": "Anthropic maakt dashboard waarin gebruikers Claude-gebruik kunnen zien"
+    },
+    {
+      "author": "Igor Bonifacic",
+      "date": "2026-07-09T13:30:00.000Z",
+      "domain": "engadget.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/",
+      "title": "Claude\u0027s new Reflect dashboard wants to help you log off of Claude"
+    },
+    {
+      "date": "2026-07-09T14:11:16.000Z",
+      "domain": "yahoo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hk.news.yahoo.com/claude-ai-%E6%B8%AC%E8%A9%A6%E5%8F%8D%E6%80%9D%E5%8A%9F%E8%83%BD-%E6%8F%90%E9%86%92%E7%94%A8%E6%88%B6%E9%81%BF%E5%85%8D%E9%81%8E%E5%BA%A6%E4%BE%9D%E8%B3%B4-141116883.html",
+      "title": "Claude AI \u6e2c\u8a66\u53cd\u601d\u529f\u80fd \u63d0\u9192\u7528\u6236\u907f\u514d\u904e\u5ea6\u4f9d\u8cf4"
+    },
+    {
+      "date": "2026-07-09T15:30:44.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE5ER1FHSFRaY3NHUEtFWkV2aGpid3hnU1E4MEpoTXRyemo1ekc1WFZ0a0lBVkctYzFVaURkckc2elI2NktLaTRMek01Q0ZuM1prdHRiX2tKQW9yek44MGpkVFBzWE1rWUJvRlNFN1lTdVMxWjE5SGs4",
+      "title": "Anthropic\u0027s Reflection: AI gets its screen-time moment - Axios"
+    }
+  ],
+  "business_angle": [
+    "Reflect shows users recurring Claude use cases and prompts them to revisit the product through periodic summaries [techcrunch.com#1][cnet.com#1].",
+    "Built-in data exclusions address sensitive AI interactions, including incognito chats, files from connected tools and conversations tied to health integrations [macrumors.com#1][itc.ua#1].",
+    "TestingCatalog said cowork conversation tracking is listed as coming soon, indicating the beta does not yet cover that use case [testingcatalog.com#1].",
+    "Reflect shows users concrete patterns in how Claude fits into recurring work [techcrunch.com#1][testingcatalog.com#1].",
+    "Quiet hours and break nudges address concerns about chatbot overuse [macrumors.com#1][mashable.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "ITC reported that Anthropic developed Reflect with MIT Media Lab, the Digital Wellness Lab at Boston Children\u0027s Hospital and the Family Online Safety Institute [itc.ua#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=testingcatalog.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "testingcatalog.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macrumors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macrumors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=engadget.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "engadget.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=yahoo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yahoo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidauthority.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidauthority.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=itc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "itc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bug.hr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bug.hr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=youtube.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "youtube.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=engadget.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "engadget.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macrumors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macrumors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidauthority.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidauthority.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=testingcatalog.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "testingcatalog.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bug.hr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bug.hr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=youtube.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "youtube.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=itc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "itc.ua"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\ude9e",
+  "feed_category": "AI, Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Spotify Wrapped popularized annual activity recaps, and similar summaries have spread to services including YouTube and Uber [bug.hr#1]. Apple introduced Screen Time in iOS 12 in 2018, giving users device-use tracking and app-limit tools [common]. Engadget compared Reflect with Spotify Wrapped and Apple\u0027s Screen Time [engadget.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI product design: Reflect adds user-facing analytics and self-management controls to a chatbot. Several technology publications compared it with Spotify Wrapped, Digital Wellbeing and Screen Time [engadget.com#1][androidauthority.com#1][macrumors.com#1][bug.hr#1].",
+    "Digital wellness: ITC reported that Anthropic developed the feature with MIT Media Lab, the Digital Wellness Lab at Boston Children\u0027s Hospital and the Family Online Safety Institute, giving Claude\u0027s usage controls an explicit digital-wellness framing [itc.ua#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 28,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Mashable",
+          "url": "https://mashable.com/tech/reflect-with-claude-anthropic-feature"
+        }
+      ],
+      "text": "Anthropic: The company said Reflect is meant to help users consider whether they use Claude effectively, too often, or for tasks they may prefer to handle themselves."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/"
+        }
+      ],
+      "text": "TechCrunch: TechCrunch described Reflect as more than an analytics feature and said it frames Claude as both a productivity tool and a technology that can be used mindfully."
+    },
+    {
+      "sources": [
+        {
+          "name": "CNET",
+          "url": "https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/"
+        }
+      ],
+      "text": "CNET: CNET said sharing data with AI can be concerning, while describing Reflect as a feature that returns some of that information to users in a potentially useful form."
+    },
+    {
+      "sources": [
+        {
+          "name": "Mashable",
+          "url": "https://mashable.com/tech/reflect-with-claude-anthropic-feature"
+        }
+      ],
+      "text": "Anthropic: Anthropic said Reflect invites users to step back and examine the role Claude plays in their lives, including whether they are using it effectively, too often, or for tasks better handled without AI."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/"
+        }
+      ],
+      "text": "TechCrunch: TechCrunch framed Reflect as more than analytics, saying that showing a user\u0027s Claude-assisted work can make the chatbot look like an everyday workflow tool while also presenting AI use as something users can manage mindfully."
+    },
+    {
+      "sources": [
+        {
+          "name": "CNET",
+          "url": "https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/"
+        }
+      ],
+      "text": "CNET: CNET said AI companies have an incentive to help users get more value from their products so they keep using them, while describing Reflect as a way to return some usage information to users."
+    }
+  ],
+  "primary_image": {
+    "caption": "Anthropic\u0027s Claude Reflect feature.",
+    "credit": "Anthropic",
+    "link": "https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/",
+    "url": "https://kagiproxy.com/img/nVqYC3rQAyLEihxax9Xwjq4H07sPAuabMmk9bxrQApDDYFr880EbYa5BQNDtbbGBj82xwgAIKQIKifLwcRqcoIGdtWIY0cdGK--RiZeeUlnRNI9wcwLFb4s5K0axv0ShO5pIbgGyJJ0Y"
+  },
+  "published": "2026-07-10T12:00:11.212Z",
+  "quote": "What\u0027s one thing you want to keep doing yourself, even if Claude could do it faster?",
+  "quote_attribution": "MacRumors",
+  "quote_author": "Anthropic",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.macrumors.com/2026/07/09/anthropic-reflect-claude-tracking/",
+    "https://www.engadget.com/2211304/claude-reflect-dashboard-wants-to-help-you-log-off/",
+    "https://news.google.com/rss/articles/CBMijAFBVV95cUxPTWpReTUtUm5JakdXUFUyaTNXMEx0VjU1WFlPZHhySzNlZ3lSM1FWN0Q4RlZwcWM3S3hpQUt3anlfQmhvMkU2THhpN3BmTzQ1WEJQY3ZOWHQzM0NUNWdxTnhITlhmS056NzRydTlNejZReVEwemZjRlMydURNSThRbDFfOHVXVE0zSVozNQ",
+    "https://mashable.com/tech/reflect-with-claude-anthropic-feature",
+    "https://www.youtube.com/shorts/dHJoc-9aM0Y",
+    "https://news.google.com/rss/articles/CBMickFVX3lxTE1HM0ZPUkgwUjBHRzRydkJRSUVpdnVUMmwzbFJ6Y0N3VmVzWGdPekN4aWNyQW5QRlNiVTdHb3hCMkhfZkE0eHJOUTdydkd1blg2RlA2dEd2eDhXeFB6bXN4VUhTWWdReUFKTlItWUpHTFlzUQ",
+    "https://www.bug.hr/umjetna-inteligencija/stigao-je-claude-wrapped-61300",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxQS1hwWVF1c3dZWEdjQWs1c2JlVFFFNExXTktFRHRXbEIxWFlXYTRCN3B2TTNpTEwxQVhHckdBUEZDbElULXBJdGhpMWRDNGxkQ05tclRqbDZyaEFHVmpUYXlwc1lJMFlJMU5nLUQtTWhKZWhTYXBBZXRranZGVkZ4UUdHR3NNY28",
+    "https://news.google.com/rss/articles/CBMibkFVX3lxTE11T1VMdTZnLVgwREExcTFNdnYyYXlEOGdnQldWWW1URHRCc2dUbUJHeno5RVhFY1lkamFNb0E5cW1vVUgyTzNtNlplTU91RnpBbkRha0gxT1VxMmp6a3dhQVk5bjBVVlk4Nkd6aS1R",
+    "https://tweakers.net/nieuws/249914/anthropic-maakt-dashboard-waarin-gebruikers-claude-gebruik-kunnen-zien.html",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxPall3b29yUlBVejdiN3JNVHNIUDd6R2xrVDNERE84S1NBMHo2WmVlMDlfTkpNb1ZfZW9YMGs3eU40YnQ0aFdZT3B6c3ZiZ3luOFFQS1dXalpfelpzRE5kRGNkbWdadXlkeUhZZFlZZFg0WEN2bndKdTdnc3hsMlhrY3JKQVpPX0dqc1psR045R3E3TWpXOGhZaXRoZ3F3SWtVcml0aTR3",
+    "https://news.google.com/rss/articles/CBMiugFBVV95cUxPTVBLbm9aTGI4dlBYeGpyT2N4c3Zja214TUt2QllUQmswUzJTeXR4aWlsU25ibnJCaVlaZVFuMUtBbjBSQ0JEcjZfMnA1UE94cDBBdlBfbnZFY3RLR1Y0MjJrbVJNNjB6OUwyUTJRWXlYT1gtYTI2eGRDaDd1WThvZFYxaERDOEVYeS1UbU5iS0VjSmhUTExhajBDelFQSjUwdjFJd2ZoOEhkRmRBazZaYnRidzRlLUFEOHfSAb8BQVVfeXFMUFhtUFdVa1lqQk8zdFU3NE5QLTdrY0lFdERFRnRGNmtWMjNSdFhNSTF0M29qQnUweWc0Qm9HVEh3aWtGZUNuLVZHN3FmckxCZDJMYmY2ZC1OR0N0R1ZMcG5RU2tFdFlXYms3aEVyTjN2emh2YUVGUlRQRjh1MzBiMi1SUjlEOGVBUTlhaENnbS1lZXBHS3FvMS15YnFtdFZBa2xjQ3RqeWNCUHpOandrQnI1RjZSd2ZzN0RLXzZodm8",
+    "https://hk.news.yahoo.com/claude-ai-%E6%B8%AC%E8%A9%A6%E5%8F%8D%E6%80%9D%E5%8A%9F%E8%83%BD-%E6%8F%90%E9%86%92%E7%94%A8%E6%88%B6%E9%81%BF%E5%85%8D%E9%81%8E%E5%BA%A6%E4%BE%9D%E8%B3%B4-141116883.html",
+    "https://news.google.com/rss/articles/CBMiX0FVX3lxTE9uQmgzMW5SUGNxN3VQLUJmU3YtcEhCVXpyUl9aOVRMVEFDZU94NGJyVS1yV1NUMGoyY2Fycm1iamhuNVBNUlFEQjd2djFiRGRXSmRiZW14akhXdS1XZlNB",
+    "https://news.google.com/rss/articles/CBMiSEFVX3lxTFBKWXJOODhiTGVVSHVxYml3SDJiTkFXd0RGSTZBQ2R2SVdPRTllQ1RoT0N4S05uQlF0Z3NxcFZnVFF2NG1OdXhBVA",
+    "https://www.testingcatalog.com/anthropic-adds-usage-reflection-dashboard-to-claude-for-all-users/",
+    "https://www.cnet.com/tech/services-and-software/anthropic-new-reflection-tool-use-claude-better/",
+    "https://news.google.com/rss/articles/CBMitwFBVV95cUxQQURCQzdlRlEwU1lERFMtYzhhQng1UWxMTjRyRklGZlZvcUhHQ0pQRUpNRDNZN19FZC16aFpmWlNZSHUta3lWeEpTY1htTTNiNG1rQ3p3WVBNTVVibEU0R1pid3BEVFJZbTRwYWxXU05Yc29ZN3A0X0gzV0ZhdVZDWXRJSml4U3hxWnlFMXNEV1ZLdGFqNjkzaTZDMnZTcl9IcDFIWTFNTzBXbUVHUHlNT1BIVHhLVG8",
+    "https://itc.ua/ua/novini/anthropic-zapustyla-claude-reflect-vin-proanalizuye-vashi-zvychky-ta-navchyt-menshe-zalezhaty-vid-sebe/",
+    "https://news.google.com/rss/articles/CBMimAFBVV95cUxOb2NaQ1M3VWIxd2NUamtRS0YxcjhSLXUyYllGbTY3b3FPSndseTRLdVVHcjRJTEpTd1N0azA5ZF81bkpVRFg2d2JYWFRTTlVhbTZBVGd0cWJ0V012VkU5dzNoRWUyMGFvT3pocTJyVlUtckpYX1A4dFpmUHlPWlVRWGM2ZXFFZmdTeXhMNW5rOTg2cjY5cnBOTQ",
+    "https://news.google.com/rss/articles/CBMicEFVX3lxTE95dFNCNl83ZEpCclpYdzROOGt3XzFhOUl3U3lUQmt5MjdHci0yYmJlcERlTmUyTTczcXBCdGJUczY2TnlFczJINjh6cVdVZ0l3eWxUX2JyUDE3SGJYQlJURi1qa0xMQlB6ZmNyNTNSTXM",
+    "https://www.androidauthority.com/claude-reflect-3685917/",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxQM1ZidHdpV1RrUFBsckRFbnJEMG5TbnhZUFh5X3hPemNaSWhwbXlsOEdySFZZOGg5aDJYNkk4cjFPcG0tMGtlNnlDaXNuSnVTbWdkX29FSzFLYWtMeVIxY2VsaHNaNmd1WVVHSHpiaGVvbHRmNnRaektsYnRmc2J2dDEzQmNsNnRPQmZ4aEI4dEJJRXB5d3JRUFN3LXo",
+    "https://news.google.com/rss/articles/CBMi_gFBVV95cUxOd1dtanlSdnM0dl90T3QxbkEzMkE2VUVWSGlpRTIzaTNHczVrd09FbHhzUHlhLVhnNFVNZ3Jqd1JJTU9PNmMyOWl2RFZ2LWMzTUpHT3puZEJCSnh6Q0Npektma1hrZTRCTXdtZUpnc2JseGs1aHd1MVlmRVlGMjdQSmFGZERIdmFMNC1WSkdkeFByYzlLVG9uTE5WQlhfbWpjUHNmaVRKMHM4LTlSUnVlOWhBaFVSaElFcVhTZVZvdkF4aThKSl9KbC1PR1ZOODZZY1EtbXdSdWMyWjZWaHJRYVhSMjBTM1JzUmRJSWlNS1dwTkh1Nm85WDNRanNrUdIBgwJBVV95cUxQeGNKaXE2MmRvcTJaOEJNQmM3OUxfSW1lLWNibkJuTkdjbmgycGdyN3FpdVNCY293SEl5SnBZcFJ2cXcweFZzR1N6V2ZtZ0JaT1FtdkdvYm94c2s1ckcwTDJWTGtTVGZkbHd0TG5mVkppZ2FKME50cTAzS0w3UlFiNjFKOV9ocEdobGJnb0E1QzViZ1gwc1lIOEtiVE0zX056b003S0JnWENkSllZVndhVkZaUERQcUFFdkJOTjVseUVjTHVpNHg5WFpQM0x6RllfQ2dlX2poWExCT2tYVFNfZml2ajhzdTFVZTNZTThvOHVONnZ1VTl6d1k3NHBucGRZWHg0",
+    "https://techcrunch.com/2026/07/09/anthropics-new-claude-feature-is-quietly-selling-you-on-ai/",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTE93eWd4S2k4NjFrRVRRVGRwQlppZDlvSnhuQlVFdWMwbUl5YWR6NGdMWWZlWGdxVVFrWUZHTEtaRzNSSHI5VWNPaWJ5YUpYelNEY3B0Wll0WVd1a0dCcGZCS0JvdzJrWWk5UktfTHUxTXFQTkd1M0dMalcyRQ",
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE5ER1FHSFRaY3NHUEtFWkV2aGpid3hnU1E4MEpoTXRyemo1ekc1WFZ0a0lBVkctYzFVaURkckc2elI2NktLaTRMek01Q0ZuM1prdHRiX2tKQW9yek44MGpkVFBzWE1rWUJvRlNFN1lTdVMxWjE5SGs4",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxPa2VrbFEwR0R5Y202aExPYXhXUEZJdUdWb1JRV2o1Rnd5Wll6WWhzRHhnX3JpZ3lsdU40U2tQQzN6bUhzaWM4RjFDbUg3SXMtVUo4d05DenFWV0dvOTFfMjFwTnRKNWdldGZDV0NKZkQyNGZ0ekZwdzBPa1Z4TzJQenNLWnF3ZE91M0ZlR0lPeEplWlJwZ1pYMVNLSGJvSE5yZjB1bW1mR1ZxYU0tOFJnemdKWkN1c1N4c3pTZWw5SDY5QQ"
+  ],
+  "suggested_qna": [],
+  "summary": "Anthropic introduced Reflect, a beta dashboard in Claude that lets users review their chatbot use over selected one-, three-, six- or 12-month periods [techcrunch.com#1][testingcatalog.com#1][macrumors.com#1][mashable.com#1]. The tool summarizes recurring topics, task types and usage patterns, and adds controls for quiet hours and break nudges after a chosen amount of Claude use [testingcatalog.com#1][macrumors.com#1][engadget.com#1].\n\nReflect is available to Free, Pro and Max users with Memory turned on, through Claude\u0027s web and desktop apps [testingcatalog.com#1][macrumors.com#1][itc.ua#1]. Anthropic said future updates will add a view of total time spent using Claude [testingcatalog.com#1]. MacRumors reported that Reflect excludes incognito chats, underlying files from connected tools and conversations tied to health integrations, and that the displayed information is not used for other purposes [macrumors.com#1].",
+  "talking_points": [
+    "Availability gap: Engadget said Reflect is limited to Claude\u0027s web client and desktop app at launch and did not describe mobile availability [engadget.com#1].",
+    "Coming support: TestingCatalog said support for cowork conversations is not live yet and is listed as coming soon [testingcatalog.com#1].",
+    "Reflection prompt: Anthropic\u0027s example prompt asks, \"What\u0027s one thing you want to keep doing yourself, even if Claude could do it faster?\" [techcrunch.com#1][macrumors.com#1][itc.ua#1].",
+    "AI fluency: The dashboard maps usage to Anthropic\u0027s 4D AI Fluency Framework: Delegation, Description, Discernment and Diligence [macrumors.com#1][testingcatalog.com#1][itc.ua#1].",
+    "Privacy limits: Reflect does not draw from incognito chats, underlying files from connected tools or conversations tied to health integration tools, and Anthropic says it does not use Reflect information for other purposes [macrumors.com#1][itc.ua#1].",
+    "Fluency framework: Reflect maps activity to Anthropic\u0027s 4D AI Fluency Framework: delegation, description, discernment and diligence [testingcatalog.com#1][macrumors.com#1][yahoo.com#1].",
+    "Interface metrics: Engadget reported that the dashboard shows a user\u0027s most active day, peak hour and total chats for the selected period, plus topic breakdowns with percentages [engadget.com#1].",
+    "Access limits: TestingCatalog reported that cowork conversation support is not yet available and is listed as coming soon [testingcatalog.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Anthropic adds Claude Reflect dashboard for AI use",
+  "travel_advisory": "",
+  "unique_domains": 13,
+  "url": "https://news.google.com/rss/articles/CBMiugFBVV95cUxPTVBLbm9aTGI4dlBYeGpyT2N4c3Zja214TUt2QllUQmswUzJTeXR4aWlsU25ibnJCaVlaZVFuMUtBbjBSQ0JEcjZfMnA1UE94cDBBdlBfbnZFY3RLR1Y0MjJrbVJNNjB6OUwyUTJRWXlYT1gtYTI2eGRDaDd1WThvZFYxaERDOEVYeS1UbU5iS0VjSmhUTExhajBDelFQSjUwdjFJd2ZoOEhkRmRBazZaYnRidzRlLUFEOHfSAb8BQVVfeXFMUFhtUFdVa1lqQk8zdFU3NE5QLTdrY0lFdERFRnRGNmtWMjNSdFhNSTF0M29qQnUweWc0Qm9HVEh3aWtGZUNuLVZHN3FmckxCZDJMYmY2ZC1OR0N0R1ZMcG5RU2tFdFlXYms3aEVyTjN2emh2YUVGUlRQRjh1MzBiMi1SUjlEOGVBUTlhaENnbS1lZXBHS3FvMS15YnFtdFZBa2xjQ3RqeWNCUHpOandrQnI1RjZSd2ZzN0RLXzZodm8",
+  "user_action_items": [
+    "Open Reflect: In Claude on the web or desktop app, go to Settings and select the Reflect tab; Free, Pro and Max accounts must have memory enabled [engadget.com#1][macrumors.com#1][testingcatalog.com#1].",
+    "Set usage boundaries: Use Reflect or the Time and focus tab to configure quiet hours or break reminders, which users can dismiss during active work [engadget.com#1][macrumors.com#1][testingcatalog.com#1].",
+    "Set usage boundaries: Use Reflect or Claude\u0027s Time and focus tab to configure quiet hours or break nudges after a chosen amount of use [testingcatalog.com#1][engadget.com#1].",
+    "Open Reflect: If you are a Free, Pro or Max user with Memory enabled, open Claude on the web or desktop app and go to Settings, then Reflect [testingcatalog.com#1][macrumors.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
