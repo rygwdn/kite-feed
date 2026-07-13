@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers release local-first tools for LLM workflows - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers release local-first tools for LLM workflows</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Independent developers and AI-tooling teams released or promoted several local-first, self-hosted and agent-focused LLM tools from July 12 to July 13. They included SayItDev for on-device Mac voice and Apple Intelligence workflows, NeatContext for desktop incident context, Honeyprompt for LLM-backed honeypots, AxioRank Gateway for signed model-response receipts and LLMlet for browser-based distributed inference <a href="https://github.com/innovatorved/sayitdev" class="footnote-ref">[1]</a><a href="https://www.neatcontext.com/" class="footnote-ref">[2]</a><a href="https://github.com/alectrocute/honeyprompt" class="footnote-ref">[3]</a><a href="https://github.com/AxioRank/gateway/tree/main" class="footnote-ref">[4]</a><a href="https://github.com/ktock/llmlet" class="footnote-ref">[5]</a>.
+
+The projects focus on integration issues involving privacy, operations and workflow control, not new model training. SayItDev says it runs Apple Intelligence locally on macOS 26+ Apple Silicon with no cloud or API keys; NeatContext says it keeps team knowledge local while grounding LLM answers in runbooks and internal context; and OneDev describes AI users that work inside issues, pull requests, builds, code and workspaces <a href="https://github.com/innovatorved/sayitdev" class="footnote-ref">[1]</a><a href="https://www.neatcontext.com/" class="footnote-ref">[2]</a><a href="https://onedev.io/blogs/ai-teammates" class="footnote-ref">[11]</a>.
+
+Other entries focus on agent and voice deployments: AVA offers a self-hosted AI voice agent for Asterisk and FreePBX; Baton tracks Claude Code sessions and Codex threads that need user attention; Reddit developers sought testers or early users for phone-local LLMs and self-hosted shared memory for agents; and Awesome LLM Apps presented more than 100 runnable AI agent and RAG templates <a href="https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk" class="footnote-ref">[9]</a><a href="https://github.com/neilkpatel/baton" class="footnote-ref">[10]</a><a href="https://www.reddit.com/r/ollama/comments/1uuojib/i_built_an_app_that_runs_opensource_llms_100_on/" class="footnote-ref">[7]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uuzzzb/i_opensourced_luthn_a_selfhosted_shared_memory/" class="footnote-ref">[8]</a><a href="https://github.com/Shubhamsaboo/awesome-llm-apps" class="footnote-ref">[12]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/innovatorved/sayitdev">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Incident context: NeatContext cites a checkout-api example that compares grounded incident analysis with a general SRE agent; in the example, internal logs, runbooks and a prior postmortem point to a pgbouncer default_pool_size cut from 100 to 40 at 08:58Z <a href="https://www.neatcontext.com/" class="footnote-ref">[2]</a>.</li>
+
+<li>Browser inference: LLMlet distributes inference among browser peers connected through WebRTC with PeerJS and uses a WebAssembly-compiled llama.cpp backend inside browser tabs <a href="https://github.com/ktock/llmlet" class="footnote-ref">[5]</a>.</li>
+
+<li>Agent memory: The Luthn developer said the self-hosted shared-memory project stores raw and sensitive records behind explicit boundaries and gives agents policy-approved summaries, references and context packs <a href="https://www.reddit.com/r/LLMDevs/comments/1uuzzzb/i_opensourced_luthn_a_selfhosted_shared_memory/" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Peer coordination: LLMlet splits model work across browser peers: one tab acts as a client, other tabs act as servers, and all peers exchange assigned IDs through PeerJS before running distributed inference <a href="https://github.com/ktock/llmlet" class="footnote-ref">[5]</a>.</li>
+
+<li>Voice pipeline: AVA describes a modular voice-agent pipeline that separates speech-to-text, LLM and text-to-speech providers, letting Asterisk or FreePBX deployments mix provider choices <a href="https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test a honeypot locally: Run Honeyprompt with Docker by downloading honeyprompt.yaml, compose.yaml and the.env example, then running the repository&#x27;s default deployment <a href="https://github.com/alectrocute/honeyprompt" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/neilkpatel/baton">https://github.com/neilkpatel/baton</a></li>
+
+
+
+<li><a href="https://github.com/ktock/llmlet">https://github.com/ktock/llmlet</a></li>
+
+
+
+<li><a href="https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk">https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk</a></li>
+
+
+
+<li><a href="https://github.com/AxioRank/gateway/tree/main">https://github.com/AxioRank/gateway/tree/main</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uuzzzb/i_opensourced_luthn_a_selfhosted_shared_memory/">https://www.reddit.com/r/LLMDevs/comments/1uuzzzb/i_opensourced_luthn_a_selfhosted_shared_memory/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uuojib/i_built_an_app_that_runs_opensource_llms_100_on/">https://www.reddit.com/r/ollama/comments/1uuojib/i_built_an_app_that_runs_opensource_llms_100_on/</a></li>
+
+
+
+<li><a href="https://github.com/Shubhamsaboo/awesome-llm-apps">https://github.com/Shubhamsaboo/awesome-llm-apps</a></li>
+
+
+
+<li><a href="https://www.neatcontext.com/">https://www.neatcontext.com/</a></li>
+
+
+
+<li><a href="https://github.com/alectrocute/honeyprompt">https://github.com/alectrocute/honeyprompt</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1uuke4j/api_for_llm/">https://www.reddit.com/r/LLM/comments/1uuke4j/api_for_llm/</a></li>
+
+
+
+<li><a href="https://onedev.io/blogs/ai-teammates">https://onedev.io/blogs/ai-teammates</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, github.com, neatcontext.com, onedev.io</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 4 unique domains, 12 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "innovatorved",
+      "date": "2026-07-12T17:29:07.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/innovatorved/sayitdev",
+      "title": "Show HN: SayItDev LLM and Speech capabilities with 0 dependencies and no models"
+    },
+    {
+      "author": "tanglearncode",
+      "date": "2026-07-12T16:39:28.000Z",
+      "domain": "neatcontext.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.neatcontext.com/",
+      "title": "Show HN: A lightweight app to let LLM work for oncall"
+    },
+    {
+      "author": "arm32",
+      "date": "2026-07-12T16:31:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/alectrocute/honeyprompt",
+      "title": "Honeyprompt: LLM-first honeypot that talks back"
+    },
+    {
+      "author": "axiorank",
+      "date": "2026-07-12T10:44:45.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/AxioRank/gateway/tree/main",
+      "title": "An AI gateway that signs a receipt for every LLM response"
+    },
+    {
+      "author": "mrauha",
+      "date": "2026-07-12T06:30:45.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/ktock/llmlet",
+      "title": "LLMlet: P2P distributed LLM inference on browsers"
+    },
+    {
+      "author": "/u/liyanajabeen",
+      "date": "2026-07-12T16:38:39.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1uuke4j/api_for_llm/",
+      "title": "Api for llm"
+    },
+    {
+      "author": "/u/shivamsharma38391",
+      "date": "2026-07-12T19:10:32.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uuojib/i_built_an_app_that_runs_opensource_llms_100_on/",
+      "title": "I built an app that runs open-source LLMs 100% on your phone. No internet, no API keys. Hey r/LocalLLaMA I was tired of ChatGPT needing internet + sending all my data to the cloud. And Ollama on laptop kills battery. So I built neuroflow- an app that runs open source LLMs directly on your phone"
+    },
+    {
+      "author": "/u/Illustrious_Tell_741",
+      "date": "2026-07-13T03:21:29.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uuzzzb/i_opensourced_luthn_a_selfhosted_shared_memory/",
+      "title": "I open-sourced Luthn, a self-hosted shared memory for AI agents \u2014 looking for early users"
+    },
+    {
+      "author": "hkjarral",
+      "date": "2026-07-13T02:51:34.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk",
+      "title": "Show HN: Self-hosted voice AI agent for Asterisk/FreePBX"
+    },
+    {
+      "author": "nkp007",
+      "date": "2026-07-13T02:36:43.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/neilkpatel/baton",
+      "title": "Show HN: Baton - Know which of your AI coding agents needs you"
+    },
+    {
+      "author": "timplant",
+      "date": "2026-07-12T23:44:18.000Z",
+      "domain": "onedev.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://onedev.io/blogs/ai-teammates",
+      "title": "OneDev AI: Coding Agents as Teammates in Issues, Pull Requests, and CI"
+    },
+    {
+      "date": "2026-07-13T07:02:05.361Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Shubhamsaboo/awesome-llm-apps",
+      "title": "Shubhamsaboo/awesome-llm-apps"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=neatcontext.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "neatcontext.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=onedev.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "onedev.io"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee0\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 12,
+  "perspectives": [],
+  "primary_image": null,
+  "published": "2026-07-13T12:00:08.787Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/neilkpatel/baton",
+    "https://github.com/ktock/llmlet",
+    "https://github.com/hkjarral/AVA-AI-Voice-Agent-for-Asterisk",
+    "https://github.com/AxioRank/gateway/tree/main",
+    "https://www.reddit.com/r/LLMDevs/comments/1uuzzzb/i_opensourced_luthn_a_selfhosted_shared_memory/",
+    "https://www.reddit.com/r/ollama/comments/1uuojib/i_built_an_app_that_runs_opensource_llms_100_on/",
+    "https://github.com/Shubhamsaboo/awesome-llm-apps",
+    "https://www.neatcontext.com/",
+    "https://github.com/alectrocute/honeyprompt",
+    "https://www.reddit.com/r/LLM/comments/1uuke4j/api_for_llm/",
+    "https://onedev.io/blogs/ai-teammates",
+    "https://github.com/innovatorved/sayitdev"
+  ],
+  "suggested_qna": [],
+  "summary": "Independent developers and AI-tooling teams released or promoted several local-first, self-hosted and agent-focused LLM tools from July 12 to July 13. They included SayItDev for on-device Mac voice and Apple Intelligence workflows, NeatContext for desktop incident context, Honeyprompt for LLM-backed honeypots, AxioRank Gateway for signed model-response receipts and LLMlet for browser-based distributed inference [github.com#1][neatcontext.com#1][github.com#2][github.com#3][github.com#4].\n\nThe projects focus on integration issues involving privacy, operations and workflow control, not new model training. SayItDev says it runs Apple Intelligence locally on macOS 26+ Apple Silicon with no cloud or API keys; NeatContext says it keeps team knowledge local while grounding LLM answers in runbooks and internal context; and OneDev describes AI users that work inside issues, pull requests, builds, code and workspaces [github.com#1][neatcontext.com#1][onedev.io#1].\n\nOther entries focus on agent and voice deployments: AVA offers a self-hosted AI voice agent for Asterisk and FreePBX; Baton tracks Claude Code sessions and Codex threads that need user attention; Reddit developers sought testers or early users for phone-local LLMs and self-hosted shared memory for agents; and Awesome LLM Apps presented more than 100 runnable AI agent and RAG templates [github.com#5][github.com#6][reddit.com#2][reddit.com#3][github.com#7].",
+  "talking_points": [
+    "Incident context: NeatContext cites a checkout-api example that compares grounded incident analysis with a general SRE agent; in the example, internal logs, runbooks and a prior postmortem point to a pgbouncer default_pool_size cut from 100 to 40 at 08:58Z [neatcontext.com#1].",
+    "Browser inference: LLMlet distributes inference among browser peers connected through WebRTC with PeerJS and uses a WebAssembly-compiled llama.cpp backend inside browser tabs [github.com#4].",
+    "Agent memory: The Luthn developer said the self-hosted shared-memory project stores raw and sensitive records behind explicit boundaries and gives agents policy-approved summaries, references and context packs [reddit.com#3]."
+  ],
+  "technical_details": [
+    "Peer coordination: LLMlet splits model work across browser peers: one tab acts as a client, other tabs act as servers, and all peers exchange assigned IDs through PeerJS before running distributed inference [github.com#4].",
+    "Voice pipeline: AVA describes a modular voice-agent pipeline that separates speech-to-text, LLM and text-to-speech providers, letting Asterisk or FreePBX deployments mix provider choices [github.com#5]."
+  ],
+  "timeline": [],
+  "title": "Developers release local-first tools for LLM workflows",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://github.com/innovatorved/sayitdev",
+  "user_action_items": [
+    "Test a honeypot locally: Run Honeyprompt with Docker by downloading honeyprompt.yaml, compose.yaml and the.env example, then running the repository\u0027s default deployment [github.com#2]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
