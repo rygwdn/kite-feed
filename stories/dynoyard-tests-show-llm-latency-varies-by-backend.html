@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Dynoyard tests show LLM latency varies by backend - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Dynoyard tests show LLM latency varies by backend</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Dynoyard said the same open-weight GLM-5.2 model behaved differently across two OpenAI-compatible serving backends: a dedicated inference host and a managed cloud endpoint. Across 40 cache-busted streaming requests with 400-token outputs, the dedicated host showed a 1.2-second median time to first token and 5.2-second total time, while the managed endpoint showed a 10.0-second median time to first token and 10.4-second total time <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/" class="footnote-ref">[4]</a>.
+
+The managed endpoint accepted `stream: true` and returned server-sent events, but Dynoyard said it generated the response, emitted nothing for about 10 seconds, and then delivered the output in one burst rather than in incremental chunks <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/" class="footnote-ref">[4]</a>. In separate Reddit posts, one Ollama user reported roughly 50-second replies through a WebUI versus 1-2 seconds from the terminal on qwen2.5:3b, and another developer launched ProviderBench to compare LLM providers on exact shared model IDs rather than mixed model catalogs <a href="https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/" class="footnote-ref">[2]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Benchmark scope: ProviderBench said it includes response time, response start, throughput, price, uptime, context, and exact routing tags across 295 qualified provider comparisons <a href="https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/" class="footnote-ref">[3]</a>.</li>
+
+<li>Local setup: The Ollama user was setting up Ollama and a WebUI on work laptops to run light models like qwen2.5:3b <a href="https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Dynoyard: Dynoyard said that while serving GLM-5.2 to agent-building teams across multiple backends, it found the managed endpoint had an eightfold slower time to first token and no incremental streaming: &#x27;The cheap endpoint generates the entire response, sits on it for ~10 seconds emitting nothing, then dumps all the tokens at once&#x27; <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/">Dynoyard</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Ollama Reddit user: The user posted: &#x27;The response time from the webui is horrible, usually 50seconds for any simple chat. When I run the model from the terminal, the response is almost instant&#x27; <a href="https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>ProviderBench developer: The developer wrote: &#x27;I kept finding that provider leaderboards compared different model catalogs, which can make a provider look fast simply because it hosts smaller models,&#x27; and said ProviderBench compares exact shared model IDs across 295 qualified comparisons, free with no signup <a href="https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Time to first token: TTFT measures how long a user waits before any generated output appears; in Dynoyard’s test, total completion time alone did not show the managed endpoint’s long silent interval before delivery <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a>.</li>
+
+<li>Streaming throughput: In Dynoyard&#x27;s test, the dedicated host delivered 167 SSE chunks for a 400-token output at 77 tok/s per stream, while the managed endpoint delivered all tokens in a single burst at an effective 38 tok/s <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/" class="footnote-ref">[4]</a>.</li>
+
+<li>Cache-busted requests: Dynoyard said it used cache-busted requests to avoid mistaking cached responses for normal generation latency <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Measure first-token latency: Run repeated streaming requests against each candidate endpoint and record time to first token, total time, chunk count, and whether tokens arrive incrementally <a href="https://dynoyard.app/blog/same-llm-8x-slower-by-backend/" class="footnote-ref">[1]</a>.</li>
+
+<li>Benchmark exact deployments: Compare the same model ID across providers, including routing tags, context limits, price, uptime, and throughput, rather than relying on provider-wide leaderboards <a href="https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/" class="footnote-ref">[3]</a>.</li>
+
+<li>Isolate UI overhead: If local model responses lag in a WebUI, test the same prompt through the terminal, then inspect the WebUI, middleware, and hardware path separately <a href="https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/">https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/">https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/</a></li>
+
+
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/">https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, dynoyard.app</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 2 unique domains, 4 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "jeremyrajan",
+      "date": "2026-07-16T20:20:06.000Z",
+      "domain": "dynoyard.app",
+      "image": "",
+      "image_caption": "",
+      "link": "https://dynoyard.app/blog/same-llm-8x-slower-by-backend/",
+      "title": "The same LLM is 8x slower to first token depending on who serves it"
+    },
+    {
+      "author": "/u/Indig3o",
+      "date": "2026-07-16T14:49:19.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/",
+      "title": "Slow response time when using webui and ollama"
+    },
+    {
+      "author": "/u/mariusbolik",
+      "date": "2026-07-16T13:45:57.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/",
+      "title": "I built a website to compare LLM provider benchmarks and find the cheapest, fastest, and most reliable options"
+    },
+    {
+      "author": "/u/TypicalOcelot9",
+      "date": "2026-07-16T20:32:51.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/",
+      "title": "The same open-weight model can be 8x slower to first token depending on the backend \u2014 and some \"OpenAI-compatible\" endpoints fake streaming"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dynoyard.app\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dynoyard.app"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\u23f1\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Inference",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 4,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Dynoyard",
+          "url": "https://dynoyard.app/blog/same-llm-8x-slower-by-backend/"
+        }
+      ],
+      "text": "Dynoyard: Dynoyard said that while serving GLM-5.2 to agent-building teams across multiple backends, it found the managed endpoint had an eightfold slower time to first token and no incremental streaming: \u0027The cheap endpoint generates the entire response, sits on it for ~10 seconds emitting nothing, then dumps all the tokens at once\u0027 [dynoyard.app#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/"
+        }
+      ],
+      "text": "Ollama Reddit user: The user posted: \u0027The response time from the webui is horrible, usually 50seconds for any simple chat. When I run the model from the terminal, the response is almost instant\u0027 [reddit.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/"
+        }
+      ],
+      "text": "ProviderBench developer: The developer wrote: \u0027I kept finding that provider leaderboards compared different model catalogs, which can make a provider look fast simply because it hosts smaller models,\u0027 and said ProviderBench compares exact shared model IDs across 295 qualified comparisons, free with no signup [reddit.com#2]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-17T12:00:09.917Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.reddit.com/r/ollama/comments/1uy50kf/slow_response_time_when_using_webui_and_ollama/",
+    "https://www.reddit.com/r/LLMDevs/comments/1uyegfn/the_same_openweight_model_can_be_8x_slower_to/",
+    "https://dynoyard.app/blog/same-llm-8x-slower-by-backend/",
+    "https://www.reddit.com/r/LLMDevs/comments/1uy3ckl/i_built_a_website_to_compare_llm_provider/"
+  ],
+  "suggested_qna": [],
+  "summary": "Dynoyard said the same open-weight GLM-5.2 model behaved differently across two OpenAI-compatible serving backends: a dedicated inference host and a managed cloud endpoint. Across 40 cache-busted streaming requests with 400-token outputs, the dedicated host showed a 1.2-second median time to first token and 5.2-second total time, while the managed endpoint showed a 10.0-second median time to first token and 10.4-second total time [dynoyard.app#1][reddit.com#3].\n\nThe managed endpoint accepted `stream: true` and returned server-sent events, but Dynoyard said it generated the response, emitted nothing for about 10 seconds, and then delivered the output in one burst rather than in incremental chunks [dynoyard.app#1][reddit.com#3]. In separate Reddit posts, one Ollama user reported roughly 50-second replies through a WebUI versus 1-2 seconds from the terminal on qwen2.5:3b, and another developer launched ProviderBench to compare LLM providers on exact shared model IDs rather than mixed model catalogs [reddit.com#1][reddit.com#2].",
+  "talking_points": [
+    "Benchmark scope: ProviderBench said it includes response time, response start, throughput, price, uptime, context, and exact routing tags across 295 qualified provider comparisons [reddit.com#2].",
+    "Local setup: The Ollama user was setting up Ollama and a WebUI on work laptops to run light models like qwen2.5:3b [reddit.com#1]."
+  ],
+  "technical_details": [
+    "Time to first token: TTFT measures how long a user waits before any generated output appears; in Dynoyard\u2019s test, total completion time alone did not show the managed endpoint\u2019s long silent interval before delivery [dynoyard.app#1].",
+    "Streaming throughput: In Dynoyard\u0027s test, the dedicated host delivered 167 SSE chunks for a 400-token output at 77 tok/s per stream, while the managed endpoint delivered all tokens in a single burst at an effective 38 tok/s [dynoyard.app#1][reddit.com#3].",
+    "Cache-busted requests: Dynoyard said it used cache-busted requests to avoid mistaking cached responses for normal generation latency [dynoyard.app#1]."
+  ],
+  "timeline": [],
+  "title": "Dynoyard tests show LLM latency varies by backend",
+  "travel_advisory": "",
+  "unique_domains": 2,
+  "url": "https://dynoyard.app/blog/same-llm-8x-slower-by-backend/",
+  "user_action_items": [
+    "Measure first-token latency: Run repeated streaming requests against each candidate endpoint and record time to first token, total time, chunk count, and whether tokens arrive incrementally [dynoyard.app#1].",
+    "Benchmark exact deployments: Compare the same model ID across providers, including routing tags, context limits, price, uptime, and throughput, rather than relying on provider-wide leaderboards [reddit.com#2].",
+    "Isolate UI overhead: If local model responses lag in a WebUI, test the same prompt through the terminal, then inspect the WebUI, middleware, and hardware path separately [reddit.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
