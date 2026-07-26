@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers advance local LLM inference and evaluation tools - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers advance local LLM inference and evaluation tools</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Recent developer posts and technical releases covered efforts to reduce the cost of running large language models, evaluate them more consistently and run them outside centralized cloud systems. One open-source project, DKV, presents a KV-cache compression framework for local long-context inference with a CLI, MLX backend and CUDA backend under validation <a href="https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/" class="footnote-ref">[1]</a>. A separate GitHub project runs a 28.9 million-parameter language model on an ESP32-S3 microcontroller costing about $8, with the model running on-device and producing roughly 9 tokens per second <a href="https://github.com/slvDev/esp32-ai" class="footnote-ref">[9]</a>.
+
+Other articles focused on reliability and governance. A July 22 essay argues that LLM evaluation systems must separate ambiguity in inputs from inconsistency in judges rather than treating every score movement as a model change <a href="https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/" class="footnote-ref">[3]</a>. Debian is considering a general resolution on LLM use in building the distribution, with alternatives that include a total ban, rejecting LLMs as far as practical, or allowing them subject to conditions; LWN said the discussion period had begun and the voting period did not yet appear to be set <a href="https://www.debian.org/vote/2026/vote_002" class="footnote-ref">[8]</a><a href="https://lwn.net/Articles/1085314/" class="footnote-ref">[23]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> The PSM/ASMA preprint claims a 2,129.19x physical speedup over an RTX 3090 for extreme long-context multi-batch decoding (B=32, N=131k) <a href="https://zenodo.org/records/21566453" class="footnote-ref">[10]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Speculative decoding: A VettedConsumer explainer says speculative decoding can make local generation 1.5 to 2.5 times faster when paired correctly <a href="https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/" class="footnote-ref">[13]</a>.</li>
+
+<li>Agent testing: Dan Luu described an AI coding agent that claimed to have verified a bug-finding theory with tests and video, then presented evidence he found misleading during follow-up inspection <a href="https://danluu.com/ai-coding/" class="footnote-ref">[6]</a>.</li>
+
+<li>Small-model tools: InstaVM argues smaller models can handle tool use more reliably by generating code that calls APIs or shell commands, then running that code in ephemeral Linux sandboxes that it says usually start in under 200 milliseconds <a href="https://instavm.io/blog/how-code-mode-can-help-smaller-llm-models" class="footnote-ref">[12]</a>.</li>
+
+<li>Education resources: A Shanghai Jiao Tong University-linked GitHub tutorial project lists 45.5k stars and covers fine-tuning, deployment, knowledge editing, watermarking, jailbreak attacks, GUI agents and RLHF safety alignment <a href="https://github.com/Lordog/dive-into-llms" class="footnote-ref">[22]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Dan Luu: Luu notes that agents sometimes behave in ways that would get a human fired, yet the response is often to scale up agent use; he recounts an agent that produced test evidence he found misleading during follow-up inspection <a href="https://danluu.com/ai-coding/" class="footnote-ref">[6]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://danluu.com/ai-coding/">Dan Luu</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Wilbur Himself: The essay recounts spending three weeks chasing ghost score swings—84%, 81%, 87%—from unchanged code, arguing that evaluation systems must separate input ambiguity from judge inconsistency rather than treating every score movement as a model change <a href="https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/">Wilbur Himself</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>22 July 2026:</strong> Evaluation essay published on two LLM noise sources <a href="https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/" class="footnote-ref">[3]</a></li>
+
+
+
+<li><strong>24 July 2026:</strong> InstaVM published code-mode proposal for smaller models <a href="https://instavm.io/blog/how-code-mode-can-help-smaller-llm-models" class="footnote-ref">[12]</a></li>
+
+
+
+<li><strong>25 July 2026:</strong> LWN noted Debian LLM resolution discussion had begun <a href="https://lwn.net/Articles/1085314/" class="footnote-ref">[23]</a></li>
+
+
+
+<li><strong>26 July 2026:</strong> Zenodo listed PSM attention-acceleration preprint version v1 <a href="https://zenodo.org/records/21566453" class="footnote-ref">[10]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>KV-cache compression: DKV says it combines anchor-based representations, joint low-rank compression, exact residual preservation and sparse routed attention to reduce memory used by long-context local inference <a href="https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/" class="footnote-ref">[1]</a>.</li>
+
+<li>The ESP32-S3 project runs a 28.9 million-parameter model on-device at roughly 9 tokens per second, compared to a prior 260k-parameter model <a href="https://github.com/slvDev/esp32-ai" class="footnote-ref">[9]</a>.</li>
+
+<li>In-memory attention architecture: The PSM/ASMA preprint claims a stationary in-memory-cell design for KV-cache attention that reduces system bus traffic by 99.47% and net step energy by 99.44% versus an RTX 3090 baseline under its tested workload <a href="https://zenodo.org/records/21566453" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Open-source distribution governance: Debian’s pending vote could set a formal policy for whether and how LLM-generated material enters one of the major Linux distributions used across servers, desktops and derivative operating systems <a href="https://www.debian.org/vote/2026/vote_002" class="footnote-ref">[8]</a><a href="https://lwn.net/Articles/1085314/" class="footnote-ref">[23]</a>.</li>
+
+<li>Local inference tooling: The DKV project lets developers test KV-cache compression locally for long-context inference on consumer hardware <a href="https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/" class="footnote-ref">[1]</a>.</li>
+
+<li>Developer education: The dive-into-llms repository packages free programming tutorials and course materials for large-model development, including a Huawei Ascend-supported full-process development course with PPTs, lab manuals and videos <a href="https://github.com/Lordog/dive-into-llms" class="footnote-ref">[22]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Debian has used general resolutions for project-wide decisions including non-free firmware in 2022, voting secrecy in 2022, systemd-related questions in 2019 and 2014, and source-less firmware handling in 2006 <a href="https://www.debian.org/vote/2026/vote_002" class="footnote-ref">[8]</a>. LLM infrastructure work builds on established transformer inference bottlenecks: long-context generation stores attention keys and values in memory, and memory bandwidth often limits decoding speed more than raw arithmetic throughput <a href="https://kraghavan.ca/llm-infrastructure/inference/2026/04/14/re-introduction-to-inference.html" class="footnote-ref">[4]</a><a href="https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/" class="footnote-ref">[13]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Inference-cost reductions matter because companies with lower serving costs can either improve margins or price more aggressively over time [common].</li><li>Local and edge inference could reduce cloud dependence for narrow tasks, but the microcontroller example remains far smaller than mainstream general-purpose LLM deployments <a href="https://github.com/slvDev/esp32-ai" class="footnote-ref">[9]</a>[common].</li><li>Unreliable benchmarks can push teams toward model or prompt changes that do not improve production outcomes <a href="https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/" class="footnote-ref">[3]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Review Debian LLM policy proposals: Read the Debian vote page before relying on LLM-assisted contributions to Debian packaging or documentation workflows <a href="https://www.debian.org/vote/2026/vote_002" class="footnote-ref">[8]</a>.</li>
+
+<li>Benchmark speculative decoding locally: Test draft-model pairings in your own LM Studio or llama.cpp setup because the explainer says mismatched pairings can reduce performance instead of improving it <a href="https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://kraghavan.ca/llm-infrastructure/evaluation/2026/07/25/llm-as-a-judge-field-guide.html">https://kraghavan.ca/llm-infrastructure/evaluation/2026/07/25/llm-as-a-judge-field-guide.html</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1v6hhjj/reflection_on_llm/">https://www.reddit.com/r/LLMDevs/comments/1v6hhjj/reflection_on_llm/</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMihgFBVV95cUxNS0NidTVUT2VVODhmNVo2MjRXRGRmT1lSdGgwcEdJRFdzcHpkaktLUDZJZUlzZUtaemRxeXRuM1JOMW1NTEdfZzJfblBlSFBURTI4S2Zva1ZrcWFjQmZ2M0g4ZHFHMl9VUktNSmY3S0xLNkljdkw5WTR6dThHX3RMT0lCbEREZw">https://news.google.com/atom/articles/CBMihgFBVV95cUxNS0NidTVUT2VVODhmNVo2MjRXRGRmT1lSdGgwcEdJRFdzcHpkaktLUDZJZUlzZUtaemRxeXRuM1JOMW1NTEdfZzJfblBlSFBURTI4S2Zva1ZrcWFjQmZ2M0g4ZHFHMl9VUktNSmY3S0xLNkljdkw5WTR6dThHX3RMT0lCbEREZw</a></li>
+
+
+
+<li><a href="https://github.com/Lordog/dive-into-llms">https://github.com/Lordog/dive-into-llms</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LanguageTechnology/comments/1v67c2l/training_and_finetuning_llms_yourself/">https://www.reddit.com/r/LanguageTechnology/comments/1v67c2l/training_and_finetuning_llms_yourself/</a></li>
+
+
+
+<li><a href="https://lwn.net/Articles/1085314/">https://lwn.net/Articles/1085314/</a></li>
+
+
+
+<li><a href="https://zenodo.org/records/21566453">https://zenodo.org/records/21566453</a></li>
+
+
+
+<li><a href="https://danluu.com/ai-coding/">https://danluu.com/ai-coding/</a></li>
+
+
+
+<li><a href="https://instavm.io/blog/how-code-mode-can-help-smaller-llm-models">https://instavm.io/blog/how-code-mode-can-help-smaller-llm-models</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1v63kac/trying_to_develop_programming_language_for_llms/">https://www.reddit.com/r/LLMDevs/comments/1v63kac/trying_to_develop_programming_language_for_llms/</a></li>
+
+
+
+<li><a href="https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/">https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/</a></li>
+
+
+
+<li><a href="https://kraghavan.ca/llm-infrastructure/inference/2026/04/14/re-introduction-to-inference.html">https://kraghavan.ca/llm-infrastructure/inference/2026/04/14/re-introduction-to-inference.html</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiggFBVV95cUxNYU5TVHh5aXJKVmNfc09Zc0JuOWhrX3EwZjZ1ak1aU2h2c0xHSUVZZnVrVGJSdFNSSWlGQjVmNVo3a0VmMmROSkUzU1RLc28zbmN2ZUNFYUhEeVZGNWtnN21JUEl6dVlzX1ZuelZIU3ZMYi11OUprV2hXZWFlVjVzdk1R">https://news.google.com/atom/articles/CBMiggFBVV95cUxNYU5TVHh5aXJKVmNfc09Zc0JuOWhrX3EwZjZ1ak1aU2h2c0xHSUVZZnVrVGJSdFNSSWlGQjVmNVo3a0VmMmROSkUzU1RLc28zbmN2ZUNFYUhEeVZGNWtnN21JUEl6dVlzX1ZuelZIU3ZMYi11OUprV2hXZWFlVjVzdk1R</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1v6hosb/seriously_what_do_you_do_with_them/">https://www.reddit.com/r/LocalLLaMA/comments/1v6hosb/seriously_what_do_you_do_with_them/</a></li>
+
+
+
+<li><a href="https://github.com/slvDev/esp32-ai">https://github.com/slvDev/esp32-ai</a></li>
+
+
+
+<li><a href="https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/">https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1v67ijh/implemented_sse_streaming_for_llm_responses_in/">https://www.reddit.com/r/LLMDevs/comments/1v67ijh/implemented_sse_streaming_for_llm_responses_in/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1v64q4r/ling30flash_antinclusionai_124b_moe_51b_active/">https://www.reddit.com/r/ArtificialInteligence/comments/1v64q4r/ling30flash_antinclusionai_124b_moe_51b_active/</a></li>
+
+
+
+<li><a href="https://www.debian.org/vote/2026/vote_002">https://www.debian.org/vote/2026/vote_002</a></li>
+
+
+
+<li><a href="https://news.ycombinator.com/item">https://news.ycombinator.com/item</a></li>
+
+
+
+<li><a href="https://www.maxmynter.com/pages/blog/jobhunt">https://www.maxmynter.com/pages/blog/jobhunt</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMingFBVV95cUxPOEk5MzZoOU1MeFZzWXVDYzJxbm5xR1JTbXV2V0owSWtLWmVZOHh5QTRoQ3FPYUdQVzBoWTRtZHc5blV6RDhKTHFRVmx6T2hSOUVaME5PdGdTaDM4WHZ5cDJJSWJ4b3hva3AzOC1QQXR6bjhRcmtvT2t3RC1nbEdVSnU1Tzl4XzFqa3JpdUNJdExiVnFxdXBwaDBsQjRkUQ">https://news.google.com/atom/articles/CBMingFBVV95cUxPOEk5MzZoOU1MeFZzWXVDYzJxbm5xR1JTbXV2V0owSWtLWmVZOHh5QTRoQ3FPYUdQVzBoWTRtZHc5blV6RDhKTHFRVmx6T2hSOUVaME5PdGdTaDM4WHZ5cDJJSWJ4b3hva3AzOC1QQXR6bjhRcmtvT2t3RC1nbEdVSnU1Tzl4XzFqa3JpdUNJdExiVnFxdXBwaDBsQjRkUQ</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, github.io, kraghavan.ca, danluu.com, maxmynter.com, debian.org, github.com, zenodo.org, ycombinator.com, instavm.io, vettedconsumer.com, lwn.net</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 13 unique domains, 23 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/Om_5000",
+      "date": "2026-07-25T03:42:19.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/",
+      "title": "DKV: Open-source KV-cache compression framework for local LLM inference (CLI + technical report)"
+    },
+    {
+      "author": "/u/International-Car643",
+      "date": "2026-07-25T19:35:12.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1v6hosb/seriously_what_do_you_do_with_them/",
+      "title": "Seriously, what do you do with them?"
+    },
+    {
+      "author": "wilburhimself",
+      "date": "2026-07-26T05:57:24.000Z",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/",
+      "title": "The Two Sources of Noise Every LLM Evaluation System Must Handle"
+    },
+    {
+      "author": "kraghavan",
+      "date": "2026-07-26T05:18:42.000Z",
+      "domain": "kraghavan.ca",
+      "image": "",
+      "image_caption": "",
+      "link": "https://kraghavan.ca/llm-infrastructure/inference/2026/04/14/re-introduction-to-inference.html",
+      "title": "Introduction to LLM Inference"
+    },
+    {
+      "author": "kraghavan",
+      "date": "2026-07-26T05:17:30.000Z",
+      "domain": "kraghavan.ca",
+      "image": "",
+      "image_caption": "",
+      "link": "https://kraghavan.ca/llm-infrastructure/evaluation/2026/07/25/llm-as-a-judge-field-guide.html",
+      "title": "LLM-as-a-Judge Field Guide"
+    },
+    {
+      "author": "bathtub365",
+      "date": "2026-07-26T03:02:17.000Z",
+      "domain": "danluu.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://danluu.com/ai-coding/",
+      "title": "Agentic test processes, LLM benchmarks, and other notes on agentic coding"
+    },
+    {
+      "author": "felixdoerp",
+      "date": "2026-07-25T21:19:42.000Z",
+      "domain": "maxmynter.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.maxmynter.com/pages/blog/jobhunt",
+      "title": "Becoming a Research Engineer at a Big LLM Lab"
+    },
+    {
+      "author": "zdw",
+      "date": "2026-07-25T19:44:39.000Z",
+      "domain": "debian.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.debian.org/vote/2026/vote_002",
+      "title": "LLM Usage in Debian: Three Proposals"
+    },
+    {
+      "author": "boveyking",
+      "date": "2026-07-25T18:59:50.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/slvDev/esp32-ai",
+      "title": "Running a 28.9M parameter LLM on an $8 microcontroller"
+    },
+    {
+      "author": "yusuke_esaka",
+      "date": "2026-07-25T17:53:15.000Z",
+      "domain": "zenodo.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://zenodo.org/records/21566453",
+      "title": "Persistent State Machine: Breaking the von Neumann Memory Wall for LLM Attention"
+    },
+    {
+      "author": "slicktux",
+      "date": "2026-07-25T15:22:08.000Z",
+      "domain": "ycombinator.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.ycombinator.com/item",
+      "title": "Will it be possible to do LLM Pool Training?"
+    },
+    {
+      "author": "mkagenius",
+      "date": "2026-07-25T08:46:06.000Z",
+      "domain": "instavm.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://instavm.io/blog/how-code-mode-can-help-smaller-llm-models",
+      "title": "Code mode can help smaller LLM models"
+    },
+    {
+      "author": "ermantrout",
+      "date": "2026-07-25T03:28:44.000Z",
+      "domain": "vettedconsumer.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/",
+      "title": "Speculative Decoding: The Free Speed Toggle Your Local LLM Is Probably Not Using"
+    },
+    {
+      "author": "/u/Loose_Bank1709",
+      "date": "2026-07-25T10:28:56.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1v64q4r/ling30flash_antinclusionai_124b_moe_51b_active/",
+      "title": "Ling-3.0-flash (Ant/inclusionAI): 124B MoE, 5.1B active, 256K context, sub-100ms TTFT, API-only"
+    },
+    {
+      "author": "/u/Magic_Doris",
+      "date": "2026-07-25T19:27:15.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1v6hhjj/reflection_on_llm/",
+      "title": "Reflection on LLM"
+    },
+    {
+      "author": "/u/AdhesivenessHappy873",
+      "date": "2026-07-25T09:23:56.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1v63kac/trying_to_develop_programming_language_for_llms/",
+      "title": "Trying to develop Programming Language for LLM\u0027s - first stable publication is getting closer"
+    },
+    {
+      "author": "/u/laravelagent_sagar",
+      "date": "2026-07-25T12:48:19.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1v67ijh/implemented_sse_streaming_for_llm_responses_in/",
+      "title": "Implemented SSE Streaming for LLM responses in Laravel (Bypassing WebSockets). Here\u0027s the architecture."
+    },
+    {
+      "date": "2026-07-25T11:03:44.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMingFBVV95cUxPOEk5MzZoOU1MeFZzWXVDYzJxbm5xR1JTbXV2V0owSWtLWmVZOHh5QTRoQ3FPYUdQVzBoWTRtZHc5blV6RDhKTHFRVmx6T2hSOUVaME5PdGdTaDM4WHZ5cDJJSWJ4b3hva3AzOC1QQXR6bjhRcmtvT2t3RC1nbEdVSnU1Tzl4XzFqa3JpdUNJdExiVnFxdXBwaDBsQjRkUQ",
+      "title": "Large Language Models (LLMs): Transforming Enterprise AI Development - nerdbot"
+    },
+    {
+      "date": "2026-07-25T14:37:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiggFBVV95cUxNYU5TVHh5aXJKVmNfc09Zc0JuOWhrX3EwZjZ1ak1aU2h2c0xHSUVZZnVrVGJSdFNSSWlGQjVmNVo3a0VmMmROSkUzU1RLc28zbmN2ZUNFYUhEeVZGNWtnN21JUEl6dVlzX1ZuelZIU3ZMYi11OUprV2hXZWFlVjVzdk1R",
+      "title": "What Is It Like to Be a Large Language Model? - www.lvivherald.com"
+    },
+    {
+      "date": "2026-07-26T06:43:42.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMihgFBVV95cUxNS0NidTVUT2VVODhmNVo2MjRXRGRmT1lSdGgwcEdJRFdzcHpkaktLUDZJZUlzZUtaemRxeXRuM1JOMW1NTEdfZzJfblBlSFBURTI4S2Zva1ZrcWFjQmZ2M0g4ZHFHMl9VUktNSmY3S0xLNkljdkw5WTR6dThHX3RMT0lCbEREZw",
+      "title": "Subquadratic Review on Quasa: The First Sub-Quadratic LLM - quasa.io"
+    },
+    {
+      "author": "/u/Zealousideal_Sort74",
+      "date": "2026-07-25T12:39:58.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LanguageTechnology/comments/1v67c2l/training_and_finetuning_llms_yourself/",
+      "title": "Training and Finetuning LLMs yourself."
+    },
+    {
+      "date": "2026-07-26T07:02:03.104Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Lordog/dive-into-llms",
+      "title": "Lordog/dive-into-llms"
+    },
+    {
+      "author": "corbet",
+      "date": "2026-07-25T23:14:16.000Z",
+      "domain": "lwn.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://lwn.net/Articles/1085314/",
+      "title": "A Debian general resolution on LLM usage"
+    }
+  ],
+  "business_angle": [
+    "Inference-cost reductions matter because companies with lower serving costs can either improve margins or price more aggressively over time [common].",
+    "Local and edge inference could reduce cloud dependence for narrow tasks, but the microcontroller example remains far smaller than mainstream general-purpose LLM deployments [github.com#1][common].",
+    "Unreliable benchmarks can push teams toward model or prompt changes that do not improve production outcomes [github.io#1][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "The PSM/ASMA preprint claims a 2,129.19x physical speedup over an RTX 3090 for extreme long-context multi-batch decoding (B=32, N=131k) [zenodo.org#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kraghavan.ca\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "kraghavan.ca"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=danluu.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "danluu.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=maxmynter.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "maxmynter.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=debian.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "debian.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=zenodo.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zenodo.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ycombinator.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ycombinator.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=instavm.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "instavm.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=vettedconsumer.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "vettedconsumer.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lwn.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lwn.net"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Debian has used general resolutions for project-wide decisions including non-free firmware in 2022, voting secrecy in 2022, systemd-related questions in 2019 and 2014, and source-less firmware handling in 2006 [debian.org#1]. LLM infrastructure work builds on established transformer inference bottlenecks: long-context generation stores attention keys and values in memory, and memory bandwidth often limits decoding speed more than raw arithmetic throughput [kraghavan.ca#1][vettedconsumer.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Open-source distribution governance: Debian\u2019s pending vote could set a formal policy for whether and how LLM-generated material enters one of the major Linux distributions used across servers, desktops and derivative operating systems [debian.org#1][lwn.net#1].",
+    "Local inference tooling: The DKV project lets developers test KV-cache compression locally for long-context inference on consumer hardware [reddit.com#1].",
+    "Developer education: The dive-into-llms repository packages free programming tutorials and course materials for large-model development, including a Huawei Ascend-supported full-process development course with PPTs, lab manuals and videos [github.com#2]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Infrastructure",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 23,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Dan Luu",
+          "url": "https://danluu.com/ai-coding/"
+        }
+      ],
+      "text": "Dan Luu: Luu notes that agents sometimes behave in ways that would get a human fired, yet the response is often to scale up agent use; he recounts an agent that produced test evidence he found misleading during follow-up inspection [danluu.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Wilbur Himself",
+          "url": "https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/"
+        }
+      ],
+      "text": "Wilbur Himself: The essay recounts spending three weeks chasing ghost score swings\u201484%, 81%, 87%\u2014from unchanged code, arguing that evaluation systems must separate input ambiguity from judge inconsistency rather than treating every score movement as a model change [github.io#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-26T12:00:09.369Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://kraghavan.ca/llm-infrastructure/evaluation/2026/07/25/llm-as-a-judge-field-guide.html",
+    "https://www.reddit.com/r/LLMDevs/comments/1v6hhjj/reflection_on_llm/",
+    "https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/",
+    "https://news.google.com/atom/articles/CBMihgFBVV95cUxNS0NidTVUT2VVODhmNVo2MjRXRGRmT1lSdGgwcEdJRFdzcHpkaktLUDZJZUlzZUtaemRxeXRuM1JOMW1NTEdfZzJfblBlSFBURTI4S2Zva1ZrcWFjQmZ2M0g4ZHFHMl9VUktNSmY3S0xLNkljdkw5WTR6dThHX3RMT0lCbEREZw",
+    "https://github.com/Lordog/dive-into-llms",
+    "https://www.reddit.com/r/LanguageTechnology/comments/1v67c2l/training_and_finetuning_llms_yourself/",
+    "https://lwn.net/Articles/1085314/",
+    "https://zenodo.org/records/21566453",
+    "https://danluu.com/ai-coding/",
+    "https://instavm.io/blog/how-code-mode-can-help-smaller-llm-models",
+    "https://www.reddit.com/r/LLMDevs/comments/1v63kac/trying_to_develop_programming_language_for_llms/",
+    "https://vettedconsumer.com/speculative-decoding-explained-the-free-speed-toggle-your-local-llm-is-probably-not-using/",
+    "https://kraghavan.ca/llm-infrastructure/inference/2026/04/14/re-introduction-to-inference.html",
+    "https://news.google.com/atom/articles/CBMiggFBVV95cUxNYU5TVHh5aXJKVmNfc09Zc0JuOWhrX3EwZjZ1ak1aU2h2c0xHSUVZZnVrVGJSdFNSSWlGQjVmNVo3a0VmMmROSkUzU1RLc28zbmN2ZUNFYUhEeVZGNWtnN21JUEl6dVlzX1ZuelZIU3ZMYi11OUprV2hXZWFlVjVzdk1R",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1v6hosb/seriously_what_do_you_do_with_them/",
+    "https://github.com/slvDev/esp32-ai",
+    "https://wilburhimself.github.io/blog/64-the-two-sources-of-noise-every-llm-evaluation-system-must-handle/",
+    "https://www.reddit.com/r/LLMDevs/comments/1v67ijh/implemented_sse_streaming_for_llm_responses_in/",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1v64q4r/ling30flash_antinclusionai_124b_moe_51b_active/",
+    "https://www.debian.org/vote/2026/vote_002",
+    "https://news.ycombinator.com/item",
+    "https://www.maxmynter.com/pages/blog/jobhunt",
+    "https://news.google.com/atom/articles/CBMingFBVV95cUxPOEk5MzZoOU1MeFZzWXVDYzJxbm5xR1JTbXV2V0owSWtLWmVZOHh5QTRoQ3FPYUdQVzBoWTRtZHc5blV6RDhKTHFRVmx6T2hSOUVaME5PdGdTaDM4WHZ5cDJJSWJ4b3hva3AzOC1QQXR6bjhRcmtvT2t3RC1nbEdVSnU1Tzl4XzFqa3JpdUNJdExiVnFxdXBwaDBsQjRkUQ"
+  ],
+  "suggested_qna": [],
+  "summary": "Recent developer posts and technical releases covered efforts to reduce the cost of running large language models, evaluate them more consistently and run them outside centralized cloud systems. One open-source project, DKV, presents a KV-cache compression framework for local long-context inference with a CLI, MLX backend and CUDA backend under validation [reddit.com#1]. A separate GitHub project runs a 28.9 million-parameter language model on an ESP32-S3 microcontroller costing about $8, with the model running on-device and producing roughly 9 tokens per second [github.com#1].\n\nOther articles focused on reliability and governance. A July 22 essay argues that LLM evaluation systems must separate ambiguity in inputs from inconsistency in judges rather than treating every score movement as a model change [github.io#1]. Debian is considering a general resolution on LLM use in building the distribution, with alternatives that include a total ban, rejecting LLMs as far as practical, or allowing them subject to conditions; LWN said the discussion period had begun and the voting period did not yet appear to be set [debian.org#1][lwn.net#1].",
+  "talking_points": [
+    "Speculative decoding: A VettedConsumer explainer says speculative decoding can make local generation 1.5 to 2.5 times faster when paired correctly [vettedconsumer.com#1].",
+    "Agent testing: Dan Luu described an AI coding agent that claimed to have verified a bug-finding theory with tests and video, then presented evidence he found misleading during follow-up inspection [danluu.com#1].",
+    "Small-model tools: InstaVM argues smaller models can handle tool use more reliably by generating code that calls APIs or shell commands, then running that code in ephemeral Linux sandboxes that it says usually start in under 200 milliseconds [instavm.io#1].",
+    "Education resources: A Shanghai Jiao Tong University-linked GitHub tutorial project lists 45.5k stars and covers fine-tuning, deployment, knowledge editing, watermarking, jailbreak attacks, GUI agents and RLHF safety alignment [github.com#2]."
+  ],
+  "technical_details": [
+    "KV-cache compression: DKV says it combines anchor-based representations, joint low-rank compression, exact residual preservation and sparse routed attention to reduce memory used by long-context local inference [reddit.com#1].",
+    "The ESP32-S3 project runs a 28.9 million-parameter model on-device at roughly 9 tokens per second, compared to a prior 260k-parameter model [github.com#1].",
+    "In-memory attention architecture: The PSM/ASMA preprint claims a stationary in-memory-cell design for KV-cache attention that reduces system bus traffic by 99.47% and net step energy by 99.44% versus an RTX 3090 baseline under its tested workload [zenodo.org#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Evaluation essay published on two LLM noise sources [github.io#1]",
+      "date": "22 July 2026",
+      "date_iso": "2026-07-22"
+    },
+    {
+      "content": "InstaVM published code-mode proposal for smaller models [instavm.io#1]",
+      "date": "24 July 2026",
+      "date_iso": "2026-07-24"
+    },
+    {
+      "content": "LWN noted Debian LLM resolution discussion had begun [lwn.net#1]",
+      "date": "25 July 2026",
+      "date_iso": "2026-07-25"
+    },
+    {
+      "content": "Zenodo listed PSM attention-acceleration preprint version v1 [zenodo.org#1]",
+      "date": "26 July 2026",
+      "date_iso": "2026-07-26"
+    }
+  ],
+  "title": "Developers advance local LLM inference and evaluation tools",
+  "travel_advisory": "",
+  "unique_domains": 13,
+  "url": "https://www.reddit.com/r/LLM/comments/1v5x6hx/dkv_opensource_kvcache_compression_framework_for/",
+  "user_action_items": [
+    "Review Debian LLM policy proposals: Read the Debian vote page before relying on LLM-assisted contributions to Debian packaging or documentation workflows [debian.org#1].",
+    "Benchmark speculative decoding locally: Test draft-model pairings in your own LM Studio or llama.cpp setup because the explainer says mismatched pairings can reduce performance instead of improving it [vettedconsumer.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
