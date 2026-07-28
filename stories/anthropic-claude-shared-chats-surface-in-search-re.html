@@ -1,0 +1,1903 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic Claude shared chats surface in search results - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic Claude shared chats surface in search results</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/"><img src="https://kagiproxy.com/img/F0B9Md_VrDV8iLlS_697pwkpqoPgVEIKUsytzQHR9C_2-45arJLbMukTJ3NLeavk4FwEqeAkkBUSAmd7sDqkCOM8WUfp1j2aZ2pUohKjYVwHcAcjLn4JJWVUIKiFLD6VLAECJsj_Dav0qVlvPCiMOiwU1Ycv9-Q2RF0imn8iXorKXY5YLxNA2GKz-E3xDDv1FRY8wD7LiNWtRw" alt="Illustration for Wired’s report on Claude chats appearing in Google and Bing search results" title="Illustration for Wired’s report on Claude chats appearing in Google and Bing search results (Wired)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Illustration for Wired’s report on Claude chats appearing in Google and Bing search results <span class='credit'>(Wired)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Shared conversations and Artifacts from Anthropic’s Claude appeared in Google and, according to some reports, Bing search results after users created public share links for chats and generated projects <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible" class="footnote-ref">[4]</a><a href="https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/" class="footnote-ref">[38]</a><a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>. Reddit users found the pages with searches such as “site:claude.ai/share,” and the BBC said the results included hundreds of conversations <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>.
+
+The exposed material included health records, clinical trial information, company documents, employee reviews, resumes, API keys, children’s names and phone numbers, and other personal or work information <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible" class="footnote-ref">[4]</a><a href="https://gizmodo.com/when-you-share-claude-chats-you-could-be-sharing-them-with-everyone-2000791372" class="footnote-ref">[1]</a><a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>. Claude’s chat-sharing interface says “anyone with the link can view,” but several reports said it did not explicitly warn that shared chats could appear in search results; Futurism said the separate Artifacts publishing flow does warn that published Artifacts may become visible in search engine results <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible" class="footnote-ref">[4]</a><a href="https://mashable.com/tech/shared-claude-chats-found-in-google-search" class="footnote-ref">[43]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>.
+
+Anthropic said it does not provide chat directories or sitemaps to search engines and that shareable links are not guessable or discoverable unless users share them <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame" class="footnote-ref">[2]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>. The BBC said the pages were no longer available through search over the weekend, while VentureBeat said many original Google results had disappeared or become harder to find by Sunday morning <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://gizmodo.com/when-you-share-claude-chats-you-could-be-sharing-them-with-everyone-2000791372">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>When someone shares a conversation, they are making that content publicly accessible, and like other public web content, it may be archived by third-party services</p>
+
+<cite>— Anthropic spokeswoman (BBC)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Earlier precedent: PCMag said OpenAI faced a similar issue last year when Google indexed shared ChatGPT chats created with a public-link function, after which OpenAI removed the option to make chats appear in Google Search <a href="https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame" class="footnote-ref">[2]</a>.</li>
+
+<li>Crawler controls: Android Headlines said Claude’s shared-chat pages used robots.txt restrictions for claude.ai/share but lacked noindex tags; URLs linked from the open web can still appear in search results <a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html" class="footnote-ref">[55]</a>.</li>
+
+<li>Initial discovery: VentureBeat traced the discovery to Reddit user -void1 on the r/ClaudeAI subreddit, where the post drew thousands of upvotes and comments about privacy and information security <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame" class="footnote-ref">[2]</a>.</li>
+
+<li>Enterprise risk: VentureBeat noted that Anthropic has positioned Claude as a collaborative workspace for software, dashboards, documents and other business assets, increasing the sensitivity of shared-work exposure for enterprise users <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a>.</li>
+
+<li>Artifact exposure: VentureBeat said it independently verified that some Claude Artifacts not shared directly with it were searchable and accessible via Google, though it could not access shared conversations <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Anthropic: The company said shared links appear in search results only when posted somewhere search engines can see, such as a forum or social media post, and said privately sent links remain out of search.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/">TechCrunch</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Mashable: Mashable said the indexing risk stemmed from the lack of noindex tags on shared Claude conversation pages and said Google appeared to have de-indexed and removed shared Claude conversations by publication time.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://mashable.com/tech/shared-claude-chats-found-in-google-search">Mashable</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Android Authority: Android Authority said private Claude chats were not affected and that the indexed links appeared to have been removed.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/">Android Authority</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>404 Media: 404 Media said users created public share links without necessarily realizing those chats and creations could become searchable by strangers.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.404media.co/tons-of-peoples-claude-chats-and-creations-are-exposed-on-google/">404 Media</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>An Anthropic spokeswoman told the BBC: &quot;When someone shares a conversation, they are making that content publicly accessible, and like other public web content, it may appear in search results.&quot;</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo">BBC</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>VentureBeat said the issue could affect enterprise users because Claude’s sharing tools are used for business assets such as dashboards, documents and software, not only chatbot responses.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search">VentureBeat</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Futurism reported that Claude’s chat-sharing warning does not tell users that shared content could be indexed by search engines, while the Artifacts publishing flow does warn that projects may be visible in search results.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible">Futurism</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>25 July 2026:</strong> Reddit user highlighted searchable Claude share pages <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html" class="footnote-ref">[55]</a></li>
+
+
+
+<li><strong>26 July 2026:</strong> Many original Google results became harder to find <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a></li>
+
+
+
+<li><strong>27 July 2026:</strong> Technology publications reported sensitive shared chats in search <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible" class="footnote-ref">[4]</a><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a></li>
+
+
+
+<li><strong>28 July 2026:</strong> Follow-up reports described removed results and privacy questions <a href="https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html" class="footnote-ref">[41]</a><a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Robots.txt limitation: Anthropic used robots.txt to tell crawlers not to crawl claude.ai/share URLs, but Android Headlines and Techmeme cited the need for page-level noindex controls because externally linked URLs can still be discovered by search systems <a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.techmeme.com/260727/p33#a260727p33" class="footnote-ref">[57]</a>.</li>
+
+<li>Noindex placement: Les Numériques explained that when robots.txt blocks crawler access to a page, a crawler may never read a noindex directive placed inside that page’s HTML, making response headers or crawlable noindex implementation important for exclusion <a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html" class="footnote-ref">[55]</a>.</li>
+
+<li>Public-link model: Claude’s share feature creates a static snapshot URL that anyone with the assigned link can view, and TechCrunch compared the expectation gap with Google Docs, whose similar link-sharing model does not make documents publicly searchable by default <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Corporate security: Reports identified exposed internal company documents, employee reviews, project plans and credentials, showing how AI-sharing workflows can intersect with corporate data-loss prevention programs <a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.digitaltrends.com/cool-tech/claude-shared-chats-google-search-privacy/" class="footnote-ref">[48]</a><a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html" class="footnote-ref">[55]</a>.</li>
+
+<li>AI collaboration tools: Claude’s Artifacts and shared chats are used to publish apps, dashboards, documents and code, so search exposure affects collaboration features that AI vendors market beyond simple chatbot conversations <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible" class="footnote-ref">[4]</a>.</li>
+
+<li>AI collaboration features: Claude’s public-link model resembles collaboration patterns used by tools such as Google Docs, but TechCrunch noted that Google Docs share links do not typically end up publicly accessible on Google Search <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a>.</li>
+
+<li>Enterprise AI use: Claude Artifacts include interactive applications, dashboards, documents and other AI-generated work products, so public indexing can expose more than ordinary chatbot transcripts <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Anthropic launched Claude as a consumer and enterprise AI assistant competing with ChatGPT and Google’s Gemini <a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo" class="footnote-ref">[53]</a>[common]. Public-link sharing has produced similar indexing problems before: PCMag reported that OpenAI changed a ChatGPT sharing option last year after Google indexed shared user chats <a href="https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame" class="footnote-ref">[2]</a>. MobileSyrup also noted a previous episode in September in which hundreds of Claude chats were found indexed by search engines <a href="https://mobilesyrup.com/2026/07/27/claude-chats-leaked-google/" class="footnote-ref">[54]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Enterprise customers may be slower to adopt shared AI workspaces if they believe public-link defaults can expose internal documents, code or employee information <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a><a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a>.</li><li>Technical fixes such as clearer warnings and noindex controls may address indexing, but customers may continue to question whether previously shared material was copied or archived <a href="https://mashable.com/tech/shared-claude-chats-found-in-google-search" class="footnote-ref">[43]</a>[common].</li><li>Competitors can point to privacy defaults and enterprise governance controls when selling against Anthropic if its sharing model remains unclear to nontechnical users [common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit shared Claude links: Search your Claude account for conversations or Artifacts you have shared, revoke links you no longer need, and avoid putting secrets, health data or client information into shared pages <a href="https://www.zdnet.com/article/claude-ai-shared-chats-indexed-by-google/" class="footnote-ref">[56]</a><a href="https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours" class="footnote-ref">[47]</a>.</li>
+
+<li>Rotate exposed secrets: If a shared chat included API keys, crypto wallet recovery phrases or database credentials, revoke and replace them because public search exposure can allow third parties to copy them <a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html" class="footnote-ref">[55]</a>[common].</li>
+
+<li>Set workplace sharing rules: Require employees to treat Claude public links as internet-public unless an administrator verifies stronger controls or an enterprise policy blocks public sharing <a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search" class="footnote-ref">[40]</a>[common].</li>
+
+<li>Review shared Claude links: Open Claude’s shared conversations and Artifacts history, remove public links you no longer need, and avoid sharing chats that contain personal, legal, health, financial, source-code or credential data <a href="https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours" class="footnote-ref">[47]</a><a href="https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/" class="footnote-ref">[45]</a>.</li>
+
+<li>Search for exposed pages: Use search operators such as site:claude.ai/share with unique names, handles, project titles or company terms, then delete or unshare any matching Claude content you control <a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/" class="footnote-ref">[3]</a><a href="https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours" class="footnote-ref">[47]</a>.</li>
+
+<li>Rotate exposed secrets: If a shared chat included API keys, crypto seed phrases or credentials, revoke and regenerate them immediately because search removal does not guarantee copies disappeared <a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html" class="footnote-ref">[42]</a><a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html" class="footnote-ref">[55]</a>[common].</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE0zYkkxX3lCelN1bWhUTmtvQUNxbFBmTUhKa3lXdjIxSUhVSVFPbDlKSUNDczB6UC01RUctRFBuTklYa182U1hMbC1ZbHA0MXVmYjByU0R4MzlpemY2VGdReXJPb0c1RV9JZWd4Qm9pcGZIdWM1cXFr">https://news.google.com/rss/articles/CBMid0FVX3lxTE0zYkkxX3lCelN1bWhUTmtvQUNxbFBmTUhKa3lXdjIxSUhVSVFPbDlKSUNDczB6UC01RUctRFBuTklYa182U1hMbC1ZbHA0MXVmYjByU0R4MzlpemY2VGdReXJPb0c1RV9JZWd4Qm9pcGZIdWM1cXFr</a></li>
+
+
+
+<li><a href="https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible">https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible</a></li>
+
+
+
+<li><a href="https://www.techmeme.com/260727/p33#a260727p33">https://www.techmeme.com/260727/p33#a260727p33</a></li>
+
+
+
+<li><a href="https://www.digitaltrends.com/cool-tech/claude-shared-chats-google-search-privacy/">https://www.digitaltrends.com/cool-tech/claude-shared-chats-google-search-privacy/</a></li>
+
+
+
+<li><a href="https://mobilesyrup.com/2026/07/27/claude-chats-leaked-google/">https://mobilesyrup.com/2026/07/27/claude-chats-leaked-google/</a></li>
+
+
+
+<li><a href="https://www.404media.co/tons-of-peoples-claude-chats-and-creations-are-exposed-on-google/">https://www.404media.co/tons-of-peoples-claude-chats-and-creations-are-exposed-on-google/</a></li>
+
+
+
+<li><a href="https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/">https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/</a></li>
+
+
+
+<li><a href="https://tweakers.net/nieuws/250408/gedeelde-claude-chats-belandden-in-zoekresultaten-van-google.html">https://tweakers.net/nieuws/250408/gedeelde-claude-chats-belandden-in-zoekresultaten-van-google.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTFBuWFdBbGNzU1pDWUlkOHlJQ1ByVFhUcy1qbzdXaEhObTZWTHpraUJsZmdrWmE5QjRJT2x3Y1YwZGFnN090bTJ3M05KQmdJYm1BTW0tTkdvNXR1TFo2">https://news.google.com/rss/articles/CBMiXEFVX3lxTFBuWFdBbGNzU1pDWUlkOHlJQ1ByVFhUcy1qbzdXaEhObTZWTHpraUJsZmdrWmE5QjRJT2x3Y1YwZGFnN090bTJ3M05KQmdJYm1BTW0tTkdvNXR1TFo2</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxQRi13cXMzazVuT1haT01iT0hYb3VLbGRZNkJUeWRkVHRJLTk3dEg1R21aUkcweThadlczS2RWNFJZMTJlYUtJWlhrNWFXOXhSV0UzTjJIQ0tENzFMWFU5RUNFMVFnay1GRVRTcXBGYmQ5ZzlFaGE2b1ppMzRHNTFnY0dKRlNaY2tYd29BRVFra2M5LXE2cmc">https://news.google.com/rss/articles/CBMilgFBVV95cUxQRi13cXMzazVuT1haT01iT0hYb3VLbGRZNkJUeWRkVHRJLTk3dEg1R21aUkcweThadlczS2RWNFJZMTJlYUtJWlhrNWFXOXhSV0UzTjJIQ0tENzFMWFU5RUNFMVFnay1GRVRTcXBGYmQ5ZzlFaGE2b1ppMzRHNTFnY0dKRlNaY2tYd29BRVFra2M5LXE2cmc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiygFBVV95cUxQa29KeWlQbHBjemJfOXV5TUFIRzRiM2wyVTFIbWJZMXZGODdOWjExMmp2ZzE1S2pmbDRNeTBaMkJKV2g2alBCbFVUbl9CRFkycmlUMnhRZnNTbDRXNExGcHZNM1owTDQzaG5NOEptSmYzWGIxenlRS2lIMW1rRkhjc2tRb0U2Zk5rTlppZlFfZ0lOaUI2VmRERTVaTVplSFdCLTFvMFVOTXV6aXU4enhWbVFmdGJfb2F5UFZHOTV6enBZTThELVFLZGlR">https://news.google.com/rss/articles/CBMiygFBVV95cUxQa29KeWlQbHBjemJfOXV5TUFIRzRiM2wyVTFIbWJZMXZGODdOWjExMmp2ZzE1S2pmbDRNeTBaMkJKV2g2alBCbFVUbl9CRFkycmlUMnhRZnNTbDRXNExGcHZNM1owTDQzaG5NOEptSmYzWGIxenlRS2lIMW1rRkhjc2tRb0U2Zk5rTlppZlFfZ0lOaUI2VmRERTVaTVplSFdCLTFvMFVOTXV6aXU4enhWbVFmdGJfb2F5UFZHOTV6enBZTThELVFLZGlR</a></li>
+
+
+
+<li><a href="https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search">https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/technology/comments/1v889hd/a_trove_of_users_seemingly_private_conversations/">https://www.reddit.com/r/technology/comments/1v889hd/a_trove_of_users_seemingly_private_conversations/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQSzlMeGpBOXdJYWJkSmNwWXYxcllBSVVEWm84ekRMVGNZYTE5aXJwRkhKVjRySjBUbVppakRYb3RtYkFJUFVFTzdKTm8wc0kyVFZCVnJrMUtLdEdxejVub1ZfMElyVXd1c0RCcjI3aU9kN1FtWkthald6Rkk1bmppZzNOcw">https://news.google.com/rss/articles/CBMigwFBVV95cUxQSzlMeGpBOXdJYWJkSmNwWXYxcllBSVVEWm84ekRMVGNZYTE5aXJwRkhKVjRySjBUbVppakRYb3RtYkFJUFVFTzdKTm8wc0kyVFZCVnJrMUtLdEdxejVub1ZfMElyVXd1c0RCcjI3aU9kN1FtWkthald6Rkk1bmppZzNOcw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNM2ZLMGYtbkFVaVhsMTV2cjBOcVh2WWZwNVREQkFJNXFhUkdUdThXVHNyUzJEWlVaMkpHSW50U2R3eGZsclRLUkFzeHFrTHo3ZHJYNHg1TzJNRmhzeTNVenluN0wyS2hHaUxDSGNSM2x3U0IxbUF4MjNja2NLYXJ6NzQtYURjMmE5bVMxZHB2OUtVZHhy">https://news.google.com/rss/articles/CBMilAFBVV95cUxNM2ZLMGYtbkFVaVhsMTV2cjBOcVh2WWZwNVREQkFJNXFhUkdUdThXVHNyUzJEWlVaMkpHSW50U2R3eGZsclRLUkFzeHFrTHo3ZHJYNHg1TzJNRmhzeTNVenluN0wyS2hHaUxDSGNSM2x3U0IxbUF4MjNja2NLYXJ6NzQtYURjMmE5bVMxZHB2OUtVZHhy</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPR21UMTVmNGE1ak45MHRTX29GdEVJNk9mRGk4UkM1U01MZFk4YU56OEhyX3Q1MkhTdzhJYjBDSm1RcDloZXZWUGFCbHlFMzRuaGljOXVJLW0yd3hkYkxlWF9ySkNrRURBVjlxbThITjE1bGNydGxPajFBckt5c2R5RmFFdlJJYkF4N0o2a2Fod3JSNHBXcHhTWtIBlwFBVV95cUxOTEViMG5sUGFxcEktMFhWbFNpRUVBTzRha3FWSWU0VndIVjI5eUNVemdYRjlteFY1ZXcwOF9GbE54Z2Y3ZzY0S3dVSXhjdXhsMzBvVTFUQUt5Vm1IVkZrZ1RGYjdyemt3Q2FFT1FmRkEzSUkydUJYVVRaZmVQeVliWWZQeDZWUE9HNnNaeTU3ZzA5b2wxODFB">https://news.google.com/rss/articles/CBMimAFBVV95cUxPR21UMTVmNGE1ak45MHRTX29GdEVJNk9mRGk4UkM1U01MZFk4YU56OEhyX3Q1MkhTdzhJYjBDSm1RcDloZXZWUGFCbHlFMzRuaGljOXVJLW0yd3hkYkxlWF9ySkNrRURBVjlxbThITjE1bGNydGxPajFBckt5c2R5RmFFdlJJYkF4N0o2a2Fod3JSNHBXcHhTWtIBlwFBVV95cUxOTEViMG5sUGFxcEktMFhWbFNpRUVBTzRha3FWSWU0VndIVjI5eUNVemdYRjlteFY1ZXcwOF9GbE54Z2Y3ZzY0S3dVSXhjdXhsMzBvVTFUQUt5Vm1IVkZrZ1RGYjdyemt3Q2FFT1FmRkEzSUkydUJYVVRaZmVQeVliWWZQeDZWUE9HNnNaeTU3ZzA5b2wxODFB</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame">https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQM1FZYlRQNkNqdkFsOXVtbFJmaVBnYUJWeHFsa0JVVDQ3VnFOckEwYnUwZTBGWXV2MWJzV1MwaW1rT0dWSTBJbFdMN2ZaVkh1dnhzWHJRRGNINm90YXBRRWNWNmpGT2lhS0VsaVhlQ0Z4QzNRVVRBdFNoU0dfMGlCUjE2NVJWX0Uwbm5rT0VaZFpTV2M">https://news.google.com/rss/articles/CBMikwFBVV95cUxQM1FZYlRQNkNqdkFsOXVtbFJmaVBnYUJWeHFsa0JVVDQ3VnFOckEwYnUwZTBGWXV2MWJzV1MwaW1rT0dWSTBJbFdMN2ZaVkh1dnhzWHJRRGNINm90YXBRRWNWNmpGT2lhS0VsaVhlQ0Z4QzNRVVRBdFNoU0dfMGlCUjE2NVJWX0Uwbm5rT0VaZFpTV2M</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiqAFBVV95cUxOU3JRRFBnUEIzbHM3VlN0NXJDWTJmQnZnMnlNVzVyVmJpcmM0X1U1R1h1QnZPQkxvck1fT2x2X210YWxrZnFnTE5sNXFmcXdRQnVuV0FabnRXZ0VSTkdGeHpiaW1mZ01fTkc2SkVqZGo2QU9KMVB0eFpiSTFwTFRQNkdwVUc2dHdqNkpMUkhDS1UyVmF3X2tvUGZnbXV5VDNNbmM5aFNrcVU">https://news.google.com/atom/articles/CBMiqAFBVV95cUxOU3JRRFBnUEIzbHM3VlN0NXJDWTJmQnZnMnlNVzVyVmJpcmM0X1U1R1h1QnZPQkxvck1fT2x2X210YWxrZnFnTE5sNXFmcXdRQnVuV0FabnRXZ0VSTkdGeHpiaW1mZ01fTkc2SkVqZGo2QU9KMVB0eFpiSTFwTFRQNkdwVUc2dHdqNkpMUkhDS1UyVmF3X2tvUGZnbXV5VDNNbmM5aFNrcVU</a></li>
+
+
+
+<li><a href="https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/">https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1Odlg3Wk44LWZPeXZtYTlnd21QS2NVWk1BNkNoTXNVWlhmbDZrNXFnYXotOHFiUk9Ya0Q2OVZTbTlSY0R6SExiejh1bm4xckM5MkF3VUhMWlpLRFF4TzBkOWNUaGtTNVdRdkNVdS1tQnNOc0JqS3pz">https://news.google.com/rss/articles/CBMid0FVX3lxTE1Odlg3Wk44LWZPeXZtYTlnd21QS2NVWk1BNkNoTXNVWlhmbDZrNXFnYXotOHFiUk9Ya0Q2OVZTbTlSY0R6SExiejh1bm4xckM5MkF3VUhMWlpLRFF4TzBkOWNUaGtTNVdRdkNVdS1tQnNOc0JqS3pz</a></li>
+
+
+
+<li><a href="https://www.bbc.co.uk/news/articles/cly5qgjk5ywo">https://www.bbc.co.uk/news/articles/cly5qgjk5ywo</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQeFRPNkpValJld3lfT2diMF9fOTNmeXJJaHdvNmQ3M3I3T1RiZVVsYXY5Rk9nNFl5ekRUVHg1T3BIVG91elF6Qi1vWnRDLWk1RE9zOW5kZzR0SExqRDZpekNScUlWX0tuT1h0emc0Y3phemJOSGswc3lKMW9zTEJfNExKbGUyc1RYaUdYalZRRzHSAZgBQVVfeXFMTUxtLVJ4NEY0LW9DQWZnS3JVaXZBc1BsbTNMQ3h2Q0pabXZRVGZLZi1fVUFuV1h0SHZHWWxhdVJtaTNJbDM5TnZjMV9INDhFS1FycjluRHg5UURfclZtbkN1Z3dITVgtdTdId1lobUpFeUlfNGxhZTd2ZXJzUTRtdU9aVk9LMUZCQnVWSFR1aTg5QW1yZlhMWmo">https://news.google.com/rss/articles/CBMikAFBVV95cUxQeFRPNkpValJld3lfT2diMF9fOTNmeXJJaHdvNmQ3M3I3T1RiZVVsYXY5Rk9nNFl5ekRUVHg1T3BIVG91elF6Qi1vWnRDLWk1RE9zOW5kZzR0SExqRDZpekNScUlWX0tuT1h0emc0Y3phemJOSGswc3lKMW9zTEJfNExKbGUyc1RYaUdYalZRRzHSAZgBQVVfeXFMTUxtLVJ4NEY0LW9DQWZnS3JVaXZBc1BsbTNMQ3h2Q0pabXZRVGZLZi1fVUFuV1h0SHZHWWxhdVJtaTNJbDM5TnZjMV9INDhFS1FycjluRHg5UURfclZtbkN1Z3dITVgtdTdId1lobUpFeUlfNGxhZTd2ZXJzUTRtdU9aVk9LMUZCQnVWSFR1aTg5QW1yZlhMWmo</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMijgFBVV95cUxNc0pjWnZQTURoZXUwREVBS0FudjZBQjF4WVpoOXA1eVBjM0o4ZC1pUFNDaFZHS04zSXZkRzFzdG1nNE5kMFBycVV1a1J0SkUxQ1ZxeWliYW4wZnpmMmJhTXVTNjVvZk8tY1VPRTlGd2pRbVo3ZTRTU1k4ZVhxZFJkWlBybVFOY1VlWXV4bmN3">https://news.google.com/rss/articles/CBMijgFBVV95cUxNc0pjWnZQTURoZXUwREVBS0FudjZBQjF4WVpoOXA1eVBjM0o4ZC1pUFNDaFZHS04zSXZkRzFzdG1nNE5kMFBycVV1a1J0SkUxQ1ZxeWliYW4wZnpmMmJhTXVTNjVvZk8tY1VPRTlGd2pRbVo3ZTRTU1k4ZVhxZFJkWlBybVFOY1VlWXV4bmN3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxNa0d6MWl0RFdWWjdRc3JZOFVWWU5hNVNsNVFVUVZaSUMyVkY2ZmpoSTF0QUNxTlZaY2p4Zl9xSlp3b1lIT1ZVclhSSzcxUnl4M3hIUjR5NThidzR4ZU9LN3J3WWZiRzhUNnE0MkQ0d0Zza1RQQWVRRTVNOU1OOGJOc0pDdmk">https://news.google.com/rss/articles/CBMihAFBVV95cUxNa0d6MWl0RFdWWjdRc3JZOFVWWU5hNVNsNVFVUVZaSUMyVkY2ZmpoSTF0QUNxTlZaY2p4Zl9xSlp3b1lIT1ZVclhSSzcxUnl4M3hIUjR5NThidzR4ZU9LN3J3WWZiRzhUNnE0MkQ0d0Zza1RQQWVRRTVNOU1OOGJOc0pDdmk</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxOSjVlVkRjQVdBcnE1dW9OYUdJN0syT1lROTRfbkxZSmFtbVVUQUM1T3ZlX2pmcl94MVhPbHprUGVScER4Ql9vOWhpSzlDc1VFS3NXN0lodEE1NW9Tenhsd0VteWp5ZE5YZ2xwRVhoMnB3LW05eXJJRUhiUUVuVWUybVMxVWhET0ZqRVRndWd3bmJjcGU0YlFjell5Nkh0b1E">https://news.google.com/rss/articles/CBMinwFBVV95cUxOSjVlVkRjQVdBcnE1dW9OYUdJN0syT1lROTRfbkxZSmFtbVVUQUM1T3ZlX2pmcl94MVhPbHprUGVScER4Ql9vOWhpSzlDc1VFS3NXN0lodEE1NW9Tenhsd0VteWp5ZE5YZ2xwRVhoMnB3LW05eXJJRUhiUUVuVWUybVMxVWhET0ZqRVRndWd3bmJjcGU0YlFjell5Nkh0b1E</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQTGdJaW9ibGdOeG0yQjJkRS1qNUlfbEtaRHhfTHhacVBacjJnZDJxak11TVhSZDA0bHBRREpHbVhwVzlMVWtQT255T3VJM3E1ZmVnRXF3ZTNhQmFSVkNhdjVUcDBtMExfd21mMVFLRXpXV1lydlpKNmR1OFFlYnk0RFJB">https://news.google.com/rss/articles/CBMiggFBVV95cUxQTGdJaW9ibGdOeG0yQjJkRS1qNUlfbEtaRHhfTHhacVBacjJnZDJxak11TVhSZDA0bHBRREpHbVhwVzlMVWtQT255T3VJM3E1ZmVnRXF3ZTNhQmFSVkNhdjVUcDBtMExfd21mMVFLRXpXV1lydlpKNmR1OFFlYnk0RFJB</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOcF9VUzlkZHZNbWhNekdoMmtVQ3hfSEIzOFVXMy0xMHZCcklaT3liekJNeWI2Y0Ywd3ZJYVY0SW50Vi0wZFF1TmJjTkZ1eVVHQUZBSmJQTFRlNTl1Y3YyRTZjQjB2cVFRRmdJT0JuMXJxVmdnUE0wU2FBTDlxNGJKZ2l3">https://news.google.com/rss/articles/CBMiggFBVV95cUxOcF9VUzlkZHZNbWhNekdoMmtVQ3hfSEIzOFVXMy0xMHZCcklaT3liekJNeWI2Y0Ywd3ZJYVY0SW50Vi0wZFF1TmJjTkZ1eVVHQUZBSmJQTFRlNTl1Y3YyRTZjQjB2cVFRRmdJT0JuMXJxVmdnUE0wU2FBTDlxNGJKZ2l3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE9RT2MzVGxkb20xYVBKV25FM05TT0I1RV80eHc4Q2V1MVNSOHZOaGt1Ui1ENFhEOUh4OWYybFk5WlY1NkR3Y2Rtc2ZsWHN1T2MtcTBvZWVuRnFfT1ZQRmlGQ1l5ZjBKVzRyV1FqSGRVb0dVVndIUlEzVmhCbw">https://news.google.com/rss/articles/CBMie0FVX3lxTE9RT2MzVGxkb20xYVBKV25FM05TT0I1RV80eHc4Q2V1MVNSOHZOaGt1Ui1ENFhEOUh4OWYybFk5WlY1NkR3Y2Rtc2ZsWHN1T2MtcTBvZWVuRnFfT1ZQRmlGQ1l5ZjBKVzRyV1FqSGRVb0dVVndIUlEzVmhCbw</a></li>
+
+
+
+<li><a href="https://www.haber7.com/teknoloji/haber/3646799-yapay-zekada-kritik-ihlal-sohbetleriniz-google-aramalarinda-cikiyor">https://www.haber7.com/teknoloji/haber/3646799-yapay-zekada-kritik-ihlal-sohbetleriniz-google-aramalarinda-cikiyor</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WbnpDZDliX05XS1E5bnBmZ201cHc0alFOb0Q4MXFsTXYwem9ySkg4R0luZDhIQmpaYXRzbnV2dno3cEN4NEZXZHBrWnlQMGpxLWdEbnB6Q2Z1dw">https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WbnpDZDliX05XS1E5bnBmZ201cHc0alFOb0Q4MXFsTXYwem9ySkg4R0luZDhIQmpaYXRzbnV2dno3cEN4NEZXZHBrWnlQMGpxLWdEbnB6Q2Z1dw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPOXhiXzdWbTMzaTZieWlTbDN6eW1tbDFfWmc3TDJyaHdMNjk3X3EtVGhNV3lfVjZub2FIM3RUbUt5RXZTLTVhTXRtTEY4V080Vl9Pc05kTnhYbm5BR1M2c01maDc3cVl4cDh1Q19WZVBPV2RadVFuaTRvX29zOFQ5VHE0eHpseUl6dWlSVTFnY2xPcEJxMXZhU2x6dmI">https://news.google.com/rss/articles/CBMinAFBVV95cUxPOXhiXzdWbTMzaTZieWlTbDN6eW1tbDFfWmc3TDJyaHdMNjk3X3EtVGhNV3lfVjZub2FIM3RUbUt5RXZTLTVhTXRtTEY4V080Vl9Pc05kTnhYbm5BR1M2c01maDc3cVl4cDh1Q19WZVBPV2RadVFuaTRvX29zOFQ5VHE0eHpseUl6dWlSVTFnY2xPcEJxMXZhU2x6dmI</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigAJBVV95cUxPNVlaWDhqX0dBNjNBbV9XTkc5b3BNZ3ZOMWlONkJXVmozNUx1OEFPQ1pfd3RibmVUVG1McExSTTZ2Y0NuYWgxZVBsa1k1am1Za3FDRVFzS3hsOFNWbTNkRlFRSF83cG1scXU1SUU5ZE9VMmV4MkFJNGY3bi14ek40NFBLbVdpMy1UMjVNM0NXNWI3NlI1eVpvN2dORlRLR3BrenBhanVUdl9xSFBKdTkzZ3ZoTkVhZDNQV0ZJRVZHRUVNUnFuUWVBMWtPa3RjdUZOd3FabTJiSzdFWVUyWmp4dmdhU1FpUFc5RFpuMURydTdiVUh3M3ZydHBMRGhJQTNp0gGGAkFVX3lxTE9qMjdrWk9KRXFSR0dMSldwdEd6QXoxWDJmYThSSEdtNU1mRVJDbTVXcWVfU1NfeUxQTTNGYmRlek0wV2ZLcUMwSXRWYjduSXpITldsTVhJNExpZjI4MEtOakl2S1locVNrTF90aFRBUXNzbG1Nd09yeHlQWjlpbkkxM2tUcjgyLVc1dExmSFZSMGpKbTBMYktsZGN5N1F1QTdqYllLVDhielBxNUNTakNHN0E4M3BYSUYycWhKNEtlVEJhcm9lWGxndlU1RzNpMUlwZXJqNDRiUm1ZQS13anNSaE1JOVlrN04xRlJ2bUtYQ2VTSVJIVXRtSjVDNjFoaTZqdDdLWWc">https://news.google.com/rss/articles/CBMigAJBVV95cUxPNVlaWDhqX0dBNjNBbV9XTkc5b3BNZ3ZOMWlONkJXVmozNUx1OEFPQ1pfd3RibmVUVG1McExSTTZ2Y0NuYWgxZVBsa1k1am1Za3FDRVFzS3hsOFNWbTNkRlFRSF83cG1scXU1SUU5ZE9VMmV4MkFJNGY3bi14ek40NFBLbVdpMy1UMjVNM0NXNWI3NlI1eVpvN2dORlRLR3BrenBhanVUdl9xSFBKdTkzZ3ZoTkVhZDNQV0ZJRVZHRUVNUnFuUWVBMWtPa3RjdUZOd3FabTJiSzdFWVUyWmp4dmdhU1FpUFc5RFpuMURydTdiVUh3M3ZydHBMRGhJQTNp0gGGAkFVX3lxTE9qMjdrWk9KRXFSR0dMSldwdEd6QXoxWDJmYThSSEdtNU1mRVJDbTVXcWVfU1NfeUxQTTNGYmRlek0wV2ZLcUMwSXRWYjduSXpITldsTVhJNExpZjI4MEtOakl2S1locVNrTF90aFRBUXNzbG1Nd09yeHlQWjlpbkkxM2tUcjgyLVc1dExmSFZSMGpKbTBMYktsZGN5N1F1QTdqYllLVDhielBxNUNTakNHN0E4M3BYSUYycWhKNEtlVEJhcm9lWGxndlU1RzNpMUlwZXJqNDRiUm1ZQS13anNSaE1JOVlrN04xRlJ2bUtYQ2VTSVJIVXRtSjVDNjFoaTZqdDdLWWc</a></li>
+
+
+
+<li><a href="https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/">https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxQeUdIYUU3dXhjZ0l3NWEzS0VrdFpNdGdWOXFrbWtNWWdnbTJ5MEpvMFNpYjBDS0VvZVZ6bEpVczRNTWEyMTlsWmJNWDdXcHgyRE9POXZubWlxZGxpX2wtUGl3MG52NEp4d3JuNFlkaGo0RW9OSkxHMFVRWndDZUJxX0lYS0wweE96Nnl3UmpHQ3FNM1JpaWt4MmZTLXN4OTYzdWp4Ml83YnFZX0lwWVFmMGg2TVJnSDhtS2RMc01yZ1o3eGdZZFpwVnhuTlYtWFF6cFNMcE1MT0p0TGc5VTJtejhXOA">https://news.google.com/rss/articles/CBMi4wFBVV95cUxQeUdIYUU3dXhjZ0l3NWEzS0VrdFpNdGdWOXFrbWtNWWdnbTJ5MEpvMFNpYjBDS0VvZVZ6bEpVczRNTWEyMTlsWmJNWDdXcHgyRE9POXZubWlxZGxpX2wtUGl3MG52NEp4d3JuNFlkaGo0RW9OSkxHMFVRWndDZUJxX0lYS0wweE96Nnl3UmpHQ3FNM1JpaWt4MmZTLXN4OTYzdWp4Ml83YnFZX0lwWVFmMGg2TVJnSDhtS2RMc01yZ1o3eGdZZFpwVnhuTlYtWFF6cFNMcE1MT0p0TGc5VTJtejhXOA</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOS29Hb0tzNEhib1F1M01VMnlWT2FRSy15U2drU3dTcnI4dEcweGhFLWZpWE9qSUozM0RDMmdmUThPM1luRmFPYUp4VWxCZXEwaDQwaUt1M29KNW5xMDhuRDI1bml1Wm1TektKc2hTRUFReF9KNGYzOE5zelpyYnZ5TzJoNHgtWjhhT1h6Z1JfRWd5Zw">https://news.google.com/rss/articles/CBMikgFBVV95cUxOS29Hb0tzNEhib1F1M01VMnlWT2FRSy15U2drU3dTcnI4dEcweGhFLWZpWE9qSUozM0RDMmdmUThPM1luRmFPYUp4VWxCZXEwaDQwaUt1M29KNW5xMDhuRDI1bml1Wm1TektKc2hTRUFReF9KNGYzOE5zelpyYnZ5TzJoNHgtWjhhT1h6Z1JfRWd5Zw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxOa0hvSDJSQ0h5RE00R0ZCN2xHSVRkWUFOQ3d2dFdlWm5qM2YtSENJZlhURHVkc0Z5azhkVXlyNGVfQ25GbkM5YnZ1Q0VQQXJfQ0Z6SDZxZFhXTndoSlZKU2l5UC1hVWpOZXo1V202US1wN0NRYy14R1MzQVh0MlFiSg">https://news.google.com/rss/articles/CBMigAFBVV95cUxOa0hvSDJSQ0h5RE00R0ZCN2xHSVRkWUFOQ3d2dFdlWm5qM2YtSENJZlhURHVkc0Z5azhkVXlyNGVfQ25GbkM5YnZ1Q0VQQXJfQ0Z6SDZxZFhXTndoSlZKU2l5UC1hVWpOZXo1V202US1wN0NRYy14R1MzQVh0MlFiSg</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSlFSUGhCRjRGc3hCRDBKcVFXNlFHN2NFT0FSY3lpNmVPMllzSmtHb2h3RTJETGlhajY4TFBSdWIwQTFZOHNVZHZXaDR4TWF6emV0TWphZ0t1dVE0VkoxR21uMFJPSXVlNWFDTUYwbXEtTHBXZE96Yld3ZGZVWV9LU2VzZ2wzOUFE">https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSlFSUGhCRjRGc3hCRDBKcVFXNlFHN2NFT0FSY3lpNmVPMllzSmtHb2h3RTJETGlhajY4TFBSdWIwQTFZOHNVZHZXaDR4TWF6emV0TWphZ0t1dVE0VkoxR21uMFJPSXVlNWFDTUYwbXEtTHBXZE96Yld3ZGZVWV9LU2VzZ2wzOUFE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxObXEyem9NVkFORmVQdkdUa0MtenNCcE9VODJXWGZJZElVNEwzbUZKNFk0a182dlBuOEFieGduektzdnBlbFhKcnRQUHNVNjYwTnRHRkotUFNlR2htNmFDLXRmVzRpNVNIQW4tOGVhNTNZUG1GNXJYU2FFSkVzYk5ZdUpGZWNJdjQxQ3J0d00xT3VfaDZiYXc">https://news.google.com/rss/articles/CBMilgFBVV95cUxObXEyem9NVkFORmVQdkdUa0MtenNCcE9VODJXWGZJZElVNEwzbUZKNFk0a182dlBuOEFieGduektzdnBlbFhKcnRQUHNVNjYwTnRHRkotUFNlR2htNmFDLXRmVzRpNVNIQW4tOGVhNTNZUG1GNXJYU2FFSkVzYk5ZdUpGZWNJdjQxQ3J0d00xT3VfaDZiYXc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi4wFBVV95cUxPdmF0Z2hIVUJKTkp0Q09sT1RkUThycVdCczZHQU1SbVQwQW9ITlJEVURfRlJMRFNIMUhMbjJIejZqVHo1STFkZjgzM1dqemZ0cEttVTBLTm5iNUVfV29JNjhjMGhwaVVZZjVLYmt5c3F0M21qTnd5YWJ5NV9kOTB0LTJDYWlCdkVrdGZ2QVZqLWZYZTd4X0VMMmxjVXVhcHJyak1oVVR2VXdST040NWY0VWlKWmI5NkRfM01JMUFIb2ZfQW9wZWxEc0pCVnIydXRORW5tRm5LRDZVZHNTa3Q0bFlGaw">https://news.google.com/rss/articles/CBMi4wFBVV95cUxPdmF0Z2hIVUJKTkp0Q09sT1RkUThycVdCczZHQU1SbVQwQW9ITlJEVURfRlJMRFNIMUhMbjJIejZqVHo1STFkZjgzM1dqemZ0cEttVTBLTm5iNUVfV29JNjhjMGhwaVVZZjVLYmt5c3F0M21qTnd5YWJ5NV9kOTB0LTJDYWlCdkVrdGZ2QVZqLWZYZTd4X0VMMmxjVXVhcHJyak1oVVR2VXdST040NWY0VWlKWmI5NkRfM01JMUFIb2ZfQW9wZWxEc0pCVnIydXRORW5tRm5LRDZVZHNTa3Q0bFlGaw</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html">https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html</a></li>
+
+
+
+<li><a href="https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html">https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxOSWVRUUZjYjg1bmpMS1k5SUwyLV9FTzJzSVpkcWpfb2tWeTluMTlWd21uQ1hSckxhNjZ3ME1qakxvYVBaMm05WnVYRXZwNjBsc21WdDBwcENGV2g2X0NGNzZqZGQwd0pMYkxqVXBRVGUzcmZiZ2pzWHVnNnUtVEFOM2hhLWhxVDJ6QTQtQlVwOEwwQmdBZ3RtR2tDNA">https://news.google.com/rss/articles/CBMimwFBVV95cUxOSWVRUUZjYjg1bmpMS1k5SUwyLV9FTzJzSVpkcWpfb2tWeTluMTlWd21uQ1hSckxhNjZ3ME1qakxvYVBaMm05WnVYRXZwNjBsc21WdDBwcENGV2g2X0NGNzZqZGQwd0pMYkxqVXBRVGUzcmZiZ2pzWHVnNnUtVEFOM2hhLWhxVDJ6QTQtQlVwOEwwQmdBZ3RtR2tDNA</a></li>
+
+
+
+<li><a href="https://gazeteoksijen.com/bilim-ve-teknoloji/claudeda-gizlilik-tartismasi-yuzlerce-sohbet-googleda-goruntulendi-283836">https://gazeteoksijen.com/bilim-ve-teknoloji/claudeda-gizlilik-tartismasi-yuzlerce-sohbet-googleda-goruntulendi-283836</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNaDZxcjJSMFhxWmQySUZ6N0dfX0tZb0RkZGtiNld0VG8yV0Y1WXJGdnFocV9kNy1RbEdZTVc3NU9SSmk4YlBmMGk4Z0lPOXpHdFdpeFNWZTJzdWE1dk4yRU9XUTFEdHQ4Zlh1QjE3dmg4N1loRDNnWVFBQkVNWjUwNXd2eXNNcFBHcm1FWU5La3dhRHYxX2dFeTFLdHBwUWkyTFRhRHdQa3R4SUo3QTJMUkoxMVhhYUZzWjFraEhHMmJhSlU3RkpKU1k0TkF4NHN2Z3hnaHFnYUhHS3ZZRVVYMkZiREkzVDA5U1E">https://news.google.com/rss/articles/CBMi6gFBVV95cUxNaDZxcjJSMFhxWmQySUZ6N0dfX0tZb0RkZGtiNld0VG8yV0Y1WXJGdnFocV9kNy1RbEdZTVc3NU9SSmk4YlBmMGk4Z0lPOXpHdFdpeFNWZTJzdWE1dk4yRU9XUTFEdHQ4Zlh1QjE3dmg4N1loRDNnWVFBQkVNWjUwNXd2eXNNcFBHcm1FWU5La3dhRHYxX2dFeTFLdHBwUWkyTFRhRHdQa3R4SUo3QTJMUkoxMVhhYUZzWjFraEhHMmJhSlU3RkpKU1k0TkF4NHN2Z3hnaHFnYUhHS3ZZRVVYMkZiREkzVDA5U1E</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQTFNxVGw5elhFZlUyY2s4Slh5SlVRbnJiNVduMzFBZEFIdXBpNTlnOUktTGhfdVpRM291YTVhYVZwRkVDNmNuTEU2ZS1lRWlBMWdZZjNYdzJJWUZjTDl0LU1FUU5NTElkc1JheHNIMjVOVl9KOXBQeXNIRlI2ZzBmUEhfWktjbnp5aTU0VUQ2V1lMWU9HeVZGeXk5NmNlZw">https://news.google.com/rss/articles/CBMingFBVV95cUxQTFNxVGw5elhFZlUyY2s4Slh5SlVRbnJiNVduMzFBZEFIdXBpNTlnOUktTGhfdVpRM291YTVhYVZwRkVDNmNuTEU2ZS1lRWlBMWdZZjNYdzJJWUZjTDl0LU1FUU5NTElkc1JheHNIMjVOVl9KOXBQeXNIRlI2ZzBmUEhfWktjbnp5aTU0VUQ2V1lMWU9HeVZGeXk5NmNlZw</a></li>
+
+
+
+<li><a href="https://www.zdnet.com/article/claude-ai-shared-chats-indexed-by-google/">https://www.zdnet.com/article/claude-ai-shared-chats-indexed-by-google/</a></li>
+
+
+
+<li><a href="https://www.golem.de/news/persoenliche-daten-geleakt-unzaehlige-claude-chats-bei-google-aufgetaucht-2607-211338.html">https://www.golem.de/news/persoenliche-daten-geleakt-unzaehlige-claude-chats-bei-google-aufgetaucht-2607-211338.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQdF9lNXc5TkhXbWpENzVtRFZSaXBvSGV0UERtUGF5ZE5VZzJITlN1YVNOWVBIN0w4dWtmVllrLWJQWmgyMWtCTWhPTkpuRHRMRGp0bVRXTnNUU1FpT01QV05hOFdiX0lIRTBUaWxybWljWXZxLUtlOUN0N3RtdlJoblVMTQ">https://news.google.com/rss/articles/CBMigwFBVV95cUxQdF9lNXc5TkhXbWpENzVtRFZSaXBvSGV0UERtUGF5ZE5VZzJITlN1YVNOWVBIN0w4dWtmVllrLWJQWmgyMWtCTWhPTkpuRHRMRGp0bVRXTnNUU1FpT01QV05hOFdiX0lIRTBUaWxybWljWXZxLUtlOUN0N3RtdlJoblVMTQ</a></li>
+
+
+
+<li><a href="https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html">https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html</a></li>
+
+
+
+<li><a href="https://decrypt.co/374412/anthropic-share-button-quietly-publishing-claude-chats-google">https://decrypt.co/374412/anthropic-share-button-quietly-publishing-claude-chats-google</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxORVNoZm5mUTl5bWJId1EzNnNIRDhyNDl1YjJZa2FGVU1YcUUwbnI4enpJMmhEbC16dy1oajJGSGl6Z2tlelRfRVRBLTNSWEN4Yml6TkRLOUxLdC15ZTdmWm1ETllTUmZ0emlwWnNsNDNiZjNqTjdvYzhOclFxaTZGWXVqVkpOOF92cDlmUUJTZTZUQQ">https://news.google.com/rss/articles/CBMikgFBVV95cUxORVNoZm5mUTl5bWJId1EzNnNIRDhyNDl1YjJZa2FGVU1YcUUwbnI4enpJMmhEbC16dy1oajJGSGl6Z2tlelRfRVRBLTNSWEN4Yml6TkRLOUxLdC15ZTdmWm1ETllTUmZ0emlwWnNsNDNiZjNqTjdvYzhOclFxaTZGWXVqVkpOOF92cDlmUUJTZTZUQQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMixwFBVV95cUxOeHlLb0Z2ZmJqRmhUcUdfRE9QdmNtYncwbG1SaV9ZTWFSRDllODVhYmR6TDRQcVNxVFl6TnRlcHZZMkZhaWJyQ3lDNFg0RkZ4NVBkWHZ2bEhwcmRXcmV0NDhtcVoycW14U3lGTUEtSjB3bzJ0dF94V1ZFSXNyZEFNRGZtcUpCeTdfaXZHVWFWUXhmSE43eDNzN0hKdmtXLUpzMkZ1YnRYYjdkdTBwYXp2aDlta29OSWxNY1Bpb2hYRk11T2Z5WHpZ">https://news.google.com/rss/articles/CBMixwFBVV95cUxOeHlLb0Z2ZmJqRmhUcUdfRE9QdmNtYncwbG1SaV9ZTWFSRDllODVhYmR6TDRQcVNxVFl6TnRlcHZZMkZhaWJyQ3lDNFg0RkZ4NVBkWHZ2bEhwcmRXcmV0NDhtcVoycW14U3lGTUEtSjB3bzJ0dF94V1ZFSXNyZEFNRGZtcUpCeTdfaXZHVWFWUXhmSE43eDNzN0hKdmtXLUpzMkZ1YnRYYjdkdTBwYXp2aDlta29OSWxNY1Bpb2hYRk11T2Z5WHpZ</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1v7y8s2/claude_shared_sessions_archived_on_a_git/">https://www.reddit.com/r/LLMDevs/comments/1v7y8s2/claude_shared_sessions_archived_on_a_git/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxPcFhXaUdoWUZmOE1UOFQ5QTF5cnhzN2RsYlBGUTFxMFM0N2RUU0pVSkNpVEtFdnNjTVd1V0ptVkdDTVdyMmdETElMeWk3V01BV0haaGt0dWNNNGpZYzBTb3hZNGtRZkhDVUFOX2gtV2NvdkVKV3RHWm9CWk83QlNMUlQxNmJXc195UFFPQ0xabUU">https://news.google.com/rss/articles/CBMikAFBVV95cUxPcFhXaUdoWUZmOE1UOFQ5QTF5cnhzN2RsYlBGUTFxMFM0N2RUU0pVSkNpVEtFdnNjTVd1V0ptVkdDTVdyMmdETElMeWk3V01BV0haaGt0dWNNNGpZYzBTb3hZNGtRZkhDVUFOX2gtV2NvdkVKV3RHWm9CWk83QlNMUlQxNmJXc195UFFPQ0xabUU</a></li>
+
+
+
+<li><a href="https://itc.ua/ua/novini/tysyachi-pryvatnyh-chativ-claude-potrapyly-do-google-u-poshuku-znajshly-medychni-dani-ta-korporatyvni-dokumenty/">https://itc.ua/ua/novini/tysyachi-pryvatnyh-chativ-claude-potrapyly-do-google-u-poshuku-znajshly-medychni-dani-ta-korporatyvni-dokumenty/</a></li>
+
+
+
+<li><a href="https://mashable.com/tech/shared-claude-chats-found-in-google-search">https://mashable.com/tech/shared-claude-chats-found-in-google-search</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxPNWsybE5OeG1sMW1vSVJWamJEanltN3FOQ0tjQnFRaWF5U2lEemJSZXZjeWpCdXNteXNiZ0h3NVptNmJxVTE5VHRFS2FRcm9NclJpM1RtZ3RaNEdac09UMWhibTlLandhNmRSMzJxNDdBbG5pSVV4cTkxd01jVlFIcFpMOVduZXhMOERCWWloSkVKZ1E">https://news.google.com/rss/articles/CBMikwFBVV95cUxPNWsybE5OeG1sMW1vSVJWamJEanltN3FOQ0tjQnFRaWF5U2lEemJSZXZjeWpCdXNteXNiZ0h3NVptNmJxVTE5VHRFS2FRcm9NclJpM1RtZ3RaNEdac09UMWhibTlLandhNmRSMzJxNDdBbG5pSVV4cTkxd01jVlFIcFpMOVduZXhMOERCWWloSkVKZ1E</a></li>
+
+
+
+<li><a href="https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours">https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, google.com, futurism.com, firstpost.com, golem.de, gizmodo.com, pcmag.com, techcrunch.com, wired.com, venturebeat.com, androidheadlines.com, mashable.com, 404media.co, androidauthority.com, tomsguide.com, digitaltrends.com, tweakers.net, itc.ua, gazeteoksijen.com, bbc.co.uk, mobilesyrup.com, lesnumeriques.com, firstpost.com, zdnet.com, decrypt.co, tweakers.net, androidheadlines.com, reddit.com, mashable.com, wired.com, futurism.com, androidauthority.com, techcrunch.com, mobilesyrup.com, venturebeat.com, bbc.co.uk, techmeme.com, google.com, digitaltrends.com, 404media.co, pcmag.com, golem.de, tomsguide.com, itc.ua, gazeteoksijen.com, lesnumeriques.com, haber7.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 22 unique domains, 55 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html"><img src="https://kagiproxy.com/img/VF-0Afju9pGp2BKTgsZH525cyA-wytSR4uPAaxrtncY1EktkXo9pMP7a4q4z9y5RJt6iLT_vVTyP86uZbAyuqa3ledUjCtzvPkANEJL4oi7OKLfUL6EMYhGtR5vVG-mUb3qqGpBTbqduTO1tIhadAMWX-nwKBQ0mZ7e5e-gT47o" alt="Anthropic-related image used with Firstpost’s report on Claude shared chats surfacing in search" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Anthropic-related image used with Firstpost’s report on Claude shared chats surfacing in search <span class='credit'>(Firstpost)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "AJ Dellinger",
+      "date": "2026-07-27T18:20:43.000Z",
+      "domain": "gizmodo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://gizmodo.com/when-you-share-claude-chats-you-could-be-sharing-them-with-everyone-2000791372",
+      "title": "When You Share Claude Chats, You Might Be Sharing Them With Everyone"
+    },
+    {
+      "date": "2026-07-27T22:01:37.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame",
+      "title": "Claude Chats Popped Up in Google Search Results. Who\u0027s to Blame?"
+    },
+    {
+      "author": "Lorenzo Franceschi-Bicchierai",
+      "date": "2026-07-27T20:19:42.000Z",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/",
+      "title": "PSA: Your Claude shared chats and Artifacts may have ended up on Google"
+    },
+    {
+      "author": "Maggie Harrison Dupr\u00e9",
+      "date": "2026-07-27T15:10:17.000Z",
+      "domain": "futurism.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible",
+      "title": "A Whole Bunch of People\u2019s Claude Chats Are Publicly Accessible Online, and There\u2019s Some Wildly Private Stuff in There"
+    },
+    {
+      "date": "2026-07-27T17:20:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPdmF0Z2hIVUJKTkp0Q09sT1RkUThycVdCczZHQU1SbVQwQW9ITlJEVURfRlJMRFNIMUhMbjJIejZqVHo1STFkZjgzM1dqemZ0cEttVTBLTm5iNUVfV29JNjhjMGhwaVVZZjVLYmt5c3F0M21qTnd5YWJ5NV9kOTB0LTJDYWlCdkVrdGZ2QVZqLWZYZTd4X0VMMmxjVXVhcHJyak1oVVR2VXdST040NWY0VWlKWmI5NkRfM01JMUFIb2ZfQW9wZWxEc0pCVnIydXRORW5tRm5LRDZVZHNTa3Q0bFlGaw",
+      "title": "Users\u2019 seemingly private conversations with Anthropic\u2019s Claude showed up in Google search results - Fortune"
+    },
+    {
+      "date": "2026-07-27T18:23:13.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE0zYkkxX3lCelN1bWhUTmtvQUNxbFBmTUhKa3lXdjIxSUhVSVFPbDlKSUNDczB6UC01RUctRFBuTklYa182U1hMbC1ZbHA0MXVmYjByU0R4MzlpemY2VGdReXJPb0c1RV9JZWd4Qm9pcGZIdWM1cXFr",
+      "title": "Shared a Claude conversation? Google may have seen it. - Mashable"
+    },
+    {
+      "date": "2026-07-27T15:10:17.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQSzlMeGpBOXdJYWJkSmNwWXYxcllBSVVEWm84ekRMVGNZYTE5aXJwRkhKVjRySjBUbVppakRYb3RtYkFJUFVFTzdKTm8wc0kyVFZCVnJrMUtLdEdxejVub1ZfMElyVXd1c0RCcjI3aU9kN1FtWkthald6Rkk1bmppZzNOcw",
+      "title": "A Whole Bunch of People\u0027s Claude Chats Are Publicly Accessible Online, and There\u0027s Some Wildly Private Stuff in There - Futurism"
+    },
+    {
+      "date": "2026-07-28T04:16:15.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOcF9VUzlkZHZNbWhNekdoMmtVQ3hfSEIzOFVXMy0xMHZCcklaT3liekJNeWI2Y0Ywd3ZJYVY0SW50Vi0wZFF1TmJjTkZ1eVVHQUZBSmJQTFRlNTl1Y3YyRTZjQjB2cVFRRmdJT0JuMXJxVmdnUE0wU2FBTDlxNGJKZ2l3",
+      "title": "Your public Claude app may be searchable on Google - Axios"
+    },
+    {
+      "date": "2026-07-27T20:08:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxObXEyem9NVkFORmVQdkdUa0MtenNCcE9VODJXWGZJZElVNEwzbUZKNFk0a182dlBuOEFieGduektzdnBlbFhKcnRQUHNVNjYwTnRHRkotUFNlR2htNmFDLXRmVzRpNVNIQW4tOGVhNTNZUG1GNXJYU2FFSkVzYk5ZdUpGZWNJdjQxQ3J0d00xT3VfaDZiYXc",
+      "title": "Private Claude Chats Exposed in Google and Bing Search Results - WIRED"
+    },
+    {
+      "date": "2026-07-27T15:02:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQeUdIYUU3dXhjZ0l3NWEzS0VrdFpNdGdWOXFrbWtNWWdnbTJ5MEpvMFNpYjBDS0VvZVZ6bEpVczRNTWEyMTlsWmJNWDdXcHgyRE9POXZubWlxZGxpX2wtUGl3MG52NEp4d3JuNFlkaGo0RW9OSkxHMFVRWndDZUJxX0lYS0wweE96Nnl3UmpHQ3FNM1JpaWt4MmZTLXN4OTYzdWp4Ml83YnFZX0lwWVFmMGg2TVJnSDhtS2RMc01yZ1o3eGdZZFpwVnhuTlYtWFF6cFNMcE1MT0p0TGc5VTJtejhXOA",
+      "title": "Uh-oh: Some Claude shared conversations and Artifacts appear to be indexed and publicly accessible on Google Search - VentureBeat"
+    },
+    {
+      "date": "2026-07-27T18:56:35.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQM1FZYlRQNkNqdkFsOXVtbFJmaVBnYUJWeHFsa0JVVDQ3VnFOckEwYnUwZTBGWXV2MWJzV1MwaW1rT0dWSTBJbFdMN2ZaVkh1dnhzWHJRRGNINm90YXBRRWNWNmpGT2lhS0VsaVhlQ0Z4QzNRVVRBdFNoU0dfMGlCUjE2NVJWX0Uwbm5rT0VaZFpTV2M",
+      "title": "Tons of Peoples\u2019 Claude Chats and Creations are Exposed on Google - 404 Media"
+    },
+    {
+      "date": "2026-07-27T14:58:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE9RT2MzVGxkb20xYVBKV25FM05TT0I1RV80eHc4Q2V1MVNSOHZOaGt1Ui1ENFhEOUh4OWYybFk5WlY1NkR3Y2Rtc2ZsWHN1T2MtcTBvZWVuRnFfT1ZQRmlGQ1l5ZjBKVzRyV1FqSGRVb0dVVndIUlEzVmhCbw",
+      "title": "Claude AI shared chats indexed by Google - see if your conversations were exposed - ZDNET"
+    },
+    {
+      "date": "2026-07-27T21:00:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQdF9lNXc5TkhXbWpENzVtRFZSaXBvSGV0UERtUGF5ZE5VZzJITlN1YVNOWVBIN0w4dWtmVllrLWJQWmgyMWtCTWhPTkpuRHRMRGp0bVRXTnNUU1FpT01QV05hOFdiX0lIRTBUaWxybWljWXZxLUtlOUN0N3RtdlJoblVMTQ",
+      "title": "Your Claude Chats May Have Been Exposed on Google - Lifehacker"
+    },
+    {
+      "date": "2026-07-27T18:24:29.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeFRPNkpValJld3lfT2diMF9fOTNmeXJJaHdvNmQ3M3I3T1RiZVVsYXY5Rk9nNFl5ekRUVHg1T3BIVG91elF6Qi1vWnRDLWk1RE9zOW5kZzR0SExqRDZpekNScUlWX0tuT1h0emc0Y3phemJOSGswc3lKMW9zTEJfNExKbGUyc1RYaUdYalZRRzHSAZgBQVVfeXFMTUxtLVJ4NEY0LW9DQWZnS3JVaXZBc1BsbTNMQ3h2Q0pabXZRVGZLZi1fVUFuV1h0SHZHWWxhdVJtaTNJbDM5TnZjMV9INDhFS1FycjluRHg5UURfclZtbkN1Z3dITVgtdTdId1lobUpFeUlfNGxhZTd2ZXJzUTRtdU9aVk9LMUZCQnVWSFR1aTg5QW1yZlhMWmo",
+      "title": "Your Shared Claude Chats Were Being Quietly Published on Google - Decrypt"
+    },
+    {
+      "date": "2026-07-27T22:01:45.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOS29Hb0tzNEhib1F1M01VMnlWT2FRSy15U2drU3dTcnI4dEcweGhFLWZpWE9qSUozM0RDMmdmUThPM1luRmFPYUp4VWxCZXEwaDQwaUt1M29KNW5xMDhuRDI1bml1Wm1TektKc2hTRUFReF9KNGYzOE5zelpyYnZ5TzJoNHgtWjhhT1h6Z1JfRWd5Zw",
+      "title": "Claude Chats Popped Up in Google Search Results. Who\u0027s to Blame? - PCMag"
+    },
+    {
+      "date": "2026-07-27T13:32:37.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1Odlg3Wk44LWZPeXZtYTlnd21QS2NVWk1BNkNoTXNVWlhmbDZrNXFnYXotOHFiUk9Ya0Q2OVZTbTlSY0R6SExiejh1bm4xckM5MkF3VUhMWlpLRFF4TzBkOWNUaGtTNVdRdkNVdS1tQnNOc0JqS3pz",
+      "title": "Claude chats and workspaces turn up on Google, revealing avoidable privacy flaw - Cybernews"
+    },
+    {
+      "date": "2026-07-27T18:20:43.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxOSjVlVkRjQVdBcnE1dW9OYUdJN0syT1lROTRfbkxZSmFtbVVUQUM1T3ZlX2pmcl94MVhPbHprUGVScER4Ql9vOWhpSzlDc1VFS3NXN0lodEE1NW9Tenhsd0VteWp5ZE5YZ2xwRVhoMnB3LW05eXJJRUhiUUVuVWUybVMxVWhET0ZqRVRndWd3bmJjcGU0YlFjell5Nkh0b1E",
+      "title": "When You Share Claude Chats, You Might Be Sharing Them With Everyone - Gizmodo"
+    },
+    {
+      "date": "2026-07-27T09:33:30.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPR21UMTVmNGE1ak45MHRTX29GdEVJNk9mRGk4UkM1U01MZFk4YU56OEhyX3Q1MkhTdzhJYjBDSm1RcDloZXZWUGFCbHlFMzRuaGljOXVJLW0yd3hkYkxlWF9ySkNrRURBVjlxbThITjE1bGNydGxPajFBckt5c2R5RmFFdlJJYkF4N0o2a2Fod3JSNHBXcHhTWtIBlwFBVV95cUxOTEViMG5sUGFxcEktMFhWbFNpRUVBTzRha3FWSWU0VndIVjI5eUNVemdYRjlteFY1ZXcwOF9GbE54Z2Y3ZzY0S3dVSXhjdXhsMzBvVTFUQUt5Vm1IVkZrZ1RGYjdyemt3Q2FFT1FmRkEzSUkydUJYVVRaZmVQeVliWWZQeDZWUE9HNnNaeTU3ZzA5b2wxODFB",
+      "title": "Your Claude conversations may have leaked online if you did this - Neowin"
+    },
+    {
+      "date": "2026-07-27T21:51:34.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBuWFdBbGNzU1pDWUlkOHlJQ1ByVFhUcy1qbzdXaEhObTZWTHpraUJsZmdrWmE5QjRJT2x3Y1YwZGFnN090bTJ3M05KQmdJYm1BTW0tTkdvNXR1TFo2",
+      "title": "Some people\u0027s chats with Claude AI found publicly available online - BBC"
+    },
+    {
+      "date": "2026-07-27T12:33:24.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNWsybE5OeG1sMW1vSVJWamJEanltN3FOQ0tjQnFRaWF5U2lEemJSZXZjeWpCdXNteXNiZ0h3NVptNmJxVTE5VHRFS2FRcm9NclJpM1RtZ3RaNEdac09UMWhibTlLandhNmRSMzJxNDdBbG5pSVV4cTkxd01jVlFIcFpMOVduZXhMOERCWWloSkVKZ1E",
+      "title": "Shared Claude chats were reportedly showing up in search engines - the-decoder.com"
+    },
+    {
+      "date": "2026-07-27T10:56:48.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxOa0hvSDJSQ0h5RE00R0ZCN2xHSVRkWUFOQ3d2dFdlWm5qM2YtSENJZlhURHVkc0Z5azhkVXlyNGVfQ25GbkM5YnZ1Q0VQQXJfQ0Z6SDZxZFhXTndoSlZKU2l5UC1hVWpOZXo1V202US1wN0NRYy14R1MzQVh0MlFiSg",
+      "title": "Google Indexed Claude AI Shared Chats Before Results Were Removed - Hackread"
+    },
+    {
+      "date": "2026-07-28T02:12:20.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQTFNxVGw5elhFZlUyY2s4Slh5SlVRbnJiNVduMzFBZEFIdXBpNTlnOUktTGhfdVpRM291YTVhYVZwRkVDNmNuTEU2ZS1lRWlBMWdZZjNYdzJJWUZjTDl0LU1FUU5NTElkc1JheHNIMjVOVl9KOXBQeXNIRlI2ZzBmUEhfWktjbnp5aTU0VUQ2V1lMWU9HeVZGeXk5NmNlZw",
+      "title": "Indexed Claude Chats Show Why Disallow Is Not Noindex - Search Engine Journal"
+    },
+    {
+      "date": "2026-07-27T21:45:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSlFSUGhCRjRGc3hCRDBKcVFXNlFHN2NFT0FSY3lpNmVPMllzSmtHb2h3RTJETGlhajY4TFBSdWIwQTFZOHNVZHZXaDR4TWF6emV0TWphZ0t1dVE0VkoxR21uMFJPSXVlNWFDTUYwbXEtTHBXZE96Yld3ZGZVWV9LU2VzZ2wzOUFE",
+      "title": "Google Search lists public Claude chats, raising privacy concerns - Interesting Engineering"
+    },
+    {
+      "date": "2026-07-27T21:35:46.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNaDZxcjJSMFhxWmQySUZ6N0dfX0tZb0RkZGtiNld0VG8yV0Y1WXJGdnFocV9kNy1RbEdZTVc3NU9SSmk4YlBmMGk4Z0lPOXpHdFdpeFNWZTJzdWE1dk4yRU9XUTFEdHQ4Zlh1QjE3dmg4N1loRDNnWVFBQkVNWjUwNXd2eXNNcFBHcm1FWU5La3dhRHYxX2dFeTFLdHBwUWkyTFRhRHdQa3R4SUo3QTJMUkoxMVhhYUZzWjFraEhHMmJhSlU3RkpKU1k0TkF4NHN2Z3hnaHFnYUhHS3ZZRVVYMkZiREkzVDA5U1E",
+      "title": "Claude Shared Chats and Artifacts Indexed on Google Search After Anthropic Share Feature Error - NewsCord"
+    },
+    {
+      "date": "2026-07-27T19:07:38.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNM2ZLMGYtbkFVaVhsMTV2cjBOcVh2WWZwNVREQkFJNXFhUkdUdThXVHNyUzJEWlVaMkpHSW50U2R3eGZsclRLUkFzeHFrTHo3ZHJYNHg1TzJNRmhzeTNVenluN0wyS2hHaUxDSGNSM2x3U0IxbUF4MjNja2NLYXJ6NzQtYURjMmE5bVMxZHB2OUtVZHhy",
+      "title": "Search engines fix Claude leak but Perplexity users\u2019 files still online - Protos | Informed crypto news"
+    },
+    {
+      "date": "2026-07-28T02:07:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiygFBVV95cUxQa29KeWlQbHBjemJfOXV5TUFIRzRiM2wyVTFIbWJZMXZGODdOWjExMmp2ZzE1S2pmbDRNeTBaMkJKV2g2alBCbFVUbl9CRFkycmlUMnhRZnNTbDRXNExGcHZNM1owTDQzaG5NOEptSmYzWGIxenlRS2lIMW1rRkhjc2tRb0U2Zk5rTlppZlFfZ0lOaUI2VmRERTVaTVplSFdCLTFvMFVOTXV6aXU4enhWbVFmdGJfb2F5UFZHOTV6enBZTThELVFLZGlR",
+      "title": "Anthropic\u0027s Claude AI shared chats appear in Google searches, raising privacy concerns - Notebookcheck"
+    },
+    {
+      "date": "2026-07-27T17:37:25.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTGdJaW9ibGdOeG0yQjJkRS1qNUlfbEtaRHhfTHhacVBacjJnZDJxak11TVhSZDA0bHBRREpHbVhwVzlMVWtQT255T3VJM3E1ZmVnRXF3ZTNhQmFSVkNhdjVUcDBtMExfd21mMVFLRXpXV1lydlpKNmR1OFFlYnk0RFJB",
+      "title": "If you ever shared a Claude chat, your private data could be on Google - How-To Geek"
+    },
+    {
+      "date": "2026-07-28T06:04:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigAJBVV95cUxPNVlaWDhqX0dBNjNBbV9XTkc5b3BNZ3ZOMWlONkJXVmozNUx1OEFPQ1pfd3RibmVUVG1McExSTTZ2Y0NuYWgxZVBsa1k1am1Za3FDRVFzS3hsOFNWbTNkRlFRSF83cG1scXU1SUU5ZE9VMmV4MkFJNGY3bi14ek40NFBLbVdpMy1UMjVNM0NXNWI3NlI1eVpvN2dORlRLR3BrenBhanVUdl9xSFBKdTkzZ3ZoTkVhZDNQV0ZJRVZHRUVNUnFuUWVBMWtPa3RjdUZOd3FabTJiSzdFWVUyWmp4dmdhU1FpUFc5RFpuMURydTdiVUh3M3ZydHBMRGhJQTNp0gGGAkFVX3lxTE9qMjdrWk9KRXFSR0dMSldwdEd6QXoxWDJmYThSSEdtNU1mRVJDbTVXcWVfU1NfeUxQTTNGYmRlek0wV2ZLcUMwSXRWYjduSXpITldsTVhJNExpZjI4MEtOakl2S1locVNrTF90aFRBUXNzbG1Nd09yeHlQWjlpbkkxM2tUcjgyLVc1dExmSFZSMGpKbTBMYktsZGN5N1F1QTdqYllLVDhielBxNUNTakNHN0E4M3BYSUYycWhKNEtlVEJhcm9lWGxndlU1RzNpMUlwZXJqNDRiUm1ZQS13anNSaE1JOVlrN04xRlJ2bUtYQ2VTSVJIVXRtSjVDNjFoaTZqdDdLWWc",
+      "title": "As users private chats with Claude appear on Google, Anthropic says: They are to blame as ... - The Times of India"
+    },
+    {
+      "date": "2026-07-28T00:27:04.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPOXhiXzdWbTMzaTZieWlTbDN6eW1tbDFfWmc3TDJyaHdMNjk3X3EtVGhNV3lfVjZub2FIM3RUbUt5RXZTLTVhTXRtTEY4V080Vl9Pc05kTnhYbm5BR1M2c01maDc3cVl4cDh1Q19WZVBPV2RadVFuaTRvX29zOFQ5VHE0eHpseUl6dWlSVTFnY2xPcEJxMXZhU2x6dmI",
+      "title": "Your Claude Shared Chats May Be Showing in Google Search Results Right Now - Android Headlines"
+    },
+    {
+      "date": "2026-07-27T18:00:23.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxORVNoZm5mUTl5bWJId1EzNnNIRDhyNDl1YjJZa2FGVU1YcUUwbnI4enpJMmhEbC16dy1oajJGSGl6Z2tlelRfRVRBLTNSWEN4Yml6TkRLOUxLdC15ZTdmWm1ETllTUmZ0emlwWnNsNDNiZjNqTjdvYzhOclFxaTZGWXVqVkpOOF92cDlmUUJTZTZUQQ",
+      "title": "Claude AI Chats \u0026 Creations Found on Google, Exposing Private Data - Yahoo Tech"
+    },
+    {
+      "date": "2026-07-27T18:24:29.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxPcFhXaUdoWUZmOE1UOFQ5QTF5cnhzN2RsYlBGUTFxMFM0N2RUU0pVSkNpVEtFdnNjTVd1V0ptVkdDTVdyMmdETElMeWk3V01BV0haaGt0dWNNNGpZYzBTb3hZNGtRZkhDVUFOX2gtV2NvdkVKV3RHWm9CWk83QlNMUlQxNmJXc195UFFPQ0xabUU",
+      "title": "Your Shared Claude Chats Were Being Quietly Published on Google - Yahoo Tech"
+    },
+    {
+      "date": "2026-07-27T20:42:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxOSWVRUUZjYjg1bmpMS1k5SUwyLV9FTzJzSVpkcWpfb2tWeTluMTlWd21uQ1hSckxhNjZ3ME1qakxvYVBaMm05WnVYRXZwNjBsc21WdDBwcENGV2g2X0NGNzZqZGQwd0pMYkxqVXBRVGUzcmZiZ2pzWHVnNnUtVEFOM2hhLWhxVDJ6QTQtQlVwOEwwQmdBZ3RtR2tDNA",
+      "title": "Claude Shared Chats Exposed on Google Search in Privacy Breach - The Tech Buzz"
+    },
+    {
+      "date": "2026-07-27T08:08:11.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeHlLb0Z2ZmJqRmhUcUdfRE9QdmNtYncwbG1SaV9ZTWFSRDllODVhYmR6TDRQcVNxVFl6TnRlcHZZMkZhaWJyQ3lDNFg0RkZ4NVBkWHZ2bEhwcmRXcmV0NDhtcVoycW14U3lGTUEtSjB3bzJ0dF94V1ZFSXNyZEFNRGZtcUpCeTdfaXZHVWFWUXhmSE43eDNzN0hKdmtXLUpzMkZ1YnRYYjdkdTBwYXp2aDlta29OSWxNY1Bpb2hYRk11T2Z5WHpZ",
+      "title": "Anthropic responds after Claude conversations appeared in Google Search results - TweakTown"
+    },
+    {
+      "date": "2026-07-27T21:26:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNa0d6MWl0RFdWWjdRc3JZOFVWWU5hNVNsNVFVUVZaSUMyVkY2ZmpoSTF0QUNxTlZaY2p4Zl9xSlp3b1lIT1ZVclhSSzcxUnl4M3hIUjR5NThidzR4ZU9LN3J3WWZiRzhUNnE0MkQ0d0Zza1RQQWVRRTVNOU1OOGJOc0pDdmk",
+      "title": "Ever shared a Claude chat? It may have appeared in Google Search - Android Authority"
+    },
+    {
+      "date": "2026-07-27T15:43:45.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMijgFBVV95cUxNc0pjWnZQTURoZXUwREVBS0FudjZBQjF4WVpoOXA1eVBjM0o4ZC1pUFNDaFZHS04zSXZkRzFzdG1nNE5kMFBycVV1a1J0SkUxQ1ZxeWliYW4wZnpmMmJhTXVTNjVvZk8tY1VPRTlGd2pRbVo3ZTRTU1k4ZVhxZFJkWlBybVFOY1VlWXV4bmN3",
+      "title": "I just learned your Claude AI chats could show up in Google \u2014 here\u0027s how to check yours - Yahoo Tech"
+    },
+    {
+      "date": "2026-07-27T20:42:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxQRi13cXMzazVuT1haT01iT0hYb3VLbGRZNkJUeWRkVHRJLTk3dEg1R21aUkcweThadlczS2RWNFJZMTJlYUtJWlhrNWFXOXhSV0UzTjJIQ0tENzFMWFU5RUNFMVFnay1GRVRTcXBGYmQ5ZzlFaGE2b1ppMzRHNTFnY0dKRlNaY2tYd29BRVFra2M5LXE2cmc",
+      "title": "Private Claude Chats Exposed in Google, Bing Search Results - The Tech Buzz"
+    },
+    {
+      "date": "2026-07-27T20:19:42.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiqAFBVV95cUxOU3JRRFBnUEIzbHM3VlN0NXJDWTJmQnZnMnlNVzVyVmJpcmM0X1U1R1h1QnZPQkxvck1fT2x2X210YWxrZnFnTE5sNXFmcXdRQnVuV0FabnRXZ0VSTkdGeHpiaW1mZ01fTkc2SkVqZGo2QU9KMVB0eFpiSTFwTFRQNkdwVUc2dHdqNkpMUkhDS1UyVmF3X2tvUGZnbXV5VDNNbmM5aFNrcVU",
+      "title": "PSA: Your Claude shared chats and Artifacts may have ended up on Google - TechCrunch"
+    },
+    {
+      "author": "Maddy Varner",
+      "date": "2026-07-27T20:08:00.000Z",
+      "domain": "wired.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/",
+      "title": "Private Claude Chats Exposed in Google and Bing Search Results"
+    },
+    {
+      "author": "/u/Mazrael33",
+      "date": "2026-07-27T11:56:34.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1v7y8s2/claude_shared_sessions_archived_on_a_git/",
+      "title": "Claude shared sessions archived on a git?"
+    },
+    {
+      "author": "Carl Franzen",
+      "date": "2026-07-27T15:02:00.000Z",
+      "domain": "venturebeat.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search",
+      "title": "Uh-oh: Some Claude shared conversations and Artifacts appear to be indexed and publicly accessible on Google Search"
+    },
+    {
+      "author": "Unnati Gusain",
+      "date": "2026-07-28T06:17:07.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/dxal4T246QI_K54uKBhlA7aIUSBwX3emMSXWgD0lWu08bWaZj0SiOslORaxsv7Tg_g4F5Q3gnnLbMZkkchqqaQkWCEPXqXa-FB57DsPHP6a6mW7zdQQgrRx784FYK-3C74kjZlvQntolG4lkWujYRr74KOO9t8nZbCKw4cX6IrU",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html",
+      "title": "Private Claude chats briefly surfaced in Google Search, exposing sensitive user data"
+    },
+    {
+      "author": "Jean Leon",
+      "date": "2026-07-28T00:25:56.000Z",
+      "domain": "androidheadlines.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html",
+      "title": "Your Claude Shared Chats May Be Showing in Google Search Results Right Now"
+    },
+    {
+      "date": "2026-07-27T18:15:27.000Z",
+      "domain": "mashable.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mashable.com/tech/shared-claude-chats-found-in-google-search",
+      "title": "Shared a Claude conversation? Google may have seen it."
+    },
+    {
+      "author": "Joseph Cox",
+      "date": "2026-07-27T13:48:42.000Z",
+      "domain": "404media.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.404media.co/tons-of-peoples-claude-chats-and-creations-are-exposed-on-google/",
+      "title": "Tons of Peoples\u2019 Claude Chats and Creations are Exposed on Google"
+    },
+    {
+      "author": "Matt Horne",
+      "date": "2026-07-27T21:26:32.000Z",
+      "domain": "androidauthority.com",
+      "image": "https://kagiproxy.com/img/We30hEVP8AU_a6wwg6TWWRB0J2pN82_4xSTfRcUw-4Y5IkQNsmYV3pyaEPzu882DU3qHqxXRmIYc3bwy2Qov-m3B7i6T6nvw3sgmdsu7eC5xIhpuW5PDgcyL6NYi53QUzKQlfz03ZsZuIbE",
+      "image_caption": "",
+      "link": "https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/",
+      "title": "Ever shared a Claude chat? It may have appeared in Google Search"
+    },
+    {
+      "date": "2026-07-28T06:55:02.000Z",
+      "domain": "golem.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.golem.de/news/persoenliche-daten-geleakt-unzaehlige-claude-chats-bei-google-aufgetaucht-2607-211338.html",
+      "title": "Pers\u00c3\u00b6nliche Daten geleakt: Unz\u00c3\u00a4hlige Claude-Chats bei Google aufgetaucht"
+    },
+    {
+      "author": "Amanda Caswell",
+      "date": "2026-07-27T15:43:45.000Z",
+      "domain": "tomsguide.com",
+      "image": "https://kagiproxy.com/img/-07d3h0z0vNPihrg1dwC0DrPEeDXfzHNp9uO8FVcq6wHDOmn-YzCz0VL1KXOgkhI8c45-3d88Wlrv1j5GnH0skaABr8szVsxZEpd11FqWAIJP1yajuXs4Q",
+      "image_caption": "",
+      "link": "https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours",
+      "title": "I just learned your Claude AI chats could show up in Google \u2014 here\u0027s how to check yours"
+    },
+    {
+      "author": "Varun Mirchandani",
+      "date": "2026-07-27T22:14:23.000Z",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitaltrends.com/cool-tech/claude-shared-chats-google-search-privacy/",
+      "title": "That Claude chat you shared? Google may have seen it too"
+    },
+    {
+      "author": "Eveline Meijer",
+      "date": "2026-07-27T06:50:40.000Z",
+      "domain": "tweakers.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tweakers.net/nieuws/250408/gedeelde-claude-chats-belandden-in-zoekresultaten-van-google.html",
+      "title": "\u0027Gedeelde Claude-chats belandden in zoekresultaten van Google\u0027"
+    },
+    {
+      "author": "/u/marketrent",
+      "date": "2026-07-27T18:09:14.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/technology/comments/1v889hd/a_trove_of_users_seemingly_private_conversations/",
+      "title": "A trove of users\u2019 seemingly private conversations with Anthropic\u2019s Claude AI chatbot show up in Google search results"
+    },
+    {
+      "author": "\u0428\u0430\u0434\u0440\u0456\u043d \u0410\u043d\u0434\u0440\u0456\u0439",
+      "date": "2026-07-28T04:00:52.000Z",
+      "domain": "itc.ua",
+      "image": "",
+      "image_caption": "",
+      "link": "https://itc.ua/ua/novini/tysyachi-pryvatnyh-chativ-claude-potrapyly-do-google-u-poshuku-znajshly-medychni-dani-ta-korporatyvni-dokumenty/",
+      "title": "\u0422\u0438\u0441\u044f\u0447\u0456 \u043f\u0440\u0438\u0432\u0430\u0442\u043d\u0438\u0445 \u0447\u0430\u0442\u0456\u0432 Claude \u043f\u043e\u0442\u0440\u0430\u043f\u0438\u043b\u0438 \u0434\u043e Google: \u0443 \u043f\u043e\u0448\u0443\u043a\u0443 \u0437\u043d\u0430\u0439\u0448\u043b\u0438 \u043c\u0435\u0434\u0438\u0447\u043d\u0456 \u0434\u0430\u043d\u0456 \u0442\u0430 \u043a\u043e\u0440\u043f\u043e\u0440\u0430\u0442\u0438\u0432\u043d\u0456 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0438"
+    },
+    {
+      "date": "2026-07-28T07:00:00.000Z",
+      "domain": "gazeteoksijen.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://gazeteoksijen.com/bilim-ve-teknoloji/claudeda-gizlilik-tartismasi-yuzlerce-sohbet-googleda-goruntulendi-283836",
+      "title": "Claude\u0027da gizlilik tart\u0131\u015fmas\u0131: Y\u00fczlerce sohbet Google\u0027da g\u00f6r\u00fcnt\u00fclendi"
+    },
+    {
+      "date": "2026-07-27T22:14:04.000Z",
+      "domain": "bbc.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.co.uk/news/articles/cly5qgjk5ywo",
+      "title": "Some people\u0027s chats with Claude AI found publicly available online"
+    },
+    {
+      "author": "Bradly Shankar",
+      "date": "2026-07-27T16:26:11.000Z",
+      "domain": "mobilesyrup.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mobilesyrup.com/2026/07/27/claude-chats-leaked-google/",
+      "title": "Claude chats are being leaked on Google"
+    },
+    {
+      "author": "Aymeric Geoffre-Rouland",
+      "date": "2026-07-27T13:11:00.000Z",
+      "domain": "lesnumeriques.com",
+      "image": "https://kagiproxy.com/img/LBXtrD7n1brK3ud8MzMDcK420pxZEr_jQCfgRooFeDs_GaRdOoQOhR9VpXUlKidMlMBBzStSszqzQD0n18X2F_5Vv_rMope0t8xntUAvh1vxA97lhC6RC6QFe4FByjgXmOwEmda4i44ejKC98J9S9H-TUl8NViIf5dLU39c0LkkJLxdR-j_rT6DqPJBuCkj7vVBLvh97r0dvBPItoh3I6lToQDY0yPTO5QcPc2rMsPDT9S_owuO0UlgZbtluSxk",
+      "image_caption": "",
+      "link": "https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html",
+      "title": "Actualit\u00e9 : Claude : attention, vos conversations priv\u00e9es sont accessibles \u00e0 n\u0027importe qui sur Google"
+    },
+    {
+      "date": "2026-07-27T14:58:25.000Z",
+      "domain": "zdnet.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.zdnet.com/article/claude-ai-shared-chats-indexed-by-google/",
+      "title": "Claude AI shared chats indexed by Google - see if your conversations were exposed"
+    },
+    {
+      "date": "2026-07-27T22:35:01.000Z",
+      "domain": "techmeme.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techmeme.com/260727/p33#a260727p33",
+      "title": "Claude chats showed in Google and Bing search results, despite Anthropic\u0027s robots.txt saying not to crawl them, likely because the pages lacked a \"noindex\" tag (Maddy Varner/Wired)"
+    },
+    {
+      "date": "2026-07-27T22:14:04.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WbnpDZDliX05XS1E5bnBmZ201cHc0alFOb0Q4MXFsTXYwem9ySkg4R0luZDhIQmpaYXRzbnV2dno3cEN4NEZXZHBrWnlQMGpxLWdEbnB6Q2Z1dw",
+      "title": "Some people\u0027s chats with Claude AI found publicly available online - BBC"
+    },
+    {
+      "author": "Jose Antonio Lanz",
+      "date": "2026-07-27T18:24:29.000Z",
+      "domain": "decrypt.co",
+      "image": "https://kagiproxy.com/img/Rf7OZdT2TqYyeRQgPSoMAogYYrk87jZ3J_1idlsO7wtK8SUJHsxbMx1QEB3CGHrecmqwviRskNJNQ0u7rUdeuWr83Uq5oQw7MOEZD_WLw0O6bnbi2sB4Eu4ftysN_olbbR5tFSsWo_6z8a1_95Zih6bOB2dYuw",
+      "image_caption": "",
+      "link": "https://decrypt.co/374412/anthropic-share-button-quietly-publishing-claude-chats-google",
+      "title": "Your Shared Claude Chats Were Being Quietly Published on Google"
+    },
+    {
+      "date": "2026-07-28T06:42:00.000Z",
+      "domain": "haber7.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.haber7.com/teknoloji/haber/3646799-yapay-zekada-kritik-ihlal-sohbetleriniz-google-aramalarinda-cikiyor",
+      "title": "Yapay zekada kritik ihlal! Sohbetleriniz Google aramalar\u0131nda \u00e7\u0131k\u0131yor!"
+    }
+  ],
+  "business_angle": [
+    "Enterprise customers may be slower to adopt shared AI workspaces if they believe public-link defaults can expose internal documents, code or employee information [venturebeat.com#1][androidheadlines.com#1].",
+    "Technical fixes such as clearer warnings and noindex controls may address indexing, but customers may continue to question whether previously shared material was copied or archived [mashable.com#1][common].",
+    "Competitors can point to privacy defaults and enterprise governance controls when selling against Anthropic if its sharing model remains unclear to nontechnical users [common]."
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=futurism.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=golem.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "golem.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gizmodo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gizmodo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wired.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "wired.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=venturebeat.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "venturebeat.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidheadlines.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=404media.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "404media.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidauthority.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidauthority.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomsguide.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomsguide.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=itc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "itc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gazeteoksijen.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gazeteoksijen.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bbc.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bbc.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mobilesyrup.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mobilesyrup.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lesnumeriques.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lesnumeriques.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=zdnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zdnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=decrypt.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "decrypt.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidheadlines.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wired.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "wired.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=futurism.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidauthority.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidauthority.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mobilesyrup.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mobilesyrup.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=venturebeat.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "venturebeat.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bbc.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bbc.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techmeme.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techmeme.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=404media.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "404media.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=golem.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "golem.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomsguide.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomsguide.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=itc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "itc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gazeteoksijen.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gazeteoksijen.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lesnumeriques.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lesnumeriques.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=haber7.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "haber7.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd0e",
+  "feed_category": "AI, Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Anthropic launched Claude as a consumer and enterprise AI assistant competing with ChatGPT and Google\u2019s Gemini [bbc.co.uk#1][common]. Public-link sharing has produced similar indexing problems before: PCMag reported that OpenAI changed a ChatGPT sharing option last year after Google indexed shared user chats [pcmag.com#1]. MobileSyrup also noted a previous episode in September in which hundreds of Claude chats were found indexed by search engines [mobilesyrup.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Corporate security: Reports identified exposed internal company documents, employee reviews, project plans and credentials, showing how AI-sharing workflows can intersect with corporate data-loss prevention programs [androidheadlines.com#1][digitaltrends.com#1][lesnumeriques.com#1].",
+    "AI collaboration tools: Claude\u2019s Artifacts and shared chats are used to publish apps, dashboards, documents and code, so search exposure affects collaboration features that AI vendors market beyond simple chatbot conversations [venturebeat.com#1][futurism.com#1].",
+    "AI collaboration features: Claude\u2019s public-link model resembles collaboration patterns used by tools such as Google Docs, but TechCrunch noted that Google Docs share links do not typically end up publicly accessible on Google Search [techcrunch.com#1].",
+    "Enterprise AI use: Claude Artifacts include interactive applications, dashboards, documents and other AI-generated work products, so public indexing can expose more than ordinary chatbot transcripts [venturebeat.com#1][androidheadlines.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Privacy",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 55,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/"
+        }
+      ],
+      "text": "Anthropic: The company said shared links appear in search results only when posted somewhere search engines can see, such as a forum or social media post, and said privately sent links remain out of search."
+    },
+    {
+      "sources": [
+        {
+          "name": "Mashable",
+          "url": "https://mashable.com/tech/shared-claude-chats-found-in-google-search"
+        }
+      ],
+      "text": "Mashable: Mashable said the indexing risk stemmed from the lack of noindex tags on shared Claude conversation pages and said Google appeared to have de-indexed and removed shared Claude conversations by publication time."
+    },
+    {
+      "sources": [
+        {
+          "name": "Android Authority",
+          "url": "https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/"
+        }
+      ],
+      "text": "Android Authority: Android Authority said private Claude chats were not affected and that the indexed links appeared to have been removed."
+    },
+    {
+      "sources": [
+        {
+          "name": "404 Media",
+          "url": "https://www.404media.co/tons-of-peoples-claude-chats-and-creations-are-exposed-on-google/"
+        }
+      ],
+      "text": "404 Media: 404 Media said users created public share links without necessarily realizing those chats and creations could become searchable by strangers."
+    },
+    {
+      "sources": [
+        {
+          "name": "BBC",
+          "url": "https://www.bbc.co.uk/news/articles/cly5qgjk5ywo"
+        }
+      ],
+      "text": "An Anthropic spokeswoman told the BBC: \"When someone shares a conversation, they are making that content publicly accessible, and like other public web content, it may appear in search results.\""
+    },
+    {
+      "sources": [
+        {
+          "name": "VentureBeat",
+          "url": "https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search"
+        }
+      ],
+      "text": "VentureBeat said the issue could affect enterprise users because Claude\u2019s sharing tools are used for business assets such as dashboards, documents and software, not only chatbot responses."
+    },
+    {
+      "sources": [
+        {
+          "name": "Futurism",
+          "url": "https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible"
+        }
+      ],
+      "text": "Futurism reported that Claude\u2019s chat-sharing warning does not tell users that shared content could be indexed by search engines, while the Artifacts publishing flow does warn that projects may be visible in search results."
+    }
+  ],
+  "primary_image": {
+    "caption": "Illustration for Wired\u2019s report on Claude chats appearing in Google and Bing search results",
+    "credit": "Wired",
+    "link": "https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/",
+    "url": "https://kagiproxy.com/img/F0B9Md_VrDV8iLlS_697pwkpqoPgVEIKUsytzQHR9C_2-45arJLbMukTJ3NLeavk4FwEqeAkkBUSAmd7sDqkCOM8WUfp1j2aZ2pUohKjYVwHcAcjLn4JJWVUIKiFLD6VLAECJsj_Dav0qVlvPCiMOiwU1Ycv9-Q2RF0imn8iXorKXY5YLxNA2GKz-E3xDDv1FRY8wD7LiNWtRw"
+  },
+  "published": "2026-07-28T12:00:10.609Z",
+  "quote": "When someone shares a conversation, they are making that content publicly accessible, and like other public web content, it may be archived by third-party services",
+  "quote_attribution": "BBC",
+  "quote_author": "Anthropic spokeswoman",
+  "scientific_significance": [],
+  "secondary_image": {
+    "caption": "Anthropic-related image used with Firstpost\u2019s report on Claude shared chats surfacing in search",
+    "credit": "Firstpost",
+    "link": "https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html",
+    "url": "https://kagiproxy.com/img/VF-0Afju9pGp2BKTgsZH525cyA-wytSR4uPAaxrtncY1EktkXo9pMP7a4q4z9y5RJt6iLT_vVTyP86uZbAyuqa3ledUjCtzvPkANEJL4oi7OKLfUL6EMYhGtR5vVG-mUb3qqGpBTbqduTO1tIhadAMWX-nwKBQ0mZ7e5e-gT47o"
+  },
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE0zYkkxX3lCelN1bWhUTmtvQUNxbFBmTUhKa3lXdjIxSUhVSVFPbDlKSUNDczB6UC01RUctRFBuTklYa182U1hMbC1ZbHA0MXVmYjByU0R4MzlpemY2VGdReXJPb0c1RV9JZWd4Qm9pcGZIdWM1cXFr",
+    "https://futurism.com/artificial-intelligence/claude-chats-publicly-accessible",
+    "https://www.techmeme.com/260727/p33#a260727p33",
+    "https://www.digitaltrends.com/cool-tech/claude-shared-chats-google-search-privacy/",
+    "https://mobilesyrup.com/2026/07/27/claude-chats-leaked-google/",
+    "https://www.404media.co/tons-of-peoples-claude-chats-and-creations-are-exposed-on-google/",
+    "https://www.androidauthority.com/shared-claude-chats-on-google-search-3691594/",
+    "https://tweakers.net/nieuws/250408/gedeelde-claude-chats-belandden-in-zoekresultaten-van-google.html",
+    "https://news.google.com/rss/articles/CBMiXEFVX3lxTFBuWFdBbGNzU1pDWUlkOHlJQ1ByVFhUcy1qbzdXaEhObTZWTHpraUJsZmdrWmE5QjRJT2x3Y1YwZGFnN090bTJ3M05KQmdJYm1BTW0tTkdvNXR1TFo2",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxQRi13cXMzazVuT1haT01iT0hYb3VLbGRZNkJUeWRkVHRJLTk3dEg1R21aUkcweThadlczS2RWNFJZMTJlYUtJWlhrNWFXOXhSV0UzTjJIQ0tENzFMWFU5RUNFMVFnay1GRVRTcXBGYmQ5ZzlFaGE2b1ppMzRHNTFnY0dKRlNaY2tYd29BRVFra2M5LXE2cmc",
+    "https://news.google.com/rss/articles/CBMiygFBVV95cUxQa29KeWlQbHBjemJfOXV5TUFIRzRiM2wyVTFIbWJZMXZGODdOWjExMmp2ZzE1S2pmbDRNeTBaMkJKV2g2alBCbFVUbl9CRFkycmlUMnhRZnNTbDRXNExGcHZNM1owTDQzaG5NOEptSmYzWGIxenlRS2lIMW1rRkhjc2tRb0U2Zk5rTlppZlFfZ0lOaUI2VmRERTVaTVplSFdCLTFvMFVOTXV6aXU4enhWbVFmdGJfb2F5UFZHOTV6enBZTThELVFLZGlR",
+    "https://venturebeat.com/technology/uh-oh-some-claude-shared-conversations-and-artifacts-appear-to-be-indexed-and-publicly-accessible-on-google-search",
+    "https://www.reddit.com/r/technology/comments/1v889hd/a_trove_of_users_seemingly_private_conversations/",
+    "https://news.google.com/rss/articles/CBMigwFBVV95cUxQSzlMeGpBOXdJYWJkSmNwWXYxcllBSVVEWm84ekRMVGNZYTE5aXJwRkhKVjRySjBUbVppakRYb3RtYkFJUFVFTzdKTm8wc0kyVFZCVnJrMUtLdEdxejVub1ZfMElyVXd1c0RCcjI3aU9kN1FtWkthald6Rkk1bmppZzNOcw",
+    "https://news.google.com/rss/articles/CBMilAFBVV95cUxNM2ZLMGYtbkFVaVhsMTV2cjBOcVh2WWZwNVREQkFJNXFhUkdUdThXVHNyUzJEWlVaMkpHSW50U2R3eGZsclRLUkFzeHFrTHo3ZHJYNHg1TzJNRmhzeTNVenluN0wyS2hHaUxDSGNSM2x3U0IxbUF4MjNja2NLYXJ6NzQtYURjMmE5bVMxZHB2OUtVZHhy",
+    "https://news.google.com/rss/articles/CBMimAFBVV95cUxPR21UMTVmNGE1ak45MHRTX29GdEVJNk9mRGk4UkM1U01MZFk4YU56OEhyX3Q1MkhTdzhJYjBDSm1RcDloZXZWUGFCbHlFMzRuaGljOXVJLW0yd3hkYkxlWF9ySkNrRURBVjlxbThITjE1bGNydGxPajFBckt5c2R5RmFFdlJJYkF4N0o2a2Fod3JSNHBXcHhTWtIBlwFBVV95cUxOTEViMG5sUGFxcEktMFhWbFNpRUVBTzRha3FWSWU0VndIVjI5eUNVemdYRjlteFY1ZXcwOF9GbE54Z2Y3ZzY0S3dVSXhjdXhsMzBvVTFUQUt5Vm1IVkZrZ1RGYjdyemt3Q2FFT1FmRkEzSUkydUJYVVRaZmVQeVliWWZQeDZWUE9HNnNaeTU3ZzA5b2wxODFB",
+    "https://www.pcmag.com/news/claude-chats-popped-up-in-google-search-results-whos-to-blame",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxQM1FZYlRQNkNqdkFsOXVtbFJmaVBnYUJWeHFsa0JVVDQ3VnFOckEwYnUwZTBGWXV2MWJzV1MwaW1rT0dWSTBJbFdMN2ZaVkh1dnhzWHJRRGNINm90YXBRRWNWNmpGT2lhS0VsaVhlQ0Z4QzNRVVRBdFNoU0dfMGlCUjE2NVJWX0Uwbm5rT0VaZFpTV2M",
+    "https://news.google.com/atom/articles/CBMiqAFBVV95cUxOU3JRRFBnUEIzbHM3VlN0NXJDWTJmQnZnMnlNVzVyVmJpcmM0X1U1R1h1QnZPQkxvck1fT2x2X210YWxrZnFnTE5sNXFmcXdRQnVuV0FabnRXZ0VSTkdGeHpiaW1mZ01fTkc2SkVqZGo2QU9KMVB0eFpiSTFwTFRQNkdwVUc2dHdqNkpMUkhDS1UyVmF3X2tvUGZnbXV5VDNNbmM5aFNrcVU",
+    "https://www.wired.com/story/private-claude-chats-exposed-in-google-and-bing-search-results/",
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE1Odlg3Wk44LWZPeXZtYTlnd21QS2NVWk1BNkNoTXNVWlhmbDZrNXFnYXotOHFiUk9Ya0Q2OVZTbTlSY0R6SExiejh1bm4xckM5MkF3VUhMWlpLRFF4TzBkOWNUaGtTNVdRdkNVdS1tQnNOc0JqS3pz",
+    "https://www.bbc.co.uk/news/articles/cly5qgjk5ywo",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeFRPNkpValJld3lfT2diMF9fOTNmeXJJaHdvNmQ3M3I3T1RiZVVsYXY5Rk9nNFl5ekRUVHg1T3BIVG91elF6Qi1vWnRDLWk1RE9zOW5kZzR0SExqRDZpekNScUlWX0tuT1h0emc0Y3phemJOSGswc3lKMW9zTEJfNExKbGUyc1RYaUdYalZRRzHSAZgBQVVfeXFMTUxtLVJ4NEY0LW9DQWZnS3JVaXZBc1BsbTNMQ3h2Q0pabXZRVGZLZi1fVUFuV1h0SHZHWWxhdVJtaTNJbDM5TnZjMV9INDhFS1FycjluRHg5UURfclZtbkN1Z3dITVgtdTdId1lobUpFeUlfNGxhZTd2ZXJzUTRtdU9aVk9LMUZCQnVWSFR1aTg5QW1yZlhMWmo",
+    "https://news.google.com/rss/articles/CBMijgFBVV95cUxNc0pjWnZQTURoZXUwREVBS0FudjZBQjF4WVpoOXA1eVBjM0o4ZC1pUFNDaFZHS04zSXZkRzFzdG1nNE5kMFBycVV1a1J0SkUxQ1ZxeWliYW4wZnpmMmJhTXVTNjVvZk8tY1VPRTlGd2pRbVo3ZTRTU1k4ZVhxZFJkWlBybVFOY1VlWXV4bmN3",
+    "https://news.google.com/rss/articles/CBMihAFBVV95cUxNa0d6MWl0RFdWWjdRc3JZOFVWWU5hNVNsNVFVUVZaSUMyVkY2ZmpoSTF0QUNxTlZaY2p4Zl9xSlp3b1lIT1ZVclhSSzcxUnl4M3hIUjR5NThidzR4ZU9LN3J3WWZiRzhUNnE0MkQ0d0Zza1RQQWVRRTVNOU1OOGJOc0pDdmk",
+    "https://news.google.com/rss/articles/CBMinwFBVV95cUxOSjVlVkRjQVdBcnE1dW9OYUdJN0syT1lROTRfbkxZSmFtbVVUQUM1T3ZlX2pmcl94MVhPbHprUGVScER4Ql9vOWhpSzlDc1VFS3NXN0lodEE1NW9Tenhsd0VteWp5ZE5YZ2xwRVhoMnB3LW05eXJJRUhiUUVuVWUybVMxVWhET0ZqRVRndWd3bmJjcGU0YlFjell5Nkh0b1E",
+    "https://news.google.com/rss/articles/CBMiggFBVV95cUxQTGdJaW9ibGdOeG0yQjJkRS1qNUlfbEtaRHhfTHhacVBacjJnZDJxak11TVhSZDA0bHBRREpHbVhwVzlMVWtQT255T3VJM3E1ZmVnRXF3ZTNhQmFSVkNhdjVUcDBtMExfd21mMVFLRXpXV1lydlpKNmR1OFFlYnk0RFJB",
+    "https://news.google.com/rss/articles/CBMiggFBVV95cUxOcF9VUzlkZHZNbWhNekdoMmtVQ3hfSEIzOFVXMy0xMHZCcklaT3liekJNeWI2Y0Ywd3ZJYVY0SW50Vi0wZFF1TmJjTkZ1eVVHQUZBSmJQTFRlNTl1Y3YyRTZjQjB2cVFRRmdJT0JuMXJxVmdnUE0wU2FBTDlxNGJKZ2l3",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTE9RT2MzVGxkb20xYVBKV25FM05TT0I1RV80eHc4Q2V1MVNSOHZOaGt1Ui1ENFhEOUh4OWYybFk5WlY1NkR3Y2Rtc2ZsWHN1T2MtcTBvZWVuRnFfT1ZQRmlGQ1l5ZjBKVzRyV1FqSGRVb0dVVndIUlEzVmhCbw",
+    "https://www.haber7.com/teknoloji/haber/3646799-yapay-zekada-kritik-ihlal-sohbetleriniz-google-aramalarinda-cikiyor",
+    "https://news.google.com/rss/articles/CBMiWkFVX3lxTE9WbnpDZDliX05XS1E5bnBmZ201cHc0alFOb0Q4MXFsTXYwem9ySkg4R0luZDhIQmpaYXRzbnV2dno3cEN4NEZXZHBrWnlQMGpxLWdEbnB6Q2Z1dw",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxPOXhiXzdWbTMzaTZieWlTbDN6eW1tbDFfWmc3TDJyaHdMNjk3X3EtVGhNV3lfVjZub2FIM3RUbUt5RXZTLTVhTXRtTEY4V080Vl9Pc05kTnhYbm5BR1M2c01maDc3cVl4cDh1Q19WZVBPV2RadVFuaTRvX29zOFQ5VHE0eHpseUl6dWlSVTFnY2xPcEJxMXZhU2x6dmI",
+    "https://news.google.com/rss/articles/CBMigAJBVV95cUxPNVlaWDhqX0dBNjNBbV9XTkc5b3BNZ3ZOMWlONkJXVmozNUx1OEFPQ1pfd3RibmVUVG1McExSTTZ2Y0NuYWgxZVBsa1k1am1Za3FDRVFzS3hsOFNWbTNkRlFRSF83cG1scXU1SUU5ZE9VMmV4MkFJNGY3bi14ek40NFBLbVdpMy1UMjVNM0NXNWI3NlI1eVpvN2dORlRLR3BrenBhanVUdl9xSFBKdTkzZ3ZoTkVhZDNQV0ZJRVZHRUVNUnFuUWVBMWtPa3RjdUZOd3FabTJiSzdFWVUyWmp4dmdhU1FpUFc5RFpuMURydTdiVUh3M3ZydHBMRGhJQTNp0gGGAkFVX3lxTE9qMjdrWk9KRXFSR0dMSldwdEd6QXoxWDJmYThSSEdtNU1mRVJDbTVXcWVfU1NfeUxQTTNGYmRlek0wV2ZLcUMwSXRWYjduSXpITldsTVhJNExpZjI4MEtOakl2S1locVNrTF90aFRBUXNzbG1Nd09yeHlQWjlpbkkxM2tUcjgyLVc1dExmSFZSMGpKbTBMYktsZGN5N1F1QTdqYllLVDhielBxNUNTakNHN0E4M3BYSUYycWhKNEtlVEJhcm9lWGxndlU1RzNpMUlwZXJqNDRiUm1ZQS13anNSaE1JOVlrN04xRlJ2bUtYQ2VTSVJIVXRtSjVDNjFoaTZqdDdLWWc",
+    "https://techcrunch.com/2026/07/27/psa-your-claude-shared-chats-and-artifacts-may-have-ended-up-on-google/",
+    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxQeUdIYUU3dXhjZ0l3NWEzS0VrdFpNdGdWOXFrbWtNWWdnbTJ5MEpvMFNpYjBDS0VvZVZ6bEpVczRNTWEyMTlsWmJNWDdXcHgyRE9POXZubWlxZGxpX2wtUGl3MG52NEp4d3JuNFlkaGo0RW9OSkxHMFVRWndDZUJxX0lYS0wweE96Nnl3UmpHQ3FNM1JpaWt4MmZTLXN4OTYzdWp4Ml83YnFZX0lwWVFmMGg2TVJnSDhtS2RMc01yZ1o3eGdZZFpwVnhuTlYtWFF6cFNMcE1MT0p0TGc5VTJtejhXOA",
+    "https://gizmodo.com/when-you-share-claude-chats-you-could-be-sharing-them-with-everyone-2000791372",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxOS29Hb0tzNEhib1F1M01VMnlWT2FRSy15U2drU3dTcnI4dEcweGhFLWZpWE9qSUozM0RDMmdmUThPM1luRmFPYUp4VWxCZXEwaDQwaUt1M29KNW5xMDhuRDI1bml1Wm1TektKc2hTRUFReF9KNGYzOE5zelpyYnZ5TzJoNHgtWjhhT1h6Z1JfRWd5Zw",
+    "https://news.google.com/rss/articles/CBMigAFBVV95cUxOa0hvSDJSQ0h5RE00R0ZCN2xHSVRkWUFOQ3d2dFdlWm5qM2YtSENJZlhURHVkc0Z5azhkVXlyNGVfQ25GbkM5YnZ1Q0VQQXJfQ0Z6SDZxZFhXTndoSlZKU2l5UC1hVWpOZXo1V202US1wN0NRYy14R1MzQVh0MlFiSg",
+    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxNSlFSUGhCRjRGc3hCRDBKcVFXNlFHN2NFT0FSY3lpNmVPMllzSmtHb2h3RTJETGlhajY4TFBSdWIwQTFZOHNVZHZXaDR4TWF6emV0TWphZ0t1dVE0VkoxR21uMFJPSXVlNWFDTUYwbXEtTHBXZE96Yld3ZGZVWV9LU2VzZ2wzOUFE",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxObXEyem9NVkFORmVQdkdUa0MtenNCcE9VODJXWGZJZElVNEwzbUZKNFk0a182dlBuOEFieGduektzdnBlbFhKcnRQUHNVNjYwTnRHRkotUFNlR2htNmFDLXRmVzRpNVNIQW4tOGVhNTNZUG1GNXJYU2FFSkVzYk5ZdUpGZWNJdjQxQ3J0d00xT3VfaDZiYXc",
+    "https://news.google.com/rss/articles/CBMi4wFBVV95cUxPdmF0Z2hIVUJKTkp0Q09sT1RkUThycVdCczZHQU1SbVQwQW9ITlJEVURfRlJMRFNIMUhMbjJIejZqVHo1STFkZjgzM1dqemZ0cEttVTBLTm5iNUVfV29JNjhjMGhwaVVZZjVLYmt5c3F0M21qTnd5YWJ5NV9kOTB0LTJDYWlCdkVrdGZ2QVZqLWZYZTd4X0VMMmxjVXVhcHJyak1oVVR2VXdST040NWY0VWlKWmI5NkRfM01JMUFIb2ZfQW9wZWxEc0pCVnIydXRORW5tRm5LRDZVZHNTa3Q0bFlGaw",
+    "https://www.firstpost.com/tech/private-claude-chats-briefly-surfaced-in-google-search-exposing-sensitive-user-data-14034375.html",
+    "https://www.androidheadlines.com/2026/07/google-indexes-shared-claude-ai-chats-privacy-leak.html",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxOSWVRUUZjYjg1bmpMS1k5SUwyLV9FTzJzSVpkcWpfb2tWeTluMTlWd21uQ1hSckxhNjZ3ME1qakxvYVBaMm05WnVYRXZwNjBsc21WdDBwcENGV2g2X0NGNzZqZGQwd0pMYkxqVXBRVGUzcmZiZ2pzWHVnNnUtVEFOM2hhLWhxVDJ6QTQtQlVwOEwwQmdBZ3RtR2tDNA",
+    "https://gazeteoksijen.com/bilim-ve-teknoloji/claudeda-gizlilik-tartismasi-yuzlerce-sohbet-googleda-goruntulendi-283836",
+    "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNaDZxcjJSMFhxWmQySUZ6N0dfX0tZb0RkZGtiNld0VG8yV0Y1WXJGdnFocV9kNy1RbEdZTVc3NU9SSmk4YlBmMGk4Z0lPOXpHdFdpeFNWZTJzdWE1dk4yRU9XUTFEdHQ4Zlh1QjE3dmg4N1loRDNnWVFBQkVNWjUwNXd2eXNNcFBHcm1FWU5La3dhRHYxX2dFeTFLdHBwUWkyTFRhRHdQa3R4SUo3QTJMUkoxMVhhYUZzWjFraEhHMmJhSlU3RkpKU1k0TkF4NHN2Z3hnaHFnYUhHS3ZZRVVYMkZiREkzVDA5U1E",
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxQTFNxVGw5elhFZlUyY2s4Slh5SlVRbnJiNVduMzFBZEFIdXBpNTlnOUktTGhfdVpRM291YTVhYVZwRkVDNmNuTEU2ZS1lRWlBMWdZZjNYdzJJWUZjTDl0LU1FUU5NTElkc1JheHNIMjVOVl9KOXBQeXNIRlI2ZzBmUEhfWktjbnp5aTU0VUQ2V1lMWU9HeVZGeXk5NmNlZw",
+    "https://www.zdnet.com/article/claude-ai-shared-chats-indexed-by-google/",
+    "https://www.golem.de/news/persoenliche-daten-geleakt-unzaehlige-claude-chats-bei-google-aufgetaucht-2607-211338.html",
+    "https://news.google.com/rss/articles/CBMigwFBVV95cUxQdF9lNXc5TkhXbWpENzVtRFZSaXBvSGV0UERtUGF5ZE5VZzJITlN1YVNOWVBIN0w4dWtmVllrLWJQWmgyMWtCTWhPTkpuRHRMRGp0bVRXTnNUU1FpT01QV05hOFdiX0lIRTBUaWxybWljWXZxLUtlOUN0N3RtdlJoblVMTQ",
+    "https://www.lesnumeriques.com/intelligence-artificielle/claude-attention-vos-conversations-privees-sont-accessibles-a-n-importe-qui-sur-google-n259768.html",
+    "https://decrypt.co/374412/anthropic-share-button-quietly-publishing-claude-chats-google",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxORVNoZm5mUTl5bWJId1EzNnNIRDhyNDl1YjJZa2FGVU1YcUUwbnI4enpJMmhEbC16dy1oajJGSGl6Z2tlelRfRVRBLTNSWEN4Yml6TkRLOUxLdC15ZTdmWm1ETllTUmZ0emlwWnNsNDNiZjNqTjdvYzhOclFxaTZGWXVqVkpOOF92cDlmUUJTZTZUQQ",
+    "https://news.google.com/rss/articles/CBMixwFBVV95cUxOeHlLb0Z2ZmJqRmhUcUdfRE9QdmNtYncwbG1SaV9ZTWFSRDllODVhYmR6TDRQcVNxVFl6TnRlcHZZMkZhaWJyQ3lDNFg0RkZ4NVBkWHZ2bEhwcmRXcmV0NDhtcVoycW14U3lGTUEtSjB3bzJ0dF94V1ZFSXNyZEFNRGZtcUpCeTdfaXZHVWFWUXhmSE43eDNzN0hKdmtXLUpzMkZ1YnRYYjdkdTBwYXp2aDlta29OSWxNY1Bpb2hYRk11T2Z5WHpZ",
+    "https://www.reddit.com/r/LLMDevs/comments/1v7y8s2/claude_shared_sessions_archived_on_a_git/",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxPcFhXaUdoWUZmOE1UOFQ5QTF5cnhzN2RsYlBGUTFxMFM0N2RUU0pVSkNpVEtFdnNjTVd1V0ptVkdDTVdyMmdETElMeWk3V01BV0haaGt0dWNNNGpZYzBTb3hZNGtRZkhDVUFOX2gtV2NvdkVKV3RHWm9CWk83QlNMUlQxNmJXc195UFFPQ0xabUU",
+    "https://itc.ua/ua/novini/tysyachi-pryvatnyh-chativ-claude-potrapyly-do-google-u-poshuku-znajshly-medychni-dani-ta-korporatyvni-dokumenty/",
+    "https://mashable.com/tech/shared-claude-chats-found-in-google-search",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxPNWsybE5OeG1sMW1vSVJWamJEanltN3FOQ0tjQnFRaWF5U2lEemJSZXZjeWpCdXNteXNiZ0h3NVptNmJxVTE5VHRFS2FRcm9NclJpM1RtZ3RaNEdac09UMWhibTlLandhNmRSMzJxNDdBbG5pSVV4cTkxd01jVlFIcFpMOVduZXhMOERCWWloSkVKZ1E",
+    "https://www.tomsguide.com/ai/claude/i-just-learned-your-claude-ai-chats-could-show-up-in-google-heres-how-to-check-yours"
+  ],
+  "suggested_qna": [],
+  "summary": "Shared conversations and Artifacts from Anthropic\u2019s Claude appeared in Google and, according to some reports, Bing search results after users created public share links for chats and generated projects [techcrunch.com#1][futurism.com#1][wired.com#1][androidheadlines.com#1][bbc.co.uk#1]. Reddit users found the pages with searches such as \u201csite:claude.ai/share,\u201d and the BBC said the results included hundreds of conversations [techcrunch.com#1][bbc.co.uk#1].\n\nThe exposed material included health records, clinical trial information, company documents, employee reviews, resumes, API keys, children\u2019s names and phone numbers, and other personal or work information [techcrunch.com#1][futurism.com#1][gizmodo.com#1][androidheadlines.com#1][bbc.co.uk#1]. Claude\u2019s chat-sharing interface says \u201canyone with the link can view,\u201d but several reports said it did not explicitly warn that shared chats could appear in search results; Futurism said the separate Artifacts publishing flow does warn that published Artifacts may become visible in search engine results [techcrunch.com#1][futurism.com#1][mashable.com#1][bbc.co.uk#1].\n\nAnthropic said it does not provide chat directories or sitemaps to search engines and that shareable links are not guessable or discoverable unless users share them [techcrunch.com#1][venturebeat.com#1][pcmag.com#1][bbc.co.uk#1]. The BBC said the pages were no longer available through search over the weekend, while VentureBeat said many original Google results had disappeared or become harder to find by Sunday morning [venturebeat.com#1][bbc.co.uk#1].",
+  "talking_points": [
+    "Earlier precedent: PCMag said OpenAI faced a similar issue last year when Google indexed shared ChatGPT chats created with a public-link function, after which OpenAI removed the option to make chats appear in Google Search [pcmag.com#1].",
+    "Crawler controls: Android Headlines said Claude\u2019s shared-chat pages used robots.txt restrictions for claude.ai/share but lacked noindex tags; URLs linked from the open web can still appear in search results [androidheadlines.com#1][lesnumeriques.com#1].",
+    "Initial discovery: VentureBeat traced the discovery to Reddit user -void1 on the r/ClaudeAI subreddit, where the post drew thousands of upvotes and comments about privacy and information security [venturebeat.com#1][pcmag.com#1].",
+    "Enterprise risk: VentureBeat noted that Anthropic has positioned Claude as a collaborative workspace for software, dashboards, documents and other business assets, increasing the sensitivity of shared-work exposure for enterprise users [venturebeat.com#1].",
+    "Artifact exposure: VentureBeat said it independently verified that some Claude Artifacts not shared directly with it were searchable and accessible via Google, though it could not access shared conversations [venturebeat.com#1]."
+  ],
+  "technical_details": [
+    "Robots.txt limitation: Anthropic used robots.txt to tell crawlers not to crawl claude.ai/share URLs, but Android Headlines and Techmeme cited the need for page-level noindex controls because externally linked URLs can still be discovered by search systems [androidheadlines.com#1][techmeme.com#1].",
+    "Noindex placement: Les Num\u00e9riques explained that when robots.txt blocks crawler access to a page, a crawler may never read a noindex directive placed inside that page\u2019s HTML, making response headers or crawlable noindex implementation important for exclusion [lesnumeriques.com#1].",
+    "Public-link model: Claude\u2019s share feature creates a static snapshot URL that anyone with the assigned link can view, and TechCrunch compared the expectation gap with Google Docs, whose similar link-sharing model does not make documents publicly searchable by default [techcrunch.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Reddit user highlighted searchable Claude share pages [venturebeat.com#1][lesnumeriques.com#1]",
+      "date": "25 July 2026",
+      "date_iso": "2026-07-25"
+    },
+    {
+      "content": "Many original Google results became harder to find [venturebeat.com#1]",
+      "date": "26 July 2026",
+      "date_iso": "2026-07-26"
+    },
+    {
+      "content": "Technology publications reported sensitive shared chats in search [techcrunch.com#1][futurism.com#1][bbc.co.uk#1]",
+      "date": "27 July 2026",
+      "date_iso": "2026-07-27"
+    },
+    {
+      "content": "Follow-up reports described removed results and privacy questions [firstpost.com#1][androidheadlines.com#1]",
+      "date": "28 July 2026",
+      "date_iso": "2026-07-28"
+    }
+  ],
+  "title": "Anthropic Claude shared chats surface in search results",
+  "travel_advisory": "",
+  "unique_domains": 22,
+  "url": "https://gizmodo.com/when-you-share-claude-chats-you-could-be-sharing-them-with-everyone-2000791372",
+  "user_action_items": [
+    "Audit shared Claude links: Search your Claude account for conversations or Artifacts you have shared, revoke links you no longer need, and avoid putting secrets, health data or client information into shared pages [zdnet.com#1][tomsguide.com#1].",
+    "Rotate exposed secrets: If a shared chat included API keys, crypto wallet recovery phrases or database credentials, revoke and replace them because public search exposure can allow third parties to copy them [androidheadlines.com#1][lesnumeriques.com#1][common].",
+    "Set workplace sharing rules: Require employees to treat Claude public links as internet-public unless an administrator verifies stronger controls or an enterprise policy blocks public sharing [venturebeat.com#1][common].",
+    "Review shared Claude links: Open Claude\u2019s shared conversations and Artifacts history, remove public links you no longer need, and avoid sharing chats that contain personal, legal, health, financial, source-code or credential data [tomsguide.com#1][androidauthority.com#1].",
+    "Search for exposed pages: Use search operators such as site:claude.ai/share with unique names, handles, project titles or company terms, then delete or unshare any matching Claude content you control [techcrunch.com#1][tomsguide.com#1].",
+    "Rotate exposed secrets: If a shared chat included API keys, crypto seed phrases or credentials, revoke and regenerate them immediately because search removal does not guarantee copies disappeared [androidheadlines.com#1][lesnumeriques.com#1][common]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
