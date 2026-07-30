@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI writing scrutiny pushes style shifts and safeguards - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI writing scrutiny pushes style shifts and safeguards</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/"><img src="https://kagiproxy.com/img/nZpdYiWREnOLihsyqJAs6Y8eQ4MCyXI5BNqWDK4iScCD-6wgKSCOhQogaTvQqV3seh11IbyWNGz7WTSKXllNsofgtvzOHtUn0ZhkXEClhOewG8F3HmtSYQ4Shs9MyWEALoAnV6acIlDbypPzC2f1NrsbSh_-SDQ9ABRv" alt="Image accompanying Wired’s report on writers adapting their style to avoid being mistaken for AI-generated prose." title="Image accompanying Wired’s report on writers adapting their style to avoid being mistaken for AI-generated prose. (wired.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Image accompanying Wired’s report on writers adapting their style to avoid being mistaken for AI-generated prose. <span class='credit'>(wired.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Writers, publishers and AI companies are responding to suspicion of machine-generated prose. The New York Times profiled Pangram, an AI detection startup that says it can identify writing and imagery not made by humans with near-perfect accuracy <a href="https://www.nytimes.com/2026/07/29/business/dealbook/pangram-ai-slop-detection.html" class="footnote-ref">[3]</a>. Wired reported that novelists, journalists and LinkedIn users are adding first-person narration, idiosyncrasies, typos and fewer em dashes to avoid being mistaken for chatbots <a href="https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/" class="footnote-ref">[5]</a>.
+
+On Reddit, a newsletter writer said commenters repeatedly cite em dashes, bullet points and questions as signs of AI use. Another Reddit user in New Zealand said workplace enquiries often contain random bolding or unremoved prompts <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1va5j93/i_am_so_sick_of_getting_accused_of_using_ai_for/" class="footnote-ref">[2]</a><a href="https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/" class="footnote-ref">[9]</a>. Separately, ChatGPT has begun refusing some requests to imitate specific authors’ styles, with reports tying the change to copyright and editorial risks around AI-generated writing <a href="https://futurism.com/artificial-intelligence/hack-writers-fuming-chatgpt-refuse-mimic-author" class="footnote-ref">[6]</a><a href="https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles" class="footnote-ref">[7]</a><a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca" class="footnote-ref">[8]</a><a href="https://www.eweek.com/news/chatgpt-author-style-restrictions-copyright/" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.eweek.com/news/chatgpt-author-style-restrictions-copyright/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Legal risk: Style imitation is legally unsettled because U.S. copyright law protects expression rather than style itself, but AI-generated imitation may create liability if it is substantially similar to original work <a href="https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles" class="footnote-ref">[7]</a><a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Logit bias: Vincent Schmalbach tested an API setting that changes token-selection scores directly, applying a -8 bias to token IDs associated with words that appeared unusually often in AI-generated text <a href="https://www.vincentschmalbach.com/make-ai-writing-sound-human-logit-bias/" class="footnote-ref">[4]</a>.</li>
+
+<li>Whole-article rewriting: Schmalbach sent eight complete AI-generated articles through DeepSeek V4 Flash via OpenRouter, comparing a control rewrite with no token bias against an experimental rewrite using the blacklist <a href="https://www.vincentschmalbach.com/make-ai-writing-sound-human-logit-bias/" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>AI platforms: OpenAI faces legal battles from authors who say model training violated their copyrights, adding risk around author-style generation <a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca" class="footnote-ref">[8]</a><a href="https://www.eweek.com/news/chatgpt-author-style-restrictions-copyright/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>OpenAI previously configured DALL·E 3 to refuse requests to copy the styles of living artists, while its December text-response specifications did not contain the same explicit author-style prohibition, according to Aktuelno’s account of the policy context <a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca" class="footnote-ref">[8]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>AI-detection vendors need more than high accuracy claims; false positives against human writers could undermine customer trust and renewal rates <a href="https://www.nytimes.com/2026/07/29/business/dealbook/pangram-ai-slop-detection.html" class="footnote-ref">[3]</a>[common].</li><li>Model providers that reduce author-style imitation may sacrifice some user flexibility to lower copyright and brand-risk exposure <a href="https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles" class="footnote-ref">[7]</a><a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca" class="footnote-ref">[8]</a>.</li><li>AI-written workplace emails can create extra back-and-forth when they assume incorrect facts or leave prompts in messages <a href="https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/" class="footnote-ref">[9]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit AI-assisted public writing: Before publishing, remove leftover prompts, check formatting artifacts such as unexplained bolding, and verify that the text does not make incorrect assumptions about the recipient <a href="https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/" class="footnote-ref">[9]</a>.</li>
+
+<li>Avoid author-style prompts: Ask for broad qualities such as pacing, clarity or dialogue density instead of asking a chatbot to imitate a named author’s style <a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/">https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1va5j93/i_am_so_sick_of_getting_accused_of_using_ai_for/">https://www.reddit.com/r/ArtificialInteligence/comments/1va5j93/i_am_so_sick_of_getting_accused_of_using_ai_for/</a></li>
+
+
+
+<li><a href="https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles">https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/">https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/</a></li>
+
+
+
+<li><a href="https://www.nytimes.com/2026/07/29/business/dealbook/pangram-ai-slop-detection.html">https://www.nytimes.com/2026/07/29/business/dealbook/pangram-ai-slop-detection.html</a></li>
+
+
+
+<li><a href="https://futurism.com/artificial-intelligence/hack-writers-fuming-chatgpt-refuse-mimic-author">https://futurism.com/artificial-intelligence/hack-writers-fuming-chatgpt-refuse-mimic-author</a></li>
+
+
+
+<li><a href="https://www.vincentschmalbach.com/make-ai-writing-sound-human-logit-bias/">https://www.vincentschmalbach.com/make-ai-writing-sound-human-logit-bias/</a></li>
+
+
+
+
+
+<li><a href="https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca">https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, futurism.com, nytimes.com, aktuelno.me, eweek.com, vincentschmalbach.com, wired.com, extremetech.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 8 unique domains, 9 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Madeline Clarke",
+      "date": "2026-07-29T10:37:54.786Z",
+      "domain": "eweek.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.eweek.com/news/chatgpt-author-style-restrictions-copyright/",
+      "title": "ChatGPT Restricts Famous Author Style Requests Amid Copyright Pressure"
+    },
+    {
+      "author": "/u/Altruistic_Virus8460",
+      "date": "2026-07-29T18:59:55.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1va5j93/i_am_so_sick_of_getting_accused_of_using_ai_for/",
+      "title": "I am so sick of getting accused of using AI for my writing."
+    },
+    {
+      "author": "Niko Gallogly",
+      "date": "2026-07-30T03:14:56.000Z",
+      "domain": "nytimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nytimes.com/2026/07/29/business/dealbook/pangram-ai-slop-detection.html",
+      "title": "Sick of A.I.-Generated Content? The \u2018Slop Janitor\u2019 Is Here to Help."
+    },
+    {
+      "author": "vincent_s",
+      "date": "2026-07-30T04:15:23.000Z",
+      "domain": "vincentschmalbach.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.vincentschmalbach.com/make-ai-writing-sound-human-logit-bias/",
+      "title": "I Tried to Make AI Writing Sound Human by Banning AI Words Through Logit_bias"
+    },
+    {
+      "author": "Emma Madden",
+      "date": "2026-07-29T10:30:00.000Z",
+      "domain": "wired.com",
+      "image": "https://kagiproxy.com/img/Jx2QsMCYmsODQi_X6FGI6r4IQwBTHBDHwEbuyt7EvPWSjLAqsvexCTIg8ABRAGyIBWK6tvEVk8tqvqCh3bVAFfCA7gkN1FbOAY3BTTJsDKV9n5yDvZPyvisAjqzO5sxx6voWXd4KBKOKYmScjZ7y5PSuxnTTuIc55Dyl",
+      "image_caption": "",
+      "link": "https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/",
+      "title": "More Typos, Fewer Em Dashes: Writers Are Creating an Anti-AI \u2018Literary Counterculture\u2019"
+    },
+    {
+      "author": "Frank Landymore",
+      "date": "2026-07-29T19:47:54.000Z",
+      "domain": "futurism.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://futurism.com/artificial-intelligence/hack-writers-fuming-chatgpt-refuse-mimic-author",
+      "title": "Hack \u201cWriters\u201d Fuming After ChatGPT Starts Refusing Prompts to Copy a Specific Author\u2019s Style"
+    },
+    {
+      "date": "2026-07-29T13:45:26.000Z",
+      "domain": "extremetech.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles",
+      "title": "ChatGPT Blocks Requests to Mimic Famous Authors\u0027 Styles"
+    },
+    {
+      "author": "Aktuelno",
+      "date": "2026-07-29T19:28:02.000Z",
+      "domain": "aktuelno.me",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca",
+      "title": "ChatGPT vi\u0161e ne kopira jedinstveni stil slavnih pisaca"
+    },
+    {
+      "author": "/u/dirt_court",
+      "date": "2026-07-29T21:27:34.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/",
+      "title": "Can people stop using AI to write a email?????"
+    }
+  ],
+  "business_angle": [
+    "AI-detection vendors need more than high accuracy claims; false positives against human writers could undermine customer trust and renewal rates [nytimes.com#1][common].",
+    "Model providers that reduce author-style imitation may sacrifice some user flexibility to lower copyright and brand-risk exposure [extremetech.com#1][aktuelno.me#1].",
+    "AI-written workplace emails can create extra back-and-forth when they assume incorrect facts or leave prompts in messages [reddit.com#2]."
+  ],
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=futurism.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aktuelno.me\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aktuelno.me"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=eweek.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "eweek.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=vincentschmalbach.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "vincentschmalbach.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wired.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "wired.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=extremetech.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "extremetech.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\u270d\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "OpenAI previously configured DALL\u00b7E 3 to refuse requests to copy the styles of living artists, while its December text-response specifications did not contain the same explicit author-style prohibition, according to Aktuelno\u2019s account of the policy context [aktuelno.me#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "AI platforms: OpenAI faces legal battles from authors who say model training violated their copyrights, adding risk around author-style generation [aktuelno.me#1][eweek.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Writing",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 9,
+  "perspectives": [],
+  "primary_image": {
+    "caption": "Image accompanying Wired\u2019s report on writers adapting their style to avoid being mistaken for AI-generated prose.",
+    "credit": "wired.com",
+    "link": "https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/",
+    "url": "https://kagiproxy.com/img/nZpdYiWREnOLihsyqJAs6Y8eQ4MCyXI5BNqWDK4iScCD-6wgKSCOhQogaTvQqV3seh11IbyWNGz7WTSKXllNsofgtvzOHtUn0ZhkXEClhOewG8F3HmtSYQ4Shs9MyWEALoAnV6acIlDbypPzC2f1NrsbSh_-SDQ9ABRv"
+  },
+  "published": "2026-07-30T12:00:09.404Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.wired.com/story/more-typos-fewer-em-dashes-writers-are-creating-an-anti-ai-literary-counterculture/",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1va5j93/i_am_so_sick_of_getting_accused_of_using_ai_for/",
+    "https://www.extremetech.com/internet/chatgpt-blocks-requests-to-mimic-famous-authors-styles",
+    "https://www.reddit.com/r/newzealand/comments/1va9n1l/can_people_stop_using_ai_to_write_a_email/",
+    "https://www.nytimes.com/2026/07/29/business/dealbook/pangram-ai-slop-detection.html",
+    "https://futurism.com/artificial-intelligence/hack-writers-fuming-chatgpt-refuse-mimic-author",
+    "https://www.vincentschmalbach.com/make-ai-writing-sound-human-logit-bias/",
+    "https://www.eweek.com/news/chatgpt-author-style-restrictions-copyright/",
+    "https://www.aktuelno.me/clanak/chatgpt-vise-ne-kopira-jedinstveni-stil-slavnih-pisaca"
+  ],
+  "suggested_qna": [],
+  "summary": "Writers, publishers and AI companies are responding to suspicion of machine-generated prose. The New York Times profiled Pangram, an AI detection startup that says it can identify writing and imagery not made by humans with near-perfect accuracy [nytimes.com#1]. Wired reported that novelists, journalists and LinkedIn users are adding first-person narration, idiosyncrasies, typos and fewer em dashes to avoid being mistaken for chatbots [wired.com#1].\n\nOn Reddit, a newsletter writer said commenters repeatedly cite em dashes, bullet points and questions as signs of AI use. Another Reddit user in New Zealand said workplace enquiries often contain random bolding or unremoved prompts [reddit.com#1][reddit.com#2]. Separately, ChatGPT has begun refusing some requests to imitate specific authors\u2019 styles, with reports tying the change to copyright and editorial risks around AI-generated writing [futurism.com#1][extremetech.com#1][aktuelno.me#1][eweek.com#1].",
+  "talking_points": [
+    "Legal risk: Style imitation is legally unsettled because U.S. copyright law protects expression rather than style itself, but AI-generated imitation may create liability if it is substantially similar to original work [extremetech.com#1][aktuelno.me#1]."
+  ],
+  "technical_details": [
+    "Logit bias: Vincent Schmalbach tested an API setting that changes token-selection scores directly, applying a -8 bias to token IDs associated with words that appeared unusually often in AI-generated text [vincentschmalbach.com#1].",
+    "Whole-article rewriting: Schmalbach sent eight complete AI-generated articles through DeepSeek V4 Flash via OpenRouter, comparing a control rewrite with no token bias against an experimental rewrite using the blacklist [vincentschmalbach.com#1]."
+  ],
+  "timeline": [],
+  "title": "AI writing scrutiny pushes style shifts and safeguards",
+  "travel_advisory": "",
+  "unique_domains": 8,
+  "url": "https://www.eweek.com/news/chatgpt-author-style-restrictions-copyright/",
+  "user_action_items": [
+    "Audit AI-assisted public writing: Before publishing, remove leftover prompts, check formatting artifacts such as unexplained bolding, and verify that the text does not make incorrect assumptions about the recipient [reddit.com#2].",
+    "Avoid author-style prompts: Ask for broad qualities such as pacing, clarity or dialogue density instead of asking a chatbot to imitate a named author\u2019s style [aktuelno.me#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

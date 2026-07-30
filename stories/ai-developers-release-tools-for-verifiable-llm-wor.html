@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI developers release tools for verifiable LLM workflows - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI developers release tools for verifiable LLM workflows</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI developers and researchers released a set of LLM-related projects and essays focused on verifiability, evaluation, local execution and workflow design. Engy advertised “verified inference” for open models, saying its API provides cryptographic proof that the requested model produced an output, rather than a cheaper or quantized substitute <a href="https://engy.ai/" class="footnote-ref">[10]</a>. Mateo Lafalce said users of provider-hosted LLM APIs cannot directly verify the model, effective system prompt or weights behind an answer <a href="https://twitter.com/lafalcemateo/status/2082250304330809738" class="footnote-ref">[2]</a>.
+
+Other releases included tools for AI code review, knowledge management and on-device reading assistance. multi-llm-plugin, a GitHub project, said it can run plan reviews, implementation tasks and code reviews across 12 CLI-based coding tools <a href="https://github.com/beastlabai/multi-llm-plugin" class="footnote-ref">[5]</a>. Bybit’s KaaS project described an LLM pipeline that turns scattered documents, meetings and email into role-based wikis <a href="https://github.com/bybit-exchange/kaas" class="footnote-ref">[11]</a>. Garden Reads presented an offline e-reader that uses Google’s Gemma on-device through LiteRT to explain selected passages without an account or internet connection <a href="https://gardenreads.app/" class="footnote-ref">[15]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://llm2human.pages.dev/">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Text became cheap. Understanding did not.</p>
+
+<cite>— Dmitri Samsonov (samsonov.io)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Evaluation risk: Mark B. Hall wrote that his 1.2B local model scored 6/6 only because the evaluator checked whether answers looked like bare integers, even though all six answers were wrong <a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/" class="footnote-ref">[4]</a>.</li>
+
+<li>Math agents: ProofCouncil’s arXiv paper said FirstProof referees judged its submissions for 6 of 10 real-world mathematical problems correct with at most minor revisions <a href="https://arxiv.org/abs/2607.09474" class="footnote-ref">[17]</a>.</li>
+
+<li>Coding workflows: The multi-llm-plugin README lists Codex, OpenCode, Cursor Agent, Gemini CLI, Grok Build, Cline, goose, Aider, Antigravity CLI, Pi and Claude Code among supported harnesses <a href="https://github.com/beastlabai/multi-llm-plugin" class="footnote-ref">[5]</a>.</li>
+
+<li>Local privacy: Garden Reads says its AI explanations run entirely on-device and that nothing leaves the phone unless the user enables Drive sync <a href="https://gardenreads.app/" class="footnote-ref">[15]</a>.</li>
+
+<li>Long chats: Dmitri Samsonov wrote that long exploratory LLM chats expose little conversation structure, making it hard to return to an evolving question after many generated threads <a href="https://msg.samsonov.io/2026-07-28-sequence-is-not-structure/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Mateo Lafalce: Lafalce said self-hosting can restore visibility into the model version and system prompt, but model weights remain hard to verify and deeper trust questions move to software, hardware, firmware, drivers, microcode and silicon.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://twitter.com/lafalcemateo/status/2082250304330809738">Twitter</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Aaron Stannard: Stannard said developers do not need to keep LLM agents running constantly to avoid falling behind, while describing agentic coding as a major productivity improvement for software engineers.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://aaronstannard.com/escaping-ai-coding-ratrace/">aaronstannard.com</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Mark B. Hall: Hall found that scaffolding did not improve closed-book knowledge scores in his tests, but did substantially raise verified, tool-backed task completion <a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/">markbhall.dev</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Bybit KaaS maintainers: The KaaS maintainers said the project began as an internal tool to preserve role knowledge when employees changed roles or left, then became worth open-sourcing.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/bybit-exchange/kaas">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>10 July 2026:</strong> ProofCouncil paper submitted to arXiv <a href="https://arxiv.org/abs/2607.09474" class="footnote-ref">[17]</a></li>
+
+
+
+<li><strong>27 July 2026:</strong> Hall published local LLM evaluation post <a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/" class="footnote-ref">[4]</a></li>
+
+
+
+<li><strong>28 July 2026:</strong> Samsonov published essay on long LLM chats <a href="https://msg.samsonov.io/2026-07-28-sequence-is-not-structure/" class="footnote-ref">[3]</a></li>
+
+
+
+<li><strong>28 July 2026:</strong> Lafalce posted API-verification critique on Twitter <a href="https://twitter.com/lafalcemateo/status/2082250304330809738" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>29 July 2026:</strong> Engy page appeared with verified-inference setup instructions <a href="https://engy.ai/" class="footnote-ref">[10]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Golden snapshots: The agentsnap Reddit post says it records LLM and tool calls once, commits them as a golden snapshot, then diffs later runs across tool-call sequence, arguments and model behavior to catch regressions <a href="https://www.reddit.com/r/LLMDevs/comments/1va7tbr/i_built_a_snapshottesting_library_for_llm_agents/" class="footnote-ref">[20]</a>.</li>
+
+<li>Persistent state machines: Two Zenodo records describe persistent-state-machine approaches for LLM attention: one includes a Vivado estimate of 0.0267 PJ per operation, and another covers a high-sparsity LLM accelerator <a href="https://zenodo.org/records/21694686" class="footnote-ref">[6]</a><a href="https://zenodo.org/records/21679919" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Service-business software: Supabook bundles a business phone number, AI call answering, missed-call text-back, voicemail, call recording, transcripts, SMS, CRM records, proposals, invoices and projects for service businesses <a href="https://supabook.ai/" class="footnote-ref">[8]</a>.</li>
+
+<li>AI coding tools: The multi-llm-plugin project aims to consolidate feedback from multiple models and coding harnesses so developers can catch bugs, blind spots and improvements that a single model may miss <a href="https://github.com/beastlabai/multi-llm-plugin" class="footnote-ref">[5]</a>.</li>
+
+<li>Enterprise knowledge management: KaaS says it compiles content through a four-phase LLM pipeline rather than using typical RAG chunking and embedding of raw text <a href="https://github.com/bybit-exchange/kaas" class="footnote-ref">[11]</a>.</li>
+
+<li>Consumer reading apps: Garden Reads combines e-reading, audiobooks, dictionaries, translations, annotations and on-device AI explanations without requiring an account, tracking or subscription <a href="https://gardenreads.app/" class="footnote-ref">[15]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Mathematical reasoning: ProofCouncil used an author-critic architecture for open mathematical problems and reported the best performance among teams participating in FirstProof’s second batch <a href="https://arxiv.org/abs/2607.09474" class="footnote-ref">[17]</a>.</li>
+
+<li>Human validation: On 30 open problems collected from mathematical researchers, ProofCouncil received human feedback on 21 solutions; 5 were judged completely correct, 2 promising pending final verification and 8 useful partial progress <a href="https://arxiv.org/abs/2607.09474" class="footnote-ref">[17]</a>.</li>
+
+<li>Replication status: The ProofCouncil paper is a 25-page arXiv submission with code and an agent-building library released as open source, rather than a peer-reviewed journal article <a href="https://arxiv.org/abs/2607.09474" class="footnote-ref">[17]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Workflow products such as Supabook could gain retention if they become the system of record for calls, CRM entries, proposals, invoices and follow-ups <a href="https://supabook.ai/" class="footnote-ref">[8]</a>[common].</li><li>Verified-inference providers may charge for proof of model integrity rather than treating inference as a token-price commodity <a href="https://engy.ai/" class="footnote-ref">[10]</a>[common].</li><li>Open-source AI tooling can spread quickly, but investors should watch whether maintainers convert usage into durable revenue, support contracts or hosted services <a href="https://github.com/beastlabai/multi-llm-plugin" class="footnote-ref">[5]</a><a href="https://github.com/bybit-exchange/kaas" class="footnote-ref">[11]</a>[common].</li><li>Evaluation failures like Hall’s 6/6 formatting mistake show that AI product claims need outcome-based benchmarks, not just polished demos <a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/" class="footnote-ref">[4]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit LLM evaluation checks: Verify that tests compare answer value and task completion, not just output shape or formatting, after Hall’s benchmark accepted wrong integer answers <a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/" class="footnote-ref">[4]</a>.</li>
+
+<li>Request model-verification details: When buying hosted inference, ask whether the provider can prove which model, prompt path and runtime configuration produced outputs <a href="https://engy.ai/" class="footnote-ref">[10]</a><a href="https://twitter.com/lafalcemateo/status/2082250304330809738" class="footnote-ref">[2]</a>.</li>
+
+<li>Test agent regressions with snapshots: Record representative LLM and tool-call traces as committed snapshots, then diff later runs after prompt edits or model changes <a href="https://www.reddit.com/r/LLMDevs/comments/1va7tbr/i_built_a_snapshottesting_library_for_llm_agents/" class="footnote-ref">[20]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/beastlabai/multi-llm-plugin">https://github.com/beastlabai/multi-llm-plugin</a></li>
+
+
+
+<li><a href="https://github.com/The747Lab/747-terminal-games">https://github.com/The747Lab/747-terminal-games</a></li>
+
+
+
+<li><a href="https://queue.acm.org/detail.cfm">https://queue.acm.org/detail.cfm</a></li>
+
+
+
+<li><a href="https://markbhall.dev/writing/my-local-llm-scored-6-of-6/">https://markbhall.dev/writing/my-local-llm-scored-6-of-6/</a></li>
+
+
+
+<li><a href="https://supabook.ai/">https://supabook.ai/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1va6bbo/challenge_get_an_llm_to_implement_my_pnp_paper/">https://www.reddit.com/r/LLM/comments/1va6bbo/challenge_get_an_llm_to_implement_my_pnp_paper/</a></li>
+
+
+
+<li><a href="https://engy.ai/">https://engy.ai/</a></li>
+
+
+
+
+
+<li><a href="https://arxiv.org/abs/2607.09474">https://arxiv.org/abs/2607.09474</a></li>
+
+
+
+<li><a href="https://github.com/bybit-exchange/kaas">https://github.com/bybit-exchange/kaas</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1va7tbr/i_built_a_snapshottesting_library_for_llm_agents/">https://www.reddit.com/r/LLMDevs/comments/1va7tbr/i_built_a_snapshottesting_library_for_llm_agents/</a></li>
+
+
+
+<li><a href="https://gardenreads.app/">https://gardenreads.app/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/foss/comments/1v9p82d/nodus_free_and_opensource_alternative_to/">https://www.reddit.com/r/foss/comments/1v9p82d/nodus_free_and_opensource_alternative_to/</a></li>
+
+
+
+<li><a href="https://msg.samsonov.io/2026-07-28-sequence-is-not-structure/">https://msg.samsonov.io/2026-07-28-sequence-is-not-structure/</a></li>
+
+
+
+<li><a href="https://zenodo.org/records/21679919">https://zenodo.org/records/21679919</a></li>
+
+
+
+<li><a href="https://aaronstannard.com/escaping-ai-coding-ratrace/">https://aaronstannard.com/escaping-ai-coding-ratrace/</a></li>
+
+
+
+<li><a href="https://twitter.com/lafalcemateo/status/2082250304330809738">https://twitter.com/lafalcemateo/status/2082250304330809738</a></li>
+
+
+
+<li><a href="https://zenodo.org/records/21694686">https://zenodo.org/records/21694686</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1vae93w/llm_honeypot/">https://www.reddit.com/r/LLM/comments/1vae93w/llm_honeypot/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1vaead1/llms_the_next_rung_on_the_ladder_of_abstraction/">https://www.reddit.com/r/ArtificialInteligence/comments/1vaead1/llms_the_next_rung_on_the_ladder_of_abstraction/</a></li>
+
+
+
+<li><a href="https://x-agent.sascha10k.biz">https://x-agent.sascha10k.biz</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> pages.dev, twitter.com, samsonov.io, markbhall.dev, github.com, zenodo.org, reddit.com, supabook.ai, engy.ai, aaronstannard.com, sascha10k.biz, gardenreads.app, acm.org, arxiv.org</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 14 unique domains, 21 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "8thom",
+      "date": "2026-07-29T22:51:03.000Z",
+      "domain": "pages.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://llm2human.pages.dev/",
+      "title": "LLM Honeypot"
+    },
+    {
+      "author": "lafalce",
+      "date": "2026-07-29T21:19:13.000Z",
+      "domain": "twitter.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://twitter.com/lafalcemateo/status/2082250304330809738",
+      "title": "There is no way to know if an LLM API is manipulating you"
+    },
+    {
+      "author": "kryzhovnik",
+      "date": "2026-07-29T21:11:03.000Z",
+      "domain": "samsonov.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://msg.samsonov.io/2026-07-28-sequence-is-not-structure/",
+      "title": "Sequence Is Not Structure: Getting Lost in Long LLM Conversations"
+    },
+    {
+      "author": "jacquesm",
+      "date": "2026-07-29T20:59:08.000Z",
+      "domain": "markbhall.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://markbhall.dev/writing/my-local-llm-scored-6-of-6/",
+      "title": "My Local LLM Scored 6/6. It Was Wrong Every Time"
+    },
+    {
+      "author": "beastlabai",
+      "date": "2026-07-29T19:26:37.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/beastlabai/multi-llm-plugin",
+      "title": "Show HN: Multi-LLM \u2013 review plans and code across 12 coding CLIs, many models"
+    },
+    {
+      "author": "yusuke_esaka",
+      "date": "2026-07-30T00:56:56.000Z",
+      "domain": "zenodo.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://zenodo.org/records/21694686",
+      "title": "Persistent State Machines for LLM Attention (Vivado Estimated 0.0267 PJ/Op)"
+    },
+    {
+      "author": "/u/davidSenTeGuard",
+      "date": "2026-07-30T00:35:32.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1vaead1/llms_the_next_rung_on_the_ladder_of_abstraction/",
+      "title": "LLMs: The Next Rung on the Ladder of Abstraction"
+    },
+    {
+      "author": "seangavin3000",
+      "date": "2026-07-30T04:51:43.000Z",
+      "domain": "supabook.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://supabook.ai/",
+      "title": "Supabook \u2013 AI Native Business OS"
+    },
+    {
+      "author": "the747lab",
+      "date": "2026-07-29T18:53:10.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/The747Lab/747-terminal-games",
+      "title": "Nobody owns the 30 seconds an LLM spends thinking, so I made an arcade there"
+    },
+    {
+      "author": "poidos",
+      "date": "2026-07-29T18:49:31.000Z",
+      "domain": "engy.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://engy.ai/",
+      "title": "Engy \u2013 Verified LLM Inference"
+    },
+    {
+      "author": "lucasmaan",
+      "date": "2026-07-29T16:45:38.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/bybit-exchange/kaas",
+      "title": "KaaS \u2013 Knowledge as a Service: an out-of-the-box LLM wiki compiler"
+    },
+    {
+      "author": "yusuke_esaka",
+      "date": "2026-07-29T14:58:38.000Z",
+      "domain": "zenodo.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://zenodo.org/records/21679919",
+      "title": "Sparse Attention with Persistent State Machines \u2013 High\u2011Sparsity LLM Accelerator"
+    },
+    {
+      "author": "Aaronontheweb",
+      "date": "2026-07-29T14:41:30.000Z",
+      "domain": "aaronstannard.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://aaronstannard.com/escaping-ai-coding-ratrace/",
+      "title": "Escaping the LLM Coding Rat Race"
+    },
+    {
+      "author": "sascha10000",
+      "date": "2026-07-29T13:40:02.000Z",
+      "domain": "sascha10k.biz",
+      "image": "",
+      "image_caption": "",
+      "link": "https://x-agent.sascha10k.biz",
+      "title": "Show HN: Multi-agent LLM editor with local inference via WebSockets"
+    },
+    {
+      "author": "mihainid",
+      "date": "2026-07-29T12:33:43.000Z",
+      "domain": "gardenreads.app",
+      "image": "",
+      "image_caption": "",
+      "link": "https://gardenreads.app/",
+      "title": "Garden Reads \u2013 An offline e-reader with an on-device LLM that explains passages"
+    },
+    {
+      "author": "rbanffy",
+      "date": "2026-07-29T10:08:44.000Z",
+      "domain": "acm.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://queue.acm.org/detail.cfm",
+      "title": "Titan Transients and LLM Scalability"
+    },
+    {
+      "author": "frozenseven",
+      "date": "2026-07-29T09:58:04.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.09474",
+      "title": "ProofCouncil: An LLM Agent for Solving Open Mathematical Problems"
+    },
+    {
+      "author": "/u/skatesail",
+      "date": "2026-07-30T00:34:04.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1vae93w/llm_honeypot/",
+      "title": "LLM honeypot"
+    },
+    {
+      "author": "/u/No_Arachnid_5563",
+      "date": "2026-07-29T19:26:50.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1va6bbo/challenge_get_an_llm_to_implement_my_pnp_paper/",
+      "title": "Challenge: Get an LLM to Implement My P=NP Paper"
+    },
+    {
+      "author": "/u/iamfaham5",
+      "date": "2026-07-29T20:19:32.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1va7tbr/i_built_a_snapshottesting_library_for_llm_agents/",
+      "title": "I built a snapshot-testing library for LLM agents (replay recorded calls to catch regressions, open source)"
+    },
+    {
+      "author": "/u/Drakonis96",
+      "date": "2026-07-29T07:39:13.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/foss/comments/1v9p82d/nodus_free_and_opensource_alternative_to/",
+      "title": "Nodus. Free and open-source alternative to NotebookLM for research, teaching and study"
+    }
+  ],
+  "business_angle": [
+    "Workflow products such as Supabook could gain retention if they become the system of record for calls, CRM entries, proposals, invoices and follow-ups [supabook.ai#1][common].",
+    "Verified-inference providers may charge for proof of model integrity rather than treating inference as a token-price commodity [engy.ai#1][common].",
+    "Open-source AI tooling can spread quickly, but investors should watch whether maintainers convert usage into durable revenue, support contracts or hosted services [github.com#1][github.com#3][common].",
+    "Evaluation failures like Hall\u2019s 6/6 formatting mistake show that AI product claims need outcome-based benchmarks, not just polished demos [markbhall.dev#1][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=pages.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pages.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=twitter.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "twitter.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=samsonov.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "samsonov.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=markbhall.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "markbhall.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=zenodo.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zenodo.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=supabook.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "supabook.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=engy.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "engy.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aaronstannard.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aaronstannard.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sascha10k.biz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sascha10k.biz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gardenreads.app\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gardenreads.app"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=acm.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "acm.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Service-business software: Supabook bundles a business phone number, AI call answering, missed-call text-back, voicemail, call recording, transcripts, SMS, CRM records, proposals, invoices and projects for service businesses [supabook.ai#1].",
+    "AI coding tools: The multi-llm-plugin project aims to consolidate feedback from multiple models and coding harnesses so developers can catch bugs, blind spots and improvements that a single model may miss [github.com#1].",
+    "Enterprise knowledge management: KaaS says it compiles content through a four-phase LLM pipeline rather than using typical RAG chunking and embedding of raw text [github.com#3].",
+    "Consumer reading apps: Garden Reads combines e-reading, audiobooks, dictionaries, translations, annotations and on-device AI explanations without requiring an account, tracking or subscription [gardenreads.app#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 21,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Twitter",
+          "url": "https://twitter.com/lafalcemateo/status/2082250304330809738"
+        }
+      ],
+      "text": "Mateo Lafalce: Lafalce said self-hosting can restore visibility into the model version and system prompt, but model weights remain hard to verify and deeper trust questions move to software, hardware, firmware, drivers, microcode and silicon."
+    },
+    {
+      "sources": [
+        {
+          "name": "aaronstannard.com",
+          "url": "https://aaronstannard.com/escaping-ai-coding-ratrace/"
+        }
+      ],
+      "text": "Aaron Stannard: Stannard said developers do not need to keep LLM agents running constantly to avoid falling behind, while describing agentic coding as a major productivity improvement for software engineers."
+    },
+    {
+      "sources": [
+        {
+          "name": "markbhall.dev",
+          "url": "https://markbhall.dev/writing/my-local-llm-scored-6-of-6/"
+        }
+      ],
+      "text": "Mark B. Hall: Hall found that scaffolding did not improve closed-book knowledge scores in his tests, but did substantially raise verified, tool-backed task completion [markbhall.dev#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/bybit-exchange/kaas"
+        }
+      ],
+      "text": "Bybit KaaS maintainers: The KaaS maintainers said the project began as an internal tool to preserve role knowledge when employees changed roles or left, then became worth open-sourcing."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-07-30T12:00:09.404Z",
+  "quote": "Text became cheap. Understanding did not.",
+  "quote_attribution": "samsonov.io",
+  "quote_author": "Dmitri Samsonov",
+  "scientific_significance": [
+    "Mathematical reasoning: ProofCouncil used an author-critic architecture for open mathematical problems and reported the best performance among teams participating in FirstProof\u2019s second batch [arxiv.org#1].",
+    "Human validation: On 30 open problems collected from mathematical researchers, ProofCouncil received human feedback on 21 solutions; 5 were judged completely correct, 2 promising pending final verification and 8 useful partial progress [arxiv.org#1].",
+    "Replication status: The ProofCouncil paper is a 25-page arXiv submission with code and an agent-building library released as open source, rather than a peer-reviewed journal article [arxiv.org#1]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/beastlabai/multi-llm-plugin",
+    "https://github.com/The747Lab/747-terminal-games",
+    "https://queue.acm.org/detail.cfm",
+    "https://markbhall.dev/writing/my-local-llm-scored-6-of-6/",
+    "https://supabook.ai/",
+    "https://www.reddit.com/r/LLM/comments/1va6bbo/challenge_get_an_llm_to_implement_my_pnp_paper/",
+    "https://engy.ai/",
+    "https://llm2human.pages.dev/",
+    "https://arxiv.org/abs/2607.09474",
+    "https://github.com/bybit-exchange/kaas",
+    "https://www.reddit.com/r/LLMDevs/comments/1va7tbr/i_built_a_snapshottesting_library_for_llm_agents/",
+    "https://gardenreads.app/",
+    "https://www.reddit.com/r/foss/comments/1v9p82d/nodus_free_and_opensource_alternative_to/",
+    "https://msg.samsonov.io/2026-07-28-sequence-is-not-structure/",
+    "https://zenodo.org/records/21679919",
+    "https://aaronstannard.com/escaping-ai-coding-ratrace/",
+    "https://twitter.com/lafalcemateo/status/2082250304330809738",
+    "https://zenodo.org/records/21694686",
+    "https://www.reddit.com/r/LLM/comments/1vae93w/llm_honeypot/",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1vaead1/llms_the_next_rung_on_the_ladder_of_abstraction/",
+    "https://x-agent.sascha10k.biz"
+  ],
+  "suggested_qna": [],
+  "summary": "AI developers and researchers released a set of LLM-related projects and essays focused on verifiability, evaluation, local execution and workflow design. Engy advertised \u201cverified inference\u201d for open models, saying its API provides cryptographic proof that the requested model produced an output, rather than a cheaper or quantized substitute [engy.ai#1]. Mateo Lafalce said users of provider-hosted LLM APIs cannot directly verify the model, effective system prompt or weights behind an answer [twitter.com#1].\n\nOther releases included tools for AI code review, knowledge management and on-device reading assistance. multi-llm-plugin, a GitHub project, said it can run plan reviews, implementation tasks and code reviews across 12 CLI-based coding tools [github.com#1]. Bybit\u2019s KaaS project described an LLM pipeline that turns scattered documents, meetings and email into role-based wikis [github.com#3]. Garden Reads presented an offline e-reader that uses Google\u2019s Gemma on-device through LiteRT to explain selected passages without an account or internet connection [gardenreads.app#1].",
+  "talking_points": [
+    "Evaluation risk: Mark B. Hall wrote that his 1.2B local model scored 6/6 only because the evaluator checked whether answers looked like bare integers, even though all six answers were wrong [markbhall.dev#1].",
+    "Math agents: ProofCouncil\u2019s arXiv paper said FirstProof referees judged its submissions for 6 of 10 real-world mathematical problems correct with at most minor revisions [arxiv.org#1].",
+    "Coding workflows: The multi-llm-plugin README lists Codex, OpenCode, Cursor Agent, Gemini CLI, Grok Build, Cline, goose, Aider, Antigravity CLI, Pi and Claude Code among supported harnesses [github.com#1].",
+    "Local privacy: Garden Reads says its AI explanations run entirely on-device and that nothing leaves the phone unless the user enables Drive sync [gardenreads.app#1].",
+    "Long chats: Dmitri Samsonov wrote that long exploratory LLM chats expose little conversation structure, making it hard to return to an evolving question after many generated threads [samsonov.io#1]."
+  ],
+  "technical_details": [
+    "Golden snapshots: The agentsnap Reddit post says it records LLM and tool calls once, commits them as a golden snapshot, then diffs later runs across tool-call sequence, arguments and model behavior to catch regressions [reddit.com#4].",
+    "Persistent state machines: Two Zenodo records describe persistent-state-machine approaches for LLM attention: one includes a Vivado estimate of 0.0267 PJ per operation, and another covers a high-sparsity LLM accelerator [zenodo.org#1][zenodo.org#2]."
+  ],
+  "timeline": [
+    {
+      "content": "ProofCouncil paper submitted to arXiv [arxiv.org#1]",
+      "date": "10 July 2026",
+      "date_iso": "2026-07-10"
+    },
+    {
+      "content": "Hall published local LLM evaluation post [markbhall.dev#1]",
+      "date": "27 July 2026",
+      "date_iso": "2026-07-27"
+    },
+    {
+      "content": "Samsonov published essay on long LLM chats [samsonov.io#1]",
+      "date": "28 July 2026",
+      "date_iso": "2026-07-28"
+    },
+    {
+      "content": "Lafalce posted API-verification critique on Twitter [twitter.com#1]",
+      "date": "28 July 2026",
+      "date_iso": "2026-07-28"
+    },
+    {
+      "content": "Engy page appeared with verified-inference setup instructions [engy.ai#1]",
+      "date": "29 July 2026",
+      "date_iso": "2026-07-29"
+    }
+  ],
+  "title": "AI developers release tools for verifiable LLM workflows",
+  "travel_advisory": "",
+  "unique_domains": 14,
+  "url": "https://llm2human.pages.dev/",
+  "user_action_items": [
+    "Audit LLM evaluation checks: Verify that tests compare answer value and task completion, not just output shape or formatting, after Hall\u2019s benchmark accepted wrong integer answers [markbhall.dev#1].",
+    "Request model-verification details: When buying hosted inference, ask whether the provider can prove which model, prompt path and runtime configuration produced outputs [engy.ai#1][twitter.com#1].",
+    "Test agent regressions with snapshots: Record representative LLM and tool-call traces as committed snapshots, then diff later runs after prompt edits or model changes [reddit.com#4]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
