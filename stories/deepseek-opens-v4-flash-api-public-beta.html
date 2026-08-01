@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>DeepSeek opens V4-Flash API public beta - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>DeepSeek opens V4-Flash API public beta</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>DeepSeek released DeepSeek-V4-Flash-0731 in public beta for API users, describing it as an upgrade focused on agent tasks, coding workflows and tool use <a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" class="footnote-ref">[27]</a><a href="https://techgenyz.com/deepseek-v4-flash-api/" class="footnote-ref">[21]</a><a href="https://www.techinasia.com/news/deepseek-opens-v4flash-api-public" class="footnote-ref">[25]</a>. The update adds support for the Responses API and Codex integrations, while DeepSeek said V4-Pro API, the web app and the mobile app had not yet changed <a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" class="footnote-ref">[27]</a><a href="https://www.latent.space/p/ainews-not-much-happened-today-038" class="footnote-ref">[13]</a><a href="https://news.smol.ai/issues/26-07-31-not-much/" class="footnote-ref">[17]</a>.
+
+The company said V4-Flash-0731 keeps the same structure and size as the preview model and improves performance through retraining or post-training rather than a larger model <a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" class="footnote-ref">[27]</a><a href="https://www.blognone.com/node/151271" class="footnote-ref">[22]</a><a href="https://news.cnyes.com/news/id/6555685" class="footnote-ref">[23]</a><a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a>. DeepSeek reported benchmark scores of 82.7 on Terminal Bench 2.1 and 54.4 on DeepSWE, above its V4-Pro Preview in those agent-oriented tests <a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" class="footnote-ref">[27]</a><a href="https://www.blognone.com/node/151271" class="footnote-ref">[22]</a><a href="https://news.cnyes.com/news/id/6555685" class="footnote-ref">[23]</a><a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a>.
+
+DeepSeek kept low API pricing: several sources listed V4-Flash at about $0.14 per million input tokens and $0.27 to $0.28 per million output tokens, while Chinese reports said the yuan-denominated rate remains 1 yuan per million input tokens and 2 yuan per million output tokens before cache discounts <a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything" class="footnote-ref">[20]</a><a href="https://www.blognone.com/node/151271" class="footnote-ref">[22]</a><a href="https://news.cnyes.com/news/id/6555685" class="footnote-ref">[23]</a><a href="https://www.ifanr.com/1673553" class="footnote-ref">[28]</a>. Nikkei Asia framed the release as part of a widening AI price war, and iFanr reported that OpenAI cut GPT-5.6 Luna API prices by about 80% around the same time <a href="https://asia.nikkei.com/business/technology/artificial-intelligence/deepseek-releases-beta-version-of-v4-models-as-ai-price-war-heats-up" class="footnote-ref">[26]</a><a href="https://www.ifanr.com/1673553" class="footnote-ref">[28]</a><a href="https://wccftech.com/deepseeks-v4-flash-guts-openais-price-war-within-hours-matching-opus-grade-output-at-0-14-per-million-tokens-as-moonshot-scales-with-20000-new-nvidia-gpus/" class="footnote-ref">[29]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>This may currently be the best value-per-intelligence model out there</p>
+
+<cite>— Simon Willison (Simon Willison’s Weblog)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Open weights: DeepSeek published DeepSeek-V4-Flash-0731 on Hugging Face, and community GGUF conversions appeared quickly through Unsloth and antirez-related repositories <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbp7kb/deepseekaideepseekv4flash0731_on_huggingface/" class="footnote-ref">[4]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc4041/deepseek_v4_flash_is_now_2_open_weight_model_to/" class="footnote-ref">[6]</a><a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything" class="footnote-ref">[20]</a>.</li>
+
+<li>Benchmark caveat: Habr noted that independent tests were still scarce, and a Reddit post said DeepSeek&#x27;s claimed DeepSWE standing had not yet been verified by DeepSWE <a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/" class="footnote-ref">[1]</a>.</li>
+
+<li>Model ranking: Simon Willison wrote that Artificial Analysis ranked the 304-billion-parameter release ahead of MiniMax M3, a 428-billion-parameter model, on its index-versus-cost view <a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything" class="footnote-ref">[20]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Simon Willison: Willison highlighted the model&#x27;s 304 billion parameters, 167GB size on Hugging Face and low token pricing, while noting that one test improved when he raised the reasoning level to high.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything">Simon Willison’s Weblog</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Habr/BotHub: Habr&#x27;s BotHub post treated the company&#x27;s benchmark claims skeptically because independent testing was limited, while describing the API economics as potentially competitive for agent workloads.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://habr.com/ru/companies/bothub/news/1065322/">Habr</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>iFanr: iFanr tested the model on five practical coding and content production tasks without extra prompting, then compared the low run cost with the need for agents to make many repeated model calls.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.ifanr.com/1673553">iFanr</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>April 2026:</strong> DeepSeek released the first V4-Flash version <a href="https://www.blognone.com/node/151271" class="footnote-ref">[22]</a>.</li>
+
+
+
+<li><strong>31 July 2026:</strong> DeepSeek put V4-Flash API into public beta <a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" class="footnote-ref">[27]</a>.</li>
+
+
+
+<li><strong>31 July 2026:</strong> Hugging Face listing circulated among LocalLLaMA users <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/" class="footnote-ref">[3]</a>.</li>
+
+
+
+<li><strong>August 2026:</strong> DeepSeek expects V4-Pro Codex compatibility in early August <a href="https://techgenyz.com/deepseek-v4-flash-api/" class="footnote-ref">[21]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>MoE active parameters: Cnyes said V4-Flash uses a mixture-of-experts architecture with 284 billion total parameters and about 13 billion active parameters per token, a design that reduces inference compute versus activating the full model <a href="https://news.cnyes.com/news/id/6555685" class="footnote-ref">[23]</a>.</li>
+
+<li>Long-context efficiency: Cnyes said V4 supports a 1-million-token context and that, at that scale, per-token inference compute fell to 27% of V3.2 while KV-cache usage fell to about 10% <a href="https://news.cnyes.com/news/id/6555685" class="footnote-ref">[23]</a>.</li>
+
+<li>Agent API surface: Habr said the updated API supports parallel tool calls, reasoning levels of low, high and max, and a unified configuration path for Codex-backed agent applications and IDE plugins <a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Cnyes described V4-Pro Preview as a release from about three months earlier and said V4-Flash-0731&#x27;s DeepSWE score rose to 54.4 from 7.3 against that preview baseline <a href="https://news.cnyes.com/news/id/6555685" class="footnote-ref">[23]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Low-cost capable models can compress API margins if buyers treat frontier-adjacent intelligence as interchangeable <a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything" class="footnote-ref">[20]</a>[common].</li><li>Open weights create opportunities for hosting providers and local-inference tooling because developers can deploy outside DeepSeek&#x27;s own API <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbp7kb/deepseekaideepseekv4flash0731_on_huggingface/" class="footnote-ref">[4]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1vc4klv/deepseek_v4_flash_0731_gguf_benchmark_tensorsharp/" class="footnote-ref">[18]</a>.</li><li>Agent products benefit most from token-cost declines because multi-step tasks can require repeated calls, retries and tool use <a href="https://www.ifanr.com/1673553" class="footnote-ref">[28]</a>[common].</li><li>Benchmark claims need validation before investors treat the release as a durable competitive advantage <a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/" class="footnote-ref">[1]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Check deployment constraints before migrating agents: Confirm whether your workflow needs the API-only V4-Flash update, because DeepSeek&#x27;s app, website and V4-Pro API had not been updated in the same release <a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/" class="footnote-ref">[27]</a><a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a>.</li>
+
+<li>Validate benchmark claims on your own tasks: Run a small evaluation on your codebase or agent workflow before switching production traffic, since independent tests remained limited after launch <a href="https://habr.com/ru/companies/bothub/news/1065322/" class="footnote-ref">[24]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://techgenyz.com/deepseek-v4-flash-api/">https://techgenyz.com/deepseek-v4-flash-api/</a></li>
+
+
+
+<li><a href="https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/">https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/</a></li>
+
+
+
+<li><a href="https://www.techinasia.com/news/deepseek-opens-v4flash-api-public">https://www.techinasia.com/news/deepseek-opens-v4flash-api-public</a></li>
+
+
+
+<li><a href="https://news.smol.ai/issues/26-07-31-not-much/">https://news.smol.ai/issues/26-07-31-not-much/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMi0gFBVV95cUxOV3o4YXZVWEZta2NwZUlsbXd0QW13UkJhSzluUUFyT2E5VkU0OThQZ2xjakpzV25KYTdPQVVKQ2RSZW5uSE13VUFaUThlUHJkckJySnBiTWJHdTk1NER2cFJoaWN5bWNBdlRSdDU1UmcwVzBFcG9obUZ0RG11NUJKX19oYXBMem02anZ1aGFmZC1HaFJRMnQ4eXJmRlpOVXlfMl9BUHI3ZmJSaDlIVk1adnZrVEcwR1R3VHhaUS1scE00UjZod1lGNzRXcnE0b2xJUmc">https://news.google.com/atom/articles/CBMi0gFBVV95cUxOV3o4YXZVWEZta2NwZUlsbXd0QW13UkJhSzluUUFyT2E5VkU0OThQZ2xjakpzV25KYTdPQVVKQ2RSZW5uSE13VUFaUThlUHJkckJySnBiTWJHdTk1NER2cFJoaWN5bWNBdlRSdDU1UmcwVzBFcG9obUZ0RG11NUJKX19oYXBMem02anZ1aGFmZC1HaFJRMnQ4eXJmRlpOVXlfMl9BUHI3ZmJSaDlIVk1adnZrVEcwR1R3VHhaUS1scE00UjZod1lGNzRXcnE0b2xJUmc</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1vbq3hl/how_to_measure_the_cost_of_deepseek_v4_flash_vs/">https://www.reddit.com/r/LLMDevs/comments/1vbq3hl/how_to_measure_the_cost_of_deepseek_v4_flash_vs/</a></li>
+
+
+
+<li><a href="https://news.cnyes.com/news/id/6555685">https://news.cnyes.com/news/id/6555685</a></li>
+
+
+
+<li><a href="https://wccftech.com/deepseeks-v4-flash-guts-openais-price-war-within-hours-matching-opus-grade-output-at-0-14-per-million-tokens-as-moonshot-scales-with-20000-new-nvidia-gpus/">https://wccftech.com/deepseeks-v4-flash-guts-openais-price-war-within-hours-matching-opus-grade-output-at-0-14-per-million-tokens-as-moonshot-scales-with-20000-new-nvidia-gpus/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1vc4klv/deepseek_v4_flash_0731_gguf_benchmark_tensorsharp/">https://www.reddit.com/r/LLMDevs/comments/1vc4klv/deepseek_v4_flash_0731_gguf_benchmark_tensorsharp/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1vc92c3/v4_flash_vs_v4_flash_0731_guys_new_deepseek_v4/">https://www.reddit.com/r/ollama/comments/1vc92c3/v4_flash_vs_v4_flash_0731_guys_new_deepseek_v4/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1vbkn4r/will_ollama_upgrade_deepseek_v4_flash_on_cloud/">https://www.reddit.com/r/ollama/comments/1vbkn4r/will_ollama_upgrade_deepseek_v4_flash_on_cloud/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbidkp/deepseekv4flash_has_been_updated_the_official/">https://www.reddit.com/r/LocalLLaMA/comments/1vbidkp/deepseekv4flash_has_been_updated_the_official/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbk5ob/new_deepseek_v4flash_achieves_50_on/">https://www.reddit.com/r/LocalLLaMA/comments/1vbk5ob/new_deepseek_v4flash_achieves_50_on/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbtdok/unsloth_deepseek_v4_0731_ggufs_are_up/">https://www.reddit.com/r/LocalLLaMA/comments/1vbtdok/unsloth_deepseek_v4_0731_ggufs_are_up/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbzicu/with_release_of_deepseek_v4_i_wanted_see_how_the/">https://www.reddit.com/r/LocalLLaMA/comments/1vbzicu/with_release_of_deepseek_v4_i_wanted_see_how_the/</a></li>
+
+
+
+<li><a href="https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything">https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything</a></li>
+
+
+
+<li><a href="https://habr.com/ru/companies/bothub/news/1065322/">https://habr.com/ru/companies/bothub/news/1065322/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc4041/deepseek_v4_flash_is_now_2_open_weight_model_to/">https://www.reddit.com/r/LocalLLaMA/comments/1vc4041/deepseek_v4_flash_is_now_2_open_weight_model_to/</a></li>
+
+
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc8zbo/deepseekv4flashq4kexpertsf16hcf16compressorf16inde/">https://www.reddit.com/r/LocalLLaMA/comments/1vc8zbo/deepseekv4flashq4kexpertsf16hcf16compressorf16inde/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbtiy7/deepseek_v4_flash_on_slopcodebench/">https://www.reddit.com/r/LocalLLaMA/comments/1vbtiy7/deepseek_v4_flash_on_slopcodebench/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbp7kb/deepseekaideepseekv4flash0731_on_huggingface/">https://www.reddit.com/r/LocalLLaMA/comments/1vbp7kb/deepseekaideepseekv4flash0731_on_huggingface/</a></li>
+
+
+
+<li><a href="https://asia.nikkei.com/business/technology/artificial-intelligence/deepseek-releases-beta-version-of-v4-models-as-ai-price-war-heats-up">https://asia.nikkei.com/business/technology/artificial-intelligence/deepseek-releases-beta-version-of-v4-models-as-ai-price-war-heats-up</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbkvau/deepseekv4flash0731_now_far_surpassing_the/">https://www.reddit.com/r/LocalLLaMA/comments/1vbkvau/deepseekv4flash0731_now_far_surpassing_the/</a></li>
+
+
+
+<li><a href="https://www.blognone.com/node/151271">https://www.blognone.com/node/151271</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vbx39u/deepseek_v4_flash_ga_ranks_the_same_as_sonnet_5/">https://www.reddit.com/r/LocalLLaMA/comments/1vbx39u/deepseek_v4_flash_ga_ranks_the_same_as_sonnet_5/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/">https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/</a></li>
+
+
+
+<li><a href="https://www.ifanr.com/1673553">https://www.ifanr.com/1673553</a></li>
+
+
+
+<li><a href="https://www.latent.space/p/ainews-not-much-happened-today-038">https://www.latent.space/p/ainews-not-much-happened-today-038</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, blognone.com, latent.space, smol.ai, simonwillison.net, techgenyz.com, cnyes.com, habr.com, techinasia.com, nikkei.com, technode.com, ifanr.com, wccftech.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 14 unique domains, 29 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/Potential_Top_4669",
+      "date": "2026-07-31T06:57:29.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/",
+      "title": "DeepSeek-V4-Flash-0731 is going to cause another market crash."
+    },
+    {
+      "author": "/u/sdexca",
+      "date": "2026-07-31T17:14:23.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbx39u/deepseek_v4_flash_ga_ranks_the_same_as_sonnet_5/",
+      "title": "DeepSeek V4 Flash GA ranks the same as Sonnet 5 and Grok 4.5 on DeepSWE"
+    },
+    {
+      "author": "/u/returnity",
+      "date": "2026-07-31T23:31:15.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/",
+      "title": "DeepSeek v4 Flash for DS4 (DwarfStar) GGUF w/ DSpark MTP Head"
+    },
+    {
+      "author": "/u/cgs019283",
+      "date": "2026-07-31T12:12:35.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbp7kb/deepseekaideepseekv4flash0731_on_huggingface/",
+      "title": "deepseek-ai/DeepSeek-V4-Flash-0731 on Huggingface"
+    },
+    {
+      "author": "/u/BlackBeardAI",
+      "date": "2026-07-31T15:00:43.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbtdok/unsloth_deepseek_v4_0731_ggufs_are_up/",
+      "title": "Unsloth Deepseek V4 0731 GGUF\u0027s are UP!"
+    },
+    {
+      "author": "/u/davidthesong",
+      "date": "2026-07-31T21:32:17.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vc4041/deepseek_v4_flash_is_now_2_open_weight_model_to/",
+      "title": "Deepseek V4 Flash is now ~#2 open weight model to Kimi K3 and \u003e50x cheaper"
+    },
+    {
+      "author": "/u/challis88ocarina",
+      "date": "2026-08-01T01:01:00.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vc8zbo/deepseekv4flashq4kexpertsf16hcf16compressorf16inde/",
+      "title": "DeepSeek-V4-Flash-Q4KExperts-F16HC-F16Compressor-F16Indexer-Q8Attn-Q8Shared-Q8Out-chat-v2-imatrix-0731.gguf"
+    },
+    {
+      "author": "/u/No-Meringue5867",
+      "date": "2026-07-31T18:42:27.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbzicu/with_release_of_deepseek_v4_i_wanted_see_how_the/",
+      "title": "With release of Deepseek V4 I wanted see how the model sizes are trending over time. The trend is that by this time next year, we probably will have Opus 4.5 level models on consumer grade laptops!"
+    },
+    {
+      "author": "/u/Nunki08",
+      "date": "2026-07-31T06:04:59.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbidkp/deepseekv4flash_has_been_updated_the_official/",
+      "title": "DeepSeek-V4-Flash has been updated, \"The official release of DeepSeek-V4-Pro will follow soon\""
+    },
+    {
+      "author": "/u/MagicZhang",
+      "date": "2026-07-31T07:41:14.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbk5ob/new_deepseek_v4flash_achieves_50_on/",
+      "title": "New DeepSeek V4-Flash achieves 50 on ArtificalAnalysis Index, 1 point below GLM-5.2 and GPT-5.6 Luna"
+    },
+    {
+      "author": "/u/SnooBunnies8392",
+      "date": "2026-07-31T08:21:37.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbkvau/deepseekv4flash0731_now_far_surpassing_the/",
+      "title": "DeepSeek-V4-Flash-0731 now far surpassing the DeepSeek-V4-Pro-Preview in benchmarks"
+    },
+    {
+      "author": "/u/corruptbytes",
+      "date": "2026-07-31T15:05:45.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vbtiy7/deepseek_v4_flash_on_slopcodebench/",
+      "title": "Deepseek V4 Flash on SlopCodeBench"
+    },
+    {
+      "date": "2026-08-01T01:38:09.000Z",
+      "domain": "latent.space",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.latent.space/p/ainews-not-much-happened-today-038",
+      "title": "[AINews] not much happened today"
+    },
+    {
+      "date": "2026-07-31T09:08:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMi0gFBVV95cUxOV3o4YXZVWEZta2NwZUlsbXd0QW13UkJhSzluUUFyT2E5VkU0OThQZ2xjakpzV25KYTdPQVVKQ2RSZW5uSE13VUFaUThlUHJkckJySnBiTWJHdTk1NER2cFJoaWN5bWNBdlRSdDU1UmcwVzBFcG9obUZ0RG11NUJKX19oYXBMem02anZ1aGFmZC1HaFJRMnQ4eXJmRlpOVXlfMl9BUHI3ZmJSaDlIVk1adnZrVEcwR1R3VHhaUS1scE00UjZod1lGNzRXcnE0b2xJUmc",
+      "title": "DeepSeek releases beta version of V4 models as AI price war heats up - Nikkei Asia"
+    },
+    {
+      "author": "/u/pmv143",
+      "date": "2026-08-01T01:04:49.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1vc92c3/v4_flash_vs_v4_flash_0731_guys_new_deepseek_v4/",
+      "title": "V4 flash vs V4 Flash (0731). Guys, new DeepSeek V4 Flash(0731) is now free on InferX"
+    },
+    {
+      "author": "/u/WhiskyAKM",
+      "date": "2026-07-31T08:08:55.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1vbkn4r/will_ollama_upgrade_deepseek_v4_flash_on_cloud/",
+      "title": "Will ollama upgrade Deepseek V4 Flash on cloud?"
+    },
+    {
+      "date": "2026-07-31T05:44:39.000Z",
+      "domain": "smol.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.smol.ai/issues/26-07-31-not-much/",
+      "title": "not much happened today"
+    },
+    {
+      "author": "/u/fuzhongkai",
+      "date": "2026-07-31T21:54:58.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1vc4klv/deepseek_v4_flash_0731_gguf_benchmark_tensorsharp/",
+      "title": "Deepseek v4 Flash 0731 GGUF Benchmark: TensorSharp vs. llama.cpp"
+    },
+    {
+      "author": "/u/auto_off",
+      "date": "2026-07-31T12:51:53.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1vbq3hl/how_to_measure_the_cost_of_deepseek_v4_flash_vs/",
+      "title": "How to measure the cost of deepseek v4 flash vs luna in programming"
+    },
+    {
+      "date": "2026-07-31T23:59:44.000Z",
+      "domain": "simonwillison.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything",
+      "title": "deepseek-ai/DeepSeek-V4-Flash-0731"
+    },
+    {
+      "author": "Anjali Mishra",
+      "date": "2026-07-31T12:55:28.000Z",
+      "domain": "techgenyz.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techgenyz.com/deepseek-v4-flash-api/",
+      "title": "DeepSeek V4 Flash API Unveils Faster Tools"
+    },
+    {
+      "author": "lew",
+      "date": "2026-07-31T13:34:03.000Z",
+      "domain": "blognone.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.blognone.com/node/151271",
+      "title": "DeepSeek \u0e2d\u0e31\u0e1b\u0e40\u0e14\u0e15 V4 Flash \u0e40\u0e1e\u0e34\u0e48\u0e21\u0e04\u0e27\u0e32\u0e21\u0e40\u0e01\u0e48\u0e07\u0e16\u0e36\u0e07\u0e23\u0e30\u0e14\u0e31\u0e1a Claude Sonnet 5 \u0e41\u0e15\u0e48\u0e23\u0e32\u0e04\u0e32\u0e16\u0e39\u0e01\u0e40\u0e2b\u0e21\u0e37\u0e2d\u0e19\u0e40\u0e14\u0e34\u0e21"
+    },
+    {
+      "author": "\u9245\u4ea8\u7db2\u65b0\u805e\u4e2d\u5fc3",
+      "date": "2026-08-01T04:43:15.000Z",
+      "domain": "cnyes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.cnyes.com/news/id/6555685",
+      "title": "DeepSeek-V4-Flash\u6b63\u5f0fAPI\u4e0a\u7dda\uff01 Agent\u80fd\u529b\u66b4\u6f326\u500d \u50f9\u683c\u50c5Claude 1/90"
+    },
+    {
+      "author": "DashaPasha (BotHub)",
+      "date": "2026-07-31T11:23:45.000Z",
+      "domain": "habr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://habr.com/ru/companies/bothub/news/1065322/",
+      "title": "DeepSeek \u043e\u0431\u043d\u043e\u0432\u0438\u043b\u0430 V4-Flash: Responses API, 1\u00a0\u043c\u043b\u043d \u0442\u043e\u043a\u0435\u043d\u043e\u0432 \u043a\u043e\u043d\u0442\u0435\u043a\u0441\u0442\u0430 \u0438 \u0438\u043d\u0442\u0435\u0433\u0440\u0430\u0446\u0438\u044f \u0441\u00a0Codex"
+    },
+    {
+      "author": "Grace Priscilla Teo",
+      "date": "2026-08-01T01:37:37.000Z",
+      "domain": "techinasia.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techinasia.com/news/deepseek-opens-v4flash-api-public",
+      "title": "DeepSeek opens V4-Flash API to the public"
+    },
+    {
+      "date": "2026-08-01T07:17:37.940Z",
+      "domain": "nikkei.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://asia.nikkei.com/business/technology/artificial-intelligence/deepseek-releases-beta-version-of-v4-models-as-ai-price-war-heats-up",
+      "title": "DeepSeek releases beta version of V4 models as AI price war heats up"
+    },
+    {
+      "author": "TechNode Feed",
+      "date": "2026-07-31T07:19:25.000Z",
+      "domain": "technode.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/",
+      "title": "DeepSeek puts V4-Flash API into public beta"
+    },
+    {
+      "author": "\u90d1\u5ef7\u65ed",
+      "date": "2026-07-31T11:50:59.000Z",
+      "domain": "ifanr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ifanr.com/1673553",
+      "title": "\u5b9e\u6d4b DeepSeek V4 \u6b63\u5f0f\u7248\uff1a3 \u5757\u94b1\u5e72\u5b8c 5 \u4ef6\u4e8b\uff0cAI\u300c\u667a\u4ef7\u6bd4\u300d\u4e4b\u6218\u5f00\u6253\u4e86"
+    },
+    {
+      "author": "Rohail Saleem",
+      "date": "2026-07-31T16:10:41.000Z",
+      "domain": "wccftech.com",
+      "image": "https://kagiproxy.com/img/EYl2e4E_Rk3aPqWheTtiaQv2rRKUtoLqYf8iHpG_8h6MmZSeD8BVT3fuZvNEOpzLBu1CBhR0TIGD2LlpTl8O7fucx4SXuOWtDS2WMcHfUAUtUbk2m_Z4WLzcqEKMPNaIlH4aLesBYM00PQ",
+      "image_caption": "",
+      "link": "https://wccftech.com/deepseeks-v4-flash-guts-openais-price-war-within-hours-matching-opus-grade-output-at-0-14-per-million-tokens-as-moonshot-scales-with-20000-new-nvidia-gpus/",
+      "title": "DeepSeek\u2019s V4 Flash Guts OpenAI\u2019s Price War Within Hours, Matching Opus-Grade Output At $0.28 Per Million Tokens, As Moonshot Scales With 20,000 New NVIDIA GPUs"
+    }
+  ],
+  "business_angle": [
+    "Low-cost capable models can compress API margins if buyers treat frontier-adjacent intelligence as interchangeable [simonwillison.net#1][common].",
+    "Open weights create opportunities for hosting providers and local-inference tooling because developers can deploy outside DeepSeek\u0027s own API [reddit.com#3][reddit.com#4][reddit.com#15].",
+    "Agent products benefit most from token-cost declines because multi-step tasks can require repeated calls, retries and tool use [ifanr.com#1][common].",
+    "Benchmark claims need validation before investors treat the release as a durable competitive advantage [habr.com#1][reddit.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=blognone.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "blognone.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=latent.space\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "latent.space"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=smol.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "smol.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=simonwillison.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "simonwillison.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techgenyz.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techgenyz.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnyes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnyes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=habr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "habr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techinasia.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "techinasia.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nikkei.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nikkei.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=technode.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "technode.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ifanr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ifanr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wccftech.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wccftech.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Cnyes described V4-Pro Preview as a release from about three months earlier and said V4-Flash-0731\u0027s DeepSWE score rose to 54.4 from 7.3 against that preview baseline [cnyes.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Model Releases",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 29,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Simon Willison\u2019s Weblog",
+          "url": "https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything"
+        }
+      ],
+      "text": "Simon Willison: Willison highlighted the model\u0027s 304 billion parameters, 167GB size on Hugging Face and low token pricing, while noting that one test improved when he raised the reasoning level to high."
+    },
+    {
+      "sources": [
+        {
+          "name": "Habr",
+          "url": "https://habr.com/ru/companies/bothub/news/1065322/"
+        }
+      ],
+      "text": "Habr/BotHub: Habr\u0027s BotHub post treated the company\u0027s benchmark claims skeptically because independent testing was limited, while describing the API economics as potentially competitive for agent workloads."
+    },
+    {
+      "sources": [
+        {
+          "name": "iFanr",
+          "url": "https://www.ifanr.com/1673553"
+        }
+      ],
+      "text": "iFanr: iFanr tested the model on five practical coding and content production tasks without extra prompting, then compared the low run cost with the need for agents to make many repeated model calls."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-01T12:00:12.283Z",
+  "quote": "This may currently be the best value-per-intelligence model out there",
+  "quote_attribution": "Simon Willison\u2019s Weblog",
+  "quote_author": "Simon Willison",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://techgenyz.com/deepseek-v4-flash-api/",
+    "https://technode.com/2026/07/31/deepseek-puts-v4-flash-api-into-public-beta/",
+    "https://www.techinasia.com/news/deepseek-opens-v4flash-api-public",
+    "https://news.smol.ai/issues/26-07-31-not-much/",
+    "https://news.google.com/atom/articles/CBMi0gFBVV95cUxOV3o4YXZVWEZta2NwZUlsbXd0QW13UkJhSzluUUFyT2E5VkU0OThQZ2xjakpzV25KYTdPQVVKQ2RSZW5uSE13VUFaUThlUHJkckJySnBiTWJHdTk1NER2cFJoaWN5bWNBdlRSdDU1UmcwVzBFcG9obUZ0RG11NUJKX19oYXBMem02anZ1aGFmZC1HaFJRMnQ4eXJmRlpOVXlfMl9BUHI3ZmJSaDlIVk1adnZrVEcwR1R3VHhaUS1scE00UjZod1lGNzRXcnE0b2xJUmc",
+    "https://www.reddit.com/r/LLMDevs/comments/1vbq3hl/how_to_measure_the_cost_of_deepseek_v4_flash_vs/",
+    "https://news.cnyes.com/news/id/6555685",
+    "https://wccftech.com/deepseeks-v4-flash-guts-openais-price-war-within-hours-matching-opus-grade-output-at-0-14-per-million-tokens-as-moonshot-scales-with-20000-new-nvidia-gpus/",
+    "https://www.reddit.com/r/LLMDevs/comments/1vc4klv/deepseek_v4_flash_0731_gguf_benchmark_tensorsharp/",
+    "https://www.reddit.com/r/ollama/comments/1vc92c3/v4_flash_vs_v4_flash_0731_guys_new_deepseek_v4/",
+    "https://www.reddit.com/r/ollama/comments/1vbkn4r/will_ollama_upgrade_deepseek_v4_flash_on_cloud/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbidkp/deepseekv4flash_has_been_updated_the_official/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbk5ob/new_deepseek_v4flash_achieves_50_on/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbtdok/unsloth_deepseek_v4_0731_ggufs_are_up/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbzicu/with_release_of_deepseek_v4_i_wanted_see_how_the/",
+    "https://simonwillison.net/2026/Jul/31/deepseek-v4-flash-0731/#atom-everything",
+    "https://habr.com/ru/companies/bothub/news/1065322/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vc4041/deepseek_v4_flash_is_now_2_open_weight_model_to/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vc8zbo/deepseekv4flashq4kexpertsf16hcf16compressorf16inde/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbtiy7/deepseek_v4_flash_on_slopcodebench/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbp7kb/deepseekaideepseekv4flash0731_on_huggingface/",
+    "https://asia.nikkei.com/business/technology/artificial-intelligence/deepseek-releases-beta-version-of-v4-models-as-ai-price-war-heats-up",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbkvau/deepseekv4flash0731_now_far_surpassing_the/",
+    "https://www.blognone.com/node/151271",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vbx39u/deepseek_v4_flash_ga_ranks_the_same_as_sonnet_5/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vc6xbu/deepseek_v4_flash_for_ds4_dwarfstar_gguf_w_dspark/",
+    "https://www.ifanr.com/1673553",
+    "https://www.latent.space/p/ainews-not-much-happened-today-038"
+  ],
+  "suggested_qna": [],
+  "summary": "DeepSeek released DeepSeek-V4-Flash-0731 in public beta for API users, describing it as an upgrade focused on agent tasks, coding workflows and tool use [technode.com#1][techgenyz.com#1][techinasia.com#1]. The update adds support for the Responses API and Codex integrations, while DeepSeek said V4-Pro API, the web app and the mobile app had not yet changed [technode.com#1][latent.space#1][smol.ai#1].\n\nThe company said V4-Flash-0731 keeps the same structure and size as the preview model and improves performance through retraining or post-training rather than a larger model [technode.com#1][blognone.com#1][cnyes.com#1][habr.com#1]. DeepSeek reported benchmark scores of 82.7 on Terminal Bench 2.1 and 54.4 on DeepSWE, above its V4-Pro Preview in those agent-oriented tests [technode.com#1][blognone.com#1][cnyes.com#1][habr.com#1].\n\nDeepSeek kept low API pricing: several sources listed V4-Flash at about $0.14 per million input tokens and $0.27 to $0.28 per million output tokens, while Chinese reports said the yuan-denominated rate remains 1 yuan per million input tokens and 2 yuan per million output tokens before cache discounts [simonwillison.net#1][blognone.com#1][cnyes.com#1][ifanr.com#1]. Nikkei Asia framed the release as part of a widening AI price war, and iFanr reported that OpenAI cut GPT-5.6 Luna API prices by about 80% around the same time [nikkei.com#1][ifanr.com#1][wccftech.com#1].",
+  "talking_points": [
+    "Open weights: DeepSeek published DeepSeek-V4-Flash-0731 on Hugging Face, and community GGUF conversions appeared quickly through Unsloth and antirez-related repositories [reddit.com#3][reddit.com#4][reddit.com#6][simonwillison.net#1].",
+    "Benchmark caveat: Habr noted that independent tests were still scarce, and a Reddit post said DeepSeek\u0027s claimed DeepSWE standing had not yet been verified by DeepSWE [habr.com#1][reddit.com#1].",
+    "Model ranking: Simon Willison wrote that Artificial Analysis ranked the 304-billion-parameter release ahead of MiniMax M3, a 428-billion-parameter model, on its index-versus-cost view [simonwillison.net#1]."
+  ],
+  "technical_details": [
+    "MoE active parameters: Cnyes said V4-Flash uses a mixture-of-experts architecture with 284 billion total parameters and about 13 billion active parameters per token, a design that reduces inference compute versus activating the full model [cnyes.com#1].",
+    "Long-context efficiency: Cnyes said V4 supports a 1-million-token context and that, at that scale, per-token inference compute fell to 27% of V3.2 while KV-cache usage fell to about 10% [cnyes.com#1].",
+    "Agent API surface: Habr said the updated API supports parallel tool calls, reasoning levels of low, high and max, and a unified configuration path for Codex-backed agent applications and IDE plugins [habr.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "DeepSeek released the first V4-Flash version [blognone.com#1].",
+      "date": "April 2026",
+      "date_iso": "2026-04"
+    },
+    {
+      "content": "DeepSeek put V4-Flash API into public beta [technode.com#1].",
+      "date": "31 July 2026",
+      "date_iso": "2026-07-31"
+    },
+    {
+      "content": "Hugging Face listing circulated among LocalLLaMA users [reddit.com#3].",
+      "date": "31 July 2026",
+      "date_iso": "2026-07-31"
+    },
+    {
+      "content": "DeepSeek expects V4-Pro Codex compatibility in early August [techgenyz.com#1].",
+      "date": "August 2026",
+      "date_iso": "2026-08"
+    }
+  ],
+  "title": "DeepSeek opens V4-Flash API public beta",
+  "travel_advisory": "",
+  "unique_domains": 14,
+  "url": "https://www.reddit.com/r/LocalLLaMA/comments/1vbjdby/deepseekv4flash0731_is_going_to_cause_another/",
+  "user_action_items": [
+    "Check deployment constraints before migrating agents: Confirm whether your workflow needs the API-only V4-Flash update, because DeepSeek\u0027s app, website and V4-Pro API had not been updated in the same release [technode.com#1][habr.com#1].",
+    "Validate benchmark claims on your own tasks: Run a small evaluation on your codebase or agent workflow before switching production traffic, since independent tests remained limited after launch [habr.com#1][reddit.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
