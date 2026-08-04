@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>New benchmarks expose limits of AI coding agents - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>New benchmarks expose limits of AI coding agents</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Researchers released coding-agent benchmarks and systems on Aug. 4 that test sustained software work, shared workspaces, app generation and agent operations rather than short coding prompts. LoopsBench evaluates long-horizon development through dependency graphs across 112 tasks, eight programming languages and nine domains; its strongest tested setup, Opus-4.7 with Claude Code and outer continuation, resolved 25.00% of tasks <a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a>. SWE-Touch tested agents when a user modifies task-relevant code during a run and found counter-edits lowered the average resolve rate by 7.7 percentage points on SWE-bench Verified <a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a>.
+
+Other work examined code generation beyond repository repairs. MobileForge evaluates multi-screen mobile app generation by build success, navigation, visual fidelity, maintainability and efficiency <a href="https://arxiv.org/abs/2607.28645" class="footnote-ref">[5]</a>. WebCoderBench introduced 1,572 real user requirements and 24 fine-grained metrics for web app generation <a href="https://arxiv.org/abs/2601.02430" class="footnote-ref">[8]</a>.
+
+The releases also included production and developer-facing tooling. A GitHub Copilot trace study analyzed sampled June 2026 usage covering 3.2 million users, 13 million sessions, 761 million LLM calls and 95 trillion tokens, describing agentic coding as sparse user turns followed by autonomous loops of model calls and tool use <a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a>. Google described an agent-quality workflow that links evaluation cases, prompt changes and production traces through a coding-agent skill <a href="https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/" class="footnote-ref">[13]</a>, while Bubo, DeepSeek-Reasonix, Codeman, Keepgate and Benzi described self-hosted or local-first approaches to code review, terminal agents, agent supervision and live code-map grounding <a href="https://github.com/mountainowl/bubo" class="footnote-ref">[1]</a><a href="https://github.com/esengine/DeepSeek-Reasonix" class="footnote-ref">[14]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/" class="footnote-ref">[11]</a><a href="https://www.reddit.com/r/selfhosted/comments/1vebymy/codeman_selfhosted_mission_control_for_ai_coding/" class="footnote-ref">[12]</a><a href="https://benzi.fly.dev/" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/mountainowl/bubo">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Testing: DragonCrawl reported a 91.6% pass rate on iOS and 92.2% on Android across 1,013 automated tests, while reducing test onboarding time from 96-120 hours to under four hours <a href="https://arxiv.org/abs/2607.28750" class="footnote-ref">[6]</a>.</li>
+
+<li>Serving workload: The Copilot trace study measured average KV-cache hit rates of 90% within turns and 55% across turn boundaries; model switches and context compaction sharply reduced reuse <a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a>.</li>
+
+<li>Hardware: PCMag described OpenAI&#x27;s $230 Codex Micro as a programmable shortcut keypad made with Work Louder that works with the ChatGPT desktop app after OpenAI merged Codex into the app <a href="https://www.pcmag.com/news/openai-codex-micro-keyboard-hands-on-review" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>SWE-Touch researchers: They said strong autonomous coding performance does not show that an agent can detect workspace changes, reconcile conflicting user edits and verify revised behavior with targeted tests.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.02499">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Google Cloud AI developers: They described agent quality work as a Build &amp; Test, Ship &amp; Monitor, and Learn &amp; Refine flywheel, and said teams need discipline linking prompt changes to evaluation outcomes rather than checking only a few examples.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/">Google Developers Blog</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Bubo maintainers: They said Bubo is a self-hosted code-review agent that keeps code, diffs and review data on the user&#x27;s infrastructure and posts only actionable inline findings or an &#x27;all good&#x27; result.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/mountainowl/bubo">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Keepgate developer: The developer said Keepgate records what an agent actually verified to address cases in which agents falsely claim they ran a test, changed a file or completed a task.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>5 January 2026:</strong> WebCoderBench first version submitted to arXiv <a href="https://arxiv.org/abs/2601.02430" class="footnote-ref">[8]</a></li>
+
+
+
+<li><strong>29 May 2026:</strong> MobileForge project-level app benchmark submitted <a href="https://arxiv.org/abs/2607.28645" class="footnote-ref">[5]</a></li>
+
+
+
+<li><strong>June 2026:</strong> Copilot trace study sampled June production usage <a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a></li>
+
+
+
+<li><strong>30 June 2026:</strong> Google published agent-quality flywheel post <a href="https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/" class="footnote-ref">[13]</a></li>
+
+
+
+<li><strong>31 July 2026:</strong> LoopsBench long-horizon benchmark submitted <a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a></li>
+
+
+
+<li><strong>3 August 2026:</strong> SWE-Touch shared-workspace benchmark submitted <a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Flow-aware runtime: LoopsBench releases tests along the ready frontier of a dependency DAG and keeps completed nodes as regression obligations, requiring agents to preserve earlier work while advancing later development units <a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a>.</li>
+
+<li>Counter-Edits: SWE-Touch mines task-critical regions from multiple repair trajectories, generates plausible conflicting edits with a separate User Patch Generator, and injects those edits when agents reach relevant code <a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a>.</li>
+
+<li>Intent-based mobile testing: DragonCrawl moved from semantic embedding matching to GPT-4o multimodal intent reasoning, using vision to detect end states and tool calling for backend state transitions in regression tests <a href="https://arxiv.org/abs/2607.28750" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Data sovereignty: Bubo, DeepSeek-Reasonix, and Codeman offer self-hosted or local coding-agent approaches that keep proprietary code and review data on-premises and avoid third-party API dependencies <a href="https://github.com/mountainowl/bubo" class="footnote-ref">[1]</a><a href="https://github.com/esengine/DeepSeek-Reasonix" class="footnote-ref">[14]</a><a href="https://www.reddit.com/r/selfhosted/comments/1vebymy/codeman_selfhosted_mission_control_for_ai_coding/" class="footnote-ref">[12]</a>.</li>
+
+<li>AI infrastructure: Agentic coding sessions had long-tailed token consumption and variable workflows in the Copilot trace study, with autonomous tool-use loops that require capacity for bursty workloads <a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a>.</li>
+
+<li>Quality assurance: DragonCrawl reported reducing test onboarding from 96-120 hours to under four hours while running regression suites across iOS and Android <a href="https://arxiv.org/abs/2607.28750" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Evaluation shift: The research moves evaluation from single-shot or final-answer scoring toward process-sensitive settings: dependency-ordered tasks, shared code changes, navigation tests and production traces <a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a><a href="https://arxiv.org/abs/2607.28645" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a>.</li>
+
+<li>Measured uncertainty: ARCTIC reported a statistically significant 5.76-point additional reduction in code misalignment during experimental rollout with p = 0.026, while many other benchmark abstracts report aggregate performance without confidence intervals <a href="https://arxiv.org/abs/2607.29516" class="footnote-ref">[7]</a><a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a>.</li>
+
+<li>External validity: The Copilot study uses production-scale traces, while several benchmarks use curated or validated task sets; together they address both controlled evaluation and observed deployment behavior <a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a><a href="https://arxiv.org/abs/2601.02430" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>SWE-bench became a common repository-level benchmark for evaluating whether models can resolve real software issues, and SWE-bench Verified later narrowed the set to validated tasks [common]. The new papers test conditions that basic issue-resolution scores often omit, including long dependency chains, user edits during a run, multi-screen app behavior and production-scale serving traces <a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a><a href="https://arxiv.org/abs/2607.28645" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Model vendors may face higher serving-cost pressure from agentic coding because Copilot traces show 761 million LLM calls and 95 trillion tokens across sampled June 2026 activity <a href="https://arxiv.org/abs/2608.00101" class="footnote-ref">[10]</a>.</li><li>Self-hosted review tools like Bubo and Keepgate keep code, diffs, review data or verification records on user infrastructure, addressing constraints on sending proprietary code to external services <a href="https://github.com/mountainowl/bubo" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/" class="footnote-ref">[11]</a>.</li><li>Coding-agent benchmark results vary by task and metric: WebCoderBench found no dominant model across all evaluation metrics, and LoopsBench&#x27;s best tested configuration resolved only 25.00% of tasks <a href="https://arxiv.org/abs/2601.02430" class="footnote-ref">[8]</a><a href="https://arxiv.org/abs/2608.00267" class="footnote-ref">[3]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test agents on interrupted work: Add review scenarios where a human edits task-relevant files mid-run, mirroring SWE-Touch&#x27;s counter-edit setup <a href="https://arxiv.org/abs/2608.02499" class="footnote-ref">[4]</a>.</li>
+
+<li>Track verification evidence: Require agents to record which tests they ran and which files they changed before marking work complete, the failure mode Keepgate targets <a href="https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/" class="footnote-ref">[11]</a>.</li>
+
+<li>Compare models by task type: Use metric-level results rather than a single score because WebCoderBench found no dominant model across all web-app generation metrics <a href="https://arxiv.org/abs/2601.02430" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://benzi.fly.dev/">https://benzi.fly.dev/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/selfhosted/comments/1vebymy/codeman_selfhosted_mission_control_for_ai_coding/">https://www.reddit.com/r/selfhosted/comments/1vebymy/codeman_selfhosted_mission_control_for_ai_coding/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.29516">https://arxiv.org/abs/2607.29516</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.00267">https://arxiv.org/abs/2608.00267</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.28645">https://arxiv.org/abs/2607.28645</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.28750">https://arxiv.org/abs/2607.28750</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/openai-codex-micro-keyboard-hands-on-review">https://www.pcmag.com/news/openai-codex-micro-keyboard-hands-on-review</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.00101">https://arxiv.org/abs/2608.00101</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.02430">https://arxiv.org/abs/2601.02430</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/">https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/</a></li>
+
+
+
+<li><a href="https://github.com/esengine/DeepSeek-Reasonix">https://github.com/esengine/DeepSeek-Reasonix</a></li>
+
+
+
+<li><a href="https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/">https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.02499">https://arxiv.org/abs/2608.02499</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> arxiv.org, github.com, reddit.com, fly.dev, pcmag.com, googleblog.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 6 unique domains, 14 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "mt_owl",
+      "date": "2026-08-04T06:12:11.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/mountainowl/bubo",
+      "title": "Bubo: AI code-reviewer that learns from review comments"
+    },
+    {
+      "author": "showhz",
+      "date": "2026-08-04T03:30:27.000Z",
+      "domain": "fly.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://benzi.fly.dev/",
+      "title": "Show HN: Benzi \u2013 An AI coding assistant grounded in a live code map"
+    },
+    {
+      "author": "Han Li, Zhemin Fang, Rili Feng, Yingqi Zhao, Jiaheng Liu, Pengfei Gao, He Ye, Dayi Lin, Qingwei Lin, Saravan Rajmohan, Dongmei Zhang",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.00267",
+      "title": "LoopsBench: From Harness Engineering to Loop Engineering in Benchmarking Coding Agent"
+    },
+    {
+      "author": "Yuqiao Tan, Jinxiang Meng, Fangyu Lei, Minzheng Wang, Shizhu He, Jun Zhao, Kang Liu",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.02499",
+      "title": "SWE-Touch: Benchmarking Coding Agents When Users Touch the Code"
+    },
+    {
+      "author": "Fan Wu, Cuiyun Gao, Yiming Huang, Yang Xiao, Yujia Chen, Qing Liao",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.28645",
+      "title": "Looks Right, Works Right: A Project-Level Benchmark for Multi-Screen Mobile App Generation"
+    },
+    {
+      "author": "Sowjanya Puligadda, Mengdie Zhang, Ali Zamani, Dhruva Dixith Kurra, Eric Chen, Juan Marcano",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.28750",
+      "title": "DragonCrawl: A Generative, Intent-Based Framework for Scalable Mobile End-to-End Testing"
+    },
+    {
+      "author": "Chandra Maddila, Mashrur Rashik, Euna Mehnaz Khan, Smriti Jha, James Saindon, Nachi Nagappan, Peter C. Rigby",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.29516",
+      "title": "From Code Review to Code Critique: Intent, Drift, and Spotlight for AI-Generated Diffs at Scale"
+    },
+    {
+      "author": "Chenxu Liu, Yingjie Fu, Wei Yang, Ying Zhang, Tao Xie",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.02430",
+      "title": "WebCoderBench: Benchmarking Web Application Generation with Comprehensive and Interpretable Evaluation Metrics"
+    },
+    {
+      "date": "2026-08-03T11:00:00.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/openai-codex-micro-keyboard-hands-on-review",
+      "title": "I Snagged OpenAI\u0027s Sold-Out Vibe-Coding Gadget: Here\u0027s What the Codex Micro Can Do"
+    },
+    {
+      "author": "Banruo Liu, Haoran Qiu, \\\u0027I\\~nigo Goiri, Rodrigo Fonseca, Ricardo Bianchini, Esha Choukse",
+      "date": "2026-08-04T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.00101",
+      "title": "Agentic Coding in the Wild: Characterizing GitHub Copilot Traces at Production Scale"
+    },
+    {
+      "author": "/u/darrien1998",
+      "date": "2026-08-03T07:53:32.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/",
+      "title": "I built Keepgate to make coding agents prove work before they call it done"
+    },
+    {
+      "author": "/u/Kindly-Inside6590",
+      "date": "2026-08-03T12:24:53.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/selfhosted/comments/1vebymy/codeman_selfhosted_mission_control_for_ai_coding/",
+      "title": "Codeman: self-hosted mission control for AI coding agents, built in the open with the community, supports OpenCode, Claude Code, Codex and Gemini"
+    },
+    {
+      "date": "2026-08-04T07:16:25.255Z",
+      "domain": "googleblog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/",
+      "title": "Driving the Agent Quality Flywheel from Your Coding Agent"
+    },
+    {
+      "date": "2026-08-04T07:05:26.074Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/esengine/DeepSeek-Reasonix",
+      "title": "esengine/DeepSeek-Reasonix"
+    }
+  ],
+  "business_angle": [
+    "Model vendors may face higher serving-cost pressure from agentic coding because Copilot traces show 761 million LLM calls and 95 trillion tokens across sampled June 2026 activity [arxiv.org#7].",
+    "Self-hosted review tools like Bubo and Keepgate keep code, diffs, review data or verification records on user infrastructure, addressing constraints on sending proprietary code to external services [github.com#1][reddit.com#1].",
+    "Coding-agent benchmark results vary by task and metric: WebCoderBench found no dominant model across all evaluation metrics, and LoopsBench\u0027s best tested configuration resolved only 25.00% of tasks [arxiv.org#6][arxiv.org#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=fly.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "fly.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=googleblog.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "googleblog.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "SWE-bench became a common repository-level benchmark for evaluating whether models can resolve real software issues, and SWE-bench Verified later narrowed the set to validated tasks [common]. The new papers test conditions that basic issue-resolution scores often omit, including long dependency chains, user edits during a run, multi-screen app behavior and production-scale serving traces [arxiv.org#1][arxiv.org#2][arxiv.org#3][arxiv.org#7].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Data sovereignty: Bubo, DeepSeek-Reasonix, and Codeman offer self-hosted or local coding-agent approaches that keep proprietary code and review data on-premises and avoid third-party API dependencies [github.com#1][github.com#2][reddit.com#2].",
+    "AI infrastructure: Agentic coding sessions had long-tailed token consumption and variable workflows in the Copilot trace study, with autonomous tool-use loops that require capacity for bursty workloads [arxiv.org#7].",
+    "Quality assurance: DragonCrawl reported reducing test onboarding from 96-120 hours to under four hours while running regression suites across iOS and Android [arxiv.org#4]."
+  ],
+  "international_reactions": [],
+  "item_category": "Coding Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 14,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.02499"
+        }
+      ],
+      "text": "SWE-Touch researchers: They said strong autonomous coding performance does not show that an agent can detect workspace changes, reconcile conflicting user edits and verify revised behavior with targeted tests."
+    },
+    {
+      "sources": [
+        {
+          "name": "Google Developers Blog",
+          "url": "https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/"
+        }
+      ],
+      "text": "Google Cloud AI developers: They described agent quality work as a Build \u0026 Test, Ship \u0026 Monitor, and Learn \u0026 Refine flywheel, and said teams need discipline linking prompt changes to evaluation outcomes rather than checking only a few examples."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/mountainowl/bubo"
+        }
+      ],
+      "text": "Bubo maintainers: They said Bubo is a self-hosted code-review agent that keeps code, diffs and review data on the user\u0027s infrastructure and posts only actionable inline findings or an \u0027all good\u0027 result."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/"
+        }
+      ],
+      "text": "Keepgate developer: The developer said Keepgate records what an agent actually verified to address cases in which agents falsely claim they ran a test, changed a file or completed a task."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-04T12:00:11.856Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Evaluation shift: The research moves evaluation from single-shot or final-answer scoring toward process-sensitive settings: dependency-ordered tasks, shared code changes, navigation tests and production traces [arxiv.org#1][arxiv.org#2][arxiv.org#3][arxiv.org#7].",
+    "Measured uncertainty: ARCTIC reported a statistically significant 5.76-point additional reduction in code misalignment during experimental rollout with p = 0.026, while many other benchmark abstracts report aggregate performance without confidence intervals [arxiv.org#5][arxiv.org#1][arxiv.org#2].",
+    "External validity: The Copilot study uses production-scale traces, while several benchmarks use curated or validated task sets; together they address both controlled evaluation and observed deployment behavior [arxiv.org#7][arxiv.org#1][arxiv.org#2][arxiv.org#6]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://benzi.fly.dev/",
+    "https://www.reddit.com/r/selfhosted/comments/1vebymy/codeman_selfhosted_mission_control_for_ai_coding/",
+    "https://arxiv.org/abs/2607.29516",
+    "https://arxiv.org/abs/2608.00267",
+    "https://arxiv.org/abs/2607.28645",
+    "https://arxiv.org/abs/2607.28750",
+    "https://www.pcmag.com/news/openai-codex-micro-keyboard-hands-on-review",
+    "https://arxiv.org/abs/2608.00101",
+    "https://arxiv.org/abs/2601.02430",
+    "https://www.reddit.com/r/LLMDevs/comments/1ve6x81/i_built_keepgate_to_make_coding_agents_prove_work/",
+    "https://github.com/esengine/DeepSeek-Reasonix",
+    "https://developers.googleblog.com/driving-the-agent-quality-flywheel-from-your-coding-agent/",
+    "https://arxiv.org/abs/2608.02499",
+    "https://github.com/mountainowl/bubo"
+  ],
+  "suggested_qna": [],
+  "summary": "Researchers released coding-agent benchmarks and systems on Aug. 4 that test sustained software work, shared workspaces, app generation and agent operations rather than short coding prompts. LoopsBench evaluates long-horizon development through dependency graphs across 112 tasks, eight programming languages and nine domains; its strongest tested setup, Opus-4.7 with Claude Code and outer continuation, resolved 25.00% of tasks [arxiv.org#1]. SWE-Touch tested agents when a user modifies task-relevant code during a run and found counter-edits lowered the average resolve rate by 7.7 percentage points on SWE-bench Verified [arxiv.org#2].\n\nOther work examined code generation beyond repository repairs. MobileForge evaluates multi-screen mobile app generation by build success, navigation, visual fidelity, maintainability and efficiency [arxiv.org#3]. WebCoderBench introduced 1,572 real user requirements and 24 fine-grained metrics for web app generation [arxiv.org#6].\n\nThe releases also included production and developer-facing tooling. A GitHub Copilot trace study analyzed sampled June 2026 usage covering 3.2 million users, 13 million sessions, 761 million LLM calls and 95 trillion tokens, describing agentic coding as sparse user turns followed by autonomous loops of model calls and tool use [arxiv.org#7]. Google described an agent-quality workflow that links evaluation cases, prompt changes and production traces through a coding-agent skill [googleblog.com#1], while Bubo, DeepSeek-Reasonix, Codeman, Keepgate and Benzi described self-hosted or local-first approaches to code review, terminal agents, agent supervision and live code-map grounding [github.com#1][github.com#2][reddit.com#1][reddit.com#2][fly.dev#1].",
+  "talking_points": [
+    "Testing: DragonCrawl reported a 91.6% pass rate on iOS and 92.2% on Android across 1,013 automated tests, while reducing test onboarding time from 96-120 hours to under four hours [arxiv.org#4].",
+    "Serving workload: The Copilot trace study measured average KV-cache hit rates of 90% within turns and 55% across turn boundaries; model switches and context compaction sharply reduced reuse [arxiv.org#7].",
+    "Hardware: PCMag described OpenAI\u0027s $230 Codex Micro as a programmable shortcut keypad made with Work Louder that works with the ChatGPT desktop app after OpenAI merged Codex into the app [pcmag.com#1]."
+  ],
+  "technical_details": [
+    "Flow-aware runtime: LoopsBench releases tests along the ready frontier of a dependency DAG and keeps completed nodes as regression obligations, requiring agents to preserve earlier work while advancing later development units [arxiv.org#1].",
+    "Counter-Edits: SWE-Touch mines task-critical regions from multiple repair trajectories, generates plausible conflicting edits with a separate User Patch Generator, and injects those edits when agents reach relevant code [arxiv.org#2].",
+    "Intent-based mobile testing: DragonCrawl moved from semantic embedding matching to GPT-4o multimodal intent reasoning, using vision to detect end states and tool calling for backend state transitions in regression tests [arxiv.org#4]."
+  ],
+  "timeline": [
+    {
+      "content": "WebCoderBench first version submitted to arXiv [arxiv.org#6]",
+      "date": "5 January 2026",
+      "date_iso": "2026-01-05"
+    },
+    {
+      "content": "MobileForge project-level app benchmark submitted [arxiv.org#3]",
+      "date": "29 May 2026",
+      "date_iso": "2026-05-29"
+    },
+    {
+      "content": "Copilot trace study sampled June production usage [arxiv.org#7]",
+      "date": "June 2026",
+      "date_iso": "2026-06"
+    },
+    {
+      "content": "Google published agent-quality flywheel post [googleblog.com#1]",
+      "date": "30 June 2026",
+      "date_iso": "2026-06-30"
+    },
+    {
+      "content": "LoopsBench long-horizon benchmark submitted [arxiv.org#1]",
+      "date": "31 July 2026",
+      "date_iso": "2026-07-31"
+    },
+    {
+      "content": "SWE-Touch shared-workspace benchmark submitted [arxiv.org#2]",
+      "date": "3 August 2026",
+      "date_iso": "2026-08-03"
+    }
+  ],
+  "title": "New benchmarks expose limits of AI coding agents",
+  "travel_advisory": "",
+  "unique_domains": 6,
+  "url": "https://github.com/mountainowl/bubo",
+  "user_action_items": [
+    "Test agents on interrupted work: Add review scenarios where a human edits task-relevant files mid-run, mirroring SWE-Touch\u0027s counter-edit setup [arxiv.org#2].",
+    "Track verification evidence: Require agents to record which tests they ran and which files they changed before marking work complete, the failure mode Keepgate targets [reddit.com#1].",
+    "Compare models by task type: Use metric-level results rather than a single score because WebCoderBench found no dominant model across all web-app generation metrics [arxiv.org#6]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
