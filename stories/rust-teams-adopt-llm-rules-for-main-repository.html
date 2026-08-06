@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Rust teams adopt LLM rules for main repository - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Rust teams adopt LLM rules for main repository</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Five Rust project teams adopted a policy governing how contributors may use large language models in the rust-lang/rust monorepo, according to an Inside Rust post by Jynn Nelson, who said they originally authored the policy <a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" class="footnote-ref">[3]</a><a href="https://runtimewire.com/article/rust-teams-adopt-llm-contribution-policy" class="footnote-ref">[2]</a>. Nelson wrote that the policy is not an official Rust project stance on LLMs and does not apply across the Rust project <a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" class="footnote-ref">[3]</a>.
+
+The policy applies to people who review or moderate pull requests on rust-lang/rust, pull request authors whose code contains LLM-generated material, people who use LLMs to find issues and post them on rust-lang/rust, and people who write issues or comments that directly quote an LLM <a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" class="footnote-ref">[3]</a>. Nelson said contributors outside those groups do not need to change how they work <a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMigwFBVV95cUxNQ0lOeUdTTl9kOVBzNGgweEhKZ2xCd0hpSXAzUGZESlQyWFBzaEd1b3gycVFzR2lHNUtkbmtRdzdLRnlucXkyT0tlZFZIems4ZXhkZTVXeEp3ZzA0cThFUEY1S2NIb0pUVzdMZ1dZSmZDUXBfY1pkMVdTUEJvSTNFWGY2MA">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>While the Rust project is a collection of technical artifacts, it is also a community of people who work together to build, maintain, and extend those artifacts.</p>
+
+<cite>— Jynn Nelson (Inside Rust)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Allowed uses: The policy summary says LLMs may be used to answer questions, analyze, distill, refine, check, suggest and review, but not to create <a href="https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/" class="footnote-ref">[4]</a>.</li>
+
+<li>Review burden: LWN reported that no one except the author must read LLM output unless they choose to, and reviewers may decline to review LLM pull requests <a href="https://lwn.net/Articles/1087326/" class="footnote-ref">[5]</a>.</li>
+
+<li>Disclosure rule: LLM output is not allowed in public documentation, pull request descriptions or GitHub comments unless clearly marked, according to LWN&#x27;s summary of the policy <a href="https://lwn.net/Articles/1087326/" class="footnote-ref">[5]</a>.</li>
+
+<li>Human review: The rules say LLM reviews cannot replace human review or self-review, and project policies must be written for humans first rather than machines <a href="https://lwn.net/Articles/1087326/" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Jynn Nelson said contributing to Rust is about joining a community of maintainers as well as working on technical artifacts, and that the policy aims to preserve that collaborative dynamic.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/">Inside Rust</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>LWN noted that the policy says no one is required to use LLMs to contribute to rust-lang/rust, and that all project policies are written for humans first, with machine-readable summaries only as a secondary aid.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://lwn.net/Articles/1087326/">LWN</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>A Reddit poster on r/linux described the discussion as part of open source projects finding their way and adjusting to new realities around LLM usage policies.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Before the policy, contributors were already using LLMs in rust-lang/rust, including to translate messages into English, identify poor diagnostics for code snippets from new users, and analyze RFCs for missing interactions with other language areas <a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" class="footnote-ref">[3]</a>. Nelson said some uses respected the community while others did not, leading to a policy focused on contribution workflows in the main repository <a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/" class="footnote-ref">[3]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/">https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/</a></li>
+
+
+
+<li><a href="https://lwn.net/Articles/1087326/">https://lwn.net/Articles/1087326/</a></li>
+
+
+
+<li><a href="https://runtimewire.com/article/rust-teams-adopt-llm-contribution-policy">https://runtimewire.com/article/rust-teams-adopt-llm-contribution-policy</a></li>
+
+
+
+<li><a href="https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/">https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, google.com, runtimewire.com, rust-lang.org, lwn.net</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 5 unique domains, 5 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-05T07:22:01.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMigwFBVV95cUxNQ0lOeUdTTl9kOVBzNGgweEhKZ2xCd0hpSXAzUGZESlQyWFBzaEd1b3gycVFzR2lHNUtkbmtRdzdLRnlucXkyT0tlZFZIems4ZXhkZTVXeEp3ZzA0cThFUEY1S2NIb0pUVzdMZ1dZSmZDUXBfY1pkMVdTUEJvSTNFWGY2MA",
+      "title": "Rust Adopts a Formal LLM Policy for Its Main Repository - Unite.AI"
+    },
+    {
+      "author": "ryanmerket",
+      "date": "2026-08-05T14:12:37.000Z",
+      "domain": "runtimewire.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://runtimewire.com/article/rust-teams-adopt-llm-contribution-policy",
+      "title": "Five Rust teams adopt LLM rules to protect human code review"
+    },
+    {
+      "author": "afdbcreid",
+      "date": "2026-08-05T05:52:24.000Z",
+      "domain": "rust-lang.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/",
+      "title": "Rust-lang/rust is adopting an LLM policy"
+    },
+    {
+      "author": "/u/AiwendilH",
+      "date": "2026-08-05T09:09:26.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/",
+      "title": "rust-lang/rust is adopting an LLM policy"
+    },
+    {
+      "author": "corbet",
+      "date": "2026-08-05T13:43:00.000Z",
+      "domain": "lwn.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://lwn.net/Articles/1087326/",
+      "title": "Nelson: rust-lang/rust is adopting an LLM policy"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=runtimewire.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "runtimewire.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rust-lang.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rust-lang.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lwn.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lwn.net"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd80",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Before the policy, contributors were already using LLMs in rust-lang/rust, including to translate messages into English, identify poor diagnostics for code snippets from new users, and analyze RFCs for missing interactions with other language areas [rust-lang.org#1]. Nelson said some uses respected the community while others did not, leading to a policy focused on contribution workflows in the main repository [rust-lang.org#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Open Source",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 5,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Inside Rust",
+          "url": "https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/"
+        }
+      ],
+      "text": "Jynn Nelson said contributing to Rust is about joining a community of maintainers as well as working on technical artifacts, and that the policy aims to preserve that collaborative dynamic."
+    },
+    {
+      "sources": [
+        {
+          "name": "LWN",
+          "url": "https://lwn.net/Articles/1087326/"
+        }
+      ],
+      "text": "LWN noted that the policy says no one is required to use LLMs to contribute to rust-lang/rust, and that all project policies are written for humans first, with machine-readable summaries only as a secondary aid."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/"
+        }
+      ],
+      "text": "A Reddit poster on r/linux described the discussion as part of open source projects finding their way and adjusting to new realities around LLM usage policies."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-06T12:00:16.406Z",
+  "quote": "While the Rust project is a collection of technical artifacts, it is also a community of people who work together to build, maintain, and extend those artifacts.",
+  "quote_attribution": "Inside Rust",
+  "quote_author": "Jynn Nelson",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/atom/articles/CBMigwFBVV95cUxNQ0lOeUdTTl9kOVBzNGgweEhKZ2xCd0hpSXAzUGZESlQyWFBzaEd1b3gycVFzR2lHNUtkbmtRdzdLRnlucXkyT0tlZFZIems4ZXhkZTVXeEp3ZzA0cThFUEY1S2NIb0pUVzdMZ1dZSmZDUXBfY1pkMVdTUEJvSTNFWGY2MA",
+    "https://www.reddit.com/r/linux/comments/1vg23x0/rustlangrust_is_adopting_an_llm_policy/",
+    "https://lwn.net/Articles/1087326/",
+    "https://runtimewire.com/article/rust-teams-adopt-llm-contribution-policy",
+    "https://blog.rust-lang.org/inside-rust/2026/08/05/rust-langrust-is-adopting-an-llm-policy/"
+  ],
+  "suggested_qna": [],
+  "summary": "Five Rust project teams adopted a policy governing how contributors may use large language models in the rust-lang/rust monorepo, according to an Inside Rust post by Jynn Nelson, who said they originally authored the policy [rust-lang.org#1][runtimewire.com#1]. Nelson wrote that the policy is not an official Rust project stance on LLMs and does not apply across the Rust project [rust-lang.org#1].\n\nThe policy applies to people who review or moderate pull requests on rust-lang/rust, pull request authors whose code contains LLM-generated material, people who use LLMs to find issues and post them on rust-lang/rust, and people who write issues or comments that directly quote an LLM [rust-lang.org#1]. Nelson said contributors outside those groups do not need to change how they work [rust-lang.org#1].",
+  "talking_points": [
+    "Allowed uses: The policy summary says LLMs may be used to answer questions, analyze, distill, refine, check, suggest and review, but not to create [reddit.com#1].",
+    "Review burden: LWN reported that no one except the author must read LLM output unless they choose to, and reviewers may decline to review LLM pull requests [lwn.net#1].",
+    "Disclosure rule: LLM output is not allowed in public documentation, pull request descriptions or GitHub comments unless clearly marked, according to LWN\u0027s summary of the policy [lwn.net#1].",
+    "Human review: The rules say LLM reviews cannot replace human review or self-review, and project policies must be written for humans first rather than machines [lwn.net#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Rust teams adopt LLM rules for main repository",
+  "travel_advisory": "",
+  "unique_domains": 5,
+  "url": "https://news.google.com/atom/articles/CBMigwFBVV95cUxNQ0lOeUdTTl9kOVBzNGgweEhKZ2xCd0hpSXAzUGZESlQyWFBzaEd1b3gycVFzR2lHNUtkbmtRdzdLRnlucXkyT0tlZFZIems4ZXhkZTVXeEp3ZzA0cThFUEY1S2NIb0pUVzdMZ1dZSmZDUXBfY1pkMVdTUEJvSTNFWGY2MA",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
