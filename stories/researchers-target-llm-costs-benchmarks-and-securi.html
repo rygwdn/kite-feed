@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers target LLM costs, benchmarks and security risks - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers target LLM costs, benchmarks and security risks</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A wave of AI papers and engineering posts published or surfaced this week focuses on reducing large language model costs and latency and improving evaluation, rather than only increasing model size. The material includes an engineering breakdown of vLLM’s high-throughput inference stack, a first-principles model for LLM inference performance, and an LLM harness design that replaces always-pasted context with indexed, on-demand payloads to reduce repeated prompt costs <a href="https://www.aleksagordic.com/blog/vllm" class="footnote-ref">[1]</a><a href="https://sidbabu.com/posts/llm-perf-modeling" class="footnote-ref">[2]</a><a href="https://udnes.dev/posts/context-engineering-harness-part-1-ontology/" class="footnote-ref">[6]</a>.
+
+Several papers examine how budgets and orchestration shape model performance. Token-budget-aware reasoning dynamically adjusts reasoning length by problem complexity, CostAda allocates inference-time search effort by cost-calibrated frontier utility, TIPEX coordinates two kinds of multi-agent parallelism, and HarnessOpt-Bench evaluates LLMs as optimizers of the prompts, tools, control flow, memory and orchestration code around other agents <a href="https://arxiv.org/abs/2412.18547" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2607.26828" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2608.05791" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2608.06301" class="footnote-ref">[7]</a>. Other studies focus on measurement problems: SciCode-Verified reports that defects in an existing scientific-coding benchmark suppressed scores, GB/T-Bench measures rule-intensive review of national standards, and LangChoiceBench tests programming-language choice in project-level code generation <a href="https://arxiv.org/abs/2608.04975" class="footnote-ref">[9]</a><a href="https://arxiv.org/abs/2608.06312" class="footnote-ref">[12]</a><a href="https://arxiv.org/abs/2608.06041" class="footnote-ref">[16]</a>.
+
+Other papers cover security and reliability. SparSEEty describes a token-extraction attack against sparsity-exploiting LLM serving systems, including an instantiation inside an Intel TDX confidential virtual machine, while a self-consistency position paper argues that failures such as sycophancy, incomplete logical generalization and confident incorrect answers cannot be fully detected through isolated single-output evaluation <a href="https://arxiv.org/abs/2608.02995" class="footnote-ref">[4]</a><a href="https://arxiv.org/abs/2608.05188" class="footnote-ref">[17]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.aleksagordic.com/blog/vllm">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Coding leaderboard: DeepSWE v1.1 lists 113 long-horizon engineering tasks across 91 languages, with claude-opus-5 at 74% Pass@1 and an average cost of $11.84 <a href="https://deepswe.datacurve.ai/" class="footnote-ref">[8]</a>.</li>
+
+<li>Traffic scheduling: A WAIT-algorithm extension estimates request intensity from observed interarrival times and was tested on Markov Modulated Poisson Process workloads against Sarathi-Serve, ORCA and vLLM <a href="https://arxiv.org/abs/2608.06135" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>SparSEEty authors: They construct a neuron-activation oracle from side-channel observations and invert activation traces to reconstruct input tokens, demonstrating the attack inside an Intel TDX confidential VM.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.02995">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>SciCode-Verified authors: They found 263 defects across 65 problems, with 192 causing correct solutions to be wrongly rejected, and note that 78% required domain expertise to detect rather than clerical proofreading.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.04975">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>LangChoiceBench authors: They report that many Python selections in model reasoning traces appeared automatic or ease-driven rather than grounded in project requirements.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.06041">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>HarnessOpt-Bench authors: They treat harness optimization as a separate measurable capability and report that optimizer models differed more than the coding harnesses they used.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.06301">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>LLM serving: vLLM-centered engineering work highlights production features including paged attention, continuous batching, prefix caching, speculative decoding, multi-GPU execution and multi-node dynamic serving <a href="https://www.aleksagordic.com/blog/vllm" class="footnote-ref">[1]</a>.</li>
+
+<li>Scientific coding evaluations: The paper describes SciCode as part of the Artificial Analysis Intelligence Index and government and national-laboratory evaluation suites, extending the relevance of benchmark defects beyond a single academic leaderboard <a href="https://arxiv.org/abs/2608.04975" class="footnote-ref">[9]</a>.</li>
+
+<li>Coding agents: DeepSWE compares 20 model configurations on original long-horizon engineering tasks, with reported average costs ranging from $0.61 for gpt-5.6-luna at max effort to $21.63 for claude-fable-5 at max effort among the listed top entries <a href="https://deepswe.datacurve.ai/" class="footnote-ref">[8]</a>.</li>
+
+<li>Professional documents: GB/T-Bench targets China GB/T national standard documents and defines 25 diagnosable error types across structure, scope alignment, normative modality, terminology consistency and references <a href="https://arxiv.org/abs/2608.06312" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Efficiency research direction: The papers focus on inference-time control variables such as token budgets, search allocation, parallel execution, scheduling and decoding strategy <a href="https://arxiv.org/abs/2412.18547" class="footnote-ref">[3]</a><a href="https://arxiv.org/abs/2607.26828" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2608.05791" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2601.07568" class="footnote-ref">[11]</a><a href="https://arxiv.org/abs/2608.06135" class="footnote-ref">[13]</a>.</li>
+
+<li>Measurement reliability: SciCode-Verified shows that benchmark construction can dominate measured progress: after domain-expert corrections, reported main-problem accuracy rose from 9–27% to 69–92% <a href="https://arxiv.org/abs/2608.04975" class="footnote-ref">[9]</a>.</li>
+
+<li>Security limitation: SparSEEty indicates that performance optimizations exploiting activation sparsity can introduce deterministic leakage channels even when serving runs inside confidential computing infrastructure <a href="https://arxiv.org/abs/2608.02995" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Token-budget-aware reasoning can compress chain-of-thought reasoning with only slight performance reduction, lowering per-query token costs <a href="https://arxiv.org/abs/2412.18547" class="footnote-ref">[3]</a>.</li><li>SciCode-Verified uncovered 263 defects in a major scientific-coding benchmark, with 192 causing correct solutions to be wrongly rejected, highlighting risk in benchmark-based procurement <a href="https://arxiv.org/abs/2608.04975" class="footnote-ref">[9]</a>.</li><li>Security hardening may raise serving costs if sparsity-based optimizations require mitigation against input-dependent memory-access leakage <a href="https://arxiv.org/abs/2608.02995" class="footnote-ref">[4]</a>.</li><li>Agent products may need stronger harness engineering because HarnessOpt-Bench treats prompts, tools, memory and orchestration as performance-critical system components <a href="https://arxiv.org/abs/2608.06301" class="footnote-ref">[7]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit benchmark dependence: If you select coding or scientific models using benchmark scores, check whether the benchmark has domain-expert validation and whether grading tolerances can reject correct solutions <a href="https://arxiv.org/abs/2608.04975" class="footnote-ref">[9]</a>.</li>
+
+<li>Evaluate self-consistency: Test whether model responses remain coherent across related inputs, as single-output evaluation may miss sycophancy or logical gaps <a href="https://arxiv.org/abs/2608.05188" class="footnote-ref">[17]</a>.</li>
+
+<li>Test language selection: For code-generation agents, require the model to justify language choice against project constraints and verify that implementation matches the selected language <a href="https://arxiv.org/abs/2608.06041" class="footnote-ref">[16]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://arxiv.org/abs/2608.05791">https://arxiv.org/abs/2608.05791</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06301">https://arxiv.org/abs/2608.06301</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.26828">https://arxiv.org/abs/2607.26828</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06312">https://arxiv.org/abs/2608.06312</a></li>
+
+
+
+<li><a href="https://deepswe.datacurve.ai/">https://deepswe.datacurve.ai/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.02995">https://arxiv.org/abs/2608.02995</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.04975">https://arxiv.org/abs/2608.04975</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.05188">https://arxiv.org/abs/2608.05188</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.01707">https://arxiv.org/abs/2604.01707</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.07568">https://arxiv.org/abs/2601.07568</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06041">https://arxiv.org/abs/2608.06041</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06135">https://arxiv.org/abs/2608.06135</a></li>
+
+
+
+<li><a href="https://udnes.dev/posts/context-engineering-harness-part-1-ontology/">https://udnes.dev/posts/context-engineering-harness-part-1-ontology/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.05152">https://arxiv.org/abs/2608.05152</a></li>
+
+
+
+<li><a href="https://sidbabu.com/posts/llm-perf-modeling">https://sidbabu.com/posts/llm-perf-modeling</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2412.18547">https://arxiv.org/abs/2412.18547</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> aleksagordic.com, sidbabu.com, arxiv.org, udnes.dev, datacurve.ai</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 5 unique domains, 17 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "sebg",
+      "date": "2026-08-06T21:30:21.000Z",
+      "domain": "aleksagordic.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.aleksagordic.com/blog/vllm",
+      "title": "Inside vLLM: Anatomy of a High-Throughput LLM Inference System (2025)"
+    },
+    {
+      "author": "matt_d",
+      "date": "2026-08-06T20:25:59.000Z",
+      "domain": "sidbabu.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://sidbabu.com/posts/llm-perf-modeling",
+      "title": "Modeling LLM Performance from First Principles"
+    },
+    {
+      "author": "ankitg12",
+      "date": "2026-08-06T06:17:50.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2412.18547",
+      "title": "Token-Budget-Aware LLM Reasoning"
+    },
+    {
+      "author": "sbulaev",
+      "date": "2026-08-07T06:07:06.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.02995",
+      "title": "SparSEEty: Extracting Tokens from Sparsity-Exploiting LLM Serving Systems"
+    },
+    {
+      "author": "Yansen Zhang, Yilu Liu, Tianyu Liu, Jiamin Chen, Xiaokun Zhang, Kai Xie, Xue Liu, Yiyan Qi, Chen Ma",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.26828",
+      "title": "Budget-Aware LLM Discovery via Cost-Calibrated Frontier Utility"
+    },
+    {
+      "author": "udnes",
+      "date": "2026-08-06T07:25:19.000Z",
+      "domain": "udnes.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://udnes.dev/posts/context-engineering-harness-part-1-ontology/",
+      "title": "Context Engineering in an LLM Harness"
+    },
+    {
+      "author": "Varun Ursekar, Apaar Shanker, Yash Maurya, Shehab Yasser, Vijay S. Kalmath, Veronica Chatrath, Yuan Xue",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06301",
+      "title": "HarnessOpt-Bench: Evaluating LLMs at Harness Optimization"
+    },
+    {
+      "author": "ijidak",
+      "date": "2026-08-06T18:45:08.000Z",
+      "domain": "datacurve.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://deepswe.datacurve.ai/",
+      "title": "LLM DeepSWE Pareto Frontier"
+    },
+    {
+      "author": "sbulaev",
+      "date": "2026-08-07T02:07:16.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.04975",
+      "title": "SciCode-Verified: How Benchmark Defects Underestimated LLM Scientific-Coding"
+    },
+    {
+      "author": "Zihan Xu, Haolin Tian, Hai Jiang",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.05791",
+      "title": "A Two-Tier Perspective on Inference-Time Parallelism in Multi-Agent LLM Systems"
+    },
+    {
+      "author": "Yu-Yang Qian, Junda Su, Lanxiang Hu, Peiyuan Zhang, Zhijie Deng, Peng Zhao, Hao Zhang",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.07568",
+      "title": "d3LLM: Ultra-Fast Diffusion LLM using Pseudo-Trajectory Distillation"
+    },
+    {
+      "author": "Tao Wang, Qihao Yang, Rongjiao Liang, Lianghong Lin, Haitao Wang, Xinyu Cao, Tianyong Hao",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06312",
+      "title": "Benchmarking and Enhancing LLMs for Rule-Intensive Review of National Standard Documents"
+    },
+    {
+      "author": "Anjali Gangadhar Katageria, Shobha Rani, Raghu Nandan Sengupta",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06135",
+      "title": "LLM Inference Under Bursty Workload Distribution: Modifying the WAIT Algorithm"
+    },
+    {
+      "author": "Hao Ai",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.05152",
+      "title": "Mean-Field Dynamics of Chain-of-Thought Reasoning in Large Language Models"
+    },
+    {
+      "author": "Yanchen Wu, Tenghui Lin, Yingli Zhou, Fangyuan Zhang, Qintian Guo, Xun Zhou, Sibo Wang, Xilin Liu, Yuchi Ma, Yixiang Fang",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.01707",
+      "title": "Memory in the LLM Era: Modular Architectures and Strategies in a Unified Framework"
+    },
+    {
+      "author": "Lukas Twist, Twm Stone, Helen Yannakoudakis, Jie M. Zhang",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06041",
+      "title": "LangChoiceBench: Measuring and Explaining Programming-Language Choice in LLMs"
+    },
+    {
+      "author": "Itamar Pres, Belinda Z. Li, Laura Ruis, Zifan Carl Guo, Keya Hu, Mehul Damani, Isha Puri, Ekdeep Singh Lubana, Jacob Andreas",
+      "date": "2026-08-07T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.05188",
+      "title": "Position: It\u0027s Time to Optimize LLMs for Self-Consistency"
+    }
+  ],
+  "business_angle": [
+    "Token-budget-aware reasoning can compress chain-of-thought reasoning with only slight performance reduction, lowering per-query token costs [arxiv.org#1].",
+    "SciCode-Verified uncovered 263 defects in a major scientific-coding benchmark, with 192 causing correct solutions to be wrongly rejected, highlighting risk in benchmark-based procurement [arxiv.org#5].",
+    "Security hardening may raise serving costs if sparsity-based optimizations require mitigation against input-dependent memory-access leakage [arxiv.org#2].",
+    "Agent products may need stronger harness engineering because HarnessOpt-Bench treats prompts, tools, memory and orchestration as performance-critical system components [arxiv.org#4]."
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=aleksagordic.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aleksagordic.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sidbabu.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sidbabu.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=udnes.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "udnes.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=datacurve.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "datacurve.ai"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "LLM serving: vLLM-centered engineering work highlights production features including paged attention, continuous batching, prefix caching, speculative decoding, multi-GPU execution and multi-node dynamic serving [aleksagordic.com#1].",
+    "Scientific coding evaluations: The paper describes SciCode as part of the Artificial Analysis Intelligence Index and government and national-laboratory evaluation suites, extending the relevance of benchmark defects beyond a single academic leaderboard [arxiv.org#5].",
+    "Coding agents: DeepSWE compares 20 model configurations on original long-horizon engineering tasks, with reported average costs ranging from $0.61 for gpt-5.6-luna at max effort to $21.63 for claude-fable-5 at max effort among the listed top entries [datacurve.ai#1].",
+    "Professional documents: GB/T-Bench targets China GB/T national standard documents and defines 25 diagnosable error types across structure, scope alignment, normative modality, terminology consistency and references [arxiv.org#8]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Systems",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 17,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.02995"
+        }
+      ],
+      "text": "SparSEEty authors: They construct a neuron-activation oracle from side-channel observations and invert activation traces to reconstruct input tokens, demonstrating the attack inside an Intel TDX confidential VM."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.04975"
+        }
+      ],
+      "text": "SciCode-Verified authors: They found 263 defects across 65 problems, with 192 causing correct solutions to be wrongly rejected, and note that 78% required domain expertise to detect rather than clerical proofreading."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.06041"
+        }
+      ],
+      "text": "LangChoiceBench authors: They report that many Python selections in model reasoning traces appeared automatic or ease-driven rather than grounded in project requirements."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.06301"
+        }
+      ],
+      "text": "HarnessOpt-Bench authors: They treat harness optimization as a separate measurable capability and report that optimizer models differed more than the coding harnesses they used."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-07T12:00:11.369Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Efficiency research direction: The papers focus on inference-time control variables such as token budgets, search allocation, parallel execution, scheduling and decoding strategy [arxiv.org#1][arxiv.org#3][arxiv.org#6][arxiv.org#7][arxiv.org#9].",
+    "Measurement reliability: SciCode-Verified shows that benchmark construction can dominate measured progress: after domain-expert corrections, reported main-problem accuracy rose from 9\u201327% to 69\u201392% [arxiv.org#5].",
+    "Security limitation: SparSEEty indicates that performance optimizations exploiting activation sparsity can introduce deterministic leakage channels even when serving runs inside confidential computing infrastructure [arxiv.org#2]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.aleksagordic.com/blog/vllm",
+    "https://arxiv.org/abs/2608.05791",
+    "https://arxiv.org/abs/2608.06301",
+    "https://arxiv.org/abs/2607.26828",
+    "https://arxiv.org/abs/2608.06312",
+    "https://deepswe.datacurve.ai/",
+    "https://arxiv.org/abs/2608.02995",
+    "https://arxiv.org/abs/2608.04975",
+    "https://arxiv.org/abs/2608.05188",
+    "https://arxiv.org/abs/2604.01707",
+    "https://arxiv.org/abs/2601.07568",
+    "https://arxiv.org/abs/2608.06041",
+    "https://arxiv.org/abs/2608.06135",
+    "https://udnes.dev/posts/context-engineering-harness-part-1-ontology/",
+    "https://arxiv.org/abs/2608.05152",
+    "https://sidbabu.com/posts/llm-perf-modeling",
+    "https://arxiv.org/abs/2412.18547"
+  ],
+  "suggested_qna": [],
+  "summary": "A wave of AI papers and engineering posts published or surfaced this week focuses on reducing large language model costs and latency and improving evaluation, rather than only increasing model size. The material includes an engineering breakdown of vLLM\u2019s high-throughput inference stack, a first-principles model for LLM inference performance, and an LLM harness design that replaces always-pasted context with indexed, on-demand payloads to reduce repeated prompt costs [aleksagordic.com#1][sidbabu.com#1][udnes.dev#1].\n\nSeveral papers examine how budgets and orchestration shape model performance. Token-budget-aware reasoning dynamically adjusts reasoning length by problem complexity, CostAda allocates inference-time search effort by cost-calibrated frontier utility, TIPEX coordinates two kinds of multi-agent parallelism, and HarnessOpt-Bench evaluates LLMs as optimizers of the prompts, tools, control flow, memory and orchestration code around other agents [arxiv.org#1][arxiv.org#3][arxiv.org#6][arxiv.org#4]. Other studies focus on measurement problems: SciCode-Verified reports that defects in an existing scientific-coding benchmark suppressed scores, GB/T-Bench measures rule-intensive review of national standards, and LangChoiceBench tests programming-language choice in project-level code generation [arxiv.org#5][arxiv.org#8][arxiv.org#12].\n\nOther papers cover security and reliability. SparSEEty describes a token-extraction attack against sparsity-exploiting LLM serving systems, including an instantiation inside an Intel TDX confidential virtual machine, while a self-consistency position paper argues that failures such as sycophancy, incomplete logical generalization and confident incorrect answers cannot be fully detected through isolated single-output evaluation [arxiv.org#2][arxiv.org#13].",
+  "talking_points": [
+    "Coding leaderboard: DeepSWE v1.1 lists 113 long-horizon engineering tasks across 91 languages, with claude-opus-5 at 74% Pass@1 and an average cost of $11.84 [datacurve.ai#1].",
+    "Traffic scheduling: A WAIT-algorithm extension estimates request intensity from observed interarrival times and was tested on Markov Modulated Poisson Process workloads against Sarathi-Serve, ORCA and vLLM [arxiv.org#9]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Researchers target LLM costs, benchmarks and security risks",
+  "travel_advisory": "",
+  "unique_domains": 5,
+  "url": "https://www.aleksagordic.com/blog/vllm",
+  "user_action_items": [
+    "Audit benchmark dependence: If you select coding or scientific models using benchmark scores, check whether the benchmark has domain-expert validation and whether grading tolerances can reject correct solutions [arxiv.org#5].",
+    "Evaluate self-consistency: Test whether model responses remain coherent across related inputs, as single-output evaluation may miss sycophancy or logical gaps [arxiv.org#13].",
+    "Test language selection: For code-generation agents, require the model to justify language choice against project constraints and verify that implementation matches the selected language [arxiv.org#12]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
