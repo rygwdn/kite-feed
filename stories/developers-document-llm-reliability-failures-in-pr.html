@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers document LLM reliability failures in production workflows - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers document LLM reliability failures in production workflows</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Three practitioner posts described limits and workarounds for using LLMs in real software and content workflows: a Reddit developer said a non-browsing critique agent missed three prior-art collisions in a batch of generated ideas, MarketDaily described a multi-model system for producing personalized financial newsletters, and Fidel Ramos outlined an LLM-assisted review process for Emacs package upgrades <a href="https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/" class="footnote-ref">[1]</a><a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608" class="footnote-ref">[2]</a><a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.
+
+The MarketDaily post said its daily financial email digest serves 21 subscribers, supports U.S. and Taiwan stock holdings, sends personalized HTML reports twice a day, and uses a nine-model council, a judge and deterministic audit checks because silent degradation can produce plausible reports without throwing errors <a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608" class="footnote-ref">[2]</a>. Ramos wrote that Emacs package upgrades carry supply-chain risk because packages run arbitrary Lisp with user privileges, so his workflow pins packages to exact commits, reviews diffs before merging and uses an LLM for a first-pass security audit before upgraded code executes <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Prior-art gap: The Reddit developer said the checker was instructed to flag only facts it was sure about, which left it unable to catch shipped products it could not browse for <a href="https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/" class="footnote-ref">[1]</a>.</li>
+
+<li>Production scale: MarketDaily said the system had 75 days of production history and more than 1,800 commits after a first commit on 2026-05-19 <a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608" class="footnote-ref">[2]</a>.</li>
+
+<li>Emacs risk: Ramos identified recipe redirection as a specific supply-chain vector, where a one-line MELPA recipe change can point an existing package name to a different repository <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</li>
+
+<li>Upgrade method: The Emacs workflow verifies straight.el&#x27;s bootstrap script against a pinned SHA-256 checksum and keeps package and recipe repository pins in a version-controlled lockfile <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>The developer is seeking community approaches to prior-art verification, saying non-browsing checkers need access to external information to catch real-world collisions.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>MarketDaily rejected a simple main-model-plus-fallback design, saying the damaging failure mode is silent degradation rather than an API error.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608">MarketDaily</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Ramos wrote that the solution to Emacs package risk is deliberate upgrades, not avoidance, and that LLM-assisted review can make this practical.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://blog.fidelramos.net/software/emacs-straight-ai-review">Fidel Ramos</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Deterministic audit gate: MarketDaily places deterministic code before and after model output, including a structure prior for price versus MA20/MA50 direction and a 31-check audit gate <a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608" class="footnote-ref">[2]</a>.</li>
+
+<li>Fetch-first upgrades: Ramos&#x27; Emacs process fetches package updates before execution so diffs can be reviewed through straight.el, Magit and gptel before the new Lisp code runs <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Emacs Lisp packages execute inside the editor rather than in a sandbox, so installed packages can access local files, credentials and network resources under the user&#x27;s privileges <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>. MELPA commonly builds packages from repository commits rather than distributing centrally vetted artifacts, and Ramos said many packages are maintained by one person <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>. Those design choices make account takeovers, repository ownership changes and recipe redirection relevant to package-upgrade security <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Financial content delivered before market open has near-zero tolerance for errors, making reliability engineering essential even at small scale <a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608" class="footnote-ref">[2]</a>.</li><li>The Reddit developer and Ramos identified verification, retrieval and supply-chain review as gaps in production workflows that use unaudited LLM answers <a href="https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/" class="footnote-ref">[1]</a><a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Add retrieval to prior-art checks: Give the checking step access to browsing, search or a curated product database instead of asking a non-browsing model to flag only facts it already knows <a href="https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/" class="footnote-ref">[1]</a>.</li>
+
+<li>Separate model judgment from deterministic validation: Use code to validate facts that can be computed, such as market-data comparisons, and reserve LLMs for analysis that cannot be reduced to fixed checks <a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608" class="footnote-ref">[2]</a>.</li>
+
+<li>Check for maintainer or repository ownership changes before upgrading packages, as these can indicate supply-chain compromise <a href="https://blog.fidelramos.net/software/emacs-straight-ai-review" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://blog.fidelramos.net/software/emacs-straight-ai-review">https://blog.fidelramos.net/software/emacs-straight-ai-review</a></li>
+
+
+
+<li><a href="https://marketdaily.ai/blog/eng-llm-council-judge-en-202608">https://marketdaily.ai/blog/eng-llm-council-judge-en-202608</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, marketdaily.ai, fidelramos.net</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/yuto-makihara",
+      "date": "2026-08-08T07:13:51.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/",
+      "title": "How are you handling prior-art checks when the LLM checker can\u0027t browse?"
+    },
+    {
+      "author": "delvinchang",
+      "date": "2026-08-08T13:30:01.000Z",
+      "domain": "marketdaily.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://marketdaily.ai/blog/eng-llm-council-judge-en-202608",
+      "title": "I run a 9-model LLM council to write a financial newsletter. What breaks"
+    },
+    {
+      "author": "fidelramos",
+      "date": "2026-08-08T09:48:55.000Z",
+      "domain": "fidelramos.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://blog.fidelramos.net/software/emacs-straight-ai-review",
+      "title": "Supply-chain hygiene for Emacs: LLM review of package upgrades"
+    }
+  ],
+  "business_angle": [
+    "Financial content delivered before market open has near-zero tolerance for errors, making reliability engineering essential even at small scale [marketdaily.ai#1].",
+    "The Reddit developer and Ramos identified verification, retrieval and supply-chain review as gaps in production workflows that use unaudited LLM answers [reddit.com#1][fidelramos.net#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=marketdaily.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "marketdaily.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=fidelramos.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "fidelramos.net"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee0\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Emacs Lisp packages execute inside the editor rather than in a sandbox, so installed packages can access local files, credentials and network resources under the user\u0027s privileges [fidelramos.net#1]. MELPA commonly builds packages from repository commits rather than distributing centrally vetted artifacts, and Ramos said many packages are maintained by one person [fidelramos.net#1]. Those design choices make account takeovers, repository ownership changes and recipe redirection relevant to package-upgrade security [fidelramos.net#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Reliability",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/"
+        }
+      ],
+      "text": "The developer is seeking community approaches to prior-art verification, saying non-browsing checkers need access to external information to catch real-world collisions."
+    },
+    {
+      "sources": [
+        {
+          "name": "MarketDaily",
+          "url": "https://marketdaily.ai/blog/eng-llm-council-judge-en-202608"
+        }
+      ],
+      "text": "MarketDaily rejected a simple main-model-plus-fallback design, saying the damaging failure mode is silent degradation rather than an API error."
+    },
+    {
+      "sources": [
+        {
+          "name": "Fidel Ramos",
+          "url": "https://blog.fidelramos.net/software/emacs-straight-ai-review"
+        }
+      ],
+      "text": "Ramos wrote that the solution to Emacs package risk is deliberate upgrades, not avoidance, and that LLM-assisted review can make this practical."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-09T12:00:12.056Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/",
+    "https://blog.fidelramos.net/software/emacs-straight-ai-review",
+    "https://marketdaily.ai/blog/eng-llm-council-judge-en-202608"
+  ],
+  "suggested_qna": [],
+  "summary": "Three practitioner posts described limits and workarounds for using LLMs in real software and content workflows: a Reddit developer said a non-browsing critique agent missed three prior-art collisions in a batch of generated ideas, MarketDaily described a multi-model system for producing personalized financial newsletters, and Fidel Ramos outlined an LLM-assisted review process for Emacs package upgrades [reddit.com#1][marketdaily.ai#1][fidelramos.net#1].\n\nThe MarketDaily post said its daily financial email digest serves 21 subscribers, supports U.S. and Taiwan stock holdings, sends personalized HTML reports twice a day, and uses a nine-model council, a judge and deterministic audit checks because silent degradation can produce plausible reports without throwing errors [marketdaily.ai#1]. Ramos wrote that Emacs package upgrades carry supply-chain risk because packages run arbitrary Lisp with user privileges, so his workflow pins packages to exact commits, reviews diffs before merging and uses an LLM for a first-pass security audit before upgraded code executes [fidelramos.net#1].",
+  "talking_points": [
+    "Prior-art gap: The Reddit developer said the checker was instructed to flag only facts it was sure about, which left it unable to catch shipped products it could not browse for [reddit.com#1].",
+    "Production scale: MarketDaily said the system had 75 days of production history and more than 1,800 commits after a first commit on 2026-05-19 [marketdaily.ai#1].",
+    "Emacs risk: Ramos identified recipe redirection as a specific supply-chain vector, where a one-line MELPA recipe change can point an existing package name to a different repository [fidelramos.net#1].",
+    "Upgrade method: The Emacs workflow verifies straight.el\u0027s bootstrap script against a pinned SHA-256 checksum and keeps package and recipe repository pins in a version-controlled lockfile [fidelramos.net#1]."
+  ],
+  "technical_details": [
+    "Deterministic audit gate: MarketDaily places deterministic code before and after model output, including a structure prior for price versus MA20/MA50 direction and a 31-check audit gate [marketdaily.ai#1].",
+    "Fetch-first upgrades: Ramos\u0027 Emacs process fetches package updates before execution so diffs can be reviewed through straight.el, Magit and gptel before the new Lisp code runs [fidelramos.net#1]."
+  ],
+  "timeline": [],
+  "title": "Developers document LLM reliability failures in production workflows",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://www.reddit.com/r/LLMDevs/comments/1vipbd3/how_are_you_handling_priorart_checks_when_the_llm/",
+  "user_action_items": [
+    "Add retrieval to prior-art checks: Give the checking step access to browsing, search or a curated product database instead of asking a non-browsing model to flag only facts it already knows [reddit.com#1].",
+    "Separate model judgment from deterministic validation: Use code to validate facts that can be computed, such as market-data comparisons, and reserve LLMs for analysis that cannot be reduced to fixed checks [marketdaily.ai#1].",
+    "Check for maintainer or repository ownership changes before upgrading packages, as these can indicate supply-chain compromise [fidelramos.net#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
