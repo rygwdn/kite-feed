@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers push smaller local LLMs for devices - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers push smaller local LLMs for devices</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Developers and startups released several projects focused on smaller, local and token-efficient language models, with examples ranging from Cactus Compute’s Needle 2, a 45-million-parameter model packaged as a 14 MB binary, to a local LLM agent embedded in a Mac menu-bar system monitor <a href="https://cactuscompute.com/needle" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vkqy66/needle_2_14mb_agentic_llm_for_phones_wearables/" class="footnote-ref">[13]</a><a href="https://github.com/raro42/mac-stats" class="footnote-ref">[2]</a>. MIT Technology Review separately profiled startups working on alternatives to standard large language model approaches after Google researchers introduced the transformer architecture in the 2017 paper “Attention Is All You Need” <a href="https://www.technologyreview.com/2026/08/10/1141511/these-startups-are-chasing-the-next-big-thing-in-llms/" class="footnote-ref">[14]</a><a href="https://news.google.com/atom/articles/CBMiqgFBVV95cUxPRTQtTzd2S1RCbGItZWp5RjVZSVNTNnpyeGV5bjhveDNUZ1pfY3BFQ1Noc2hTd2FtU0t1LW5EZ3FIVFNLSlV2WWZCbWFuYklUYWlRMDJKUWRTTnJYN0RoR3Zzb3NrbllMcHFLang4WnlueWExVXp0U0I3QjdaMjRORi02al9CTHdZQ2tKWHF3aWpqWUp0YTQ2SW9BNnh3d2ZNR0EzNURhM2dFUdIBrwFBVV95cUxNWmNzVlRSWFBZVkxJMGkwY1NQUVJnYUE2OXAwYVJ5bWpqUnh1ZW5pQmU1VEk3QjdGZWhUNTdtb0E5MHNXS2YtZ3B2TXRLZDFNWnhzRjJaR2hDVVZtdlBVU3VmQnM4UWI3cV9iNmdCbnpKQ2JSZFlzbndIQkYxa2UxYTluQ3AyV0I3b2VvTTI2d1lFZzBQZ1B4cXg5Ykp2b24wZjhKcm5iWXhvb2VSS3M4" class="footnote-ref">[1]</a>.
+
+The projects focus on running AI on or near users’ devices rather than relying only on remote APIs. Needle 2 targets phones, wearables, smart-home devices, robots and newer microcontrollers, while PrivateRedact uses a local hybrid regex-and-LLM pipeline for offline personally identifiable information redaction, and Prisma lets users run multiple local or cloud models in parallel before synthesizing answers <a href="https://cactuscompute.com/needle" class="footnote-ref">[3]</a><a href="https://github.com/monjurulkarim/privateredact" class="footnote-ref">[5]</a><a href="https://www.reddit.com/r/ollama/comments/1vkk9rm/prisma_run_multiple_ai_models_in_parallel_and/" class="footnote-ref">[11]</a>.
+
+Other posts addressed the economics and limits of LLM use: JSONSEEK pitches token-efficient navigation for JSON and JSONL files, Netflix described in-house LLM serving, and a software developer argued that round-the-clock AI-agent coding work benefits inference providers while distribution remains harder than software production <a href="https://github.com/lo2589/JSONSEEK" class="footnote-ref">[4]</a><a href="https://netflixtechblog.com/in-house-llm-serving-at-netflix-a5a8e799ea2c" class="footnote-ref">[6]</a><a href="https://aaronstannard.com/escaping-ai-coding-ratrace/" class="footnote-ref">[8]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMiqgFBVV95cUxPRTQtTzd2S1RCbGItZWp5RjVZSVNTNnpyeGV5bjhveDNUZ1pfY3BFQ1Noc2hTd2FtU0t1LW5EZ3FIVFNLSlV2WWZCbWFuYklUYWlRMDJKUWRTTnJYN0RoR3Zzb3NrbllMcHFLang4WnlueWExVXp0U0I3QjdaMjRORi02al9CTHdZQ2tKWHF3aWpqWUp0YTQ2SW9BNnh3d2ZNR0EzNURhM2dFUdIBrwFBVV95cUxNWmNzVlRSWFBZVkxJMGkwY1NQUVJnYUE2OXAwYVJ5bWpqUnh1ZW5pQmU1VEk3QjdGZWhUNTdtb0E5MHNXS2YtZ3B2TXRLZDFNWnhzRjJaR2hDVVZtdlBVU3VmQnM4UWI3cV9iNmdCbnpKQ2JSZFlzbndIQkYxa2UxYTluQ3AyV0I3b2VvTTI2d1lFZzBQZ1B4cXg5Ykp2b24wZjhKcm5iWXhvb2VSS3M4">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Distribution is more important than production.</p>
+
+<cite>— Aaron Stannard (Aaron Stannard)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Hardware experiment: Mike Ayles reported a 3.16-million-parameter INT4 transformer running entirely in on-chip memory on a $250 Xilinx Kria KV260 FPGA at 59,965 tokens per second in the FPGA fabric, compared with 11 tokens per second on the board’s Arm cores <a href="https://www.mikeayles.com/blog/on-chip-llm-kv260/" class="footnote-ref">[7]</a>.</li>
+
+<li>Token costs: JSONSEEK says loading a 10 MB JSON file can equal about 2.5 million tokens and about $15 per task on Claude Opus, while its commands can reduce the file interaction to ~50-200 tokens <a href="https://github.com/lo2589/JSONSEEK" class="footnote-ref">[4]</a>.</li>
+
+<li>Privacy workflow: PrivateRedact says it handles text PDFs, scanned or image PDFs using OCR, DOCX, TXT and images while letting users review each redaction before export <a href="https://github.com/monjurulkarim/privateredact" class="footnote-ref">[5]</a>.</li>
+
+<li>Training access: A LocalLLaMA poster said they trained a 1.1-billion-parameter model on 20 billion FineWeb-Edu tokens, then fine-tuned it with LoRA on OpenHermes, for about $200 during February and March <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vkydi5/i_trained_a_1bparameter_llm_from_scratch_on_20b/" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Cactus Compute: Cactus presents Needle 2 as an Apache 2.0-licensed open model with weights on Hugging Face and a browser WebAssembly playground for testing tool use across device categories.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://cactuscompute.com/needle">Cactus Compute</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>raro42/mac-stats: The mac-stats project keeps its system monitor separate from the AI agent, making the Ollama and Discord agent optional and off by default through configuration.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/raro42/mac-stats">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>PrivateRedact: PrivateRedact criticizes cloud redaction tools for requiring users to upload the documents they want to protect and says its app redacts text values rather than merely covering a rendered layer.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/monjurulkarim/privateredact">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>JSONSEEK: JSONSEEK’s author argues agents should inspect a file’s shape, then query targeted content, rather than putting entire JSON files into a model context.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/lo2589/JSONSEEK">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Aaron Stannard: Stannard says LLM coding agents have improved his software work, but rejects the idea that developers must keep automated Claude-powered factories running around the clock to remain employable.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://aaronstannard.com/escaping-ai-coding-ratrace/">Aaron Stannard</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>CQ2-bit compression: Needle 2 uses Cactus Quants CQ2-bit compression, allowing the 45-million-parameter model to ship as a 14 MB binary and run sessions at about 28 MB peak RAM <a href="https://cactuscompute.com/needle" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vkqy66/needle_2_14mb_agentic_llm_for_phones_wearables/" class="footnote-ref">[13]</a>.</li>
+
+<li>On-chip inference loop: The FPGA experiment keeps weights and the token loop in UltraRAM and Block RAM rather than off-chip DDR, which the author identifies as the board’s bandwidth bottleneck <a href="https://www.mikeayles.com/blog/on-chip-llm-kv260/" class="footnote-ref">[7]</a>.</li>
+
+<li>JSON shape-first workflow: JSONSEEK exposes commands such as shape, fields, query and get so an agent can inspect structure and retrieve targeted values without loading the full file into context <a href="https://github.com/lo2589/JSONSEEK" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Consumer devices: Needle 2 is packaged as a 14 MB binary, and Cactus reports 500 tok/s on Raspberry Pi 5 <a href="https://cactuscompute.com/needle" class="footnote-ref">[3]</a>.</li>
+
+<li>Document privacy: PrivateRedact runs redaction offline, combining regex detection for known formats such as SSNs, cards, IBANs and dates of birth with a local LLM <a href="https://github.com/monjurulkarim/privateredact" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test local AI only after checking defaults: For mac-stats, leave the AI agent disabled unless needed, or enable it explicitly through the aiAgentEnabled setting described in the repository <a href="https://github.com/raro42/mac-stats" class="footnote-ref">[2]</a>.</li>
+
+<li>Avoid pasting full JSON files into LLM prompts: Use a shape-first and targeted-query workflow, such as JSONSEEK’s shape, fields, query and get commands, to inspect only the data needed <a href="https://github.com/lo2589/JSONSEEK" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/raro42/mac-stats">https://github.com/raro42/mac-stats</a></li>
+
+
+
+<li><a href="https://www.technologyreview.com/2026/08/10/1141511/these-startups-are-chasing-the-next-big-thing-in-llms/">https://www.technologyreview.com/2026/08/10/1141511/these-startups-are-chasing-the-next-big-thing-in-llms/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiigFBVV95cUxQY2dJU0xqWG1fb1ZiMEpsNlhmUU8ta0tCbm9sVGZEUWYtejJHcXM2OVBFOUstbnVITmRnYmVBTW5hZVhtNlA1Q3QzZVlTZTFxa1ZqS3NHSEY2a2V3M2Z5NHFDUTZkRGdadE5Zd0UxUmw3V1VTb1BOY05wMzdoZ0xhQTRKeWR1bW5nZlE">https://news.google.com/rss/articles/CBMiigFBVV95cUxQY2dJU0xqWG1fb1ZiMEpsNlhmUU8ta0tCbm9sVGZEUWYtejJHcXM2OVBFOUstbnVITmRnYmVBTW5hZVhtNlA1Q3QzZVlTZTFxa1ZqS3NHSEY2a2V3M2Z5NHFDUTZkRGdadE5Zd0UxUmw3V1VTb1BOY05wMzdoZ0xhQTRKeWR1bW5nZlE</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1vkk9rm/prisma_run_multiple_ai_models_in_parallel_and/">https://www.reddit.com/r/ollama/comments/1vkk9rm/prisma_run_multiple_ai_models_in_parallel_and/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1vkoyov/built_my_own_llm_from_scratch_looking_for/">https://www.reddit.com/r/LLMDevs/comments/1vkoyov/built_my_own_llm_from_scratch_looking_for/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1vkzry1/best_llm_for_professional_writing/">https://www.reddit.com/r/LLM/comments/1vkzry1/best_llm_for_professional_writing/</a></li>
+
+
+
+<li><a href="https://cactuscompute.com/needle">https://cactuscompute.com/needle</a></li>
+
+
+
+
+
+<li><a href="https://www.mikeayles.com/blog/on-chip-llm-kv260/">https://www.mikeayles.com/blog/on-chip-llm-kv260/</a></li>
+
+
+
+<li><a href="https://github.com/lo2589/JSONSEEK">https://github.com/lo2589/JSONSEEK</a></li>
+
+
+
+<li><a href="https://github.com/monjurulkarim/privateredact">https://github.com/monjurulkarim/privateredact</a></li>
+
+
+
+<li><a href="https://aaronstannard.com/escaping-ai-coding-ratrace/">https://aaronstannard.com/escaping-ai-coding-ratrace/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vkydi5/i_trained_a_1bparameter_llm_from_scratch_on_20b/">https://www.reddit.com/r/LocalLLaMA/comments/1vkydi5/i_trained_a_1bparameter_llm_from_scratch_on_20b/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vkqy66/needle_2_14mb_agentic_llm_for_phones_wearables/">https://www.reddit.com/r/LocalLLaMA/comments/1vkqy66/needle_2_14mb_agentic_llm_for_phones_wearables/</a></li>
+
+
+
+<li><a href="https://netflixtechblog.com/in-house-llm-serving-at-netflix-a5a8e799ea2c">https://netflixtechblog.com/in-house-llm-serving-at-netflix-a5a8e799ea2c</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1vkjbl0/local_llms_and_why_i_love_them/">https://www.reddit.com/r/ollama/comments/1vkjbl0/local_llms_and_why_i_love_them/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, reddit.com, github.com, cactuscompute.com, netflixtechblog.com, mikeayles.com, aaronstannard.com, technologyreview.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 8 unique domains, 16 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-10T09:00:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiqgFBVV95cUxPRTQtTzd2S1RCbGItZWp5RjVZSVNTNnpyeGV5bjhveDNUZ1pfY3BFQ1Noc2hTd2FtU0t1LW5EZ3FIVFNLSlV2WWZCbWFuYklUYWlRMDJKUWRTTnJYN0RoR3Zzb3NrbllMcHFLang4WnlueWExVXp0U0I3QjdaMjRORi02al9CTHdZQ2tKWHF3aWpqWUp0YTQ2SW9BNnh3d2ZNR0EzNURhM2dFUdIBrwFBVV95cUxNWmNzVlRSWFBZVkxJMGkwY1NQUVJnYUE2OXAwYVJ5bWpqUnh1ZW5pQmU1VEk3QjdGZWhUNTdtb0E5MHNXS2YtZ3B2TXRLZDFNWnhzRjJaR2hDVVZtdlBVU3VmQnM4UWI3cV9iNmdCbnpKQ2JSZFlzbndIQkYxa2UxYTluQ3AyV0I3b2VvTTI2d1lFZzBQZ1B4cXg5Ykp2b24wZjhKcm5iWXhvb2VSS3M4",
+      "title": "These startups are chasing the next big thing in LLMs - MIT Technology Review"
+    },
+    {
+      "author": "raro43",
+      "date": "2026-08-10T18:57:59.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/raro42/mac-stats",
+      "title": "I put a local LLM agent inside a menu-bar Mac monitor (and you can leave it off)"
+    },
+    {
+      "author": "HenryNdubuaku",
+      "date": "2026-08-10T17:22:07.000Z",
+      "domain": "cactuscompute.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cactuscompute.com/needle",
+      "title": "Show HN: Needle2: 14MB agentic LLM for phones, wearables, smart home and robots"
+    },
+    {
+      "author": "yoliliya",
+      "date": "2026-08-10T16:38:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/lo2589/JSONSEEK",
+      "title": "Show HN: Jsonseek \u2013 Token-efficient JSON/JSONL navigation for LLM agents"
+    },
+    {
+      "author": "rajubuet24",
+      "date": "2026-08-10T15:43:27.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/monjurulkarim/privateredact",
+      "title": "Show HN: PrivateRedact \u2013 Offline PII redaction with a local LLM, no cloud"
+    },
+    {
+      "author": "Anon84",
+      "date": "2026-08-10T12:03:26.000Z",
+      "domain": "netflixtechblog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://netflixtechblog.com/in-house-llm-serving-at-netflix-a5a8e799ea2c",
+      "title": "In-House LLM Serving at Netflix"
+    },
+    {
+      "author": "mikeayles",
+      "date": "2026-08-10T11:52:07.000Z",
+      "domain": "mikeayles.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.mikeayles.com/blog/on-chip-llm-kv260/",
+      "title": "Show HN: A tiny LLM running at 21,000 tok/s on a $250 FPGA (Live Demo)"
+    },
+    {
+      "author": "kiyanwang",
+      "date": "2026-08-10T05:53:21.000Z",
+      "domain": "aaronstannard.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://aaronstannard.com/escaping-ai-coding-ratrace/",
+      "title": "Escaping the LLM Coding Rat Race"
+    },
+    {
+      "date": "2026-08-11T04:18:11.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiigFBVV95cUxQY2dJU0xqWG1fb1ZiMEpsNlhmUU8ta0tCbm9sVGZEUWYtejJHcXM2OVBFOUstbnVITmRnYmVBTW5hZVhtNlA1Q3QzZVlTZTFxa1ZqS3NHSEY2a2V3M2Z5NHFDUTZkRGdadE5Zd0UxUmw3V1VTb1BOY05wMzdoZ0xhQTRKeWR1bW5nZlE",
+      "title": "The Hard Part of Building an AI Stock Screener Isn\u2019t the LLM - HackerNoon"
+    },
+    {
+      "author": "/u/Least_Collection_513",
+      "date": "2026-08-10T12:22:42.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1vkjbl0/local_llms_and_why_i_love_them/",
+      "title": "Local LLMs and why I love them."
+    },
+    {
+      "author": "/u/Similar_Summer6344",
+      "date": "2026-08-10T13:03:39.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1vkk9rm/prisma_run_multiple_ai_models_in_parallel_and/",
+      "title": "Prisma \u2014 run multiple AI models in parallel and synthesize their answers (local or cloud) [demo inside]"
+    },
+    {
+      "author": "/u/SevereTilt",
+      "date": "2026-08-10T21:44:43.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vkydi5/i_trained_a_1bparameter_llm_from_scratch_on_20b/",
+      "title": "I trained a 1B-parameter LLM from scratch on 20B tokens for about $200"
+    },
+    {
+      "author": "/u/Henrie_the_dreamer",
+      "date": "2026-08-10T17:12:46.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vkqy66/needle_2_14mb_agentic_llm_for_phones_wearables/",
+      "title": "Needle 2: 14MB agentic LLM for phones, wearables, smart home and robots."
+    },
+    {
+      "author": "Will Douglas Heaven",
+      "date": "2026-08-10T09:00:00.000Z",
+      "domain": "technologyreview.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.technologyreview.com/2026/08/10/1141511/these-startups-are-chasing-the-next-big-thing-in-llms/",
+      "title": "These startups are chasing the next big thing in LLMs"
+    },
+    {
+      "author": "/u/PopImpossible9164",
+      "date": "2026-08-10T16:02:18.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1vkoyov/built_my_own_llm_from_scratch_looking_for/",
+      "title": "Built my own LLM from scratch \u2014 looking for guidance on training strategy and evaluation methodology"
+    },
+    {
+      "author": "/u/Candid_Incident_9921",
+      "date": "2026-08-10T22:41:34.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1vkzry1/best_llm_for_professional_writing/",
+      "title": "Best LLM for professional writing"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cactuscompute.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cactuscompute.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=netflixtechblog.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "netflixtechblog.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mikeayles.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mikeayles.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aaronstannard.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aaronstannard.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=technologyreview.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "technologyreview.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Consumer devices: Needle 2 is packaged as a 14 MB binary, and Cactus reports 500 tok/s on Raspberry Pi 5 [cactuscompute.com#1].",
+    "Document privacy: PrivateRedact runs redaction offline, combining regex detection for known formats such as SSNs, cards, IBANs and dates of birth with a local LLM [github.com#3]."
+  ],
+  "international_reactions": [],
+  "item_category": "Local Llms",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 16,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Cactus Compute",
+          "url": "https://cactuscompute.com/needle"
+        }
+      ],
+      "text": "Cactus Compute: Cactus presents Needle 2 as an Apache 2.0-licensed open model with weights on Hugging Face and a browser WebAssembly playground for testing tool use across device categories."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/raro42/mac-stats"
+        }
+      ],
+      "text": "raro42/mac-stats: The mac-stats project keeps its system monitor separate from the AI agent, making the Ollama and Discord agent optional and off by default through configuration."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/monjurulkarim/privateredact"
+        }
+      ],
+      "text": "PrivateRedact: PrivateRedact criticizes cloud redaction tools for requiring users to upload the documents they want to protect and says its app redacts text values rather than merely covering a rendered layer."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/lo2589/JSONSEEK"
+        }
+      ],
+      "text": "JSONSEEK: JSONSEEK\u2019s author argues agents should inspect a file\u2019s shape, then query targeted content, rather than putting entire JSON files into a model context."
+    },
+    {
+      "sources": [
+        {
+          "name": "Aaron Stannard",
+          "url": "https://aaronstannard.com/escaping-ai-coding-ratrace/"
+        }
+      ],
+      "text": "Aaron Stannard: Stannard says LLM coding agents have improved his software work, but rejects the idea that developers must keep automated Claude-powered factories running around the clock to remain employable."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-11T12:00:12.315Z",
+  "quote": "Distribution is more important than production.",
+  "quote_attribution": "Aaron Stannard",
+  "quote_author": "Aaron Stannard",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/raro42/mac-stats",
+    "https://www.technologyreview.com/2026/08/10/1141511/these-startups-are-chasing-the-next-big-thing-in-llms/",
+    "https://news.google.com/rss/articles/CBMiigFBVV95cUxQY2dJU0xqWG1fb1ZiMEpsNlhmUU8ta0tCbm9sVGZEUWYtejJHcXM2OVBFOUstbnVITmRnYmVBTW5hZVhtNlA1Q3QzZVlTZTFxa1ZqS3NHSEY2a2V3M2Z5NHFDUTZkRGdadE5Zd0UxUmw3V1VTb1BOY05wMzdoZ0xhQTRKeWR1bW5nZlE",
+    "https://www.reddit.com/r/ollama/comments/1vkk9rm/prisma_run_multiple_ai_models_in_parallel_and/",
+    "https://www.reddit.com/r/LLMDevs/comments/1vkoyov/built_my_own_llm_from_scratch_looking_for/",
+    "https://www.reddit.com/r/LLM/comments/1vkzry1/best_llm_for_professional_writing/",
+    "https://cactuscompute.com/needle",
+    "https://news.google.com/atom/articles/CBMiqgFBVV95cUxPRTQtTzd2S1RCbGItZWp5RjVZSVNTNnpyeGV5bjhveDNUZ1pfY3BFQ1Noc2hTd2FtU0t1LW5EZ3FIVFNLSlV2WWZCbWFuYklUYWlRMDJKUWRTTnJYN0RoR3Zzb3NrbllMcHFLang4WnlueWExVXp0U0I3QjdaMjRORi02al9CTHdZQ2tKWHF3aWpqWUp0YTQ2SW9BNnh3d2ZNR0EzNURhM2dFUdIBrwFBVV95cUxNWmNzVlRSWFBZVkxJMGkwY1NQUVJnYUE2OXAwYVJ5bWpqUnh1ZW5pQmU1VEk3QjdGZWhUNTdtb0E5MHNXS2YtZ3B2TXRLZDFNWnhzRjJaR2hDVVZtdlBVU3VmQnM4UWI3cV9iNmdCbnpKQ2JSZFlzbndIQkYxa2UxYTluQ3AyV0I3b2VvTTI2d1lFZzBQZ1B4cXg5Ykp2b24wZjhKcm5iWXhvb2VSS3M4",
+    "https://www.mikeayles.com/blog/on-chip-llm-kv260/",
+    "https://github.com/lo2589/JSONSEEK",
+    "https://github.com/monjurulkarim/privateredact",
+    "https://aaronstannard.com/escaping-ai-coding-ratrace/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vkydi5/i_trained_a_1bparameter_llm_from_scratch_on_20b/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vkqy66/needle_2_14mb_agentic_llm_for_phones_wearables/",
+    "https://netflixtechblog.com/in-house-llm-serving-at-netflix-a5a8e799ea2c",
+    "https://www.reddit.com/r/ollama/comments/1vkjbl0/local_llms_and_why_i_love_them/"
+  ],
+  "suggested_qna": [],
+  "summary": "Developers and startups released several projects focused on smaller, local and token-efficient language models, with examples ranging from Cactus Compute\u2019s Needle 2, a 45-million-parameter model packaged as a 14 MB binary, to a local LLM agent embedded in a Mac menu-bar system monitor [cactuscompute.com#1][reddit.com#4][github.com#1]. MIT Technology Review separately profiled startups working on alternatives to standard large language model approaches after Google researchers introduced the transformer architecture in the 2017 paper \u201cAttention Is All You Need\u201d [technologyreview.com#1][google.com#1].\n\nThe projects focus on running AI on or near users\u2019 devices rather than relying only on remote APIs. Needle 2 targets phones, wearables, smart-home devices, robots and newer microcontrollers, while PrivateRedact uses a local hybrid regex-and-LLM pipeline for offline personally identifiable information redaction, and Prisma lets users run multiple local or cloud models in parallel before synthesizing answers [cactuscompute.com#1][github.com#3][reddit.com#2].\n\nOther posts addressed the economics and limits of LLM use: JSONSEEK pitches token-efficient navigation for JSON and JSONL files, Netflix described in-house LLM serving, and a software developer argued that round-the-clock AI-agent coding work benefits inference providers while distribution remains harder than software production [github.com#2][netflixtechblog.com#1][aaronstannard.com#1].",
+  "talking_points": [
+    "Hardware experiment: Mike Ayles reported a 3.16-million-parameter INT4 transformer running entirely in on-chip memory on a $250 Xilinx Kria KV260 FPGA at 59,965 tokens per second in the FPGA fabric, compared with 11 tokens per second on the board\u2019s Arm cores [mikeayles.com#1].",
+    "Token costs: JSONSEEK says loading a 10 MB JSON file can equal about 2.5 million tokens and about $15 per task on Claude Opus, while its commands can reduce the file interaction to ~50-200 tokens [github.com#2].",
+    "Privacy workflow: PrivateRedact says it handles text PDFs, scanned or image PDFs using OCR, DOCX, TXT and images while letting users review each redaction before export [github.com#3].",
+    "Training access: A LocalLLaMA poster said they trained a 1.1-billion-parameter model on 20 billion FineWeb-Edu tokens, then fine-tuned it with LoRA on OpenHermes, for about $200 during February and March [reddit.com#3]."
+  ],
+  "technical_details": [
+    "CQ2-bit compression: Needle 2 uses Cactus Quants CQ2-bit compression, allowing the 45-million-parameter model to ship as a 14 MB binary and run sessions at about 28 MB peak RAM [cactuscompute.com#1][reddit.com#4].",
+    "On-chip inference loop: The FPGA experiment keeps weights and the token loop in UltraRAM and Block RAM rather than off-chip DDR, which the author identifies as the board\u2019s bandwidth bottleneck [mikeayles.com#1].",
+    "JSON shape-first workflow: JSONSEEK exposes commands such as shape, fields, query and get so an agent can inspect structure and retrieve targeted values without loading the full file into context [github.com#2]."
+  ],
+  "timeline": [],
+  "title": "Developers push smaller local LLMs for devices",
+  "travel_advisory": "",
+  "unique_domains": 8,
+  "url": "https://news.google.com/atom/articles/CBMiqgFBVV95cUxPRTQtTzd2S1RCbGItZWp5RjVZSVNTNnpyeGV5bjhveDNUZ1pfY3BFQ1Noc2hTd2FtU0t1LW5EZ3FIVFNLSlV2WWZCbWFuYklUYWlRMDJKUWRTTnJYN0RoR3Zzb3NrbllMcHFLang4WnlueWExVXp0U0I3QjdaMjRORi02al9CTHdZQ2tKWHF3aWpqWUp0YTQ2SW9BNnh3d2ZNR0EzNURhM2dFUdIBrwFBVV95cUxNWmNzVlRSWFBZVkxJMGkwY1NQUVJnYUE2OXAwYVJ5bWpqUnh1ZW5pQmU1VEk3QjdGZWhUNTdtb0E5MHNXS2YtZ3B2TXRLZDFNWnhzRjJaR2hDVVZtdlBVU3VmQnM4UWI3cV9iNmdCbnpKQ2JSZFlzbndIQkYxa2UxYTluQ3AyV0I3b2VvTTI2d1lFZzBQZ1B4cXg5Ykp2b24wZjhKcm5iWXhvb2VSS3M4",
+  "user_action_items": [
+    "Test local AI only after checking defaults: For mac-stats, leave the AI agent disabled unless needed, or enable it explicitly through the aiAgentEnabled setting described in the repository [github.com#1].",
+    "Avoid pasting full JSON files into LLM prompts: Use a shape-first and targeted-query workflow, such as JSONSEEK\u2019s shape, fields, query and get commands, to inspect only the data needed [github.com#2]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
