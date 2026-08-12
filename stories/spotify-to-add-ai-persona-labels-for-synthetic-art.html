@@ -1,0 +1,3185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Spotify to add AI Persona labels for synthetic artists - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Spotify to add AI Persona labels for synthetic artists</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/"><img src="https://kagiproxy.com/img/uTm2R0jx2T3ec0PXQB9d_mrFqkK8uQfd6vIQT_C6BFv7nMk-LynOeGLnb_pAqvypchFzKaLBaQQqTyZMiETy49Xe_ICCN7naBKLPKwwtbboFm7uZbXdbXi1KsMgqbkIwHWAYxwwc-PnKTd7m6iE9KkKMB6Ud4fU" alt="Spotify AI Persona badges" title="Spotify AI Persona badges (consequence.net)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Spotify AI Persona badges <span class='credit'>(consequence.net)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Spotify said it will start showing an “AI Persona” badge on some artist profiles in mid-September to indicate that an artist’s public identity may be AI-generated and does not represent a real person <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music" class="footnote-ref">[8]</a>. The company said the badge responds to listener complaints about artist profiles that appear human until users discover the persona was generated by AI <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319" class="footnote-ref">[10]</a><a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists" class="footnote-ref">[11]</a>.
+
+Artists have been able to self-disclose through Spotify for Artists since Aug. 11, but Spotify said it will also review profiles whose names and imagery appear to present photorealistic AI-generated identities <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://financialpost.com/technology/tech-news/spotify-asks-artists-disclose-humans-or-ai" class="footnote-ref">[71]</a>. Once labeled, AI Personas will be excluded by default from Spotify’s editorial, algorithmic and personalized recommendations unless a user follows them <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://mashable.com/tech/spotify-ai-persona-badge-music-recommendations" class="footnote-ref">[34]</a>.
+
+Spotify said the policy is part of its Artist Identity &amp; Trust work, which also includes Verified by Spotify, SongDNA, AI Credits and Artist Profile Protection <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://www.techradar.com/audio/spotify/spotify-is-introducing-ai-persona-tags-to-differentiate-real-artists-from-the-fake-vowing-to-become-the-most-transparent-and-trustworthy-place-to-listen-to-music-but-the-tool-isnt-targeting-the-music-itself" class="footnote-ref">[29]</a>. The company said the badge covers the artist’s public identity rather than whether AI helped create the music itself <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://entertainment.slashdot.org/story/26/08/11/1741252/spotify-will-label-ai-persona-profiles-exclude-their-music-from-recommendations" class="footnote-ref">[1]</a><a href="https://expansion.mx/tecnologia/2026/08/11/spotify-etiquetara-artistas-creados-con-ia" class="footnote-ref">[54]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://entertainment.slashdot.org/story/26/08/11/1741252/spotify-will-label-ai-persona-profiles-exclude-their-music-from-recommendations">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Although there’s a broad spectrum in how artists use AI as a creative tool, the question of whether a profile represents an actual human is one where Spotify can help make a clear determination.</p>
+
+<cite>— Spotify (Spotify Newsroom)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> A fake band called the Velvet Sundown sparked a transparency debate after its streams took off while its creators distributed AI-generated photos of imaginary musicians <a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists" class="footnote-ref">[11]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Appeals process: Artists that Spotify labels will be notified and can self-disclose or appeal if they believe the badge was applied incorrectly <a href="https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music" class="footnote-ref">[8]</a><a href="https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/" class="footnote-ref">[51]</a><a href="https://www.latercera.com/culto/noticia/spotify-lanzara-etiquetas-para-identificar-a-artistas-creados-con-inteligencia-artificial/" class="footnote-ref">[52]</a>.</li>
+
+<li>Past cleanup: Spotify said in 2025 that it had removed more than 75 million spam tracks over a 12-month period, compared with a legitimate catalog of about 100 million tracks <a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists" class="footnote-ref">[11]</a><a href="https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/" class="footnote-ref">[14]</a>.</li>
+
+<li>Catalog pressure: Spotify said in 2025 that it had removed more than 75 million spam tracks over 12 months, while The Guardian reported its legitimate catalog stands at 100 million tracks <a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists" class="footnote-ref">[11]</a><a href="https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/" class="footnote-ref">[14]</a><a href="https://kaaoszine.fi/spotify-aloittaa-tekoalyartistien-merkitsemisen-ja-poistaa-ne-personoiduista-suosituksista/" class="footnote-ref">[42]</a>.</li>
+
+<li>Review priority: Spotify said it will begin reviews with profiles that have met defined audience thresholds so labeling covers the profiles users visit most <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319" class="footnote-ref">[10]</a>.</li>
+
+<li>Prior safeguards: Spotify’s 2026 identity program also includes Verified by Spotify, SongDNA, AI Credits and Artist Profile Protection <a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/" class="footnote-ref">[14]</a>.</li>
+
+<li>User reporting: Spotify plans to add a tool in the coming months for listeners to report artist profiles they believe are AI Personas without a label <a href="https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html" class="footnote-ref">[15]</a><a href="https://meduza.io/news/2026/08/12/spotify-nachnet-markirovat-ii-ispolniteley-znachkom-ai-persona-ih-muzyku-isklyuchat-iz-rekomendatsiy" class="footnote-ref">[35]</a><a href="https://dtf.ru/music/5235311-spotify-bejdzi-dlya-ii-artistov" class="footnote-ref">[57]</a>.</li>
+
+<li>Appeal process: If Spotify applies a label after review, the account holder will be notified and can self-disclose or appeal the classification <a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a><a href="https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music" class="footnote-ref">[8]</a><a href="https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html" class="footnote-ref">[15]</a><a href="https://www.latercera.com/culto/noticia/spotify-lanzara-etiquetas-para-identificar-a-artistas-creados-con-inteligencia-artificial/" class="footnote-ref">[52]</a>.</li>
+
+<li>Badge placement: Spotify said the label will appear in artist-profile banners and About sections, in Search, and on track rows across playlists <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Spotify: Spotify said its programming will focus on elevating music from authentic artists building careers in music, while still allowing artists to choose how they present themselves.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/">Spotify Newsroom</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Ifun: Ifun called the move limited because the badge does not indicate whether a song was fully or partly made with AI, noting that a human musician using AI in production, composition or vocals would not automatically receive the label.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/">Ifun</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Digital Music News: Digital Music News highlighted the significance of manual profile reviews and said the role of Spotify’s review team could matter for moderation after past platform controversies involving deceptive uploads.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/">Digital Music News</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Spotify: Spotify said it focuses its programming on music from authentic artists building careers in music, while allowing creators to choose how they present themselves.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/">Spotify Newsroom</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Critics of the scope: iFun said the approach is limited because the badge does not identify whether a specific song was fully or partly made with AI, only whether the artist profile presents an AI-generated identity.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/">iFun</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Deezer comparison: iFun contrasted Spotify’s profile-focused badge with Deezer’s policy, saying Deezer already labels fully AI-generated music and has offered a free playlist detector.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/">iFun</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>April 2026:</strong> Spotify launched the Verified by Spotify authenticity badge <a href="https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/" class="footnote-ref">[27]</a></li>
+
+
+
+<li><strong>11 August 2026:</strong> Artists could self-disclose AI Persona status <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a></li>
+
+
+
+<li><strong>September 2026:</strong> AI Persona badges are scheduled to appear <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a></li>
+
+
+
+<li><strong>April 2026:</strong> Spotify launched the Verified by Spotify authenticity badge <a href="https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/" class="footnote-ref">[27]</a></li>
+
+
+
+<li><strong>11 August 2026:</strong> Artists could begin self-disclosing AI Personas <a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a></li>
+
+
+
+<li><strong>September 2026:</strong> AI Persona badges are scheduled to start appearing to users <a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Review methodology: Spotify will use human moderators and AI detection tools to identify photorealistic AI-generated identities, starting with profiles that meet audience thresholds <a href="https://www.digitaltrends.com/home-theater/spotify-is-finally-calling-out-ai-artists-and-youll-see-it-right-away/" class="footnote-ref">[24]</a><a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a>.</li>
+
+<li>Label variants: Self-disclosed profiles will show an “AI Persona” badge; profiles identified by Spotify’s review may display a “Likely AI Persona” label <a href="https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/" class="footnote-ref">[46]</a><a href="https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/" class="footnote-ref">[51]</a>.</li>
+
+<li>Badge interaction: Tapping the badge will show whether the artist self-disclosed or Spotify applied the label after review <a href="https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/" class="footnote-ref">[18]</a><a href="https://adaderana.lk/news/cmspniqio000j356pw6o2c2x3" class="footnote-ref">[23]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Specific example: Spotify will exclude AI-generated artists such as Velvet Sundown from personalized recommendations by default, and they will carry the persona label <a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists" class="footnote-ref">[11]</a>.</li>
+
+<li>Human artists: The Guardian reported that the policy aims to distinguish deepfake artists from real performers who could lose streams to artificial rivals <a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists" class="footnote-ref">[11]</a>.</li>
+
+<li>Competing services: Ifun reported that Deezer already labels fully AI-generated music and that Tidal has also adopted labeling that goes beyond artist profiles, contrasting Spotify’s narrower identity-focused badge <a href="https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/" class="footnote-ref">[62]</a>.</li>
+
+<li>Initial rollout: The AI Persona badge will first appear on mobile in artist profiles, Search and playlist track rows starting in mid-September <a href="https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/" class="footnote-ref">[51]</a><a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a>.</li>
+
+<li>Music labeling: A group representing musicians and record labels proposed a similar voluntary labeling system in July 2026, before Spotify announced its own self-disclosure and review approach <a href="https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319" class="footnote-ref">[10]</a>.</li>
+
+<li>Industry pressure: Record labels have been pushing streaming services to label AI-generated music, with a WSJ report in July 2026 noting major labels sought mandatory marking <a href="https://dtf.ru/music/5235311-spotify-bejdzi-dlya-ii-artistov" class="footnote-ref">[57]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Spotify introduced its AI music policies in September 2025, including labels for AI music using industry-standard techniques and bans on unauthorized AI voice clones and deepfakes <a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a>. In April 2026, Spotify launched Verified by Spotify, a badge showing that a profile had been reviewed and met its authenticity standard <a href="https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/" class="footnote-ref">[27]</a><a href="https://www.franceinfo.fr/internet/streaming/spotify/spotify-va-lancer-un-badge-permettant-d-identifier-la-musique-generee-par-intelligence-artificielle_8143382.html#xtor=RSS-3-%5Bgeneral%5D" class="footnote-ref">[55]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Recommendation quality is a core asset for a music-streaming platform, so reducing unwanted synthetic personas could support user retention if listeners value clearer identity signals <a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a>[common].</li><li>If Spotify&#x27;s identity labeling becomes widely copied, competitors without similar transparency tools could face pressure to add them [common].</li><li>The badge does not identify AI-generated songs, leaving a transparency gap that rivals or rights holders could use to pressure Spotify for stricter labeling <a href="https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/" class="footnote-ref">[62]</a><a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Check labeled profiles: When badges appear in mid-September, tap an AI Persona label to see whether the artist self-disclosed or Spotify applied the badge after review <a href="https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/" class="footnote-ref">[18]</a><a href="https://adaderana.lk/news/cmspniqio000j356pw6o2c2x3" class="footnote-ref">[23]</a><a href="https://www.haber7.com/teknoloji/haber/3650627-spotifya-yapay-zeka-ayari-ai-persona-rozeti-geliyor" class="footnote-ref">[82]</a>.</li>
+
+<li>Control recommendations: Do not follow AI Persona profiles if you do not want Spotify to treat them as an explicit signal for future recommendations <a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/" class="footnote-ref">[83]</a><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/" class="footnote-ref">[7]</a><a href="https://mashable.com/tech/spotify-ai-persona-badge-music-recommendations" class="footnote-ref">[34]</a>.</li>
+
+<li>Report suspected profiles later: Spotify plans to roll out a tool in the coming months for users to report artist profiles they believe are AI Personas without a label <a href="https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html" class="footnote-ref">[15]</a><a href="https://meduza.io/news/2026/08/12/spotify-nachnet-markirovat-ii-ispolniteley-znachkom-ai-persona-ih-muzyku-isklyuchat-iz-rekomendatsiy" class="footnote-ref">[35]</a>.</li>
+
+<li>Check AI Persona disclosure: When the badge appears, tap it to see whether the artist self-disclosed or Spotify applied the label after review <a href="https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/" class="footnote-ref">[18]</a><a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/" class="footnote-ref">[84]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists">https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiugFBVV95cUxNRXM5Nk10cXFDUnN1d2tDd254ek5qZmhhWE1wZ1RzSDV0eW9jYWdnSGtoUUppZ1RzdkUtZXR2MTFBSDkwLXhZaE1SbVdSWmVtUmdPTXpxNEJkajJPdGttbDFsb1RoNllUV2J0ZWhUTHpRN1puQlZUMTZ2Z3pueVBReG9XSDFORnlFRU9aUVZOeUlGYU5HYUJweEdIQkFXMXJJWXI3cU5VanB1QmFwVWRUbEVSTHlWX3dTa2c">https://news.google.com/atom/articles/CBMiugFBVV95cUxNRXM5Nk10cXFDUnN1d2tDd254ek5qZmhhWE1wZ1RzSDV0eW9jYWdnSGtoUUppZ1RzdkUtZXR2MTFBSDkwLXhZaE1SbVdSWmVtUmdPTXpxNEJkajJPdGttbDFsb1RoNllUV2J0ZWhUTHpRN1puQlZUMTZ2Z3pueVBReG9XSDFORnlFRU9aUVZOeUlGYU5HYUJweEdIQkFXMXJJWXI3cU5VanB1QmFwVWRUbEVSTHlWX3dTa2c</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/france/comments/1vlob9w/spotify_va_lancer_un_nouveau_badge_permettant/">https://www.reddit.com/r/france/comments/1vlob9w/spotify_va_lancer_un_nouveau_badge_permettant/</a></li>
+
+
+
+<li><a href="https://habr.com/ru/news/1069468/">https://habr.com/ru/news/1069468/</a></li>
+
+
+
+<li><a href="https://www.lrt.lt/naujienos/mokslas-ir-it/11/3018359/spotify-pristatys-zyme-padesiancia-atskirti-dirbtinio-intelekto-sukurta-muzika">https://www.lrt.lt/naujienos/mokslas-ir-it/11/3018359/spotify-pristatys-zyme-padesiancia-atskirti-dirbtinio-intelekto-sukurta-muzika</a></li>
+
+
+
+<li><a href="https://www.telegraaf.nl/entertainment/cultuur/spotify-grijpt-hard-in-met-nieuwe-functie-ai-artiesten-worden-gelabeld-en-geweerd-uit-aanbevelingen/159891103.html">https://www.telegraaf.nl/entertainment/cultuur/spotify-grijpt-hard-in-met-nieuwe-functie-ai-artiesten-worden-gelabeld-en-geweerd-uit-aanbevelingen/159891103.html</a></li>
+
+
+
+<li><a href="https://www.independent.ie/business/world/spotify-to-ask-artists-to-disclose-whether-theyre-humans-or-ai/a/159900363.html">https://www.independent.ie/business/world/spotify-to-ask-artists-to-disclose-whether-theyre-humans-or-ai/a/159900363.html</a></li>
+
+
+
+<li><a href="https://www.hollywoodreporter.com/music/music-industry-news/spotify-announces-ai-personas-feature-1236670607/">https://www.hollywoodreporter.com/music/music-industry-news/spotify-announces-ai-personas-feature-1236670607/</a></li>
+
+
+
+<li><a href="https://www.perfil.com/noticias/bloomberg/bc-spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia.phtml">https://www.perfil.com/noticias/bloomberg/bc-spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia.phtml</a></li>
+
+
+
+<li><a href="https://sol.iol.pt/vida/noticias/spotify-quer-acabar-com-duvidas-sobre-artistas-criados-por-ia-e-lanca-nova-etiqueta/20260811/6a7b5b660cf2b42132dbd6f9">https://sol.iol.pt/vida/noticias/spotify-quer-acabar-com-duvidas-sobre-artistas-criados-por-ia-e-lanca-nova-etiqueta/20260811/6a7b5b660cf2b42132dbd6f9</a></li>
+
+
+
+<li><a href="https://nyheter24.se/nyheter/teknik/1504268-spotify-infor-markning-ska-avsloja-ai-genererade-artister">https://nyheter24.se/nyheter/teknik/1504268-spotify-infor-markning-ska-avsloja-ai-genererade-artister</a></li>
+
+
+
+<li><a href="https://www.theclinic.cl/2026/08/11/spotify-etiqueta-artistas-ia-algoritmo-recomendaciones/">https://www.theclinic.cl/2026/08/11/spotify-etiqueta-artistas-ia-algoritmo-recomendaciones/</a></li>
+
+
+
+<li><a href="https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/spotify-anuncia-selo-para-identificar-artistas-sinteticos-gerados-por-ia-na-plataforma.shtml">https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/spotify-anuncia-selo-para-identificar-artistas-sinteticos-gerados-por-ia-na-plataforma.shtml</a></li>
+
+
+
+<li><a href="https://www.heise.de/news/Spotify-KI-Kuenstler-bekommen-ein-Label-und-fliegen-aus-den-Empfehlungen-11410865.html">https://www.heise.de/news/Spotify-KI-Kuenstler-bekommen-ein-Label-und-fliegen-aus-den-Empfehlungen-11410865.html</a></li>
+
+
+
+<li><a href="https://www.nytimes.com/2026/08/11/arts/music/spotify-artificial-intelligence-music.html">https://www.nytimes.com/2026/08/11/arts/music/spotify-artificial-intelligence-music.html</a></li>
+
+
+
+<li><a href="https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/">https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/</a></li>
+
+
+
+<li><a href="https://meduza.io/news/2026/08/12/spotify-nachnet-markirovat-ii-ispolniteley-znachkom-ai-persona-ih-muzyku-isklyuchat-iz-rekomendatsiy">https://meduza.io/news/2026/08/12/spotify-nachnet-markirovat-ii-ispolniteley-znachkom-ai-persona-ih-muzyku-isklyuchat-iz-rekomendatsiy</a></li>
+
+
+
+<li><a href="https://expansion.mx/tecnologia/2026/08/11/spotify-etiquetara-artistas-creados-con-ia">https://expansion.mx/tecnologia/2026/08/11/spotify-etiquetara-artistas-creados-con-ia</a></li>
+
+
+
+<li><a href="https://www.ensonhaber.com/spotifydan-yapay-zeka-hamlesi-sanatci-profillerine-ai-persona-etiketi-geliyor-h1556878">https://www.ensonhaber.com/spotifydan-yapay-zeka-hamlesi-sanatci-profillerine-ai-persona-etiketi-geliyor-h1556878</a></li>
+
+
+
+<li><a href="https://www.lamontagne.fr/france-monde/economie/spotify-lance-un-badge-pour-reperer-les-artistes-generes-par-lia-voici-ce-qui-va-changer-pour-les-auditeurs_15031629/">https://www.lamontagne.fr/france-monde/economie/spotify-lance-un-badge-pour-reperer-les-artistes-generes-par-lia-voici-ce-qui-va-changer-pour-les-auditeurs_15031629/</a></li>
+
+
+
+<li><a href="https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319">https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319</a></li>
+
+
+
+<li><a href="https://www.techradar.com/audio/spotify/spotify-is-introducing-ai-persona-tags-to-differentiate-real-artists-from-the-fake-vowing-to-become-the-most-transparent-and-trustworthy-place-to-listen-to-music-but-the-tool-isnt-targeting-the-music-itself">https://www.techradar.com/audio/spotify/spotify-is-introducing-ai-persona-tags-to-differentiate-real-artists-from-the-fake-vowing-to-become-the-most-transparent-and-trustworthy-place-to-listen-to-music-but-the-tool-isnt-targeting-the-music-itself</a></li>
+
+
+
+<li><a href="https://kaaoszine.fi/spotify-aloittaa-tekoalyartistien-merkitsemisen-ja-poistaa-ne-personoiduista-suosituksista/">https://kaaoszine.fi/spotify-aloittaa-tekoalyartistien-merkitsemisen-ja-poistaa-ne-personoiduista-suosituksista/</a></li>
+
+
+
+<li><a href="https://www.franceinfo.fr/internet/streaming/spotify/spotify-va-lancer-un-badge-permettant-d-identifier-la-musique-generee-par-intelligence-artificielle_8143382.html#xtor=RSS-3-%5Bgeneral%5D">https://www.franceinfo.fr/internet/streaming/spotify/spotify-va-lancer-un-badge-permettant-d-identifier-la-musique-generee-par-intelligence-artificielle_8143382.html#xtor=RSS-3-%5Bgeneral%5D</a></li>
+
+
+
+<li><a href="https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/">https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/</a></li>
+
+
+
+<li><a href="https://newsroom.spotify.com/2026-08-11/spotify-fuhrt-eine-neue-kennzeichnung-fur-ki-generierte-kunstlerinnen-identitaten-ein/">https://newsroom.spotify.com/2026-08-11/spotify-fuhrt-eine-neue-kennzeichnung-fur-ki-generierte-kunstlerinnen-identitaten-ein/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/Music/comments/1vlxyxx/spotify_is_cracking_down_on_profiles_of_artists/">https://www.reddit.com/r/Music/comments/1vlxyxx/spotify_is_cracking_down_on_profiles_of_artists/</a></li>
+
+
+
+
+
+<li><a href="https://www.sverigesradio.se/artikel/9273620">https://www.sverigesradio.se/artikel/9273620</a></li>
+
+
+
+<li><a href="https://metalinjection.net/news/spotify-ai-generated-music-platform-to-add-tags">https://metalinjection.net/news/spotify-ai-generated-music-platform-to-add-tags</a></li>
+
+
+
+<li><a href="https://www.hs.fi/popkulttuuri/art-2000012198812.html">https://www.hs.fi/popkulttuuri/art-2000012198812.html</a></li>
+
+
+
+<li><a href="https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/">https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/</a></li>
+
+
+
+<li><a href="https://www.teletica.com/entretenimiento/spotify-anuncia-lanzamiento-de-una-etiqueta-para-identificar-musica-creada-con-ia_415269">https://www.teletica.com/entretenimiento/spotify-anuncia-lanzamiento-de-una-etiqueta-para-identificar-musica-creada-con-ia_415269</a></li>
+
+
+
+<li><a href="https://www.citizen.co.za/lifestyle/technology/spotify-to-launch-badge-identifying-ai-music/">https://www.citizen.co.za/lifestyle/technology/spotify-to-launch-badge-identifying-ai-music/</a></li>
+
+
+
+<li><a href="https://www.rollingstone.com/music/music-news/spotify-labeling-ai-artists-1235606855/">https://www.rollingstone.com/music/music-news/spotify-labeling-ai-artists-1235606855/</a></li>
+
+
+
+<li><a href="https://www.spiegel.de/netzwelt/spotify-plattform-will-ki-generierte-nutzerprofile-kennzeichnen-a-368c2b03-6409-4660-a708-1f011fa8abc5#ref=rss">https://www.spiegel.de/netzwelt/spotify-plattform-will-ki-generierte-nutzerprofile-kennzeichnen-a-368c2b03-6409-4660-a708-1f011fa8abc5#ref=rss</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMimwFBVV95cUxOSklXWUtfRmtaZmxKUHdoY29DaXlPd1NCb1JqTjdCa0t1T01RWlJnMmN5OE5fWGlicFRCU3FqZlc0VFRpMWJnR3hlNVlvQjRkQVVDRXJTSnNIRk0wcGlYanVTaGgyRTdDcVdEaEF6dTNJNGMzSElYTms1TVNRWldlQXk0bHdkbVpHb0dSekFNVnNONG9kY3ZQM3dQdw">https://news.google.com/atom/articles/CBMimwFBVV95cUxOSklXWUtfRmtaZmxKUHdoY29DaXlPd1NCb1JqTjdCa0t1T01RWlJnMmN5OE5fWGlicFRCU3FqZlc0VFRpMWJnR3hlNVlvQjRkQVVDRXJTSnNIRk0wcGlYanVTaGgyRTdDcVdEaEF6dTNJNGMzSElYTms1TVNRWldlQXk0bHdkbVpHb0dSekFNVnNONG9kY3ZQM3dQdw</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/Music/comments/1vm6lg1/spotify_to_add_ai_persona_badges_to_flag/">https://www.reddit.com/r/Music/comments/1vm6lg1/spotify_to_add_ai_persona_badges_to_flag/</a></li>
+
+
+
+<li><a href="https://suspilne.media/culture/1376824-spotify-pocne-markuvati-vikonavciv-zgenerovanih-stucnim-intelektom-ta-obmezit-ih-u-rekomendaciah/">https://suspilne.media/culture/1376824-spotify-pocne-markuvati-vikonavciv-zgenerovanih-stucnim-intelektom-ta-obmezit-ih-u-rekomendaciah/</a></li>
+
+
+
+<li><a href="https://www.golem.de/news/musik-streaming-spotify-markiert-ki-ersteller-mit-neuem-persona-label-2608-211836.html">https://www.golem.de/news/musik-streaming-spotify-markiert-ki-ersteller-mit-neuem-persona-label-2608-211836.html</a></li>
+
+
+
+<li><a href="https://www.derstandard.at/story/3000000335211/spotify-f252hrt-kennzeichnung-f252r-ki-generierte-profile-ein">https://www.derstandard.at/story/3000000335211/spotify-f252hrt-kennzeichnung-f252r-ki-generierte-profile-ein</a></li>
+
+
+
+<li><a href="https://www.evrensel.net/haber/5996023/spotify-duyurdu-yapay-zeka-profillerine-ai-persona-etiketi-gelecek">https://www.evrensel.net/haber/5996023/spotify-duyurdu-yapay-zeka-profillerine-ai-persona-etiketi-gelecek</a></li>
+
+
+
+<li><a href="https://www.latercera.com/culto/noticia/spotify-lanzara-etiquetas-para-identificar-a-artistas-creados-con-inteligencia-artificial/">https://www.latercera.com/culto/noticia/spotify-lanzara-etiquetas-para-identificar-a-artistas-creados-con-inteligencia-artificial/</a></li>
+
+
+
+<li><a href="https://www.kathimerini.gr/culture/music/564396328/to-spotify-tha-markarei-toys-ai-kallitechnes/">https://www.kathimerini.gr/culture/music/564396328/to-spotify-tha-markarei-toys-ai-kallitechnes/</a></li>
+
+
+
+<li><a href="https://tweakers.net/nieuws/250882/spotify-markeert-ai-gegenereerde-artiesten-vanaf-half-september-met-nieuw-label.html">https://tweakers.net/nieuws/250882/spotify-markeert-ai-gegenereerde-artiesten-vanaf-half-september-met-nieuw-label.html</a></li>
+
+
+
+<li><a href="https://indianexpress.com/article/technology/tech-news-technology/spotify-to-slap-ai-persona-badges-on-ai-generated-artist-profiles-10829138/">https://indianexpress.com/article/technology/tech-news-technology/spotify-to-slap-ai-persona-badges-on-ai-generated-artist-profiles-10829138/</a></li>
+
+
+
+<li><a href="http://www.df.cl/internacional/multinacionales/spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia-a">http://www.df.cl/internacional/multinacionales/spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia-a</a></li>
+
+
+
+<li><a href="https://aristeguinoticias.com/1108/kiosko/spotify-etiquetara-a-los-artistas-creados-con-inteligencia-artificial/">https://aristeguinoticias.com/1108/kiosko/spotify-etiquetara-a-los-artistas-creados-con-inteligencia-artificial/</a></li>
+
+
+
+<li><a href="https://www.20min.ch/fr/story/musique-spotify-va-etiqueter-les-artistes-ia-et-les-virer-des-playlists-103616228">https://www.20min.ch/fr/story/musique-spotify-va-etiqueter-les-artistes-ia-et-les-virer-des-playlists-103616228</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music">https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiqgFBVV95cUxQejM4MFFFM2FqUjh2YVBxamIxWWtvaDZodU4zdWd2cjFXUl9ETHhHaUNXcnlXYmw5TVlnd0d3QUpBVTdxX2tGZzJGbVN5QjY0eDNiRkRYQzZGbGRzaFo1dXlsdkhEc1VXci1WaHo2T0FFLUY0amxHM3pBeDVhdkhZTk5TVmFBLTViVnZxa19wY0MtUi1jeTNOd1NtX1JKX3ljMG9QLW1EeGl1dw">https://news.google.com/atom/articles/CBMiqgFBVV95cUxQejM4MFFFM2FqUjh2YVBxamIxWWtvaDZodU4zdWd2cjFXUl9ETHhHaUNXcnlXYmw5TVlnd0d3QUpBVTdxX2tGZzJGbVN5QjY0eDNiRkRYQzZGbGRzaFo1dXlsdkhEc1VXci1WaHo2T0FFLUY0amxHM3pBeDVhdkhZTk5TVmFBLTViVnZxa19wY0MtUi1jeTNOd1NtX1JKX3ljMG9QLW1EeGl1dw</a></li>
+
+
+
+<li><a href="https://mashable.com/tech/spotify-ai-persona-badge-music-recommendations">https://mashable.com/tech/spotify-ai-persona-badge-music-recommendations</a></li>
+
+
+
+<li><a href="https://dtf.ru/music/5235311-spotify-bejdzi-dlya-ii-artistov">https://dtf.ru/music/5235311-spotify-bejdzi-dlya-ii-artistov</a></li>
+
+
+
+<li><a href="https://www.business-standard.com/technology/tech-news/spotify-to-add-ai-persona-badges-on-ai-generated-artist-profiles-from-sep-126081200465_1.html">https://www.business-standard.com/technology/tech-news/spotify-to-add-ai-persona-badges-on-ai-generated-artist-profiles-from-sep-126081200465_1.html</a></li>
+
+
+
+<li><a href="https://www.digitaltrends.com/home-theater/spotify-is-finally-calling-out-ai-artists-and-youll-see-it-right-away/">https://www.digitaltrends.com/home-theater/spotify-is-finally-calling-out-ai-artists-and-youll-see-it-right-away/</a></li>
+
+
+
+<li><a href="https://news.sky.com/story/spotify-to-add-ai-persona-badges-to-flag-ai-generated-artists-13572097">https://news.sky.com/story/spotify-to-add-ai-persona-badges-to-flag-ai-generated-artists-13572097</a></li>
+
+
+
+<li><a href="https://www.iltempo.it/tv-news/2026/08/11/video/spotify-introduce-etichetta-per-gli-artisti-generati-tramite-ai-48838979/">https://www.iltempo.it/tv-news/2026/08/11/video/spotify-introduce-etichetta-per-gli-artisti-generati-tramite-ai-48838979/</a></li>
+
+
+
+<li><a href="https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/">https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/</a></li>
+
+
+
+<li><a href="https://www.stern.de/kultur/neuerung-ab-september--spotify-kennzeichnet-ki-kuenstler-38092658.html">https://www.stern.de/kultur/neuerung-ab-september--spotify-kennzeichnet-ki-kuenstler-38092658.html</a></li>
+
+
+
+<li><a href="https://www.trthaber.com/haber/dunya/spotify-muzisyen-profillerine-yapay-zeka-rozeti-getiriyor-953709.html">https://www.trthaber.com/haber/dunya/spotify-muzisyen-profillerine-yapay-zeka-rozeti-getiriyor-953709.html</a></li>
+
+
+
+<li><a href="https://www.sydsvenskan.se/noje/spotify-lanserar-markning-av-ai-artister/">https://www.sydsvenskan.se/noje/spotify-lanserar-markning-av-ai-artister/</a></li>
+
+
+
+<li><a href="https://www.latimes.com/entertainment-arts/business/story/2026-08-11/spotify-to-label-ai-personas-rid-ai-music-from-recommendations">https://www.latimes.com/entertainment-arts/business/story/2026-08-11/spotify-to-label-ai-personas-rid-ai-music-from-recommendations</a></li>
+
+
+
+<li><a href="https://www.karar.com/guncel-haberler/spotify-muzisyen-profillerinde-yapay-zeka-donemi-2065152">https://www.karar.com/guncel-haberler/spotify-muzisyen-profillerinde-yapay-zeka-donemi-2065152</a></li>
+
+
+
+<li><a href="https://nairametrics.com/2026/08/11/spotify-to-identify-ai-generated-artists-with-new-profile-labels/">https://nairametrics.com/2026/08/11/spotify-to-identify-ai-generated-artists-with-new-profile-labels/</a></li>
+
+
+
+<li><a href="https://adaderana.lk/news/cmspniqio000j356pw6o2c2x3">https://adaderana.lk/news/cmspniqio000j356pw6o2c2x3</a></li>
+
+
+
+<li><a href="https://betanews.com/article/spotify-to-launch-ai-persona-badge-to-help-identify-ai-artists/">https://betanews.com/article/spotify-to-launch-ai-persona-badge-to-help-identify-ai-artists/</a></li>
+
+
+
+<li><a href="https://www.libertatea.ro/stiri/cum-identifici-artistii-ai-pe-spotify-persona-badge-5847896">https://www.libertatea.ro/stiri/cum-identifici-artistii-ai-pe-spotify-persona-badge-5847896</a></li>
+
+
+
+<li><a href="https://www.dn.se/kultur/efter-kritiken-spotify-marker-ai-artister/">https://www.dn.se/kultur/efter-kritiken-spotify-marker-ai-artister/</a></li>
+
+
+
+<li><a href="https://arynews.tv/spotify-bans-ai-generated-artists-from-recommendations">https://arynews.tv/spotify-bans-ai-generated-artists-from-recommendations</a></li>
+
+
+
+<li><a href="https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/">https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/</a></li>
+
+
+
+<li><a href="https://www.antena3.ro/high-tech/spotify-va-lansa-o-eticheta-care-permite-identificarea-muzicii-generate-de-ai-799119.html">https://www.antena3.ro/high-tech/spotify-va-lansa-o-eticheta-care-permite-identificarea-muzicii-generate-de-ai-799119.html</a></li>
+
+
+
+<li><a href="https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html">https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html</a></li>
+
+
+
+<li><a href="https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/">https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/</a></li>
+
+
+
+<li><a href="https://www.haber7.com/teknoloji/haber/3650627-spotifya-yapay-zeka-ayari-ai-persona-rozeti-geliyor">https://www.haber7.com/teknoloji/haber/3650627-spotifya-yapay-zeka-ayari-ai-persona-rozeti-geliyor</a></li>
+
+
+
+<li><a href="https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/">https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/spotify-to-label-ai-generated-artists-as-ai-persona-and-exclude-their-music-from-recommendations-14037509.html">https://www.firstpost.com/tech/spotify-to-label-ai-generated-artists-as-ai-persona-and-exclude-their-music-from-recommendations-14037509.html</a></li>
+
+
+
+<li><a href="https://www.khaosod.co.th/special-stories/news_10357201">https://www.khaosod.co.th/special-stories/news_10357201</a></li>
+
+
+
+<li><a href="https://www.nd.nl/varia/varia/1327102/spotify-komt-met-label-voor-ai-gegenereerde-artiesten">https://www.nd.nl/varia/varia/1327102/spotify-komt-met-label-voor-ai-gegenereerde-artiesten</a></li>
+
+
+
+<li><a href="https://financialpost.com/technology/tech-news/spotify-asks-artists-disclose-humans-or-ai">https://financialpost.com/technology/tech-news/spotify-asks-artists-disclose-humans-or-ai</a></li>
+
+
+
+<li><a href="https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/">https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMie0FVX3lxTE54SHRiUkpBcXlNYVRiYjJfUi1lMnFhMFowRkpwVTdUdWx0SDV5YXphU1A3N1UxQVNTX1lheHR6MGdqX2hDejkwQlNYTUNOTjg2dklSUjJEN3liNXZtcVV0OFlXbHBnaHMxbkw0S0RqVmNXSTE3WWd5UFlOYw">https://news.google.com/atom/articles/CBMie0FVX3lxTE54SHRiUkpBcXlNYVRiYjJfUi1lMnFhMFowRkpwVTdUdWx0SDV5YXphU1A3N1UxQVNTX1lheHR6MGdqX2hDejkwQlNYTUNOTjg2dklSUjJEN3liNXZtcVV0OFlXbHBnaHMxbkw0S0RqVmNXSTE3WWd5UFlOYw</a></li>
+
+
+
+<li><a href="https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/">https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/</a></li>
+
+
+
+<li><a href="https://www.lsm.lv/raksts/zinas/arzemes/12.08.2026-spotify-markes-ar-maksliga-intelekta-raditu-izpilditaju-profilu.a658448/">https://www.lsm.lv/raksts/zinas/arzemes/12.08.2026-spotify-markes-ar-maksliga-intelekta-raditu-izpilditaju-profilu.a658448/</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMikgFBVV95cUxOTEgtay00NGpMa2hWTk81QlQtOEwtRXFlMzJVZktFNTV5d21hUmpmUjhSTDhXcVJUYTZFY25ZWm5PUlpaWjE4NW5FNG90LVVmZ2JZX1RySWlIZE5HQWRnSWpLZmtqLWpqZm5BYjdSSXFUUHUyU0xvU0VINEhUcXVFOVdqMi1GanhHZkdWMkJWMFJ1dw">https://news.google.com/atom/articles/CBMikgFBVV95cUxOTEgtay00NGpMa2hWTk81QlQtOEwtRXFlMzJVZktFNTV5d21hUmpmUjhSTDhXcVJUYTZFY25ZWm5PUlpaWjE4NW5FNG90LVVmZ2JZX1RySWlIZE5HQWRnSWpLZmtqLWpqZm5BYjdSSXFUUHUyU0xvU0VINEhUcXVFOVdqMi1GanhHZkdWMkJWMFJ1dw</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, firstpost.com, techcrunch.com, nytimes.com, gizmodo.com, reddit.com, heise.de, slashdot.org, pcmag.com, theguardian.com, iltempo.it, consequence.net, androidheadlines.com, nairametrics.com, hollywoodreporter.com, cnet.com, aristeguinoticias.com, latimes.com, betanews.com, telegraaf.nl, adaderana.lk, digitaltrends.com, rollingstone.com, metalinjection.net, rte.ie, indianexpress.com, techradar.com, nyheter24.se, nd.nl, sverigesradio.se, mashable.com, meduza.io, suspilne.media, arynews.tv, business-standard.com, 20min.ch, dn.se, kaaoszine.fi, teletica.com, tweakers.net, iol.pt, digitalmusicnews.com, khaosod.co.th, sydsvenskan.se, habr.com, libertatea.ro, engadget.com, latercera.com, perfil.com, expansion.mx, franceinfo.fr, dtf.ru, df.cl, derstandard.at, sky.com, folha.com.br, ifun.de, ensonhaber.com, antena3.ro, lrt.lt, lamontagne.fr, citizen.co.za, hs.fi, golem.de, spiegel.de, financialpost.com, theclinic.cl, stern.de, evrensel.net, karar.com, kathimerini.gr, independent.ie, trthaber.com, lsm.lv, spotify.com, haber7.com, sky.com, gizmodo.com, slashdot.org, firstpost.com, nytimes.com, androidheadlines.com, digitaltrends.com, techradar.com, mashable.com, engadget.com, betanews.com, cnet.com, theguardian.com, pcmag.com, latimes.com, consequence.net, techcrunch.com, nairametrics.com, adaderana.lk, hollywoodreporter.com, indianexpress.com, aristeguinoticias.com, nyheter24.se, sverigesradio.se, rte.ie, telegraaf.nl, business-standard.com, reddit.com, metalinjection.net, rollingstone.com, tweakers.net, dn.se, digitalmusicnews.com, meduza.io, suspilne.media, libertatea.ro, expansion.mx, khaosod.co.th, nd.nl, habr.com, 20min.ch, arynews.tv, latercera.com, kaaoszine.fi, teletica.com, perfil.com, franceinfo.fr, sydsvenskan.se, iol.pt, df.cl, heise.de, dtf.ru, derstandard.at, iltempo.it, lamontagne.fr, ifun.de, financialpost.com, citizen.co.za, stern.de, spiegel.de, antena3.ro, ensonhaber.com, folha.com.br, golem.de, independent.ie, theclinic.cl, lrt.lt, hs.fi, evrensel.net, karar.com, spotify.com, trthaber.com, kathimerini.gr, lsm.lv, haber7.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 76 unique domains, 84 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/"><img src="https://kagiproxy.com/img/41obGv5UZ82bkld4PuhWv-PELZ4RMcWGKs_MyImX1AKKoQYTt6NqVejJH_7DOUmj1pI8Rre938-II3ouacrIXYQaMcIz4Y5_DtaWXpgR4iEaGPmk1-lJuxWiYEhzQeomQGnOBuRxEQ4leAa8LkI" alt="Spotify app imagery accompanying coverage of AI Persona labels" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Spotify app imagery accompanying coverage of AI Persona labels <span class='credit'>(cnet.com)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "BeauHD",
+      "date": "2026-08-11T19:00:00.000Z",
+      "domain": "slashdot.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://entertainment.slashdot.org/story/26/08/11/1741252/spotify-will-label-ai-persona-profiles-exclude-their-music-from-recommendations",
+      "title": "Spotify Will Label \u0027AI Persona\u0027 Profiles, Exclude Their Music From Recommendations"
+    },
+    {
+      "date": "2026-08-11T21:09:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiqgFBVV95cUxQejM4MFFFM2FqUjh2YVBxamIxWWtvaDZodU4zdWd2cjFXUl9ETHhHaUNXcnlXYmw5TVlnd0d3QUpBVTdxX2tGZzJGbVN5QjY0eDNiRkRYQzZGbGRzaFo1dXlsdkhEc1VXci1WaHo2T0FFLUY0amxHM3pBeDVhdkhZTk5TVmFBLTViVnZxa19wY0MtUi1jeTNOd1NtX1JKX3ljMG9QLW1EeGl1dw",
+      "title": "Spotify to distinguish AI artists from real people \u2013 and stop recommending them - The Guardian"
+    },
+    {
+      "date": "2026-08-11T13:13:19.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMie0FVX3lxTE54SHRiUkpBcXlNYVRiYjJfUi1lMnFhMFowRkpwVTdUdWx0SDV5YXphU1A3N1UxQVNTX1lheHR6MGdqX2hDejkwQlNYTUNOTjg2dklSUjJEN3liNXZtcVV0OFlXbHBnaHMxbkw0S0RqVmNXSTE3WWd5UFlOYw",
+      "title": "Introducing a New Label for AI-Generated Artist Identities on Spotify - Spotify"
+    },
+    {
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiugFBVV95cUxNRXM5Nk10cXFDUnN1d2tDd254ek5qZmhhWE1wZ1RzSDV0eW9jYWdnSGtoUUppZ1RzdkUtZXR2MTFBSDkwLXhZaE1SbVdSWmVtUmdPTXpxNEJkajJPdGttbDFsb1RoNllUV2J0ZWhUTHpRN1puQlZUMTZ2Z3pueVBReG9XSDFORnlFRU9aUVZOeUlGYU5HYUJweEdIQkFXMXJJWXI3cU5VanB1QmFwVWRUbEVSTHlWX3dTa2c",
+      "title": "Spotify will label \u2018AI Persona\u2019 profiles and exclude their music from recommendations - TechCrunch"
+    },
+    {
+      "date": "2026-08-11T19:59:45.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMikgFBVV95cUxOTEgtay00NGpMa2hWTk81QlQtOEwtRXFlMzJVZktFNTV5d21hUmpmUjhSTDhXcVJUYTZFY25ZWm5PUlpaWjE4NW5FNG90LVVmZ2JZX1RySWlIZE5HQWRnSWpLZmtqLWpqZm5BYjdSSXFUUHUyU0xvU0VINEhUcXVFOVdqMi1GanhHZkdWMkJWMFJ1dw",
+      "title": "Spotify Will Label A.I. Artists and Avoid Promoting Them - The New York Times"
+    },
+    {
+      "date": "2026-08-11T18:03:18.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMimwFBVV95cUxOSklXWUtfRmtaZmxKUHdoY29DaXlPd1NCb1JqTjdCa0t1T01RWlJnMmN5OE5fWGlicFRCU3FqZlc0VFRpMWJnR3hlNVlvQjRkQVVDRXJTSnNIRk0wcGlYanVTaGgyRTdDcVdEaEF6dTNJNGMzSElYTms1TVNRWldlQXk0bHdkbVpHb0dSekFNVnNONG9kY3ZQM3dQdw",
+      "title": "Spotify will identify music created using artificial intelligence - voz.us"
+    },
+    {
+      "author": "Sarah Perez",
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/",
+      "title": "Spotify will label \u2018AI Persona\u2019 profiles and exclude their music from recommendations"
+    },
+    {
+      "date": "2026-08-11T16:51:02.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music",
+      "title": "Spotify Will Now Flag \u0027AI Personas\u0027 and Stop Recommending Their Music"
+    },
+    {
+      "author": "Malia Mendez",
+      "date": "2026-08-11T19:59:45.000Z",
+      "domain": "nytimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nytimes.com/2026/08/11/arts/music/spotify-artificial-intelligence-music.html",
+      "title": "Spotify Will Label A.I. Artists and Avoid Promoting Them"
+    },
+    {
+      "author": "Webb Wright",
+      "date": "2026-08-11T20:55:59.000Z",
+      "domain": "gizmodo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319",
+      "title": "Spotify Will Start Labeling AI Artists on Its Platform Next Month"
+    },
+    {
+      "author": "Dan Milmo Global technology editor",
+      "date": "2026-08-11T13:40:14.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/0QyrySZ0EZ42OXGF8ut-WJ2oxhViaENsZMqc3iESrljMrUNUAwLd-gFDNHOZaGs_ZjpJNfjFiyPkB3KMzqcyUN4HOKUhKKPVccaE1CYgVaLHlJZME9F4qesrliqHGow7L2nB-SunG3_vz9oDYFv9Jk9QwiGFHi-t_1_jY_RBpACcZ5DvcLbP6uyv9WxggCjfBMmxTbu-HmoqdwBXCDG87DTxxtjiAerXXYBk0I2a52Q585uxeNwfAoQxp98A5LjuiSZ3EdehF8f2NCOcxw-9",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists",
+      "title": "Spotify to distinguish AI artists from real people \u2013 and stop recommending them"
+    },
+    {
+      "author": "Shriyansh.Garg",
+      "date": "2026-08-11T14:26:21.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/iCGIQXwsfgkA33VDk4QXrygy8ec-_kpITgRNaK-IVKduaBI1IwfVnmXZsVUtOkFndUWyACi4jCch445mU-fhOv3RVbMxSIhV3PTXOz0kQhEezo_GjYc2nk8ZeZs2T0LsBBtMD_Z5O1tx1VpsILdRD3UtaH7sqwZDB855OTP9XQNU",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/spotify-to-label-ai-generated-artists-as-ai-persona-and-exclude-their-music-from-recommendations-14037509.html",
+      "title": "Spotify to label AI-generated artists with \u2018AI Persona\u2019 and exclude their music from recommendations"
+    },
+    {
+      "author": "TMNews",
+      "date": "2026-08-11T14:29:00.000Z",
+      "domain": "iltempo.it",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.iltempo.it/tv-news/2026/08/11/video/spotify-introduce-etichetta-per-gli-artisti-generati-tramite-ai-48838979/",
+      "title": "Spotify introduce etichetta per gli artisti generati tramite AI"
+    },
+    {
+      "author": "Eddie Fu",
+      "date": "2026-08-11T14:54:49.000Z",
+      "domain": "consequence.net",
+      "image": "https://kagiproxy.com/img/C1lVGSCmnd9Tpek0ONMImySOKz6ClVODJKhNCj8Kg4Zm9bMGvN-tztflx0pjh67Jgi-NnO0VgF-HSJJYmKIWkl3ZvBxLjA2IgOjtDAX93LQnOwHQq-fDjbl-2TFpH33ZqKmsGxejs1_kP47cVxLo65pAtnDKSVE",
+      "image_caption": "spotify ai persona badges",
+      "link": "https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/",
+      "title": "Spotify to Label AI Artists with AI Persona Badge, Keep Them Out of Personalized Recommendations"
+    },
+    {
+      "author": "Sai Krishna",
+      "date": "2026-08-11T19:57:04.000Z",
+      "domain": "androidheadlines.com",
+      "image": "https://kagiproxy.com/img/XejvuHEwUABXeGzeRU37V2vPhYKVBv6ZR-REzOBFcw-e2ntr1U54EMNUHAR-BO_ZgVMffWPcma6txI_OamWr1U1SvldNBsSdBo5tLMfaOFm63bIGjadovS1ZAWtv8J8yK7hMiTgF3mhIDt7VWs_odeRr2pRdiPfzu4SykUchWDPXjgJazckfoSCVOHVi",
+      "image_caption": "",
+      "link": "https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html",
+      "title": "Spotify Will Label AI Artists and Keep Them Out of Your Recommendations"
+    },
+    {
+      "author": "Emmanuel Azubuike",
+      "date": "2026-08-11T15:10:01.000Z",
+      "domain": "nairametrics.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://nairametrics.com/2026/08/11/spotify-to-identify-ai-generated-artists-with-new-profile-labels/",
+      "title": "Spotify to identify AI-generated artists with new profile labels"
+    },
+    {
+      "author": "Ethan Millman",
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "hollywoodreporter.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.hollywoodreporter.com/music/music-industry-news/spotify-announces-ai-personas-feature-1236670607/",
+      "title": "Spotify to Start Labeling AI Artists"
+    },
+    {
+      "author": "Kourtnee Jackson",
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "cnet.com",
+      "image": "https://kagiproxy.com/img/CBzWHwlcSBqZVDXjYmwTFCg_GAW7MwxyjoDFZkSdDw9GnE9TsNlmPUrT7u1ZwNYuHeLSAsWg0khFsNqrY0CcZuH4WxLYTOlBr2U_wNJ-Bx89gV7_jQKOtenqnHRrGyzJ5UgfAYhnCwrK2rQC2oQ",
+      "image_caption": "",
+      "link": "https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/",
+      "title": "Spotify\u2019s AI Persona Label to Pluck AI Artists From Your Algorithm"
+    },
+    {
+      "date": "2026-08-11T21:23:08.000Z",
+      "domain": "aristeguinoticias.com",
+      "image": "https://kagiproxy.com/img/M4bL8z6HCMexSpmFehmKGd1reIc_rWSv0-oTQyevTAoigIeMnEb59_-pitNRxpd1QbFRWC8qTrK4lEisQ-VS3GJS-kC-3LMdJc4ttT7-w1YwctN19HJq7WtA8SiZVV3rGAh4YN3bzme3bie2s4WHyAQTUg",
+      "image_caption": "Imagen generada con inteligencia Artificial",
+      "link": "https://aristeguinoticias.com/1108/kiosko/spotify-etiquetara-a-los-artistas-creados-con-inteligencia-artificial/",
+      "title": "Spotify etiquetar\u00e1 a los artistas creados con inteligencia artificial"
+    },
+    {
+      "author": "Cerys Davies",
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "latimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.latimes.com/entertainment-arts/business/story/2026-08-11/spotify-to-label-ai-personas-rid-ai-music-from-recommendations",
+      "title": "Spotify to label \u0027AI personas\u0027 and exclude AI music from personal recommendations"
+    },
+    {
+      "author": "Sofia Elizabella Wyci\u015blik-Wilson",
+      "date": "2026-08-11T18:28:51.000Z",
+      "domain": "betanews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://betanews.com/article/spotify-to-launch-ai-persona-badge-to-help-identify-ai-artists/",
+      "title": "Spotify to launch AI Persona badge to help identify AI artists"
+    },
+    {
+      "author": "Dan Tesselaar",
+      "date": "2026-08-11T14:54:29.000Z",
+      "domain": "telegraaf.nl",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.telegraaf.nl/entertainment/cultuur/spotify-grijpt-hard-in-met-nieuwe-functie-ai-artiesten-worden-gelabeld-en-geweerd-uit-aanbevelingen/159891103.html",
+      "title": "Spotify grijpt hard in met nieuwe functie: AI-artiesten worden gelabeld en geweerd uit aanbevelingen"
+    },
+    {
+      "date": "2026-08-12T07:04:51.271Z",
+      "domain": "adaderana.lk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://adaderana.lk/news/cmspniqio000j356pw6o2c2x3",
+      "title": "Spotify to slap \u0027AI Persona\u0027 badges on AI-generated artist profiles"
+    },
+    {
+      "author": "Shikhar Mehrotra",
+      "date": "2026-08-11T15:57:58.000Z",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitaltrends.com/home-theater/spotify-is-finally-calling-out-ai-artists-and-youll-see-it-right-away/",
+      "title": "Spotify is finally calling out AI artists, and you\u2019ll see it right away"
+    },
+    {
+      "author": "Jon Blistein",
+      "date": "2026-08-11T17:24:16.000Z",
+      "domain": "rollingstone.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.rollingstone.com/music/music-news/spotify-labeling-ai-artists-1235606855/",
+      "title": "Spotify Details Plan to Label AI Artists"
+    },
+    {
+      "author": "Isabella Ambrosio",
+      "date": "2026-08-11T15:39:02.000Z",
+      "domain": "metalinjection.net",
+      "image": "https://kagiproxy.com/img/wXOjyzA97TmSyADjWtZ4oXGeIAyMOrEdINb5GSF4kf9gMlVwzQVDYEcTMzonmgbssv9OzS5zxkWy4cUhQKqdmqT_luqkkzQWenRtp_VHuKc_svq2ygaw8sQZAKsckvB950qWyQwzpkXNOnlTHpWZmsqskm2g3eehFiqRk4EH_SO5s072Nu9TqiGFqt6d571J2oVFq5pcqc7FVBuamLnvVD7FNVgPzl_AdLE",
+      "image_caption": "",
+      "link": "https://metalinjection.net/news/spotify-ai-generated-music-platform-to-add-tags",
+      "title": "Spotify to Label All AI Artists on Platform With Identifying Badge"
+    },
+    {
+      "date": "2026-08-11T14:55:24.000Z",
+      "domain": "rte.ie",
+      "image": "https://kagiproxy.com/img/W8dnTLV_50ITPaOln4o6-aRZzjmhoHgmQ05_VfPn_b1Too3WxKC7ZEJLycwMtPjdYx3awjATZJyTJ5PnySx7x0VhVgrjPQ",
+      "image_caption": "",
+      "link": "https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/",
+      "title": "Spotify to launch badge identifying AI music to users"
+    },
+    {
+      "date": "2026-08-12T03:42:57.000Z",
+      "domain": "indianexpress.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://indianexpress.com/article/technology/tech-news-technology/spotify-to-slap-ai-persona-badges-on-ai-generated-artist-profiles-10829138/",
+      "title": "Spotify to slap \u2018AI Persona\u2019 badges on AI-generated artist profiles"
+    },
+    {
+      "author": "Rowan Davies",
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "techradar.com",
+      "image": "https://kagiproxy.com/img/N5Yy15bZCv2fTm53OF8S8YEZhn1wtfmmHbj2E7A4OYHgXsv5NqEka8XndixFxiAL8x61NNTsZ3ShzE5EvsWwR7vGAS5XqGDdpwMz-n58RBUrMJn62-jhPw",
+      "image_caption": "",
+      "link": "https://www.techradar.com/audio/spotify/spotify-is-introducing-ai-persona-tags-to-differentiate-real-artists-from-the-fake-vowing-to-become-the-most-transparent-and-trustworthy-place-to-listen-to-music-but-the-tool-isnt-targeting-the-music-itself",
+      "title": "Spotify is introducing AI Persona tags to differentiate real artists from fake ones, vowing to become \u2018the most transparent and trustworthy place to listen to music\u2019 \u2014 but the tool isn\u2019t targeting the music itself"
+    },
+    {
+      "author": "/u/Iamvosi",
+      "date": "2026-08-11T23:44:50.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/Music/comments/1vlxyxx/spotify_is_cracking_down_on_profiles_of_artists/",
+      "title": "Spotify is cracking down on profiles of artists whose identities are generated by artificial intelligence."
+    },
+    {
+      "date": "2026-08-11T18:53:53.000Z",
+      "domain": "nyheter24.se",
+      "image": "",
+      "image_caption": "",
+      "link": "https://nyheter24.se/nyheter/teknik/1504268-spotify-infor-markning-ska-avsloja-ai-genererade-artister",
+      "title": "Spotify inf\u00f6r m\u00e4rkning \u2013 ska avsl\u00f6ja AI-genererade artister"
+    },
+    {
+      "date": "2026-08-11T17:01:44.000Z",
+      "domain": "nd.nl",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nd.nl/varia/varia/1327102/spotify-komt-met-label-voor-ai-gegenereerde-artiesten",
+      "title": "Spotify komt met label voor AI-gegenereerde artiesten"
+    },
+    {
+      "author": "Ekot",
+      "date": "2026-08-11T15:05:00.000Z",
+      "domain": "sverigesradio.se",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.sverigesradio.se/artikel/9273620",
+      "title": "Spotify ska m\u00e4rka AI-genererade artister"
+    },
+    {
+      "date": "2026-08-11T18:04:03.000Z",
+      "domain": "mashable.com",
+      "image": "https://kagiproxy.com/img/7p-NcWsqHxi4W0qHE7IrrZCSEcf2iP2NcsA8_v5Zdcw2xBdIdI50D6CvUVV2T6xRFrPpQ1tE3gbm_Le8_vnKcM1_SKZLpEBGS1yhJ8dZSeTDXC-K3fb4DRxGP0Jw5SWv1XnzQoQVL3V2EwP-jD8E5meDgJlefAi6-PdTzs8asXqOHDIaC5fxpQsKUaJNbII",
+      "image_caption": "",
+      "link": "https://mashable.com/tech/spotify-ai-persona-badge-music-recommendations",
+      "title": "Spotify will now tell you when an artist isn\u2019t real"
+    },
+    {
+      "date": "2026-08-12T07:12:51.000Z",
+      "domain": "meduza.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://meduza.io/news/2026/08/12/spotify-nachnet-markirovat-ii-ispolniteley-znachkom-ai-persona-ih-muzyku-isklyuchat-iz-rekomendatsiy",
+      "title": "Spotify \u043d\u0430\u0447\u043d\u0435\u0442 \u043c\u0430\u0440\u043a\u0438\u0440\u043e\u0432\u0430\u0442\u044c \u0418\u0418-\u0438\u0441\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u0435\u0439 \u0437\u043d\u0430\u0447\u043a\u043e\u043c AI\u00a0Persona. \u0418\u0445\u00a0\u043c\u0443\u0437\u044b\u043a\u0443 \u0438\u0441\u043a\u043b\u044e\u0447\u0430\u0442 \u0438\u0437\u00a0\u0440\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0438\u0439"
+    },
+    {
+      "date": "2026-08-11T15:56:26.000Z",
+      "domain": "suspilne.media",
+      "image": "",
+      "image_caption": "",
+      "link": "https://suspilne.media/culture/1376824-spotify-pocne-markuvati-vikonavciv-zgenerovanih-stucnim-intelektom-ta-obmezit-ih-u-rekomendaciah/",
+      "title": "Spotify \u043f\u043e\u0447\u043d\u0435 \u043c\u0430\u0440\u043a\u0443\u0432\u0430\u0442\u0438 \u0432\u0438\u043a\u043e\u043d\u0430\u0432\u0446\u0456\u0432, \u0437\u0433\u0435\u043d\u0435\u0440\u043e\u0432\u0430\u043d\u0438\u0445 \u0448\u0442\u0443\u0447\u043d\u0438\u043c \u0456\u043d\u0442\u0435\u043b\u0435\u043a\u0442\u043e\u043c, \u0442\u0430 \u043e\u0431\u043c\u0435\u0436\u0438\u0442\u044c \u0457\u0445 \u0443 \u0440\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0456\u044f\u0445"
+    },
+    {
+      "date": "2026-08-11T14:56:01.000Z",
+      "domain": "arynews.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arynews.tv/spotify-bans-ai-generated-artists-from-recommendations",
+      "title": "Spotify bans AI-generated artists from personalized recommendations with new label"
+    },
+    {
+      "date": "2026-08-12T05:08:11.000Z",
+      "domain": "business-standard.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.business-standard.com/technology/tech-news/spotify-to-add-ai-persona-badges-on-ai-generated-artist-profiles-from-sep-126081200465_1.html",
+      "title": "Spotify to add \u0027AI Persona\u0027 badges on AI-generated artist profiles from Sep"
+    },
+    {
+      "date": "2026-08-11T15:23:35.000Z",
+      "domain": "20min.ch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.20min.ch/fr/story/musique-spotify-va-etiqueter-les-artistes-ia-et-les-virer-des-playlists-103616228",
+      "title": "Spotify va \u00e9tiqueter les artistes IA et les virer des playlists"
+    },
+    {
+      "author": "Mina Asp Romefors",
+      "date": "2026-08-11T14:30:13.000Z",
+      "domain": "dn.se",
+      "image": "https://kagiproxy.com/img/KG3uVvIyFow27pcTedRa4kcewR75seDGBVgxybtGnvOS3YU3EcRmW5nflSHXwjXmtxIVVHcCMyVgiT072rsPCfaVAJO59pjaQkOrMK7gN5-78DTCxGcp8x2Z0VEhvQBb0QVM6YxRHUFFK-vINq5rnZVCamrXGg",
+      "image_caption": "AI-m\u00e4rkningen kommer att synas vid artisternas profiler och i s\u00f6kresultat.",
+      "link": "https://www.dn.se/kultur/efter-kritiken-spotify-marker-ai-artister/",
+      "title": "Efter kritiken \u2013 Spotify m\u00e4rker AI-artister"
+    },
+    {
+      "author": "/u/Unlucky-Touch8754",
+      "date": "2026-08-12T06:51:34.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/Music/comments/1vm6lg1/spotify_to_add_ai_persona_badges_to_flag/",
+      "title": "Spotify to add \u0027AI Persona\u0027 badges to flag AI-generated artists [Sky]"
+    },
+    {
+      "author": "Samuel J\u00e4rvinen",
+      "date": "2026-08-12T06:21:52.000Z",
+      "domain": "kaaoszine.fi",
+      "image": "https://kagiproxy.com/img/p5YjjwaYuOzuHjIWS0k2as66eUJsq_uiVzMNBXa5TaMXAxc_c7b5A1Xyl8cMApgX8QW2LXUi830fLQJht4XOkOJEhMCaULawy1lGDIz5Auu2GP9scflPhcBdamB7NUo",
+      "image_caption": "",
+      "link": "https://kaaoszine.fi/spotify-aloittaa-tekoalyartistien-merkitsemisen-ja-poistaa-ne-personoiduista-suosituksista/",
+      "title": "Spotify aloittaa teko\u00e4lyartistien merkitsemisen ja poistaa ne personoiduista suosituksista"
+    },
+    {
+      "date": "2026-08-11T21:40:00.000Z",
+      "domain": "teletica.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.teletica.com/entretenimiento/spotify-anuncia-lanzamiento-de-una-etiqueta-para-identificar-musica-creada-con-ia_415269",
+      "title": "Spotify anuncia lanzamiento de una etiqueta para identificar m\u00fasica creada con IA"
+    },
+    {
+      "author": "Jasper Bakker",
+      "date": "2026-08-11T17:42:43.000Z",
+      "domain": "tweakers.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tweakers.net/nieuws/250882/spotify-markeert-ai-gegenereerde-artiesten-vanaf-half-september-met-nieuw-label.html",
+      "title": "Spotify markeert AI-gegenereerde artiesten vanaf half september met nieuw label"
+    },
+    {
+      "author": "Reda\u00e7\u00e3o",
+      "date": "2026-08-11T17:12:49.000Z",
+      "domain": "iol.pt",
+      "image": "",
+      "image_caption": "",
+      "link": "https://sol.iol.pt/vida/noticias/spotify-quer-acabar-com-duvidas-sobre-artistas-criados-por-ia-e-lanca-nova-etiqueta/20260811/6a7b5b660cf2b42132dbd6f9",
+      "title": "\u003c![CDATA[Spotify quer acabar com d\u00favidas sobre artistas criados por IA e lan\u00e7a nova etiqueta]]\u003e"
+    },
+    {
+      "author": "Dylan Smith",
+      "date": "2026-08-12T04:00:32.000Z",
+      "domain": "digitalmusicnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/",
+      "title": "Spotify Announces \u2018AI Persona\u2019 Label for Artist Pages That Don\u2019t \u2018Represent a Real Person\u2019 \u2014 Complete With Manual Profile Reviews, an Appeal Process, and More"
+    },
+    {
+      "author": "Benjarong",
+      "date": "2026-08-12T06:05:32.000Z",
+      "domain": "khaosod.co.th",
+      "image": "https://kagiproxy.com/img/YLKefsHkrQubuiGg0y8WiUIDR4quYqN30PzCrOWNAnTkjGx6jeSLXo-KNf9UpjGiiSGA4GgWztYVbMisQkKTB04e3iNvSmgmSXmEqLPX0YceugMz67qeStg",
+      "image_caption": "",
+      "link": "https://www.khaosod.co.th/special-stories/news_10357201",
+      "title": "Spotify \u0e40\u0e15\u0e23\u0e35\u0e22\u0e21\u0e15\u0e34\u0e14\u0e1b\u0e49\u0e32\u0e22\u0e40\u0e15\u0e37\u0e2d\u0e19 \u201cAI Persona\u201d \u0e1a\u0e19\u0e42\u0e1b\u0e23\u0e44\u0e1f\u0e25\u0e4c\u0e28\u0e34\u0e25\u0e1b\u0e34\u0e19\u0e17\u0e35\u0e48\u0e40\u0e1b\u0e47\u0e19 AI"
+    },
+    {
+      "author": "TT",
+      "date": "2026-08-11T19:04:08.000Z",
+      "domain": "sydsvenskan.se",
+      "image": "https://kagiproxy.com/img/OlnH2neO2_G8RRqMs2-DvJX1_Glo0g7Uxvtbffr7FVbu-DiNSnNbefmEGkc8pkFnqRt0hVXVVuLWLCCmc-fjzX3R9nKB50COMJ5ybH-pvN7SOFDLK_aZpItZw_mZk1LuEMEkVpLtLGPwUqKg5lj2",
+      "image_caption": "Spotify b\u00f6rjar m\u00e4rka AI-genererade artistidentiteter. Arkivbild",
+      "link": "https://www.sydsvenskan.se/noje/spotify-lanserar-markning-av-ai-artister/",
+      "title": "Spotify lanserar m\u00e4rkning av AI-artister"
+    },
+    {
+      "author": "daniilshat",
+      "date": "2026-08-11T21:25:42.000Z",
+      "domain": "habr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://habr.com/ru/news/1069468/",
+      "title": "\u0411\u043e\u043b\u044c\u0448\u0430\u044f \u0447\u0438\u0441\u0442\u043a\u0430: Spotify \u0443\u0434\u0430\u043b\u0438\u0442 \u0441\u0433\u0435\u043d\u0435\u0440\u0438\u0440\u043e\u0432\u0430\u043d\u043d\u044b\u0435 \u0442\u0440\u0435\u043a\u0438 \u0438\u0437\u00a0\u0440\u0435\u043a\u043e\u043c\u0435\u043d\u0434\u0430\u0446\u0438\u0439, \u0430\u00a0AI\u2011\u0438\u0441\u043f\u043e\u043b\u043d\u0438\u0442\u0435\u043b\u0438 \u043f\u043e\u043b\u0443\u0447\u0430\u0442 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u0439 \u0442\u0435\u0433"
+    },
+    {
+      "author": "Ioana Dinu",
+      "date": "2026-08-12T06:31:02.000Z",
+      "domain": "libertatea.ro",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.libertatea.ro/stiri/cum-identifici-artistii-ai-pe-spotify-persona-badge-5847896",
+      "title": "Spotify introduce eticheta \u201eAI Persona\u201d pentru a identifica muzica generat\u0103 cu inteligen\u021b\u0103 artificial\u0103"
+    },
+    {
+      "author": "Anna Washenko",
+      "date": "2026-08-11T13:00:00.000Z",
+      "domain": "engadget.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/",
+      "title": "Spotify AI Persona labels will alert listeners if an artist isn\u0027t real"
+    },
+    {
+      "author": "Equipo de Culto",
+      "date": "2026-08-11T20:06:40.000Z",
+      "domain": "latercera.com",
+      "image": "https://kagiproxy.com/img/46TExLzVgnxKAl8aggyVCKY2_u_uUOWDXK1I8-FTmr71ykE27YaciNiSgnD8Yax0LDjekmrtatqREAAsYJp5hVX2FZyHQoi11kowGciIBQetLf7d1h3CxsiP_M6SO6Nx5aiL85Jn1HSNpOEIcRtyhwtbNWIO9UdCv1eJERwjwGGuS5sNNW42gx7x6MntvFdQkwY8A7PQ1xpNj8GH44jOQhAudvNgxvhlbXOpirr63ou4AlTgam0x9QWjgXjHuimrayOp3VVs",
+      "image_caption": "El dominio global del K-pop: Los artistas m\u00e1s seguidos en Spotify 2025.",
+      "link": "https://www.latercera.com/culto/noticia/spotify-lanzara-etiquetas-para-identificar-a-artistas-creados-con-inteligencia-artificial/",
+      "title": "Spotify lanzar\u00e1 etiquetas para identificar a artistas creados con inteligencia artificial"
+    },
+    {
+      "author": "Ashley Carman",
+      "date": "2026-08-11T21:53:00.000Z",
+      "domain": "perfil.com",
+      "image": "https://kagiproxy.com/img/qEe_SD1jKDXIpbUyiHPA_1GLQi_iz9_i-ux_oYkObuq_TJ_aah7jrdole1bi52o2AySCTqQdtI2PwO296-bE0mp-w7mwYp-H-FHJkcHxrSNZFhXLuiQGFRuj3hFNG4Bh",
+      "image_caption": "",
+      "link": "https://www.perfil.com/noticias/bloomberg/bc-spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia.phtml",
+      "title": "Spotify solicitar\u00e1 a artistas identificar la m\u00fasica creada con IA"
+    },
+    {
+      "author": "Jimena Fuentes",
+      "date": "2026-08-11T22:18:47.000Z",
+      "domain": "expansion.mx",
+      "image": "",
+      "image_caption": "",
+      "link": "https://expansion.mx/tecnologia/2026/08/11/spotify-etiquetara-artistas-creados-con-ia",
+      "title": "Spotify etiquetar\u00e1 a los artistas creados con IA para distinguirlos de personas reales"
+    },
+    {
+      "date": "2026-08-11T19:36:59.000Z",
+      "domain": "franceinfo.fr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.franceinfo.fr/internet/streaming/spotify/spotify-va-lancer-un-badge-permettant-d-identifier-la-musique-generee-par-intelligence-artificielle_8143382.html#xtor=RSS-3-%5Bgeneral%5D",
+      "title": "Spotify va lancer un badge permettant d\u0027identifier les comptes d\u0027artistes g\u00e9n\u00e9r\u00e9s par intelligence artificielle"
+    },
+    {
+      "author": "Daniel Herbig",
+      "date": "2026-08-12T06:58:00.000Z",
+      "domain": "heise.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.heise.de/news/Spotify-KI-Kuenstler-bekommen-ein-Label-und-fliegen-aus-den-Empfehlungen-11410865.html",
+      "title": "Spotify: KI-K\u00fcnstler bekommen ein Label und fliegen aus den Empfehlungen"
+    },
+    {
+      "author": "vc.ru",
+      "date": "2026-08-11T16:59:16.000Z",
+      "domain": "dtf.ru",
+      "image": "https://kagiproxy.com/img/2haS8-jgSqDNujrrvESw9WdiT6vLJJCW6SIEjdxpYhAyS0iB0lrZumHNvGEZg0pyYfvUjOxf73YYwoV6-yoCduVt8cWMRLCPob2mc8Py_nAGL3ONy793_oYVs0k2Ma2m-ruE9k_QaTj3sg",
+      "image_caption": "",
+      "link": "https://dtf.ru/music/5235311-spotify-bejdzi-dlya-ii-artistov",
+      "title": "Spotify \u043d\u0430\u0447\u043d\u0451\u0442 \u043f\u043e\u043c\u0435\u0447\u0430\u0442\u044c \u043f\u0440\u043e\u0444\u0438\u043b\u0438 \u0418\u0418-\u0430\u0440\u0442\u0438\u0441\u0442\u043e\u0432 \u0441\u043f\u0435\u0446\u0438\u0430\u043b\u044c\u043d\u044b\u043c \u0431\u0435\u0439\u0434\u0436\u0435\u043c"
+    },
+    {
+      "date": "2026-08-11T14:49:25.000Z",
+      "domain": "df.cl",
+      "image": "",
+      "image_caption": "",
+      "link": "http://www.df.cl/internacional/multinacionales/spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia-a",
+      "title": "Spotify solicitar\u00e1 a artistas identificar la m\u00fasica creada con IA: a oyentes no les gusta descubrir perfiles que simulan a humanos"
+    },
+    {
+      "date": "2026-08-12T06:59:58.000Z",
+      "domain": "derstandard.at",
+      "image": "https://kagiproxy.com/img/PqAzCIr3uPTVlU8Mrn6sQwcF_TGjW5fxnr_-0oJLD3AYEKUPCtFh8O9US-9x_UF5DohghkF4v7iGzwz2ygWpHgMchxhZ7dh7b8gcJSTHR4-rQaX56uNSYd8bq3-7TCP7gtcs1fECKeLahcsu_NJgkjnnv1STYog362qouob069qptq8ACeg",
+      "image_caption": "",
+      "link": "https://www.derstandard.at/story/3000000335211/spotify-f252hrt-kennzeichnung-f252r-ki-generierte-profile-ein",
+      "title": "Spotify f\u00fchrt Kennzeichnung f\u00fcr KI-generierte Profile ein"
+    },
+    {
+      "date": "2026-08-11T22:21:00.000Z",
+      "domain": "sky.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.sky.com/story/spotify-to-add-ai-persona-badges-to-flag-ai-generated-artists-13572097",
+      "title": "Spotify responds to concerns over AI songs"
+    },
+    {
+      "author": "AFP",
+      "date": "2026-08-11T21:01:00.000Z",
+      "domain": "folha.com.br",
+      "image": "",
+      "image_caption": "",
+      "link": "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/spotify-anuncia-selo-para-identificar-artistas-sinteticos-gerados-por-ia-na-plataforma.shtml",
+      "title": "Spotify anuncia selo para identificar artistas sint\u00ef\u00bf\u00bdticos gerados por IA na plataforma"
+    },
+    {
+      "author": "Nicolas",
+      "date": "2026-08-11T14:45:08.000Z",
+      "domain": "ifun.de",
+      "image": "https://kagiproxy.com/img/eHcN53goR_qk5VIfLpeJhVBCgUm9QYC8fymnX2v0hdXyVfvBL6dMcPTFfdDeqIXVoFX5Pn78CeoFNBjqs-WG8TaoYZhYGYAU3VIi6exQlhLqsvGtafB55IrAO8_AqjTCKuHcZRSQehskg7ol4C7iJlkQSMo",
+      "image_caption": "",
+      "link": "https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/",
+      "title": "Leider halbherzig: Spotify f\u00fchrt KI-Kennzeichnung ein"
+    },
+    {
+      "date": "2026-08-12T06:13:06.000Z",
+      "domain": "ensonhaber.com",
+      "image": "https://kagiproxy.com/img/aoRiyGblD6CU4z52re2vl3vkQlE-Meo1q_Qee6DYy7wu74KlvQCnIZUMh-RZnAirt1XFlAZDbG7FKPRxktNwaGJ5NMkPallS4B7Obb-Z-oAIH7mB3-qRNedanhxKuYpRPlNHngHo3_98ozFeAkGiaQ",
+      "image_caption": "",
+      "link": "https://www.ensonhaber.com/spotifydan-yapay-zeka-hamlesi-sanatci-profillerine-ai-persona-etiketi-geliyor-h1556878",
+      "title": "Spotify\u0027dan yapay zeka hamlesi: Sanat\u00e7\u0131 profillerine \u0027AI Persona\u0027 etiketi geliyor"
+    },
+    {
+      "author": "Alina Dr\u0103gu\u015fin",
+      "date": "2026-08-11T21:15:00.000Z",
+      "domain": "antena3.ro",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.antena3.ro/high-tech/spotify-va-lansa-o-eticheta-care-permite-identificarea-muzicii-generate-de-ai-799119.html",
+      "title": "Spotify va lansa o etichet\u0103 care permite identificarea muzicii generate de AI"
+    },
+    {
+      "date": "2026-08-11T15:55:00.000Z",
+      "domain": "lrt.lt",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lrt.lt/naujienos/mokslas-ir-it/11/3018359/spotify-pristatys-zyme-padesiancia-atskirti-dirbtinio-intelekto-sukurta-muzika",
+      "title": "\u201eSpotify\u201c pristatys \u017eym\u0119, pad\u0117sian\u010di\u0105 atskirti dirbtinio intelekto sukurt\u0105 muzik\u0105"
+    },
+    {
+      "date": "2026-08-11T15:31:31.000Z",
+      "domain": "lamontagne.fr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lamontagne.fr/france-monde/economie/spotify-lance-un-badge-pour-reperer-les-artistes-generes-par-lia-voici-ce-qui-va-changer-pour-les-auditeurs_15031629/",
+      "title": "Spotify lance un badge pour rep\u00e9rer les artistes g\u00e9n\u00e9r\u00e9s par l\u2019IA : voici ce qui va changer pour les auditeurs"
+    },
+    {
+      "author": "Agence France Presse",
+      "date": "2026-08-12T06:30:00.000Z",
+      "domain": "citizen.co.za",
+      "image": "https://kagiproxy.com/img/YpLY-2m03nH38scNI7lKkbpZopXFWSc71hW9Td5ON86pPH6vkEZJDsg7URduSbPicBQ0WJQWTMOcH6pcLFy7jdtXyM0FomtcOZTi2tNV10mQP7o9g1shGHE0cK6XclUMWXyOUyRjeh4",
+      "image_caption": "",
+      "link": "https://www.citizen.co.za/lifestyle/technology/spotify-to-launch-badge-identifying-ai-music/",
+      "title": "Spotify to launch badge identifying AI music"
+    },
+    {
+      "date": "2026-08-11T17:24:00.000Z",
+      "domain": "hs.fi",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.hs.fi/popkulttuuri/art-2000012198812.html",
+      "title": "Musiikki | Spotify ottaa teko\u00e4ly\u00admusiikille k\u00e4ytt\u00f6\u00f6n oman merkin"
+    },
+    {
+      "date": "2026-08-12T06:45:01.000Z",
+      "domain": "golem.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.golem.de/news/musik-streaming-spotify-markiert-ki-ersteller-mit-neuem-persona-label-2608-211836.html",
+      "title": "Musik-Streaming: Spotify markiert KI-Ersteller mit neuem Persona-Label"
+    },
+    {
+      "date": "2026-08-11T20:45:00.000Z",
+      "domain": "spiegel.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.spiegel.de/netzwelt/spotify-plattform-will-ki-generierte-nutzerprofile-kennzeichnen-a-368c2b03-6409-4660-a708-1f011fa8abc5#ref=rss",
+      "title": "Spotify: Plattform will KI-generierte Nutzerprofile kennzeichnen"
+    },
+    {
+      "author": "Bloomberg News",
+      "date": "2026-08-11T15:26:06.000Z",
+      "domain": "financialpost.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://financialpost.com/technology/tech-news/spotify-asks-artists-disclose-humans-or-ai",
+      "title": "Spotify asks artists to disclose whether they\u2019re humans or AI"
+    },
+    {
+      "author": "Eduardo Woo",
+      "date": "2026-08-11T15:28:36.000Z",
+      "domain": "theclinic.cl",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theclinic.cl/2026/08/11/spotify-etiqueta-artistas-ia-algoritmo-recomendaciones/",
+      "title": "Spotify frena a los m\u00fasicos de IA: no aparecer\u00e1n en sus listas ni recomendaciones"
+    },
+    {
+      "date": "2026-08-12T05:48:00.000Z",
+      "domain": "stern.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.stern.de/kultur/neuerung-ab-september--spotify-kennzeichnet-ki-kuenstler-38092658.html",
+      "title": "Neuerung ab September: Spotify kennzeichnet KI-K\u00fcnstler"
+    },
+    {
+      "author": "/u/Andvarey",
+      "date": "2026-08-11T17:39:11.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/france/comments/1vlob9w/spotify_va_lancer_un_nouveau_badge_permettant/",
+      "title": "Spotify va lancer un nouveau badge permettant d\u0027identifier la musique g\u00e9n\u00e9r\u00e9e par l\u2019IA"
+    },
+    {
+      "date": "2026-08-11T13:53:00.000Z",
+      "domain": "evrensel.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.evrensel.net/haber/5996023/spotify-duyurdu-yapay-zeka-profillerine-ai-persona-etiketi-gelecek",
+      "title": "Spotify duyurdu: Yapay zeka profillerine \u0027AI Persona\u0027 etiketi gelecek"
+    },
+    {
+      "date": "2026-08-12T06:26:36.000Z",
+      "domain": "karar.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.karar.com/guncel-haberler/spotify-muzisyen-profillerinde-yapay-zeka-donemi-2065152",
+      "title": "Spotify m\u00fczisyen profillerinde yapay zeka d\u00f6nemi"
+    },
+    {
+      "author": "Newsroom",
+      "date": "2026-08-11T15:56:05.000Z",
+      "domain": "kathimerini.gr",
+      "image": "https://kagiproxy.com/img/ve4qgorivtnl1EAGH0FAbYgP3kHzPVY36kMo0LtzTpwGhXZFmdc4d-EMC6XYzg78PX3ykUsNx7fF1xCL_jjpHSXetE30ZJ6xw2o-xo1nQcDsTzJb-0eGs5vNs6jNiLKvrs9M0bQWYQlO8JTFXCU3RRWmUsWKX7i31FsnWyjMTuIaKL9P0kl8A1eMEKRv3JOLCnlqy3O4gAOJIP69jF7yQMm6VsuEfmBm",
+      "image_caption": "",
+      "link": "https://www.kathimerini.gr/culture/music/564396328/to-spotify-tha-markarei-toys-ai-kallitechnes/",
+      "title": "\u03a4\u03bf Spotify \u03b8\u03b1 \u00ab\u03bc\u03b1\u03c1\u03ba\u03ac\u03c1\u03b5\u03b9\u00bb \u03c4\u03bf\u03c5\u03c2 \u0391\u0399 \u03ba\u03b1\u03bb\u03bb\u03b9\u03c4\u03ad\u03c7\u03bd\u03b5\u03c2"
+    },
+    {
+      "author": "Ashley Carman",
+      "date": "2026-08-12T04:30:00.000Z",
+      "domain": "independent.ie",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.independent.ie/business/world/spotify-to-ask-artists-to-disclose-whether-theyre-humans-or-ai/a/159900363.html",
+      "title": "Spotify to ask artists to disclose whether they\u2019re humans or AI"
+    },
+    {
+      "date": "2026-08-12T05:32:00.000Z",
+      "domain": "trthaber.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.trthaber.com/haber/dunya/spotify-muzisyen-profillerine-yapay-zeka-rozeti-getiriyor-953709.html",
+      "title": "Spotify m\u00fczisyen profillerine Yapay Zeka rozeti getiriyor"
+    },
+    {
+      "date": "2026-08-12T06:56:00.000Z",
+      "domain": "lsm.lv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lsm.lv/raksts/zinas/arzemes/12.08.2026-spotify-markes-ar-maksliga-intelekta-raditu-izpilditaju-profilu.a658448/",
+      "title": "\u00abSpotify\u00bb mar\u0137\u0113s ar m\u0101ksl\u012bg\u0101 intelekta rad\u012btu izpild\u012bt\u0101ju profilu"
+    },
+    {
+      "date": "2026-08-11T13:03:56.000Z",
+      "domain": "spotify.com",
+      "image": "https://kagiproxy.com/img/kvHFIqIXaQ5idck_ANyYmFLlUjQqPCF3m-p_7kJzzMmWTk3_MPVZLc7goCVGdVwX-CCBTn7lIrSPqFGuCGfE7vE2vG4oST9CG4k3RsXMNaEqr2Rdmu6sDCBDs2FE7pI7MzsAqA",
+      "image_caption": "",
+      "link": "https://newsroom.spotify.com/2026-08-11/spotify-fuhrt-eine-neue-kennzeichnung-fur-ki-generierte-kunstlerinnen-identitaten-ein/",
+      "title": "Spotify f\u00fchrt eine neue Kennzeichnung f\u00fcr KI-generierte K\u00fcnstler*innen-Identit\u00e4ten ein"
+    },
+    {
+      "date": "2026-08-12T06:24:00.000Z",
+      "domain": "haber7.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.haber7.com/teknoloji/haber/3650627-spotifya-yapay-zeka-ayari-ai-persona-rozeti-geliyor",
+      "title": "Spotify\u2019a yapay zeka ayar\u0131: AI Persona rozeti geliyor!"
+    },
+    {
+      "date": "2026-08-11T13:02:36.000Z",
+      "domain": "spotify.com",
+      "image": "https://kagiproxy.com/img/KqkgvmlldxSk80dOY1qg-xRtNo3ij49L1H69_w56MVS8-0fwCYWEpcSYmJVdbL_pd8Iayu2WbNAamROmZ6QHzOyCdbdz1zCek8CA349jd8MKz8wkOKAzuD0GTFqjYBwcIvR9EQ",
+      "image_caption": "",
+      "link": "https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/",
+      "title": "Spotify introduce un\u2019etichetta per gli Artisti generati tramite AI"
+    },
+    {
+      "date": "2026-08-11T13:00:51.000Z",
+      "domain": "spotify.com",
+      "image": "https://kagiproxy.com/img/ObcOSXjLLuwvWMUVQWfVhaFMkVXnmL3fVS1X8Kb222uB2yaJGWEax6BNRu0YIx5O4h19tHca6ZstZ5R3k6LIsaxskeveOKz_JYiYufvln-vTiD-gscf8TKfH21MD5exdt-F1DA",
+      "image_caption": "",
+      "link": "https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/",
+      "title": "Introducing a New Label for AI-Generated Artist Identities on Spotify"
+    }
+  ],
+  "business_angle": [
+    "Recommendation quality is a core asset for a music-streaming platform, so reducing unwanted synthetic personas could support user retention if listeners value clearer identity signals [spotify.com#3][common].",
+    "If Spotify\u0027s identity labeling becomes widely copied, competitors without similar transparency tools could face pressure to add them [common].",
+    "The badge does not identify AI-generated songs, leaving a transparency gap that rivals or rights holders could use to pressure Spotify for stricter labeling [ifun.de#1][spotify.com#3]."
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "A fake band called the Velvet Sundown sparked a transparency debate after its streams took off while its creators distributed AI-generated photos of imaginary musicians [theguardian.com#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gizmodo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gizmodo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=slashdot.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "slashdot.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theguardian.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theguardian.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iltempo.it\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iltempo.it"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=consequence.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "consequence.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidheadlines.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nairametrics.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nairametrics.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hollywoodreporter.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hollywoodreporter.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aristeguinoticias.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aristeguinoticias.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=latimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "latimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=betanews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "betanews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=telegraaf.nl\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "telegraaf.nl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=adaderana.lk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "adaderana.lk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rollingstone.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "rollingstone.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=metalinjection.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "metalinjection.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rte.ie\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rte.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techradar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techradar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nyheter24.se\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nyheter24.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nd.nl\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nd.nl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sverigesradio.se\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sverigesradio.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=meduza.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "meduza.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=suspilne.media\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "suspilne.media"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arynews.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arynews.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=business-standard.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "business-standard.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=20min.ch\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "20min.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dn.se\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "dn.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kaaoszine.fi\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "kaaoszine.fi"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=teletica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "teletica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iol.pt\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iol.pt"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitalmusicnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitalmusicnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=khaosod.co.th\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "khaosod.co.th"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sydsvenskan.se\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "sydsvenskan.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=habr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "habr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=libertatea.ro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "libertatea.ro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=engadget.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "engadget.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=latercera.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "latercera.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=perfil.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "perfil.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=expansion.mx\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "expansion.mx"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=franceinfo.fr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "franceinfo.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dtf.ru\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dtf.ru"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=df.cl\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "df.cl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=derstandard.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "derstandard.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sky.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sky.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=folha.com.br\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "folha.com.br"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ifun.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ifun.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ensonhaber.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ensonhaber.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=antena3.ro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "antena3.ro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lrt.lt\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lrt.lt"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lamontagne.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "lamontagne.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=citizen.co.za\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "citizen.co.za"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hs.fi\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hs.fi"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=golem.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "golem.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=spiegel.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "spiegel.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=financialpost.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "financialpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theclinic.cl\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theclinic.cl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stern.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "stern.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=evrensel.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "evrensel.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=karar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "karar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kathimerini.gr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "kathimerini.gr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=independent.ie\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "independent.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=trthaber.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "trthaber.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lsm.lv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lsm.lv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=spotify.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "spotify.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=haber7.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "haber7.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sky.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sky.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gizmodo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gizmodo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=slashdot.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "slashdot.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidheadlines.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techradar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techradar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=engadget.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "engadget.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=betanews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "betanews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theguardian.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theguardian.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=latimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "latimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=consequence.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "consequence.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nairametrics.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nairametrics.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=adaderana.lk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "adaderana.lk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hollywoodreporter.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hollywoodreporter.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aristeguinoticias.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aristeguinoticias.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nyheter24.se\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nyheter24.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sverigesradio.se\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sverigesradio.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rte.ie\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rte.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=telegraaf.nl\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "telegraaf.nl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=business-standard.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "business-standard.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=metalinjection.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "metalinjection.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rollingstone.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "rollingstone.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dn.se\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "dn.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitalmusicnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitalmusicnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=meduza.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "meduza.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=suspilne.media\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "suspilne.media"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=libertatea.ro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "libertatea.ro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=expansion.mx\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "expansion.mx"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=khaosod.co.th\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "khaosod.co.th"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nd.nl\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nd.nl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=habr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "habr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=20min.ch\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "20min.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arynews.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arynews.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=latercera.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "latercera.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kaaoszine.fi\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "kaaoszine.fi"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=teletica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "teletica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=perfil.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "perfil.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=franceinfo.fr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "franceinfo.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sydsvenskan.se\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "sydsvenskan.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iol.pt\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iol.pt"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=df.cl\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "df.cl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dtf.ru\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dtf.ru"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=derstandard.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "derstandard.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iltempo.it\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iltempo.it"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lamontagne.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "lamontagne.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ifun.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ifun.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=financialpost.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "financialpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=citizen.co.za\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "citizen.co.za"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stern.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "stern.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=spiegel.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "spiegel.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=antena3.ro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "antena3.ro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ensonhaber.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ensonhaber.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=folha.com.br\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "folha.com.br"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=golem.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "golem.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=independent.ie\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "independent.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theclinic.cl\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theclinic.cl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lrt.lt\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lrt.lt"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hs.fi\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hs.fi"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=evrensel.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "evrensel.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=karar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "karar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=spotify.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "spotify.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=trthaber.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "trthaber.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kathimerini.gr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "kathimerini.gr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lsm.lv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lsm.lv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=haber7.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "haber7.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83c\udfa7",
+  "feed_category": "AI, Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Spotify introduced its AI music policies in September 2025, including labels for AI music using industry-standard techniques and bans on unauthorized AI voice clones and deepfakes [techcrunch.com#1]. In April 2026, Spotify launched Verified by Spotify, a badge showing that a profile had been reviewed and met its authenticity standard [rte.ie#1][franceinfo.fr#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Specific example: Spotify will exclude AI-generated artists such as Velvet Sundown from personalized recommendations by default, and they will carry the persona label [theguardian.com#1].",
+    "Human artists: The Guardian reported that the policy aims to distinguish deepfake artists from real performers who could lose streams to artificial rivals [theguardian.com#1].",
+    "Competing services: Ifun reported that Deezer already labels fully AI-generated music and that Tidal has also adopted labeling that goes beyond artist profiles, contrasting Spotify\u2019s narrower identity-focused badge [ifun.de#1].",
+    "Initial rollout: The AI Persona badge will first appear on mobile in artist profiles, Search and playlist track rows starting in mid-September [engadget.com#1][spotify.com#2].",
+    "Music labeling: A group representing musicians and record labels proposed a similar voluntary labeling system in July 2026, before Spotify announced its own self-disclosure and review approach [gizmodo.com#1].",
+    "Industry pressure: Record labels have been pushing streaming services to label AI-generated music, with a WSJ report in July 2026 noting major labels sought mandatory marking [dtf.ru#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Music Ai",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 84,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Spotify Newsroom",
+          "url": "https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/"
+        }
+      ],
+      "text": "Spotify: Spotify said its programming will focus on elevating music from authentic artists building careers in music, while still allowing artists to choose how they present themselves."
+    },
+    {
+      "sources": [
+        {
+          "name": "Ifun",
+          "url": "https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/"
+        }
+      ],
+      "text": "Ifun: Ifun called the move limited because the badge does not indicate whether a song was fully or partly made with AI, noting that a human musician using AI in production, composition or vocals would not automatically receive the label."
+    },
+    {
+      "sources": [
+        {
+          "name": "Digital Music News",
+          "url": "https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/"
+        }
+      ],
+      "text": "Digital Music News: Digital Music News highlighted the significance of manual profile reviews and said the role of Spotify\u2019s review team could matter for moderation after past platform controversies involving deceptive uploads."
+    },
+    {
+      "sources": [
+        {
+          "name": "Spotify Newsroom",
+          "url": "https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/"
+        }
+      ],
+      "text": "Spotify: Spotify said it focuses its programming on music from authentic artists building careers in music, while allowing creators to choose how they present themselves."
+    },
+    {
+      "sources": [
+        {
+          "name": "iFun",
+          "url": "https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/"
+        }
+      ],
+      "text": "Critics of the scope: iFun said the approach is limited because the badge does not identify whether a specific song was fully or partly made with AI, only whether the artist profile presents an AI-generated identity."
+    },
+    {
+      "sources": [
+        {
+          "name": "iFun",
+          "url": "https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/"
+        }
+      ],
+      "text": "Deezer comparison: iFun contrasted Spotify\u2019s profile-focused badge with Deezer\u2019s policy, saying Deezer already labels fully AI-generated music and has offered a free playlist detector."
+    }
+  ],
+  "primary_image": {
+    "caption": "Spotify AI Persona badges",
+    "credit": "consequence.net",
+    "link": "https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/",
+    "url": "https://kagiproxy.com/img/uTm2R0jx2T3ec0PXQB9d_mrFqkK8uQfd6vIQT_C6BFv7nMk-LynOeGLnb_pAqvypchFzKaLBaQQqTyZMiETy49Xe_ICCN7naBKLPKwwtbboFm7uZbXdbXi1KsMgqbkIwHWAYxwwc-PnKTd7m6iE9KkKMB6Ud4fU"
+  },
+  "published": "2026-08-12T12:00:14.223Z",
+  "quote": "Although there\u2019s a broad spectrum in how artists use AI as a creative tool, the question of whether a profile represents an actual human is one where Spotify can help make a clear determination.",
+  "quote_attribution": "Spotify Newsroom",
+  "quote_author": "Spotify",
+  "scientific_significance": [],
+  "secondary_image": {
+    "caption": "Spotify app imagery accompanying coverage of AI Persona labels",
+    "credit": "cnet.com",
+    "link": "https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/",
+    "url": "https://kagiproxy.com/img/41obGv5UZ82bkld4PuhWv-PELZ4RMcWGKs_MyImX1AKKoQYTt6NqVejJH_7DOUmj1pI8Rre938-II3ouacrIXYQaMcIz4Y5_DtaWXpgR4iEaGPmk1-lJuxWiYEhzQeomQGnOBuRxEQ4leAa8LkI"
+  },
+  "source_urls": [
+    "https://www.theguardian.com/technology/2026/aug/11/spotify-label-ai-artists-block-them-from-some-playlists",
+    "https://news.google.com/atom/articles/CBMiugFBVV95cUxNRXM5Nk10cXFDUnN1d2tDd254ek5qZmhhWE1wZ1RzSDV0eW9jYWdnSGtoUUppZ1RzdkUtZXR2MTFBSDkwLXhZaE1SbVdSWmVtUmdPTXpxNEJkajJPdGttbDFsb1RoNllUV2J0ZWhUTHpRN1puQlZUMTZ2Z3pueVBReG9XSDFORnlFRU9aUVZOeUlGYU5HYUJweEdIQkFXMXJJWXI3cU5VanB1QmFwVWRUbEVSTHlWX3dTa2c",
+    "https://www.reddit.com/r/france/comments/1vlob9w/spotify_va_lancer_un_nouveau_badge_permettant/",
+    "https://habr.com/ru/news/1069468/",
+    "https://www.lrt.lt/naujienos/mokslas-ir-it/11/3018359/spotify-pristatys-zyme-padesiancia-atskirti-dirbtinio-intelekto-sukurta-muzika",
+    "https://www.telegraaf.nl/entertainment/cultuur/spotify-grijpt-hard-in-met-nieuwe-functie-ai-artiesten-worden-gelabeld-en-geweerd-uit-aanbevelingen/159891103.html",
+    "https://www.independent.ie/business/world/spotify-to-ask-artists-to-disclose-whether-theyre-humans-or-ai/a/159900363.html",
+    "https://www.hollywoodreporter.com/music/music-industry-news/spotify-announces-ai-personas-feature-1236670607/",
+    "https://www.perfil.com/noticias/bloomberg/bc-spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia.phtml",
+    "https://sol.iol.pt/vida/noticias/spotify-quer-acabar-com-duvidas-sobre-artistas-criados-por-ia-e-lanca-nova-etiqueta/20260811/6a7b5b660cf2b42132dbd6f9",
+    "https://nyheter24.se/nyheter/teknik/1504268-spotify-infor-markning-ska-avsloja-ai-genererade-artister",
+    "https://www.theclinic.cl/2026/08/11/spotify-etiqueta-artistas-ia-algoritmo-recomendaciones/",
+    "https://redir.folha.com.br/redir/online/emcimadahora/rss091/*https://www1.folha.uol.com.br/ilustrada/2026/08/spotify-anuncia-selo-para-identificar-artistas-sinteticos-gerados-por-ia-na-plataforma.shtml",
+    "https://www.heise.de/news/Spotify-KI-Kuenstler-bekommen-ein-Label-und-fliegen-aus-den-Empfehlungen-11410865.html",
+    "https://www.nytimes.com/2026/08/11/arts/music/spotify-artificial-intelligence-music.html",
+    "https://www.ifun.de/leider-halbherzig-spotify-fuehrt-ki-kennzeichnung-ein-285524/",
+    "https://meduza.io/news/2026/08/12/spotify-nachnet-markirovat-ii-ispolniteley-znachkom-ai-persona-ih-muzyku-isklyuchat-iz-rekomendatsiy",
+    "https://expansion.mx/tecnologia/2026/08/11/spotify-etiquetara-artistas-creados-con-ia",
+    "https://www.ensonhaber.com/spotifydan-yapay-zeka-hamlesi-sanatci-profillerine-ai-persona-etiketi-geliyor-h1556878",
+    "https://www.lamontagne.fr/france-monde/economie/spotify-lance-un-badge-pour-reperer-les-artistes-generes-par-lia-voici-ce-qui-va-changer-pour-les-auditeurs_15031629/",
+    "https://gizmodo.com/spotify-will-start-labeling-ai-artists-on-its-platform-next-month-2000797319",
+    "https://www.techradar.com/audio/spotify/spotify-is-introducing-ai-persona-tags-to-differentiate-real-artists-from-the-fake-vowing-to-become-the-most-transparent-and-trustworthy-place-to-listen-to-music-but-the-tool-isnt-targeting-the-music-itself",
+    "https://kaaoszine.fi/spotify-aloittaa-tekoalyartistien-merkitsemisen-ja-poistaa-ne-personoiduista-suosituksista/",
+    "https://www.franceinfo.fr/internet/streaming/spotify/spotify-va-lancer-un-badge-permettant-d-identifier-la-musique-generee-par-intelligence-artificielle_8143382.html#xtor=RSS-3-%5Bgeneral%5D",
+    "https://newsroom.spotify.com/2026-08-11/ai-persona-badges-transparency/",
+    "https://newsroom.spotify.com/2026-08-11/spotify-fuhrt-eine-neue-kennzeichnung-fur-ki-generierte-kunstlerinnen-identitaten-ein/",
+    "https://www.reddit.com/r/Music/comments/1vlxyxx/spotify_is_cracking_down_on_profiles_of_artists/",
+    "https://entertainment.slashdot.org/story/26/08/11/1741252/spotify-will-label-ai-persona-profiles-exclude-their-music-from-recommendations",
+    "https://www.sverigesradio.se/artikel/9273620",
+    "https://metalinjection.net/news/spotify-ai-generated-music-platform-to-add-tags",
+    "https://www.hs.fi/popkulttuuri/art-2000012198812.html",
+    "https://www.digitalmusicnews.com/2026/08/11/spotify-ai-persona/",
+    "https://www.teletica.com/entretenimiento/spotify-anuncia-lanzamiento-de-una-etiqueta-para-identificar-musica-creada-con-ia_415269",
+    "https://www.citizen.co.za/lifestyle/technology/spotify-to-launch-badge-identifying-ai-music/",
+    "https://www.rollingstone.com/music/music-news/spotify-labeling-ai-artists-1235606855/",
+    "https://www.spiegel.de/netzwelt/spotify-plattform-will-ki-generierte-nutzerprofile-kennzeichnen-a-368c2b03-6409-4660-a708-1f011fa8abc5#ref=rss",
+    "https://news.google.com/atom/articles/CBMimwFBVV95cUxOSklXWUtfRmtaZmxKUHdoY29DaXlPd1NCb1JqTjdCa0t1T01RWlJnMmN5OE5fWGlicFRCU3FqZlc0VFRpMWJnR3hlNVlvQjRkQVVDRXJTSnNIRk0wcGlYanVTaGgyRTdDcVdEaEF6dTNJNGMzSElYTms1TVNRWldlQXk0bHdkbVpHb0dSekFNVnNONG9kY3ZQM3dQdw",
+    "https://www.reddit.com/r/Music/comments/1vm6lg1/spotify_to_add_ai_persona_badges_to_flag/",
+    "https://suspilne.media/culture/1376824-spotify-pocne-markuvati-vikonavciv-zgenerovanih-stucnim-intelektom-ta-obmezit-ih-u-rekomendaciah/",
+    "https://www.golem.de/news/musik-streaming-spotify-markiert-ki-ersteller-mit-neuem-persona-label-2608-211836.html",
+    "https://www.derstandard.at/story/3000000335211/spotify-f252hrt-kennzeichnung-f252r-ki-generierte-profile-ein",
+    "https://www.evrensel.net/haber/5996023/spotify-duyurdu-yapay-zeka-profillerine-ai-persona-etiketi-gelecek",
+    "https://www.latercera.com/culto/noticia/spotify-lanzara-etiquetas-para-identificar-a-artistas-creados-con-inteligencia-artificial/",
+    "https://www.kathimerini.gr/culture/music/564396328/to-spotify-tha-markarei-toys-ai-kallitechnes/",
+    "https://tweakers.net/nieuws/250882/spotify-markeert-ai-gegenereerde-artiesten-vanaf-half-september-met-nieuw-label.html",
+    "https://indianexpress.com/article/technology/tech-news-technology/spotify-to-slap-ai-persona-badges-on-ai-generated-artist-profiles-10829138/",
+    "http://www.df.cl/internacional/multinacionales/spotify-solicitara-a-artistas-identificar-la-musica-creada-con-ia-a",
+    "https://aristeguinoticias.com/1108/kiosko/spotify-etiquetara-a-los-artistas-creados-con-inteligencia-artificial/",
+    "https://www.20min.ch/fr/story/musique-spotify-va-etiqueter-les-artistes-ia-et-les-virer-des-playlists-103616228",
+    "https://www.pcmag.com/news/spotify-will-now-flag-ai-personas-and-stop-recommending-their-music",
+    "https://news.google.com/atom/articles/CBMiqgFBVV95cUxQejM4MFFFM2FqUjh2YVBxamIxWWtvaDZodU4zdWd2cjFXUl9ETHhHaUNXcnlXYmw5TVlnd0d3QUpBVTdxX2tGZzJGbVN5QjY0eDNiRkRYQzZGbGRzaFo1dXlsdkhEc1VXci1WaHo2T0FFLUY0amxHM3pBeDVhdkhZTk5TVmFBLTViVnZxa19wY0MtUi1jeTNOd1NtX1JKX3ljMG9QLW1EeGl1dw",
+    "https://mashable.com/tech/spotify-ai-persona-badge-music-recommendations",
+    "https://dtf.ru/music/5235311-spotify-bejdzi-dlya-ii-artistov",
+    "https://www.business-standard.com/technology/tech-news/spotify-to-add-ai-persona-badges-on-ai-generated-artist-profiles-from-sep-126081200465_1.html",
+    "https://www.digitaltrends.com/home-theater/spotify-is-finally-calling-out-ai-artists-and-youll-see-it-right-away/",
+    "https://news.sky.com/story/spotify-to-add-ai-persona-badges-to-flag-ai-generated-artists-13572097",
+    "https://www.iltempo.it/tv-news/2026/08/11/video/spotify-introduce-etichetta-per-gli-artisti-generati-tramite-ai-48838979/",
+    "https://consequence.net/2026/08/spotify-ai-persona-badge-artist-profiles/",
+    "https://www.stern.de/kultur/neuerung-ab-september--spotify-kennzeichnet-ki-kuenstler-38092658.html",
+    "https://www.trthaber.com/haber/dunya/spotify-muzisyen-profillerine-yapay-zeka-rozeti-getiriyor-953709.html",
+    "https://www.sydsvenskan.se/noje/spotify-lanserar-markning-av-ai-artister/",
+    "https://www.latimes.com/entertainment-arts/business/story/2026-08-11/spotify-to-label-ai-personas-rid-ai-music-from-recommendations",
+    "https://www.karar.com/guncel-haberler/spotify-muzisyen-profillerinde-yapay-zeka-donemi-2065152",
+    "https://nairametrics.com/2026/08/11/spotify-to-identify-ai-generated-artists-with-new-profile-labels/",
+    "https://adaderana.lk/news/cmspniqio000j356pw6o2c2x3",
+    "https://betanews.com/article/spotify-to-launch-ai-persona-badge-to-help-identify-ai-artists/",
+    "https://www.libertatea.ro/stiri/cum-identifici-artistii-ai-pe-spotify-persona-badge-5847896",
+    "https://www.dn.se/kultur/efter-kritiken-spotify-marker-ai-artister/",
+    "https://arynews.tv/spotify-bans-ai-generated-artists-from-recommendations",
+    "https://newsroom.spotify.com/2026-08-11/spotify-introduce-unetichetta-per-gli-artisti-generati-tramite-ai/",
+    "https://www.antena3.ro/high-tech/spotify-va-lansa-o-eticheta-care-permite-identificarea-muzicii-generate-de-ai-799119.html",
+    "https://www.androidheadlines.com/2026/08/spotify-will-label-ai-artists-and-keep-them-out-of-your-recommendations.html",
+    "https://www.engadget.com/2234144/spotify-launches-ai-persona-labels/",
+    "https://www.haber7.com/teknoloji/haber/3650627-spotifya-yapay-zeka-ayari-ai-persona-rozeti-geliyor",
+    "https://www.cnet.com/tech/services-and-software/spotifys-ai-persona-label-to-pluck-ai-artists-from-your-algorithm/",
+    "https://www.firstpost.com/tech/spotify-to-label-ai-generated-artists-as-ai-persona-and-exclude-their-music-from-recommendations-14037509.html",
+    "https://www.khaosod.co.th/special-stories/news_10357201",
+    "https://www.nd.nl/varia/varia/1327102/spotify-komt-met-label-voor-ai-gegenereerde-artiesten",
+    "https://financialpost.com/technology/tech-news/spotify-asks-artists-disclose-humans-or-ai",
+    "https://www.rte.ie/news/world/2026/0811/1587465-spotify-ai-music/",
+    "https://news.google.com/atom/articles/CBMie0FVX3lxTE54SHRiUkpBcXlNYVRiYjJfUi1lMnFhMFowRkpwVTdUdWx0SDV5YXphU1A3N1UxQVNTX1lheHR6MGdqX2hDejkwQlNYTUNOTjg2dklSUjJEN3liNXZtcVV0OFlXbHBnaHMxbkw0S0RqVmNXSTE3WWd5UFlOYw",
+    "https://techcrunch.com/2026/08/11/spotify-will-label-ai-persona-profiles-and-exclude-their-music-from-recommendations/",
+    "https://www.lsm.lv/raksts/zinas/arzemes/12.08.2026-spotify-markes-ar-maksliga-intelekta-raditu-izpilditaju-profilu.a658448/",
+    "https://news.google.com/atom/articles/CBMikgFBVV95cUxOTEgtay00NGpMa2hWTk81QlQtOEwtRXFlMzJVZktFNTV5d21hUmpmUjhSTDhXcVJUYTZFY25ZWm5PUlpaWjE4NW5FNG90LVVmZ2JZX1RySWlIZE5HQWRnSWpLZmtqLWpqZm5BYjdSSXFUUHUyU0xvU0VINEhUcXVFOVdqMi1GanhHZkdWMkJWMFJ1dw"
+  ],
+  "suggested_qna": [],
+  "summary": "Spotify said it will start showing an \u201cAI Persona\u201d badge on some artist profiles in mid-September to indicate that an artist\u2019s public identity may be AI-generated and does not represent a real person [spotify.com#3][techcrunch.com#1][pcmag.com#1]. The company said the badge responds to listener complaints about artist profiles that appear human until users discover the persona was generated by AI [spotify.com#3][gizmodo.com#1][theguardian.com#1].\n\nArtists have been able to self-disclose through Spotify for Artists since Aug. 11, but Spotify said it will also review profiles whose names and imagery appear to present photorealistic AI-generated identities [spotify.com#3][techcrunch.com#1][financialpost.com#1]. Once labeled, AI Personas will be excluded by default from Spotify\u2019s editorial, algorithmic and personalized recommendations unless a user follows them [spotify.com#3][techcrunch.com#1][mashable.com#1].\n\nSpotify said the policy is part of its Artist Identity \u0026 Trust work, which also includes Verified by Spotify, SongDNA, AI Credits and Artist Profile Protection [spotify.com#3][techradar.com#1]. The company said the badge covers the artist\u2019s public identity rather than whether AI helped create the music itself [spotify.com#3][slashdot.org#1][expansion.mx#1].",
+  "talking_points": [
+    "Appeals process: Artists that Spotify labels will be notified and can self-disclose or appeal if they believe the badge was applied incorrectly [pcmag.com#1][engadget.com#1][latercera.com#1].",
+    "Past cleanup: Spotify said in 2025 that it had removed more than 75 million spam tracks over a 12-month period, compared with a legitimate catalog of about 100 million tracks [theguardian.com#1][consequence.net#1].",
+    "Catalog pressure: Spotify said in 2025 that it had removed more than 75 million spam tracks over 12 months, while The Guardian reported its legitimate catalog stands at 100 million tracks [theguardian.com#1][consequence.net#1][kaaoszine.fi#1].",
+    "Review priority: Spotify said it will begin reviews with profiles that have met defined audience thresholds so labeling covers the profiles users visit most [spotify.com#3][techcrunch.com#1][gizmodo.com#1].",
+    "Prior safeguards: Spotify\u2019s 2026 identity program also includes Verified by Spotify, SongDNA, AI Credits and Artist Profile Protection [spotify.com#2][techcrunch.com#1][consequence.net#1].",
+    "User reporting: Spotify plans to add a tool in the coming months for listeners to report artist profiles they believe are AI Personas without a label [androidheadlines.com#1][meduza.io#1][dtf.ru#1].",
+    "Appeal process: If Spotify applies a label after review, the account holder will be notified and can self-disclose or appeal the classification [spotify.com#2][pcmag.com#1][androidheadlines.com#1][latercera.com#1].",
+    "Badge placement: Spotify said the label will appear in artist-profile banners and About sections, in Search, and on track rows across playlists [spotify.com#3][techcrunch.com#1][pcmag.com#1]."
+  ],
+  "technical_details": [
+    "Review methodology: Spotify will use human moderators and AI detection tools to identify photorealistic AI-generated identities, starting with profiles that meet audience thresholds [digitaltrends.com#1][spotify.com#2].",
+    "Label variants: Self-disclosed profiles will show an \u201cAI Persona\u201d badge; profiles identified by Spotify\u2019s review may display a \u201cLikely AI Persona\u201d label [digitalmusicnews.com#1][engadget.com#1].",
+    "Badge interaction: Tapping the badge will show whether the artist self-disclosed or Spotify applied the label after review [cnet.com#1][adaderana.lk#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Spotify launched the Verified by Spotify authenticity badge [rte.ie#1]",
+      "date": "April 2026",
+      "date_iso": "2026-04"
+    },
+    {
+      "content": "Artists could self-disclose AI Persona status [spotify.com#3]",
+      "date": "11 August 2026",
+      "date_iso": "2026-08-11"
+    },
+    {
+      "content": "AI Persona badges are scheduled to appear [spotify.com#3]",
+      "date": "September 2026",
+      "date_iso": "2026-09"
+    },
+    {
+      "content": "Spotify launched the Verified by Spotify authenticity badge [rte.ie#1]",
+      "date": "April 2026",
+      "date_iso": "2026-04"
+    },
+    {
+      "content": "Artists could begin self-disclosing AI Personas [spotify.com#2]",
+      "date": "11 August 2026",
+      "date_iso": "2026-08-11"
+    },
+    {
+      "content": "AI Persona badges are scheduled to start appearing to users [spotify.com#2]",
+      "date": "September 2026",
+      "date_iso": "2026-09"
+    }
+  ],
+  "title": "Spotify to add AI Persona labels for synthetic artists",
+  "travel_advisory": "",
+  "unique_domains": 76,
+  "url": "https://entertainment.slashdot.org/story/26/08/11/1741252/spotify-will-label-ai-persona-profiles-exclude-their-music-from-recommendations",
+  "user_action_items": [
+    "Check labeled profiles: When badges appear in mid-September, tap an AI Persona label to see whether the artist self-disclosed or Spotify applied the badge after review [cnet.com#1][adaderana.lk#1][haber7.com#1].",
+    "Control recommendations: Do not follow AI Persona profiles if you do not want Spotify to treat them as an explicit signal for future recommendations [spotify.com#2][techcrunch.com#1][mashable.com#1].",
+    "Report suspected profiles later: Spotify plans to roll out a tool in the coming months for users to report artist profiles they believe are AI Personas without a label [androidheadlines.com#1][meduza.io#1].",
+    "Check AI Persona disclosure: When the badge appears, tap it to see whether the artist self-disclosed or Spotify applied the label after review [cnet.com#1][spotify.com#3]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

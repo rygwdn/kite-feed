@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers expose reasoning traces in major AI APIs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers expose reasoning traces in major AI APIs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Researchers said they found a way to extract hidden chain-of-thought reasoning from proprietary large language model APIs by replaying encrypted reasoning blocks through weaker models in the same provider ecosystem <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/" class="footnote-ref">[3]</a><a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a><a href="https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html" class="footnote-ref">[9]</a>. The researchers demonstrated the technique across OpenAI, Anthropic and Google systems, including Claude, GPT and Gemini model families <a href="https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/" class="footnote-ref">[6]</a><a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/" class="footnote-ref">[3]</a><a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>.
+
+The paper says major providers hide step-by-step reasoning to protect intellectual property and limit information leakage, but send encrypted reasoning blocks back to client applications for use in later requests rather than storing all traces server-side <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>. The researchers said the flaw arose because those encrypted blocks were compatible across sessions, users and models within a provider’s ecosystem, allowing a less safeguarded model to output another model’s reasoning in plaintext <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/" class="footnote-ref">[3]</a><a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>.
+
+The research team reported four attack vectors: bypassing anti-distillation protections, extracting private data from publicly shared logs, revealing hazardous information hidden in rejected responses and enabling invisible prompt injections inside encrypted blocks <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMifkFVX3lxTE1kcWkwclBIdDJtS3lQbkJONHJ1Mm8ydFU0R2x4X1ZHYVdUbl9BNUhWWk9lRkpEVXE3SFR0aV9KclpFdzFMX1BYRnlpM3dRRlM1cWNZNDVFbnlMNURnNFJfLTdVd0RraWtNeU1UbzA2eUxRbHBGOS1vbTdHaWhVQQ">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Access requirements: CyberSecurityNews said the attack required only standard, unprivileged API access, not access to provider infrastructure or privileged credentials <a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>.</li>
+
+<li>Research team: CyberSecurityNews identified the work as a collaboration involving the ELLIS Institute Tübingen, the Max Planck Institute, MATS Research and Snyk <a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>.</li>
+
+<li>Provider response: AI-Updates said the researchers notified OpenAI, Anthropic and Google, and that all three adjusted their APIs before publication <a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/" class="footnote-ref">[3]</a>.</li>
+
+<li>Model lineage: WIRED reported that researchers cited extracted traces in saying some Chinese AI systems may have been trained on leading U.S. models <a href="https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>10 August 2026:</strong> Paper submitted to arXiv detailing reasoning-trace theft <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>11 August 2026:</strong> WIRED published article on extracting Claude, GPT and Gemini traces <a href="https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>11 August 2026:</strong> CyberSecurityNews described cross-model replay against major AI APIs <a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a></li>
+
+
+
+<li><strong>12 August 2026:</strong> Firstpost reported hidden reasoning risk and distillation concerns <a href="https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html" class="footnote-ref">[9]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Cross-model replay: The attack reuses an encrypted reasoning envelope generated by a more capable model as input to a cheaper sibling model in the same provider ecosystem, turning that weaker model into a decryption oracle that emits the trace in plaintext <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>.</li>
+
+<li>Missing cryptographic binding: CyberSecurityNews reported that encrypted payloads used a provider-wide authentication approach rather than being bound to a specific account, session ID or model tier, which allowed valid replay across models under the same provider <a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/" class="footnote-ref">[8]</a>.</li>
+
+<li>Invisible prompt injection: The paper says malicious instructions can be embedded entirely inside encrypted reasoning blocks, letting attackers influence later model behavior without visible prompt text in the client-facing conversation <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Model lineage controversy: AI-Updates noted that exposed reasoning traces can be used to compare how closely one model’s reasoning resembles another’s, raising questions about training data provenance and potential copying between model developers. <a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/" class="footnote-ref">[3]</a></li>
+
+<li>Developer operations: The paper said developers often shared session logs publicly without realizing encrypted reasoning blocks could contain recoverable sensitive material <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a>.</li>
+
+<li>Competitive model training: The reported anti-distillation bypass could let competitors study or reuse proprietary reasoning patterns from frontier models, according to the arXiv paper and Firstpost <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit public AI logs: Search public repositories and issue trackers for saved API session logs, then remove encrypted reasoning blocks or credentials before reuse or publication <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a>.</li>
+
+<li>Rotate exposed secrets: If AI API logs were published, rotate API keys, passwords and tokens that may have appeared in session data, because the researchers recovered credentials from decoded public reasoning blocks <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a>.</li>
+
+<li>Check provider guidance: Review OpenAI, Anthropic and Google API security notices or changelogs for mitigations tied to encrypted reasoning context handling <a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html">https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html</a></li>
+
+
+
+<li><a href="https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/">https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/</a></li>
+
+
+
+<li><a href="https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/">https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/</a></li>
+
+
+
+
+
+<li><a href="https://arxiv.org/abs/2608.09867">https://arxiv.org/abs/2608.09867</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMihgFBVV95cUxNV3ctRXpzblZqam12cUpqbkg1MDd4d0NlV3dLREk4dTBqNi1TeVlMOURxQ25GZm0wWlA1aWFWSXJTLV8zaGxyaGJUUmFuRzBLNmlUZms3M3FqMi1VbVhneElfd0NPLWZQa3F5TTJ5T1NReFNzLUh1cndrcXhfZWswMndPaGNmd9IBiwFBVV95cUxQWU96VllRM202REJpMDMzMkRmRVlRSlhRMGxSWnVWZzNkaUxpWFhjcXNNMjNCS0tmbWdPQ0tOdFE1dFdENHRjOGVZeTRVSWpVMXJ1dE56dk5NVEtaT1BuNWFzVC1kU0VKWWhOaEhUbl9JYzFVTnNNRXM2aWFXYWlxUTNlRGxSLVdDellv">https://news.google.com/atom/articles/CBMihgFBVV95cUxNV3ctRXpzblZqam12cUpqbkg1MDd4d0NlV3dLREk4dTBqNi1TeVlMOURxQ25GZm0wWlA1aWFWSXJTLV8zaGxyaGJUUmFuRzBLNmlUZms3M3FqMi1VbVhneElfd0NPLWZQa3F5TTJ5T1NReFNzLUh1cndrcXhfZWswMndPaGNmd9IBiwFBVV95cUxQWU96VllRM202REJpMDMzMkRmRVlRSlhRMGxSWnVWZzNkaUxpWFhjcXNNMjNCS0tmbWdPQ0tOdFE1dFdENHRjOGVZeTRVSWpVMXJ1dE56dk5NVEtaT1BuNWFzVC1kU0VKWWhOaEhUbl9JYzFVTnNNRXM2aWFXYWlxUTNlRGxSLVdDellv</a></li>
+
+
+
+<li><a href="https://stolen-thoughts.com/paper.pdf">https://stolen-thoughts.com/paper.pdf</a></li>
+
+
+
+<li><a href="https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/">https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/</a></li>
+
+
+
+<li><a href="https://www.indiavision.com/business/a-new-trick-reveals-ai-models-inner-thoughts/605865/">https://www.indiavision.com/business/a-new-trick-reveals-ai-models-inner-thoughts/605865/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, arxiv.org, ai-updates.net, stolen-thoughts.com, wired.com, indiavision.com, cybersecuritynews.com, firstpost.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 8 unique domains, 9 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-11T11:00:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMifkFVX3lxTE1kcWkwclBIdDJtS3lQbkJONHJ1Mm8ydFU0R2x4X1ZHYVdUbl9BNUhWWk9lRkpEVXE3SFR0aV9KclpFdzFMX1BYRnlpM3dRRlM1cWNZNDVFbnlMNURnNFJfLTdVd0RraWtNeU1UbzA2eUxRbHBGOS1vbTdHaWhVQQ",
+      "title": "A New Trick Reveals AI Models\u2019 Inner Thoughts - WIRED"
+    },
+    {
+      "author": "vismit2000",
+      "date": "2026-08-12T01:56:49.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.09867",
+      "title": "Stealing Reasoning Traces from Proprietary LLM APIs"
+    },
+    {
+      "author": "ashurandi",
+      "date": "2026-08-11T22:57:53.000Z",
+      "domain": "ai-updates.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/",
+      "title": "LLM Model-Swapping Trick Can Expose AI Reasoning Traces"
+    },
+    {
+      "author": "amrrs",
+      "date": "2026-08-11T15:30:22.000Z",
+      "domain": "stolen-thoughts.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://stolen-thoughts.com/paper.pdf",
+      "title": "Stealing Reasoning Traces from Proprietary LLM APIs [pdf]"
+    },
+    {
+      "date": "2026-08-11T15:38:07.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMihgFBVV95cUxNV3ctRXpzblZqam12cUpqbkg1MDd4d0NlV3dLREk4dTBqNi1TeVlMOURxQ25GZm0wWlA1aWFWSXJTLV8zaGxyaGJUUmFuRzBLNmlUZms3M3FqMi1VbVhneElfd0NPLWZQa3F5TTJ5T1NReFNzLUh1cndrcXhfZWswMndPaGNmd9IBiwFBVV95cUxQWU96VllRM202REJpMDMzMkRmRVlRSlhRMGxSWnVWZzNkaUxpWFhjcXNNMjNCS0tmbWdPQ0tOdFE1dFdENHRjOGVZeTRVSWpVMXJ1dE56dk5NVEtaT1BuNWFzVC1kU0VKWWhOaEhUbl9JYzFVTnNNRXM2aWFXYWlxUTNlRGxSLVdDellv",
+      "title": "OpenAI, Anthropic, and Google LLM APIs vulnerability Exposes Hidden Reasoning Traces - CyberSecurityNews"
+    },
+    {
+      "author": "Will Knight",
+      "date": "2026-08-11T11:00:00.000Z",
+      "domain": "wired.com",
+      "image": "https://kagiproxy.com/img/ADNUv_NvlyD0QBVs0WxCT3YH0JBNZLLtaWR8oM9S46dvAx0AZcCOR_DHcH41f-aWaXy2zj1yJ7TX5Ny2k3y0cM9ieTwcuF5_GQDBJo8WdDtUVD9sDGNkKXFqBl7hlZRRmL11bhw2XUtol2vXbwqEXj-dFdYoFkrBc9mnL2Arwdp8YUTDdEXh0BJ9iYyWhL1UjtKQb5qzH-qiKw",
+      "image_caption": "",
+      "link": "https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/",
+      "title": "A New Trick Reveals AI Models\u2019 Inner Thoughts"
+    },
+    {
+      "author": "Alka Anand Singh",
+      "date": "2026-08-12T00:02:09.000Z",
+      "domain": "indiavision.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.indiavision.com/business/a-new-trick-reveals-ai-models-inner-thoughts/605865/",
+      "title": "A New Trick Reveals AI Models Inner Thoughts"
+    },
+    {
+      "author": "Guru Baran",
+      "date": "2026-08-11T15:35:32.000Z",
+      "domain": "cybersecuritynews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/",
+      "title": "OpenAI, Anthropic, and Google LLM APIs vulnerability Exposes Hidden Reasoning Traces"
+    },
+    {
+      "author": "Unnati Gusain",
+      "date": "2026-08-12T04:53:10.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/EAF2oXh3Ny9O55HqF0GUETxZCW_gy43J5ajvY3QcQcFhwkvg7xCHNYvogUem0TlcDEEci6jlZJYAVeqkKuB3JURrPvYaHOUwMr47dIBm-sR88QP3OF4eZnXfM6rzNvC5DhzMZHV-G_qjl80mf37FVCimdf3g6o2BC5NuwymJ0RdLgXM",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html",
+      "title": "AI\u2019s secret thoughts may not be so secret after all: Researchers uncover hidden reasoning risk"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ai-updates.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ai-updates.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stolen-thoughts.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "stolen-thoughts.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wired.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "wired.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indiavision.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "indiavision.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cybersecuritynews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cybersecuritynews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd13",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Model lineage controversy: AI-Updates noted that exposed reasoning traces can be used to compare how closely one model\u2019s reasoning resembles another\u2019s, raising questions about training data provenance and potential copying between model developers. [ai-updates.net#1]",
+    "Developer operations: The paper said developers often shared session logs publicly without realizing encrypted reasoning blocks could contain recoverable sensitive material [arxiv.org#1].",
+    "Competitive model training: The reported anti-distillation bypass could let competitors study or reuse proprietary reasoning patterns from frontier models, according to the arXiv paper and Firstpost [arxiv.org#1][firstpost.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Security",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 9,
+  "perspectives": [],
+  "primary_image": null,
+  "published": "2026-08-12T12:00:14.223Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.firstpost.com/tech/ais-secret-thoughts-may-not-be-so-secret-after-all-researchers-uncover-hidden-reasoning-risk-14037598.html",
+    "https://ai-updates.net/model-swapping-exposes-ai-reasoning-traces/",
+    "https://cybersecuritynews.com/top-ai-models-apis-flaw-exposes-hidden-reasoning/",
+    "https://news.google.com/atom/articles/CBMifkFVX3lxTE1kcWkwclBIdDJtS3lQbkJONHJ1Mm8ydFU0R2x4X1ZHYVdUbl9BNUhWWk9lRkpEVXE3SFR0aV9KclpFdzFMX1BYRnlpM3dRRlM1cWNZNDVFbnlMNURnNFJfLTdVd0RraWtNeU1UbzA2eUxRbHBGOS1vbTdHaWhVQQ",
+    "https://arxiv.org/abs/2608.09867",
+    "https://news.google.com/atom/articles/CBMihgFBVV95cUxNV3ctRXpzblZqam12cUpqbkg1MDd4d0NlV3dLREk4dTBqNi1TeVlMOURxQ25GZm0wWlA1aWFWSXJTLV8zaGxyaGJUUmFuRzBLNmlUZms3M3FqMi1VbVhneElfd0NPLWZQa3F5TTJ5T1NReFNzLUh1cndrcXhfZWswMndPaGNmd9IBiwFBVV95cUxQWU96VllRM202REJpMDMzMkRmRVlRSlhRMGxSWnVWZzNkaUxpWFhjcXNNMjNCS0tmbWdPQ0tOdFE1dFdENHRjOGVZeTRVSWpVMXJ1dE56dk5NVEtaT1BuNWFzVC1kU0VKWWhOaEhUbl9JYzFVTnNNRXM2aWFXYWlxUTNlRGxSLVdDellv",
+    "https://stolen-thoughts.com/paper.pdf",
+    "https://www.wired.com/story/a-new-trick-reveals-ai-models-inner-thoughts/",
+    "https://www.indiavision.com/business/a-new-trick-reveals-ai-models-inner-thoughts/605865/"
+  ],
+  "suggested_qna": [],
+  "summary": "Researchers said they found a way to extract hidden chain-of-thought reasoning from proprietary large language model APIs by replaying encrypted reasoning blocks through weaker models in the same provider ecosystem [arxiv.org#1][ai-updates.net#1][cybersecuritynews.com#1][firstpost.com#1]. The researchers demonstrated the technique across OpenAI, Anthropic and Google systems, including Claude, GPT and Gemini model families [wired.com#1][arxiv.org#1][ai-updates.net#1][cybersecuritynews.com#1].\n\nThe paper says major providers hide step-by-step reasoning to protect intellectual property and limit information leakage, but send encrypted reasoning blocks back to client applications for use in later requests rather than storing all traces server-side [arxiv.org#1][cybersecuritynews.com#1]. The researchers said the flaw arose because those encrypted blocks were compatible across sessions, users and models within a provider\u2019s ecosystem, allowing a less safeguarded model to output another model\u2019s reasoning in plaintext [arxiv.org#1][ai-updates.net#1][cybersecuritynews.com#1].\n\nThe research team reported four attack vectors: bypassing anti-distillation protections, extracting private data from publicly shared logs, revealing hazardous information hidden in rejected responses and enabling invisible prompt injections inside encrypted blocks [arxiv.org#1].",
+  "talking_points": [
+    "Access requirements: CyberSecurityNews said the attack required only standard, unprivileged API access, not access to provider infrastructure or privileged credentials [cybersecuritynews.com#1].",
+    "Research team: CyberSecurityNews identified the work as a collaboration involving the ELLIS Institute T\u00fcbingen, the Max Planck Institute, MATS Research and Snyk [cybersecuritynews.com#1].",
+    "Provider response: AI-Updates said the researchers notified OpenAI, Anthropic and Google, and that all three adjusted their APIs before publication [ai-updates.net#1].",
+    "Model lineage: WIRED reported that researchers cited extracted traces in saying some Chinese AI systems may have been trained on leading U.S. models [wired.com#1]."
+  ],
+  "technical_details": [
+    "Cross-model replay: The attack reuses an encrypted reasoning envelope generated by a more capable model as input to a cheaper sibling model in the same provider ecosystem, turning that weaker model into a decryption oracle that emits the trace in plaintext [arxiv.org#1][cybersecuritynews.com#1].",
+    "Missing cryptographic binding: CyberSecurityNews reported that encrypted payloads used a provider-wide authentication approach rather than being bound to a specific account, session ID or model tier, which allowed valid replay across models under the same provider [cybersecuritynews.com#1].",
+    "Invisible prompt injection: The paper says malicious instructions can be embedded entirely inside encrypted reasoning blocks, letting attackers influence later model behavior without visible prompt text in the client-facing conversation [arxiv.org#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Paper submitted to arXiv detailing reasoning-trace theft [arxiv.org#1]",
+      "date": "10 August 2026",
+      "date_iso": "2026-08-10"
+    },
+    {
+      "content": "WIRED published article on extracting Claude, GPT and Gemini traces [wired.com#1]",
+      "date": "11 August 2026",
+      "date_iso": "2026-08-11"
+    },
+    {
+      "content": "CyberSecurityNews described cross-model replay against major AI APIs [cybersecuritynews.com#1]",
+      "date": "11 August 2026",
+      "date_iso": "2026-08-11"
+    },
+    {
+      "content": "Firstpost reported hidden reasoning risk and distillation concerns [firstpost.com#1]",
+      "date": "12 August 2026",
+      "date_iso": "2026-08-12"
+    }
+  ],
+  "title": "Researchers expose reasoning traces in major AI APIs",
+  "travel_advisory": "",
+  "unique_domains": 8,
+  "url": "https://news.google.com/atom/articles/CBMifkFVX3lxTE1kcWkwclBIdDJtS3lQbkJONHJ1Mm8ydFU0R2x4X1ZHYVdUbl9BNUhWWk9lRkpEVXE3SFR0aV9KclpFdzFMX1BYRnlpM3dRRlM1cWNZNDVFbnlMNURnNFJfLTdVd0RraWtNeU1UbzA2eUxRbHBGOS1vbTdHaWhVQQ",
+  "user_action_items": [
+    "Audit public AI logs: Search public repositories and issue trackers for saved API session logs, then remove encrypted reasoning blocks or credentials before reuse or publication [arxiv.org#1].",
+    "Rotate exposed secrets: If AI API logs were published, rotate API keys, passwords and tokens that may have appeared in session data, because the researchers recovered credentials from decoded public reasoning blocks [arxiv.org#1].",
+    "Check provider guidance: Review OpenAI, Anthropic and Google API security notices or changelogs for mitigations tied to encrypted reasoning context handling [ai-updates.net#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
