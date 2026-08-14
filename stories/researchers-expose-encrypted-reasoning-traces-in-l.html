@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers expose encrypted reasoning traces in LLM APIs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers expose encrypted reasoning traces in LLM APIs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Researchers Alexander Panfilov, David Schmotz, Ilia Shumailov, Luca Beurer-Kellner, Joachim Schaeffer, Ameya Prabhu, Jonas Geiping and Maksym Andriushchenko published a paper submitted Aug. 10 describing a method to recover concealed chain-of-thought traces from proprietary large language model APIs <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>. The paper says leading providers hide step-by-step reasoning to protect intellectual property and limit information leakage, but return encrypted reasoning blocks to clients for reuse in later requests instead of keeping them only on their servers <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>.
+
+The authors say encrypted reasoning blocks can work across different sessions, users and models within the same provider ecosystem. They describe a “scalable decryption jailbreak” in which an encrypted trace from one model is injected into a weaker model that then outputs the trace in plaintext <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>. They report demonstrations across Anthropic, OpenAI and Google, and say the flaw can support anti-distillation bypasses, private-data extraction, hazardous-content disclosure from hidden reasoning, and prompt injections embedded inside encrypted blocks <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>.
+
+Semantica, a separate AI infrastructure project, describes itself on GitHub as open-source, self-hostable graph-native infrastructure for context graphs, knowledge graphs, graph analytics, causal reasoning and decision provenance, aimed at high-stakes and regulated domains <a href="https://github.com/semantica-agi/semantica" class="footnote-ref">[1]</a>. The repository page listed 7,000 stars, 732 forks, 2,318 commits and an MIT license at publication time <a href="https://github.com/semantica-agi/semantica" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/semantica-agi/semantica">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>By injecting an encrypted reasoning trace from a given model into a weaker, and less safeguarded model from the same provider, we force it to decode and output the trace verbatim in plaintext, without ever jailbreaking the more capable model directly.</p>
+
+<cite>— Alexander Panfilov, David Schmotz, Ilia Shumailov, Luca Beurer-Kellner, Joachim Schaeffer, Ameya Prabhu, Jonas Geiping and Maksym Andriushchenko (arXiv)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Disclosure: The authors say they followed responsible disclosure and propose cryptographic and system-level mitigations for client-side reasoning traces <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>.</li>
+
+<li>Traceability tooling: Semantica’s repository lists RDF and labeled-property-graph support, W3C standards, ontology management and end-to-end traceability among its core design claims <a href="https://github.com/semantica-agi/semantica" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Developer security: Developers who publish session logs may expose hidden encrypted blocks that contain recoverable private data, including the PII and credentials found in the authors’ repository scrape <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit shared AI session logs: Search public repositories and support artifacts for encrypted reasoning blocks or API transcript dumps before publishing or archiving them <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>.</li>
+
+<li>Separate reasoning state by context: API designers should bind encrypted reasoning artifacts to the originating user, session and model so they cannot be replayed across contexts <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[2]</a><a href="https://www.alphaxiv.org/abs/2608.09867" class="footnote-ref">[3]</a>.</li>
+
+<li>Review traceability requirements: AI procurement teams should require documentation on provenance, auditability, self-hosting options and vendor-lock-in before deploying agent infrastructure in regulated workflows <a href="https://github.com/semantica-agi/semantica" class="footnote-ref">[1]</a>[common].</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.alphaxiv.org/abs/2608.09867">https://www.alphaxiv.org/abs/2608.09867</a></li>
+
+
+
+
+
+<li><a href="https://arxiv.org/abs/2608.09867">https://arxiv.org/abs/2608.09867</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> github.com, arxiv.org, alphaxiv.org</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Nina_antalpha",
+      "date": "2026-08-14T03:31:14.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/semantica-agi/semantica",
+      "title": "An open-source knowledge graph for traceable AI decisions"
+    },
+    {
+      "author": "j1436go",
+      "date": "2026-08-13T07:41:03.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.09867",
+      "title": "Stealing Reasoning Traces from Proprietary LLM APIs [pdf]"
+    },
+    {
+      "author": "buredoranna",
+      "date": "2026-08-12T23:09:42.000Z",
+      "domain": "alphaxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.alphaxiv.org/abs/2608.09867",
+      "title": "Stealing Reasoning Traces from Proprietary LLM APIs"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=alphaxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "alphaxiv.org"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd10",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Developer security: Developers who publish session logs may expose hidden encrypted blocks that contain recoverable private data, including the PII and credentials found in the authors\u2019 repository scrape [arxiv.org#1][alphaxiv.org#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Security",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [],
+  "primary_image": null,
+  "published": "2026-08-14T12:00:12.953Z",
+  "quote": "By injecting an encrypted reasoning trace from a given model into a weaker, and less safeguarded model from the same provider, we force it to decode and output the trace verbatim in plaintext, without ever jailbreaking the more capable model directly.",
+  "quote_attribution": "arXiv",
+  "quote_author": "Alexander Panfilov, David Schmotz, Ilia Shumailov, Luca Beurer-Kellner, Joachim Schaeffer, Ameya Prabhu, Jonas Geiping and Maksym Andriushchenko",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.alphaxiv.org/abs/2608.09867",
+    "https://github.com/semantica-agi/semantica",
+    "https://arxiv.org/abs/2608.09867"
+  ],
+  "suggested_qna": [],
+  "summary": "Researchers Alexander Panfilov, David Schmotz, Ilia Shumailov, Luca Beurer-Kellner, Joachim Schaeffer, Ameya Prabhu, Jonas Geiping and Maksym Andriushchenko published a paper submitted Aug. 10 describing a method to recover concealed chain-of-thought traces from proprietary large language model APIs [arxiv.org#1][alphaxiv.org#1]. The paper says leading providers hide step-by-step reasoning to protect intellectual property and limit information leakage, but return encrypted reasoning blocks to clients for reuse in later requests instead of keeping them only on their servers [arxiv.org#1][alphaxiv.org#1].\n\nThe authors say encrypted reasoning blocks can work across different sessions, users and models within the same provider ecosystem. They describe a \u201cscalable decryption jailbreak\u201d in which an encrypted trace from one model is injected into a weaker model that then outputs the trace in plaintext [arxiv.org#1][alphaxiv.org#1]. They report demonstrations across Anthropic, OpenAI and Google, and say the flaw can support anti-distillation bypasses, private-data extraction, hazardous-content disclosure from hidden reasoning, and prompt injections embedded inside encrypted blocks [arxiv.org#1][alphaxiv.org#1].\n\nSemantica, a separate AI infrastructure project, describes itself on GitHub as open-source, self-hostable graph-native infrastructure for context graphs, knowledge graphs, graph analytics, causal reasoning and decision provenance, aimed at high-stakes and regulated domains [github.com#1]. The repository page listed 7,000 stars, 732 forks, 2,318 commits and an MIT license at publication time [github.com#1].",
+  "talking_points": [
+    "Disclosure: The authors say they followed responsible disclosure and propose cryptographic and system-level mitigations for client-side reasoning traces [arxiv.org#1][alphaxiv.org#1].",
+    "Traceability tooling: Semantica\u2019s repository lists RDF and labeled-property-graph support, W3C standards, ontology management and end-to-end traceability among its core design claims [github.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Researchers expose encrypted reasoning traces in LLM APIs",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://github.com/semantica-agi/semantica",
+  "user_action_items": [
+    "Audit shared AI session logs: Search public repositories and support artifacts for encrypted reasoning blocks or API transcript dumps before publishing or archiving them [arxiv.org#1][alphaxiv.org#1].",
+    "Separate reasoning state by context: API designers should bind encrypted reasoning artifacts to the originating user, session and model so they cannot be replayed across contexts [arxiv.org#1][alphaxiv.org#1].",
+    "Review traceability requirements: AI procurement teams should require documentation on provenance, auditability, self-hosting options and vendor-lock-in before deploying agent infrastructure in regulated workflows [github.com#1][common]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

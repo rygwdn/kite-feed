@@ -1,0 +1,1322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic adds global watermarks to Claude AI outputs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic adds global watermarks to Claude AI outputs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/"><img src="https://kagiproxy.com/img/eUfPpNM4yb-PndmKyTVigNzLSDCbNpIBUKfeVS0NPCmtT1jOZ8Q06XRN9CnQnOimhGQOD_irHAw-UpIpTapZqVZfM1bcXkdZoI_jyESAk8pvd8lDXzXc9pxUzs8boZTln3I-yqtsvJQns8ha6GW6utGFOPPhvIQ" alt="Illustration accompanying Ars Technica’s report on Claude’s invisible watermark." title="Illustration accompanying Ars Technica’s report on Claude’s invisible watermark. (Aurich Lawson | American Psycho (Lions Gate Films))" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Illustration accompanying Ars Technica’s report on Claude’s invisible watermark. <span class='credit'>(Aurich Lawson | American Psycho (Lions Gate Films))</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Anthropic began adding machine-readable watermarks to outputs from Claude models released on or after Aug. 2, aligning the rollout with transparency requirements under the European Union’s AI Act and its Code of Practice on Transparency of AI-Generated Content <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a><a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/" class="footnote-ref">[29]</a><a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/" class="footnote-ref">[32]</a>. The company is applying the system globally rather than only in the EU, and the marking applies across new Claude models where supported <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a><a href="https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html" class="footnote-ref">[28]</a><a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/" class="footnote-ref">[34]</a>.
+
+For text, Anthropic embeds an imperceptible model-level watermark into the output so the signal can persist through copy-paste and some minor edits without being visible to readers <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a><a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/" class="footnote-ref">[32]</a><a href="https://www.netokracija.com/tekstovi-transparentnost-ai-oznaka-claude-246037" class="footnote-ref">[31]</a>. For images and other generated files such as JPG, PNG and SVG, Claude attaches digitally signed provenance metadata using the C2PA open standard <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a><a href="https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html" class="footnote-ref">[28]</a><a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/" class="footnote-ref">[34]</a>.
+
+Critics say Claude may mark content it processed, including text a person wrote and asked the model to proofread, translate, summarize or reformat <a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/" class="footnote-ref">[29]</a><a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/" class="footnote-ref">[34]</a><a href="https://www.netokracija.com/tekstovi-transparentnost-ai-oznaka-claude-246037" class="footnote-ref">[31]</a>. Anthropic says the watermark is not definitive evidence that Claude generated an output, while reports note that heavy rewriting, paraphrasing, translation, screenshots or file-format conversion can weaken or remove different kinds of marks <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a><a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/" class="footnote-ref">[34]</a><a href="https://thematter.co/brief/264054/264054" class="footnote-ref">[27]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Watermarking will be applied at the model level, which means it will be present no matter which Claude product or surface the text comes from</p>
+
+<cite>— Anthropic (PCMag)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> About 190 organizations signed the EU transparency code, but only 82 signed the section covering content marking, according to GeekWire <a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/" class="footnote-ref">[32]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Product reach: The rollout covers Claude’s consumer chatbot, Claude Code, the developer API, Cowork, Tag and third-party cloud hosts including AWS, Google Cloud and Microsoft Foundry <a href="https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html" class="footnote-ref">[28]</a><a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/" class="footnote-ref">[34]</a>.</li>
+
+<li>Detector gap: Claims by watermark-removal services cannot currently be verified because Anthropic has not published the watermarking method or released a detector <a href="https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/" class="footnote-ref">[33]</a>.</li>
+
+<li>Removal market: BleepingComputer identified an MIT-licensed GitHub project with more than 4,500 stars, several newly registered web tools and established AI-detection evasion services advertising Claude watermark removal <a href="https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/" class="footnote-ref">[33]</a>.</li>
+
+<li>Regulatory scope: Ars Technica reported that the EU rules give providers until December 2026 to update previously released models, while new models must mark covered outputs from launch <a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/" class="footnote-ref">[29]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Anthropic: The company said it is working to let users and third parties detect Claude’s embedded watermarks and provenance metadata.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs">PCMag</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Oren Etzioni: Etzioni described Claude’s text mark as a statistical pattern in word choices rather than hidden characters or spaces, and said this differs from style detectors because it creates a test with a computable error rate.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/">GeekWire</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>AI watermark critics: Habr cited Reddit users who argued the system could expose ordinary students, journalists and writers who used Claude for editing or summarizing, while more technical users may be better able to remove traces.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://habr.com/ru/news/1070030/">Habr</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>May 2024:</strong> Google had already adopted SynthID text watermarking <a href="https://negativestarinnovators.com/blog/watermarking-ai-text-is-fundamentally-flawed" class="footnote-ref">[10]</a>.</li>
+
+
+
+<li><strong>2 August 2026:</strong> EU AI Act transparency obligations began applying to new models <a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/" class="footnote-ref">[29]</a><a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/" class="footnote-ref">[32]</a>.</li>
+
+
+
+<li><strong>11 August 2026:</strong> Anthropic confirmed Claude watermarking and published support details <a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/" class="footnote-ref">[32]</a>.</li>
+
+
+
+<li><strong>13 August 2026:</strong> Removal tools and services surfaced publicly after disclosure <a href="https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/" class="footnote-ref">[33]</a><a href="https://thecurrencyanalytics.com/technology/anthropics-claude-watermark-faces-bypass-tools-days-after-august-2-rollout-283926" class="footnote-ref">[30]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Statistical text watermark: Claude’s mark appears to work by biasing word choices toward a recognizable pattern; GeekWire says this means a single sentence is too short to mark reliably, while longer passages can support a statistical test <a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/" class="footnote-ref">[32]</a>.</li>
+
+<li>Bypass uncertainty: Some public tools strip invisible Unicode characters or target file-format signals, but researchers cited by The Currency Analytics think Claude’s text mark likely resembles a statistical signature rather than a simple hidden-character layer <a href="https://thecurrencyanalytics.com/technology/anthropics-claude-watermark-faces-bypass-tools-days-after-august-2-rollout-283926" class="footnote-ref">[30]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Content provenance: Anthropic’s image metadata uses the C2PA open standard, which PCMag says OpenAI and Meta have also adopted, while Google accepts the standard and uses SynthID for its own labels <a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Google used SynthID watermarking for AI-generated text before the latest Claude rollout. OpenAI said on Aug. 2, 2026, that it intends to add provenance signals for AI-generated text <a href="https://negativestarinnovators.com/blog/watermarking-ai-text-is-fundamentally-flawed" class="footnote-ref">[10]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Avoid submitting sensitive drafts to Claude if marking matters: If a document’s provenance could affect school, work or publication review, do not run final text through Claude until Anthropic’s detection tools and policies are clearer <a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/" class="footnote-ref">[29]</a><a href="https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs" class="footnote-ref">[1]</a>.</li>
+
+<li>Preserve provenance metadata for generated images: Keep original JPG, PNG or SVG files instead of screenshots or converted copies if you need Claude’s C2PA metadata to remain attached <a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/" class="footnote-ref">[34]</a><a href="https://thematter.co/brief/264054/264054" class="footnote-ref">[27]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php">https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php</a></li>
+
+
+
+<li><a href="https://www.seangoedecke.com/text-ai-watermarks/">https://www.seangoedecke.com/text-ai-watermarks/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/technology/comments/1vnmzvm/ai_companies_are_suddenly_racing_to_watermark/">https://www.reddit.com/r/technology/comments/1vnmzvm/ai_companies_are_suddenly_racing_to_watermark/</a></li>
+
+
+
+<li><a href="https://negativestarinnovators.com/blog/watermarking-ai-text-is-fundamentally-flawed">https://negativestarinnovators.com/blog/watermarking-ai-text-is-fundamentally-flawed</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxNSlJXYUhlODZ2S3hCNVkteWdqb05QbGJsM2I3X01KUFliazFqOHNGUU1DM1AyNDJPdzVBVnJfMkpMaFRORjJjblh1T3dDTEZ1ekFHTHJoYW1JWTdjUHJNZE84Sk1RdTZLRTR5cXlYQU1CWkQwcXgybkE3TnlIRDlQUWZXcHJKRnZBcVNxWk9BVzdKV1NnMGhkZktYbmxDRW0wMGdUdjExcTJ0bEhPOFFRRw">https://news.google.com/rss/articles/CBMisAFBVV95cUxNSlJXYUhlODZ2S3hCNVkteWdqb05QbGJsM2I3X01KUFliazFqOHNGUU1DM1AyNDJPdzVBVnJfMkpMaFRORjJjblh1T3dDTEZ1ekFHTHJoYW1JWTdjUHJNZE84Sk1RdTZLRTR5cXlYQU1CWkQwcXgybkE3TnlIRDlQUWZXcHJKRnZBcVNxWk9BVzdKV1NnMGhkZktYbmxDRW0wMGdUdjExcTJ0bEhPOFFRRw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxPU0lMY1ZHZDFjVlpGR2FIelBZOTBsQUtZUnFwTXJxOWQwTkFudU5reG9iZmw0ZDBFTno4ekNncjlXMVkzaHJxNXZNQTJicHRzTHRUNFdWLTkwOXgtaFB0STU1bVhDOWxjU255aUF4UnBqSHB1cmlZczNWR2JTdlFZUjJ2d3lYRFZVeWpKaWppcEpsaWNvMEx5aDQtNkFaX2NmRDVHdFdaQk4zM1U2Z2kweldYV3Bfd9IBvAFBVV95cUxQTzlodUF5QWhzMzBtQ0h4bm1UQUVtazM5eHF6SGttaU12Mm5PQXdkajdSWWxkTV9kZ01KaVRZUFVoVGdpaERCTTR3M01SN01mOUw5NDZwc2JZMllGSXVuTDJuRWJMa0ZqaUZObmdMMEE3X2kwMHM0VkpxN2VnX0RnTWtuMkpjVV9UOEozV1ZPYk5zbWNaMXdnbWw1bnZ0Vm1lVFRiZG5sVWpEY0ZoUk1lc2ZBRUR5WXc0bnRSSQ">https://news.google.com/rss/articles/CBMitgFBVV95cUxPU0lMY1ZHZDFjVlpGR2FIelBZOTBsQUtZUnFwTXJxOWQwTkFudU5reG9iZmw0ZDBFTno4ekNncjlXMVkzaHJxNXZNQTJicHRzTHRUNFdWLTkwOXgtaFB0STU1bVhDOWxjU255aUF4UnBqSHB1cmlZczNWR2JTdlFZUjJ2d3lYRFZVeWpKaWppcEpsaWNvMEx5aDQtNkFaX2NmRDVHdFdaQk4zM1U2Z2kweldYV3Bfd9IBvAFBVV95cUxQTzlodUF5QWhzMzBtQ0h4bm1UQUVtazM5eHF6SGttaU12Mm5PQXdkajdSWWxkTV9kZ01KaVRZUFVoVGdpaERCTTR3M01SN01mOUw5NDZwc2JZMllGSXVuTDJuRWJMa0ZqaUZObmdMMEE3X2kwMHM0VkpxN2VnX0RnTWtuMkpjVV9UOEozV1ZPYk5zbWNaMXdnbWw1bnZ0Vm1lVFRiZG5sVWpEY0ZoUk1lc2ZBRUR5WXc0bnRSSQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQd0E4MEVwY1BNV0I4UWRaMTEzXzR1NnFOZ1VHY24xZGxnSnVZTFJHX0NObXhzRTFPRlZCZkF4WUptZTdqaWp4UndkTW9oUHZqWXFka2RpRkVwYV9CQlU0eFpwcnE1eW82S2ZXRWlwRWZaZDlKVmlfc1Q5NkhLVlVLYWx6WWtYVjlTOFBrTGlYUHI">https://news.google.com/rss/articles/CBMikAFBVV95cUxQd0E4MEVwY1BNV0I4UWRaMTEzXzR1NnFOZ1VHY24xZGxnSnVZTFJHX0NObXhzRTFPRlZCZkF4WUptZTdqaWp4UndkTW9oUHZqWXFka2RpRkVwYV9CQlU0eFpwcnE1eW82S2ZXRWlwRWZaZDlKVmlfc1Q5NkhLVlVLYWx6WWtYVjlTOFBrTGlYUHI</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNVWdFak5OTW92TzQ1cmp5bGh4UFVHQUFVSkpLd0NTR3EzckVYXzk2NkNLdlZJeGhxSUpRcWp3TDRZVlhJb0UzcEJGYzNadEY0YUNiM3YyUUFVeXJwXzU5MnUwWDdLclJ4ZW5Ua1dYRGRTUnBPTmk0enNLY0J6RTFoTlAwaUVOSEd0a0xRa01OcXlmRWptZE9YUzFRZEdtU2hpTTk4TmpmZ2RJR2J0UGc">https://news.google.com/rss/articles/CBMirgFBVV95cUxNVWdFak5OTW92TzQ1cmp5bGh4UFVHQUFVSkpLd0NTR3EzckVYXzk2NkNLdlZJeGhxSUpRcWp3TDRZVlhJb0UzcEJGYzNadEY0YUNiM3YyUUFVeXJwXzU5MnUwWDdLclJ4ZW5Ua1dYRGRTUnBPTmk0enNLY0J6RTFoTlAwaUVOSEd0a0xRa01OcXlmRWptZE9YUzFRZEdtU2hpTTk4TmpmZ2RJR2J0UGc</a></li>
+
+
+
+<li><a href="https://www.computerbase.de/news/apps/claude-wasserzeichen-kennzeichnung-trifft-auf-kritik-aber-auch-auf-zuspruch.98829/">https://www.computerbase.de/news/apps/claude-wasserzeichen-kennzeichnung-trifft-auf-kritik-aber-auch-auf-zuspruch.98829/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxQM2hzb1dVS01SVjRVME81X2tJQVRxWEZpb2k0U3RueFZqUktfZVhQZTJPaDZEeE1CNW5jMTlyNnVpcnRxbkNZUjdRYjJpM1dCblRJMU5FZDVKUERPTkZDMXZfc1Y2aDVpZlVabURjRjRGN3gzWVU2TVRjdzBTZEJScHRKWFFfX3RqeDB3MFQ1c1FGd3dm">https://news.google.com/rss/articles/CBMilAFBVV95cUxQM2hzb1dVS01SVjRVME81X2tJQVRxWEZpb2k0U3RueFZqUktfZVhQZTJPaDZEeE1CNW5jMTlyNnVpcnRxbkNZUjdRYjJpM1dCblRJMU5FZDVKUERPTkZDMXZfc1Y2aDVpZlVabURjRjRGN3gzWVU2TVRjdzBTZEJScHRKWFFfX3RqeDB3MFQ1c1FGd3dm</a></li>
+
+
+
+<li><a href="https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/">https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxOMGl6TDlILUtZX1FEd2FLUFRMR0NmaHd3VWcwRWpOYjRHejZTRWthVExrZHFMQlR3UnllWUNKT0RuWm5NdTVrUERSMHFOUnJZLW9sTjJvdkJycGFxVjQ0YXhhakk2bnN0MFFOb3ZNR3VEZG02LWROWkI4Zno2WG5yWWU0cnA2VkpvVEpVUWdtOGt0ZG9WUWFqSXU3RldWWUR4cWs0UVV3">https://news.google.com/rss/articles/CBMipgFBVV95cUxOMGl6TDlILUtZX1FEd2FLUFRMR0NmaHd3VWcwRWpOYjRHejZTRWthVExrZHFMQlR3UnllWUNKT0RuWm5NdTVrUERSMHFOUnJZLW9sTjJvdkJycGFxVjQ0YXhhakk2bnN0MFFOb3ZNR3VEZG02LWROWkI4Zno2WG5yWWU0cnA2VkpvVEpVUWdtOGt0ZG9WUWFqSXU3RldWWUR4cWs0UVV3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxOOU5IeV8wcUd4R0NQc05oaHFsb1E1ME11OXpwd2JaQVAzWnVQM2RpRzIxTW9peXJvM2dqazB1MHBuVlY4LUtKVnVuWU01WTBfYkh3OTdzdnk5aXpVRC0tSGpoT01EMzVUSHZZYXpta05pNS1iLXF0ZnJDRk9Ecnk4ZWI3WTJMXzhza3BUQkxVOVJDc2l2MXo1c1JuM1otZjBaeE1TaQ">https://news.google.com/rss/articles/CBMipAFBVV95cUxOOU5IeV8wcUd4R0NQc05oaHFsb1E1ME11OXpwd2JaQVAzWnVQM2RpRzIxTW9peXJvM2dqazB1MHBuVlY4LUtKVnVuWU01WTBfYkh3OTdzdnk5aXpVRC0tSGpoT01EMzVUSHZZYXpta05pNS1iLXF0ZnJDRk9Ecnk4ZWI3WTJMXzhza3BUQkxVOVJDc2l2MXo1c1JuM1otZjBaeE1TaQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxOTkFkc1RoWXdhRGlRb2ZVc1hsb2xyNVpXUmtqdXRHbUpNaUI4VFdPaVViTTZ5LV9WSXdKOUlZV0tsWTFpOXBlZ1RKQ3RLYzRpeWJKWE5ydWFGMFJyUENCSndHSVFRNkFza0F1QXItVjJ3b2xHc2JPNDBPXzJnM1JJcWJVTDBhNVlNXzI5U1VMZ1dqd9IBmgFBVV95cUxQTnVNZ05od2hHY0tvVEpqcnVCWmM4NERjTVdqeWZKOE0tZG5lcjVlS3hrUmNxeU5mVFpJNmJaRHVUYV9oSWJGQ3VEVHFacmdVUlRuRXVYRlRkZ1VLT0tjVFhuNG1iY3pmQzg1Q1Mxcll4VGY5WXRiNk9CRHBhV1dfV3c0aG1rYlRhOWpOQTk5M3VaWnZTZ3hJUWhR">https://news.google.com/rss/articles/CBMikgFBVV95cUxOTkFkc1RoWXdhRGlRb2ZVc1hsb2xyNVpXUmtqdXRHbUpNaUI4VFdPaVViTTZ5LV9WSXdKOUlZV0tsWTFpOXBlZ1RKQ3RLYzRpeWJKWE5ydWFGMFJyUENCSndHSVFRNkFza0F1QXItVjJ3b2xHc2JPNDBPXzJnM1JJcWJVTDBhNVlNXzI5U1VMZ1dqd9IBmgFBVV95cUxQTnVNZ05od2hHY0tvVEpqcnVCWmM4NERjTVdqeWZKOE0tZG5lcjVlS3hrUmNxeU5mVFpJNmJaRHVUYV9oSWJGQ3VEVHFacmdVUlRuRXVYRlRkZ1VLT0tjVFhuNG1iY3pmQzg1Q1Mxcll4VGY5WXRiNk9CRHBhV1dfV3c0aG1rYlRhOWpOQTk5M3VaWnZTZ3hJUWhR</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTE00a1c2NDFzOXdPZGRacnREdnhDeWVEekR6ams3QWNzQlJLZGxzN3JzbFM3UkYtRTlhdG9nR3RNeGUzTDkyX0NlZmJOaG5ERUZnMlBMejBfNHRwaHhJLWx1Z0xEdUJLOFg1SnM5bw">https://news.google.com/rss/articles/CBMibEFVX3lxTE00a1c2NDFzOXdPZGRacnREdnhDeWVEekR6ams3QWNzQlJLZGxzN3JzbFM3UkYtRTlhdG9nR3RNeGUzTDkyX0NlZmJOaG5ERUZnMlBMejBfNHRwaHhJLWx1Z0xEdUJLOFg1SnM5bw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQkxPREVfTVBCSkxWUlJWcVZTQ1JMNHN0eHF0YWVoc0NReGdTd2NPaEpmS0loaExNcXprMlk2SFBETjNWTnRDczVPcE1SaW9XMC01OGNIeDNRQlVLLVd3OXZDbVNYTmk5Z2hzYVZrZ3lGNUV6ZWZ3UjFScnE1QXBsanNnTDZBS3VRWElBYXZNZnJlVHdSUWdoazNyVnBaQ2hjYXo5X3QyNEpyQQ">https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQkxPREVfTVBCSkxWUlJWcVZTQ1JMNHN0eHF0YWVoc0NReGdTd2NPaEpmS0loaExNcXprMlk2SFBETjNWTnRDczVPcE1SaW9XMC01OGNIeDNRQlVLLVd3OXZDbVNYTmk5Z2hzYVZrZ3lGNUV6ZWZ3UjFScnE1QXBsanNnTDZBS3VRWElBYXZNZnJlVHdSUWdoazNyVnBaQ2hjYXo5X3QyNEpyQQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxOaHY4Rmg0RlpBc095UkFYTThPV0xfTDdmLTVETWtiaTk3cWhIMTZVVUI3WjRsVmlPUk9uSDJ2UmZPbUcyTG5JMjV5V0poZ2hWRURCOEpiUlQ0WkZ3MlhTTEw1S2d1NzU4eUZjS1kwakVIbGNvUzExajFzMDhKTFJEaFhtSlYzcVVCYjhYT2FxZ0N3NTBzWTVTU0lUcV8yeXphcWhXbVZpMTdwZjhTVUk3dDBiRUhndVN1WVRCME5UdDY0cnlfamxsamd0Zw">https://news.google.com/rss/articles/CBMiywFBVV95cUxOaHY4Rmg0RlpBc095UkFYTThPV0xfTDdmLTVETWtiaTk3cWhIMTZVVUI3WjRsVmlPUk9uSDJ2UmZPbUcyTG5JMjV5V0poZ2hWRURCOEpiUlQ0WkZ3MlhTTEw1S2d1NzU4eUZjS1kwakVIbGNvUzExajFzMDhKTFJEaFhtSlYzcVVCYjhYT2FxZ0N3NTBzWTVTU0lUcV8yeXphcWhXbVZpMTdwZjhTVUk3dDBiRUhndVN1WVRCME5UdDY0cnlfamxsamd0Zw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxPMUl3UmdxRnJkU1hMaFV6RWtBS1RfaW1BSXM2Ri0wR0w4VzFmRnEwSTdUNUlsU3JvdXR0WGNMOXVUVnJ3U1VOcUNYak90NDR4Z0VJTTV0dFo5WEdGUGJDT1dFVThfeVVRRlNmUy03N1hJaDNQb2lqRFNGX2lGME4wR0VtUVl5ejBtb1JtNnAxejFBX3VhN3ZLVUVpdWw0ZUnSAZ8BQVVfeXFMTzFJd1JncUZyZFNYTGhVekVrQUtUX2ltQUlzNkYtMEdMOFcxZkZxMEk3VDVJbFNyb3V0dFhjTDl1VFZyd1NVTnFDWGpPdDQ0eGdFSU01dHRaOVhHRlBiQ09XRVU4X3lVUUZTZlMtNzdYSWgzUG9pakRTRl9pRjBOMEdFbVFZeXowbW9SbTZwMXoxQV91YTd2S1VFaXVsNGVJ">https://news.google.com/rss/articles/CBMinwFBVV95cUxPMUl3UmdxRnJkU1hMaFV6RWtBS1RfaW1BSXM2Ri0wR0w4VzFmRnEwSTdUNUlsU3JvdXR0WGNMOXVUVnJ3U1VOcUNYak90NDR4Z0VJTTV0dFo5WEdGUGJDT1dFVThfeVVRRlNmUy03N1hJaDNQb2lqRFNGX2lGME4wR0VtUVl5ejBtb1JtNnAxejFBX3VhN3ZLVUVpdWw0ZUnSAZ8BQVVfeXFMTzFJd1JncUZyZFNYTGhVekVrQUtUX2ltQUlzNkYtMEdMOFcxZkZxMEk3VDVJbFNyb3V0dFhjTDl1VFZyd1NVTnFDWGpPdDQ0eGdFSU01dHRaOVhHRlBiQ09XRVU4X3lVUUZTZlMtNzdYSWgzUG9pakRTRl9pRjBOMEdFbVFZeXowbW9SbTZwMXoxQV91YTd2S1VFaXVsNGVJ</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPVnJ3dFoxSl9YdWhLa2lYaHg4Y3hNR1pjNFVfcnh5SE1XdVpSSmp2cTFGSkR2eDNQN3EtZXZOc09RTWhmZmVKcGtQOW5EUjZJT09zaWs5R0NoaVJHTHFzWG1xOC1aeHhwd1R5eGtfWVFCYWdablNPOUtpS2hxMEh0blVMWEpZdTd4bjFscHo2SXE4Z0gxb2RlZnVlMmp2NE9XV3RSbQ">https://news.google.com/rss/articles/CBMipAFBVV95cUxPVnJ3dFoxSl9YdWhLa2lYaHg4Y3hNR1pjNFVfcnh5SE1XdVpSSmp2cTFGSkR2eDNQN3EtZXZOc09RTWhmZmVKcGtQOW5EUjZJT09zaWs5R0NoaVJHTHFzWG1xOC1aeHhwd1R5eGtfWVFCYWdablNPOUtpS2hxMEh0blVMWEpZdTd4bjFscHo2SXE4Z0gxb2RlZnVlMmp2NE9XV3RSbQ</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMiiAFBVV95cUxPdjRfNFN3VFUydkxJSDV5UlB4dTBBY2FBekhlb2txNmpmTXRYQ00tQjdjM29VdlRHdzQxQk45cUY0NHdjQ3cyTko5RVBJRTNBc0ZxMUN2MnByb1JRbUN5cTk2YVQ5dTFsN0xycURia3hFUy1Xb1RnOGJWb3R4MklPWnRIZHRSc3dm">https://news.google.com/atom/articles/CBMiiAFBVV95cUxPdjRfNFN3VFUydkxJSDV5UlB4dTBBY2FBekhlb2txNmpmTXRYQ00tQjdjM29VdlRHdzQxQk45cUY0NHdjQ3cyTko5RVBJRTNBc0ZxMUN2MnByb1JRbUN5cTk2YVQ5dTFsN0xycURia3hFUy1Xb1RnOGJWb3R4MklPWnRIZHRSc3dm</a></li>
+
+
+
+<li><a href="https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/">https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNFEwUzZUYnFWaHQ0UTBIVU90aEdDa1pQQndTNmZPZE42VFVKZHE0THV4cnJCOE1aWWFvNWVGc0J5ekZHNFNtQjREOTBJeXRITENoaFZnb3NEMEFvY1ZWdkFpaVZRM2M3ODJsa1ZzbENQNjJlaTlzZnJmcnBjdk1EcXlQUmxHYk9I">https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNFEwUzZUYnFWaHQ0UTBIVU90aEdDa1pQQndTNmZPZE42VFVKZHE0THV4cnJCOE1aWWFvNWVGc0J5ekZHNFNtQjREOTBJeXRITENoaFZnb3NEMEFvY1ZWdkFpaVZRM2M3ODJsa1ZzbENQNjJlaTlzZnJmcnBjdk1EcXlQUmxHYk9I</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxOWjBIZW9FSm1lUGxSR241ek1rOGRvMW9RQjh4bkppdy1fcE5YSy0xNFB1azNxT2tlZnk3dGV2QkhJNWlhX0t1WUVudnB1bThIZDJQVVVHVzV3Q3Y4S0hmVmthc3VxNWlfTjJZQlQ3a2ZVd201bWZ3dnEwbTIteEhoTkVNNHoydzBiMzdwakxJN0UxMTdDQ093Tm92cXQxSXQ2d1E">https://news.google.com/rss/articles/CBMiogFBVV95cUxOWjBIZW9FSm1lUGxSR241ek1rOGRvMW9RQjh4bkppdy1fcE5YSy0xNFB1azNxT2tlZnk3dGV2QkhJNWlhX0t1WUVudnB1bThIZDJQVVVHVzV3Q3Y4S0hmVmthc3VxNWlfTjJZQlQ3a2ZVd201bWZ3dnEwbTIteEhoTkVNNHoydzBiMzdwakxJN0UxMTdDQ093Tm92cXQxSXQ2d1E</a></li>
+
+
+
+<li><a href="https://decrypt.co/375594/anthropic-quietly-watermarking-ai-claude-output-builders-break">https://decrypt.co/375594/anthropic-quietly-watermarking-ai-claude-output-builders-break</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vnrvr5/how_ai_text_watermarking_works/">https://www.reddit.com/r/LocalLLaMA/comments/1vnrvr5/how_ai_text_watermarking_works/</a></li>
+
+
+
+<li><a href="https://thecurrencyanalytics.com/technology/anthropics-claude-watermark-faces-bypass-tools-days-after-august-2-rollout-283926">https://thecurrencyanalytics.com/technology/anthropics-claude-watermark-faces-bypass-tools-days-after-august-2-rollout-283926</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxQSmtVbkxqUkhuUWJLSnVfU0psUnB4TWNZM2hYSVpvckc4VzBUT09tT05JdmIzTEdISktNTlNEQXhTTTNwc1RBMTlONEFMVlFNS3JGTzI5dGgyb3hLdjRnRFZ6ZHRfQW1aaFNVdjlnUHNZdDYtdFR6dWRLLVU4OGN4NTVzSFhsd2hhX1h4NmJscEVKSWM">https://news.google.com/rss/articles/CBMikwFBVV95cUxQSmtVbkxqUkhuUWJLSnVfU0psUnB4TWNZM2hYSVpvckc4VzBUT09tT05JdmIzTEdISktNTlNEQXhTTTNwc1RBMTlONEFMVlFNS3JGTzI5dGgyb3hLdjRnRFZ6ZHRfQW1aaFNVdjlnUHNZdDYtdFR6dWRLLVU4OGN4NTVzSFhsd2hhX1h4NmJscEVKSWM</a></li>
+
+
+
+<li><a href="https://elpais.com/opinion/2026-08-14/la-inteligencia-artificial-exige-ahora-un-credito-que-nunca-pago.html">https://elpais.com/opinion/2026-08-14/la-inteligencia-artificial-exige-ahora-un-credito-que-nunca-pago.html</a></li>
+
+
+
+<li><a href="https://www.heise.de/news/Claude-Nutzer-aeussern-wegen-des-neuen-Wasserzeichens-Kritik-an-Anthropic-11412904.html">https://www.heise.de/news/Claude-Nutzer-aeussern-wegen-des-neuen-Wasserzeichens-Kritik-an-Anthropic-11412904.html</a></li>
+
+
+
+<li><a href="https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html">https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html</a></li>
+
+
+
+<li><a href="https://www.nikkei.com/article/DGXZQOGN139SY0T10C26A8000000/">https://www.nikkei.com/article/DGXZQOGN139SY0T10C26A8000000/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMizwFBVV95cUxQUWdTcElQb0NNOHNfUFJ3MUI5WUdXY0hSYXBRSnJPWmdSazlabnJVTkNoNjNJZzcwZ2hleHliWlhTMFZVU2JPNkFTTWQ1UExwcEtkdEhOd2lwbE9yQ0d1b2JnMHVwdjR3WHQ0X2h4b0laVjZ4cE5qZm1SSXl0NjlmcWEtOVpCM3NYYlBvcVhobXl2eW4tRFpuTlA1MFdGN2xGSTJYeDdKa0R4U2dlYlBrQTdNUXVOMW9WYW5XR29VWWhJTHo5aDlRN2FZUlQ4NDQ">https://news.google.com/rss/articles/CBMizwFBVV95cUxQUWdTcElQb0NNOHNfUFJ3MUI5WUdXY0hSYXBRSnJPWmdSazlabnJVTkNoNjNJZzcwZ2hleHliWlhTMFZVU2JPNkFTTWQ1UExwcEtkdEhOd2lwbE9yQ0d1b2JnMHVwdjR3WHQ0X2h4b0laVjZ4cE5qZm1SSXl0NjlmcWEtOVpCM3NYYlBvcVhobXl2eW4tRFpuTlA1MFdGN2xGSTJYeDdKa0R4U2dlYlBrQTdNUXVOMW9WYW5XR29VWWhJTHo5aDlRN2FZUlQ4NDQ</a></li>
+
+
+
+<li><a href="https://thematter.co/brief/264054/264054">https://thematter.co/brief/264054/264054</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxOUnluX19Va2txNS1QQldiRnoxWU5oOWtVNjdWWlo2dzU2dmJtVHpFcTJCbXhNWEcyb0haa1pCbG1QR05GMHZCZXZSeUVFVkNkX3hiUnM3Tl94VUNpemx3YjY3QjFDLWd6bzdGM3VzbmZIUEpKNC1vYlFZS0VoaEhKOTh0cDhZUGNWQWVJNXVfQWY5VENMWk10S05KY0NyZnBCM2NQU01FM1lUTnpjRDlDS2doSlU2XzBKenRhaktuWWlYdW1uaGdBbnRiNW1UbnhST2h3TXZn0gHWAUFVX3lxTE5SeW5fX1Vra3E1LVBCV2JGejFZTmg5a1U2N1ZaWjZ3NTZ2Ym1UekVxMkJteE1YRzJvSFprWkJsbVBHTkYwdkJldlJ5RUVWQ2RfeGJSczdOX3hVQ2l6bHdiNjdCMUMtZ3pvN0YzdXNuZkhQSko0LW9iUVlLRWhoSEo5OHRwOFlQY1ZBZUk1dV9BZjlUQ0xaTXRLTkpjQ3JmcEIzY1BTTUUzWVROemNEOUNLZ2hKVTZfMEp6dGFqS25ZaVh1bW5oZ0FudGI1bVRueFJPaHdNdmc">https://news.google.com/rss/articles/CBMi1gFBVV95cUxOUnluX19Va2txNS1QQldiRnoxWU5oOWtVNjdWWlo2dzU2dmJtVHpFcTJCbXhNWEcyb0haa1pCbG1QR05GMHZCZXZSeUVFVkNkX3hiUnM3Tl94VUNpemx3YjY3QjFDLWd6bzdGM3VzbmZIUEpKNC1vYlFZS0VoaEhKOTh0cDhZUGNWQWVJNXVfQWY5VENMWk10S05KY0NyZnBCM2NQU01FM1lUTnpjRDlDS2doSlU2XzBKenRhaktuWWlYdW1uaGdBbnRiNW1UbnhST2h3TXZn0gHWAUFVX3lxTE5SeW5fX1Vra3E1LVBCV2JGejFZTmg5a1U2N1ZaWjZ3NTZ2Ym1UekVxMkJteE1YRzJvSFprWkJsbVBHTkYwdkJldlJ5RUVWQ2RfeGJSczdOX3hVQ2l6bHdiNjdCMUMtZ3pvN0YzdXNuZkhQSko0LW9iUVlLRWhoSEo5OHRwOFlQY1ZBZUk1dV9BZjlUQ0xaTXRLTkpjQ3JmcEIzY1BTTUUzWVROemNEOUNLZ2hKVTZfMEp6dGFqS25ZaVh1bW5oZ0FudGI1bVRueFJPaHdNdmc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPcmdIM3l4RC1hMFBQSHN0VGhGT19vbW1yYzNSVXZQTmVyNE1aZ0tXcHZzRTJld1RSTzVEd2RUanV5VV9XaHpWRFhvN3ZpRzNjVnE5cVFrSEhVZGhEdmFvTkpqV0lONllwS1lJMkp4NS0yRUM0VDNvdFlIMVUwNlR4Z09ZbUwyQ1g5bG5ZWGtUZjJaSXhpM3c">https://news.google.com/rss/articles/CBMilgFBVV95cUxPcmdIM3l4RC1hMFBQSHN0VGhGT19vbW1yYzNSVXZQTmVyNE1aZ0tXcHZzRTJld1RSTzVEd2RUanV5VV9XaHpWRFhvN3ZpRzNjVnE5cVFrSEhVZGhEdmFvTkpqV0lONllwS1lJMkp4NS0yRUM0VDNvdFlIMVUwNlR4Z09ZbUwyQ1g5bG5ZWGtUZjJaSXhpM3c</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxOQldRc1A5V2JwLWFyREsyWkt3d2JzN3pZZHY0eV9jYVc5WGZuY1RGd0lmNDQwaFRNcjBoZHpEQzZzNUhFVFZVa3VXME5fSVo4OS1fVXM1Zk0xZ1BvQlBHLVFiTng2RWVWcW1HSndEMm5JQ3B5eEtZelg1WERwWGhTQ0QyYkJ3TXlCNlYwTi1sQkxtdHB5a0ZJS3Y1aEhDZDVuaEE">https://news.google.com/rss/articles/CBMiogFBVV95cUxOQldRc1A5V2JwLWFyREsyWkt3d2JzN3pZZHY0eV9jYVc5WGZuY1RGd0lmNDQwaFRNcjBoZHpEQzZzNUhFVFZVa3VXME5fSVo4OS1fVXM1Zk0xZ1BvQlBHLVFiTng2RWVWcW1HSndEMm5JQ3B5eEtZelg1WERwWGhTQ0QyYkJ3TXlCNlYwTi1sQkxtdHB5a0ZJS3Y1aEhDZDVuaEE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxPOENtMmd2M1ZfaUdiWU1reUdGM3pkVlJuTlo5XzkzT0hEYTlXSnZGdGFBSURDaXZ1bEJlTmlUNi1YX082MmJnSUx5T2RzS2JNT2ZPNHZyYTR1Q25GRWZlbTBzVndlSUpPR1lhLTVaWmV3QWloYng5MVB2bnh0YS1pc2F3akk4dE93YVdxbGNkT3FidWRmUHVFM0g3aU5LWkU4NzcyQnhKWG5xMkFFb0xMTlRzY0RiRV9vQUIxbGE4a2hkM1liMXVMN2Ftd2FjNUZSYjd4RWxVdUMwREV2RnFFVUExclFRWmZyTUZZ">https://news.google.com/rss/articles/CBMi6wFBVV95cUxPOENtMmd2M1ZfaUdiWU1reUdGM3pkVlJuTlo5XzkzT0hEYTlXSnZGdGFBSURDaXZ1bEJlTmlUNi1YX082MmJnSUx5T2RzS2JNT2ZPNHZyYTR1Q25GRWZlbTBzVndlSUpPR1lhLTVaWmV3QWloYng5MVB2bnh0YS1pc2F3akk4dE93YVdxbGNkT3FidWRmUHVFM0g3aU5LWkU4NzcyQnhKWG5xMkFFb0xMTlRzY0RiRV9vQUIxbGE4a2hkM1liMXVMN2Ftd2FjNUZSYjd4RWxVdUMwREV2RnFFVUExclFRWmZyTUZZ</a></li>
+
+
+
+<li><a href="https://habr.com/ru/news/1070030/">https://habr.com/ru/news/1070030/</a></li>
+
+
+
+<li><a href="https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/">https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/</a></li>
+
+
+
+<li><a href="https://www.netokracija.com/tekstovi-transparentnost-ai-oznaka-claude-246037">https://www.netokracija.com/tekstovi-transparentnost-ai-oznaka-claude-246037</a></li>
+
+
+
+<li><a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/">https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/</a></li>
+
+
+
+<li><a href="https://www.elespanol.com/omicrono/tecnologia/20260813/acabo-darle-deberes-ia-sistema-marcas-agua-empieza-llegar-claude-chatgpt-gemini/1003744350583_0.html">https://www.elespanol.com/omicrono/tecnologia/20260813/acabo-darle-deberes-ia-sistema-marcas-agua-empieza-llegar-claude-chatgpt-gemini/1003744350583_0.html</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, habr.com, arstechnica.com, reddit.com, androidheadlines.com, decrypt.co, heise.de, pcmag.com, negativestarinnovators.com, thematter.co, thecurrencyanalytics.com, netokracija.com, geekwire.com, bleepingcomputer.com, forbes.cz, seangoedecke.com, leparisien.fr, computerbase.de, elespanol.com, nikkei.com, elpais.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 21 unique domains, 43 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/"><img src="https://kagiproxy.com/img/vGegktpwOlYsbgzEpxy0_r8Krt5imIKVMGmOw_ptiW6THXoIkptDv2N0CbA8fEvJd02V4E_5ccj9cxrw4eTGU93uvArvzZmShwYmZRH5K9VbbKGJX-FcwprxNxFNlgKiii6f3lrsC_f7zddCjg" alt="GeekWire illustration of Claude watermarking." style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+GeekWire illustration of Claude watermarking. <span class='credit'>(geekwire.com)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-13T16:56:49.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs",
+      "title": "Anthropic\u0027s Claude Will Now Add Invisible Watermarks to Text, Image Outputs"
+    },
+    {
+      "date": "2026-08-13T07:15:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPOENtMmd2M1ZfaUdiWU1reUdGM3pkVlJuTlo5XzkzT0hEYTlXSnZGdGFBSURDaXZ1bEJlTmlUNi1YX082MmJnSUx5T2RzS2JNT2ZPNHZyYTR1Q25GRWZlbTBzVndlSUpPR1lhLTVaWmV3QWloYng5MVB2bnh0YS1pc2F3akk4dE93YVdxbGNkT3FidWRmUHVFM0g3aU5LWkU4NzcyQnhKWG5xMkFFb0xMTlRzY0RiRV9vQUIxbGE4a2hkM1liMXVMN2Ftd2FjNUZSYjd4RWxVdUMwREV2RnFFVUExclFRWmZyTUZZ",
+      "title": "Explaining Anthropic\u2019s New Watermarking Of Claude AI-Generated Outputs And What It Signifies For Society - Forbes"
+    },
+    {
+      "date": "2026-08-13T11:36:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPVnJ3dFoxSl9YdWhLa2lYaHg4Y3hNR1pjNFVfcnh5SE1XdVpSSmp2cTFGSkR2eDNQN3EtZXZOc09RTWhmZmVKcGtQOW5EUjZJT09zaWs5R0NoaVJHTHFzWG1xOC1aeHhwd1R5eGtfWVFCYWdablNPOUtpS2hxMEh0blVMWEpZdTd4bjFscHo2SXE4Z0gxb2RlZnVlMmp2NE9XV3RSbQ",
+      "title": "Techies have concerns about Claude\u0027s hidden watermark. Anthropic has some answers. - Business Insider"
+    },
+    {
+      "date": "2026-08-14T01:50:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOUnluX19Va2txNS1QQldiRnoxWU5oOWtVNjdWWlo2dzU2dmJtVHpFcTJCbXhNWEcyb0haa1pCbG1QR05GMHZCZXZSeUVFVkNkX3hiUnM3Tl94VUNpemx3YjY3QjFDLWd6bzdGM3VzbmZIUEpKNC1vYlFZS0VoaEhKOTh0cDhZUGNWQWVJNXVfQWY5VENMWk10S05KY0NyZnBCM2NQU01FM1lUTnpjRDlDS2doSlU2XzBKenRhaktuWWlYdW1uaGdBbnRiNW1UbnhST2h3TXZn0gHWAUFVX3lxTE5SeW5fX1Vra3E1LVBCV2JGejFZTmg5a1U2N1ZaWjZ3NTZ2Ym1UekVxMkJteE1YRzJvSFprWkJsbVBHTkYwdkJldlJ5RUVWQ2RfeGJSczdOX3hVQ2l6bHdiNjdCMUMtZ3pvN0YzdXNuZkhQSko0LW9iUVlLRWhoSEo5OHRwOFlQY1ZBZUk1dV9BZjlUQ0xaTXRLTkpjQ3JmcEIzY1BTTUUzWVROemNEOUNLZ2hKVTZfMEp6dGFqS25ZaVh1bW5oZ0FudGI1bVRueFJPaHdNdmc",
+      "title": "Expert on Consumer Response to AI-Generated Content Available to Discuss Anthropic\u0027s New Watermark Policy | Newswise - Newswise"
+    },
+    {
+      "date": "2026-08-13T19:45:45.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOQldRc1A5V2JwLWFyREsyWkt3d2JzN3pZZHY0eV9jYVc5WGZuY1RGd0lmNDQwaFRNcjBoZHpEQzZzNUhFVFZVa3VXME5fSVo4OS1fVXM1Zk0xZ1BvQlBHLVFiTng2RWVWcW1HSndEMm5JQ3B5eEtZelg1WERwWGhTQ0QyYkJ3TXlCNlYwTi1sQkxtdHB5a0ZJS3Y1aEhDZDVuaEE",
+      "title": "Anthropic\u0027s Claude Will Now Add Invisible Watermarks to Text, Image Outputs - PCMag"
+    },
+    {
+      "date": "2026-08-13T20:30:24.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxOTkFkc1RoWXdhRGlRb2ZVc1hsb2xyNVpXUmtqdXRHbUpNaUI4VFdPaVViTTZ5LV9WSXdKOUlZV0tsWTFpOXBlZ1RKQ3RLYzRpeWJKWE5ydWFGMFJyUENCSndHSVFRNkFza0F1QXItVjJ3b2xHc2JPNDBPXzJnM1JJcWJVTDBhNVlNXzI5U1VMZ1dqd9IBmgFBVV95cUxQTnVNZ05od2hHY0tvVEpqcnVCWmM4NERjTVdqeWZKOE0tZG5lcjVlS3hrUmNxeU5mVFpJNmJaRHVUYV9oSWJGQ3VEVHFacmdVUlRuRXVYRlRkZ1VLT0tjVFhuNG1iY3pmQzg1Q1Mxcll4VGY5WXRiNk9CRHBhV1dfV3c0aG1rYlRhOWpOQTk5M3VaWnZTZ3hJUWhR",
+      "title": "Anthropic Is Quietly Watermarking Every Claude AI Output. Builders Are Already Trying to Break It - Decrypt"
+    },
+    {
+      "date": "2026-08-13T13:02:10.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxQM2hzb1dVS01SVjRVME81X2tJQVRxWEZpb2k0U3RueFZqUktfZVhQZTJPaDZEeE1CNW5jMTlyNnVpcnRxbkNZUjdRYjJpM1dCblRJMU5FZDVKUERPTkZDMXZfc1Y2aDVpZlVabURjRjRGN3gzWVU2TVRjdzBTZEJScHRKWFFfX3RqeDB3MFQ1c1FGd3dm",
+      "title": "Anthropic Will Embed Watermarks in AI Outputs - Artificial Lawyer"
+    },
+    {
+      "date": "2026-08-14T00:38:57.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMiiAFBVV95cUxPdjRfNFN3VFUydkxJSDV5UlB4dTBBY2FBekhlb2txNmpmTXRYQ00tQjdjM29VdlRHdzQxQk45cUY0NHdjQ3cyTko5RVBJRTNBc0ZxMUN2MnByb1JRbUN5cTk2YVQ5dTFsN0xycURia3hFUy1Xb1RnOGJWb3R4MklPWnRIZHRSc3dm",
+      "title": "Anthropic Watermark Neutralized by AI Tool in 24 Hours - chosun.com"
+    },
+    {
+      "author": "/u/johnnyApplePRNG",
+      "date": "2026-08-14T00:13:25.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vnrvr5/how_ai_text_watermarking_works/",
+      "title": "How AI text watermarking works"
+    },
+    {
+      "author": "pizzly",
+      "date": "2026-08-14T05:54:31.000Z",
+      "domain": "negativestarinnovators.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://negativestarinnovators.com/blog/watermarking-ai-text-is-fundamentally-flawed",
+      "title": "Watermarking AI Text Is Fundamentally Flawed"
+    },
+    {
+      "date": "2026-08-13T06:31:19.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxOaHY4Rmg0RlpBc095UkFYTThPV0xfTDdmLTVETWtiaTk3cWhIMTZVVUI3WjRsVmlPUk9uSDJ2UmZPbUcyTG5JMjV5V0poZ2hWRURCOEpiUlQ0WkZ3MlhTTEw1S2d1NzU4eUZjS1kwakVIbGNvUzExajFzMDhKTFJEaFhtSlYzcVVCYjhYT2FxZ0N3NTBzWTVTU0lUcV8yeXphcWhXbVZpMTdwZjhTVUk3dDBiRUhndVN1WVRCME5UdDY0cnlfamxsamd0Zw",
+      "title": "Claude Will Now Leave A Watermark On Everything It Writes. What Does That Mean? - Forbes"
+    },
+    {
+      "date": "2026-08-13T11:10:18.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxOOU5IeV8wcUd4R0NQc05oaHFsb1E1ME11OXpwd2JaQVAzWnVQM2RpRzIxTW9peXJvM2dqazB1MHBuVlY4LUtKVnVuWU01WTBfYkh3OTdzdnk5aXpVRC0tSGpoT01EMzVUSHZZYXpta05pNS1iLXF0ZnJDRk9Ecnk4ZWI3WTJMXzhza3BUQkxVOVJDc2l2MXo1c1JuM1otZjBaeE1TaQ",
+      "title": "Claude\u2019s new Scarlet Letter watermark is invisible\u2014for now - Ars Technica"
+    },
+    {
+      "date": "2026-08-13T17:31:55.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQd0E4MEVwY1BNV0I4UWRaMTEzXzR1NnFOZ1VHY24xZGxnSnVZTFJHX0NObXhzRTFPRlZCZkF4WUptZTdqaWp4UndkTW9oUHZqWXFka2RpRkVwYV9CQlU0eFpwcnE1eW82S2ZXRWlwRWZaZDlKVmlfc1Q5NkhLVlVLYWx6WWtYVjlTOFBrTGlYUHI",
+      "title": "Etzioni on AI: Claude is marking its text \u2014 Caveat Promptor! - GeekWire"
+    },
+    {
+      "date": "2026-08-13T12:35:23.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNVWdFak5OTW92TzQ1cmp5bGh4UFVHQUFVSkpLd0NTR3EzckVYXzk2NkNLdlZJeGhxSUpRcWp3TDRZVlhJb0UzcEJGYzNadEY0YUNiM3YyUUFVeXJwXzU5MnUwWDdLclJ4ZW5Ua1dYRGRTUnBPTmk0enNLY0J6RTFoTlAwaUVOSEd0a0xRa01OcXlmRWptZE9YUzFRZEdtU2hpTTk4TmpmZ2RJR2J0UGc",
+      "title": "Claude\u0027s Watermark Proves It Was Used, Not Who Wrote It - Forbes"
+    },
+    {
+      "date": "2026-08-13T19:45:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNFEwUzZUYnFWaHQ0UTBIVU90aEdDa1pQQndTNmZPZE42VFVKZHE0THV4cnJCOE1aWWFvNWVGc0J5ekZHNFNtQjREOTBJeXRITENoaFZnb3NEMEFvY1ZWdkFpaVZRM2M3ODJsa1ZzbENQNjJlaTlzZnJmcnBjdk1EcXlQUmxHYk9I",
+      "title": "Claude watermarking content in the EU - Atlanta News First"
+    },
+    {
+      "date": "2026-08-13T20:30:24.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxOWjBIZW9FSm1lUGxSR241ek1rOGRvMW9RQjh4bkppdy1fcE5YSy0xNFB1azNxT2tlZnk3dGV2QkhJNWlhX0t1WUVudnB1bThIZDJQVVVHVzV3Q3Y4S0hmVmthc3VxNWlfTjJZQlQ3a2ZVd201bWZ3dnEwbTIteEhoTkVNNHoydzBiMzdwakxJN0UxMTdDQ093Tm92cXQxSXQ2d1E",
+      "title": "Anthropic Is Quietly Watermarking Every Claude AI Output. Builders Are Already Trying to Break It - Yahoo Tech"
+    },
+    {
+      "date": "2026-08-13T22:58:14.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQkxPREVfTVBCSkxWUlJWcVZTQ1JMNHN0eHF0YWVoc0NReGdTd2NPaEpmS0loaExNcXprMlk2SFBETjNWTnRDczVPcE1SaW9XMC01OGNIeDNRQlVLLVd3OXZDbVNYTmk5Z2hzYVZrZ3lGNUV6ZWZ3UjFScnE1QXBsanNnTDZBS3VRWElBYXZNZnJlVHdSUWdoazNyVnBaQ2hjYXo5X3QyNEpyQQ",
+      "title": "Market for AI watermark removal tools emerges after Anthropic\u2019s Claude update - SC Media"
+    },
+    {
+      "date": "2026-08-14T02:22:45.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxOMGl6TDlILUtZX1FEd2FLUFRMR0NmaHd3VWcwRWpOYjRHejZTRWthVExrZHFMQlR3UnllWUNKT0RuWm5NdTVrUERSMHFOUnJZLW9sTjJvdkJycGFxVjQ0YXhhakk2bnN0MFFOb3ZNR3VEZG02LWROWkI4Zno2WG5yWWU0cnA2VkpvVEpVUWdtOGt0ZG9WUWFqSXU3RldWWUR4cWs0UVV3",
+      "title": "Your Next Claude-Generated Drafts \u0026 Images Will Carry an Invisible Watermark: Here\u0027s Why - Android Headlines"
+    },
+    {
+      "date": "2026-08-14T02:04:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxPU0lMY1ZHZDFjVlpGR2FIelBZOTBsQUtZUnFwTXJxOWQwTkFudU5reG9iZmw0ZDBFTno4ekNncjlXMVkzaHJxNXZNQTJicHRzTHRUNFdWLTkwOXgtaFB0STU1bVhDOWxjU255aUF4UnBqSHB1cmlZczNWR2JTdlFZUjJ2d3lYRFZVeWpKaWppcEpsaWNvMEx5aDQtNkFaX2NmRDVHdFdaQk4zM1U2Z2kweldYV3Bfd9IBvAFBVV95cUxQTzlodUF5QWhzMzBtQ0h4bm1UQUVtazM5eHF6SGttaU12Mm5PQXdkajdSWWxkTV9kZ01KaVRZUFVoVGdpaERCTTR3M01SN01mOUw5NDZwc2JZMllGSXVuTDJuRWJMa0ZqaUZObmdMMEE3X2kwMHM0VkpxN2VnX0RnTWtuMkpjVV9UOEozV1ZPYk5zbWNaMXdnbWw1bnZ0Vm1lVFRiZG5sVWpEY0ZoUk1lc2ZBRUR5WXc0bnRSSQ",
+      "title": "Anthropic watermarking Claude AI content | Explained - The Hindu"
+    },
+    {
+      "date": "2026-08-12T23:03:17.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPcmdIM3l4RC1hMFBQSHN0VGhGT19vbW1yYzNSVXZQTmVyNE1aZ0tXcHZzRTJld1RSTzVEd2RUanV5VV9XaHpWRFhvN3ZpRzNjVnE5cVFrSEhVZGhEdmFvTkpqV0lONllwS1lJMkp4NS0yRUM0VDNvdFlIMVUwNlR4Z09ZbUwyQ1g5bG5ZWGtUZjJaSXhpM3c",
+      "title": "Anthropic to Watermark Everything Claude Writes: What You Should Know - HackerNoon"
+    },
+    {
+      "date": "2026-08-14T03:12:43.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNSlJXYUhlODZ2S3hCNVkteWdqb05QbGJsM2I3X01KUFliazFqOHNGUU1DM1AyNDJPdzVBVnJfMkpMaFRORjJjblh1T3dDTEZ1ekFHTHJoYW1JWTdjUHJNZE84Sk1RdTZLRTR5cXlYQU1CWkQwcXgybkE3TnlIRDlQUWZXcHJKRnZBcVNxWk9BVzdKV1NnMGhkZktYbmxDRW0wMGdUdjExcTJ0bEhPOFFRRw",
+      "title": "Claude Watermark: Anthropic Now Labels All AI-Generated Text; Users Are Divided - Basic Tutorials"
+    },
+    {
+      "date": "2026-08-13T14:35:07.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxQSmtVbkxqUkhuUWJLSnVfU0psUnB4TWNZM2hYSVpvckc4VzBUT09tT05JdmIzTEdISktNTlNEQXhTTTNwc1RBMTlONEFMVlFNS3JGTzI5dGgyb3hLdjRnRFZ6ZHRfQW1aaFNVdjlnUHNZdDYtdFR6dWRLLVU4OGN4NTVzSFhsd2hhX1h4NmJscEVKSWM",
+      "title": "Claude Watermark Removal Tools Promise a Lot. They Deliver an Em Dash. - Currently.com"
+    },
+    {
+      "date": "2026-08-14T06:01:19.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMUl3UmdxRnJkU1hMaFV6RWtBS1RfaW1BSXM2Ri0wR0w4VzFmRnEwSTdUNUlsU3JvdXR0WGNMOXVUVnJ3U1VOcUNYak90NDR4Z0VJTTV0dFo5WEdGUGJDT1dFVThfeVVRRlNmUy03N1hJaDNQb2lqRFNGX2lGME4wR0VtUVl5ejBtb1JtNnAxejFBX3VhN3ZLVUVpdWw0ZUnSAZ8BQVVfeXFMTzFJd1JncUZyZFNYTGhVekVrQUtUX2ltQUlzNkYtMEdMOFcxZkZxMEk3VDVJbFNyb3V0dFhjTDl1VFZyd1NVTnFDWGpPdDQ0eGdFSU01dHRaOVhHRlBiQ09XRVU4X3lVUUZTZlMtNzdYSWgzUG9pakRTRl9pRjBOMEdFbVFZeXowbW9SbTZwMXoxQV91YTd2S1VFaXVsNGVJ",
+      "title": "Anthropic to watermark Claude-generated content under EU AI Act - Social Samosa"
+    },
+    {
+      "date": "2026-08-13T10:34:03.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTE00a1c2NDFzOXdPZGRacnREdnhDeWVEekR6ams3QWNzQlJLZGxzN3JzbFM3UkYtRTlhdG9nR3RNeGUzTDkyX0NlZmJOaG5ERUZnMlBMejBfNHRwaHhJLWx1Z0xEdUJLOFg1SnM5bw",
+      "title": "Claude\u2019s Controversial AI Watermarking Includes Translations - Slator"
+    },
+    {
+      "date": "2026-08-13T08:03:07.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMizwFBVV95cUxQUWdTcElQb0NNOHNfUFJ3MUI5WUdXY0hSYXBRSnJPWmdSazlabnJVTkNoNjNJZzcwZ2hleHliWlhTMFZVU2JPNkFTTWQ1UExwcEtkdEhOd2lwbE9yQ0d1b2JnMHVwdjR3WHQ0X2h4b0laVjZ4cE5qZm1SSXl0NjlmcWEtOVpCM3NYYlBvcVhobXl2eW4tRFpuTlA1MFdGN2xGSTJYeDdKa0R4U2dlYlBrQTdNUXVOMW9WYW5XR29VWWhJTHo5aDlRN2FZUlQ4NDQ",
+      "title": "Anthropic is adding imperceptible, model-level watermarks to Claude\u0027s AI-generated text - TweakTown"
+    },
+    {
+      "author": "Jose Antonio Lanz",
+      "date": "2026-08-13T20:30:24.000Z",
+      "domain": "decrypt.co",
+      "image": "https://kagiproxy.com/img/bNfkrCDXaCNRDLq8yS3JsihMUZYT03wSwSf8cYbD27rPj61_KEbA5zHDIcc6s14S3qltgBynBgXjQt6ovI9N5njiKlGJLww9zmA0Hxc8wHG5qz_5N2Si0cz1in6k8vdKnlts6thgYj24spxO4JjkHT4",
+      "image_caption": "",
+      "link": "https://decrypt.co/375594/anthropic-quietly-watermarking-ai-claude-output-builders-break",
+      "title": "Anthropic Is Quietly Watermarking Every Claude AI Output. Builders Are Already Trying to Break It"
+    },
+    {
+      "author": "The MATTER",
+      "date": "2026-08-13T09:03:36.000Z",
+      "domain": "thematter.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thematter.co/brief/264054/264054",
+      "title": "Claude \u0e08\u0e30\u0e43\u0e2a\u0e48\u0e25\u0e32\u0e22\u0e19\u0e49\u0e33\u0e1a\u0e19\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e08\u0e32\u0e01 AI: Anthropic \u0e2d\u0e2d\u0e01\u0e19\u0e42\u0e22\u0e1a\u0e32\u0e22\u0e43\u0e2a\u0e48\u0e25\u0e32\u0e22\u0e19\u0e49\u0e33 \u0e0b\u0e48\u0e2d\u0e19\u0e43\u0e19\u0e02\u0e49\u0e2d\u0e04\u0e27\u0e32\u0e21\u0e08\u0e32\u0e01\u0e1c\u0e39\u0e49\u0e43\u0e0a\u0e49\u0e07\u0e32\u0e19 Claude \u0e40\u0e1e\u0e37\u0e48\u0e2d\u0e23\u0e30\u0e1a\u0e38\u0e27\u0e48\u0e32\u0e19\u0e35\u0e48\u0e40\u0e1b\u0e47\u0e19\u0e40\u0e19\u0e37\u0e49\u0e2d\u0e2b\u0e32\u0e08\u0e32\u0e01 AI"
+    },
+    {
+      "author": "Jean Leon",
+      "date": "2026-08-14T02:18:28.000Z",
+      "domain": "androidheadlines.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html",
+      "title": "Your Next Claude-Generated Drafts \u0026 Images Will Carry an Invisible Watermark: Here\u0027s Why"
+    },
+    {
+      "author": "Ashley Belanger",
+      "date": "2026-08-13T11:10:18.000Z",
+      "domain": "arstechnica.com",
+      "image": "https://kagiproxy.com/img/I18ijqtSPRmex9XLQNAs9rtv5FIoQ5eeO_hyVhqVqOe8cYudfO1dpsBriF2I4Q9z6Q7w-wxMfxQUX5CsaM6bMvB4_I2fCxI15s1QBEejz9weR0JV4a8syacNH4UMvOzcjQAEBXb8e3lXPUPN9px9A0gzlVTG4jI",
+      "image_caption": "\"Look at that subtle off-white coloring. The tasteful thickness of it. Oh my God, it even has a watermark.\"",
+      "link": "https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/",
+      "title": "Claude\u0027s new Scarlet Letter watermark is invisible\u2014for now"
+    },
+    {
+      "author": "The Currency Analytics",
+      "date": "2026-08-13T23:11:55.000Z",
+      "domain": "thecurrencyanalytics.com",
+      "image": "https://kagiproxy.com/img/jb_3AbKNIad6loQC0fVj2o4pIfYTJSs8v9W7ed96mukg2QQLlTi4hr2VsA0GSYUo8Et1ohZxIMcsZKhk_trJlp7gnBvo7pmyynXCZYzHqCzM6bvqkks9tfLnISkjZopCxR1_yIu5fwZrqFqFjWOnRwJOGiaMM2xIFYxHLy7KXPUGpyityCIa7g9_FdaZYyNXE5uMjMi1XHgGqaZvEudpn70U3l5wjLOn2PPjT7UzQ7YP",
+      "image_caption": "",
+      "link": "https://thecurrencyanalytics.com/technology/anthropics-claude-watermark-faces-bypass-tools-days-after-august-2-rollout-283926",
+      "title": "New Bypass Tools Emerge for Anthropic\u2019s Claude Watermark Compliance System"
+    },
+    {
+      "author": "Ivan Pelivanovi\u0107",
+      "date": "2026-08-13T08:02:23.000Z",
+      "domain": "netokracija.com",
+      "image": "https://kagiproxy.com/img/eq8bD8OOa7pqzqk89IhG-lbshfGSf0wDSqzRrTbCVDaXN2lHHGufIxdXC4-n-ROMg040lqkhv0OKLNvFURhvLjqLo9Ic0fcnCQRR8hUxdm4AsXvoI7Ux1zGouZGT3qXLHkgP_GCUbOTkW2BRDg9B",
+      "image_caption": "",
+      "link": "https://www.netokracija.com/tekstovi-transparentnost-ai-oznaka-claude-246037",
+      "title": "Tekstovi \u0107e imati oznaku koja odaje jesu li pisani pomo\u0107u AI-ja"
+    },
+    {
+      "author": "Oren Etzioni",
+      "date": "2026-08-13T17:31:55.000Z",
+      "domain": "geekwire.com",
+      "image": "https://kagiproxy.com/img/JPmKLNCVQG0aALUI00GjgQ1W-lX6yecF6MV12ARYhMdUORCut-WS8U0BsHy9yEB5ySFyQdVnMcwTB3vOdvbMlKNme-o-wLLttc2tXJh4fN9Kzr5IiI2kNGt7cnjjC_i-D0VU32QDEwKNtXGzfA",
+      "image_caption": "",
+      "link": "https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/",
+      "title": "Etzioni on AI: Claude is marking its text \u2014 Caveat Promptor!"
+    },
+    {
+      "author": "Ax Sharma",
+      "date": "2026-08-13T17:33:28.000Z",
+      "domain": "bleepingcomputer.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/",
+      "title": "AI \u0027watermark removers\u0027 flood the web. Almost none can prove they work."
+    },
+    {
+      "author": "Adam Hecl",
+      "date": "2026-08-13T08:59:00.000Z",
+      "domain": "forbes.cz",
+      "image": "https://kagiproxy.com/img/pxojyO41R8hSDW4yfwruWUFvM1-GXyn46lxg-otDOLJoEyoDINTgnS1QMPLO6um6Klm5gwKRbm2bxcITSkBqYC23TR8ndvcE9oSuazEa0exWWngAr_Hy96uKxQ",
+      "image_caption": "",
+      "link": "https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/",
+      "title": "Claude nov\u011b ozna\u010duje vygenerovan\u00e9 texty vodoznakem. Nevyma\u017ee ho ani zkop\u00edrov\u00e1n\u00ed"
+    },
+    {
+      "date": "2026-08-13T15:07:10.000Z",
+      "domain": "seangoedecke.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.seangoedecke.com/text-ai-watermarks/",
+      "title": "Text AI watermarks will always be trivial to remove"
+    },
+    {
+      "date": "2026-08-14T07:09:46.306Z",
+      "domain": "leparisien.fr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php",
+      "title": "Invisible et \u00ab\u00a0infalsifiable\u00a0\u00bb\u00a0: comment Anthropic va marquer les textes g\u00e9n\u00e9r\u00e9s par son IA Claude"
+    },
+    {
+      "author": "Michael Sch\u00e4fer",
+      "date": "2026-08-13T09:17:00.000Z",
+      "domain": "computerbase.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.computerbase.de/news/apps/claude-wasserzeichen-kennzeichnung-trifft-auf-kritik-aber-auch-auf-zuspruch.98829/",
+      "title": "Claude-Wasserzeichen: Kennzeichnung trifft auf Kri\u00adtik, aber auch auf Zuspruch"
+    },
+    {
+      "date": "2026-08-13T04:30:00.000Z",
+      "domain": "elespanol.com",
+      "image": "https://kagiproxy.com/img/qP1P_KZ_0b8FudDLg71LbCy8CDRm-nlCmhU8UjJXpP8EBXxJFm_jReSb2g86lyj3fJhXRwcd5xQuLt1kX9KofAt2O55xvDHL0AoYYDeC7ekuYcpJsEu5pBWrxve8gka51JfqExlSa8ZB-3oZ0axPqA",
+      "image_caption": "",
+      "link": "https://www.elespanol.com/omicrono/tecnologia/20260813/acabo-darle-deberes-ia-sistema-marcas-agua-empieza-llegar-claude-chatgpt-gemini/1003744350583_0.html",
+      "title": "Se acab\u00f3 darle tus deberes a la IA: el sistema de marcas de agua que empieza a llegar a Claude, ChatGPT y Gemini"
+    },
+    {
+      "author": "Marvin Fuhrmann",
+      "date": "2026-08-13T11:14:00.000Z",
+      "domain": "heise.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.heise.de/news/Claude-Nutzer-aeussern-wegen-des-neuen-Wasserzeichens-Kritik-an-Anthropic-11412904.html",
+      "title": "Claude: Nutzer \u00e4u\u00dfern wegen des neuen Wasserzeichens Kritik an Anthropic"
+    },
+    {
+      "date": "2026-08-13T20:50:48.000Z",
+      "domain": "nikkei.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nikkei.com/article/DGXZQOGN139SY0T10C26A8000000/",
+      "title": "Claude\u6587\u7ae0\u3067\u300cAI\u88fd\u300d\u30d0\u30ec\u308b?\u3000\u30b3\u30d4\u30da\u3067\u3082\u6b8b\u308b\u96fb\u5b50\u900f\u304b\u3057\u306b\u30cd\u30c3\u30c8\u53cd\u767a"
+    },
+    {
+      "author": "/u/fmcortez",
+      "date": "2026-08-13T20:52:36.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/technology/comments/1vnmzvm/ai_companies_are_suddenly_racing_to_watermark/",
+      "title": "AI Companies Are Suddenly Racing to Watermark Their Content \u2014 Here\u2019s What That Means"
+    },
+    {
+      "author": "AnnieBronson",
+      "date": "2026-08-13T09:20:24.000Z",
+      "domain": "habr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://habr.com/ru/news/1070030/",
+      "title": "\u0427\u0430\u0441\u0442\u044c \u043f\u043e\u043b\u044c\u0437\u043e\u0432\u0430\u0442\u0435\u043b\u0435\u0439 Claude \u043d\u0435\u0434\u043e\u0432\u043e\u043b\u044c\u043d\u0430 \u0432\u0432\u0435\u0434\u0451\u043d\u043d\u043e\u0439 \u043d\u0435\u0434\u0430\u0432\u043d\u043e \u043c\u0430\u0440\u043a\u0438\u0440\u043e\u0432\u043a\u043e\u0439 \u043a\u043e\u043d\u0442\u0435\u043d\u0442\u0430"
+    },
+    {
+      "author": "Jos\u00e9 Nicol\u00e1s",
+      "date": "2026-08-14T03:30:01.000Z",
+      "domain": "elpais.com",
+      "image": "https://kagiproxy.com/img/yMgBvqypuSK874PbD4Lbz8O64ttzcYt0Hy25GRvgIWoKw-Mjv3F8aR9mY20EB3bx37GDqoqvZ40D5hT1RidFoiks0wE-NDyR1IA79X0hppjHpW4XBHTRdtEZC6gIm1ax7HctviGI0R-OA__l6yM9gYtVMpJo1s6P9nh48grWgvuFA6chAgm3Ntd8Uxy4zIA5obtavt_o7nbN8_T72uUXj-cVG4pVKUE",
+      "image_caption": "Una carpeta de m\u00f3vil con algunas de las principales compa\u00f1\u00edas de IA del mundo.",
+      "link": "https://elpais.com/opinion/2026-08-14/la-inteligencia-artificial-exige-ahora-un-credito-que-nunca-pago.html",
+      "title": "La inteligencia artificial exige ahora un cr\u00e9dito que nunca pag\u00f3"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "About 190 organizations signed the EU transparency code, but only 82 signed the section covering content marking, according to GeekWire [geekwire.com#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=habr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "habr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arstechnica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arstechnica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidheadlines.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=decrypt.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "decrypt.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=negativestarinnovators.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "negativestarinnovators.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thematter.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thematter.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thecurrencyanalytics.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thecurrencyanalytics.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=netokracija.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "netokracija.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=geekwire.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "geekwire.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bleepingcomputer.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bleepingcomputer.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=forbes.cz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "forbes.cz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=seangoedecke.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "seangoedecke.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=leparisien.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "leparisien.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerbase.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerbase.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=elespanol.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "elespanol.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nikkei.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nikkei.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=elpais.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "elpais.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Google used SynthID watermarking for AI-generated text before the latest Claude rollout. OpenAI said on Aug. 2, 2026, that it intends to add provenance signals for AI-generated text [negativestarinnovators.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Content provenance: Anthropic\u2019s image metadata uses the C2PA open standard, which PCMag says OpenAI and Meta have also adopted, while Google accepts the standard and uses SynthID for its own labels [pcmag.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Transparency",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 43,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "PCMag",
+          "url": "https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs"
+        }
+      ],
+      "text": "Anthropic: The company said it is working to let users and third parties detect Claude\u2019s embedded watermarks and provenance metadata."
+    },
+    {
+      "sources": [
+        {
+          "name": "GeekWire",
+          "url": "https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/"
+        }
+      ],
+      "text": "Oren Etzioni: Etzioni described Claude\u2019s text mark as a statistical pattern in word choices rather than hidden characters or spaces, and said this differs from style detectors because it creates a test with a computable error rate."
+    },
+    {
+      "sources": [
+        {
+          "name": "Habr",
+          "url": "https://habr.com/ru/news/1070030/"
+        }
+      ],
+      "text": "AI watermark critics: Habr cited Reddit users who argued the system could expose ordinary students, journalists and writers who used Claude for editing or summarizing, while more technical users may be better able to remove traces."
+    }
+  ],
+  "primary_image": {
+    "caption": "Illustration accompanying Ars Technica\u2019s report on Claude\u2019s invisible watermark.",
+    "credit": "Aurich Lawson | American Psycho (Lions Gate Films)",
+    "link": "https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/",
+    "url": "https://kagiproxy.com/img/eUfPpNM4yb-PndmKyTVigNzLSDCbNpIBUKfeVS0NPCmtT1jOZ8Q06XRN9CnQnOimhGQOD_irHAw-UpIpTapZqVZfM1bcXkdZoI_jyESAk8pvd8lDXzXc9pxUzs8boZTln3I-yqtsvJQns8ha6GW6utGFOPPhvIQ"
+  },
+  "published": "2026-08-14T12:00:12.953Z",
+  "quote": "Watermarking will be applied at the model level, which means it will be present no matter which Claude product or surface the text comes from",
+  "quote_attribution": "PCMag",
+  "quote_author": "Anthropic",
+  "scientific_significance": [],
+  "secondary_image": {
+    "caption": "GeekWire illustration of Claude watermarking.",
+    "credit": "geekwire.com",
+    "link": "https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/",
+    "url": "https://kagiproxy.com/img/vGegktpwOlYsbgzEpxy0_r8Krt5imIKVMGmOw_ptiW6THXoIkptDv2N0CbA8fEvJd02V4E_5ccj9cxrw4eTGU93uvArvzZmShwYmZRH5K9VbbKGJX-FcwprxNxFNlgKiii6f3lrsC_f7zddCjg"
+  },
+  "source_urls": [
+    "https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php",
+    "https://www.seangoedecke.com/text-ai-watermarks/",
+    "https://www.reddit.com/r/technology/comments/1vnmzvm/ai_companies_are_suddenly_racing_to_watermark/",
+    "https://negativestarinnovators.com/blog/watermarking-ai-text-is-fundamentally-flawed",
+    "https://news.google.com/rss/articles/CBMisAFBVV95cUxNSlJXYUhlODZ2S3hCNVkteWdqb05QbGJsM2I3X01KUFliazFqOHNGUU1DM1AyNDJPdzVBVnJfMkpMaFRORjJjblh1T3dDTEZ1ekFHTHJoYW1JWTdjUHJNZE84Sk1RdTZLRTR5cXlYQU1CWkQwcXgybkE3TnlIRDlQUWZXcHJKRnZBcVNxWk9BVzdKV1NnMGhkZktYbmxDRW0wMGdUdjExcTJ0bEhPOFFRRw",
+    "https://news.google.com/rss/articles/CBMitgFBVV95cUxPU0lMY1ZHZDFjVlpGR2FIelBZOTBsQUtZUnFwTXJxOWQwTkFudU5reG9iZmw0ZDBFTno4ekNncjlXMVkzaHJxNXZNQTJicHRzTHRUNFdWLTkwOXgtaFB0STU1bVhDOWxjU255aUF4UnBqSHB1cmlZczNWR2JTdlFZUjJ2d3lYRFZVeWpKaWppcEpsaWNvMEx5aDQtNkFaX2NmRDVHdFdaQk4zM1U2Z2kweldYV3Bfd9IBvAFBVV95cUxQTzlodUF5QWhzMzBtQ0h4bm1UQUVtazM5eHF6SGttaU12Mm5PQXdkajdSWWxkTV9kZ01KaVRZUFVoVGdpaERCTTR3M01SN01mOUw5NDZwc2JZMllGSXVuTDJuRWJMa0ZqaUZObmdMMEE3X2kwMHM0VkpxN2VnX0RnTWtuMkpjVV9UOEozV1ZPYk5zbWNaMXdnbWw1bnZ0Vm1lVFRiZG5sVWpEY0ZoUk1lc2ZBRUR5WXc0bnRSSQ",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxQd0E4MEVwY1BNV0I4UWRaMTEzXzR1NnFOZ1VHY24xZGxnSnVZTFJHX0NObXhzRTFPRlZCZkF4WUptZTdqaWp4UndkTW9oUHZqWXFka2RpRkVwYV9CQlU0eFpwcnE1eW82S2ZXRWlwRWZaZDlKVmlfc1Q5NkhLVlVLYWx6WWtYVjlTOFBrTGlYUHI",
+    "https://news.google.com/rss/articles/CBMirgFBVV95cUxNVWdFak5OTW92TzQ1cmp5bGh4UFVHQUFVSkpLd0NTR3EzckVYXzk2NkNLdlZJeGhxSUpRcWp3TDRZVlhJb0UzcEJGYzNadEY0YUNiM3YyUUFVeXJwXzU5MnUwWDdLclJ4ZW5Ua1dYRGRTUnBPTmk0enNLY0J6RTFoTlAwaUVOSEd0a0xRa01OcXlmRWptZE9YUzFRZEdtU2hpTTk4TmpmZ2RJR2J0UGc",
+    "https://www.computerbase.de/news/apps/claude-wasserzeichen-kennzeichnung-trifft-auf-kritik-aber-auch-auf-zuspruch.98829/",
+    "https://news.google.com/rss/articles/CBMilAFBVV95cUxQM2hzb1dVS01SVjRVME81X2tJQVRxWEZpb2k0U3RueFZqUktfZVhQZTJPaDZEeE1CNW5jMTlyNnVpcnRxbkNZUjdRYjJpM1dCblRJMU5FZDVKUERPTkZDMXZfc1Y2aDVpZlVabURjRjRGN3gzWVU2TVRjdzBTZEJScHRKWFFfX3RqeDB3MFQ1c1FGd3dm",
+    "https://www.bleepingcomputer.com/news/security/ai-watermark-removers-flood-the-web-almost-none-can-prove-they-work/",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxOMGl6TDlILUtZX1FEd2FLUFRMR0NmaHd3VWcwRWpOYjRHejZTRWthVExrZHFMQlR3UnllWUNKT0RuWm5NdTVrUERSMHFOUnJZLW9sTjJvdkJycGFxVjQ0YXhhakk2bnN0MFFOb3ZNR3VEZG02LWROWkI4Zno2WG5yWWU0cnA2VkpvVEpVUWdtOGt0ZG9WUWFqSXU3RldWWUR4cWs0UVV3",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxOOU5IeV8wcUd4R0NQc05oaHFsb1E1ME11OXpwd2JaQVAzWnVQM2RpRzIxTW9peXJvM2dqazB1MHBuVlY4LUtKVnVuWU01WTBfYkh3OTdzdnk5aXpVRC0tSGpoT01EMzVUSHZZYXpta05pNS1iLXF0ZnJDRk9Ecnk4ZWI3WTJMXzhza3BUQkxVOVJDc2l2MXo1c1JuM1otZjBaeE1TaQ",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxOTkFkc1RoWXdhRGlRb2ZVc1hsb2xyNVpXUmtqdXRHbUpNaUI4VFdPaVViTTZ5LV9WSXdKOUlZV0tsWTFpOXBlZ1RKQ3RLYzRpeWJKWE5ydWFGMFJyUENCSndHSVFRNkFza0F1QXItVjJ3b2xHc2JPNDBPXzJnM1JJcWJVTDBhNVlNXzI5U1VMZ1dqd9IBmgFBVV95cUxQTnVNZ05od2hHY0tvVEpqcnVCWmM4NERjTVdqeWZKOE0tZG5lcjVlS3hrUmNxeU5mVFpJNmJaRHVUYV9oSWJGQ3VEVHFacmdVUlRuRXVYRlRkZ1VLT0tjVFhuNG1iY3pmQzg1Q1Mxcll4VGY5WXRiNk9CRHBhV1dfV3c0aG1rYlRhOWpOQTk5M3VaWnZTZ3hJUWhR",
+    "https://news.google.com/rss/articles/CBMibEFVX3lxTE00a1c2NDFzOXdPZGRacnREdnhDeWVEekR6ams3QWNzQlJLZGxzN3JzbFM3UkYtRTlhdG9nR3RNeGUzTDkyX0NlZmJOaG5ERUZnMlBMejBfNHRwaHhJLWx1Z0xEdUJLOFg1SnM5bw",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNQkxPREVfTVBCSkxWUlJWcVZTQ1JMNHN0eHF0YWVoc0NReGdTd2NPaEpmS0loaExNcXprMlk2SFBETjNWTnRDczVPcE1SaW9XMC01OGNIeDNRQlVLLVd3OXZDbVNYTmk5Z2hzYVZrZ3lGNUV6ZWZ3UjFScnE1QXBsanNnTDZBS3VRWElBYXZNZnJlVHdSUWdoazNyVnBaQ2hjYXo5X3QyNEpyQQ",
+    "https://news.google.com/rss/articles/CBMiywFBVV95cUxOaHY4Rmg0RlpBc095UkFYTThPV0xfTDdmLTVETWtiaTk3cWhIMTZVVUI3WjRsVmlPUk9uSDJ2UmZPbUcyTG5JMjV5V0poZ2hWRURCOEpiUlQ0WkZ3MlhTTEw1S2d1NzU4eUZjS1kwakVIbGNvUzExajFzMDhKTFJEaFhtSlYzcVVCYjhYT2FxZ0N3NTBzWTVTU0lUcV8yeXphcWhXbVZpMTdwZjhTVUk3dDBiRUhndVN1WVRCME5UdDY0cnlfamxsamd0Zw",
+    "https://news.google.com/rss/articles/CBMinwFBVV95cUxPMUl3UmdxRnJkU1hMaFV6RWtBS1RfaW1BSXM2Ri0wR0w4VzFmRnEwSTdUNUlsU3JvdXR0WGNMOXVUVnJ3U1VOcUNYak90NDR4Z0VJTTV0dFo5WEdGUGJDT1dFVThfeVVRRlNmUy03N1hJaDNQb2lqRFNGX2lGME4wR0VtUVl5ejBtb1JtNnAxejFBX3VhN3ZLVUVpdWw0ZUnSAZ8BQVVfeXFMTzFJd1JncUZyZFNYTGhVekVrQUtUX2ltQUlzNkYtMEdMOFcxZkZxMEk3VDVJbFNyb3V0dFhjTDl1VFZyd1NVTnFDWGpPdDQ0eGdFSU01dHRaOVhHRlBiQ09XRVU4X3lVUUZTZlMtNzdYSWgzUG9pakRTRl9pRjBOMEdFbVFZeXowbW9SbTZwMXoxQV91YTd2S1VFaXVsNGVJ",
+    "https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxPVnJ3dFoxSl9YdWhLa2lYaHg4Y3hNR1pjNFVfcnh5SE1XdVpSSmp2cTFGSkR2eDNQN3EtZXZOc09RTWhmZmVKcGtQOW5EUjZJT09zaWs5R0NoaVJHTHFzWG1xOC1aeHhwd1R5eGtfWVFCYWdablNPOUtpS2hxMEh0blVMWEpZdTd4bjFscHo2SXE4Z0gxb2RlZnVlMmp2NE9XV3RSbQ",
+    "https://news.google.com/atom/articles/CBMiiAFBVV95cUxPdjRfNFN3VFUydkxJSDV5UlB4dTBBY2FBekhlb2txNmpmTXRYQ00tQjdjM29VdlRHdzQxQk45cUY0NHdjQ3cyTko5RVBJRTNBc0ZxMUN2MnByb1JRbUN5cTk2YVQ5dTFsN0xycURia3hFUy1Xb1RnOGJWb3R4MklPWnRIZHRSc3dm",
+    "https://forbes.cz/claude-nove-oznacuje-vygenerovane-texty-vodoznakem-nevymaze-ho-ani-zkopirovani/",
+    "https://news.google.com/rss/articles/CBMiiAFBVV95cUxQNFEwUzZUYnFWaHQ0UTBIVU90aEdDa1pQQndTNmZPZE42VFVKZHE0THV4cnJCOE1aWWFvNWVGc0J5ekZHNFNtQjREOTBJeXRITENoaFZnb3NEMEFvY1ZWdkFpaVZRM2M3ODJsa1ZzbENQNjJlaTlzZnJmcnBjdk1EcXlQUmxHYk9I",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxOWjBIZW9FSm1lUGxSR241ek1rOGRvMW9RQjh4bkppdy1fcE5YSy0xNFB1azNxT2tlZnk3dGV2QkhJNWlhX0t1WUVudnB1bThIZDJQVVVHVzV3Q3Y4S0hmVmthc3VxNWlfTjJZQlQ3a2ZVd201bWZ3dnEwbTIteEhoTkVNNHoydzBiMzdwakxJN0UxMTdDQ093Tm92cXQxSXQ2d1E",
+    "https://decrypt.co/375594/anthropic-quietly-watermarking-ai-claude-output-builders-break",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vnrvr5/how_ai_text_watermarking_works/",
+    "https://thecurrencyanalytics.com/technology/anthropics-claude-watermark-faces-bypass-tools-days-after-august-2-rollout-283926",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxQSmtVbkxqUkhuUWJLSnVfU0psUnB4TWNZM2hYSVpvckc4VzBUT09tT05JdmIzTEdISktNTlNEQXhTTTNwc1RBMTlONEFMVlFNS3JGTzI5dGgyb3hLdjRnRFZ6ZHRfQW1aaFNVdjlnUHNZdDYtdFR6dWRLLVU4OGN4NTVzSFhsd2hhX1h4NmJscEVKSWM",
+    "https://elpais.com/opinion/2026-08-14/la-inteligencia-artificial-exige-ahora-un-credito-que-nunca-pago.html",
+    "https://www.heise.de/news/Claude-Nutzer-aeussern-wegen-des-neuen-Wasserzeichens-Kritik-an-Anthropic-11412904.html",
+    "https://www.androidheadlines.com/2026/08/anthropic-adds-invisible-watermarks-to-all-claude-outputs.html",
+    "https://www.nikkei.com/article/DGXZQOGN139SY0T10C26A8000000/",
+    "https://news.google.com/rss/articles/CBMizwFBVV95cUxQUWdTcElQb0NNOHNfUFJ3MUI5WUdXY0hSYXBRSnJPWmdSazlabnJVTkNoNjNJZzcwZ2hleHliWlhTMFZVU2JPNkFTTWQ1UExwcEtkdEhOd2lwbE9yQ0d1b2JnMHVwdjR3WHQ0X2h4b0laVjZ4cE5qZm1SSXl0NjlmcWEtOVpCM3NYYlBvcVhobXl2eW4tRFpuTlA1MFdGN2xGSTJYeDdKa0R4U2dlYlBrQTdNUXVOMW9WYW5XR29VWWhJTHo5aDlRN2FZUlQ4NDQ",
+    "https://thematter.co/brief/264054/264054",
+    "https://news.google.com/rss/articles/CBMi1gFBVV95cUxOUnluX19Va2txNS1QQldiRnoxWU5oOWtVNjdWWlo2dzU2dmJtVHpFcTJCbXhNWEcyb0haa1pCbG1QR05GMHZCZXZSeUVFVkNkX3hiUnM3Tl94VUNpemx3YjY3QjFDLWd6bzdGM3VzbmZIUEpKNC1vYlFZS0VoaEhKOTh0cDhZUGNWQWVJNXVfQWY5VENMWk10S05KY0NyZnBCM2NQU01FM1lUTnpjRDlDS2doSlU2XzBKenRhaktuWWlYdW1uaGdBbnRiNW1UbnhST2h3TXZn0gHWAUFVX3lxTE5SeW5fX1Vra3E1LVBCV2JGejFZTmg5a1U2N1ZaWjZ3NTZ2Ym1UekVxMkJteE1YRzJvSFprWkJsbVBHTkYwdkJldlJ5RUVWQ2RfeGJSczdOX3hVQ2l6bHdiNjdCMUMtZ3pvN0YzdXNuZkhQSko0LW9iUVlLRWhoSEo5OHRwOFlQY1ZBZUk1dV9BZjlUQ0xaTXRLTkpjQ3JmcEIzY1BTTUUzWVROemNEOUNLZ2hKVTZfMEp6dGFqS25ZaVh1bW5oZ0FudGI1bVRueFJPaHdNdmc",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxPcmdIM3l4RC1hMFBQSHN0VGhGT19vbW1yYzNSVXZQTmVyNE1aZ0tXcHZzRTJld1RSTzVEd2RUanV5VV9XaHpWRFhvN3ZpRzNjVnE5cVFrSEhVZGhEdmFvTkpqV0lONllwS1lJMkp4NS0yRUM0VDNvdFlIMVUwNlR4Z09ZbUwyQ1g5bG5ZWGtUZjJaSXhpM3c",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxOQldRc1A5V2JwLWFyREsyWkt3d2JzN3pZZHY0eV9jYVc5WGZuY1RGd0lmNDQwaFRNcjBoZHpEQzZzNUhFVFZVa3VXME5fSVo4OS1fVXM1Zk0xZ1BvQlBHLVFiTng2RWVWcW1HSndEMm5JQ3B5eEtZelg1WERwWGhTQ0QyYkJ3TXlCNlYwTi1sQkxtdHB5a0ZJS3Y1aEhDZDVuaEE",
+    "https://news.google.com/rss/articles/CBMi6wFBVV95cUxPOENtMmd2M1ZfaUdiWU1reUdGM3pkVlJuTlo5XzkzT0hEYTlXSnZGdGFBSURDaXZ1bEJlTmlUNi1YX082MmJnSUx5T2RzS2JNT2ZPNHZyYTR1Q25GRWZlbTBzVndlSUpPR1lhLTVaWmV3QWloYng5MVB2bnh0YS1pc2F3akk4dE93YVdxbGNkT3FidWRmUHVFM0g3aU5LWkU4NzcyQnhKWG5xMkFFb0xMTlRzY0RiRV9vQUIxbGE4a2hkM1liMXVMN2Ftd2FjNUZSYjd4RWxVdUMwREV2RnFFVUExclFRWmZyTUZZ",
+    "https://habr.com/ru/news/1070030/",
+    "https://arstechnica.com/tech-policy/2026/08/claudes-new-scarlet-letter-watermark-is-invisible-for-now/",
+    "https://www.netokracija.com/tekstovi-transparentnost-ai-oznaka-claude-246037",
+    "https://www.geekwire.com/2026/etzioni-on-ai-claude-is-marking-its-text-caveat-promptor/",
+    "https://www.elespanol.com/omicrono/tecnologia/20260813/acabo-darle-deberes-ia-sistema-marcas-agua-empieza-llegar-claude-chatgpt-gemini/1003744350583_0.html"
+  ],
+  "suggested_qna": [],
+  "summary": "Anthropic began adding machine-readable watermarks to outputs from Claude models released on or after Aug. 2, aligning the rollout with transparency requirements under the European Union\u2019s AI Act and its Code of Practice on Transparency of AI-Generated Content [pcmag.com#1][arstechnica.com#1][geekwire.com#1]. The company is applying the system globally rather than only in the EU, and the marking applies across new Claude models where supported [pcmag.com#1][androidheadlines.com#1][forbes.cz#1].\n\nFor text, Anthropic embeds an imperceptible model-level watermark into the output so the signal can persist through copy-paste and some minor edits without being visible to readers [pcmag.com#1][geekwire.com#1][netokracija.com#1]. For images and other generated files such as JPG, PNG and SVG, Claude attaches digitally signed provenance metadata using the C2PA open standard [pcmag.com#1][androidheadlines.com#1][forbes.cz#1].\n\nCritics say Claude may mark content it processed, including text a person wrote and asked the model to proofread, translate, summarize or reformat [arstechnica.com#1][forbes.cz#1][netokracija.com#1]. Anthropic says the watermark is not definitive evidence that Claude generated an output, while reports note that heavy rewriting, paraphrasing, translation, screenshots or file-format conversion can weaken or remove different kinds of marks [pcmag.com#1][forbes.cz#1][thematter.co#1].",
+  "talking_points": [
+    "Product reach: The rollout covers Claude\u2019s consumer chatbot, Claude Code, the developer API, Cowork, Tag and third-party cloud hosts including AWS, Google Cloud and Microsoft Foundry [androidheadlines.com#1][forbes.cz#1].",
+    "Detector gap: Claims by watermark-removal services cannot currently be verified because Anthropic has not published the watermarking method or released a detector [bleepingcomputer.com#1].",
+    "Removal market: BleepingComputer identified an MIT-licensed GitHub project with more than 4,500 stars, several newly registered web tools and established AI-detection evasion services advertising Claude watermark removal [bleepingcomputer.com#1].",
+    "Regulatory scope: Ars Technica reported that the EU rules give providers until December 2026 to update previously released models, while new models must mark covered outputs from launch [arstechnica.com#1]."
+  ],
+  "technical_details": [
+    "Statistical text watermark: Claude\u2019s mark appears to work by biasing word choices toward a recognizable pattern; GeekWire says this means a single sentence is too short to mark reliably, while longer passages can support a statistical test [geekwire.com#1].",
+    "Bypass uncertainty: Some public tools strip invisible Unicode characters or target file-format signals, but researchers cited by The Currency Analytics think Claude\u2019s text mark likely resembles a statistical signature rather than a simple hidden-character layer [thecurrencyanalytics.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Google had already adopted SynthID text watermarking [negativestarinnovators.com#1].",
+      "date": "May 2024",
+      "date_iso": "2024-05"
+    },
+    {
+      "content": "EU AI Act transparency obligations began applying to new models [arstechnica.com#1][geekwire.com#1].",
+      "date": "2 August 2026",
+      "date_iso": "2026-08-02"
+    },
+    {
+      "content": "Anthropic confirmed Claude watermarking and published support details [geekwire.com#1].",
+      "date": "11 August 2026",
+      "date_iso": "2026-08-11"
+    },
+    {
+      "content": "Removal tools and services surfaced publicly after disclosure [bleepingcomputer.com#1][thecurrencyanalytics.com#1].",
+      "date": "13 August 2026",
+      "date_iso": "2026-08-13"
+    }
+  ],
+  "title": "Anthropic adds global watermarks to Claude AI outputs",
+  "travel_advisory": "",
+  "unique_domains": 21,
+  "url": "https://www.pcmag.com/news/anthropics-claude-will-now-add-invisible-watermarks-to-text-image-outputs",
+  "user_action_items": [
+    "Avoid submitting sensitive drafts to Claude if marking matters: If a document\u2019s provenance could affect school, work or publication review, do not run final text through Claude until Anthropic\u2019s detection tools and policies are clearer [arstechnica.com#1][pcmag.com#1].",
+    "Preserve provenance metadata for generated images: Keep original JPG, PNG or SVG files instead of screenshots or converted copies if you need Claude\u2019s C2PA metadata to remain attached [forbes.cz#1][thematter.co#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
