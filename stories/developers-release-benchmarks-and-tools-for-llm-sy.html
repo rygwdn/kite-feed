@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers release benchmarks and tools for LLM systems - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers release benchmarks and tools for LLM systems</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Several AI developer projects released benchmarks and tools this week for measuring, reducing or controlling cost and reliability problems in deployed LLM-based software. The Rails Foundation said it commissioned Evil Martians to run “Agents on Rails,” an ongoing benchmark of frontier and open-weight agentic coding tools on real Ruby on Rails codebases. Initial results were released on Aug. 12, with more stages planned over the following weeks <a href="https://rubyonrails.org/2026/8/12/llm-benchmarking-project" class="footnote-ref">[1]</a>. OpenRouter separately launched live web-search benchmarks to compare model, search engine, search depth and search budget choices for agentic systems that need current information beyond model knowledge cutoffs <a href="https://openrouter.ai/blog/announcements/web-search-benchmark/" class="footnote-ref">[5]</a>.
+
+Research papers and prototypes addressed correctness, context control and local operation. An arXiv paper by Rishi Shah and Rishav Shrestha proposed a contract-grade verifier for LLM-generated GPU kernels <a href="https://arxiv.org/abs/2608.12700" class="footnote-ref">[6]</a>. Other releases included ThoughtDAG, an editable graph interface for deciding which conversation branches enter an LLM request; Dictata, a Rust-based local Windows dictation tool using whisper.cpp and optional local LLM cleanup; and RAGless, a retrieval-only Q&amp;A system that uses Gemini embeddings and local Qdrant storage without LLM calls at runtime <a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a><a href="https://github.com/AntoineChatry/Dictata" class="footnote-ref">[3]</a><a href="https://github.com/EmilResearch/RAGless" class="footnote-ref">[9]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://rubyonrails.org/2026/8/12/llm-benchmarking-project">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> In HOAi’s example, a phone call with 25 LLM-backed turns has roughly a 22% chance of hitting at least one long silence if 1% of individual requests are catastrophically slow <a href="https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/" class="footnote-ref">[11]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Batch pricing: Digital Applied said Google, OpenAI and Anthropic each price asynchronous batch API work at 50% of synchronous rates, while xAI offers no batch discount for flagship Grok 4.6 <a href="https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026" class="footnote-ref">[8]</a>.</li>
+
+<li>Latency workaround: HOAi said a replay of 50 production requests showed sending each LLM request twice on the standard tier cut worst-case completion time to 3.5 seconds from 9.8 seconds on OpenAI’s priority tier <a href="https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/" class="footnote-ref">[11]</a>.</li>
+
+<li>Inference focus: DigitalOcean published an LLM inference benchmarking post alongside product pages for GPU Droplets, Bare Metal GPUs, Inference Engine, Evaluations and a Model Library <a href="https://www.digitalocean.com/blog/llm-inference-benchmarking" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Rails Foundation: The foundation said Agents on Rails responded to developer uncertainty about coding-agent quality, token spending and trade-offs between frontier and open-weight models.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://rubyonrails.org/2026/8/12/llm-benchmarking-project">Ruby on Rails</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>OpenRouter: OpenRouter said search budget was more important than any other benchmark factor and that failure rate drives worst-case cost scenarios.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://openrouter.ai/blog/announcements/web-search-benchmark/">OpenRouter</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Shah and Shrestha: The authors argued that common GPU-kernel correctness tests can accept kernels that fail on NaNs, infinities, determinism, shape changes or accumulation precision.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.12700">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>HOAi engineering: HOAi said it rejected paying twice for a faster service tier in its tested case after duplicate standard-tier requests produced better p95, p99 and worst-case latency.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/">HOAi Engineering</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>10 June 2026:</strong> HOAi published duplicate-request latency test results <a href="https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/" class="footnote-ref">[11]</a></li>
+
+
+
+<li><strong>12 August 2026:</strong> Rails Foundation announced the Agents on Rails benchmark project <a href="https://rubyonrails.org/2026/8/12/llm-benchmarking-project" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>12 August 2026:</strong> OpenRouter published its live web-search benchmark methodology <a href="https://openrouter.ai/blog/announcements/web-search-benchmark/" class="footnote-ref">[5]</a></li>
+
+
+
+<li><strong>13 August 2026:</strong> Shah and Shrestha submitted the GPU-kernel verifier paper to arXiv <a href="https://arxiv.org/abs/2608.12700" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>14 August 2026:</strong> Digital Applied published its batch API pricing analysis <a href="https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026" class="footnote-ref">[8]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Tolerance-free verifier gates: The arXiv verifier uses 12 adversarial gates, including several tolerance-free gates, so a rejected kernel cannot be defended merely by changing a numerical threshold <a href="https://arxiv.org/abs/2608.12700" class="footnote-ref">[6]</a>.</li>
+
+<li>Asymmetric retrieval embeddings: RAGless ingests documents using Gemini’s RETRIEVAL_DOCUMENT embedding mode and queries with RETRIEVAL_QUERY, then aggregates scores across question variants that point to the same answer_id <a href="https://github.com/EmilResearch/RAGless" class="footnote-ref">[9]</a>.</li>
+
+<li>ThoughtDAG lets users link source documents to conversation nodes, keeping evidence attached to claims and showing a context diff when branches are removed <a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit batchable LLM workloads: List jobs that do not need real-time responses, then compare synchronous and asynchronous prices for the model vendors you already use <a href="https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026" class="footnote-ref">[8]</a>.</li>
+
+<li>Use ThoughtDAG to link source documents to conversation nodes, keep evidence attached to claims and avoid context pollution <a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a>.</li>
+
+<li>Add adversarial correctness checks for generated GPU kernels based on the contract-grade verifier approach from the arXiv paper <a href="https://arxiv.org/abs/2608.12700" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/AntoineChatry/Dictata">https://github.com/AntoineChatry/Dictata</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQaXgyMFNVZ1NHc0lMWlRiN1VpZmxmSzFMR1lsTkZMRXF2R3oyeVJaMGFmWHA2TjNDUDRHRXMwZlFvY2lGeEJHVTJsZ0tfeTdqUDJ5U0ZEVzN6anJtdDNfWDhRdFlBUGl6ZExETUtyZ2ZpQjlkemlsUVFBRlJrckNrNGhvU3M5bl9ja2Z0clF5dUR5OF9HdUQ5ZWJqTQ">https://news.google.com/rss/articles/CBMimwFBVV95cUxQaXgyMFNVZ1NHc0lMWlRiN1VpZmxmSzFMR1lsTkZMRXF2R3oyeVJaMGFmWHA2TjNDUDRHRXMwZlFvY2lGeEJHVTJsZ0tfeTdqUDJ5U0ZEVzN6anJtdDNfWDhRdFlBUGl6ZExETUtyZ2ZpQjlkemlsUVFBRlJrckNrNGhvU3M5bl9ja2Z0clF5dUR5OF9HdUQ5ZWJqTQ</a></li>
+
+
+
+
+
+<li><a href="https://www.beren.io/2026-07-26-How-Can-LLM-RL-Work-Despite-Information-Theoretic-Inefficiency/">https://www.beren.io/2026-07-26-How-Can-LLM-RL-Work-Despite-Information-Theoretic-Inefficiency/</a></li>
+
+
+
+<li><a href="https://chenxiachan.github.io/thoughtdag/">https://chenxiachan.github.io/thoughtdag/</a></li>
+
+
+
+<li><a href="https://www.digitalocean.com/blog/llm-inference-benchmarking">https://www.digitalocean.com/blog/llm-inference-benchmarking</a></li>
+
+
+
+<li><a href="https://trpevski.com/blog/openrouter-unified-llm-api-with-routing-and-fallbacks/">https://trpevski.com/blog/openrouter-unified-llm-api-with-routing-and-fallbacks/</a></li>
+
+
+
+<li><a href="https://app.deltix.ai">https://app.deltix.ai</a></li>
+
+
+
+<li><a href="https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026">https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026</a></li>
+
+
+
+<li><a href="https://flownie.com/">https://flownie.com/</a></li>
+
+
+
+<li><a href="https://openrouter.ai/blog/announcements/web-search-benchmark/">https://openrouter.ai/blog/announcements/web-search-benchmark/</a></li>
+
+
+
+<li><a href="https://github.com/coladul/the_commons/tree/main">https://github.com/coladul/the_commons/tree/main</a></li>
+
+
+
+<li><a href="https://github.com/EmilResearch/RAGless">https://github.com/EmilResearch/RAGless</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.12700">https://arxiv.org/abs/2608.12700</a></li>
+
+
+
+<li><a href="https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/">https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> rubyonrails.org, github.io, github.com, openrouter.ai, arxiv.org, digitalocean.com, digitalapplied.com, trpevski.com, myhoai.com, beren.io, google.com, deltix.ai, flownie.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 13 unique domains, 15 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "ksec",
+      "date": "2026-08-15T04:47:24.000Z",
+      "domain": "rubyonrails.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://rubyonrails.org/2026/8/12/llm-benchmarking-project",
+      "title": "Agents on Rails: The LLM Benchmark Project"
+    },
+    {
+      "author": "chatchan",
+      "date": "2026-08-15T04:42:07.000Z",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://chenxiachan.github.io/thoughtdag/",
+      "title": "Show HN: ThoughtDAG \u2013 An editable context graph for LLM conversations"
+    },
+    {
+      "author": "AntoineC_",
+      "date": "2026-08-15T00:58:34.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/AntoineChatry/Dictata",
+      "title": "Show HN: Dictata \u2013 Local Whisper dictation with LLM cleanup"
+    },
+    {
+      "author": "coladul",
+      "date": "2026-08-15T00:48:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/coladul/the_commons/tree/main",
+      "title": "The Commons \u2013 experiments in inherited knowledge and errors between LLM agents"
+    },
+    {
+      "author": "DGAP",
+      "date": "2026-08-14T17:39:15.000Z",
+      "domain": "openrouter.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://openrouter.ai/blog/announcements/web-search-benchmark/",
+      "title": "LLM Web Search Benchmarks: More Searches Beat a Better Search Engine"
+    },
+    {
+      "author": "Jimmc414",
+      "date": "2026-08-14T16:57:14.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.12700",
+      "title": "A Contract-Grade Verifier for LLM-Generated GPU Kernels"
+    },
+    {
+      "author": "ankitg12",
+      "date": "2026-08-14T15:58:51.000Z",
+      "domain": "digitalocean.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitalocean.com/blog/llm-inference-benchmarking",
+      "title": "LLM Inference Benchmarking"
+    },
+    {
+      "author": "peter_d_sherman",
+      "date": "2026-08-14T14:30:10.000Z",
+      "domain": "digitalapplied.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026",
+      "title": "LLM Batch APIs: The Half-Price Lane Nobody Budgets"
+    },
+    {
+      "author": "emilianoc",
+      "date": "2026-08-14T09:51:11.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/EmilResearch/RAGless",
+      "title": "Show HN: RAGless \u2013 similar to RAG, but $0 LLM API costs at runtime"
+    },
+    {
+      "author": "dzugumot",
+      "date": "2026-08-14T08:46:01.000Z",
+      "domain": "trpevski.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://trpevski.com/blog/openrouter-unified-llm-api-with-routing-and-fallbacks/",
+      "title": "OpenRouter: Unified LLM API with Routing and Fallbacks"
+    },
+    {
+      "author": "oskrim",
+      "date": "2026-08-14T05:58:16.000Z",
+      "domain": "myhoai.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/",
+      "title": "A simple fix for LLM tail latency"
+    },
+    {
+      "author": "jxmorris12",
+      "date": "2026-08-14T00:06:40.000Z",
+      "domain": "beren.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.beren.io/2026-07-26-How-Can-LLM-RL-Work-Despite-Information-Theoretic-Inefficiency/",
+      "title": "How Can LLM RL Work Despite Information-Theoretic Inefficiency"
+    },
+    {
+      "date": "2026-08-14T03:03:27.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQaXgyMFNVZ1NHc0lMWlRiN1VpZmxmSzFMR1lsTkZMRXF2R3oyeVJaMGFmWHA2TjNDUDRHRXMwZlFvY2lGeEJHVTJsZ0tfeTdqUDJ5U0ZEVzN6anJtdDNfWDhRdFlBUGl6ZExETUtyZ2ZpQjlkemlsUVFBRlJrckNrNGhvU3M5bl9ja2Z0clF5dUR5OF9HdUQ5ZWJqTQ",
+      "title": "Beyond PageRank: Lessons from Google\u2019s Search Stack for Modern LLM Systems - HackerNoon"
+    },
+    {
+      "author": "oneounceman",
+      "date": "2026-08-15T02:42:14.000Z",
+      "domain": "deltix.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://app.deltix.ai",
+      "title": "Show HN: Deltix \u2013\u00a0AI Driven Testing"
+    },
+    {
+      "author": "savhascelik",
+      "date": "2026-08-14T23:38:09.000Z",
+      "domain": "flownie.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://flownie.com/",
+      "title": "Flownie \u2013 Open and Visual Data Workflow Platform with AI Agent Assistance"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "In HOAi\u2019s example, a phone call with 25 LLM-backed turns has roughly a 22% chance of hitting at least one long silence if 1% of individual requests are catastrophically slow [myhoai.com#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=rubyonrails.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rubyonrails.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=openrouter.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "openrouter.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitalocean.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitalocean.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitalapplied.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitalapplied.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=trpevski.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "trpevski.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=myhoai.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "myhoai.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=beren.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "beren.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=deltix.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "deltix.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=flownie.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "flownie.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddea",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Benchmarks",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 15,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Ruby on Rails",
+          "url": "https://rubyonrails.org/2026/8/12/llm-benchmarking-project"
+        }
+      ],
+      "text": "Rails Foundation: The foundation said Agents on Rails responded to developer uncertainty about coding-agent quality, token spending and trade-offs between frontier and open-weight models."
+    },
+    {
+      "sources": [
+        {
+          "name": "OpenRouter",
+          "url": "https://openrouter.ai/blog/announcements/web-search-benchmark/"
+        }
+      ],
+      "text": "OpenRouter: OpenRouter said search budget was more important than any other benchmark factor and that failure rate drives worst-case cost scenarios."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.12700"
+        }
+      ],
+      "text": "Shah and Shrestha: The authors argued that common GPU-kernel correctness tests can accept kernels that fail on NaNs, infinities, determinism, shape changes or accumulation precision."
+    },
+    {
+      "sources": [
+        {
+          "name": "HOAi Engineering",
+          "url": "https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/"
+        }
+      ],
+      "text": "HOAi engineering: HOAi said it rejected paying twice for a faster service tier in its tested case after duplicate standard-tier requests produced better p95, p99 and worst-case latency."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-15T12:00:11.040Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/AntoineChatry/Dictata",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxQaXgyMFNVZ1NHc0lMWlRiN1VpZmxmSzFMR1lsTkZMRXF2R3oyeVJaMGFmWHA2TjNDUDRHRXMwZlFvY2lGeEJHVTJsZ0tfeTdqUDJ5U0ZEVzN6anJtdDNfWDhRdFlBUGl6ZExETUtyZ2ZpQjlkemlsUVFBRlJrckNrNGhvU3M5bl9ja2Z0clF5dUR5OF9HdUQ5ZWJqTQ",
+    "https://rubyonrails.org/2026/8/12/llm-benchmarking-project",
+    "https://www.beren.io/2026-07-26-How-Can-LLM-RL-Work-Despite-Information-Theoretic-Inefficiency/",
+    "https://chenxiachan.github.io/thoughtdag/",
+    "https://www.digitalocean.com/blog/llm-inference-benchmarking",
+    "https://trpevski.com/blog/openrouter-unified-llm-api-with-routing-and-fallbacks/",
+    "https://app.deltix.ai",
+    "https://www.digitalapplied.com/blog/llm-batch-api-pricing-landscape-2026",
+    "https://flownie.com/",
+    "https://openrouter.ai/blog/announcements/web-search-benchmark/",
+    "https://github.com/coladul/the_commons/tree/main",
+    "https://github.com/EmilResearch/RAGless",
+    "https://arxiv.org/abs/2608.12700",
+    "https://engineering.myhoai.com/posts/a-simple-fix-for-llm-tail-latency/"
+  ],
+  "suggested_qna": [],
+  "summary": "Several AI developer projects released benchmarks and tools this week for measuring, reducing or controlling cost and reliability problems in deployed LLM-based software. The Rails Foundation said it commissioned Evil Martians to run \u201cAgents on Rails,\u201d an ongoing benchmark of frontier and open-weight agentic coding tools on real Ruby on Rails codebases. Initial results were released on Aug. 12, with more stages planned over the following weeks [rubyonrails.org#1]. OpenRouter separately launched live web-search benchmarks to compare model, search engine, search depth and search budget choices for agentic systems that need current information beyond model knowledge cutoffs [openrouter.ai#1].\n\nResearch papers and prototypes addressed correctness, context control and local operation. An arXiv paper by Rishi Shah and Rishav Shrestha proposed a contract-grade verifier for LLM-generated GPU kernels [arxiv.org#1]. Other releases included ThoughtDAG, an editable graph interface for deciding which conversation branches enter an LLM request; Dictata, a Rust-based local Windows dictation tool using whisper.cpp and optional local LLM cleanup; and RAGless, a retrieval-only Q\u0026A system that uses Gemini embeddings and local Qdrant storage without LLM calls at runtime [github.io#1][github.com#1][github.com#3].",
+  "talking_points": [
+    "Batch pricing: Digital Applied said Google, OpenAI and Anthropic each price asynchronous batch API work at 50% of synchronous rates, while xAI offers no batch discount for flagship Grok 4.6 [digitalapplied.com#1].",
+    "Latency workaround: HOAi said a replay of 50 production requests showed sending each LLM request twice on the standard tier cut worst-case completion time to 3.5 seconds from 9.8 seconds on OpenAI\u2019s priority tier [myhoai.com#1].",
+    "Inference focus: DigitalOcean published an LLM inference benchmarking post alongside product pages for GPU Droplets, Bare Metal GPUs, Inference Engine, Evaluations and a Model Library [digitalocean.com#1]."
+  ],
+  "technical_details": [
+    "Tolerance-free verifier gates: The arXiv verifier uses 12 adversarial gates, including several tolerance-free gates, so a rejected kernel cannot be defended merely by changing a numerical threshold [arxiv.org#1].",
+    "Asymmetric retrieval embeddings: RAGless ingests documents using Gemini\u2019s RETRIEVAL_DOCUMENT embedding mode and queries with RETRIEVAL_QUERY, then aggregates scores across question variants that point to the same answer_id [github.com#3].",
+    "ThoughtDAG lets users link source documents to conversation nodes, keeping evidence attached to claims and showing a context diff when branches are removed [github.io#1]."
+  ],
+  "timeline": [
+    {
+      "content": "HOAi published duplicate-request latency test results [myhoai.com#1]",
+      "date": "10 June 2026",
+      "date_iso": "2026-06-10"
+    },
+    {
+      "content": "Rails Foundation announced the Agents on Rails benchmark project [rubyonrails.org#1]",
+      "date": "12 August 2026",
+      "date_iso": "2026-08-12"
+    },
+    {
+      "content": "OpenRouter published its live web-search benchmark methodology [openrouter.ai#1]",
+      "date": "12 August 2026",
+      "date_iso": "2026-08-12"
+    },
+    {
+      "content": "Shah and Shrestha submitted the GPU-kernel verifier paper to arXiv [arxiv.org#1]",
+      "date": "13 August 2026",
+      "date_iso": "2026-08-13"
+    },
+    {
+      "content": "Digital Applied published its batch API pricing analysis [digitalapplied.com#1]",
+      "date": "14 August 2026",
+      "date_iso": "2026-08-14"
+    }
+  ],
+  "title": "Developers release benchmarks and tools for LLM systems",
+  "travel_advisory": "",
+  "unique_domains": 13,
+  "url": "https://rubyonrails.org/2026/8/12/llm-benchmarking-project",
+  "user_action_items": [
+    "Audit batchable LLM workloads: List jobs that do not need real-time responses, then compare synchronous and asynchronous prices for the model vendors you already use [digitalapplied.com#1].",
+    "Use ThoughtDAG to link source documents to conversation nodes, keep evidence attached to claims and avoid context pollution [github.io#1].",
+    "Add adversarial correctness checks for generated GPU kernels based on the contract-grade verifier approach from the arXiv paper [arxiv.org#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
