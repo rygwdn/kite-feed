@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers release three tools for LLM context control - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers release three tools for LLM context control</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Three AI developer projects described tools for context control in large-language-model workflows: TemporalStore presented an open-source, self-hostable memory engine; ThoughtDAG introduced an editable context graph for conversations; and Treequence described a spatial node canvas aimed at LLM context drift <a href="https://temporalstore.ai/blog-context-management.html" class="footnote-ref">[1]</a><a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a><a href="https://treequence.ai" class="footnote-ref">[3]</a>.
+
+TemporalStore says its approach moves memory into an engine instead of replaying a growing transcript into every prompt, while ThoughtDAG says the conversation graph determines what enters the next model request <a href="https://temporalstore.ai/blog-context-management.html" class="footnote-ref">[1]</a><a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a>. Treequence’s submission gave only a brief description, identifying the project as a spatial node canvas built to address context drift <a href="https://treequence.ai" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://temporalstore.ai/blog-context-management.html">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Token costs: TemporalStore says repeatedly appending prior prompts, tool results, logs, stack traces and file dumps can make context replay a large part of LLM agent costs <a href="https://temporalstore.ai/blog-context-management.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Visible context: ThoughtDAG’s demo shows a model request preview with 1,284 tokens and a context diff that removes 47 tokens after an unrelated graph edge is deleted <a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a>.</li>
+
+<li>Memory scope: TemporalStore says its stored memory can persist across sessions, devices, agents and teams rather than remain trapped in one transcript <a href="https://temporalstore.ai/blog-context-management.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Early response: The Treequence Show HN listing showed 4 points and 0 comments when captured in the provided source <a href="https://treequence.ai" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>TemporalStore: The project says transcript replay is wasteful because old tool output and logs remain in the context window after their immediate usefulness passes.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://temporalstore.ai/blog-context-management.html">TemporalStore</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>ThoughtDAG: The project rejects hidden memory selection and says visible graph wiring should show what the model sees, why it sees it and what was removed.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://chenxiachan.github.io/thoughtdag/">ThoughtDAG</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Inspect TemporalStore’s code: Visit the GitHub project linked from the TemporalStore post if you run LLM agents and want to evaluate self-hosted memory management <a href="https://temporalstore.ai/blog-context-management.html" class="footnote-ref">[1]</a>.</li>
+
+<li>Test graph-based prompting: Use the ThoughtDAG demo to compare identical prompts before and after changing graph edges that control context <a href="https://chenxiachan.github.io/thoughtdag/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://treequence.ai">https://treequence.ai</a></li>
+
+
+
+
+
+<li><a href="https://chenxiachan.github.io/thoughtdag/">https://chenxiachan.github.io/thoughtdag/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> github.io, temporalstore.ai, treequence.ai</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "matrixarkai",
+      "date": "2026-08-15T20:51:41.000Z",
+      "domain": "temporalstore.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://temporalstore.ai/blog-context-management.html",
+      "title": "TemporalStore: A disruptive open-source engine managing your LLM memory"
+    },
+    {
+      "author": "chatchan",
+      "date": "2026-08-15T04:42:07.000Z",
+      "domain": "github.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://chenxiachan.github.io/thoughtdag/",
+      "title": "Show HN: ThoughtDAG \u2013 An editable context graph for LLM conversations"
+    },
+    {
+      "author": "jebuehler55",
+      "date": "2026-08-15T13:24:43.000Z",
+      "domain": "treequence.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://treequence.ai",
+      "title": "Show HN: I built a spatial node canvas to fix LLM context drift"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=github.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=temporalstore.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "temporalstore.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=treequence.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "treequence.ai"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Context Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "TemporalStore",
+          "url": "https://temporalstore.ai/blog-context-management.html"
+        }
+      ],
+      "text": "TemporalStore: The project says transcript replay is wasteful because old tool output and logs remain in the context window after their immediate usefulness passes."
+    },
+    {
+      "sources": [
+        {
+          "name": "ThoughtDAG",
+          "url": "https://chenxiachan.github.io/thoughtdag/"
+        }
+      ],
+      "text": "ThoughtDAG: The project rejects hidden memory selection and says visible graph wiring should show what the model sees, why it sees it and what was removed."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-16T12:00:11.219Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://treequence.ai",
+    "https://temporalstore.ai/blog-context-management.html",
+    "https://chenxiachan.github.io/thoughtdag/"
+  ],
+  "suggested_qna": [],
+  "summary": "Three AI developer projects described tools for context control in large-language-model workflows: TemporalStore presented an open-source, self-hostable memory engine; ThoughtDAG introduced an editable context graph for conversations; and Treequence described a spatial node canvas aimed at LLM context drift [temporalstore.ai#1][github.io#1][treequence.ai#1].\n\nTemporalStore says its approach moves memory into an engine instead of replaying a growing transcript into every prompt, while ThoughtDAG says the conversation graph determines what enters the next model request [temporalstore.ai#1][github.io#1]. Treequence\u2019s submission gave only a brief description, identifying the project as a spatial node canvas built to address context drift [treequence.ai#1].",
+  "talking_points": [
+    "Token costs: TemporalStore says repeatedly appending prior prompts, tool results, logs, stack traces and file dumps can make context replay a large part of LLM agent costs [temporalstore.ai#1].",
+    "Visible context: ThoughtDAG\u2019s demo shows a model request preview with 1,284 tokens and a context diff that removes 47 tokens after an unrelated graph edge is deleted [github.io#1].",
+    "Memory scope: TemporalStore says its stored memory can persist across sessions, devices, agents and teams rather than remain trapped in one transcript [temporalstore.ai#1].",
+    "Early response: The Treequence Show HN listing showed 4 points and 0 comments when captured in the provided source [treequence.ai#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Developers release three tools for LLM context control",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://temporalstore.ai/blog-context-management.html",
+  "user_action_items": [
+    "Inspect TemporalStore\u2019s code: Visit the GitHub project linked from the TemporalStore post if you run LLM agents and want to evaluate self-hosted memory management [temporalstore.ai#1].",
+    "Test graph-based prompting: Use the ThoughtDAG demo to compare identical prompts before and after changing graph edges that control context [github.io#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
