@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic adds invisible watermarks to Claude-generated text - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic adds invisible watermarks to Claude-generated text</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/"><img src="https://kagiproxy.com/img/vbBr1MSIGLnyiSdnvGyClndMMJCDD9hwskSv2JFfnA7i_EvalhzivQI3TMmSrMN0mxOAKorVVeaY_EK1PUuCPpdyUb9coTqBvcSt2wE3p4P-MUAXcYlzDO6QCSEDVV6HPw" alt="Claude watermark illustration from coverage of Anthropic&#39;s text-labeling system" title="Claude watermark illustration from coverage of Anthropic&#39;s text-labeling system (CzechCrunch)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Claude watermark illustration from coverage of Anthropic&#39;s text-labeling system <span class='credit'>(CzechCrunch)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Anthropic has described how Claude will embed invisible watermarks in text generated by supported models, a move linked to the EU AI Act’s requirements for marking AI-generated or edited content <a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes" class="footnote-ref">[2]</a><a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/" class="footnote-ref">[16]</a>. The company says the watermark is embedded in the model’s word-selection process, not through visible labels, hidden characters or metadata, and can indicate Claude processed text rather than prove Claude was the original author <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a><a href="https://www.lesnumeriques.com/intelligence-artificielle/la-solution-d-anthropic-pour-reperer-les-textes-generes-par-ia-ne-me-convainc-pas-n260467.html" class="footnote-ref">[19]</a>.
+
+The method changes probability-based choices among plausible next words so a detector with the relevant key can later check for a statistical pattern <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/" class="footnote-ref">[15]</a><a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>. Anthropic says the system does not affect meaning, quality or readability, requires no extra tokens, does not identify users, companies or conversation content, and will be supported by a detection API <a href="https://tweakers.net/nieuws/251018/anthropic-legt-voor-het-eerst-uit-hoe-zijn-watermerktechnologie-werkt.html" class="footnote-ref">[8]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.
+
+The plan drew criticism from users and commentators who worry that AI-assisted writing, translation, proofreading or code work could be labeled in ways that misrepresent authorship <a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes" class="footnote-ref">[2]</a><a href="https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark" class="footnote-ref">[3]</a><a href="https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing" class="footnote-ref">[9]</a><a href="https://biz.heraldcorp.com/article/10842639" class="footnote-ref">[18]</a>. Slashdot cited Business Insider’s reporting that dozens of people posted on X that they had canceled Claude subscriptions after the announcement, and Firstpost reported that Cardano founder Charles Hoskinson released a free tool intended to strip Anthropic’s AI watermarks <a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes" class="footnote-ref">[2]</a><a href="https://www.firstpost.com/tech/anthropics-ai-watermarks-already-have-a-counter-cardano-founder-launches-free-removal-tool-14038581.html" class="footnote-ref">[5]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.techmeme.com/260817/p1#a260817p1">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>That mark will be the kiss of death on any piece of text that people can sell</p>
+
+<cite>— John Gruber (Daring Fireball)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> A paraphrasing test cited by Cnyes estimated the cost of reworking a roughly 1,000-word article to defeat a watermark at about 4 cents <a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>User outrage: Some Reddit users demanded an option to generate non-watermarked text, with one asking if Anthropic would require ID to access unmarked output <a href="https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark" class="footnote-ref">[3]</a>.</li>
+
+<li>Industry adoption: Google applied SynthID to Gemini text in May 2024, before Anthropic&#x27;s move, while other major AI providers have also committed to the EU AI code <a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.</li>
+
+<li>Verification gap: Heise criticized the rollout for lacking an external checking option, saying Anthropic presents the watermark as working only under certain conditions rather than as fully verifiable <a href="https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html" class="footnote-ref">[14]</a>.</li>
+
+<li>Detection limits: Anthropic says the mark works only on tokens Claude chooses, which limits detection in short emails, tightly constrained factual text, proofreading that changes only a few words, and code where exact syntax limits word-choice freedom <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li>
+
+<li>Removal risk: A July 2026 study cited by Cnyes found that AI paraphrasing removed detectable watermarks from 58 of 59 texts that had been detectable, a 98.3% bypass rate <a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>John Gruber: Gruber argued that altering token choices to embed provenance signals compromises a writing tool even if the change is designed to be hard for readers to notice.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing">Daring Fireball</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>James Padolsey: Padolsey argued that watermarking may mainly burden people who lack the technical ability to remove it, including disabled or neurodivergent users who rely more heavily on AI-assisted writing.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/">James Padolsey&#39;s Blog</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Claude users: Some users on X and Reddit said they would cancel paid subscriptions, while others argued that objections came from people who wanted to pass AI-produced work off as unaided human writing.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://biz.heraldcorp.com/article/10842639">Herald Corp</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Heise: The outlet questioned the measure’s reliability and transparency, saying Anthropic describes the watermark as working only under some conditions and offers no checking mechanism.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html">Heise</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Claude users on Reddit: Some users reacted angrily, saying watermarking could expose undisclosed AI use in schoolwork, emails, code, and commercial writing.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark">Futurism</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>2022:</strong> Scott Aaronson proposed a statistical text-watermarking concept <a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li>
+
+
+
+<li><strong>2024:</strong> The EU passed the AI Act with AI-output marking obligations <a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes" class="footnote-ref">[2]</a>.</li>
+
+
+
+<li><strong>May 2024:</strong> Google applied SynthID to Gemini app and web text <a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.</li>
+
+
+
+<li><strong>2 August 2026:</strong> EU content-marking duties began for covered AI providers <a href="https://biz.heraldcorp.com/article/10842639" class="footnote-ref">[18]</a>.</li>
+
+
+
+<li><strong>14 August 2026:</strong> Anthropic announced Claude text-watermarking plans <a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Keyed token selection: Claude’s watermark uses a secret-key-derived pattern during next-token selection. It chooses among near-equivalent candidates so long passages accumulate a detectable statistical signal <a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/" class="footnote-ref">[15]</a><a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.</li>
+
+<li>Signal limits: Because the signal depends on repeated model choices, it weakens when output space is constrained, when a human heavily edits the text, or when another AI paraphrases it <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li>
+
+<li>Detector access: Anthropic has said it will offer a detection API, but Cnyes notes that repeated API checks could create an attack loop in which users edit and retest text until the watermark signal drops below detection <a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Detection reliability: The case tests whether text watermarking can remain detectable after normal human editing, a known weakness for provenance systems that rely on statistical patterns rather than cryptographic metadata <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a>[common].</li>
+
+<li>Implementation uncertainty: Available reports do not provide error rates, false-positive rates, model coverage, or independent replication results, so the public evidence is not enough to assess detection accuracy <a href="https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html" class="footnote-ref">[14]</a><a href="https://digitechbytes.com/emerging-consumer-tech-explained/is-anthropic-s-claude-watermark-the-future-of-ai-content-labeling/" class="footnote-ref">[6]</a>.</li>
+
+<li>Domain limitation: The weaker code watermark points to a technical constraint: structured outputs leave less room for watermarking signals than natural-language prose <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a>[common].</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>The EU passed the AI Act in 2024; it includes content-marking obligations for providers of general-purpose AI systems <a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes" class="footnote-ref">[2]</a><a href="https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/" class="footnote-ref">[16]</a>. Coverage links the statistical text-watermarking idea to Scott Aaronson’s 2022 proposal while at OpenAI, and Google DeepMind later developed a production version called SynthID-Text that appeared in Nature in 2024 <a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a><a href="https://www.newsis.com/view/NISX20260817_0003751417" class="footnote-ref">[13]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Regulatory compliance can protect market access in the EU, but weak or removable watermarks may still fail to create customer confidence <a href="https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/" class="footnote-ref">[16]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li><li>EU compliance can reduce regulatory risk, but it may also make Claude less attractive to users who want unmarked output <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark" class="footnote-ref">[3]</a>.</li><li>A weaker watermark for code may preserve developer usability, but it also limits the feature’s value in software provenance <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a>.</li><li>If verification remains closed or unclear, customers may not treat the watermark as a reliable trust signal <a href="https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html" class="footnote-ref">[14]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Review AI-use clauses in client contracts: If you use Claude for editing, translation or code review, check whether contracts distinguish AI assistance from AI authorship because Anthropic says a watermark can show processing without proving original authorship <a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes" class="footnote-ref">[2]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li>
+
+<li>Avoid treating watermarks as authorship proof: Use any future Claude detector result only as a provenance signal, since sources report that proofreading, translation, heavy editing and paraphrasing can complicate or erase the mark <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://news.cnyes.com/news/id/6578277" class="footnote-ref">[7]</a>.</li>
+
+<li>Disclose AI assistance where required: If a school, employer, publisher, or client requires disclosure, treat Claude-generated text as potentially identifiable because supported models are being watermarked <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a><a href="https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark" class="footnote-ref">[3]</a>.</li>
+
+<li>Avoid relying on watermark removal: Editing may affect detection, but Firstpost said Anthropic addressed post-edit behavior, so rewriting should not be treated as a guaranteed way to remove provenance signals <a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/">https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html">https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html</a></li>
+
+
+
+<li><a href="https://digitechbytes.com/emerging-consumer-tech-explained/is-anthropic-s-claude-watermark-the-future-of-ai-content-labeling/">https://digitechbytes.com/emerging-consumer-tech-explained/is-anthropic-s-claude-watermark-the-future-of-ai-content-labeling/</a></li>
+
+
+
+<li><a href="https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/">https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/</a></li>
+
+
+
+
+
+<li><a href="https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark">https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark</a></li>
+
+
+
+<li><a href="https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes">https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes</a></li>
+
+
+
+<li><a href="https://news.cnyes.com/news/id/6578277">https://news.cnyes.com/news/id/6578277</a></li>
+
+
+
+<li><a href="https://www.lesnumeriques.com/intelligence-artificielle/la-solution-d-anthropic-pour-reperer-les-textes-generes-par-ia-ne-me-convainc-pas-n260467.html">https://www.lesnumeriques.com/intelligence-artificielle/la-solution-d-anthropic-pour-reperer-les-textes-generes-par-ia-ne-me-convainc-pas-n260467.html</a></li>
+
+
+
+<li><a href="https://www.newsis.com/view/NISX20260817_0003751417">https://www.newsis.com/view/NISX20260817_0003751417</a></li>
+
+
+
+<li><a href="https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html">https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html</a></li>
+
+
+
+<li><a href="https://it.dir.bg/tehnologii/anthropic-obyasni-kak-shte-rabotyat-ai-vodnite-znatsi-v-tekstovete-na-claude">https://it.dir.bg/tehnologii/anthropic-obyasni-kak-shte-rabotyat-ai-vodnite-znatsi-v-tekstovete-na-claude</a></li>
+
+
+
+<li><a href="https://t3n.de/news/anthropic-erklaert-wie-das-neue-wasserzeichen-in-claude-genau-funktioniert-1758332/">https://t3n.de/news/anthropic-erklaert-wie-das-neue-wasserzeichen-in-claude-genau-funktioniert-1758332/</a></li>
+
+
+
+<li><a href="https://biz.heraldcorp.com/article/10842639">https://biz.heraldcorp.com/article/10842639</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/anthropics-ai-watermarks-already-have-a-counter-cardano-founder-launches-free-removal-tool-14038581.html">https://www.firstpost.com/tech/anthropics-ai-watermarks-already-have-a-counter-cardano-founder-launches-free-removal-tool-14038581.html</a></li>
+
+
+
+<li><a href="https://tweakers.net/nieuws/251018/anthropic-legt-voor-het-eerst-uit-hoe-zijn-watermerktechnologie-werkt.html">https://tweakers.net/nieuws/251018/anthropic-legt-voor-het-eerst-uit-hoe-zijn-watermerktechnologie-werkt.html</a></li>
+
+
+
+<li><a href="https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php">https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1vpl0kr/anthropic_published_on_their_blog_how_the/">https://www.reddit.com/r/ArtificialInteligence/comments/1vpl0kr/anthropic_published_on_their_blog_how_the/</a></li>
+
+
+
+<li><a href="https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing">https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing</a></li>
+
+
+
+<li><a href="https://www.chinanews.com.cn/cj/2026/08-17/10678919.shtml">https://www.chinanews.com.cn/cj/2026/08-17/10678919.shtml</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> techmeme.com, slashdot.org, futurism.com, firstpost.com, digitechbytes.com, cnyes.com, tweakers.net, daringfireball.net, reddit.com, leparisien.fr, t3n.de, newsis.com, heise.de, cc.cz, j11y.io, dir.bg, heraldcorp.com, lesnumeriques.com, chinanews.com.cn, leparisien.fr, futurism.com, firstpost.com, heise.de, digitechbytes.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 19 unique domains, 20 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html"><img src="https://kagiproxy.com/img/lNNf3eEaoWyQg9I5UjG60-8PXWP-DGAmsHycxdVOtnBnSXUraJsDvDyhQ2-Ct5CuXlXnFKT7zHFntxjB0x1OmMSijOEtV-Jg-lZ0ntZCd_Ez64lpG0zoBAOUW6KvFwOSdrdqLHId2MfrpvZksZp3biuOr3vfW_FJRDYpdbPJSm8" alt="Anthropic image used with coverage of Claude&#39;s watermarking system" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Anthropic image used with coverage of Claude&#39;s watermarking system <span class='credit'>(Firstpost)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-17T04:00:13.000Z",
+      "domain": "techmeme.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techmeme.com/260817/p1#a260817p1",
+      "title": "Anthropic\u0027s text watermark alters word probabilities to embed a fingerprint, which could degrade Claude\u0027s writing, despite its claim of no impact on quality (John Gruber/Daring Fireball)"
+    },
+    {
+      "author": "EditorDavid",
+      "date": "2026-08-17T02:04:00.000Z",
+      "domain": "slashdot.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes",
+      "title": "Anthropic Criticized For Adding Watermarks to Text that Claude Generates - or Processes"
+    },
+    {
+      "author": "Frank Landymore",
+      "date": "2026-08-16T10:01:00.000Z",
+      "domain": "futurism.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark",
+      "title": "People Horrified That They\u2019ll Be Busted Now That Anthropic Is Watermarking AI Content"
+    },
+    {
+      "author": "Unnati Gusain",
+      "date": "2026-08-17T05:05:16.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/hbyeMKytiknuAPL340tDYG_epjDyE3jj-CpaAbBJyda60AGZXQ2qTkFki9OjFOU_Ra-9VLcjcLeVZwSLBAPnmI1ptTZhGs6y_SNgoWLLRE_90NCXeYwe39YQaeBOhS6FLzSDxxjVCTqrZ5eBCUgCjX4zcFiIaxJh-nYSE1RWU2M",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html",
+      "title": "Anthropic Claude watermark explained: Can AI-generated text be made untraceable?"
+    },
+    {
+      "author": "Shriyansh.Garg",
+      "date": "2026-08-16T16:03:55.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/aNFIA4VG95EHcb0-INRiSbNuDbKmzDkm10tKElx7yyK2aT940DDCsd7ZLZB7DQsB4Aly2j-ph8m1ygz1atojG1vI7n6VtPQN0Gzw-9cGMjf_gxrnhoGbJe7nt93V9vomu0tmZWqXHwdNTeAzsmMdSjuBHGFGshbrXMGiELKhDQ4q0XCQcw",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/anthropics-ai-watermarks-already-have-a-counter-cardano-founder-launches-free-removal-tool-14038581.html",
+      "title": "Anthropic\u2019s AI watermarks already have a counter: Cardano founder launches free removal tool"
+    },
+    {
+      "author": "Digitech Bytes",
+      "date": "2026-08-16T11:12:32.000Z",
+      "domain": "digitechbytes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://digitechbytes.com/emerging-consumer-tech-explained/is-anthropic-s-claude-watermark-the-future-of-ai-content-labeling/",
+      "title": "Is Anthropic\u2019s Claude Watermark The Future Of AI Content Labeling?"
+    },
+    {
+      "author": "\u9245\u4ea8\u7db2\u65b0\u805e\u4e2d\u5fc3",
+      "date": "2026-08-16T12:10:15.000Z",
+      "domain": "cnyes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.cnyes.com/news/id/6578277",
+      "title": "Anthropic Claude AI\u751f\u6210\u6d6e\u6c34\u5370\u6280\u8853\u7d30\u7bc0\u66dd\uff01\u600e\u9ebc\u52a0\u5165\uff1f\u53ef\u4ee5\u79fb\u9664\u55ce\uff1f"
+    },
+    {
+      "author": "Tijs Hofmans",
+      "date": "2026-08-16T10:02:47.000Z",
+      "domain": "tweakers.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tweakers.net/nieuws/251018/anthropic-legt-voor-het-eerst-uit-hoe-zijn-watermerktechnologie-werkt.html",
+      "title": "Anthropic legt voor het eerst uit hoe zijn watermerktechnologie werkt"
+    },
+    {
+      "author": "John Gruber",
+      "date": "2026-08-16T19:26:33.000Z",
+      "domain": "daringfireball.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing",
+      "title": "\u2605 Anthropic\u2019s \u2018Watermark\u2019 Text Adulteration in Claude Is a Perversion of Writing"
+    },
+    {
+      "author": "/u/CollectiveCloudPe",
+      "date": "2026-08-16T02:26:58.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1vpl0kr/anthropic_published_on_their_blog_how_the/",
+      "title": "Anthropic published on their blog how the watermark will work on Claude, and here\u0027s a summary ! \u26ce"
+    },
+    {
+      "date": "2026-08-17T07:09:46.000Z",
+      "domain": "leparisien.fr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php",
+      "title": "Invisible et \u00ab\u00a0infalsifiable\u00a0\u00bb\u00a0: comment Anthropic va marquer les textes g\u00e9n\u00e9r\u00e9s par son IA Claude"
+    },
+    {
+      "date": "2026-08-16T17:36:17.000Z",
+      "domain": "t3n.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://t3n.de/news/anthropic-erklaert-wie-das-neue-wasserzeichen-in-claude-genau-funktioniert-1758332/",
+      "title": "Anthropic erkl\u00e4rt, wie das neue Wasserzeichen in Claude genau funktioniert"
+    },
+    {
+      "author": "\uc724\ud604\uc131 \uae30\uc790",
+      "date": "2026-08-17T05:09:38.000Z",
+      "domain": "newsis.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.newsis.com/view/NISX20260817_0003751417",
+      "title": "AI\uac00 \uc4f4 \uae00\uc5d0\ub3c4 \u0027\ud754\uc801\u0027 \ub0a8\uae34\ub2e4\u2026\uc81c\ubbf8\ub098\uc774 \uc774\uc5b4 \ud074\ub85c\ub4dc\ub3c4 \uc6cc\ud130\ub9c8\ud06c \ub3c4\uc785"
+    },
+    {
+      "author": "Nico Ernst",
+      "date": "2026-08-16T14:03:00.000Z",
+      "domain": "heise.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html",
+      "title": "WTF: Anthropic sagt, sein Wasserzeichen funktioniere. Vielleicht. Manchmal."
+    },
+    {
+      "author": "Ond\u0159ej Holzman",
+      "date": "2026-08-16T05:15:40.000Z",
+      "domain": "cc.cz",
+      "image": "https://kagiproxy.com/img/wjOTjIfMSmr1oudLnCllGpe3gorVdzRBU_ne81FNJB6_C60gJh8nyXL27YqzOX7dfQKZr0bm37TTQBNcbivCZ8UvWOa0jviIZl4jXDGRdItKjHeAFLo5bxbuoiRPT9ZbIQ",
+      "image_caption": "",
+      "link": "https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/",
+      "title": "Jak bude Claude ozna\u010dovat generovan\u00e9 texty? N\u00e1lepku AI dostanou, i kdy\u017e jen p\u0159ekl\u00e1d\u00e1 nebo opravuje"
+    },
+    {
+      "author": "John Gruber",
+      "date": "2026-08-16T17:30:00.000Z",
+      "domain": "j11y.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/",
+      "title": "\u2018Anthropic\u2019s Weak Watermarks Appease a Weak Law\u2019"
+    },
+    {
+      "date": "2026-08-17T06:26:50.000Z",
+      "domain": "dir.bg",
+      "image": "",
+      "image_caption": "",
+      "link": "https://it.dir.bg/tehnologii/anthropic-obyasni-kak-shte-rabotyat-ai-vodnite-znatsi-v-tekstovete-na-claude",
+      "title": "Anthropic \u043e\u0431\u044f\u0441\u043d\u0438 \u043a\u0430\u043a \u0449\u0435 \u0440\u0430\u0431\u043e\u0442\u044f\u0442 AI \u0432\u043e\u0434\u043d\u0438\u0442\u0435 \u0437\u043d\u0430\u0446\u0438 \u0432 \u0442\u0435\u043a\u0441\u0442\u043e\u0432\u0435\u0442\u0435 \u043d\u0430 Claude"
+    },
+    {
+      "author": "\ud5e4\ub7f4\ub4dc\uacbd\uc81c",
+      "date": "2026-08-16T11:20:40.000Z",
+      "domain": "heraldcorp.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://biz.heraldcorp.com/article/10842639",
+      "title": "\u201c\ud074\ub85c\ub4dc \uc774\uc6a9\uc790 \uc0c1\ub300 \uc74c\ubaa8\ub2e4\u201d\u2026\uc564\ud2b8\ub85c\ud53d AI \uc6cc\ud130\ub9c8\ud06c \ub3c4\uc785\uc5d0 \u2018\uad6c\ub3c5\ucde8\uc18c\u2019 \ubc18\ubc1c"
+    },
+    {
+      "author": "Nassim Chentouf",
+      "date": "2026-08-16T07:15:00.000Z",
+      "domain": "lesnumeriques.com",
+      "image": "https://kagiproxy.com/img/BC4eTdKpRyKQzBaCARl14bkdKIBSsA6Lp-QYKko7wlWSafF0H-_y48gUAR4YmxN6Q6UUuVlNgApK1cdfUIyPF9PVrwJ02glIjilRoIlK03UOhvgagAu0ho39phE3TyITQjqn1Yfffehtj0vZLVFn4h0aqHqWgVXc6_BeET62XUVFbwVEwTdOJiQ8nVSyZZdip9rGW2bO4IDw7wC0S5UD4JU8_BM9Qr_TcTBMWKMld3byVbAEQoY4l5_vo1Phe_bN",
+      "image_caption": "",
+      "link": "https://www.lesnumeriques.com/intelligence-artificielle/la-solution-d-anthropic-pour-reperer-les-textes-generes-par-ia-ne-me-convainc-pas-n260467.html",
+      "title": "Actualit\u00e9 : La solution d\u0027Anthropic pour rep\u00e9rer les textes g\u00e9n\u00e9r\u00e9s par IA ne me convainc pas"
+    },
+    {
+      "date": "2026-08-17T03:54:00.000Z",
+      "domain": "chinanews.com.cn",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.chinanews.com.cn/cj/2026/08-17/10678919.shtml",
+      "title": "\u9690\u5f62\u6c34\u5370\u4e0a\u7ebf\uff0cAI\u5199\u4f5c\u5f00\u59cb\u7559\u75d5"
+    }
+  ],
+  "business_angle": [
+    "Regulatory compliance can protect market access in the EU, but weak or removable watermarks may still fail to create customer confidence [j11y.io#1][cnyes.com#1].",
+    "EU compliance can reduce regulatory risk, but it may also make Claude less attractive to users who want unmarked output [firstpost.com#1][futurism.com#1].",
+    "A weaker watermark for code may preserve developer usability, but it also limits the feature\u2019s value in software provenance [firstpost.com#1].",
+    "If verification remains closed or unclear, customers may not treat the watermark as a reliable trust signal [heise.de#1][common]."
+  ],
+  "category": "Technology",
+  "cluster_number": 1,
+  "did_you_know": "A paraphrasing test cited by Cnyes estimated the cost of reworking a roughly 1,000-word article to defeat a watermark at about 4 cents [cnyes.com#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=techmeme.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techmeme.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=slashdot.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "slashdot.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=futurism.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitechbytes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitechbytes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnyes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnyes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=daringfireball.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "daringfireball.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=leparisien.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "leparisien.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=t3n.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "t3n.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=newsis.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "newsis.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cc.cz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cc.cz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=j11y.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "j11y.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dir.bg\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dir.bg"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heraldcorp.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "heraldcorp.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lesnumeriques.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lesnumeriques.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=chinanews.com.cn\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "chinanews.com.cn"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=leparisien.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "leparisien.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=futurism.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitechbytes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitechbytes.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd0d",
+  "feed_category": "Science, Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "The EU passed the AI Act in 2024; it includes content-marking obligations for providers of general-purpose AI systems [slashdot.org#1][j11y.io#1]. Coverage links the statistical text-watermarking idea to Scott Aaronson\u2019s 2022 proposal while at OpenAI, and Google DeepMind later developed a production version called SynthID-Text that appeared in Nature in 2024 [cnyes.com#1][newsis.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Labeling",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 20,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Daring Fireball",
+          "url": "https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing"
+        }
+      ],
+      "text": "John Gruber: Gruber argued that altering token choices to embed provenance signals compromises a writing tool even if the change is designed to be hard for readers to notice."
+    },
+    {
+      "sources": [
+        {
+          "name": "James Padolsey\u0027s Blog",
+          "url": "https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/"
+        }
+      ],
+      "text": "James Padolsey: Padolsey argued that watermarking may mainly burden people who lack the technical ability to remove it, including disabled or neurodivergent users who rely more heavily on AI-assisted writing."
+    },
+    {
+      "sources": [
+        {
+          "name": "Herald Corp",
+          "url": "https://biz.heraldcorp.com/article/10842639"
+        }
+      ],
+      "text": "Claude users: Some users on X and Reddit said they would cancel paid subscriptions, while others argued that objections came from people who wanted to pass AI-produced work off as unaided human writing."
+    },
+    {
+      "sources": [
+        {
+          "name": "Heise",
+          "url": "https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html"
+        }
+      ],
+      "text": "Heise: The outlet questioned the measure\u2019s reliability and transparency, saying Anthropic describes the watermark as working only under some conditions and offers no checking mechanism."
+    },
+    {
+      "sources": [
+        {
+          "name": "Futurism",
+          "url": "https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark"
+        }
+      ],
+      "text": "Claude users on Reddit: Some users reacted angrily, saying watermarking could expose undisclosed AI use in schoolwork, emails, code, and commercial writing."
+    }
+  ],
+  "primary_image": {
+    "caption": "Claude watermark illustration from coverage of Anthropic\u0027s text-labeling system",
+    "credit": "CzechCrunch",
+    "link": "https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/",
+    "url": "https://kagiproxy.com/img/vbBr1MSIGLnyiSdnvGyClndMMJCDD9hwskSv2JFfnA7i_EvalhzivQI3TMmSrMN0mxOAKorVVeaY_EK1PUuCPpdyUb9coTqBvcSt2wE3p4P-MUAXcYlzDO6QCSEDVV6HPw"
+  },
+  "published": "2026-08-17T12:00:10.967Z",
+  "quote": "That mark will be the kiss of death on any piece of text that people can sell",
+  "quote_attribution": "Daring Fireball",
+  "quote_author": "John Gruber",
+  "scientific_significance": [
+    "Detection reliability: The case tests whether text watermarking can remain detectable after normal human editing, a known weakness for provenance systems that rely on statistical patterns rather than cryptographic metadata [firstpost.com#1][common].",
+    "Implementation uncertainty: Available reports do not provide error rates, false-positive rates, model coverage, or independent replication results, so the public evidence is not enough to assess detection accuracy [heise.de#1][digitechbytes.com#1].",
+    "Domain limitation: The weaker code watermark points to a technical constraint: structured outputs leave less room for watermarking signals than natural-language prose [firstpost.com#1][common]."
+  ],
+  "secondary_image": {
+    "caption": "Anthropic image used with coverage of Claude\u0027s watermarking system",
+    "credit": "Firstpost",
+    "link": "https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html",
+    "url": "https://kagiproxy.com/img/lNNf3eEaoWyQg9I5UjG60-8PXWP-DGAmsHycxdVOtnBnSXUraJsDvDyhQ2-Ct5CuXlXnFKT7zHFntxjB0x1OmMSijOEtV-Jg-lZ0ntZCd_Ez64lpG0zoBAOUW6KvFwOSdrdqLHId2MfrpvZksZp3biuOr3vfW_FJRDYpdbPJSm8"
+  },
+  "source_urls": [
+    "https://blog.j11y.io/2026-08-12_Anthropics-weak-watermarks-appease-a-weak-law/",
+    "https://www.firstpost.com/tech/anthropic-claude-watermark-explained-can-ai-generated-text-be-made-untraceable-14038645.html",
+    "https://digitechbytes.com/emerging-consumer-tech-explained/is-anthropic-s-claude-watermark-the-future-of-ai-content-labeling/",
+    "https://cc.cz/jak-bude-claude-oznacovat-generovane-texty-nalepku-ai-dostanou-i-kdyz-jen-preklada-nebo-opravuje/",
+    "https://www.techmeme.com/260817/p1#a260817p1",
+    "https://futurism.com/artificial-intelligence/people-horrified-busted-anthropic-watermark",
+    "https://slashdot.org/story/26/08/17/022215/anthropic-criticized-for-adding-watermarks-to-text-that-claude-generates---or-processes",
+    "https://news.cnyes.com/news/id/6578277",
+    "https://www.lesnumeriques.com/intelligence-artificielle/la-solution-d-anthropic-pour-reperer-les-textes-generes-par-ia-ne-me-convainc-pas-n260467.html",
+    "https://www.newsis.com/view/NISX20260817_0003751417",
+    "https://www.heise.de/meinung/WTF-Anthropic-sagt-sein-Wasserzeichen-funktioniere-Vielleicht-Manchmal-11415365.html",
+    "https://it.dir.bg/tehnologii/anthropic-obyasni-kak-shte-rabotyat-ai-vodnite-znatsi-v-tekstovete-na-claude",
+    "https://t3n.de/news/anthropic-erklaert-wie-das-neue-wasserzeichen-in-claude-genau-funktioniert-1758332/",
+    "https://biz.heraldcorp.com/article/10842639",
+    "https://www.firstpost.com/tech/anthropics-ai-watermarks-already-have-a-counter-cardano-founder-launches-free-removal-tool-14038581.html",
+    "https://tweakers.net/nieuws/251018/anthropic-legt-voor-het-eerst-uit-hoe-zijn-watermerktechnologie-werkt.html",
+    "https://www.leparisien.fr/high-tech/invisible-et-infalsifiable-comment-anthropic-va-marquer-les-textes-generes-par-son-ia-claude-11-08-2026-O4KVNLPWYBDSHO7KRGSSGXQBME.php",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1vpl0kr/anthropic_published_on_their_blog_how_the/",
+    "https://daringfireball.net/2026/08/anthropics_watermark_text_adulteration_in_claude_is_a_perversion_of_writing",
+    "https://www.chinanews.com.cn/cj/2026/08-17/10678919.shtml"
+  ],
+  "suggested_qna": [],
+  "summary": "Anthropic has described how Claude will embed invisible watermarks in text generated by supported models, a move linked to the EU AI Act\u2019s requirements for marking AI-generated or edited content [slashdot.org#1][firstpost.com#1][cnyes.com#1][j11y.io#1]. The company says the watermark is embedded in the model\u2019s word-selection process, not through visible labels, hidden characters or metadata, and can indicate Claude processed text rather than prove Claude was the original author [firstpost.com#1][cnyes.com#1][newsis.com#1][lesnumeriques.com#1].\n\nThe method changes probability-based choices among plausible next words so a detector with the relevant key can later check for a statistical pattern [firstpost.com#1][cnyes.com#1][cc.cz#1][newsis.com#1]. Anthropic says the system does not affect meaning, quality or readability, requires no extra tokens, does not identify users, companies or conversation content, and will be supported by a detection API [tweakers.net#1][cnyes.com#1][newsis.com#1].\n\nThe plan drew criticism from users and commentators who worry that AI-assisted writing, translation, proofreading or code work could be labeled in ways that misrepresent authorship [slashdot.org#1][futurism.com#1][daringfireball.net#1][heraldcorp.com#1]. Slashdot cited Business Insider\u2019s reporting that dozens of people posted on X that they had canceled Claude subscriptions after the announcement, and Firstpost reported that Cardano founder Charles Hoskinson released a free tool intended to strip Anthropic\u2019s AI watermarks [slashdot.org#1][firstpost.com#2].",
+  "talking_points": [
+    "User outrage: Some Reddit users demanded an option to generate non-watermarked text, with one asking if Anthropic would require ID to access unmarked output [futurism.com#1].",
+    "Industry adoption: Google applied SynthID to Gemini text in May 2024, before Anthropic\u0027s move, while other major AI providers have also committed to the EU AI code [newsis.com#1].",
+    "Verification gap: Heise criticized the rollout for lacking an external checking option, saying Anthropic presents the watermark as working only under certain conditions rather than as fully verifiable [heise.de#1].",
+    "Detection limits: Anthropic says the mark works only on tokens Claude chooses, which limits detection in short emails, tightly constrained factual text, proofreading that changes only a few words, and code where exact syntax limits word-choice freedom [firstpost.com#1][cnyes.com#1].",
+    "Removal risk: A July 2026 study cited by Cnyes found that AI paraphrasing removed detectable watermarks from 58 of 59 texts that had been detectable, a 98.3% bypass rate [cnyes.com#1]."
+  ],
+  "technical_details": [
+    "Keyed token selection: Claude\u2019s watermark uses a secret-key-derived pattern during next-token selection. It chooses among near-equivalent candidates so long passages accumulate a detectable statistical signal [cnyes.com#1][cc.cz#1][newsis.com#1].",
+    "Signal limits: Because the signal depends on repeated model choices, it weakens when output space is constrained, when a human heavily edits the text, or when another AI paraphrases it [firstpost.com#1][cnyes.com#1].",
+    "Detector access: Anthropic has said it will offer a detection API, but Cnyes notes that repeated API checks could create an attack loop in which users edit and retest text until the watermark signal drops below detection [cnyes.com#1][newsis.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Scott Aaronson proposed a statistical text-watermarking concept [cnyes.com#1].",
+      "date": "2022",
+      "date_iso": "2022"
+    },
+    {
+      "content": "The EU passed the AI Act with AI-output marking obligations [slashdot.org#1].",
+      "date": "2024",
+      "date_iso": "2024"
+    },
+    {
+      "content": "Google applied SynthID to Gemini app and web text [newsis.com#1].",
+      "date": "May 2024",
+      "date_iso": "2024-05"
+    },
+    {
+      "content": "EU content-marking duties began for covered AI providers [heraldcorp.com#1].",
+      "date": "2 August 2026",
+      "date_iso": "2026-08-02"
+    },
+    {
+      "content": "Anthropic announced Claude text-watermarking plans [newsis.com#1].",
+      "date": "14 August 2026",
+      "date_iso": "2026-08-14"
+    }
+  ],
+  "title": "Anthropic adds invisible watermarks to Claude-generated text",
+  "travel_advisory": "",
+  "unique_domains": 19,
+  "url": "https://www.techmeme.com/260817/p1#a260817p1",
+  "user_action_items": [
+    "Review AI-use clauses in client contracts: If you use Claude for editing, translation or code review, check whether contracts distinguish AI assistance from AI authorship because Anthropic says a watermark can show processing without proving original authorship [slashdot.org#1][cnyes.com#1].",
+    "Avoid treating watermarks as authorship proof: Use any future Claude detector result only as a provenance signal, since sources report that proofreading, translation, heavy editing and paraphrasing can complicate or erase the mark [firstpost.com#1][cnyes.com#1].",
+    "Disclose AI assistance where required: If a school, employer, publisher, or client requires disclosure, treat Claude-generated text as potentially identifiable because supported models are being watermarked [firstpost.com#1][futurism.com#1].",
+    "Avoid relying on watermark removal: Editing may affect detection, but Firstpost said Anthropic addressed post-edit behavior, so rewriting should not be treated as a guaranteed way to remove provenance signals [firstpost.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

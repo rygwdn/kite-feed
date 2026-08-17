@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Linus Torvalds releases Linux kernel 7.2 - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Linus Torvalds releases Linux kernel 7.2</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release"><img src="https://kagiproxy.com/img/hE9UOkvn-jpdx9UjWPMmbXD7pgCFDEUXcs498mQXO31cmQzwqW29MTPId2dq-xaxJ_5Q4ZaG6NwkJk3LnNq0iLNyKpTtmeDiUGwTJ2RAcIQUUXbR4h9ytFC4iyouaFEiUTUMsrh9RlutzJFSGAaSjuroKA" alt="Linux kernel 7.2 shown in an Ubuntu fastfetch output screenshot" title="Linux kernel 7.2 shown in an Ubuntu fastfetch output screenshot (itsfoss.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Linux kernel 7.2 shown in an Ubuntu fastfetch output screenshot <span class='credit'>(itsfoss.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Linus Torvalds released Linux kernel 7.2 as a stable version on August 16, after a final release week he said was “bigger than I would have wished for” <a href="https://lwn.net/Articles/1088991/" class="footnote-ref">[3]</a><a href="https://www.phoronix.com/news/Linux-7.2-Released" class="footnote-ref">[4]</a><a href="https://www.theregister.com/os-platforms/2026/08/17/linux-72-debuts-linus-torvalds-says-new-normal-means-he-had-to-do-it-now-or-never/5288250" class="footnote-ref">[1]</a>. The release arrived on schedule after Linux 7.1 in June, with source code available through kernel.org <a href="https://habr.com/ru/news/1068558/" class="footnote-ref">[8]</a>.
+
+The kernel adds cache-aware CPU scheduling, large-folio support for Btrfs, further swap-subsystem work, Landlock security-module improvements, common attributes support in the bpf() system call, and a dm-inlinecrypt device-mapper target for block devices with inline encryption hardware <a href="https://lwn.net/Articles/1088991/" class="footnote-ref">[3]</a><a href="https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/" class="footnote-ref">[10]</a><a href="https://habr.com/ru/news/1068558/" class="footnote-ref">[8]</a>. Hardware and driver changes include AMDGPU initial HDMI 2.1 FRL support, Intel Xe CRI platform support, Rust support for IBM S/390, Intel and AMD I/O performance improvements, and new support for Intel Panther Lake R processors <a href="https://linux.slashdot.org/story/26/08/16/2349224/linux-kernel-72-has-been-officially-released-with-many-new-features" class="footnote-ref">[2]</a><a href="https://www.phoronix.com/news/Linux-7.2-Released" class="footnote-ref">[4]</a>.
+
+Torvalds said he did not delay the release despite the larger-than-desired final week, citing the “new normal” of kernel development <a href="https://lwn.net/Articles/1088991/" class="footnote-ref">[3]</a><a href="https://www.phoronix.com/news/Linux-7.2-Released" class="footnote-ref">[4]</a><a href="https://www.theregister.com/os-platforms/2026/08/17/linux-72-debuts-linus-torvalds-says-new-normal-means-he-had-to-do-it-now-or-never/5288250" class="footnote-ref">[1]</a>. During the final week, maintainers reverted the planned DRM “fair” GPU scheduler back to FIFO after regression reports, while adding sound-device quirks and a new tlbi=ipi boot option <a href="https://www.phoronix.com/news/Linux-7.2-Released" class="footnote-ref">[4]</a><a href="https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs" class="footnote-ref">[11]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.theregister.com/os-platforms/2026/08/17/linux-72-debuts-linus-torvalds-says-new-normal-means-he-had-to-do-it-now-or-never/5288250">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Well, this last week of the release was - once again - bigger than I would have wished for, but hey, with the whole &quot;new normal&quot; thing, if I delayed releases for that reason we&#x27;d probably never have a release at all.</p>
+
+<cite>— Linus Torvalds (LWN)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Development churn: The nine-week cycle set a merge-window record and involved more than 2,100 contributors; LWN commit analysis found roughly 5% of 7.2 commits carried an “assisted-by” tag indicating AI use <a href="https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs" class="footnote-ref">[11]</a>.</li>
+
+<li>Legacy removals: Linux 7.2 removed more than 13,000 lines of legacy i486 CPU-emulation code, as well as the Hercules graphics-card driver, AppleTalk networking, and ISA and PCMCIA ARCnet drivers <a href="https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs" class="footnote-ref">[11]</a>.</li>
+
+<li>Networking changes: The release adds MPTCP IPv6 address signaling plus GRO/GSO support for PPPoE <a href="https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/" class="footnote-ref">[10]</a><a href="https://linux.slashdot.org/story/26/08/16/2349224/linux-kernel-72-has-been-officially-released-with-many-new-features" class="footnote-ref">[2]</a>.</li>
+
+<li>Mac support: Initial Apple M3 support lets a series of 2023 MacBooks boot the Linux 7.2 kernel <a href="https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Linus Torvalds: Torvalds said late reverts were the right response when code was not ready and caused problems, and that developers would try the reverted work again later.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.phoronix.com/news/Linux-7.2-Released">Phoronix</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Kernel developers: Developers said the swap-subsystem rework brought static metadata overhead close to zero, with some workloads showing slightly better performance.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/">Linuxiac</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>OMG! Ubuntu: OMG! Ubuntu said users who still need removed legacy hardware support can boot Linux 7.1 or earlier.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs">OMG! Ubuntu</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>June 2026:</strong> Linux 7.1 shipped as the previous stable release <a href="https://habr.com/ru/news/1068558/" class="footnote-ref">[8]</a></li>
+
+
+
+<li><strong>16 August 2026:</strong> Torvalds released Linux 7.2 as stable <a href="https://lwn.net/Articles/1088991/" class="footnote-ref">[3]</a><a href="https://www.phoronix.com/news/Linux-7.2-Released" class="footnote-ref">[4]</a></li>
+
+
+
+<li><strong>25 August 2026:</strong> Linux reaches its 35th anniversary <a href="https://habr.com/ru/news/1068558/" class="footnote-ref">[8]</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Linux distributions: Ubuntu 26.10 and other upcoming distributions are expected to use Linux 7.2, giving downstream maintainers a new base for hardware enablement and filesystem changes <a href="https://www.phoronix.com/news/Linux-7.2-Released" class="footnote-ref">[4]</a>.</li>
+
+<li>Laptop hardware: AMD ISP4 support completes webcam support for the HP ZBook Ultra G1a and other upcoming Ryzen laptops, bringing into the mainline kernel work that Ubuntu&#x27;s OEM kernel had carried out of tree <a href="https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release" class="footnote-ref">[12]</a>.</li>
+
+<li>Enterprise storage: XFS zoned-storage support, first introduced in Linux 6.15, is no longer marked experimental in Linux 7.2 <a href="https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiXEFVX3lxTE1JdGJtZmZrNGpBRFRoUG1UZmxvaDdmanRPel9XT0Zfekp6TTlrRVZlN2szZFpfQ0xBVUJBdmdTUG5ZZVhlTDdwNF9RUUwwSWdRRkQyZ0trUEk3b3pJ">https://news.google.com/rss/articles/CBMiXEFVX3lxTE1JdGJtZmZrNGpBRFRoUG1UZmxvaDdmanRPel9XT0Zfekp6TTlrRVZlN2szZFpfQ0xBVUJBdmdTUG5ZZVhlTDdwNF9RUUwwSWdRRkQyZ0trUEk3b3pJ</a></li>
+
+
+
+<li><a href="https://lwn.net/Articles/1088991/">https://lwn.net/Articles/1088991/</a></li>
+
+
+
+<li><a href="https://www.solidot.org/story">https://www.solidot.org/story</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/linux/comments/1vqc9wk/linux_kernel_72_has_been_released/">https://www.reddit.com/r/linux/comments/1vqc9wk/linux_kernel_72_has_been_released/</a></li>
+
+
+
+<li><a href="https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release">https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release</a></li>
+
+
+
+
+
+<li><a href="https://habr.com/ru/news/1068558/">https://habr.com/ru/news/1068558/</a></li>
+
+
+
+<li><a href="https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/">https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/</a></li>
+
+
+
+<li><a href="https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs">https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs</a></li>
+
+
+
+<li><a href="https://www.phoronix.com/news/Linux-7.2-Released">https://www.phoronix.com/news/Linux-7.2-Released</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/technology/comments/1vqe0xi/linux_kernel_72_officially_released_this_is_whats/">https://www.reddit.com/r/technology/comments/1vqe0xi/linux_kernel_72_officially_released_this_is_whats/</a></li>
+
+
+
+<li><a href="https://linux.slashdot.org/story/26/08/16/2349224/linux-kernel-72-has-been-officially-released-with-many-new-features">https://linux.slashdot.org/story/26/08/16/2349224/linux-kernel-72-has-been-officially-released-with-many-new-features</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> slashdot.org, reddit.com, theregister.com, lwn.net, phoronix.com, google.com, habr.com, solidot.org, linuxiac.com, omgubuntu.co.uk, itsfoss.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 11 unique domains, 12 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-17T06:01:32.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/os-platforms/2026/08/17/linux-72-debuts-linus-torvalds-says-new-normal-means-he-had-to-do-it-now-or-never/5288250",
+      "title": "Linux 7.2 debuts, Linus Torvalds says \u2018new normal\u2019 means he had to do it now ... or never?"
+    },
+    {
+      "author": "EditorDavid",
+      "date": "2026-08-17T00:03:00.000Z",
+      "domain": "slashdot.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://linux.slashdot.org/story/26/08/16/2349224/linux-kernel-72-has-been-officially-released-with-many-new-features",
+      "title": "Linux Kernel 7.2 Has Been Officially Released with Many New Features"
+    },
+    {
+      "author": "corbet",
+      "date": "2026-08-16T23:11:28.000Z",
+      "domain": "lwn.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://lwn.net/Articles/1088991/",
+      "title": "The 7.2 kernel has been released"
+    },
+    {
+      "author": "Michael Larabel",
+      "date": "2026-08-16T23:12:47.000Z",
+      "domain": "phoronix.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.phoronix.com/news/Linux-7.2-Released",
+      "title": "Linux 7.2 Released With Faster I/O, New AMD \u0026 Intel Driver Improvements"
+    },
+    {
+      "author": "/u/ourlifeintoronto",
+      "date": "2026-08-17T01:02:51.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/technology/comments/1vqe0xi/linux_kernel_72_officially_released_this_is_whats/",
+      "title": "Linux Kernel 7.2 Officially Released, This Is What\u2019s New"
+    },
+    {
+      "date": "2026-08-16T23:12:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1JdGJtZmZrNGpBRFRoUG1UZmxvaDdmanRPel9XT0Zfekp6TTlrRVZlN2szZFpfQ0xBVUJBdmdTUG5ZZVhlTDdwNF9RUUwwSWdRRkQyZ0trUEk3b3pJ",
+      "title": "Linux 7.2 Released With Faster I/O, New AMD \u0026 Intel Driver Improvements - Phoronix"
+    },
+    {
+      "author": "/u/unixbhaskar",
+      "date": "2026-08-16T23:41:59.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/linux/comments/1vqc9wk/linux_kernel_72_has_been_released/",
+      "title": "Linux kernel 7.2 has been released!"
+    },
+    {
+      "author": "denis-19",
+      "date": "2026-08-17T04:09:31.000Z",
+      "domain": "habr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://habr.com/ru/news/1068558/",
+      "title": "\u0420\u0435\u043b\u0438\u0437 Linux 7.2"
+    },
+    {
+      "date": "2026-08-17T06:03:45.000Z",
+      "domain": "solidot.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.solidot.org/story",
+      "title": "Linux 7.2 \u91ca\u51fa"
+    },
+    {
+      "author": "Bobby Borisov",
+      "date": "2026-08-17T05:46:50.000Z",
+      "domain": "linuxiac.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/",
+      "title": "Linux Kernel 7.2 Released with Btrfs, Scheduler, and Networking Improvements"
+    },
+    {
+      "author": "Joey Sneddon",
+      "date": "2026-08-16T23:04:44.000Z",
+      "domain": "omgubuntu.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs",
+      "title": "Linux 7.2 brings cache-aware scheduling, faster ext4 and Btrfs"
+    },
+    {
+      "author": "Sourav Rudra",
+      "date": "2026-08-17T05:08:16.000Z",
+      "domain": "itsfoss.com",
+      "image": "https://kagiproxy.com/img/JYtHllGGTqT8peRIDsVxuiNfipq4WH8XiZgabT1PELAix_hPgmrRhEuS1yjJ35GfAysMZLV3c1WcrAu939V-N5QrzOHSbyLp_IzYMQPAsVUesmhVZeeGo8ZyASjwFUWN4Mb6FabAqnDtdHgqrjnMpCWrQA",
+      "image_caption": "",
+      "link": "https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release",
+      "title": "Linux 7.2 Arrives With Cache Aware Scheduling After More Than a Year of Work"
+    }
+  ],
+  "business_angle": "",
+  "category": "Technology",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=slashdot.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "slashdot.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theregister.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theregister.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lwn.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lwn.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=phoronix.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "phoronix.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=habr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "habr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=solidot.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "solidot.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=linuxiac.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "linuxiac.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=omgubuntu.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "omgubuntu.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=itsfoss.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "itsfoss.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udc27",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Linux distributions: Ubuntu 26.10 and other upcoming distributions are expected to use Linux 7.2, giving downstream maintainers a new base for hardware enablement and filesystem changes [phoronix.com#1].",
+    "Laptop hardware: AMD ISP4 support completes webcam support for the HP ZBook Ultra G1a and other upcoming Ryzen laptops, bringing into the mainline kernel work that Ubuntu\u0027s OEM kernel had carried out of tree [itsfoss.com#1].",
+    "Enterprise storage: XFS zoned-storage support, first introduced in Linux 6.15, is no longer marked experimental in Linux 7.2 [linuxiac.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Open Source",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 12,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Phoronix",
+          "url": "https://www.phoronix.com/news/Linux-7.2-Released"
+        }
+      ],
+      "text": "Linus Torvalds: Torvalds said late reverts were the right response when code was not ready and caused problems, and that developers would try the reverted work again later."
+    },
+    {
+      "sources": [
+        {
+          "name": "Linuxiac",
+          "url": "https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/"
+        }
+      ],
+      "text": "Kernel developers: Developers said the swap-subsystem rework brought static metadata overhead close to zero, with some workloads showing slightly better performance."
+    },
+    {
+      "sources": [
+        {
+          "name": "OMG! Ubuntu",
+          "url": "https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs"
+        }
+      ],
+      "text": "OMG! Ubuntu: OMG! Ubuntu said users who still need removed legacy hardware support can boot Linux 7.1 or earlier."
+    }
+  ],
+  "primary_image": {
+    "caption": "Linux kernel 7.2 shown in an Ubuntu fastfetch output screenshot",
+    "credit": "itsfoss.com",
+    "link": "https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release",
+    "url": "https://kagiproxy.com/img/hE9UOkvn-jpdx9UjWPMmbXD7pgCFDEUXcs498mQXO31cmQzwqW29MTPId2dq-xaxJ_5Q4ZaG6NwkJk3LnNq0iLNyKpTtmeDiUGwTJ2RAcIQUUXbR4h9ytFC4iyouaFEiUTUMsrh9RlutzJFSGAaSjuroKA"
+  },
+  "published": "2026-08-17T12:00:10.967Z",
+  "quote": "Well, this last week of the release was - once again - bigger than I would have wished for, but hey, with the whole \"new normal\" thing, if I delayed releases for that reason we\u0027d probably never have a release at all.",
+  "quote_attribution": "LWN",
+  "quote_author": "Linus Torvalds",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMiXEFVX3lxTE1JdGJtZmZrNGpBRFRoUG1UZmxvaDdmanRPel9XT0Zfekp6TTlrRVZlN2szZFpfQ0xBVUJBdmdTUG5ZZVhlTDdwNF9RUUwwSWdRRkQyZ0trUEk3b3pJ",
+    "https://lwn.net/Articles/1088991/",
+    "https://www.solidot.org/story",
+    "https://www.reddit.com/r/linux/comments/1vqc9wk/linux_kernel_72_has_been_released/",
+    "https://feed.itsfoss.com/link/24361/17420586/linux-kernel-7-2-release",
+    "https://www.theregister.com/os-platforms/2026/08/17/linux-72-debuts-linus-torvalds-says-new-normal-means-he-had-to-do-it-now-or-never/5288250",
+    "https://habr.com/ru/news/1068558/",
+    "https://linuxiac.com/linux-kernel-7-2-released-with-btrfs-scheduler-and-networking-improvements/",
+    "https://www.omgubuntu.co.uk/2026/08/linux-7-2-cache-aware-scheduling-ext4-btrfs",
+    "https://www.phoronix.com/news/Linux-7.2-Released",
+    "https://www.reddit.com/r/technology/comments/1vqe0xi/linux_kernel_72_officially_released_this_is_whats/",
+    "https://linux.slashdot.org/story/26/08/16/2349224/linux-kernel-72-has-been-officially-released-with-many-new-features"
+  ],
+  "suggested_qna": [],
+  "summary": "Linus Torvalds released Linux kernel 7.2 as a stable version on August 16, after a final release week he said was \u201cbigger than I would have wished for\u201d [lwn.net#1][phoronix.com#1][theregister.com#1]. The release arrived on schedule after Linux 7.1 in June, with source code available through kernel.org [habr.com#1].\n\nThe kernel adds cache-aware CPU scheduling, large-folio support for Btrfs, further swap-subsystem work, Landlock security-module improvements, common attributes support in the bpf() system call, and a dm-inlinecrypt device-mapper target for block devices with inline encryption hardware [lwn.net#1][linuxiac.com#1][habr.com#1]. Hardware and driver changes include AMDGPU initial HDMI 2.1 FRL support, Intel Xe CRI platform support, Rust support for IBM S/390, Intel and AMD I/O performance improvements, and new support for Intel Panther Lake R processors [slashdot.org#1][phoronix.com#1].\n\nTorvalds said he did not delay the release despite the larger-than-desired final week, citing the \u201cnew normal\u201d of kernel development [lwn.net#1][phoronix.com#1][theregister.com#1]. During the final week, maintainers reverted the planned DRM \u201cfair\u201d GPU scheduler back to FIFO after regression reports, while adding sound-device quirks and a new tlbi=ipi boot option [phoronix.com#1][omgubuntu.co.uk#1].",
+  "talking_points": [
+    "Development churn: The nine-week cycle set a merge-window record and involved more than 2,100 contributors; LWN commit analysis found roughly 5% of 7.2 commits carried an \u201cassisted-by\u201d tag indicating AI use [omgubuntu.co.uk#1].",
+    "Legacy removals: Linux 7.2 removed more than 13,000 lines of legacy i486 CPU-emulation code, as well as the Hercules graphics-card driver, AppleTalk networking, and ISA and PCMCIA ARCnet drivers [omgubuntu.co.uk#1].",
+    "Networking changes: The release adds MPTCP IPv6 address signaling plus GRO/GSO support for PPPoE [linuxiac.com#1][slashdot.org#1].",
+    "Mac support: Initial Apple M3 support lets a series of 2023 MacBooks boot the Linux 7.2 kernel [itsfoss.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [
+    {
+      "content": "Linux 7.1 shipped as the previous stable release [habr.com#1]",
+      "date": "June 2026",
+      "date_iso": "2026-06"
+    },
+    {
+      "content": "Torvalds released Linux 7.2 as stable [lwn.net#1][phoronix.com#1]",
+      "date": "16 August 2026",
+      "date_iso": "2026-08-16"
+    },
+    {
+      "content": "Linux reaches its 35th anniversary [habr.com#1]",
+      "date": "25 August 2026",
+      "date_iso": "2026-08-25"
+    }
+  ],
+  "title": "Linus Torvalds releases Linux kernel 7.2",
+  "travel_advisory": "",
+  "unique_domains": 11,
+  "url": "https://www.theregister.com/os-platforms/2026/08/17/linux-72-debuts-linus-torvalds-says-new-normal-means-he-had-to-do-it-now-or-never/5288250",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
