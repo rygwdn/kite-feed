@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers release new LLM memory and evaluation tools - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers release new LLM memory and evaluation tools</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Independent developers and researchers published a cluster of AI projects and papers on Aug. 18-19 focused on persistent memory, context control, evaluation, local execution and agent debugging. The releases include A.L.I.C.E. Brain Core, a bring-your-own-keys HTTP API that stores memory in a user-provided Neo4j graph; Cogni, an MCP memory server using entity-graph spreading activation without an LLM in the retrieval path; Leviath, a Rust binary for structured context regions in agent runs; and Coalent, a cache for LLM-derived source-grounded claims that invalidates when underlying documents change <a href="https://alicebraincore.web.app" class="footnote-ref">[5]</a><a href="https://getcogni.io/" class="footnote-ref">[10]</a><a href="https://leviath.dev" class="footnote-ref">[11]</a><a href="https://github.com/AshwinUgale/tracelint" class="footnote-ref">[2]</a>.
+
+Other developer tools target narrower operational problems: tracelint reads tool-calling agent traces and flags structural defects without a second model judge; Privibe repackages a coding-agent CLI for local-first use with no call-home behavior; Unigram encodes bytes as one-token words for prompt-friendly identifiers; and PurgeHound uses a local LLM through Ollama to move Maildir messages marked as spam into an Archive-Spam folder rather than deleting them <a href="https://github.com/vishal-dehurdle/hypersae" class="footnote-ref">[6]</a><a href="https://github.com/Vectorlink-Labs/coalent" class="footnote-ref">[7]</a><a href="https://github.com/alainnothere/privibe/tree/main" class="footnote-ref">[3]</a><a href="https://git.cerberusgames.ca/Starstreak/PurgeHound/" class="footnote-ref">[15]</a>.
+
+The research items include SCOPE, an ICML 2026 paper proposing selective conformal pairwise LLM judging with empirical false discovery rates of about 0.097-0.099 at alpha 0.10; an Anthropic-linked paper on self-propagating “mind viruses” in multi-agent LLM systems; and a withdrawn arXiv paper on LLM narrative-summary attention flows, which listed an error in its data creation pipeline <a href="https://arxiv.org/abs/2602.13110" class="footnote-ref">[4]</a><a href="https://arxiv.org/abs/2608.10218" class="footnote-ref">[14]</a><a href="https://arxiv.org/abs/2604.06416" class="footnote-ref">[13]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://github.com/bleugreen/unigram">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Memory metrics: Cogni says its chain-recall@8 benchmark surfaced 3.4 of four linked documents versus 2.6 for plain vector search, using the same eight returned rows against 300 distractor documents <a href="https://getcogni.io/" class="footnote-ref">[10]</a>.</li>
+
+<li>Context control: Leviath reports version 0.4.0 shipped Aug. 18 with a 28 MB Rust binary, 10,000-plus agents in one process, and 64 ms from startup to a running agent <a href="https://leviath.dev" class="footnote-ref">[11]</a>.</li>
+
+<li>Judging calibration: SCOPE uses Bidirectional Preference Entropy and selective conformal calibration, and its authors report up to 2.4 times more accepted judgments than vanilla baselines under the same risk constraint <a href="https://arxiv.org/abs/2602.13110" class="footnote-ref">[4]</a>.</li>
+
+<li>Local workflows: Privibe removes cloud and account machinery from its upstream coding-agent base, makes the Mistral SDK optional, and targets local llama.cpp servers first <a href="https://github.com/Vectorlink-Labs/coalent" class="footnote-ref">[7]</a>.</li>
+
+<li>Coding practice: The LLM-assisted development workflow essay recommends limiting task scope and scaffolding agent loops with tests, describing the iteration process as similar to a genetic algorithm <a href="https://yogthos.net/posts/2026-08-17-llm-workflow.html" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>A.L.I.C.E. Brain Core: The project says it encrypts all user data with per-tenant KMS envelopes and decrypts it only at the moment of use, so the service never sees plaintext data; it says a flat price covers unlimited usage because users bring their own keys and Neo4j instance.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://alicebraincore.web.app">A.L.I.C.E. Brain Core</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Cogni: Cogni describes the product as “memory that reasons, not just retrieves,” claims a chain-recall@8 score of 0.85 versus 0.65 for vector search on a benchmark with 300 distractor documents, and says it does so without a model in the retrieval loop.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://getcogni.io/">Cogni</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>tracelint: The project includes a fault injector and recovery scorecard for measuring an agent&#x27;s robustness over time and tracking changes in recovery rates.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/AshwinUgale/tracelint">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Anthropic-linked researchers: The mind-virus paper concludes that self-propagating ideas pose a real but currently limited risk, and says brief warnings in system prompts produced near-total immunity in their experiments.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.10218">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>13 February 2026:</strong> SCOPE paper first submitted to arXiv <a href="https://arxiv.org/abs/2602.13110" class="footnote-ref">[4]</a>.</li>
+
+
+
+<li><strong>7 April 2026:</strong> Attention Flows paper first submitted to arXiv <a href="https://arxiv.org/abs/2604.06416" class="footnote-ref">[13]</a>.</li>
+
+
+
+<li><strong>10 August 2026:</strong> Mind Viruses paper submitted to arXiv <a href="https://arxiv.org/abs/2608.10218" class="footnote-ref">[14]</a>.</li>
+
+
+
+<li><strong>18 August 2026:</strong> Leviath stable version 0.4.0 shipped <a href="https://leviath.dev" class="footnote-ref">[11]</a>.</li>
+
+
+
+<li><strong>18 August 2026:</strong> SCOPE version four posted after ICML acceptance <a href="https://arxiv.org/abs/2602.13110" class="footnote-ref">[4]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Coalent integrations: Coalent ships with LangChain and MCP integrations, a CLI, and a benchmark suite for integration with existing agent pipelines and for measuring cache performance <a href="https://github.com/AshwinUgale/tracelint" class="footnote-ref">[2]</a>.</li>
+
+<li>Decoupled hyperbolic SAE: HyperSAE keeps active token data in a Euclidean bfloat16 forward pass while enforcing hierarchical concept relations in dictionary parameter space through Poincaré ball projections during optimization <a href="https://github.com/bleugreen/unigram" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Evaluation reliability: SCOPE addresses LLM-judge miscalibration by allowing abstention and bounding errors among accepted pairwise judgments under exchangeability, with reported empirical FDR near the user-set 0.10 level <a href="https://arxiv.org/abs/2602.13110" class="footnote-ref">[4]</a>.</li>
+
+<li>Multi-agent risk: The mind-virus paper tests propagation across a collaborative coding-team setting and a chain of brief agent interactions with wiped context, isolating factors such as host model, instructions, payload harmfulness and network topology <a href="https://arxiv.org/abs/2608.10218" class="footnote-ref">[14]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Deterministic agent-observability tools produce CI failures and trace evidence, formats that fit existing software-governance workflows better than opaque model judgments <a href="https://github.com/vishal-dehurdle/hypersae" class="footnote-ref">[6]</a>[common].</li><li>Open-source availability lowers adoption friction but can also weaken pricing power unless projects build hosted services, compliance features or ecosystem lock-in <a href="https://github.com/bleugreen/unigram" class="footnote-ref">[1]</a><a href="https://github.com/AshwinUgale/tracelint" class="footnote-ref">[2]</a><a href="https://github.com/vishal-dehurdle/hypersae" class="footnote-ref">[6]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test trace linting on agent logs: Run tracelint against saved tool-calling traces to check for schema-violating calls, ignored errors, loops and redundant calls before adding it to CI <a href="https://github.com/vishal-dehurdle/hypersae" class="footnote-ref">[6]</a>.</li>
+
+<li>Try local-first coding sessions: Point Privibe at a local llama.cpp server if your priority is avoiding call-home behavior while using a coding-agent CLI <a href="https://github.com/Vectorlink-Labs/coalent" class="footnote-ref">[7]</a>.</li>
+
+<li>Evaluate memory retrieval on your own corpus: Compare Cogni or A.L.I.C.E.-style graph memory against vector retrieval using questions that require following entity chains across documents <a href="https://getcogni.io/" class="footnote-ref">[10]</a><a href="https://alicebraincore.web.app" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://getcogni.io/">https://getcogni.io/</a></li>
+
+
+
+<li><a href="https://yogthos.net/posts/2026-08-17-llm-workflow.html">https://yogthos.net/posts/2026-08-17-llm-workflow.html</a></li>
+
+
+
+<li><a href="https://alicebraincore.web.app">https://alicebraincore.web.app</a></li>
+
+
+
+<li><a href="https://neuronfriend.com">https://neuronfriend.com</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.06416">https://arxiv.org/abs/2604.06416</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.10218">https://arxiv.org/abs/2608.10218</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.13110">https://arxiv.org/abs/2602.13110</a></li>
+
+
+
+<li><a href="https://git.cerberusgames.ca/Starstreak/PurgeHound/">https://git.cerberusgames.ca/Starstreak/PurgeHound/</a></li>
+
+
+
+<li><a href="https://layog.io/blog/llm-speedrun-arch/">https://layog.io/blog/llm-speedrun-arch/</a></li>
+
+
+
+<li><a href="https://github.com/AshwinUgale/tracelint">https://github.com/AshwinUgale/tracelint</a></li>
+
+
+
+<li><a href="https://github.com/vishal-dehurdle/hypersae">https://github.com/vishal-dehurdle/hypersae</a></li>
+
+
+
+<li><a href="https://github.com/Vectorlink-Labs/coalent">https://github.com/Vectorlink-Labs/coalent</a></li>
+
+
+
+<li><a href="https://github.com/alainnothere/privibe/tree/main">https://github.com/alainnothere/privibe/tree/main</a></li>
+
+
+
+<li><a href="https://leviath.dev">https://leviath.dev</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> github.com, arxiv.org, web.app, yogthos.net, layog.io, getcogni.io, leviath.dev, neuronfriend.com, cerberusgames.ca</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 9 unique domains, 15 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "bleugreenlab",
+      "date": "2026-08-18T17:58:17.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/bleugreen/unigram",
+      "title": "Show HN: Unigram: encode bytes as words that cost one LLM token"
+    },
+    {
+      "author": "Ashwin1121",
+      "date": "2026-08-18T14:49:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/AshwinUgale/tracelint",
+      "title": "Show HN: Tracelint \u2013 a linter for AI agent traces, no LLM judge"
+    },
+    {
+      "author": "xlayn",
+      "date": "2026-08-18T00:39:32.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/alainnothere/privibe/tree/main",
+      "title": "Privibe \u2013 LLM CLI Local first+privacy focus+llama.cpp cache branch and Qwen3.x"
+    },
+    {
+      "author": "Sher Badshah, Ali Emami, Hassan Sajjad",
+      "date": "2026-08-19T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.13110",
+      "title": "SCOPE: Selective Conformal Optimized Pairwise LLM Judging"
+    },
+    {
+      "author": "kindsocial",
+      "date": "2026-08-19T05:15:27.000Z",
+      "domain": "web.app",
+      "image": "",
+      "image_caption": "",
+      "link": "https://alicebraincore.web.app",
+      "title": "BYOKs for an LLM with a Brain"
+    },
+    {
+      "author": "visha1v",
+      "date": "2026-08-18T16:53:01.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/vishal-dehurdle/hypersae",
+      "title": "Show HN: See what an LLM learned, organised as a browsable tree"
+    },
+    {
+      "author": "nisarg-pujara",
+      "date": "2026-08-18T14:16:34.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/Vectorlink-Labs/coalent",
+      "title": "Show HN: Coalent \u2013 an LLM answer cache that invalidates when source docs change"
+    },
+    {
+      "author": "yogthos",
+      "date": "2026-08-18T13:27:26.000Z",
+      "domain": "yogthos.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://yogthos.net/posts/2026-08-17-llm-workflow.html",
+      "title": "A practical workflow for LLM-assisted development"
+    },
+    {
+      "author": "layog",
+      "date": "2026-08-18T04:46:15.000Z",
+      "domain": "layog.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://layog.io/blog/llm-speedrun-arch/",
+      "title": "LLM Speedrun: Architecture"
+    },
+    {
+      "author": "ihamilton7",
+      "date": "2026-08-18T00:21:14.000Z",
+      "domain": "getcogni.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://getcogni.io/",
+      "title": "Show HN: Cogni: MCP memory for LLMs, with no LLM in the retrieval path"
+    },
+    {
+      "author": "gemisis",
+      "date": "2026-08-18T13:12:01.000Z",
+      "domain": "leviath.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://leviath.dev",
+      "title": "Show HN: Leviath \u2013 Structured context regions for LLM agents, in one Rust binary"
+    },
+    {
+      "author": "nvinacur",
+      "date": "2026-08-18T18:41:12.000Z",
+      "domain": "neuronfriend.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://neuronfriend.com",
+      "title": "Chat with an LLM powered with lip-sync to see it talking"
+    },
+    {
+      "author": "Rebecca M. M. Hicke, Sil Hamilton, David Mimno, Ross Deans Kristensen-McLachlan",
+      "date": "2026-08-19T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.06416",
+      "title": "Attention Flows: Tracing LLM Conceptual Engagement via Story Summaries"
+    },
+    {
+      "author": "binyu",
+      "date": "2026-08-18T12:01:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.10218",
+      "title": "Mind Viruses: Self-Propagating Ideas in Multi-Agent LLM Systems (Anthropic)"
+    },
+    {
+      "author": "QBasicBitch",
+      "date": "2026-08-18T07:26:25.000Z",
+      "domain": "cerberusgames.ca",
+      "image": "",
+      "image_caption": "",
+      "link": "https://git.cerberusgames.ca/Starstreak/PurgeHound/",
+      "title": "PurgeHound \u2013 Use the power of local LLM to declutter a Maildir folder"
+    }
+  ],
+  "business_angle": [
+    "Deterministic agent-observability tools produce CI failures and trace evidence, formats that fit existing software-governance workflows better than opaque model judgments [github.com#4][common].",
+    "Open-source availability lowers adoption friction but can also weaken pricing power unless projects build hosted services, compliance features or ecosystem lock-in [github.com#1][github.com#2][github.com#4][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=web.app\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "web.app"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=yogthos.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yogthos.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=layog.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "layog.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=getcogni.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "getcogni.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=leviath.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "leviath.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=neuronfriend.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "neuronfriend.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cerberusgames.ca\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cerberusgames.ca"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Developer Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 15,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "A.L.I.C.E. Brain Core",
+          "url": "https://alicebraincore.web.app"
+        }
+      ],
+      "text": "A.L.I.C.E. Brain Core: The project says it encrypts all user data with per-tenant KMS envelopes and decrypts it only at the moment of use, so the service never sees plaintext data; it says a flat price covers unlimited usage because users bring their own keys and Neo4j instance."
+    },
+    {
+      "sources": [
+        {
+          "name": "Cogni",
+          "url": "https://getcogni.io/"
+        }
+      ],
+      "text": "Cogni: Cogni describes the product as \u201cmemory that reasons, not just retrieves,\u201d claims a chain-recall@8 score of 0.85 versus 0.65 for vector search on a benchmark with 300 distractor documents, and says it does so without a model in the retrieval loop."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/AshwinUgale/tracelint"
+        }
+      ],
+      "text": "tracelint: The project includes a fault injector and recovery scorecard for measuring an agent\u0027s robustness over time and tracking changes in recovery rates."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.10218"
+        }
+      ],
+      "text": "Anthropic-linked researchers: The mind-virus paper concludes that self-propagating ideas pose a real but currently limited risk, and says brief warnings in system prompts produced near-total immunity in their experiments."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-19T12:00:16.632Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Evaluation reliability: SCOPE addresses LLM-judge miscalibration by allowing abstention and bounding errors among accepted pairwise judgments under exchangeability, with reported empirical FDR near the user-set 0.10 level [arxiv.org#1].",
+    "Multi-agent risk: The mind-virus paper tests propagation across a collaborative coding-team setting and a chain of brief agent interactions with wiped context, isolating factors such as host model, instructions, payload harmfulness and network topology [arxiv.org#3]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/bleugreen/unigram",
+    "https://getcogni.io/",
+    "https://yogthos.net/posts/2026-08-17-llm-workflow.html",
+    "https://alicebraincore.web.app",
+    "https://neuronfriend.com",
+    "https://arxiv.org/abs/2604.06416",
+    "https://arxiv.org/abs/2608.10218",
+    "https://arxiv.org/abs/2602.13110",
+    "https://git.cerberusgames.ca/Starstreak/PurgeHound/",
+    "https://layog.io/blog/llm-speedrun-arch/",
+    "https://github.com/AshwinUgale/tracelint",
+    "https://github.com/vishal-dehurdle/hypersae",
+    "https://github.com/Vectorlink-Labs/coalent",
+    "https://github.com/alainnothere/privibe/tree/main",
+    "https://leviath.dev"
+  ],
+  "suggested_qna": [],
+  "summary": "Independent developers and researchers published a cluster of AI projects and papers on Aug. 18-19 focused on persistent memory, context control, evaluation, local execution and agent debugging. The releases include A.L.I.C.E. Brain Core, a bring-your-own-keys HTTP API that stores memory in a user-provided Neo4j graph; Cogni, an MCP memory server using entity-graph spreading activation without an LLM in the retrieval path; Leviath, a Rust binary for structured context regions in agent runs; and Coalent, a cache for LLM-derived source-grounded claims that invalidates when underlying documents change [web.app#1][getcogni.io#1][leviath.dev#1][github.com#2].\n\nOther developer tools target narrower operational problems: tracelint reads tool-calling agent traces and flags structural defects without a second model judge; Privibe repackages a coding-agent CLI for local-first use with no call-home behavior; Unigram encodes bytes as one-token words for prompt-friendly identifiers; and PurgeHound uses a local LLM through Ollama to move Maildir messages marked as spam into an Archive-Spam folder rather than deleting them [github.com#4][github.com#5][github.com#3][cerberusgames.ca#1].\n\nThe research items include SCOPE, an ICML 2026 paper proposing selective conformal pairwise LLM judging with empirical false discovery rates of about 0.097-0.099 at alpha 0.10; an Anthropic-linked paper on self-propagating \u201cmind viruses\u201d in multi-agent LLM systems; and a withdrawn arXiv paper on LLM narrative-summary attention flows, which listed an error in its data creation pipeline [arxiv.org#1][arxiv.org#3][arxiv.org#2].",
+  "talking_points": [
+    "Memory metrics: Cogni says its chain-recall@8 benchmark surfaced 3.4 of four linked documents versus 2.6 for plain vector search, using the same eight returned rows against 300 distractor documents [getcogni.io#1].",
+    "Context control: Leviath reports version 0.4.0 shipped Aug. 18 with a 28 MB Rust binary, 10,000-plus agents in one process, and 64 ms from startup to a running agent [leviath.dev#1].",
+    "Judging calibration: SCOPE uses Bidirectional Preference Entropy and selective conformal calibration, and its authors report up to 2.4 times more accepted judgments than vanilla baselines under the same risk constraint [arxiv.org#1].",
+    "Local workflows: Privibe removes cloud and account machinery from its upstream coding-agent base, makes the Mistral SDK optional, and targets local llama.cpp servers first [github.com#5].",
+    "Coding practice: The LLM-assisted development workflow essay recommends limiting task scope and scaffolding agent loops with tests, describing the iteration process as similar to a genetic algorithm [yogthos.net#1]."
+  ],
+  "technical_details": [
+    "Coalent integrations: Coalent ships with LangChain and MCP integrations, a CLI, and a benchmark suite for integration with existing agent pipelines and for measuring cache performance [github.com#2].",
+    "Decoupled hyperbolic SAE: HyperSAE keeps active token data in a Euclidean bfloat16 forward pass while enforcing hierarchical concept relations in dictionary parameter space through Poincar\u00e9 ball projections during optimization [github.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "SCOPE paper first submitted to arXiv [arxiv.org#1].",
+      "date": "13 February 2026",
+      "date_iso": "2026-02-13"
+    },
+    {
+      "content": "Attention Flows paper first submitted to arXiv [arxiv.org#2].",
+      "date": "7 April 2026",
+      "date_iso": "2026-04-07"
+    },
+    {
+      "content": "Mind Viruses paper submitted to arXiv [arxiv.org#3].",
+      "date": "10 August 2026",
+      "date_iso": "2026-08-10"
+    },
+    {
+      "content": "Leviath stable version 0.4.0 shipped [leviath.dev#1].",
+      "date": "18 August 2026",
+      "date_iso": "2026-08-18"
+    },
+    {
+      "content": "SCOPE version four posted after ICML acceptance [arxiv.org#1].",
+      "date": "18 August 2026",
+      "date_iso": "2026-08-18"
+    }
+  ],
+  "title": "Developers release new LLM memory and evaluation tools",
+  "travel_advisory": "",
+  "unique_domains": 9,
+  "url": "https://github.com/bleugreen/unigram",
+  "user_action_items": [
+    "Test trace linting on agent logs: Run tracelint against saved tool-calling traces to check for schema-violating calls, ignored errors, loops and redundant calls before adding it to CI [github.com#4].",
+    "Try local-first coding sessions: Point Privibe at a local llama.cpp server if your priority is avoiding call-home behavior while using a coding-agent CLI [github.com#5].",
+    "Evaluate memory retrieval on your own corpus: Compare Cogni or A.L.I.C.E.-style graph memory against vector retrieval using questions that require following entity chains across documents [getcogni.io#1][web.app#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
