@@ -1,0 +1,1930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI studies probe agents’ safety, memory and costs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI studies probe agents’ safety, memory and costs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Many AI research papers and practitioner articles published or surfaced on Aug. 20-21 examined how large language models behave when acting as agents, processing multimodal inputs, using tools or carrying sensitive context. The work covered agent evaluation and benchmarking, safety failures in multi-step trajectories, prompt injection in video and 3D settings, encrypted reasoning-trace leakage, memory errors, and domain-specific deployments in medicine, finance, robotics, air traffic control and enterprise software <a href="https://arxiv.org/abs/2608.20237" class="footnote-ref">[32]</a><a href="https://arxiv.org/abs/2608.19395" class="footnote-ref">[33]</a><a href="https://arxiv.org/abs/2608.19889" class="footnote-ref">[50]</a><a href="https://arxiv.org/abs/2510.03519" class="footnote-ref">[53]</a><a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[79]</a><a href="https://arxiv.org/abs/2608.19652" class="footnote-ref">[87]</a><a href="https://arxiv.org/abs/2608.19981" class="footnote-ref">[86]</a><a href="https://arxiv.org/abs/2604.18738" class="footnote-ref">[67]</a><a href="https://arxiv.org/abs/2608.20047" class="footnote-ref">[76]</a><a href="https://arxiv.org/abs/2608.20281" class="footnote-ref">[45]</a><a href="https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html" class="footnote-ref">[60]</a><a href="https://techxplore.com/news/2026-08-qa-perils-agentic-ai.html" class="footnote-ref">[83]</a>.
+
+Several papers found that systems designed to make AI agents more capable can also introduce measurable failure modes. Studies found that multimodal models lose accuracy under system-message constraints, irrelevant text can bias visual judgments, memory can distort reasoning, and visible compliance rules do not fully stop rejected actions in simulated financial trading <a href="https://arxiv.org/abs/2608.19009" class="footnote-ref">[1]</a><a href="https://arxiv.org/abs/2608.19653" class="footnote-ref">[2]</a><a href="https://arxiv.org/abs/2603.18853" class="footnote-ref">[41]</a><a href="https://arxiv.org/abs/2604.18738" class="footnote-ref">[67]</a>. Other work proposed mitigations, including workflow-level policy guidance, safer embodied-agent branch training, state-first memory tracking, black-box safety classifiers, and benchmarks that separate action compliance from stated rationales <a href="https://arxiv.org/abs/2608.20153" class="footnote-ref">[57]</a><a href="https://arxiv.org/abs/2608.15949" class="footnote-ref">[26]</a><a href="https://arxiv.org/abs/2608.19652" class="footnote-ref">[87]</a><a href="https://arxiv.org/abs/2606.09498" class="footnote-ref">[25]</a><a href="https://arxiv.org/abs/2604.18738" class="footnote-ref">[67]</a>.
+
+Other papers examined cost and deployment limits. New methods claimed large speedups or lower token, memory and evaluation costs for long-context serving, tool-augmented agents, multimodal token pruning, audio-token compression, adaptive reasoning, and LLM fleet profiling <a href="https://arxiv.org/abs/2608.19611" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2608.06108" class="footnote-ref">[56]</a><a href="https://arxiv.org/abs/2608.19800" class="footnote-ref">[71]</a><a href="https://arxiv.org/abs/2511.20973" class="footnote-ref">[80]</a><a href="https://arxiv.org/abs/2608.20256" class="footnote-ref">[85]</a><a href="https://arxiv.org/abs/2608.19680" class="footnote-ref">[49]</a>. Practitioner pieces also addressed fine-tuning and continued pretraining, including an end-to-end guide to LLM fine-tuning and a local continued-pretraining experiment using LoRA adapters on Qwen 3 4B for a fictional travel-advice domain <a href="https://towardsdatascience.com/how-to-fine-tune-an-llm-an-end-to-end-guide/" class="footnote-ref">[28]</a><a href="https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain" class="footnote-ref">[27]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://arxiv.org/abs/2608.19009">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> One citation study found 11 language models from three vendors concentrated citations on a narrow subset of real papers even after authors, years, venues and citation counts were hidden <a href="https://arxiv.org/abs/2608.19230" class="footnote-ref">[88]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Agent safety: ATBench introduced 1,000 agent trajectories organized by risk source, failure mode, and real-world harm, using a long-context delayed-trigger protocol to capture risk emergence across multiple stages <a href="https://arxiv.org/abs/2608.19395" class="footnote-ref">[33]</a>.</li>
+
+<li>Security risks: Researchers exploited compatibility of encrypted reasoning blocks across sessions, users, and models to force a weaker model to decode secrets, recovering PII and credentials without jailbreaking the stronger model <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[79]</a>.</li>
+
+<li>Serving efficiency: FlashPrefill V2 introduced block-sparse prefill attention with mean correction, PackGQA memory access, warp specialization, pingpong pipelining, FP8 inference, paged KV cache, and continuous batching for long-context serving <a href="https://arxiv.org/abs/2608.19611" class="footnote-ref">[10]</a>.</li>
+
+<li>Memory limits: StateMemBench tested 234 multi-session scenarios with closed-pool grading that separates current-state answers from superseded-state errors, and proposed StateMem, a state-first memory method that explicitly tracks supersession and relational dependencies <a href="https://arxiv.org/abs/2608.19652" class="footnote-ref">[87]</a>.</li>
+
+<li>Medical evaluation: HealMed contains 1,000 examples in each of nine languages, covering MCQA, NLI, and open-ended QA, developed over two years by 23 physicians and medical experts across nine countries <a href="https://arxiv.org/abs/2608.19981" class="footnote-ref">[86]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Enterprise AI evaluators: CIO described evaluation and benchmarking as an emerging enterprise niche distinct from AgentOps observability and trust-and-guardrails tools for agentic AI systems.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html">CIO</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Agent memory researchers: The StateMemBench authors argued that memory systems should track evolving state, not only extract, store and retrieve previously stated facts.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.19652">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Financial compliance researchers: The ReguSim authors found that trader rationales can mislead an independent monitor unless enforcement evidence is shown, and that simple structured baselines matched or exceeded prompt-only LLMs in monitoring, suggesting that compliance evaluation should audit evidence use, not just stated reasoning.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.19974">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Local fine-tuning practitioners: Teach Me Cool Stuff reported using LoRA-based continued pretraining with only 66 million targeted parameters, 1.6% of Qwen 3 4B&#x27;s total parameter count.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain">Teach Me Cool Stuff</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Block-sparse prefill attention: FlashPrefill V2 adds mean correction, PackGQA memory access, warp specialization, pingpong pipelining, FP8 inference, paged KV cache and continuous batching for long-context serving <a href="https://arxiv.org/abs/2608.19611" class="footnote-ref">[10]</a>.</li>
+
+<li>Resource-wise KV caching: ReCache assigns resource-local positions and removes cross-resource interactions so recurring tool or skill schemas can reuse composition-invariant KV blocks across different request orders <a href="https://arxiv.org/abs/2608.06108" class="footnote-ref">[56]</a>.</li>
+
+<li>State supersession: StateMem explicitly tracks when facts, constraints or decisions replace earlier ones, letting graders distinguish current-state answers from superseded-state errors <a href="https://arxiv.org/abs/2608.19652" class="footnote-ref">[87]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Enterprise software: Agent-First Tool API reported validation in a production multi-tenant SaaS platform <a href="https://arxiv.org/abs/2608.19807" class="footnote-ref">[62]</a>.</li>
+
+<li>Customer service: PolicyGuide raised mean Pass^4 across airline, retail and telecom domains <a href="https://arxiv.org/abs/2608.20153" class="footnote-ref">[57]</a>.</li>
+
+<li>Hardware serving: HYDRA reported throughput and time-to-first-token improvements for hybrid LLM serving on heterogeneous chiplet systems <a href="https://arxiv.org/abs/2608.19794" class="footnote-ref">[31]</a>.</li>
+
+<li>Financial agents: InvestLogicBench released documented decisions from real-world investors <a href="https://arxiv.org/abs/2608.19803" class="footnote-ref">[54]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Quantization interference: INT4 quantization significantly reduced retrieval accuracy under high proactive interference, linked to same-key intrusion errors, while INT8 also showed a smaller penalty in some models <a href="https://arxiv.org/abs/2608.19662" class="footnote-ref">[58]</a>.</li>
+
+<li>Verification taxonomy: A proposed Verification Autonomy Levels (VAL) framework classifies verification schemes by where the specification comes from and what the verdict guarantees, highlighting that substitution- and sampling-based verifiers cannot confirm completeness <a href="https://arxiv.org/abs/2604.26170" class="footnote-ref">[23]</a>.</li>
+
+<li>Deployment evidence: Most papers were preprints or benchmark studies, so their reported gains and failures require independent replication and production validation before they support operational claims <a href="https://arxiv.org/abs/2608.19611" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2608.06108" class="footnote-ref">[56]</a><a href="https://arxiv.org/abs/2608.20256" class="footnote-ref">[85]</a>[common].</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Infrastructure suppliers and AI platforms could benefit if long-context serving and cache-compression methods lower inference cost per request <a href="https://arxiv.org/abs/2608.19611" class="footnote-ref">[10]</a><a href="https://arxiv.org/abs/2608.06108" class="footnote-ref">[56]</a>.</li><li>Financial compliance evaluation should audit rule-grounded actions and evidence use, not just a single compliance score, because trader rationales can mislead monitors <a href="https://arxiv.org/abs/2604.18738" class="footnote-ref">[67]</a>.</li><li>Companies that log encrypted reasoning blocks may expose secrets if weaker models decode those blocks, as demonstrated by the cross-model decryption attack <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[79]</a>.</li><li>Fine-tuning vendors and toolmakers may see demand from teams adapting smaller local models with LoRA rather than full retraining <a href="https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain" class="footnote-ref">[27]</a><a href="https://arxiv.org/abs/2608.19974" class="footnote-ref">[69]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Audit agent workflows before deployment: Test agents on multi-step trajectories and workflow-level compliance, not only final answers or single tool calls <a href="https://arxiv.org/abs/2608.19395" class="footnote-ref">[33]</a><a href="https://arxiv.org/abs/2608.20153" class="footnote-ref">[57]</a>.</li>
+
+<li>Avoid logging opaque reasoning blocks publicly: Treat encrypted or hidden model-state fields in session logs as sensitive because researchers recovered PII and credentials from decoded reasoning blocks <a href="https://arxiv.org/abs/2608.09867" class="footnote-ref">[79]</a>.</li>
+
+<li>Validate memory updates separately: Check whether an agent should persist, verify, clarify or ignore user-derived information before writing it to durable memory <a href="https://arxiv.org/abs/2608.19285" class="footnote-ref">[73]</a><a href="https://arxiv.org/abs/2608.19652" class="footnote-ref">[87]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://arxiv.org/abs/2604.02022">https://arxiv.org/abs/2604.02022</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19611">https://arxiv.org/abs/2608.19611</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20129">https://arxiv.org/abs/2608.20129</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19880">https://arxiv.org/abs/2608.19880</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.10828">https://arxiv.org/abs/2605.10828</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19230">https://arxiv.org/abs/2608.19230</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19208">https://arxiv.org/abs/2608.19208</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2508.00554">https://arxiv.org/abs/2508.00554</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19981">https://arxiv.org/abs/2608.19981</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.10555">https://arxiv.org/abs/2605.10555</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19803">https://arxiv.org/abs/2608.19803</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19395">https://arxiv.org/abs/2608.19395</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20047">https://arxiv.org/abs/2608.20047</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2509.08022">https://arxiv.org/abs/2509.08022</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19800">https://arxiv.org/abs/2608.19800</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19490">https://arxiv.org/abs/2608.19490</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.27154">https://arxiv.org/abs/2607.27154</a></li>
+
+
+
+
+
+<li><a href="https://arxiv.org/abs/2606.01034">https://arxiv.org/abs/2606.01034</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19529">https://arxiv.org/abs/2608.19529</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19857">https://arxiv.org/abs/2608.19857</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.18578">https://arxiv.org/abs/2608.18578</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19689">https://arxiv.org/abs/2608.19689</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.21596">https://arxiv.org/abs/2607.21596</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.03259">https://arxiv.org/abs/2608.03259</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2507.06127">https://arxiv.org/abs/2507.06127</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMigAFBVV95cUxQT0sySkpQZmFZbFI4XzRWTWtqTEIyTENmdGFGa01Oa0JtOWdWc3NMWk5tdEFTeWhuQkFxNlJWeXlTRklHVWh6SVA5a3RWM0tsN0tqX2VfeVNIRWxkN1JFdndZLV9zNUhZM0lOa0hyNDJybkpvazdfWlRSUTJQN1dVLQ">https://news.google.com/atom/articles/CBMigAFBVV95cUxQT0sySkpQZmFZbFI4XzRWTWtqTEIyTENmdGFGa01Oa0JtOWdWc3NMWk5tdEFTeWhuQkFxNlJWeXlTRklHVWh6SVA5a3RWM0tsN0tqX2VfeVNIRWxkN1JFdndZLV9zNUhZM0lOa0hyNDJybkpvazdfWlRSUTJQN1dVLQ</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20274">https://arxiv.org/abs/2608.20274</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19285">https://arxiv.org/abs/2608.19285</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19746">https://arxiv.org/abs/2608.19746</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19659">https://arxiv.org/abs/2608.19659</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20099">https://arxiv.org/abs/2608.20099</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.09867">https://arxiv.org/abs/2608.09867</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2509.02910">https://arxiv.org/abs/2509.02910</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.18853">https://arxiv.org/abs/2603.18853</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20318">https://arxiv.org/abs/2608.20318</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19794">https://arxiv.org/abs/2608.19794</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.17168">https://arxiv.org/abs/2606.17168</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1vtyty2/training_an_llm_on_a_new_domain/">https://www.reddit.com/r/LLMDevs/comments/1vtyty2/training_an_llm_on_a_new_domain/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20169">https://arxiv.org/abs/2608.20169</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19737">https://arxiv.org/abs/2608.19737</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19901">https://arxiv.org/abs/2608.19901</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.09498">https://arxiv.org/abs/2606.09498</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.18738">https://arxiv.org/abs/2604.18738</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19729">https://arxiv.org/abs/2608.19729</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20116">https://arxiv.org/abs/2608.20116</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20237">https://arxiv.org/abs/2608.20237</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19206">https://arxiv.org/abs/2608.19206</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06108">https://arxiv.org/abs/2608.06108</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19861">https://arxiv.org/abs/2608.19861</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20202">https://arxiv.org/abs/2608.20202</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.07104">https://arxiv.org/abs/2602.07104</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20256">https://arxiv.org/abs/2608.20256</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.23522">https://arxiv.org/abs/2603.23522</a></li>
+
+
+
+<li><a href="https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain">https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19207">https://arxiv.org/abs/2608.19207</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19662">https://arxiv.org/abs/2608.19662</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19807">https://arxiv.org/abs/2608.19807</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19889">https://arxiv.org/abs/2608.19889</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19652">https://arxiv.org/abs/2608.19652</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19218">https://arxiv.org/abs/2608.19218</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20338">https://arxiv.org/abs/2608.20338</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.06245">https://arxiv.org/abs/2606.06245</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.23487">https://arxiv.org/abs/2606.23487</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19526">https://arxiv.org/abs/2608.19526</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19085">https://arxiv.org/abs/2608.19085</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19758">https://arxiv.org/abs/2608.19758</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19598">https://arxiv.org/abs/2608.19598</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19621">https://arxiv.org/abs/2608.19621</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.11922">https://arxiv.org/abs/2608.11922</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19299">https://arxiv.org/abs/2608.19299</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20153">https://arxiv.org/abs/2608.20153</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19653">https://arxiv.org/abs/2608.19653</a></li>
+
+
+
+<li><a href="https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html">https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.15949">https://arxiv.org/abs/2608.15949</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2510.03519">https://arxiv.org/abs/2510.03519</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19726">https://arxiv.org/abs/2608.19726</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19297">https://arxiv.org/abs/2608.19297</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19993">https://arxiv.org/abs/2608.19993</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19564">https://arxiv.org/abs/2608.19564</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.24856">https://arxiv.org/abs/2605.24856</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19739">https://arxiv.org/abs/2608.19739</a></li>
+
+
+
+<li><a href="https://techxplore.com/news/2026-08-qa-perils-agentic-ai.html">https://techxplore.com/news/2026-08-qa-perils-agentic-ai.html</a></li>
+
+
+
+<li><a href="https://towardsdatascience.com/how-to-fine-tune-an-llm-an-end-to-end-guide/">https://towardsdatascience.com/how-to-fine-tune-an-llm-an-end-to-end-guide/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06834">https://arxiv.org/abs/2608.06834</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19579">https://arxiv.org/abs/2608.19579</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2511.20973">https://arxiv.org/abs/2511.20973</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19680">https://arxiv.org/abs/2608.19680</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.26170">https://arxiv.org/abs/2604.26170</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.01548">https://arxiv.org/abs/2608.01548</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19802">https://arxiv.org/abs/2608.19802</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20281">https://arxiv.org/abs/2608.20281</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20084">https://arxiv.org/abs/2608.20084</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19974">https://arxiv.org/abs/2608.19974</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.19323">https://arxiv.org/abs/2608.19323</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> arxiv.org, google.com, teachmecoolstuff.com, towardsdatascience.com, reddit.com, cio.com, techxplore.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 7 unique domains, 95 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Yajie Yin",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19009",
+      "title": "Grading the Graders: Verification Autonomy Levels (L0-L5) for LLM Reasoning"
+    },
+    {
+      "author": "Josias Moukpe, Priyanka Aryal, Matthew Kenney",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19653",
+      "title": "DeltaML-Bench: Evaluating Machine Learning Agents on Real-World Research Repositories"
+    },
+    {
+      "author": "Tsunehiko Tanaka, Matthew Stephenson, Alistair Macvicar, Edgar Simo-Serra",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20084",
+      "title": "Evidence-Gated Task and Motion Planning with Vision-Language Models"
+    },
+    {
+      "author": "Filip Sondej, Yushi Yang, Adam Mahdi",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.17168",
+      "title": "RepSelect: Robust LLM Unlearning via Representation Selectivity"
+    },
+    {
+      "date": "2026-08-20T13:30:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMigAFBVV95cUxQT0sySkpQZmFZbFI4XzRWTWtqTEIyTENmdGFGa01Oa0JtOWdWc3NMWk5tdEFTeWhuQkFxNlJWeXlTRklHVWh6SVA5a3RWM0tsN0tqX2VfeVNIRWxkN1JFdndZLV9zNUhZM0lOa0hyNDJybkpvazdfWlRSUTJQN1dVLQ",
+      "title": "How to Fine-Tune an LLM: An End-to-End Guide - Towards Data Science"
+    },
+    {
+      "author": "Juan Yeo, Geewook Kim",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19207",
+      "title": "Compliance, Capability, and Conflict: Benchmarking Multimodal LLMs under System Messages"
+    },
+    {
+      "author": "Yinfeng Wang, Zhiyuan Yao, Zheren Fu, Lei Zhang, Zhendong Mao",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19208",
+      "title": "When Irrelevant Text Matters: Affine Margin Shifts in Multimodal Large Language Models"
+    },
+    {
+      "author": "Valeriu Dimidov, Rapha\\\"el Frank",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19218",
+      "title": "Time-Series Retrieval for Grounding Multimodal Language Models in Remaining Useful Life"
+    },
+    {
+      "author": "Su Yan, Rakesh Iyer",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19529",
+      "title": "When Machines Speak: A Unified Generative Framework for Integrating Machine-Native Symbols into Pretrained Large Language Models"
+    },
+    {
+      "author": "Eric Bigelow, Amir Zur, Satchel Grant, Tal Haklay, Can Rager, Owen Lewis, Thomas McGrath, Jack Merullo, Ekdeep Singh Lubana, Atticus Geiger",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19611",
+      "title": "Forking Fast: Efficiently Estimating Uncertainty Dynamics in Text Generation"
+    },
+    {
+      "author": "Hexi Wang, Yujia Zhou, Bangde Du, Weihang Su, Xinyuan Cao, Qingyi Pan, Qingyao Ai, Yueyue Wu, Min Zhang, Yiqun Liu",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19621",
+      "title": "Mitigating Identity Essentialism in LLM Agents with Longitudinal Life Trajectories"
+    },
+    {
+      "author": "Nyx Iskandar, Saathvik Selvan, Slater Victoroff",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19726",
+      "title": "Projector Is All You Train"
+    },
+    {
+      "author": "Yash Ganpat Sawant",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19746",
+      "title": "PersonalBench: Measuring the Authorship Gap in LLM Personalization"
+    },
+    {
+      "author": "Qihang Fan, Huaibo Huang, Zhiying Wu, Bingning Wang, Ran He",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19758",
+      "title": "FlashPrefill V2: Block-Sparse Prefill Attention for Long-Context LLM Serving"
+    },
+    {
+      "author": "Mattia Carletti, Edward Phillips, Fredrik K. Gustafsson, Patitapaban Palo, Lei Clifton, Danielle Belgrave, Xiao Gu, David A. Clifton",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20116",
+      "title": "When Text and Numbers Disagree: Evidence Arbitration in Large Language Models"
+    },
+    {
+      "author": "Atsuyuki Miyai, Kiyoharu Aizawa, Toshihiko Yamasaki",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20169",
+      "title": "Task-CoEvolve: Efficient Harness Optimization via Adaptive Validation Task Selection"
+    },
+    {
+      "author": "Sahil Kale, Ian Harris",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20338",
+      "title": "ConceptGuard: Benchmarking Context-Sensitive Unlearning in Large Language Models"
+    },
+    {
+      "author": "Chengsong Huang, Zifeng Wang, Rujun Han, Jun Yan, Yanfei Chen, Zoey CuiZhu, Ke Jiang, Peng Xia, Han Yu, Yufan Zhuang, Yifei Ming, Jiaqi Pan, Bhavana Dalvi Mishra, Jiaxin Huang, Burak Gokturk, Tomas Pfister, Chen-Yu Lee",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19880",
+      "title": "EnvHarness: Awakening Static Worlds for Agent Learning"
+    },
+    {
+      "author": "Mehdi Azarafza, Faezeh Pasandideh, Ali Ehteshami Bejnordi, Stefan Henkler, Achim Rettberg",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20129",
+      "title": "Multi-Agent Orchestration with the Common-Sense Reasoning Capabilities of LLMs for Autonomous Driving"
+    },
+    {
+      "author": "Yiyang Feng, Biddut Sarker Bijoy, Niranjan Balasubramanian, Jiawei Zhou",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20274",
+      "title": "Break It Down, Pass It On: Cross-Task Skill Transfer in LLM Agents"
+    },
+    {
+      "author": "Yizhe Chi, Wenyi Li, Deyao Hong, Xiaoqiu Wang, Mingju Gao, Kaisen Yang, Bingxiang He, Youjie Zheng, Calvin Xiao, Qinhuai Na",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20318",
+      "title": "AI4AI-Bench: Benchmarking LLM Agents in Algorithmic Design for Recursive Self-Improvement"
+    },
+    {
+      "author": "Shanghua Gao, Yuchang Su, Pengwei Sui, Curtis Ginder, Marinka Zitnik",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.23522",
+      "title": "Qworld: Question-Specific Evaluation Criteria for LLMs"
+    },
+    {
+      "author": "Ting-Wei Li, Sirui Chen, Jiaru Zou, Yingbing Huang, Tianxin Wei, Jingrui He, Hanghang Tong",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.26170",
+      "title": "EvoSelect: Data-Efficient LLM Evolution for Targeted Task Adaptation"
+    },
+    {
+      "author": "Bin Zhu, Yi Xie, Yanghui Rao",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.01034",
+      "title": "A Finite-Calibration Regime Map for LLM Judge Panels"
+    },
+    {
+      "author": "Hangfan Zhang, Shao Zhang, Kangcong Li, Chen Zhang, Yang Chen, Yiqun Zhang, Lei Bai, Shuyue Hu",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.09498",
+      "title": "Self-Harness: Harnesses That Improve Themselves"
+    },
+    {
+      "author": "Cedar Site Bai, Zhenyu Liao, Duanshun Li, Sheikh Sarwar, Huiyuan Chen, Yuan Chen, Changhe Yuan, Haiyang Zhang, Qilin Qi",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.15949",
+      "title": "Ask to Be Sure: Informative Interactions for Confident Multi-Turn LLM Recommendation"
+    },
+    {
+      "author": "dev-experiments",
+      "date": "2026-08-20T20:52:00.000Z",
+      "domain": "teachmecoolstuff.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain",
+      "title": "Teaching a local LLM to reason about a new domain through continued pretraining"
+    },
+    {
+      "author": "Sam Black",
+      "date": "2026-08-20T13:30:00.000Z",
+      "domain": "towardsdatascience.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://towardsdatascience.com/how-to-fine-tune-an-llm-an-end-to-end-guide/",
+      "title": "How to Fine-Tune an LLM: An End-to-End Guide"
+    },
+    {
+      "author": "Mohamed Akrout, Olivera Kotevska, Dan Wilson",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19579",
+      "title": "Enforcing LLM Safety through DMD-based Classification of Prompt-Response Embedding Dynamics"
+    },
+    {
+      "author": "Hyunse Lee, Jiwoo Jeong, Haneul Lee, Kyochul Jang, Youngjae Yu, Woojin Lee",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19729",
+      "title": "SafeBranch: Branch-Pair Safety Alignment for Embodied Agents"
+    },
+    {
+      "author": "Fujiang Yuan, Xia Huang, Lusheng Wang, Jun Ding, Zhen Tian, Yuxin Wang, Shaojie Gu, Yuki Funabora, Yanhong Peng, Zebing Mao",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19794",
+      "title": "Towards general embodied intelligence: integrating large language models, knowledge bases, and reasoning capabilities to build the next generation of AI agents"
+    },
+    {
+      "author": "Yu Chen, Ting Lei, Yaoyi Li, Jia Cai, Zhecen Wu, Yang Liu",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20237",
+      "title": "Rule-Compliant Visual Spatial Planning for Multimodal Large Language Models"
+    },
+    {
+      "author": "Jiahao Lin, Alish Kanani, Sangwan Lee, Jaehyun Park, Umit Ogras",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19395",
+      "title": "HYDRA: A Heterogeneous Chiplet DSE Framework for Serving Dynamic Hybrid LLM Workloads"
+    },
+    {
+      "author": "Yue Wang, Yi Liu, Gelei Deng, Ying Zhang, Yuekang Li, Zhenyu Chen, Leo Zhang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19901",
+      "title": "MaliciousSkillBench: A Comprehensive Benchmark for Malicious Agent Skill Detection"
+    },
+    {
+      "author": "Yu Li, Haoyu Luo, Yuejin Xie, Yuqian Fu, Zhonghao Yang, Shuai Shao, Qihan Ren, Wanying Qu, Yanwei Fu, Yujiu Yang, Jing Shao, Xia Hu, Dongrui Liu",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.02022",
+      "title": "ATBench: A Diverse and Realistic Agent Trajectory Benchmark for Safety Evaluation and Diagnosis"
+    },
+    {
+      "author": "Zeyu Ren, Ling Yue, Ran Li, Yishu Wang, Shengxiang Xu, Hanmo Liu, Shaowu Pan, Shimin Di",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.21596",
+      "title": "FlowEvo: Self-Evolving Agents through the Co-Evolution of Workflows and Executable Skills"
+    },
+    {
+      "author": "Yi Liu",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.01548",
+      "title": "LLM Capability Limits: Static Emergence and Dynamic Boundary Control"
+    },
+    {
+      "author": "Sandra C. Matz, Kimberly Klugescheid, C. Blaine Horton, Sofie Goethals",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2509.02910",
+      "title": "The Basic B*** Effect: The Use of LLM-based Agents Reduces the Distinctiveness and Diversity of People\u0027s Choices"
+    },
+    {
+      "author": "/u/funJS",
+      "date": "2026-08-20T22:55:04.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1vtyty2/training_an_llm_on_a_new_domain/",
+      "title": "Training an LLM on a new domain"
+    },
+    {
+      "author": "Yihan Xie, Hanwen Cui, Runze Ye, Juekai Lin, Haoyang Wang, Jinhao Mao, Bo Zhang, Wenqiao Zhang, Xiaogang Guo, Jun Xiao, Lei Zhang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19297",
+      "title": "Holtercare-Bench: A Multimodal Benchmark for Evaluating Long-Term Dynamic ECG Analysis"
+    },
+    {
+      "author": "Xiucheng Wang, Zhenye Chen, Nan Cheng, Zhisheng Yin, Xuemin Shen",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.18853",
+      "title": "Learn for Variation: Efficient AAV Trajectory Learning through a Differentiable Wireless World Model"
+    },
+    {
+      "author": "Yao Liang, Dongcheng Zhao, Feifei Zhao, Guobin Shen, Yuwei Wang, Dongqi Liang, Yi Zeng",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2509.08022",
+      "title": "DiverValue-Bench: A Benchmark and Fine-Tuning Framework for Aligning Large Language Models with Diverse Human Values"
+    },
+    {
+      "author": "Mengru Wang, Haozhe Luo, Zhenqian Xu, Zhixiang Cui, Haoming Xu, Qu Yang, Jizhan Fang, Junfeng Fang, Ningyu Zhang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20202",
+      "title": "MemTrapBench: Benchmarking Cognitive Traps in LLM Memory Use"
+    },
+    {
+      "author": "Jaiden Fairoze, Neal Mangaokar, Kamalika Chaudhuri, Sanjam Garg, Saeed Mahloujifar",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19857",
+      "title": "Inadvertent Context Leakage in Language Models"
+    },
+    {
+      "author": "Qian Kou, Xiaofeng Shi, Xiaosong Qiu, Hua Zhou",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20281",
+      "title": "Inject, Align, Recover: Staged Post-Training for Retrieval-Free Document Knowledge Internalization"
+    },
+    {
+      "author": "Poomphob Suwannapichat, Boonyarit Changaival, Caesar Wu, Pascal Bouvry",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20099",
+      "title": "Reward-Guided Autoregressive Graph Generation for Efficient Multi-Agent Communication Topology Design"
+    },
+    {
+      "author": "Mahyar Ghazanfari, Matthias Casanova, Jordan Kam, Alex Zongo, Peng Wei, Torsten Darrell, Alexandre Bayen",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19299",
+      "title": "Air Traffic Control Using Large Language Models: Prompt Engineering, Architecture, and Evaluation"
+    },
+    {
+      "author": "Pei Wang, Xu Chen, Ji-Rong Wen",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19689",
+      "title": "Rethinking the Evaluation and Optimization of LLM-Based Social Simulation"
+    },
+    {
+      "author": "Tenghui Huang, Jiawen Kang, Dongning Liu, Changyan Yi, Chengjun Cai, Anjia Yang, Li Li, Dong In Kim",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19680",
+      "title": "Frequency-Aware Continual Learning for Smart Contract Vulnerability Detection with Large Language Models"
+    },
+    {
+      "author": "Jacob Nielsen, Danial Namazifard, Lukas Galke Poech, Peter Schneider-Kamp",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19889",
+      "title": "Write Once, Run Everywhere: The Axon DSL for Shape-Safe and Framework-Agnostic LLM Architectures"
+    },
+    {
+      "author": "Huang Cheng, Scott Zhang, Aubert Li",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19659",
+      "title": "FleetSieve: Decision-Critical Profiling for SLO-Aware LLM Fleet Configuration"
+    },
+    {
+      "author": "Ling Zhou, Yihao Huang, Jingling Sun, Zhiwen Tian, Yi Zeng, Qihe Liu, Shijie Zhou",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19737",
+      "title": "TempJail: Temporal Jailbreak Attack against Large Vision-Language Models via Subtitle Scheduling"
+    },
+    {
+      "author": "Fangxu Yu, Hongyu Zhao, Tianyi Zhou",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2510.03519",
+      "title": "TS-Reasoner: Aligning Time Series Foundation Models with LLM Reasoning"
+    },
+    {
+      "author": "Bo Qian, Yuting Wu, Shuang Zeng, Huaiyu Wan, Dalin Zhang, Jiqiang Liu",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19803",
+      "title": "MileGPO: Milestone Inference with Local Evidence for Graph-Based Policy Optimization of Long-Horizon LLM Agents"
+    },
+    {
+      "author": "Zhuoheng Li, Ying Chen",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.07104",
+      "title": "Extended to Reality: Prompt Injection in 3D Environments"
+    },
+    {
+      "author": "Yuanhong Jiang, Jingjie Zou, Rui Jiang, Zhenghong Lin, Xusheng Yu, Qiqi Huang, Shuai Jia, Shijie Dai",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06108",
+      "title": "Evaluating Investment Logic in Large Language Models: A Real-World Benchmark Towards Personalzied Financial Agents"
+    },
+    {
+      "author": "Dingzirui Wang, Xuanliang Zhang, Keyan Xu, Qingfu Zhu, Wanxiang Che",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20153",
+      "title": "FormalTCS: Benchmarking End-to-End Frontier Formal Theoretical Computer Science Research of Large Language Models"
+    },
+    {
+      "author": "Yichu Fang, Sitong Wei, Haozhe Hu, Xiaoyu Shen",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19662",
+      "title": "ReCache: Efficient KV Cache Reuse and Compression for Tool-Augmented LLM Agents"
+    },
+    {
+      "author": "Seongjae Kang, Taehyung Yu, Sung Ju Hwang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19861",
+      "title": "PolicyGuide: From Guarding One Action to Guiding the Whole Workflow for Policy-Compliant LLM Agents"
+    },
+    {
+      "date": "2026-08-20T10:01:00.000Z",
+      "domain": "cio.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html",
+      "title": "Looking to avoid agentic failure? These 13 AI evaluation tools will help"
+    },
+    {
+      "author": "Shayan Shahrabi-Farahani, Dara Rahmati",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.18578",
+      "title": "Compress and Forget: bitsandbytes Quantization Amplifies Proactive Interference in LLMs"
+    },
+    {
+      "author": "Rongyu Yu, Ke Niu, Fengxiang He",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19807",
+      "title": "Answer-Level Trust Selection for Physical Vision-Language Reasoning"
+    },
+    {
+      "author": "Bin Zhu, Yi Xie, Yanghui Rao",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19802",
+      "title": "Stopping and Routing LLM Judge Panels"
+    },
+    {
+      "author": "Kai Pan, Rong Hou",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.10555",
+      "title": "Agent-First Tool API: A Semantic Interface Paradigm for Enterprise AI Agent Systems"
+    },
+    {
+      "author": "Jiawei Feng, Jiancan Wu, Xingyu Zhu, Junkang Wu, Xiang Wang, Xiangnan He",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19598",
+      "title": "PEA-DPO: Perception-Enhanced Alignment Direct Preference Optimization for MLLMs Alignment"
+    },
+    {
+      "author": "Sokhna Diarra Mbacke, Mouloud Belbahri, Gabriel Loaiza-Ganem",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19323",
+      "title": "Improved Confidence Estimates for Black-Box Large Language Models"
+    },
+    {
+      "author": "Lin Yao",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.18738",
+      "title": "Remask, Don\u0027t Replace: Token-to-Mask Refinement in Diffusion Language Models"
+    },
+    {
+      "author": "Roshan Kenia, Stephanie L McNamara, William Lotter",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.27154",
+      "title": "Anatomy Contextualized Adaptation of CT Foundation Models"
+    },
+    {
+      "author": "Yiyang Luo, Yihang Jiang, Qijun Xie, Liang Lan, Lin Willian Cong, Anyi Rao, Yunya Song",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19974",
+      "title": "ReguSim: Evaluating LLM Agent Rule Grounding in Financial Compliance"
+    },
+    {
+      "author": "Alin-Ionut Popa",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19739",
+      "title": "Question-Guided Evidence Acquisition for Multimodal Visual Question Answering"
+    },
+    {
+      "author": "Haonan He, Xinyue Fan",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19800",
+      "title": "LoRA-GA$^2$: Low Rank Adaptation with Multi-step Gradient Adaptive Alignment"
+    },
+    {
+      "author": "Rishabh Jha, Amrita Singh, Prashanna Chudal",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.23487",
+      "title": "CADRE: Stable, Parameter Efficient Adaptation of Medical Vision Language Models with Bounded Forgetting and Prior Drift"
+    },
+    {
+      "author": "Baptiste Rossigneux, Inna Kucher, Vincent Lorrain, Emmanuel Casseau",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19285",
+      "title": "Clustering and Token Denoising for Faster and More Robust VLMs"
+    },
+    {
+      "author": "Nicolas Rodriguez-Alvarez (IES Parquesol, Valladolid, Spain)",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19206",
+      "title": "Hallucination as a Feature, not a Defect: Evaluating a multi-agent architecture to transform speculative language-model outputs into testable scientific hypotheses"
+    },
+    {
+      "author": "Baichuan Li, Junyi Yao, Zihao Zheng",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19564",
+      "title": "Remember, Verify, or Ask? Cross-Family Evaluation of Memory Commitment in LLM Agents"
+    },
+    {
+      "author": "Alexander Nemecek, Osama Zafar, Debargha Ganguly, Vikash Singh, Vipin Chaudhary, Erman Ayday",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20047",
+      "title": "Auditing Cross-Lingual Fairness in Language Model Watermarking"
+    },
+    {
+      "author": "Li Zhao, Rui Sun, Zuoyou Jiang, Bo Yang, Yuxiao Bai, Mengting Chen, Jing Li, Zuo Bai",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2508.00554",
+      "title": "ContestTrade: A Multi-Agent Trading System Based on Internal Contest Mechanism"
+    },
+    {
+      "author": "Ruiguo Zhong, Benshan Ma, Xiaolong Chen, Lang Zhang, Mingyue Feng, Yaonong Wang, Pei Liu, Jun Ma",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19085",
+      "title": "DA-WAM: Decision-Aligned Future Latents for Driving World Models"
+    },
+    {
+      "author": "doppp",
+      "date": "2026-08-20T02:12:17.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.09867",
+      "title": "Stealing Reasoning Traces from Proprietary LLM APIs"
+    },
+    {
+      "author": "Saurabhchand Bhati, Samuel Thomas, Hilde Kuehne, Rogerio Feris, James Glass",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2511.20973",
+      "title": "Towards Audio Token Compression in Large Audio Language Models"
+    },
+    {
+      "author": "Hung-Chun Hsu, Po-Jen Ko, Che-Cheng Wu, Li-Yang Chang, Chuan-Ju Wang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.11922",
+      "title": "LODESTAR: Robust Entropy-Based Answer Selection in Retrieval-Augmented Generation for Question Answering -- Directing Frozen-LLM Entropy with a Reinforcement-Learned Prompt Polarizer under Misleading Passages"
+    },
+    {
+      "author": "Lintai Hou",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06834",
+      "title": "Graph Machine: Exploring Edge Mechanisms as an Inductive Bias"
+    },
+    {
+      "date": "2026-08-21T01:40:01.000Z",
+      "domain": "techxplore.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techxplore.com/news/2026-08-qa-perils-agentic-ai.html",
+      "title": "Q\u0026A: Promise and perils of agentic AI"
+    },
+    {
+      "author": "Boyang Zhang, Lianlei Shan",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.06245",
+      "title": "MPCoT: Reward-Guided Multi-Path Latent Reasoning for Test-Time Scalable Vision-Language-Action"
+    },
+    {
+      "author": "Gijs Kassenaar, Zhao Yang, Vincent Fran\\c{c}ois-Lavet",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20256",
+      "title": "Learning When to Think: Adaptive Reasoning for Test-Time Compute Allocation"
+    },
+    {
+      "author": "Yingjian Chen (Drew), Fan Gao (Drew), Sherry T. Tong (Drew), Haoyu Zhang (Drew), Aosong Feng (Drew), Kevin W. Jin (Drew), Xing Wu (Drew), Jinghui Lu (Drew), Abdul Samad (Drew), Akbar Faruqi (Drew), Cesar Caraballo (Drew), Cibele Brand\\~ao (Drew), Dhruva (Drew), Gupta, Eunji Jeon, Gabriel Madera-Santiago, Geon Lee, Hugo Toshio Itikawa, Insook Cho, Isabelli Martins, Isarar Siddique, Israr Ahmed, Jihyo Kwak, Kanyakorn Veerakanjana, Luis Guilherme Cardoso, Minjin Kim, Piyalitt Ittichaiwong, Renee Dua, Santiago Gudi\\~no-Rosales, Xiujie Chen, Zeo Lapalus, Zixin Xu, Michihiro Yasunaga, Rex Ying, Heuiseok Lim, Jaewoo Kang, Chanjun Park, Hang Jiang, Ethan Goh, Hyunjae Kim, Edison Marrese-Taylor, Yusuke Iwasawa, Yutaka Matsuo, Qingyu Chen, Irene Li",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19981",
+      "title": "HealMed: Multilingual Evaluation of Large Language Models in Medicine"
+    },
+    {
+      "author": "Xinyi Fan, Miri Liu, Ruozhen Yang, Siru Ouyang, Jiawei Han",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19652",
+      "title": "Can Agent Memory Systems Track Evolving State?"
+    },
+    {
+      "author": "Sina Alemohammad, Denghui Zhang, Bolong Tang, Anthony Qin, Gengchen Mai, Ahmed Abbasi, Richard Baraniuk, Zhangyang Wang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19230",
+      "title": "When AI Writes, Who Gets Cited? Evidence of Citation Monoculture Across Language Models"
+    },
+    {
+      "author": "Jaehoon Lee, Jun Seo, Seunghan Lee, Tae Yoon Lim, Dongwan Kang, Hwanil Choi, Minjae Kim, Sungdong Yoo, Junhyeok Kang, Sangjun Han, Soonyoung Lee, Wonbin Ahn",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.03259",
+      "title": "FinVerse: Financial Time-Series Benchmark"
+    },
+    {
+      "author": "James Henry",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.24856",
+      "title": "The Concept Allocation Zone: Tracking How Concepts Form Across Transformer Depth"
+    },
+    {
+      "author": "Yu Chen, Ruishuo Chen, Xun Wang, Zhuoran Li, Longbo Huang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19993",
+      "title": "Optimal Skill Selection for LLM Agents with Provable Bicriteria Guarantees"
+    },
+    {
+      "author": "Dongsheng Zuo, Jiadong Zhu, Yang Luo, Yuzhe Ma",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2507.06127",
+      "title": "PrefixAgent: An LLM-Powered Design Framework for Efficient Prefix Adder Optimization"
+    },
+    {
+      "author": "Prachi Garg, Steve Xing, Prahit Yaugand, Saurabh Gupta, Derek Hoiem",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19490",
+      "title": "Fine-Tuning VLAs with Self-Demonstrated Generative Control for Multi-Task Manipulation"
+    },
+    {
+      "author": "Muhan Gao, Zih-Ching Chen, Kuan-Hao Huang",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.10828",
+      "title": "The First Drop of Ink: Nonlinear Impact of Distracting Information in Long-Context Reasoning"
+    },
+    {
+      "author": "Pranav Chandaliya",
+      "date": "2026-08-21T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.19526",
+      "title": "Automated Summarization of Financial News Using Large Language Models and Retrieval-Augmented Generation: An Early Empirical Study (Fall 2023)"
+    }
+  ],
+  "business_angle": [
+    "Infrastructure suppliers and AI platforms could benefit if long-context serving and cache-compression methods lower inference cost per request [arxiv.org#9][arxiv.org#52].",
+    "Financial compliance evaluation should audit rule-grounded actions and evidence use, not just a single compliance score, because trader rationales can mislead monitors [arxiv.org#62].",
+    "Companies that log encrypted reasoning blocks may expose secrets if weaker models decode those blocks, as demonstrated by the cross-model decryption attack [arxiv.org#74].",
+    "Fine-tuning vendors and toolmakers may see demand from teams adapting smaller local models with LoRA rather than full retraining [teachmecoolstuff.com#1][arxiv.org#64]."
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "One citation study found 11 language models from three vendors concentrated citations on a narrow subset of real papers even after authors, years, venues and citation counts were hidden [arxiv.org#82].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=teachmecoolstuff.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "teachmecoolstuff.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=towardsdatascience.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "towardsdatascience.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cio.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cio.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techxplore.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techxplore.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Enterprise software: Agent-First Tool API reported validation in a production multi-tenant SaaS platform [arxiv.org#57].",
+    "Customer service: PolicyGuide raised mean Pass^4 across airline, retail and telecom domains [arxiv.org#53].",
+    "Hardware serving: HYDRA reported throughput and time-to-first-token improvements for hybrid LLM serving on heterogeneous chiplet systems [arxiv.org#28].",
+    "Financial agents: InvestLogicBench released documented decisions from real-world investors [arxiv.org#50]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Research",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 95,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "CIO",
+          "url": "https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html"
+        }
+      ],
+      "text": "Enterprise AI evaluators: CIO described evaluation and benchmarking as an emerging enterprise niche distinct from AgentOps observability and trust-and-guardrails tools for agentic AI systems."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.19652"
+        }
+      ],
+      "text": "Agent memory researchers: The StateMemBench authors argued that memory systems should track evolving state, not only extract, store and retrieve previously stated facts."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.19974"
+        }
+      ],
+      "text": "Financial compliance researchers: The ReguSim authors found that trader rationales can mislead an independent monitor unless enforcement evidence is shown, and that simple structured baselines matched or exceeded prompt-only LLMs in monitoring, suggesting that compliance evaluation should audit evidence use, not just stated reasoning."
+    },
+    {
+      "sources": [
+        {
+          "name": "Teach Me Cool Stuff",
+          "url": "https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain"
+        }
+      ],
+      "text": "Local fine-tuning practitioners: Teach Me Cool Stuff reported using LoRA-based continued pretraining with only 66 million targeted parameters, 1.6% of Qwen 3 4B\u0027s total parameter count."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-21T12:00:14.251Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Quantization interference: INT4 quantization significantly reduced retrieval accuracy under high proactive interference, linked to same-key intrusion errors, while INT8 also showed a smaller penalty in some models [arxiv.org#54].",
+    "Verification taxonomy: A proposed Verification Autonomy Levels (VAL) framework classifies verification schemes by where the specification comes from and what the verdict guarantees, highlighting that substitution- and sampling-based verifiers cannot confirm completeness [arxiv.org#22].",
+    "Deployment evidence: Most papers were preprints or benchmark studies, so their reported gains and failures require independent replication and production validation before they support operational claims [arxiv.org#9][arxiv.org#52][arxiv.org#79][common]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://arxiv.org/abs/2604.02022",
+    "https://arxiv.org/abs/2608.19611",
+    "https://arxiv.org/abs/2608.20129",
+    "https://arxiv.org/abs/2608.19880",
+    "https://arxiv.org/abs/2605.10828",
+    "https://arxiv.org/abs/2608.19230",
+    "https://arxiv.org/abs/2608.19208",
+    "https://arxiv.org/abs/2508.00554",
+    "https://arxiv.org/abs/2608.19981",
+    "https://arxiv.org/abs/2605.10555",
+    "https://arxiv.org/abs/2608.19803",
+    "https://arxiv.org/abs/2608.19395",
+    "https://arxiv.org/abs/2608.20047",
+    "https://arxiv.org/abs/2509.08022",
+    "https://arxiv.org/abs/2608.19800",
+    "https://arxiv.org/abs/2608.19490",
+    "https://arxiv.org/abs/2607.27154",
+    "https://arxiv.org/abs/2608.19009",
+    "https://arxiv.org/abs/2606.01034",
+    "https://arxiv.org/abs/2608.19529",
+    "https://arxiv.org/abs/2608.19857",
+    "https://arxiv.org/abs/2608.18578",
+    "https://arxiv.org/abs/2608.19689",
+    "https://arxiv.org/abs/2607.21596",
+    "https://arxiv.org/abs/2608.03259",
+    "https://arxiv.org/abs/2507.06127",
+    "https://news.google.com/atom/articles/CBMigAFBVV95cUxQT0sySkpQZmFZbFI4XzRWTWtqTEIyTENmdGFGa01Oa0JtOWdWc3NMWk5tdEFTeWhuQkFxNlJWeXlTRklHVWh6SVA5a3RWM0tsN0tqX2VfeVNIRWxkN1JFdndZLV9zNUhZM0lOa0hyNDJybkpvazdfWlRSUTJQN1dVLQ",
+    "https://arxiv.org/abs/2608.20274",
+    "https://arxiv.org/abs/2608.19285",
+    "https://arxiv.org/abs/2608.19746",
+    "https://arxiv.org/abs/2608.19659",
+    "https://arxiv.org/abs/2608.20099",
+    "https://arxiv.org/abs/2608.09867",
+    "https://arxiv.org/abs/2509.02910",
+    "https://arxiv.org/abs/2603.18853",
+    "https://arxiv.org/abs/2608.20318",
+    "https://arxiv.org/abs/2608.19794",
+    "https://arxiv.org/abs/2606.17168",
+    "https://www.reddit.com/r/LLMDevs/comments/1vtyty2/training_an_llm_on_a_new_domain/",
+    "https://arxiv.org/abs/2608.20169",
+    "https://arxiv.org/abs/2608.19737",
+    "https://arxiv.org/abs/2608.19901",
+    "https://arxiv.org/abs/2606.09498",
+    "https://arxiv.org/abs/2604.18738",
+    "https://arxiv.org/abs/2608.19729",
+    "https://arxiv.org/abs/2608.20116",
+    "https://arxiv.org/abs/2608.20237",
+    "https://arxiv.org/abs/2608.19206",
+    "https://arxiv.org/abs/2608.06108",
+    "https://arxiv.org/abs/2608.19861",
+    "https://arxiv.org/abs/2608.20202",
+    "https://arxiv.org/abs/2602.07104",
+    "https://arxiv.org/abs/2608.20256",
+    "https://arxiv.org/abs/2603.23522",
+    "https://www.teachmecoolstuff.com/viewarticle/teaching-a-local-llm-a-new-domain",
+    "https://arxiv.org/abs/2608.19207",
+    "https://arxiv.org/abs/2608.19662",
+    "https://arxiv.org/abs/2608.19807",
+    "https://arxiv.org/abs/2608.19889",
+    "https://arxiv.org/abs/2608.19652",
+    "https://arxiv.org/abs/2608.19218",
+    "https://arxiv.org/abs/2608.20338",
+    "https://arxiv.org/abs/2606.06245",
+    "https://arxiv.org/abs/2606.23487",
+    "https://arxiv.org/abs/2608.19526",
+    "https://arxiv.org/abs/2608.19085",
+    "https://arxiv.org/abs/2608.19758",
+    "https://arxiv.org/abs/2608.19598",
+    "https://arxiv.org/abs/2608.19621",
+    "https://arxiv.org/abs/2608.11922",
+    "https://arxiv.org/abs/2608.19299",
+    "https://arxiv.org/abs/2608.20153",
+    "https://arxiv.org/abs/2608.19653",
+    "https://www.cio.com/article/4207550/tools-for-evaluating-and-benchmarking-agentic-ai-systems.html",
+    "https://arxiv.org/abs/2608.15949",
+    "https://arxiv.org/abs/2510.03519",
+    "https://arxiv.org/abs/2608.19726",
+    "https://arxiv.org/abs/2608.19297",
+    "https://arxiv.org/abs/2608.19993",
+    "https://arxiv.org/abs/2608.19564",
+    "https://arxiv.org/abs/2605.24856",
+    "https://arxiv.org/abs/2608.19739",
+    "https://techxplore.com/news/2026-08-qa-perils-agentic-ai.html",
+    "https://towardsdatascience.com/how-to-fine-tune-an-llm-an-end-to-end-guide/",
+    "https://arxiv.org/abs/2608.06834",
+    "https://arxiv.org/abs/2608.19579",
+    "https://arxiv.org/abs/2511.20973",
+    "https://arxiv.org/abs/2608.19680",
+    "https://arxiv.org/abs/2604.26170",
+    "https://arxiv.org/abs/2608.01548",
+    "https://arxiv.org/abs/2608.19802",
+    "https://arxiv.org/abs/2608.20281",
+    "https://arxiv.org/abs/2608.20084",
+    "https://arxiv.org/abs/2608.19974",
+    "https://arxiv.org/abs/2608.19323"
+  ],
+  "suggested_qna": [],
+  "summary": "Many AI research papers and practitioner articles published or surfaced on Aug. 20-21 examined how large language models behave when acting as agents, processing multimodal inputs, using tools or carrying sensitive context. The work covered agent evaluation and benchmarking, safety failures in multi-step trajectories, prompt injection in video and 3D settings, encrypted reasoning-trace leakage, memory errors, and domain-specific deployments in medicine, finance, robotics, air traffic control and enterprise software [arxiv.org#29][arxiv.org#30][arxiv.org#46][arxiv.org#49][arxiv.org#74][arxiv.org#81][arxiv.org#80][arxiv.org#62][arxiv.org#71][arxiv.org#41][cio.com#1][techxplore.com#1].\n\nSeveral papers found that systems designed to make AI agents more capable can also introduce measurable failure modes. Studies found that multimodal models lose accuracy under system-message constraints, irrelevant text can bias visual judgments, memory can distort reasoning, and visible compliance rules do not fully stop rejected actions in simulated financial trading [arxiv.org#1][arxiv.org#2][arxiv.org#37][arxiv.org#62]. Other work proposed mitigations, including workflow-level policy guidance, safer embodied-agent branch training, state-first memory tracking, black-box safety classifiers, and benchmarks that separate action compliance from stated rationales [arxiv.org#53][arxiv.org#25][arxiv.org#81][arxiv.org#24][arxiv.org#62].\n\nOther papers examined cost and deployment limits. New methods claimed large speedups or lower token, memory and evaluation costs for long-context serving, tool-augmented agents, multimodal token pruning, audio-token compression, adaptive reasoning, and LLM fleet profiling [arxiv.org#9][arxiv.org#52][arxiv.org#66][arxiv.org#75][arxiv.org#79][arxiv.org#45]. Practitioner pieces also addressed fine-tuning and continued pretraining, including an end-to-end guide to LLM fine-tuning and a local continued-pretraining experiment using LoRA adapters on Qwen 3 4B for a fictional travel-advice domain [towardsdatascience.com#1][teachmecoolstuff.com#1].",
+  "talking_points": [
+    "Agent safety: ATBench introduced 1,000 agent trajectories organized by risk source, failure mode, and real-world harm, using a long-context delayed-trigger protocol to capture risk emergence across multiple stages [arxiv.org#30].",
+    "Security risks: Researchers exploited compatibility of encrypted reasoning blocks across sessions, users, and models to force a weaker model to decode secrets, recovering PII and credentials without jailbreaking the stronger model [arxiv.org#74].",
+    "Serving efficiency: FlashPrefill V2 introduced block-sparse prefill attention with mean correction, PackGQA memory access, warp specialization, pingpong pipelining, FP8 inference, paged KV cache, and continuous batching for long-context serving [arxiv.org#9].",
+    "Memory limits: StateMemBench tested 234 multi-session scenarios with closed-pool grading that separates current-state answers from superseded-state errors, and proposed StateMem, a state-first memory method that explicitly tracks supersession and relational dependencies [arxiv.org#81].",
+    "Medical evaluation: HealMed contains 1,000 examples in each of nine languages, covering MCQA, NLI, and open-ended QA, developed over two years by 23 physicians and medical experts across nine countries [arxiv.org#80]."
+  ],
+  "technical_details": [
+    "Block-sparse prefill attention: FlashPrefill V2 adds mean correction, PackGQA memory access, warp specialization, pingpong pipelining, FP8 inference, paged KV cache and continuous batching for long-context serving [arxiv.org#9].",
+    "Resource-wise KV caching: ReCache assigns resource-local positions and removes cross-resource interactions so recurring tool or skill schemas can reuse composition-invariant KV blocks across different request orders [arxiv.org#52].",
+    "State supersession: StateMem explicitly tracks when facts, constraints or decisions replace earlier ones, letting graders distinguish current-state answers from superseded-state errors [arxiv.org#81]."
+  ],
+  "timeline": [],
+  "title": "AI studies probe agents\u2019 safety, memory and costs",
+  "travel_advisory": "",
+  "unique_domains": 7,
+  "url": "https://arxiv.org/abs/2608.19009",
+  "user_action_items": [
+    "Audit agent workflows before deployment: Test agents on multi-step trajectories and workflow-level compliance, not only final answers or single tool calls [arxiv.org#30][arxiv.org#53].",
+    "Avoid logging opaque reasoning blocks publicly: Treat encrypted or hidden model-state fields in session logs as sensitive because researchers recovered PII and credentials from decoded reasoning blocks [arxiv.org#74].",
+    "Validate memory updates separately: Check whether an agent should persist, verify, clarify or ignore user-derived information before writing it to durable memory [arxiv.org#68][arxiv.org#81]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

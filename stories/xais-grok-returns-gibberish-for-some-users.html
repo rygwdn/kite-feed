@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>xAI’s Grok returns gibberish for some users - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>xAI’s Grok returns gibberish for some users</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>xAI’s Grok chatbot returned nonsensical text to some users this week, including one response to a PDF-generation request that began, “match it without and your they and two for planets can practical and often cheese,” TechCrunch reported <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a><a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255" class="footnote-ref">[2]</a>. Users who spoke with TechCrunch said they were using Grok Lite and noticed the issue as early as Wednesday morning, while TechCrunch said it could not reproduce the problem and that it likely affected only a small subset of users <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a><a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255" class="footnote-ref">[2]</a>.
+
+TechCrunch reported that users posted complaints in Grok’s Reddit community and that refreshing a session often restored normal responses, though some users said the gibberish continued after repeated refreshes <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a>. The issue appeared limited to direct queries on Grok.com, and the Grok account on X said Thursday morning that the “rare temporary generation glitch” did not show up as an incident on xAI’s official status page <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Source checks: TechCrunch and Gizmodo reported that one affected user, checking Grok’s sources, found links to reinforcement-learning research sites <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a><a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255" class="footnote-ref">[2]</a>.</li>
+
+<li>User ratings: Gizmodo cited a recent YouGov UK poll that gave Grok 24.6% positive user satisfaction, above only Siri’s 23.7% among major AI platforms <a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Affected Grok users: Some users told TechCrunch the malfunction continued after multiple refreshes, while Reddit users posted examples such as a reply to the word “balls” that began, “app scale designs with that and to your horse choose batch,” and another that started with “people stable stage right professional on steel” <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a><a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/">TechCrunch</a>, 
+
+
+
+<a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255">Gizmodo</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>xAI: TechCrunch said the company did not respond to its request for comment on the malfunction.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/">TechCrunch</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Recover a bad Grok session: Start a fresh chat or regenerate the answer, which Grok’s X account said usually clears the temporary glitch <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a>.</li>
+
+<li>Check service status: Visit https://status.x.ai to see whether xAI lists an active Grok incident before troubleshooting your browser or account <a href="https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiaEFVX3lxTE1USEZNeXpHS2hHbTd6dEZQX0ZrazdERFlsX1ljRGFRUnIwRDJCVEdrZlNNVHJXblV3LXEtZURqZ2swTzBkbjJvUnA4NmFfWHhkUHIySjZTdm1OZUhEeV82b1hCVjJxUGpG">https://news.google.com/rss/articles/CBMiaEFVX3lxTE1USEZNeXpHS2hHbTd6dEZQX0ZrazdERFlsX1ljRGFRUnIwRDJCVEdrZlNNVHJXblV3LXEtZURqZ2swTzBkbjJvUnA4NmFfWHhkUHIySjZTdm1OZUhEeV82b1hCVjJxUGpG</a></li>
+
+
+
+
+
+<li><a href="https://gizmodo.com/grok-is-having-a-hard-time-2000801255">https://gizmodo.com/grok-is-having-a-hard-time-2000801255</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, techcrunch.com, gizmodo.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Russell Brandom",
+      "date": "2026-08-20T17:32:16.000Z",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/",
+      "title": "Grok keeps sending gibberish responses to users"
+    },
+    {
+      "author": "Tom McKay",
+      "date": "2026-08-20T21:55:49.000Z",
+      "domain": "gizmodo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://gizmodo.com/grok-is-having-a-hard-time-2000801255",
+      "title": "Grok Is Having a Hard Time"
+    },
+    {
+      "date": "2026-08-20T21:55:49.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1USEZNeXpHS2hHbTd6dEZQX0ZrazdERFlsX1ljRGFRUnIwRDJCVEdrZlNNVHJXblV3LXEtZURqZ2swTzBkbjJvUnA4NmFfWHhkUHIySjZTdm1OZUhEeV82b1hCVjJxUGpG",
+      "title": "Grok Is Having a Hard Time - Gizmodo"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gizmodo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gizmodo.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Chatbots",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/"
+        },
+        {
+          "name": "Gizmodo",
+          "url": "https://gizmodo.com/grok-is-having-a-hard-time-2000801255"
+        }
+      ],
+      "text": "Affected Grok users: Some users told TechCrunch the malfunction continued after multiple refreshes, while Reddit users posted examples such as a reply to the word \u201cballs\u201d that began, \u201capp scale designs with that and to your horse choose batch,\u201d and another that started with \u201cpeople stable stage right professional on steel\u201d [techcrunch.com#1][gizmodo.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechCrunch",
+          "url": "https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/"
+        }
+      ],
+      "text": "xAI: TechCrunch said the company did not respond to its request for comment on the malfunction."
+    }
+  ],
+  "primary_image": {
+    "caption": "Photo illustration showing the Grok logo on an iPhone screen, as described by Gizmodo.",
+    "credit": "Anna Barclay/Getty Images",
+    "link": "",
+    "url": ""
+  },
+  "published": "2026-08-21T12:00:14.251Z",
+  "quote": "",
+  "quote_attribution": "TechCrunch",
+  "quote_author": "Grok account on X",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMiaEFVX3lxTE1USEZNeXpHS2hHbTd6dEZQX0ZrazdERFlsX1ljRGFRUnIwRDJCVEdrZlNNVHJXblV3LXEtZURqZ2swTzBkbjJvUnA4NmFfWHhkUHIySjZTdm1OZUhEeV82b1hCVjJxUGpG",
+    "https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/",
+    "https://gizmodo.com/grok-is-having-a-hard-time-2000801255"
+  ],
+  "suggested_qna": [],
+  "summary": "xAI\u2019s Grok chatbot returned nonsensical text to some users this week, including one response to a PDF-generation request that began, \u201cmatch it without and your they and two for planets can practical and often cheese,\u201d TechCrunch reported [techcrunch.com#1][gizmodo.com#1]. Users who spoke with TechCrunch said they were using Grok Lite and noticed the issue as early as Wednesday morning, while TechCrunch said it could not reproduce the problem and that it likely affected only a small subset of users [techcrunch.com#1][gizmodo.com#1].\n\nTechCrunch reported that users posted complaints in Grok\u2019s Reddit community and that refreshing a session often restored normal responses, though some users said the gibberish continued after repeated refreshes [techcrunch.com#1]. The issue appeared limited to direct queries on Grok.com, and the Grok account on X said Thursday morning that the \u201crare temporary generation glitch\u201d did not show up as an incident on xAI\u2019s official status page [techcrunch.com#1].",
+  "talking_points": [
+    "Source checks: TechCrunch and Gizmodo reported that one affected user, checking Grok\u2019s sources, found links to reinforcement-learning research sites [techcrunch.com#1][gizmodo.com#1].",
+    "User ratings: Gizmodo cited a recent YouGov UK poll that gave Grok 24.6% positive user satisfaction, above only Siri\u2019s 23.7% among major AI platforms [gizmodo.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "xAI\u2019s Grok returns gibberish for some users",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://techcrunch.com/2026/08/20/grok-keeps-sending-gibberish-responses-to-users/",
+  "user_action_items": [
+    "Recover a bad Grok session: Start a fresh chat or regenerate the answer, which Grok\u2019s X account said usually clears the temporary glitch [techcrunch.com#1].",
+    "Check service status: Visit https://status.x.ai to see whether xAI lists an active Grok incident before troubleshooting your browser or account [techcrunch.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
