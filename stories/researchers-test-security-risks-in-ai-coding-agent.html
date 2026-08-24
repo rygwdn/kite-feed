@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers test security risks in AI coding agents - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers test security risks in AI coding agents</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI researchers and developers released work on agentic coding systems, including arXiv papers testing whether LLM-generated code can be made safer and cheaper to evaluate. One paper introduced ARQ, an agentic framework that automatically refines C/C++ CodeQL queries by comparing a query’s verdict with execution results from synthesized programs <a href="https://arxiv.org/abs/2608.01347" class="footnote-ref">[1]</a>. A separate twin-prompt study generated six web apps twice, once with an appended security-requirements section and once without; it confirmed 75 findings from 85 candidates. Security-aware prompts produced 24 findings, compared with 51 in baseline outputs, and no Critical or High issues <a href="https://arxiv.org/abs/2608.20637" class="footnote-ref">[3]</a>.
+
+Other papers reported limits in agentic coding. SUSVIBES benchmarked 12 coding-agent settings on 186 feature-request tasks drawn from real open-source projects with vulnerable human implementations; SWE-Agent with Claude 4 Sonnet produced functionally correct solutions 57% of the time, but only 11.8% were secure, and vulnerability hints did not mitigate the issues <a href="https://arxiv.org/abs/2512.03262" class="footnote-ref">[8]</a>. Another study argued coding-agent efficiency should be measured as cost per successful task because prompt wording, inference effort, harness policy, model choice, tool use, context management and provider accounting interact rather than operate as independent controls <a href="https://arxiv.org/abs/2608.20963" class="footnote-ref">[4]</a>.
+
+Developers also released or discussed tools to steer agents and constrain execution. Prism Reviewer advertises a multi-agent GitHub Action for pull-request review with AST parsing, dependency scanning, line verification and claimed 90% token savings <a href="https://github.com/marketplace/actions/prism-reviewer-ai" class="footnote-ref">[6]</a>; Flare and Faber use code graphs to help agents navigate repositories <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1vwazom/flare_a_graphfirst_ide_for_agentic_coding_watch/" class="footnote-ref">[5]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1vwiujg/i_built_an_opensource_coding_agent_that_uses_a/" class="footnote-ref">[9]</a>; Smolbox runs an Alpine Linux x86_64 VM, LLM tool calls and file controls inside a browser tab without server-side processing <a href="https://remyhax.xyz/posts/smolbox/" class="footnote-ref">[2]</a>; and OpenAI’s Codex repository described Codex CLI as a local coding agent with 116,000 stars and 17,700 forks on GitHub <a href="https://github.com/openai/codex" class="footnote-ref">[10]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://arxiv.org/abs/2608.01347">View original article</a></p>
+
+
+
+
+
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> In the twin-prompt study, the most severe finding was detected only through manual testing rather than automated analysis <a href="https://arxiv.org/abs/2608.20637" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Prompt limits: The twin-prompt study treated its results as descriptive rather than statistically established because each program variant was generated once across a small corpus <a href="https://arxiv.org/abs/2608.20637" class="footnote-ref">[3]</a>.</li>
+
+<li>Cost measurement: The prompt-waste paper said token and cache counts measure an agent trajectory but are not sufficient targets for optimizing coding-agent efficiency <a href="https://arxiv.org/abs/2608.20963" class="footnote-ref">[4]</a>.</li>
+
+<li>Review determinism: Prism Reviewer says it supports zero temperature, fixed seed routing and structured JSON output to reduce probabilistic drift across review runs <a href="https://github.com/marketplace/actions/prism-reviewer-ai" class="footnote-ref">[6]</a>.</li>
+
+<li>Reusable configuration: Enozunu uses enozunu.kdl and enozunu.lock.json as source-of-truth files to recreate the same AI-agent configuration across developer machines and CI runs <a href="https://github.com/tooppoo/enozunu" class="footnote-ref">[7]</a>.</li>
+
+<li>Query independence: ARQ does not require labeled datasets, commit history or vulnerability-specific templates to refine CodeQL vulnerability queries <a href="https://arxiv.org/abs/2608.01347" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>SUSVIBES authors: The authors framed their benchmark as evidence of poor security performance across tested coding-agent settings, especially for security-sensitive applications.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2512.03262">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Twin-prompt study author: Darko Andročec said the pipeline is being scaled to multiple models and repeated runs because the initial corpus was small and non-repeated.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.20963">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Smolbox creator: The Smolbox post presented the browser-only sandbox as a proof of concept and criticized current AI security practices for future users.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://remyhax.xyz/posts/smolbox/">remyhax.xyz</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Prism Reviewer developers: Vyoman Labs designed the reviewer around an Agent Council that routes structural, security and tactical context to separate agent roles instead of using one monolithic prompt.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/marketplace/actions/prism-reviewer-ai">GitHub Marketplace</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>2 December 2025:</strong> SUSVIBES paper first submitted for agent-security benchmarking <a href="https://arxiv.org/abs/2512.03262" class="footnote-ref">[8]</a>.</li>
+
+
+
+<li><strong>2 August 2026:</strong> Prompt-waste paper first submitted on coding-agent costs <a href="https://arxiv.org/abs/2608.20963" class="footnote-ref">[4]</a>.</li>
+
+
+
+<li><strong>21 August 2026:</strong> ARQ and twin-prompt papers submitted to arXiv <a href="https://arxiv.org/abs/2608.01347" class="footnote-ref">[1]</a><a href="https://arxiv.org/abs/2608.20637" class="footnote-ref">[3]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Execution-grounded refinement: ARQ treats a vulnerable synthesized program missed by a query as a false-negative weakness and a safe program flagged by a query as a false-positive weakness, then uses an LLM refinement loop to repair the query <a href="https://arxiv.org/abs/2608.01347" class="footnote-ref">[1]</a>.</li>
+
+<li>AST-guided review: Prism Reviewer combines local Tree-Sitter syntax trees, dependency warnings and usage-reference searches before compiling severity-categorized pull-request feedback <a href="https://github.com/marketplace/actions/prism-reviewer-ai" class="footnote-ref">[6]</a>.</li>
+
+<li>Read-only host mount: Smolbox can mount a user-selected browser folder read-only under /mnt/host, limiting how the in-browser VM sees local files <a href="https://remyhax.xyz/posts/smolbox/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Incorporate manual review into your AI code testing pipeline, as the twin-prompt study&#x27;s most severe finding was missed by automated tools <a href="https://arxiv.org/abs/2608.20637" class="footnote-ref">[3]</a>.</li>
+
+<li>Experiment with prompt wording and inference effort settings, as they can alter agent behavior and cost independently of task difficulty <a href="https://arxiv.org/abs/2608.20963" class="footnote-ref">[4]</a>.</li>
+
+<li>Keep agent configuration reproducible: Store shared selections in source-controlled configuration and lock files, as Enozunu does with enozunu.kdl and enozunu.lock.json <a href="https://github.com/tooppoo/enozunu" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://remyhax.xyz/posts/smolbox/">https://remyhax.xyz/posts/smolbox/</a></li>
+
+
+
+
+
+<li><a href="https://github.com/tooppoo/enozunu">https://github.com/tooppoo/enozunu</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20963">https://arxiv.org/abs/2608.20963</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2512.03262">https://arxiv.org/abs/2512.03262</a></li>
+
+
+
+<li><a href="https://github.com/marketplace/actions/prism-reviewer-ai">https://github.com/marketplace/actions/prism-reviewer-ai</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1vwazom/flare_a_graphfirst_ide_for_agentic_coding_watch/">https://www.reddit.com/r/ArtificialInteligence/comments/1vwazom/flare_a_graphfirst_ide_for_agentic_coding_watch/</a></li>
+
+
+
+<li><a href="https://github.com/openai/codex">https://github.com/openai/codex</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1vwiujg/i_built_an_opensource_coding_agent_that_uses_a/">https://www.reddit.com/r/LLMDevs/comments/1vwiujg/i_built_an_opensource_coding_agent_that_uses_a/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20637">https://arxiv.org/abs/2608.20637</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, arxiv.org, remyhax.xyz, github.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 4 unique domains, 10 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Sarel Weinberger, Amir Hozez",
+      "date": "2026-08-24T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.01347",
+      "title": "Prompt-Induced Waste in Coding Agents: Reasoning, Effort, Harness Design, and End-to-End Cost"
+    },
+    {
+      "author": "882542F3884314B",
+      "date": "2026-08-23T11:20:53.000Z",
+      "domain": "remyhax.xyz",
+      "image": "",
+      "image_caption": "",
+      "link": "https://remyhax.xyz/posts/smolbox/",
+      "title": "Agentic AI in a Smolbox"
+    },
+    {
+      "author": "Chunyi Wang, Yunfei Ke, Junfeng Yang, Yun-Yun Tsai, Penghui Li",
+      "date": "2026-08-24T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20637",
+      "title": "ARQ: Agentic CodeQL Query Refinement for C/C++ Vulnerability Detection"
+    },
+    {
+      "author": "Darko Andro\\v{c}ec",
+      "date": "2026-08-24T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20963",
+      "title": "Vibe Coding and Web Application Security: A Twin-Prompt Study"
+    },
+    {
+      "author": "/u/AlgoWithNoRhythm",
+      "date": "2026-08-23T16:00:42.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1vwazom/flare_a_graphfirst_ide_for_agentic_coding_watch/",
+      "title": "Flare, a graph-first IDE for agentic coding: watch the map change while your agent works"
+    },
+    {
+      "author": "aravinthan-n",
+      "date": "2026-08-23T12:22:24.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/marketplace/actions/prism-reviewer-ai",
+      "title": "Prism Reviewer \u2013 Multi-agent AI code reviewer built with LangGraph and LiteLLM"
+    },
+    {
+      "author": "philomagi",
+      "date": "2026-08-23T11:48:23.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/tooppoo/enozunu",
+      "title": "Show HN: Declarative, reproducible configuration materializer for AI agents"
+    },
+    {
+      "author": "Songwen Zhao, Danqing Wang, Kexun Zhang, Jiaxuan Luo, Zhuo Li, Lei Li",
+      "date": "2026-08-24T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2512.03262",
+      "title": "Is Vibe Coding Safe? Benchmarking Vulnerability of Agent-Generated Code in Real-World Tasks"
+    },
+    {
+      "author": "/u/Either-Win-862",
+      "date": "2026-08-23T20:59:56.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1vwiujg/i_built_an_opensource_coding_agent_that_uses_a/",
+      "title": "I built an open-source coding agent that uses a code graph to reduce context, cost, and search time"
+    },
+    {
+      "date": "2026-08-24T07:05:27.721Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/openai/codex",
+      "title": "openai/codex"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "In the twin-prompt study, the most severe finding was detected only through manual testing rather than automated analysis [arxiv.org#2].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=remyhax.xyz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "remyhax.xyz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Coding Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 10,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2512.03262"
+        }
+      ],
+      "text": "SUSVIBES authors: The authors framed their benchmark as evidence of poor security performance across tested coding-agent settings, especially for security-sensitive applications."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.20963"
+        }
+      ],
+      "text": "Twin-prompt study author: Darko Andro\u010dec said the pipeline is being scaled to multiple models and repeated runs because the initial corpus was small and non-repeated."
+    },
+    {
+      "sources": [
+        {
+          "name": "remyhax.xyz",
+          "url": "https://remyhax.xyz/posts/smolbox/"
+        }
+      ],
+      "text": "Smolbox creator: The Smolbox post presented the browser-only sandbox as a proof of concept and criticized current AI security practices for future users."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub Marketplace",
+          "url": "https://github.com/marketplace/actions/prism-reviewer-ai"
+        }
+      ],
+      "text": "Prism Reviewer developers: Vyoman Labs designed the reviewer around an Agent Council that routes structural, security and tactical context to separate agent roles instead of using one monolithic prompt."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-24T12:00:11.779Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://remyhax.xyz/posts/smolbox/",
+    "https://arxiv.org/abs/2608.01347",
+    "https://github.com/tooppoo/enozunu",
+    "https://arxiv.org/abs/2608.20963",
+    "https://arxiv.org/abs/2512.03262",
+    "https://github.com/marketplace/actions/prism-reviewer-ai",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1vwazom/flare_a_graphfirst_ide_for_agentic_coding_watch/",
+    "https://github.com/openai/codex",
+    "https://www.reddit.com/r/LLMDevs/comments/1vwiujg/i_built_an_opensource_coding_agent_that_uses_a/",
+    "https://arxiv.org/abs/2608.20637"
+  ],
+  "suggested_qna": [],
+  "summary": "AI researchers and developers released work on agentic coding systems, including arXiv papers testing whether LLM-generated code can be made safer and cheaper to evaluate. One paper introduced ARQ, an agentic framework that automatically refines C/C++ CodeQL queries by comparing a query\u2019s verdict with execution results from synthesized programs [arxiv.org#1]. A separate twin-prompt study generated six web apps twice, once with an appended security-requirements section and once without; it confirmed 75 findings from 85 candidates. Security-aware prompts produced 24 findings, compared with 51 in baseline outputs, and no Critical or High issues [arxiv.org#2].\n\nOther papers reported limits in agentic coding. SUSVIBES benchmarked 12 coding-agent settings on 186 feature-request tasks drawn from real open-source projects with vulnerable human implementations; SWE-Agent with Claude 4 Sonnet produced functionally correct solutions 57% of the time, but only 11.8% were secure, and vulnerability hints did not mitigate the issues [arxiv.org#4]. Another study argued coding-agent efficiency should be measured as cost per successful task because prompt wording, inference effort, harness policy, model choice, tool use, context management and provider accounting interact rather than operate as independent controls [arxiv.org#3].\n\nDevelopers also released or discussed tools to steer agents and constrain execution. Prism Reviewer advertises a multi-agent GitHub Action for pull-request review with AST parsing, dependency scanning, line verification and claimed 90% token savings [github.com#1]; Flare and Faber use code graphs to help agents navigate repositories [reddit.com#1][reddit.com#2]; Smolbox runs an Alpine Linux x86_64 VM, LLM tool calls and file controls inside a browser tab without server-side processing [remyhax.xyz#1]; and OpenAI\u2019s Codex repository described Codex CLI as a local coding agent with 116,000 stars and 17,700 forks on GitHub [github.com#3].",
+  "talking_points": [
+    "Prompt limits: The twin-prompt study treated its results as descriptive rather than statistically established because each program variant was generated once across a small corpus [arxiv.org#2].",
+    "Cost measurement: The prompt-waste paper said token and cache counts measure an agent trajectory but are not sufficient targets for optimizing coding-agent efficiency [arxiv.org#3].",
+    "Review determinism: Prism Reviewer says it supports zero temperature, fixed seed routing and structured JSON output to reduce probabilistic drift across review runs [github.com#1].",
+    "Reusable configuration: Enozunu uses enozunu.kdl and enozunu.lock.json as source-of-truth files to recreate the same AI-agent configuration across developer machines and CI runs [github.com#2].",
+    "Query independence: ARQ does not require labeled datasets, commit history or vulnerability-specific templates to refine CodeQL vulnerability queries [arxiv.org#1]."
+  ],
+  "technical_details": [
+    "Execution-grounded refinement: ARQ treats a vulnerable synthesized program missed by a query as a false-negative weakness and a safe program flagged by a query as a false-positive weakness, then uses an LLM refinement loop to repair the query [arxiv.org#1].",
+    "AST-guided review: Prism Reviewer combines local Tree-Sitter syntax trees, dependency warnings and usage-reference searches before compiling severity-categorized pull-request feedback [github.com#1].",
+    "Read-only host mount: Smolbox can mount a user-selected browser folder read-only under /mnt/host, limiting how the in-browser VM sees local files [remyhax.xyz#1]."
+  ],
+  "timeline": [
+    {
+      "content": "SUSVIBES paper first submitted for agent-security benchmarking [arxiv.org#4].",
+      "date": "2 December 2025",
+      "date_iso": "2025-12-02"
+    },
+    {
+      "content": "Prompt-waste paper first submitted on coding-agent costs [arxiv.org#3].",
+      "date": "2 August 2026",
+      "date_iso": "2026-08-02"
+    },
+    {
+      "content": "ARQ and twin-prompt papers submitted to arXiv [arxiv.org#1][arxiv.org#2].",
+      "date": "21 August 2026",
+      "date_iso": "2026-08-21"
+    }
+  ],
+  "title": "Researchers test security risks in AI coding agents",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://arxiv.org/abs/2608.01347",
+  "user_action_items": [
+    "Incorporate manual review into your AI code testing pipeline, as the twin-prompt study\u0027s most severe finding was missed by automated tools [arxiv.org#2].",
+    "Experiment with prompt wording and inference effort settings, as they can alter agent behavior and cost independently of task difficulty [arxiv.org#3].",
+    "Keep agent configuration reproducible: Store shared selections in source-controlled configuration and lock files, as Enozunu does with enozunu.kdl and enozunu.lock.json [github.com#2]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
