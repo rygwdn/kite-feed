@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Open-source AMD kernels target LLM inference gap - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Open-source AMD kernels target LLM inference gap</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Developers published new material on AMD-focused LLM inference, including a Zenodo record titled “Cross-vendor byte-identical inference for a 72B LLM (AMD MI300X vs. Nvidia H100)” and an open-source GitHub repository for Netra Kernel, a project that provides ahead-of-time GPU kernels for production inference on AMD hardware <a href="https://zenodo.org/records/19882078" class="footnote-ref">[1]</a><a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>. The GitHub project says Netra Kernel compiles model operations into fixed-contract raw-assembly kernels and packages them as loadable Netra Engines, using a TensorRT-style workflow for profiles, tactics, layout planning, static memory planning and engine building <a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>.
+
+A Reddit post in r/LocalLLaMA described an open-source kernel for Qwen3.6-35B-A3B on AMD MI350X hardware and reported 78,498 output tokens per second on eight GPUs <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/" class="footnote-ref">[3]</a>. The post said many LLM users rely on Nvidia GPUs, argued that MI350X has higher raw power than Nvidia B200, and identified AMD’s software stack and ROCm maturity as the main gap the developer sought to address <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/" class="footnote-ref">[3]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://zenodo.org/records/19882078">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Developer access: The Reddit poster said they obtained a handful of MI350X GPUs a few weeks before the post for experimentation and development <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/" class="footnote-ref">[3]</a>.</li>
+
+<li>Community interest: The Zenodo submission appeared on Hacker News with 6 points and no comments in the provided article metadata <a href="https://zenodo.org/records/19882078" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>NetraRuntime: The project presents Netra Kernel as a way to bring TensorRT-style engine building to native AMD GPU kernels while avoiding a model-locked codebase.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/NetraRuntime/netra-kernel">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Fixed-contract kernels: Netra compiles model operations for predetermined shapes, data types, layouts and quantization choices, reducing runtime flexibility in exchange for specialized serving behavior <a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>.</li>
+
+<li>Raw-assembly AMDGCN: The repository describes schedule-specific raw-assembly kernels for AMD GPUs, exposing lower-level control than generic framework kernels while requiring architecture-specific implementation work <a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>.</li>
+
+<li>Cross-vendor determinism: The Zenodo record’s title claims byte-identical inference for a 72B LLM across AMD MI300X and Nvidia H100, a stricter result than ordinary numerical closeness <a href="https://zenodo.org/records/19882078" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>The Reddit post&#x27;s 78,498 tok/s claim on 8 MI350X GPUs is a single data point without independent validation, making it difficult to assess real-world performance for investors <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/" class="footnote-ref">[3]</a>.</li><li>Open-source kernels may reduce customer dependence on proprietary vendor tooling, but the sources do not show production customer deployments or support commitments <a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>.</li><li>Netra compares its workflow to TensorRT-style engine building, pointing to Nvidia’s developer tooling as the reference point [common]<a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Inspect the kernel repository: Review NetraRuntime/netra-kernel on GitHub, especially the README, docs, examples and tests, before attempting integration <a href="https://github.com/NetraRuntime/netra-kernel" class="footnote-ref">[2]</a>.</li>
+
+<li>Verify benchmark relevance: Compare the Reddit throughput claim with your own model, batch size, quantization and serving contract before treating it as a deployment target <a href="https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://github.com/NetraRuntime/netra-kernel">https://github.com/NetraRuntime/netra-kernel</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/">https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> zenodo.org, github.com, reddit.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "ashsyngh",
+      "date": "2026-08-25T20:24:36.000Z",
+      "domain": "zenodo.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://zenodo.org/records/19882078",
+      "title": "Cross-vendor byte-identical inference for a 72B LLM (AMD MI300X vs. Nvidia H100)"
+    },
+    {
+      "author": "rbisri",
+      "date": "2026-08-25T13:54:01.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/NetraRuntime/netra-kernel",
+      "title": "Show HN: Open-source AMDGCN kernels for optimizing LLM inference"
+    },
+    {
+      "author": "/u/SmilingGen",
+      "date": "2026-08-26T04:12:07.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/",
+      "title": "Open Source Kernel in Qwen3.6-35B-A3B for AMD MI350X: 78,498 output tok/s on 8 GPUs"
+    }
+  ],
+  "business_angle": [
+    "The Reddit post\u0027s 78,498 tok/s claim on 8 MI350X GPUs is a single data point without independent validation, making it difficult to assess real-world performance for investors [reddit.com#1].",
+    "Open-source kernels may reduce customer dependence on proprietary vendor tooling, but the sources do not show production customer deployments or support commitments [github.com#1].",
+    "Netra compares its workflow to TensorRT-style engine building, pointing to Nvidia\u2019s developer tooling as the reference point [common][github.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=zenodo.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zenodo.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Gpu Kernels",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/NetraRuntime/netra-kernel"
+        }
+      ],
+      "text": "NetraRuntime: The project presents Netra Kernel as a way to bring TensorRT-style engine building to native AMD GPU kernels while avoiding a model-locked codebase."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-26T12:00:13.994Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://zenodo.org/records/19882078",
+    "https://github.com/NetraRuntime/netra-kernel",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1vymha8/open_source_kernel_in_qwen3635ba3b_for_amd_mi350x/"
+  ],
+  "suggested_qna": [],
+  "summary": "Developers published new material on AMD-focused LLM inference, including a Zenodo record titled \u201cCross-vendor byte-identical inference for a 72B LLM (AMD MI300X vs. Nvidia H100)\u201d and an open-source GitHub repository for Netra Kernel, a project that provides ahead-of-time GPU kernels for production inference on AMD hardware [zenodo.org#1][github.com#1]. The GitHub project says Netra Kernel compiles model operations into fixed-contract raw-assembly kernels and packages them as loadable Netra Engines, using a TensorRT-style workflow for profiles, tactics, layout planning, static memory planning and engine building [github.com#1].\n\nA Reddit post in r/LocalLLaMA described an open-source kernel for Qwen3.6-35B-A3B on AMD MI350X hardware and reported 78,498 output tokens per second on eight GPUs [reddit.com#1]. The post said many LLM users rely on Nvidia GPUs, argued that MI350X has higher raw power than Nvidia B200, and identified AMD\u2019s software stack and ROCm maturity as the main gap the developer sought to address [reddit.com#1].",
+  "talking_points": [
+    "Developer access: The Reddit poster said they obtained a handful of MI350X GPUs a few weeks before the post for experimentation and development [reddit.com#1].",
+    "Community interest: The Zenodo submission appeared on Hacker News with 6 points and no comments in the provided article metadata [zenodo.org#1]."
+  ],
+  "technical_details": [
+    "Fixed-contract kernels: Netra compiles model operations for predetermined shapes, data types, layouts and quantization choices, reducing runtime flexibility in exchange for specialized serving behavior [github.com#1].",
+    "Raw-assembly AMDGCN: The repository describes schedule-specific raw-assembly kernels for AMD GPUs, exposing lower-level control than generic framework kernels while requiring architecture-specific implementation work [github.com#1].",
+    "Cross-vendor determinism: The Zenodo record\u2019s title claims byte-identical inference for a 72B LLM across AMD MI300X and Nvidia H100, a stricter result than ordinary numerical closeness [zenodo.org#1]."
+  ],
+  "timeline": [],
+  "title": "Open-source AMD kernels target LLM inference gap",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://zenodo.org/records/19882078",
+  "user_action_items": [
+    "Inspect the kernel repository: Review NetraRuntime/netra-kernel on GitHub, especially the README, docs, examples and tests, before attempting integration [github.com#1].",
+    "Verify benchmark relevance: Compare the Reddit throughput claim with your own model, batch size, quantization and serving contract before treating it as a deployment target [reddit.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
