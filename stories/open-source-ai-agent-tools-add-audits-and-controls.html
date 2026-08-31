@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Open-source AI agent tools add audits and controls - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Open-source AI agent tools add audits and controls</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Several newly published AI projects focus on agent accountability, local execution and developer automation rather than model launches. Halo-record, described by Help Net Security on August 31, is an open-source Python package by Brian Kuan that records an AI agent’s tool calls, model calls, data access and approvals as append-only lines linked by hashes. The design lets customers or auditors check whether a log was altered without a vendor account or key <a href="https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/" class="footnote-ref">[12]</a>.
+
+Other projects published or highlighted the same day target specific agent workflows: Reddie says it can discover LLM application vulnerabilities, generate pytest reproductions, synthesize prompt or guardrail patches, verify fixes in a sandbox and open a GitHub pull request <a href="https://github.com/irfadox/reddie" class="footnote-ref">[3]</a>; Steer puts a rule engine in front of agent tool calls <a href="https://github.com/amalucelli/steer" class="footnote-ref">[8]</a>; Glean tracks files a tool already processed so later runs inspect only changed files <a href="https://github.com/amalucelli/glean" class="footnote-ref">[7]</a>; and HermOS describes a local-first AI agent IDE with zero telemetry and sandboxed terminal and browser control <a href="https://hermos.is-a.dev/" class="footnote-ref">[9]</a>. Architect Labs also posted an arXiv paper saying its AI system designed, verified and deployed an AI accelerator called Redwood from a high-level specification in under two weeks <a href="https://arxiv.org/abs/2608.26418" class="footnote-ref">[11]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/atom/articles/CBMikgFBVV95cUxNWGJ4ZGE0a2lhX1RTNHVIeEdYeTcxSU83RUN5aG5sbjZaeEpSUzJseFNsNXdXWEFIdlI5eGVJaTJlc1lhT0I4OWE1VDU1MkZ2SEt1TUtMRGVVdVRyb3ZFTnV6ZmRXbnJ5TmdHOFJsSWJVQ19sOGpiQmpIc2s0WkRXdXFWd29VLVp4OFhweWEzbnVBZw">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>The progress of AI in mathematics is spectacular.</p>
+
+<cite>— Hugo Duminil-Copin (Proofs and Prompts)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> The Infinite Slop site describes itself as an endless AI-generated TV channel where chat decides what airs next <a href="https://infiniteslop.ai/" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Local media: Clips Kitty says it turns YouTube, Twitch or Kick videos into Shorts, Reels and TikToks on a user’s PC, with speaker-centered 9:16 cropping, word-synced captions and generated titles, descriptions and hashtags <a href="https://github.com/ColinGPT9/clips-studio" class="footnote-ref">[10]</a>.</li>
+
+<li>Web extraction: Crawl4AI describes itself as an open-source, LLM-friendly crawler that converts web pages into Markdown for RAG, agents and data pipelines, and its GitHub page shows 80.4k stars <a href="https://github.com/unclecode/crawl4ai" class="footnote-ref">[14]</a>.</li>
+
+<li>Math debate: Hugo Duminil-Copin said frontier models have encyclopedic knowledge of his field, while he sometimes struggles to remember his own proofs <a href="https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Hugo Duminil-Copin: The mathematician said AI could clearly help with problems that have urgent applications but argued that some areas of mathematics may not benefit from a rapid influx of AI-generated proofs.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/">Proofs and Prompts</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Steer project: The project describes pre-tool-call hooks as the last layer that can override an agent harness when system-level instructions outrank user repository guidance.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/amalucelli/steer">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Architect Labs: The Redwood authors argue that AI workloads change faster than conventional silicon design cycles, so hardware and software should be co-designed and verified under one objective.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.26418">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Hash-linked audit records: Halo-record stores each action as one append-only line carrying the previous line’s hash; raw arguments are excluded, while values are hashed and summarized through pattern-based redaction of common secret and personal data formats <a href="https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/" class="footnote-ref">[12]</a>.</li>
+
+<li>Per-consumer baselines: Glean keeps separate baselines for each skill or tool in.git/glean and treats a file as changed when its bytes differ from the baseline, avoiding reruns of parallel passes over unchanged files <a href="https://github.com/amalucelli/glean" class="footnote-ref">[7]</a>.</li>
+
+<li>Hardware verification loop: The Redwood paper says the system generated the performance model, RTL, UVM environments, formal proofs, firmware and kernels, with every block reaching 95% coverage and specification changes reverified and redeployed in under 48 hours <a href="https://arxiv.org/abs/2608.26418" class="footnote-ref">[11]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Security teams: Halo-record includes adapters for OpenTelemetry spans, LangChain, MCP servers and gateway logs, so teams can build audit evidence from systems they may already operate <a href="https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/" class="footnote-ref">[12]</a>.</li>
+
+<li>DevSecOps: Reddie includes a turnkey GitHub Action for pull requests and a scheduled daily security audit at 2:00 a.m. UTC, according to its repository example <a href="https://github.com/irfadox/reddie" class="footnote-ref">[3]</a>.</li>
+
+<li>Creator software: Clips Kitty says it was renamed from Clips Studio in version 1.1.3 to meet Microsoft Store naming requirements while keeping the same app, repository and data <a href="https://github.com/ColinGPT9/clips-studio" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Open-source agent controls can pressure vendors that sell basic audit, routing or workflow automation as isolated paid features <a href="https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/" class="footnote-ref">[12]</a><a href="https://github.com/amalucelli/steer" class="footnote-ref">[8]</a>[common].</li><li>Crawl4AI’s closed-beta Cloud API points to a hosted-service path where maintainers charge for scale and reliability rather than only the code <a href="https://github.com/unclecode/crawl4ai" class="footnote-ref">[14]</a>[common].</li><li>Local-first products such as HermOS and Clips Kitty may appeal to privacy-sensitive users because they advertise zero telemetry or no cloud upload of project data and footage <a href="https://hermos.is-a.dev/" class="footnote-ref">[9]</a><a href="https://github.com/ColinGPT9/clips-studio" class="footnote-ref">[10]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test agent auditability: Developers evaluating Halo-record can wrap an agent with one line of Python and export records for independent hash-chain verification <a href="https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/" class="footnote-ref">[12]</a>.</li>
+
+<li>Limit risky tool calls: Claude Code users can register Steer as a PreToolUse hook in ~/.claude/settings.json so configured rules can deny, rewrite or annotate tool calls before execution <a href="https://github.com/amalucelli/steer" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://infiniteslop.ai/">https://infiniteslop.ai/</a></li>
+
+
+
+<li><a href="https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/">https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/</a></li>
+
+
+
+<li><a href="https://github.com/amalucelli/steer">https://github.com/amalucelli/steer</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.26418">https://arxiv.org/abs/2608.26418</a></li>
+
+
+
+<li><a href="https://hermos.is-a.dev/">https://hermos.is-a.dev/</a></li>
+
+
+
+<li><a href="https://bughunters.google.com/blog/scaling-memory-safety">https://bughunters.google.com/blog/scaling-memory-safety</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/blueteamsec/comments/1w359pv/gryxa_the_aibuilt_toolkit_that_watches_how_you/">https://www.reddit.com/r/blueteamsec/comments/1w359pv/gryxa_the_aibuilt_toolkit_that_watches_how_you/</a></li>
+
+
+
+<li><a href="https://github.com/unclecode/crawl4ai">https://github.com/unclecode/crawl4ai</a></li>
+
+
+
+
+
+<li><a href="https://github.com/ColinGPT9/clips-studio">https://github.com/ColinGPT9/clips-studio</a></li>
+
+
+
+<li><a href="https://github.com/irfadox/reddie">https://github.com/irfadox/reddie</a></li>
+
+
+
+<li><a href="https://growtics.io">https://growtics.io</a></li>
+
+
+
+<li><a href="https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/">https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/</a></li>
+
+
+
+<li><a href="https://github.com/amalucelli/glean">https://github.com/amalucelli/glean</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> google.com, infiniteslop.ai, github.com, proofsandprompts.com, growtics.io, is-a.dev, arxiv.org, helpnetsecurity.com, reddit.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 9 unique domains, 14 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-08-31T05:30:37.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMikgFBVV95cUxNWGJ4ZGE0a2lhX1RTNHVIeEdYeTcxSU83RUN5aG5sbjZaeEpSUzJseFNsNXdXWEFIdlI5eGVJaTJlc1lhT0I4OWE1VDU1MkZ2SEt1TUtMRGVVdVRyb3ZFTnV6ZmRXbnJ5TmdHOFJsSWJVQ19sOGpiQmpIc2s0WkRXdXFWd29VLVp4OFhweWEzbnVBZw",
+      "title": "Halo-record: Open-source audit trails for AI agents - Help Net Security"
+    },
+    {
+      "author": "mdrzn",
+      "date": "2026-08-31T06:54:13.000Z",
+      "domain": "infiniteslop.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://infiniteslop.ai/",
+      "title": "Infinite Slop (24/7 AI video generation)"
+    },
+    {
+      "author": "Irfadox",
+      "date": "2026-08-31T05:46:47.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/irfadox/reddie",
+      "title": "Reddie \u2013 Autonomous AI Red-Teaming and GitHub PR Patching DevTool"
+    },
+    {
+      "author": "meerita",
+      "date": "2026-08-31T05:44:33.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://bughunters.google.com/blog/scaling-memory-safety",
+      "title": "Scaling Memory Safety: AI-Assisted Rewrites of C/C++ Dependencies to Rust"
+    },
+    {
+      "author": "Shuddown",
+      "date": "2026-08-31T04:12:01.000Z",
+      "domain": "proofsandprompts.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/",
+      "title": "Care for a Little More AI?"
+    },
+    {
+      "author": "jabed",
+      "date": "2026-08-31T03:00:10.000Z",
+      "domain": "growtics.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://growtics.io",
+      "title": "Show HN: Growtics \u2013 an AI growth agent that tells you what to do next"
+    },
+    {
+      "author": "malucelli",
+      "date": "2026-08-31T02:39:48.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/amalucelli/glean",
+      "title": "Glean: Run an AI skill only over what changed since it last ran"
+    },
+    {
+      "author": "malucelli",
+      "date": "2026-08-31T02:38:33.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/amalucelli/steer",
+      "title": "Steer: Deny or rewrite an AI agent\u0027s tool calls before they run"
+    },
+    {
+      "author": "WFekik",
+      "date": "2026-08-31T02:09:41.000Z",
+      "domain": "is-a.dev",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hermos.is-a.dev/",
+      "title": "HermOS \u2013 a local-first AI agent IDE"
+    },
+    {
+      "author": "ColinGPT",
+      "date": "2026-08-31T01:31:48.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/ColinGPT9/clips-studio",
+      "title": "Clips Kitty Open-source local AI video clipping and editing"
+    },
+    {
+      "author": "Jimmc414",
+      "date": "2026-08-31T00:37:46.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.26418",
+      "title": "AI Accelerator Designed, Verified, and Deployed from Scratch in 2 Weeks by AI"
+    },
+    {
+      "author": "Mirko Zorz",
+      "date": "2026-08-31T05:30:37.000Z",
+      "domain": "helpnetsecurity.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/",
+      "title": "Halo-record: Open-source audit trails for AI agents"
+    },
+    {
+      "author": "/u/digicat",
+      "date": "2026-08-31T06:15:00.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/blueteamsec/comments/1w359pv/gryxa_the_aibuilt_toolkit_that_watches_how_you/",
+      "title": "Gryxa: The AI-Built Toolkit That Watches How You Remove It"
+    },
+    {
+      "date": "2026-08-31T07:05:32.855Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/unclecode/crawl4ai",
+      "title": "unclecode/crawl4ai"
+    }
+  ],
+  "business_angle": [
+    "Open-source agent controls can pressure vendors that sell basic audit, routing or workflow automation as isolated paid features [helpnetsecurity.com#1][github.com#3][common].",
+    "Crawl4AI\u2019s closed-beta Cloud API points to a hosted-service path where maintainers charge for scale and reliability rather than only the code [github.com#5][common].",
+    "Local-first products such as HermOS and Clips Kitty may appeal to privacy-sensitive users because they advertise zero telemetry or no cloud upload of project data and footage [is-a.dev#1][github.com#4]."
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "The Infinite Slop site describes itself as an endless AI-generated TV channel where chat decides what airs next [infiniteslop.ai#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=infiniteslop.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "infiniteslop.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=proofsandprompts.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "proofsandprompts.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=growtics.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "growtics.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=is-a.dev\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "is-a.dev"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=helpnetsecurity.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "helpnetsecurity.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddf0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Security teams: Halo-record includes adapters for OpenTelemetry spans, LangChain, MCP servers and gateway logs, so teams can build audit evidence from systems they may already operate [helpnetsecurity.com#1].",
+    "DevSecOps: Reddie includes a turnkey GitHub Action for pull requests and a scheduled daily security audit at 2:00 a.m. UTC, according to its repository example [github.com#1].",
+    "Creator software: Clips Kitty says it was renamed from Clips Studio in version 1.1.3 to meet Microsoft Store naming requirements while keeping the same app, repository and data [github.com#4]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Tools",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 14,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Proofs and Prompts",
+          "url": "https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/"
+        }
+      ],
+      "text": "Hugo Duminil-Copin: The mathematician said AI could clearly help with problems that have urgent applications but argued that some areas of mathematics may not benefit from a rapid influx of AI-generated proofs."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/amalucelli/steer"
+        }
+      ],
+      "text": "Steer project: The project describes pre-tool-call hooks as the last layer that can override an agent harness when system-level instructions outrank user repository guidance."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.26418"
+        }
+      ],
+      "text": "Architect Labs: The Redwood authors argue that AI workloads change faster than conventional silicon design cycles, so hardware and software should be co-designed and verified under one objective."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-08-31T12:00:09.809Z",
+  "quote": "The progress of AI in mathematics is spectacular.",
+  "quote_attribution": "Proofs and Prompts",
+  "quote_author": "Hugo Duminil-Copin",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://infiniteslop.ai/",
+    "https://proofsandprompts.com/2026/08/30/care-for-a-little-more-ai/",
+    "https://github.com/amalucelli/steer",
+    "https://arxiv.org/abs/2608.26418",
+    "https://hermos.is-a.dev/",
+    "https://bughunters.google.com/blog/scaling-memory-safety",
+    "https://www.reddit.com/r/blueteamsec/comments/1w359pv/gryxa_the_aibuilt_toolkit_that_watches_how_you/",
+    "https://github.com/unclecode/crawl4ai",
+    "https://news.google.com/atom/articles/CBMikgFBVV95cUxNWGJ4ZGE0a2lhX1RTNHVIeEdYeTcxSU83RUN5aG5sbjZaeEpSUzJseFNsNXdXWEFIdlI5eGVJaTJlc1lhT0I4OWE1VDU1MkZ2SEt1TUtMRGVVdVRyb3ZFTnV6ZmRXbnJ5TmdHOFJsSWJVQ19sOGpiQmpIc2s0WkRXdXFWd29VLVp4OFhweWEzbnVBZw",
+    "https://github.com/ColinGPT9/clips-studio",
+    "https://github.com/irfadox/reddie",
+    "https://growtics.io",
+    "https://www.helpnetsecurity.com/2026/08/31/halo-record-open-source-ai-agent-audit-trail/",
+    "https://github.com/amalucelli/glean"
+  ],
+  "suggested_qna": [],
+  "summary": "Several newly published AI projects focus on agent accountability, local execution and developer automation rather than model launches. Halo-record, described by Help Net Security on August 31, is an open-source Python package by Brian Kuan that records an AI agent\u2019s tool calls, model calls, data access and approvals as append-only lines linked by hashes. The design lets customers or auditors check whether a log was altered without a vendor account or key [helpnetsecurity.com#1].\n\nOther projects published or highlighted the same day target specific agent workflows: Reddie says it can discover LLM application vulnerabilities, generate pytest reproductions, synthesize prompt or guardrail patches, verify fixes in a sandbox and open a GitHub pull request [github.com#1]; Steer puts a rule engine in front of agent tool calls [github.com#3]; Glean tracks files a tool already processed so later runs inspect only changed files [github.com#2]; and HermOS describes a local-first AI agent IDE with zero telemetry and sandboxed terminal and browser control [is-a.dev#1]. Architect Labs also posted an arXiv paper saying its AI system designed, verified and deployed an AI accelerator called Redwood from a high-level specification in under two weeks [arxiv.org#1].",
+  "talking_points": [
+    "Local media: Clips Kitty says it turns YouTube, Twitch or Kick videos into Shorts, Reels and TikToks on a user\u2019s PC, with speaker-centered 9:16 cropping, word-synced captions and generated titles, descriptions and hashtags [github.com#4].",
+    "Web extraction: Crawl4AI describes itself as an open-source, LLM-friendly crawler that converts web pages into Markdown for RAG, agents and data pipelines, and its GitHub page shows 80.4k stars [github.com#5].",
+    "Math debate: Hugo Duminil-Copin said frontier models have encyclopedic knowledge of his field, while he sometimes struggles to remember his own proofs [proofsandprompts.com#1]."
+  ],
+  "technical_details": [
+    "Hash-linked audit records: Halo-record stores each action as one append-only line carrying the previous line\u2019s hash; raw arguments are excluded, while values are hashed and summarized through pattern-based redaction of common secret and personal data formats [helpnetsecurity.com#1].",
+    "Per-consumer baselines: Glean keeps separate baselines for each skill or tool in.git/glean and treats a file as changed when its bytes differ from the baseline, avoiding reruns of parallel passes over unchanged files [github.com#2].",
+    "Hardware verification loop: The Redwood paper says the system generated the performance model, RTL, UVM environments, formal proofs, firmware and kernels, with every block reaching 95% coverage and specification changes reverified and redeployed in under 48 hours [arxiv.org#1]."
+  ],
+  "timeline": [],
+  "title": "Open-source AI agent tools add audits and controls",
+  "travel_advisory": "",
+  "unique_domains": 9,
+  "url": "https://news.google.com/atom/articles/CBMikgFBVV95cUxNWGJ4ZGE0a2lhX1RTNHVIeEdYeTcxSU83RUN5aG5sbjZaeEpSUzJseFNsNXdXWEFIdlI5eGVJaTJlc1lhT0I4OWE1VDU1MkZ2SEt1TUtMRGVVdVRyb3ZFTnV6ZmRXbnJ5TmdHOFJsSWJVQ19sOGpiQmpIc2s0WkRXdXFWd29VLVp4OFhweWEzbnVBZw",
+  "user_action_items": [
+    "Test agent auditability: Developers evaluating Halo-record can wrap an agent with one line of Python and export records for independent hash-chain verification [helpnetsecurity.com#1].",
+    "Limit risky tool calls: Claude Code users can register Steer as a PreToolUse hook in ~/.claude/settings.json so configured rules can deny, rewrite or annotate tool calls before execution [github.com#3]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
