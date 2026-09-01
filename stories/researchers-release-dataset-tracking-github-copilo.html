@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers release dataset tracking GitHub Copilot agent logs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers release dataset tracking GitHub Copilot agent logs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Researchers Jonan Richards, Kosei Horikawa, Youmei Fan, Yutaro Kashiwa and Mairieli Wessel introduced AgentLogs, an arXiv dataset for studying how GitHub’s Copilot cloud agent handles software-engineering tasks, not just the pull requests it produces <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>. The paper says the dataset contains 307,416 agent tasks and 549,239 agent sessions across 35,810 public repositories, after the authors scanned 1,812,362 popular public repositories <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>.
+
+Other coding-agent items appeared at the same time: Aurora Mobile’s Modellix announced a beta plugin for DeepSeek Harness that adds free LLM models, while a separate Google News item said DeepSeek Harness had drawn nearly 200,000 GitHub stars <a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPbmZPX3lCdDc0UmdEMG1uY0tTLTF1U281d29Tc05nRDdoTGROcmYwVnBZR29HMHV6UlBlbEZsbDZUS2IzUTYwY2xUZ0dsa0RTaDNVZ1pqVmgzSnhzUXlPR3N1OW5jWlRqNndZSC1xSEYtS2JSWXI5OUhZUDh1TGlvSnNaVFBqRXJqMWYyZ016cU5KaFZLZ0VNMEN1UzNYN2t3RTI5dGZPTEhhWGFlVEZLT1o1RHJOM01ER0hhVw" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMisAJBVV95cUxQdlhzZWVvTmFodFVfeDhVVFpGVFE5QzZoYktsd3FTYTdrYXlyeUh2TTRsTjhOV1Y4clNqaWNtcXl5OGkwdUpJQmtWVVo2OG5mSTYtSEU4cUpBN3MtcncyUFIxbFdiR0p1Ykh2bkgyYWlJZjgzb1F6dHBqX0Y0NnJWRlZMZDNHSGVCZE5ibHlxMjdUUEdtWXUtdmw5ZHF5UHVaMkZxTGxIandyTVhqTUw3c0NnalhqT1B4ZVQ3d29qRTZZMEZyYXgwNk9ITFktTmxkenBPRkJvdTBMeUljM0NQdUhnSTFRbUR5cnN2UC1GSGl0Qm1qcXZtb2tKVms4cUFDTlJHVWVNQW1CXzV2M3lKRnBHRkYwbXNMcU5PV00wRHdtY3ZOcUQxREpPSlFBMkdo0gG2AkFVX3lxTE5oZk55dDFJMm0xck5lMlpVTFNUd1RvMHpFUTRZalZyTmgzb2xDMXlET0pSWVdNZ1RVU2MyR3ZiVXp0dVp0QS0xZlJUNDdaV2g0ZkhfYjEyZjZzYXVPemlWNTdGNUNzdWktQVFxbXBaNGdyRnBwRVVqcnc3SDdJc0RJZEZoNkxRZGxuTGlpeFV2WGxYM3JXYXVrVFh2cENia0ktMl9RcmhxOVRKWVNQYVFyRVBxY1I1S2plUEtwbVEwS3FGR3NZeWtYOTl3UnJQcExFV29rRTczZ2NkSnVKdnh5Z0ZoeU5ZWldNaURtbzRnTkZ5a3pPOWdvaWg2TGp3dTkxOUV1U1RybGkwdF9WY3liM25qT1NPQmhCVFF6aDYzY3J2VnhvNXJOZDhXMGg1X1dVOUZ0WHc" class="footnote-ref">[4]</a>. Reddit posts described experiments and tools around agent orchestration, including reports of DeepSeek-V4-Flash on Ollama Cloud Pro entering repetitive reasoning loops in agent frameworks and open-source apps that coordinate Claude Code, Codex, Pi, Gemini, Kimi Code and other coding agents <a href="https://www.reddit.com/r/ollama/comments/1w2ywkv/deepseekv4flash_on_ollama_cloud_pro_enters/" class="footnote-ref">[1]</a><a href="https://www.reddit.com/r/LLMDevs/comments/1w3zsdx/i_built_an_opensource_app_that_puts_claude_code/" class="footnote-ref">[7]</a><a href="https://www.reddit.com/r/foss/comments/1w3itrt/i_just_open_source_the_ai_orchestrator_for/" class="footnote-ref">[8]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/ollama/comments/1w2ywkv/deepseekv4flash_on_ollama_cloud_pro_enters/">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Process visibility: The AgentLogs authors say existing datasets often capture agent-authored outcomes; their dataset exposes step-by-step activity for research into behavior, efficiency, cost, task formulation, failure modes and human-agent collaboration <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>.</li>
+
+<li>Repository metrics: The ECC GitHub repository listed 245,000 stars, 37,100 forks, 2,615 commits, 43 issues and 83 pull requests on Sept. 1 <a href="https://github.com/affaan-m/ECC" class="footnote-ref">[9]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>AgentLogs authors: The researchers framed the dataset as a way to open the black box of GitHub’s cloud agent by exposing prompts, intermediate reasoning, tool calls and token usage rather than just final pull-request outcomes.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2608.29204">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>29 August 2026:</strong> AgentLogs paper submitted to arXiv <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>31 August 2026:</strong> Aurora Mobile plugin item published via Google News <a href="https://news.google.com/rss/articles/CBMisAJBVV95cUxQdlhzZWVvTmFodFVfeDhVVFpGVFE5QzZoYktsd3FTYTdrYXlyeUh2TTRsTjhOV1Y4clNqaWNtcXl5OGkwdUpJQmtWVVo2OG5mSTYtSEU4cUpBN3MtcncyUFIxbFdiR0p1Ykh2bkgyYWlJZjgzb1F6dHBqX0Y0NnJWRlZMZDNHSGVCZE5ibHlxMjdUUEdtWXUtdmw5ZHF5UHVaMkZxTGxIandyTVhqTUw3c0NnalhqT1B4ZVQ3d29qRTZZMEZyYXgwNk9ITFktTmxkenBPRkJvdTBMeUljM0NQdUhnSTFRbUR5cnN2UC1GSGl0Qm1qcXZtb2tKVms4cUFDTlJHVWVNQW1CXzV2M3lKRnBHRkYwbXNMcU5PV00wRHdtY3ZOcUQxREpPSlFBMkdo0gG2AkFVX3lxTE5oZk55dDFJMm0xck5lMlpVTFNUd1RvMHpFUTRZalZyTmgzb2xDMXlET0pSWVdNZ1RVU2MyR3ZiVXp0dVp0QS0xZlJUNDdaV2g0ZkhfYjEyZjZzYXVPemlWNTdGNUNzdWktQVFxbXBaNGdyRnBwRVVqcnc3SDdJc0RJZEZoNkxRZGxuTGlpeFV2WGxYM3JXYXVrVFh2cENia0ktMl9RcmhxOVRKWVNQYVFyRVBxY1I1S2plUEtwbVEwS3FGR3NZeWtYOTl3UnJQcExFV29rRTczZ2NkSnVKdnh5Z0ZoeU5ZWldNaURtbzRnTkZ5a3pPOWdvaWg2TGp3dTkxOUV1U1RybGkwdF9WY3liM25qT1NPQmhCVFF6aDYzY3J2VnhvNXJOZDhXMGg1X1dVOUZ0WHc" class="footnote-ref">[4]</a></li>
+
+
+
+<li><strong>1 September 2026:</strong> arXiv listing published for AgentLogs dataset <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>1 September 2026:</strong> ECC repository snapshot showed 245,000 GitHub stars <a href="https://github.com/affaan-m/ECC" class="footnote-ref">[9]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Session log entries: AgentLogs includes 64,255,174 session log entries that record individual run steps, including prompts, intermediate reasoning, file edits, git operations, GitHub interactions and token usage <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>.</li>
+
+<li>Agent orchestration: Reddit developers described desktop and persistent-team tools that run multiple coding-agent CLIs with existing logins, separate worktrees, file-based memory and visibility into blocked or completed sessions <a href="https://www.reddit.com/r/LLMDevs/comments/1w3zsdx/i_built_an_opensource_app_that_puts_claude_code/" class="footnote-ref">[7]</a><a href="https://www.reddit.com/r/foss/comments/1w3itrt/i_just_open_source_the_ai_orchestrator_for/" class="footnote-ref">[8]</a>.</li>
+
+<li>Reasoning-loop failure: One Ollama user reported DeepSeek-V4-Flash on Ollama Cloud Pro entering infinite thinking loops or repetitive chain-of-thought behavior when used with high reasoning effort in Pi and DeepSeek Harness agent frameworks <a href="https://www.reddit.com/r/ollama/comments/1w2ywkv/deepseekv4flash_on_ollama_cloud_pro_enters/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Scope limitation: The dataset covers activity found in 35,810 popular public repositories, so it does not represent private repositories or all software-development settings <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Open-source attention can lower distribution costs, but stars do not prove paid retention or enterprise willingness to standardize on a tool [common].</li><li>Datasets that expose token usage and failure modes can help vendors reduce inference waste, which directly affects gross margins for agentic coding products <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>[common].</li><li>The ECC repository warned that unofficial mirrors may contain malware and directed users to approved distribution channels <a href="https://github.com/affaan-m/ECC" class="footnote-ref">[9]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Use verified ECC downloads: Install ECC only from the GitHub repository, the listed npm packages, the GitHub App, the ecc@ecc plugin slug or ecc.tools, as the project says unofficial mirrors may contain malware <a href="https://github.com/affaan-m/ECC" class="footnote-ref">[9]</a>.</li>
+
+<li>Review agent logs before relying on output: Inspect prompts, tool calls, file edits, git operations and token usage where available, because AgentLogs shows these traces are central to understanding agent behavior and failures <a href="https://arxiv.org/abs/2608.29204" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMisAJBVV95cUxQdlhzZWVvTmFodFVfeDhVVFpGVFE5QzZoYktsd3FTYTdrYXlyeUh2TTRsTjhOV1Y4clNqaWNtcXl5OGkwdUpJQmtWVVo2OG5mSTYtSEU4cUpBN3MtcncyUFIxbFdiR0p1Ykh2bkgyYWlJZjgzb1F6dHBqX0Y0NnJWRlZMZDNHSGVCZE5ibHlxMjdUUEdtWXUtdmw5ZHF5UHVaMkZxTGxIandyTVhqTUw3c0NnalhqT1B4ZVQ3d29qRTZZMEZyYXgwNk9ITFktTmxkenBPRkJvdTBMeUljM0NQdUhnSTFRbUR5cnN2UC1GSGl0Qm1qcXZtb2tKVms4cUFDTlJHVWVNQW1CXzV2M3lKRnBHRkYwbXNMcU5PV00wRHdtY3ZOcUQxREpPSlFBMkdo0gG2AkFVX3lxTE5oZk55dDFJMm0xck5lMlpVTFNUd1RvMHpFUTRZalZyTmgzb2xDMXlET0pSWVdNZ1RVU2MyR3ZiVXp0dVp0QS0xZlJUNDdaV2g0ZkhfYjEyZjZzYXVPemlWNTdGNUNzdWktQVFxbXBaNGdyRnBwRVVqcnc3SDdJc0RJZEZoNkxRZGxuTGlpeFV2WGxYM3JXYXVrVFh2cENia0ktMl9RcmhxOVRKWVNQYVFyRVBxY1I1S2plUEtwbVEwS3FGR3NZeWtYOTl3UnJQcExFV29rRTczZ2NkSnVKdnh5Z0ZoeU5ZWldNaURtbzRnTkZ5a3pPOWdvaWg2TGp3dTkxOUV1U1RybGkwdF9WY3liM25qT1NPQmhCVFF6aDYzY3J2VnhvNXJOZDhXMGg1X1dVOUZ0WHc">https://news.google.com/rss/articles/CBMisAJBVV95cUxQdlhzZWVvTmFodFVfeDhVVFpGVFE5QzZoYktsd3FTYTdrYXlyeUh2TTRsTjhOV1Y4clNqaWNtcXl5OGkwdUpJQmtWVVo2OG5mSTYtSEU4cUpBN3MtcncyUFIxbFdiR0p1Ykh2bkgyYWlJZjgzb1F6dHBqX0Y0NnJWRlZMZDNHSGVCZE5ibHlxMjdUUEdtWXUtdmw5ZHF5UHVaMkZxTGxIandyTVhqTUw3c0NnalhqT1B4ZVQ3d29qRTZZMEZyYXgwNk9ITFktTmxkenBPRkJvdTBMeUljM0NQdUhnSTFRbUR5cnN2UC1GSGl0Qm1qcXZtb2tKVms4cUFDTlJHVWVNQW1CXzV2M3lKRnBHRkYwbXNMcU5PV00wRHdtY3ZOcUQxREpPSlFBMkdo0gG2AkFVX3lxTE5oZk55dDFJMm0xck5lMlpVTFNUd1RvMHpFUTRZalZyTmgzb2xDMXlET0pSWVdNZ1RVU2MyR3ZiVXp0dVp0QS0xZlJUNDdaV2g0ZkhfYjEyZjZzYXVPemlWNTdGNUNzdWktQVFxbXBaNGdyRnBwRVVqcnc3SDdJc0RJZEZoNkxRZGxuTGlpeFV2WGxYM3JXYXVrVFh2cENia0ktMl9RcmhxOVRKWVNQYVFyRVBxY1I1S2plUEtwbVEwS3FGR3NZeWtYOTl3UnJQcExFV29rRTczZ2NkSnVKdnh5Z0ZoeU5ZWldNaURtbzRnTkZ5a3pPOWdvaWg2TGp3dTkxOUV1U1RybGkwdF9WY3liM25qT1NPQmhCVFF6aDYzY3J2VnhvNXJOZDhXMGg1X1dVOUZ0WHc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxPbmZPX3lCdDc0UmdEMG1uY0tTLTF1U281d29Tc05nRDdoTGROcmYwVnBZR29HMHV6UlBlbEZsbDZUS2IzUTYwY2xUZ0dsa0RTaDNVZ1pqVmgzSnhzUXlPR3N1OW5jWlRqNndZSC1xSEYtS2JSWXI5OUhZUDh1TGlvSnNaVFBqRXJqMWYyZ016cU5KaFZLZ0VNMEN1UzNYN2t3RTI5dGZPTEhhWGFlVEZLT1o1RHJOM01ER0hhVw">https://news.google.com/rss/articles/CBMivAFBVV95cUxPbmZPX3lCdDc0UmdEMG1uY0tTLTF1U281d29Tc05nRDdoTGROcmYwVnBZR29HMHV6UlBlbEZsbDZUS2IzUTYwY2xUZ0dsa0RTaDNVZ1pqVmgzSnhzUXlPR3N1OW5jWlRqNndZSC1xSEYtS2JSWXI5OUhZUDh1TGlvSnNaVFBqRXJqMWYyZ016cU5KaFZLZ0VNMEN1UzNYN2t3RTI5dGZPTEhhWGFlVEZLT1o1RHJOM01ER0hhVw</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.29204">https://arxiv.org/abs/2608.29204</a></li>
+
+
+
+<li><a href="https://github.com/affaan-m/ECC">https://github.com/affaan-m/ECC</a></li>
+
+
+
+
+
+<li><a href="https://www.reddit.com/r/foss/comments/1w3itrt/i_just_open_source_the_ai_orchestrator_for/">https://www.reddit.com/r/foss/comments/1w3itrt/i_just_open_source_the_ai_orchestrator_for/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1w3zsdx/i_built_an_opensource_app_that_puts_claude_code/">https://www.reddit.com/r/LLMDevs/comments/1w3zsdx/i_built_an_opensource_app_that_puts_claude_code/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1w39i6r/deepseekaideepseekv4flashvisionexp_hugging_face/">https://www.reddit.com/r/LocalLLaMA/comments/1w39i6r/deepseekaideepseekv4flashvisionexp_hugging_face/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1w3vhv9/deepseek_v4_flash_vision_is_out/">https://www.reddit.com/r/LocalLLaMA/comments/1w3vhv9/deepseek_v4_flash_vision_is_out/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, arxiv.org, google.com, github.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 4 unique domains, 9 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/South_Can_3680",
+      "date": "2026-08-31T01:01:20.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1w2ywkv/deepseekv4flash_on_ollama_cloud_pro_enters/",
+      "title": "DeepSeek-V4-Flash on Ollama Cloud Pro enters infinite thinking loops / repetitive CoT with high reasoning effort in Agent frameworks (Pi / DeepSeek Harness)"
+    },
+    {
+      "author": "Jonan Richards, Kosei Horikawa, Youmei Fan, Yutaro Kashiwa, Mairieli Wessel",
+      "date": "2026-09-01T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.29204",
+      "title": "AgentLogs: A Dataset for Opening the Black Box of GitHub\u0027s Cloud Agent"
+    },
+    {
+      "date": "2026-08-31T11:00:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxPbmZPX3lCdDc0UmdEMG1uY0tTLTF1U281d29Tc05nRDdoTGROcmYwVnBZR29HMHV6UlBlbEZsbDZUS2IzUTYwY2xUZ0dsa0RTaDNVZ1pqVmgzSnhzUXlPR3N1OW5jWlRqNndZSC1xSEYtS2JSWXI5OUhZUDh1TGlvSnNaVFBqRXJqMWYyZ016cU5KaFZLZ0VNMEN1UzNYN2t3RTI5dGZPTEhhWGFlVEZLT1o1RHJOM01ER0hhVw",
+      "title": "DeepSeek Harness Draws Nearly 200,000 GitHub Stars as Aurora Mobile Adds Free AI Models - stocktitan.net"
+    },
+    {
+      "date": "2026-08-31T11:19:33.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMisAJBVV95cUxQdlhzZWVvTmFodFVfeDhVVFpGVFE5QzZoYktsd3FTYTdrYXlyeUh2TTRsTjhOV1Y4clNqaWNtcXl5OGkwdUpJQmtWVVo2OG5mSTYtSEU4cUpBN3MtcncyUFIxbFdiR0p1Ykh2bkgyYWlJZjgzb1F6dHBqX0Y0NnJWRlZMZDNHSGVCZE5ibHlxMjdUUEdtWXUtdmw5ZHF5UHVaMkZxTGxIandyTVhqTUw3c0NnalhqT1B4ZVQ3d29qRTZZMEZyYXgwNk9ITFktTmxkenBPRkJvdTBMeUljM0NQdUhnSTFRbUR5cnN2UC1GSGl0Qm1qcXZtb2tKVms4cUFDTlJHVWVNQW1CXzV2M3lKRnBHRkYwbXNMcU5PV00wRHdtY3ZOcUQxREpPSlFBMkdo0gG2AkFVX3lxTE5oZk55dDFJMm0xck5lMlpVTFNUd1RvMHpFUTRZalZyTmgzb2xDMXlET0pSWVdNZ1RVU2MyR3ZiVXp0dVp0QS0xZlJUNDdaV2g0ZkhfYjEyZjZzYXVPemlWNTdGNUNzdWktQVFxbXBaNGdyRnBwRVVqcnc3SDdJc0RJZEZoNkxRZGxuTGlpeFV2WGxYM3JXYXVrVFh2cENia0ktMl9RcmhxOVRKWVNQYVFyRVBxY1I1S2plUEtwbVEwS3FGR3NZeWtYOTl3UnJQcExFV29rRTczZ2NkSnVKdnh5Z0ZoeU5ZWldNaURtbzRnTkZ5a3pPOWdvaWg2TGp3dTkxOUV1U1RybGkwdF9WY3liM25qT1NPQmhCVFF6aDYzY3J2VnhvNXJOZDhXMGg1X1dVOUZ0WHc",
+      "title": "Aurora Mobile\u2019s Modellix Releases Beta Plugin for DeepSeek Harness, Adding Free LLM Models to the Fast-Growing Open-Source Coding Agent - manilatimes.net"
+    },
+    {
+      "author": "/u/Key_Solid_1696",
+      "date": "2026-08-31T23:55:28.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1w3vhv9/deepseek_v4_flash_vision_is_out/",
+      "title": "Deepseek v4 Flash Vision is out..."
+    },
+    {
+      "author": "/u/t4a8945",
+      "date": "2026-08-31T10:13:34.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1w39i6r/deepseekaideepseekv4flashvisionexp_hugging_face/",
+      "title": "deepseek-ai/DeepSeek-V4-Flash-Vision-Exp \u00b7 Hugging Face"
+    },
+    {
+      "author": "/u/Great-Fig8080",
+      "date": "2026-09-01T03:04:10.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1w3zsdx/i_built_an_opensource_app_that_puts_claude_code/",
+      "title": "I built an open-source app that puts Claude Code, Codex and Pi in one room as a persistent team"
+    },
+    {
+      "author": "/u/nicktayi",
+      "date": "2026-08-31T16:27:33.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/foss/comments/1w3itrt/i_just_open_source_the_ai_orchestrator_for/",
+      "title": "I just open source the AI orchestrator for running a team of coding agents from your desktop or phone"
+    },
+    {
+      "date": "2026-09-01T07:06:00.555Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/affaan-m/ECC",
+      "title": "affaan-m/ECC"
+    }
+  ],
+  "business_angle": [
+    "Open-source attention can lower distribution costs, but stars do not prove paid retention or enterprise willingness to standardize on a tool [common].",
+    "Datasets that expose token usage and failure modes can help vendors reduce inference waste, which directly affects gross margins for agentic coding products [arxiv.org#1][common].",
+    "The ECC repository warned that unofficial mirrors may contain malware and directed users to approved distribution channels [github.com#1][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Coding Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 9,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2608.29204"
+        }
+      ],
+      "text": "AgentLogs authors: The researchers framed the dataset as a way to open the black box of GitHub\u2019s cloud agent by exposing prompts, intermediate reasoning, tool calls and token usage rather than just final pull-request outcomes."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-09-01T12:00:11.009Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Scope limitation: The dataset covers activity found in 35,810 popular public repositories, so it does not represent private repositories or all software-development settings [arxiv.org#1]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMisAJBVV95cUxQdlhzZWVvTmFodFVfeDhVVFpGVFE5QzZoYktsd3FTYTdrYXlyeUh2TTRsTjhOV1Y4clNqaWNtcXl5OGkwdUpJQmtWVVo2OG5mSTYtSEU4cUpBN3MtcncyUFIxbFdiR0p1Ykh2bkgyYWlJZjgzb1F6dHBqX0Y0NnJWRlZMZDNHSGVCZE5ibHlxMjdUUEdtWXUtdmw5ZHF5UHVaMkZxTGxIandyTVhqTUw3c0NnalhqT1B4ZVQ3d29qRTZZMEZyYXgwNk9ITFktTmxkenBPRkJvdTBMeUljM0NQdUhnSTFRbUR5cnN2UC1GSGl0Qm1qcXZtb2tKVms4cUFDTlJHVWVNQW1CXzV2M3lKRnBHRkYwbXNMcU5PV00wRHdtY3ZOcUQxREpPSlFBMkdo0gG2AkFVX3lxTE5oZk55dDFJMm0xck5lMlpVTFNUd1RvMHpFUTRZalZyTmgzb2xDMXlET0pSWVdNZ1RVU2MyR3ZiVXp0dVp0QS0xZlJUNDdaV2g0ZkhfYjEyZjZzYXVPemlWNTdGNUNzdWktQVFxbXBaNGdyRnBwRVVqcnc3SDdJc0RJZEZoNkxRZGxuTGlpeFV2WGxYM3JXYXVrVFh2cENia0ktMl9RcmhxOVRKWVNQYVFyRVBxY1I1S2plUEtwbVEwS3FGR3NZeWtYOTl3UnJQcExFV29rRTczZ2NkSnVKdnh5Z0ZoeU5ZWldNaURtbzRnTkZ5a3pPOWdvaWg2TGp3dTkxOUV1U1RybGkwdF9WY3liM25qT1NPQmhCVFF6aDYzY3J2VnhvNXJOZDhXMGg1X1dVOUZ0WHc",
+    "https://news.google.com/rss/articles/CBMivAFBVV95cUxPbmZPX3lCdDc0UmdEMG1uY0tTLTF1U281d29Tc05nRDdoTGROcmYwVnBZR29HMHV6UlBlbEZsbDZUS2IzUTYwY2xUZ0dsa0RTaDNVZ1pqVmgzSnhzUXlPR3N1OW5jWlRqNndZSC1xSEYtS2JSWXI5OUhZUDh1TGlvSnNaVFBqRXJqMWYyZ016cU5KaFZLZ0VNMEN1UzNYN2t3RTI5dGZPTEhhWGFlVEZLT1o1RHJOM01ER0hhVw",
+    "https://arxiv.org/abs/2608.29204",
+    "https://github.com/affaan-m/ECC",
+    "https://www.reddit.com/r/ollama/comments/1w2ywkv/deepseekv4flash_on_ollama_cloud_pro_enters/",
+    "https://www.reddit.com/r/foss/comments/1w3itrt/i_just_open_source_the_ai_orchestrator_for/",
+    "https://www.reddit.com/r/LLMDevs/comments/1w3zsdx/i_built_an_opensource_app_that_puts_claude_code/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1w39i6r/deepseekaideepseekv4flashvisionexp_hugging_face/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1w3vhv9/deepseek_v4_flash_vision_is_out/"
+  ],
+  "suggested_qna": [],
+  "summary": "Researchers Jonan Richards, Kosei Horikawa, Youmei Fan, Yutaro Kashiwa and Mairieli Wessel introduced AgentLogs, an arXiv dataset for studying how GitHub\u2019s Copilot cloud agent handles software-engineering tasks, not just the pull requests it produces [arxiv.org#1]. The paper says the dataset contains 307,416 agent tasks and 549,239 agent sessions across 35,810 public repositories, after the authors scanned 1,812,362 popular public repositories [arxiv.org#1].\n\nOther coding-agent items appeared at the same time: Aurora Mobile\u2019s Modellix announced a beta plugin for DeepSeek Harness that adds free LLM models, while a separate Google News item said DeepSeek Harness had drawn nearly 200,000 GitHub stars [google.com#1][google.com#2]. Reddit posts described experiments and tools around agent orchestration, including reports of DeepSeek-V4-Flash on Ollama Cloud Pro entering repetitive reasoning loops in agent frameworks and open-source apps that coordinate Claude Code, Codex, Pi, Gemini, Kimi Code and other coding agents [reddit.com#1][reddit.com#4][reddit.com#5].",
+  "talking_points": [
+    "Process visibility: The AgentLogs authors say existing datasets often capture agent-authored outcomes; their dataset exposes step-by-step activity for research into behavior, efficiency, cost, task formulation, failure modes and human-agent collaboration [arxiv.org#1].",
+    "Repository metrics: The ECC GitHub repository listed 245,000 stars, 37,100 forks, 2,615 commits, 43 issues and 83 pull requests on Sept. 1 [github.com#1]."
+  ],
+  "technical_details": [
+    "Session log entries: AgentLogs includes 64,255,174 session log entries that record individual run steps, including prompts, intermediate reasoning, file edits, git operations, GitHub interactions and token usage [arxiv.org#1].",
+    "Agent orchestration: Reddit developers described desktop and persistent-team tools that run multiple coding-agent CLIs with existing logins, separate worktrees, file-based memory and visibility into blocked or completed sessions [reddit.com#4][reddit.com#5].",
+    "Reasoning-loop failure: One Ollama user reported DeepSeek-V4-Flash on Ollama Cloud Pro entering infinite thinking loops or repetitive chain-of-thought behavior when used with high reasoning effort in Pi and DeepSeek Harness agent frameworks [reddit.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "AgentLogs paper submitted to arXiv [arxiv.org#1]",
+      "date": "29 August 2026",
+      "date_iso": "2026-08-29"
+    },
+    {
+      "content": "Aurora Mobile plugin item published via Google News [google.com#2]",
+      "date": "31 August 2026",
+      "date_iso": "2026-08-31"
+    },
+    {
+      "content": "arXiv listing published for AgentLogs dataset [arxiv.org#1]",
+      "date": "1 September 2026",
+      "date_iso": "2026-09-01"
+    },
+    {
+      "content": "ECC repository snapshot showed 245,000 GitHub stars [github.com#1]",
+      "date": "1 September 2026",
+      "date_iso": "2026-09-01"
+    }
+  ],
+  "title": "Researchers release dataset tracking GitHub Copilot agent logs",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://www.reddit.com/r/ollama/comments/1w2ywkv/deepseekv4flash_on_ollama_cloud_pro_enters/",
+  "user_action_items": [
+    "Use verified ECC downloads: Install ECC only from the GitHub repository, the listed npm packages, the GitHub App, the ecc@ecc plugin slug or ecc.tools, as the project says unofficial mirrors may contain malware [github.com#1].",
+    "Review agent logs before relying on output: Inspect prompts, tool calls, file edits, git operations and token usage where available, because AgentLogs shows these traces are central to understanding agent behavior and failures [arxiv.org#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
