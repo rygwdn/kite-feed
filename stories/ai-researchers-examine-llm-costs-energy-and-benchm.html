@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI researchers examine LLM costs, energy and benchmarks - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI researchers examine LLM costs, energy and benchmarks</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>AI research and engineering reports published this week focused on practical constraints in large language model deployment: energy use on mobile devices, tokenization latency, fine-tuning evaluation, and production inference cost. A paper accepted to the EMNLP 2026 Main Conference studied how prompt cognitive load and phrasing patterns affect on-device LLM energy consumption, finding that cognitive load mainly changes energy cost per token while phrasing pattern changes energy largely through token usage <a href="https://arxiv.org/abs/2609.01798" class="footnote-ref">[1]</a>.
+
+Other technical write-ups examined LLM-system bottlenecks. Andrew Healey analyzed GPT-2-style tokenization and why it can matter on the request path for routing, cost estimation, and context compression <a href="https://healeycodes.com/what-makes-llm-tokenization-slow" class="footnote-ref">[2]</a>. A GitHub audit project examines whether community fine-tunes improve on base models or merely memorize benchmarks <a href="https://github.com/aryanyaksh-art/did-it-even-learn" class="footnote-ref">[3]</a>. Neradot reported that prompt caching cut production LLM inference costs by 36% for a human-in-the-loop ReAct agent used in VIP gaming customer support <a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://arxiv.org/abs/2609.01798">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Energy frontier: The EMNLP paper says prompt design changes the attainable energy-quality frontier differently across models, pointing to model-aware prompt design for on-device inference <a href="https://arxiv.org/abs/2609.01798" class="footnote-ref">[1]</a>.</li>
+
+<li>Benchmark controls: The fine-tuning audit compares public benchmark items with newly generated equivalent items across math, general knowledge, and instruction-following tasks <a href="https://github.com/aryanyaksh-art/did-it-even-learn" class="footnote-ref">[3]</a>.</li>
+
+<li>Cache placement: Neradot focused on cache breakpoints in long system prompts and tool schemas, warning that implementation mistakes can reduce cache hit rates <a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching" class="footnote-ref">[4]</a>.</li>
+
+<li>Tokenizer scope: Healey converted GPT-2&#x27;s reference encoder to Rust to study performance constraints in a compact tokenizer implementation <a href="https://healeycodes.com/what-makes-llm-tokenization-slow" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Wei Hu and co-authors: The authors frame prompt design as an underexplored energy variable for mobile LLM deployment and released code, datasets, and scripts with the paper.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.01798">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Did it even learn? project: The audit treats a gap between public-condition and fresh-condition scores as evidence that a fine-tune may have learned benchmark items rather than the underlying capability.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/aryanyaksh-art/did-it-even-learn">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Liza Katz: Katz said the team built the agent first and optimized after production billing showed cost per interaction was slightly above its model.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching">Neradot</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Prefill versus decode profiling: The energy study separates prefill and decode phases, allowing researchers to attribute energy behavior to prompt processing versus token generation rather than measuring only total inference cost <a href="https://arxiv.org/abs/2609.01798" class="footnote-ref">[1]</a>.</li>
+
+<li>GPT-2 BPE boundaries: GPT-2 first applies a regex that splits text into regions such as word-like text, numbers, contractions, punctuation, and whitespace before byte-pair encoding runs within those regions <a href="https://healeycodes.com/what-makes-llm-tokenization-slow" class="footnote-ref">[2]</a>.</li>
+
+<li>ReAct loop billing: Neradot&#x27;s case study notes that a ReAct agent can resend the full prompt on each loop, so a user message with two tool calls becomes at least three model requests <a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Community models: The audit targets community fine-tunes on Hugging Face, where the project says thousands of users publish open-weight model variants claiming improvement <a href="https://github.com/aryanyaksh-art/did-it-even-learn" class="footnote-ref">[3]</a>.</li>
+
+<li>Customer support automation: Neradot&#x27;s case study involved a production VIP customer-support agent for a gaming company that used procedure documents, player preferences, account details, lifetime value, and deal eligibility in its context <a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Experimental scope: The on-device energy paper says it covers prompt properties, datasets, models, and devices, making the study broader than a single-model prompt comparison <a href="https://arxiv.org/abs/2609.01798" class="footnote-ref">[1]</a>.</li>
+
+<li>Stated limitation: Healey&#x27;s tokenizer analysis is explicitly GPT-2-specific, though he argues the underlying performance considerations remain relevant to later tokenizer implementations <a href="https://healeycodes.com/what-makes-llm-tokenization-slow" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Historical Background</h2><p>GPT-2 popularized byte-pair encoding tokenization in a widely studied open implementation, and Healey used its reference encoder because it remains compact and readable <a href="https://healeycodes.com/what-makes-llm-tokenization-slow" class="footnote-ref">[2]</a>. The GitHub audit says Hugging Face&#x27;s Open LLM Leaderboard retired in 2025, leaving no direct replacement for systematically assessing the long tail of community fine-tunes <a href="https://github.com/aryanyaksh-art/did-it-even-learn" class="footnote-ref">[3]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>On-device LLM energy efficiency can influence battery life and therefore product viability for mobile AI features <a href="https://arxiv.org/abs/2609.01798" class="footnote-ref">[1]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Test prompts for energy or cost, not only quality: When deploying LLMs on devices or at scale, measure token counts, per-token cost, and output quality across alternative prompt phrasings <a href="https://arxiv.org/abs/2609.01798" class="footnote-ref">[1]</a><a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching" class="footnote-ref">[4]</a>.</li>
+
+<li>Audit fine-tunes against fresh tasks: Compare candidate fine-tunes with their base models on newly generated items that test the same skill as public benchmarks <a href="https://github.com/aryanyaksh-art/did-it-even-learn" class="footnote-ref">[3]</a>.</li>
+
+<li>Place cache breakpoints deliberately: Review long system prompts and tool schemas for stable sections that can be cached without changing model behavior <a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://github.com/aryanyaksh-art/did-it-even-learn">https://github.com/aryanyaksh-art/did-it-even-learn</a></li>
+
+
+
+<li><a href="https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching">https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching</a></li>
+
+
+
+<li><a href="https://healeycodes.com/what-makes-llm-tokenization-slow">https://healeycodes.com/what-makes-llm-tokenization-slow</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> arxiv.org, github.com, healeycodes.com, neradot.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 4 unique domains, 4 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Wei Hu, Xiaolong Tu, Dawei Chen, Yitao Chen, Kyungtae Han, Haoxin Wang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01798",
+      "title": "How Do Prompt Variations Affect Energy Consumption in On-Device LLMs?"
+    },
+    {
+      "author": "ibobev",
+      "date": "2026-09-02T18:18:17.000Z",
+      "domain": "healeycodes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://healeycodes.com/what-makes-llm-tokenization-slow",
+      "title": "What Makes LLM Tokenization Slow?"
+    },
+    {
+      "author": "aryan_yaksh",
+      "date": "2026-09-02T14:49:39.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/aryanyaksh-art/did-it-even-learn",
+      "title": "Fine-tuning your LLM might be making it dumber"
+    },
+    {
+      "author": "lizakatz",
+      "date": "2026-09-02T06:46:47.000Z",
+      "domain": "neradot.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching",
+      "title": "Cutting LLM inference costs by 36% with prompt caching"
+    }
+  ],
+  "business_angle": [
+    "On-device LLM energy efficiency can influence battery life and therefore product viability for mobile AI features [arxiv.org#1][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=healeycodes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "healeycodes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=neradot.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "neradot.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "GPT-2 popularized byte-pair encoding tokenization in a widely studied open implementation, and Healey used its reference encoder because it remains compact and readable [healeycodes.com#1]. The GitHub audit says Hugging Face\u0027s Open LLM Leaderboard retired in 2025, leaving no direct replacement for systematically assessing the long tail of community fine-tunes [github.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Community models: The audit targets community fine-tunes on Hugging Face, where the project says thousands of users publish open-weight model variants claiming improvement [github.com#1].",
+    "Customer support automation: Neradot\u0027s case study involved a production VIP customer-support agent for a gaming company that used procedure documents, player preferences, account details, lifetime value, and deal eligibility in its context [neradot.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Llm Operations",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 4,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.01798"
+        }
+      ],
+      "text": "Wei Hu and co-authors: The authors frame prompt design as an underexplored energy variable for mobile LLM deployment and released code, datasets, and scripts with the paper."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/aryanyaksh-art/did-it-even-learn"
+        }
+      ],
+      "text": "Did it even learn? project: The audit treats a gap between public-condition and fresh-condition scores as evidence that a fine-tune may have learned benchmark items rather than the underlying capability."
+    },
+    {
+      "sources": [
+        {
+          "name": "Neradot",
+          "url": "https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching"
+        }
+      ],
+      "text": "Liza Katz: Katz said the team built the agent first and optimized after production billing showed cost per interaction was slightly above its model."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-09-03T12:00:12.034Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Experimental scope: The on-device energy paper says it covers prompt properties, datasets, models, and devices, making the study broader than a single-model prompt comparison [arxiv.org#1].",
+    "Stated limitation: Healey\u0027s tokenizer analysis is explicitly GPT-2-specific, though he argues the underlying performance considerations remain relevant to later tokenizer implementations [healeycodes.com#1]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://github.com/aryanyaksh-art/did-it-even-learn",
+    "https://www.neradot.com/post/cutting-inference-cost-36-percent-with-prompt-caching",
+    "https://healeycodes.com/what-makes-llm-tokenization-slow",
+    "https://arxiv.org/abs/2609.01798"
+  ],
+  "suggested_qna": [],
+  "summary": "AI research and engineering reports published this week focused on practical constraints in large language model deployment: energy use on mobile devices, tokenization latency, fine-tuning evaluation, and production inference cost. A paper accepted to the EMNLP 2026 Main Conference studied how prompt cognitive load and phrasing patterns affect on-device LLM energy consumption, finding that cognitive load mainly changes energy cost per token while phrasing pattern changes energy largely through token usage [arxiv.org#1].\n\nOther technical write-ups examined LLM-system bottlenecks. Andrew Healey analyzed GPT-2-style tokenization and why it can matter on the request path for routing, cost estimation, and context compression [healeycodes.com#1]. A GitHub audit project examines whether community fine-tunes improve on base models or merely memorize benchmarks [github.com#1]. Neradot reported that prompt caching cut production LLM inference costs by 36% for a human-in-the-loop ReAct agent used in VIP gaming customer support [neradot.com#1].",
+  "talking_points": [
+    "Energy frontier: The EMNLP paper says prompt design changes the attainable energy-quality frontier differently across models, pointing to model-aware prompt design for on-device inference [arxiv.org#1].",
+    "Benchmark controls: The fine-tuning audit compares public benchmark items with newly generated equivalent items across math, general knowledge, and instruction-following tasks [github.com#1].",
+    "Cache placement: Neradot focused on cache breakpoints in long system prompts and tool schemas, warning that implementation mistakes can reduce cache hit rates [neradot.com#1].",
+    "Tokenizer scope: Healey converted GPT-2\u0027s reference encoder to Rust to study performance constraints in a compact tokenizer implementation [healeycodes.com#1]."
+  ],
+  "technical_details": [
+    "Prefill versus decode profiling: The energy study separates prefill and decode phases, allowing researchers to attribute energy behavior to prompt processing versus token generation rather than measuring only total inference cost [arxiv.org#1].",
+    "GPT-2 BPE boundaries: GPT-2 first applies a regex that splits text into regions such as word-like text, numbers, contractions, punctuation, and whitespace before byte-pair encoding runs within those regions [healeycodes.com#1].",
+    "ReAct loop billing: Neradot\u0027s case study notes that a ReAct agent can resend the full prompt on each loop, so a user message with two tool calls becomes at least three model requests [neradot.com#1]."
+  ],
+  "timeline": [],
+  "title": "AI researchers examine LLM costs, energy and benchmarks",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://arxiv.org/abs/2609.01798",
+  "user_action_items": [
+    "Test prompts for energy or cost, not only quality: When deploying LLMs on devices or at scale, measure token counts, per-token cost, and output quality across alternative prompt phrasings [arxiv.org#1][neradot.com#1].",
+    "Audit fine-tunes against fresh tasks: Compare candidate fine-tunes with their base models on newly generated items that test the same skill as public benchmarks [github.com#1].",
+    "Place cache breakpoints deliberately: Review long system prompts and tool schemas for stable sections that can be cached without changing model behavior [neradot.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

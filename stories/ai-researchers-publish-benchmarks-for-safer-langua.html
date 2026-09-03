@@ -1,0 +1,4008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI researchers publish benchmarks for safer language models - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI researchers publish benchmarks for safer language models</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>A batch of AI research papers posted or revised on arXiv around Sept. 1-2 focused on making language models more reliable for factual grounding, safety, efficiency and user intent. Several papers targeted retrieval-augmented generation and grounded question answering, including PRO-Step, which trains a process reward model to evaluate logical validity and evidential grounding at each reasoning step, and Evidence Sufficiency Boundary Training, which teaches models when to abstain until evidence is sufficient <a href="https://arxiv.org/abs/2609.02054" class="footnote-ref">[1]</a><a href="https://arxiv.org/abs/2609.01658" class="footnote-ref">[3]</a>.
+
+The batch also included work on culturally and linguistically grounded evaluation, with new resources for South Asian meme understanding, Indic pragmatics, Farsi dialogue, discourse-aware sign-language gloss translation and multilingual dictionary digitization <a href="https://arxiv.org/abs/2609.01737" class="footnote-ref">[5]</a><a href="https://arxiv.org/abs/2609.01772" class="footnote-ref">[6]</a><a href="https://arxiv.org/abs/2609.01788" class="footnote-ref">[7]</a><a href="https://arxiv.org/abs/2609.02796" class="footnote-ref">[31]</a><a href="https://arxiv.org/abs/2606.09435" class="footnote-ref">[81]</a>. Other studies examined safety and trust failures in deployment-style systems, including stale memories overriding current evidence, visual prompts weakening safety refusals, unreliable LLM judges in subjective evaluations and clinical agents violating safety constraints in high-risk cases <a href="https://arxiv.org/abs/2609.01852" class="footnote-ref">[35]</a><a href="https://arxiv.org/abs/2609.02082" class="footnote-ref">[38]</a><a href="https://arxiv.org/abs/2606.03043" class="footnote-ref">[80]</a><a href="https://arxiv.org/abs/2608.30188" class="footnote-ref">[100]</a>.
+
+Efficiency and agentic workflows formed another major thread. Papers proposed faster diffusion language model decoding, sparse long-context attention, model routing, tool-use harnesses, repository-to-skill distillation and paper-to-code generation frameworks <a href="https://arxiv.org/abs/2609.02108" class="footnote-ref">[18]</a><a href="https://arxiv.org/abs/2609.02737" class="footnote-ref">[30]</a><a href="https://arxiv.org/abs/2609.01925" class="footnote-ref">[36]</a><a href="https://arxiv.org/abs/2609.02292" class="footnote-ref">[44]</a><a href="https://arxiv.org/abs/2609.02749" class="footnote-ref">[51]</a><a href="https://arxiv.org/abs/2609.02272" class="footnote-ref">[21]</a>. One coding-competition paper reported that a competition-specific Ultra-CC system scored 535.4 out of 600 under IOI 2026 constraints, exceeding the gold threshold of 438.3 <a href="https://arxiv.org/abs/2609.02849" class="footnote-ref">[53]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://arxiv.org/abs/2609.02054">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Grounding methods: DKL merges knowledge-infused base-model weights into an instruction model without another instruction-tuning phase <a href="https://arxiv.org/abs/2609.02685" class="footnote-ref">[28]</a>.</li>
+
+<li>Clinical limits: GPAgentBench-2K evaluated 16 LLMs in primary-care decision workflows and found that even frontier models violated safety constraints in over half of high-risk cases <a href="https://arxiv.org/abs/2608.30188" class="footnote-ref">[100]</a>.</li>
+
+<li>Cultural gaps: MemeCULT-1K found that adding minimal cultural context improved mean SBERT similarity from 44.6 to 56.4 and LLM-as-a-judge scores from 2.57 to 3.43 out of 5 across South Asian meme tasks <a href="https://arxiv.org/abs/2609.01737" class="footnote-ref">[5]</a>.</li>
+
+<li>Judge reliability: A multilingual LLM-judge study found judges matched one another on subjective rubrics but reached only 58-66% of human agreement, while the gap narrowed on a rubric with a verifiable answer <a href="https://arxiv.org/abs/2606.03043" class="footnote-ref">[80]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Retrieval-augmented generation researchers: PRO-Step&#x27;s authors said outcome-only optimization misses intermediate retrieval and reasoning errors, so they used step-level preference optimization guided by a process reward model.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.01658">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>AI safety benchmark researchers: EvalDetectBench&#x27;s authors said evaluation awareness can undermine safety testing if systems behave differently under benchmark conditions than in deployment.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.01611">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Accessibility-focused speech researchers: SpeakPay&#x27;s author described Nepali voice-wallet recognition as an accessibility problem for visually impaired users and released code, data and model weights with the deployed web application.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.01737">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Persistent-memory agent researchers: The Memory Trust Gap paper reported that metadata helped larger models handle stale-memory conflicts, while smaller checkpoints needed conflicts resolved in advance.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.01852">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Step-level DPO: PRO-Step constructs preference pairs between valid and flawed intermediate RAG steps, then applies Direct Preference Optimization at the step level instead of rewarding only final answers <a href="https://arxiv.org/abs/2609.02054" class="footnote-ref">[1]</a>.</li>
+
+<li>KV-cache skipping: Declarative Attention asks the model to mark generation as global, focus or local, letting the inference engine skip much of the key-value cache read during long-context decoding <a href="https://arxiv.org/abs/2609.02737" class="footnote-ref">[30]</a>.</li>
+
+<li>Constrained MDP benchmark: GPAgentBench-2K models primary-care decisions as a constrained Markov decision process with six foundational clinical actions and safety-informed abstention as an explicit outcome <a href="https://arxiv.org/abs/2608.30188" class="footnote-ref">[100]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Contact centers: Beyond-RAG described a Minerva CQ deployment that identifies customer questions in real time and returns FAQ or RAG-generated answers to human agents within 2 seconds <a href="https://arxiv.org/abs/2410.10136" class="footnote-ref">[55]</a>.</li>
+
+<li>Financial RAG: Incremental pooled LLM evaluation reused 65-80% of relevance judgments and cut evaluation costs by up to 4.9 times when comparing 62 retrieval configurations for financial news QA <a href="https://arxiv.org/abs/2609.02745" class="footnote-ref">[50]</a>.</li>
+
+<li>Tool ecosystems: HEART used ToolFace, a repository of 25,519 functions, and reported up to 85% lower API cost while outperforming listed frontier commercial models on tool-use benchmarks <a href="https://arxiv.org/abs/2609.01736" class="footnote-ref">[34]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>Benchmark dependence: Several reported gains come from task-specific benchmarks or controlled diagnostic setups, including 50-query samples in text2ql, synthetic perception-reasoning tasks for vision-language post-training and a clinical benchmark built from expert-validated GP encounters <a href="https://arxiv.org/abs/2609.02115" class="footnote-ref">[19]</a><a href="https://arxiv.org/abs/2605.29496" class="footnote-ref">[78]</a><a href="https://arxiv.org/abs/2608.30188" class="footnote-ref">[100]</a>.</li>
+
+<li>Evaluation uncertainty: The LLM-judge papers in this batch flagged measurement risks: RuVerBench found substantial noise in rubric verification, BASSE found proprietary judges correlated best with human summarization judgments, and ICE reported operator-dependent explanation faithfulness <a href="https://arxiv.org/abs/2606.29920" class="footnote-ref">[88]</a><a href="https://arxiv.org/abs/2503.17039" class="footnote-ref">[56]</a><a href="https://arxiv.org/abs/2603.18579" class="footnote-ref">[73]</a>.</li>
+
+<li>Research integrity: One withdrawn arXiv paper on agentic sycophancy said its reported results did not match the executed evaluation and &quot;should not be cited,&quot; a direct caution against treating unreconciled preprints as evidence <a href="https://arxiv.org/abs/2608.21377" class="footnote-ref">[96]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Check benchmark status before citing: Review each arXiv record for comments such as accepted venue, under review, preprint or withdrawn before relying on a result; some preprints may be withdrawn or contain errors.</li>
+
+<li>Audit LLM-judge evaluations: When using LLM judges, compare judge scores with held-out human ratings or reference-matched checks because several papers found judge agreement can diverge from human alignment <a href="https://arxiv.org/abs/2503.17039" class="footnote-ref">[56]</a><a href="https://arxiv.org/abs/2606.03043" class="footnote-ref">[80]</a><a href="https://arxiv.org/abs/2606.29920" class="footnote-ref">[88]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://arxiv.org/abs/2609.01691">https://arxiv.org/abs/2609.01691</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.10110">https://arxiv.org/abs/2607.10110</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02364">https://arxiv.org/abs/2609.02364</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2512.15662">https://arxiv.org/abs/2512.15662</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.26263">https://arxiv.org/abs/2608.26263</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.02961">https://arxiv.org/abs/2608.02961</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2410.10136">https://arxiv.org/abs/2410.10136</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.06992">https://arxiv.org/abs/2608.06992</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02089">https://arxiv.org/abs/2609.02089</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02082">https://arxiv.org/abs/2609.02082</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.18579">https://arxiv.org/abs/2603.18579</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2507.21815">https://arxiv.org/abs/2507.21815</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01834">https://arxiv.org/abs/2609.01834</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.16741">https://arxiv.org/abs/2607.16741</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02339">https://arxiv.org/abs/2609.02339</a></li>
+
+
+
+<li><a href="https://www.lesswrong.com/posts/GTWDGHjZ9C7f5YxqE/notes-on-a-global-workspace-in-language-models">https://www.lesswrong.com/posts/GTWDGHjZ9C7f5YxqE/notes-on-a-global-workspace-in-language-models</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01611">https://arxiv.org/abs/2609.01611</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.21321">https://arxiv.org/abs/2606.21321</a></li>
+
+
+
+<li><a href="https://sebastianraschka.com/blog/2026/openai-astra-looped-transformers.html">https://sebastianraschka.com/blog/2026/openai-astra-looped-transformers.html</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00575">https://arxiv.org/abs/2609.00575</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02548">https://arxiv.org/abs/2609.02548</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02745">https://arxiv.org/abs/2609.02745</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2511.08590">https://arxiv.org/abs/2511.08590</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.15517">https://arxiv.org/abs/2606.15517</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1w5vlz5/llm_test_wrapper/">https://www.reddit.com/r/LLMDevs/comments/1w5vlz5/llm_test_wrapper/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02371">https://arxiv.org/abs/2609.02371</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2406.16893">https://arxiv.org/abs/2406.16893</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00474">https://arxiv.org/abs/2609.00474</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.29531">https://arxiv.org/abs/2605.29531</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01658">https://arxiv.org/abs/2609.01658</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02480">https://arxiv.org/abs/2609.02480</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.29270">https://arxiv.org/abs/2608.29270</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00528">https://arxiv.org/abs/2609.00528</a></li>
+
+
+
+<li><a href="https://writethatblog.substack.com/p/rubber-ducking-your-blog-post-with-llms">https://writethatblog.substack.com/p/rubber-ducking-your-blog-post-with-llms</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02399">https://arxiv.org/abs/2609.02399</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.01708">https://arxiv.org/abs/2608.01708</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01833">https://arxiv.org/abs/2609.01833</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.16749">https://arxiv.org/abs/2603.16749</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.21617">https://arxiv.org/abs/2607.21617</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.24780">https://arxiv.org/abs/2607.24780</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01737">https://arxiv.org/abs/2609.01737</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.07710">https://arxiv.org/abs/2606.07710</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02510">https://arxiv.org/abs/2609.02510</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00566">https://arxiv.org/abs/2609.00566</a></li>
+
+
+
+<li><a href="https://github.com/tokencanopy/price">https://github.com/tokencanopy/price</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.29496">https://arxiv.org/abs/2605.29496</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02451">https://arxiv.org/abs/2609.02451</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02749">https://arxiv.org/abs/2609.02749</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02133">https://arxiv.org/abs/2609.02133</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.16991">https://arxiv.org/abs/2605.16991</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00588">https://arxiv.org/abs/2609.00588</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2507.08468">https://arxiv.org/abs/2507.08468</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.08389">https://arxiv.org/abs/2608.08389</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.12639">https://arxiv.org/abs/2602.12639</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02106">https://arxiv.org/abs/2609.02106</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.01284">https://arxiv.org/abs/2608.01284</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2505.15276">https://arxiv.org/abs/2505.15276</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.16077">https://arxiv.org/abs/2603.16077</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.03557">https://arxiv.org/abs/2606.03557</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02233">https://arxiv.org/abs/2609.02233</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.20574">https://arxiv.org/abs/2608.20574</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2512.07328">https://arxiv.org/abs/2512.07328</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.00684">https://arxiv.org/abs/2607.00684</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.22344">https://arxiv.org/abs/2605.22344</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.31016">https://arxiv.org/abs/2608.31016</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02273">https://arxiv.org/abs/2609.02273</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2503.17039">https://arxiv.org/abs/2503.17039</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02092">https://arxiv.org/abs/2609.02092</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01936">https://arxiv.org/abs/2609.01936</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02253">https://arxiv.org/abs/2609.02253</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02846">https://arxiv.org/abs/2609.02846</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02059">https://arxiv.org/abs/2609.02059</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.27284">https://arxiv.org/abs/2605.27284</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2509.00030">https://arxiv.org/abs/2509.00030</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.19828">https://arxiv.org/abs/2603.19828</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01815">https://arxiv.org/abs/2609.01815</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.30022">https://arxiv.org/abs/2605.30022</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.11557">https://arxiv.org/abs/2604.11557</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01736">https://arxiv.org/abs/2609.01736</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01687">https://arxiv.org/abs/2609.01687</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.12062">https://arxiv.org/abs/2608.12062</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.17117">https://arxiv.org/abs/2607.17117</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.10103">https://arxiv.org/abs/2607.10103</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.28482">https://arxiv.org/abs/2608.28482</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02852">https://arxiv.org/abs/2609.02852</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02750">https://arxiv.org/abs/2609.02750</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.28346">https://arxiv.org/abs/2605.28346</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.18593">https://arxiv.org/abs/2603.18593</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02115">https://arxiv.org/abs/2609.02115</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02737">https://arxiv.org/abs/2609.02737</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02797">https://arxiv.org/abs/2609.02797</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.10118">https://arxiv.org/abs/2602.10118</a></li>
+
+
+
+<li><a href="https://akitaonrails.com/en/2026/09/02/ai-memory-2-0-best-memory-system-for-agents-and-teams/">https://akitaonrails.com/en/2026/09/02/ai-memory-2-0-best-memory-system-for-agents-and-teams/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.06662">https://arxiv.org/abs/2603.06662</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.26550">https://arxiv.org/abs/2608.26550</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMikwFBVV95cUxNc2Y1NE5uU1BuZG9FemdwdS1DRmlaQ3hPdTM5dmpteEVwYUQtSHRtWm93WjlqZWtNczZVV2dhWk1yUll2MWNIN2RockNZaF9xQ05OWFNkUDJUalZYWnF1aXA5aHdlcjFmYTJOLUE2UVpGLUIwMU5RT3ExY2xrRUh6Nk1qUjdCSlNWUGxDWGo1Z01IT00">https://news.google.com/atom/articles/CBMikwFBVV95cUxNc2Y1NE5uU1BuZG9FemdwdS1DRmlaQ3hPdTM5dmpteEVwYUQtSHRtWm93WjlqZWtNczZVV2dhWk1yUll2MWNIN2RockNZaF9xQ05OWFNkUDJUalZYWnF1aXA5aHdlcjFmYTJOLUE2UVpGLUIwMU5RT3ExY2xrRUh6Nk1qUjdCSlNWUGxDWGo1Z01IT00</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.05520">https://arxiv.org/abs/2601.05520</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMioAFBVV95cUxNNDlURVZWZjJyVVNITTFvMW1YaW9mVWpDWl9DNVVpOVlnbTR6cGh6S1ljN0UySU5sOElWLWlIdVZkdFhjLW5saDRxLXJybjRpU3JGTDNVWXVseC1QNEppLXNsMU00V1FDSDNvS2ZKazJwam1GMU44dFU1VUFyRUhCb2RyXzRjODhSdGY3VW5tUXRYT2ozN2NHazRYN2xVVlNn">https://news.google.com/atom/articles/CBMioAFBVV95cUxNNDlURVZWZjJyVVNITTFvMW1YaW9mVWpDWl9DNVVpOVlnbTR6cGh6S1ljN0UySU5sOElWLWlIdVZkdFhjLW5saDRxLXJybjRpU3JGTDNVWXVseC1QNEppLXNsMU00V1FDSDNvS2ZKazJwam1GMU44dFU1VUFyRUhCb2RyXzRjODhSdGY3VW5tUXRYT2ozN2NHazRYN2xVVlNn</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.30188">https://arxiv.org/abs/2608.30188</a></li>
+
+
+
+<li><a href="https://news.google.com/atom/articles/CBMikAFBVV95cUxQd2RIdGpKMXFvZlVPZmVxd2tYbVBoUmFyelB3UWxlUThhdlF4MTduREN4aE8xeUN1c3hYc1JveWZhV3hSenVSc1NSN3p6bzRNaHQ0clFxWFZkR0hQOW9wWU9vYXp5d1ZKa09UNXQ5a0hxY3loLUJMNHc3bFM1QUtONFptR2JlUHVzWWlkYUFIdk0">https://news.google.com/atom/articles/CBMikAFBVV95cUxQd2RIdGpKMXFvZlVPZmVxd2tYbVBoUmFyelB3UWxlUThhdlF4MTduREN4aE8xeUN1c3hYc1JveWZhV3hSenVSc1NSN3p6bzRNaHQ0clFxWFZkR0hQOW9wWU9vYXp5d1ZKa09UNXQ5a0hxY3loLUJMNHc3bFM1QUtONFptR2JlUHVzWWlkYUFIdk0</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.04562">https://arxiv.org/abs/2607.04562</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.29291">https://arxiv.org/abs/2608.29291</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02786">https://arxiv.org/abs/2609.02786</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.29920">https://arxiv.org/abs/2606.29920</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.30378">https://arxiv.org/abs/2608.30378</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.17372">https://arxiv.org/abs/2606.17372</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02685">https://arxiv.org/abs/2609.02685</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02796">https://arxiv.org/abs/2609.02796</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.24661">https://arxiv.org/abs/2605.24661</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ollama/comments/1w5dje5/architectural_proposal_for_future_qwen_models/">https://www.reddit.com/r/ollama/comments/1w5dje5/architectural_proposal_for_future_qwen_models/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00224">https://arxiv.org/abs/2609.00224</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2512.16310">https://arxiv.org/abs/2512.16310</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2505.23713">https://arxiv.org/abs/2505.23713</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01867">https://arxiv.org/abs/2609.01867</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.28026">https://arxiv.org/abs/2603.28026</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02421">https://arxiv.org/abs/2609.02421</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.23286">https://arxiv.org/abs/2607.23286</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.28980">https://arxiv.org/abs/2608.28980</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2505.22451">https://arxiv.org/abs/2505.22451</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.04726">https://arxiv.org/abs/2607.04726</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01985">https://arxiv.org/abs/2609.01985</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.04547">https://arxiv.org/abs/2606.04547</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02482">https://arxiv.org/abs/2609.02482</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02679">https://arxiv.org/abs/2609.02679</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01836">https://arxiv.org/abs/2609.01836</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02029">https://arxiv.org/abs/2609.02029</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.07468">https://arxiv.org/abs/2601.07468</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02859">https://arxiv.org/abs/2609.02859</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02168">https://arxiv.org/abs/2609.02168</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01832">https://arxiv.org/abs/2609.01832</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01660">https://arxiv.org/abs/2609.01660</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.16848">https://arxiv.org/abs/2603.16848</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02108">https://arxiv.org/abs/2609.02108</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.07571">https://arxiv.org/abs/2606.07571</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.29894">https://arxiv.org/abs/2606.29894</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02049">https://arxiv.org/abs/2609.02049</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01971">https://arxiv.org/abs/2609.01971</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02849">https://arxiv.org/abs/2609.02849</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02336">https://arxiv.org/abs/2609.02336</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01810">https://arxiv.org/abs/2609.01810</a></li>
+
+
+
+<li><a href="https://www.lesswrong.com/posts/finpDcZidhcdCa4cS/bloom-wilt-on-policy-examples-of-any-llm-behaviour-from-a-1">https://www.lesswrong.com/posts/finpDcZidhcdCa4cS/bloom-wilt-on-policy-examples-of-any-llm-behaviour-from-a-1</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.19128">https://arxiv.org/abs/2607.19128</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.25184">https://arxiv.org/abs/2603.25184</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.23101">https://arxiv.org/abs/2603.23101</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02215">https://arxiv.org/abs/2609.02215</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01615">https://arxiv.org/abs/2609.01615</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.22396">https://arxiv.org/abs/2601.22396</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01772">https://arxiv.org/abs/2609.01772</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01925">https://arxiv.org/abs/2609.01925</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01788">https://arxiv.org/abs/2609.01788</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01982">https://arxiv.org/abs/2609.01982</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.13081">https://arxiv.org/abs/2606.13081</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.10963">https://arxiv.org/abs/2608.10963</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02244">https://arxiv.org/abs/2609.02244</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.03729">https://arxiv.org/abs/2608.03729</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2407.14845">https://arxiv.org/abs/2407.14845</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2605.29829">https://arxiv.org/abs/2605.29829</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.19686">https://arxiv.org/abs/2607.19686</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.06973">https://arxiv.org/abs/2601.06973</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.21144">https://arxiv.org/abs/2606.21144</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.26841">https://arxiv.org/abs/2604.26841</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.20819">https://arxiv.org/abs/2604.20819</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02343">https://arxiv.org/abs/2609.02343</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2512.10534">https://arxiv.org/abs/2512.10534</a></li>
+
+
+
+
+
+<li><a href="https://arxiv.org/abs/2606.17698">https://arxiv.org/abs/2606.17698</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01807">https://arxiv.org/abs/2609.01807</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01962">https://arxiv.org/abs/2609.01962</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1w5l0gh/i_built_a_comparison_tool_for_166_models_llmttsstt/">https://www.reddit.com/r/LLMDevs/comments/1w5l0gh/i_built_a_comparison_tool_for_166_models_llmttsstt/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02623">https://arxiv.org/abs/2609.02623</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00570">https://arxiv.org/abs/2609.00570</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.28945">https://arxiv.org/abs/2608.28945</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02438">https://arxiv.org/abs/2609.02438</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02265">https://arxiv.org/abs/2609.02265</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.08146">https://arxiv.org/abs/2601.08146</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01657">https://arxiv.org/abs/2609.01657</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02275">https://arxiv.org/abs/2609.02275</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLM/comments/1w51tzg/openroutiq_architecture_benchmarks_and_safety/">https://www.reddit.com/r/LLM/comments/1w51tzg/openroutiq_architecture_benchmarks_and_safety/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1w5u9w8/wvy_is_a_handwritten_language_model_every/">https://www.reddit.com/r/LocalLLaMA/comments/1w5u9w8/wvy_is_a_handwritten_language_model_every/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.03072">https://arxiv.org/abs/2603.03072</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00618">https://arxiv.org/abs/2609.00618</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02083">https://arxiv.org/abs/2609.02083</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02149">https://arxiv.org/abs/2609.02149</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.23092">https://arxiv.org/abs/2606.23092</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.14501">https://arxiv.org/abs/2604.14501</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01828">https://arxiv.org/abs/2609.01828</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02702">https://arxiv.org/abs/2609.02702</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02264">https://arxiv.org/abs/2609.02264</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01662">https://arxiv.org/abs/2609.01662</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.12983">https://arxiv.org/abs/2601.12983</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.09435">https://arxiv.org/abs/2606.09435</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.05605">https://arxiv.org/abs/2602.05605</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.16847">https://arxiv.org/abs/2606.16847</a></li>
+
+
+
+<li><a href="https://antithetical-labs.com/blog/the-judge-liked-it-better/">https://antithetical-labs.com/blog/the-judge-liked-it-better/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01878">https://arxiv.org/abs/2609.01878</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01723">https://arxiv.org/abs/2609.01723</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/MachineLearning/comments/1w54qkk/mir_with_audiomuseaisae_p/">https://www.reddit.com/r/MachineLearning/comments/1w54qkk/mir_with_audiomuseaisae_p/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01408">https://arxiv.org/abs/2609.01408</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01849">https://arxiv.org/abs/2609.01849</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.03043">https://arxiv.org/abs/2606.03043</a></li>
+
+
+
+<li><a href="https://www.searchplex.net/blog/llm-judge-search-relevance">https://www.searchplex.net/blog/llm-judge-search-relevance</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.07678">https://arxiv.org/abs/2606.07678</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.20129">https://arxiv.org/abs/2607.20129</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.25202">https://arxiv.org/abs/2608.25202</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02580">https://arxiv.org/abs/2609.02580</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.00015">https://arxiv.org/abs/2609.00015</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2603.26236">https://arxiv.org/abs/2603.26236</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02277">https://arxiv.org/abs/2609.02277</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.21377">https://arxiv.org/abs/2608.21377</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02805">https://arxiv.org/abs/2609.02805</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.17350">https://arxiv.org/abs/2606.17350</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02094">https://arxiv.org/abs/2609.02094</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02042">https://arxiv.org/abs/2609.02042</a></li>
+
+
+
+<li><a href="https://developer.nvidia.com/blog/co-designing-ai-models-using-speculative-decoding-for-faster-llm-inference/">https://developer.nvidia.com/blog/co-designing-ai-models-using-speculative-decoding-for-faster-llm-inference/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02177">https://arxiv.org/abs/2609.02177</a></li>
+
+
+
+<li><a href="https://memhub.simplex.lat">https://memhub.simplex.lat</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2510.18699">https://arxiv.org/abs/2510.18699</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2601.22365">https://arxiv.org/abs/2601.22365</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01976">https://arxiv.org/abs/2609.01976</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2602.22453">https://arxiv.org/abs/2602.22453</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02131">https://arxiv.org/abs/2609.02131</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2607.12406">https://arxiv.org/abs/2607.12406</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01779">https://arxiv.org/abs/2609.01779</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2506.00290">https://arxiv.org/abs/2506.00290</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02246">https://arxiv.org/abs/2609.02246</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01924">https://arxiv.org/abs/2609.01924</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02217">https://arxiv.org/abs/2609.02217</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02652">https://arxiv.org/abs/2609.02652</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02731">https://arxiv.org/abs/2609.02731</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02292">https://arxiv.org/abs/2609.02292</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2604.02198">https://arxiv.org/abs/2604.02198</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.21052">https://arxiv.org/abs/2606.21052</a></li>
+
+
+
+<li><a href="https://redactle.net/llm-leaderboard">https://redactle.net/llm-leaderboard</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01852">https://arxiv.org/abs/2609.01852</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02272">https://arxiv.org/abs/2609.02272</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01567">https://arxiv.org/abs/2609.01567</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2606.22975">https://arxiv.org/abs/2606.22975</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.27141">https://arxiv.org/abs/2608.27141</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.01918">https://arxiv.org/abs/2609.01918</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.02526">https://arxiv.org/abs/2609.02526</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2608.27463">https://arxiv.org/abs/2608.27463</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> arxiv.org, reddit.com, simplex.lat, akitaonrails.com, google.com, redactle.net, antithetical-labs.com, nvidia.com, substack.com, github.com, searchplex.net, lesswrong.com, sebastianraschka.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 13 unique domains, 241 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Yikai Zhao, Saurabh Pandey, Pradeep Kumar Misra",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02054",
+      "title": "A Tri-Agent Framework for Evaluating and Aligning Question Clarification Capabilities of Large Language Models"
+    },
+    {
+      "author": "/u/Helpful-Series132",
+      "date": "2026-09-03T02:04:17.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1w5u9w8/wvy_is_a_handwritten_language_model_every/",
+      "title": "WVY is a handwritten language model. Every response was written by one person to demonstrate that the illusion of intelligence is not exclusive to parameter count."
+    },
+    {
+      "author": "MinKeon Kim, Namjun Lee, Jaekwang Kim",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01658",
+      "title": "PRO-Step: Step-level Process Reward Optimization for Retrieval-Augmented Generation"
+    },
+    {
+      "author": "Haruto Sato, Yuki Tanaka, Ren Nakamura, Aoi Kobayashi, Mei Ito",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01687",
+      "title": "Learning Evidence Sufficiency Boundaries for Selective Answering in Grounded Multi-Hop QA"
+    },
+    {
+      "author": "Biraj Subedi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01737",
+      "title": "SpeakPay: Domain-Adaptive LoRA Fine-Tuning of Whisper for Low-Resource Nepali Financial Speech Recognition"
+    },
+    {
+      "author": "Tawsif Tashwar Dipto, Mehedi Ahamed, Radib Bin Kabir, Mueeze Al Mushabbir, Mohammed Saidul Islam, Mir Rayat Imtiaz Hossain, Md Tahmid Rahman Laskar, Sabbir Ahmed",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01772",
+      "title": "MemeCULT-1K: Benchmarking South Asian Cultural Context and Humor Understanding of Multimodal Models"
+    },
+    {
+      "author": "Usneek Singh, Poorvaja Veera Balaji Kumar, Parth Nanda, Anand Madhusoodanan, Geyang Guo, Wei Xu, Junyi Jessy L",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01788",
+      "title": "VakyArth: Evaluating Pragmatic Competence in LLMs across Indic Languages"
+    },
+    {
+      "author": "Neda Jamshidi, Kamyar Zeinalipour, Fahimeh Akbari, Monica Bianchini, Marco Maggini, Marco Gori",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01810",
+      "title": "TalkFa: A Unified Benchmark for Farsi Dialogue Generation and Understanding"
+    },
+    {
+      "author": "Chunggi Lee, Hanspeter Pfister",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01828",
+      "title": "AVERT: Audio-Verified Adjudication for Spoken Dialogue State Tracking"
+    },
+    {
+      "author": "Fangyi Zhu, Ajay Subramanian, Allison Constant, Camille Wang, Ravish Gupta, Corey J. Keller",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01832",
+      "title": "Interpretable Symptom Vectors for Depression in a Large Language Model"
+    },
+    {
+      "author": "Weiming Li, Catarina Barata, Miguel Constante, Joao Sanches",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01833",
+      "title": "Candidate Generation and Definition-Guided Verification for Sentence-Level Depression Symptom Recognition"
+    },
+    {
+      "author": "Henry Arthur",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01867",
+      "title": "Thinking effort aligns between humans and reasoning models in abductive reasoning"
+    },
+    {
+      "author": "Moghis Fereidouni, Muhammad Umair Haider, Hassan Sajjad, A. B. Siddique",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01878",
+      "title": "GAPS: Dimension-Level Gates for Conditional Activation Steering"
+    },
+    {
+      "author": "Kunal Jadhav, Siddhesh More",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01918",
+      "title": "Grounded, Compute-Efficient LLM Policy Agents for Energy-Poverty Equity in Physically-Constrained Peer-to-Peer Energy Markets"
+    },
+    {
+      "author": "Matteo He, William F. Shen, Xinchi Qiu, Nicholas D. Lane",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01936",
+      "title": "Sparse Readout Prism: Explaining Logit-Lens Scores in Features Instead of Tokens"
+    },
+    {
+      "author": "Wuche Liu, Yiran Qiao, Linlin Hou, Rui Yang, Shusen Pu, Song Wang, Jing Ma",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01971",
+      "title": "NS-Copilot: An LLM-Driven Agent System for Autonomous Neuroscience Analysis"
+    },
+    {
+      "author": "Zheng Wang, Muchen Li, Renjie Liao, Yan Leng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02089",
+      "title": "IDEEA: training-free Input-Dependent stEEring via Activation cluster matching"
+    },
+    {
+      "author": "Haobo Xu, Sirui Chen, Yuanchen Bei, Lingjie Chen, Yuchen Yan, Dongqi Fu, Jingrui He, Hanghang Tong",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02108",
+      "title": "Predict, Don\u0027t Iterate: Efficient Adaptive-Length Infilling for Diffusion Language Models"
+    },
+    {
+      "author": "Ritesh Kumar",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02115",
+      "title": "text2ql: Multi-Target Natural Language Querying via a Language-Agnostic Intermediate Representation"
+    },
+    {
+      "author": "S M Rafiuddin, Atriya Sen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02131",
+      "title": "C$^{3}$T: Counterfactual Causal Reasoning for Sentiment Shifts in Social-Media Conversation Trees"
+    },
+    {
+      "author": "Yunhao Liu, Hong Phuc Pham, Jaehong Yoon",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02272",
+      "title": "PaperCompiler: Faithful Paper-to-Code Generation via Repository-Level Specification Compilation"
+    },
+    {
+      "author": "Youqi Wu, Farzan Farnia",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02275",
+      "title": "Do Large Language Models Capture the Diversity in their Training Data?"
+    },
+    {
+      "author": "Smitha Muthya Sudheendra, Jaideep Srivastava",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02438",
+      "title": "When Decodability Is Not Enough: Logical Validity Representations, Behavioral Dissociation, and Causal Tests in Language Models"
+    },
+    {
+      "author": "Smitha Muthya Sudheendra, Jaideep Srivastava",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02480",
+      "title": "PragAlign: Feedback-Guided Pragmatic Alignment for Controlled Synthetic Dialogue Generation"
+    },
+    {
+      "author": "Katrin Rohrbacher, Bj\\\"orn Nieth, Emmanuelle Salin, Bjoern Eskofier, Michaela Mahlberg",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02482",
+      "title": "How LLMs Build Fictional Worlds: Setting and Narrative Space in AI-Generated Creative Storytelling"
+    },
+    {
+      "author": "Leon Fr\\\"ohling, Jens Rupprecht, Markus Strohmaier, Claudia Wagner",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02526",
+      "title": "When Persona Attributes Improve Population Alignment in Large Language Models"
+    },
+    {
+      "author": "Urja Pawar, Rajitha Ramanayake, Owen O\u0027Neill, Nabeel Kemal, Abhishek Mandal, Houssem Chatbri, Christopher Martin",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02679",
+      "title": "From Tokens to Semantics: Leveraging Complementary Signals for Hallucination Detection in Black-Box LLMs"
+    },
+    {
+      "author": "Kushagra Bhushan, Meghanadh Pulivarthi, Sai Krishna Reddy Sathi, Gaurav Pandey, Sonam Gupta, Vineet Kumar, Jaydeep Sen, Yatin Nandwani, Sachindra Joshi, Dinesh Raghu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02685",
+      "title": "DKL: Decoupled Knowledge Learning for Instruction-Tuned Language Models"
+    },
+    {
+      "author": "Xu Zou, Jie Tang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02702",
+      "title": "Trace as State: Reasoning Traces as Conditional States for Long-Context Transformers"
+    },
+    {
+      "author": "Namgyu Ho, Huzama Ahmad, Woosung Koh, Se-Young Yun, Tal Schuster, Cicero Nogueira dos Santos",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02737",
+      "title": "Language Models Can Control Their Own Attention"
+    },
+    {
+      "author": "Vasileios Baltatzis, Mert Inan, Connor Gillis, Raja Kushalnagar, Lorna Quandt, Leah Findlater, Colin Lea",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02796",
+      "title": "DiscoSign: Discourse-Aware Text to Sign Language Gloss Translation"
+    },
+    {
+      "author": "Shachar Don-Yehiya, Leshem Choshen, Omri Abend",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02859",
+      "title": "User Feedback Provides a Unique Signal that LLMs Can not Detect"
+    },
+    {
+      "author": "Xinning Li, Kemunto Ochwang\u0027i, Aryasomayajula Ram Bharadwaj, Alexandra Souly, Robert Kirk",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01611",
+      "title": "EvalDetectBench: A Benchmark for Measuring Evaluation Awareness in Frontier Language Models"
+    },
+    {
+      "author": "Haibo Jin, Suijin Wang, Xucheng Yu, Haojing Luo, Haohan Wang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01736",
+      "title": "Harness Engineering in LLM Tool Use via Agent-Native Reusable Tool Primitives"
+    },
+    {
+      "author": "Jundong Hu, Shekar Ramachandran",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01852",
+      "title": "The Memory Trust Gap: Capability-Dependent Failures in Persistent-Memory Agents"
+    },
+    {
+      "author": "Huu Huy Nguyen, Chien Van Nguyen, Franck Dernoncourt, Ryan A. Rossi, Linh Ngo Van, Jieyang Chen, Thien Huu Nguyen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01925",
+      "title": "CRISP: Cliff-awaRe Input-adaptive Sparse Prefilling with Structural-Mass-Motivated Routing"
+    },
+    {
+      "author": "Ali Backour",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02049",
+      "title": "The Dynamics of Continuous Mixture Collapse in Language Models"
+    },
+    {
+      "author": "Tianqi Xiao, Shiyao Cui, Minghao Zhang, Junxiao Yang, Renmiao Chen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02082",
+      "title": "Transfer Safety Awareness for Cross-Modal Safety Drift in Multimodal Large Language Models"
+    },
+    {
+      "author": "Jundong Hu, Shekar Ramachandran",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02083",
+      "title": "XMerge: Cross-Axis Selection and Reconstructive Layer Merging for LLM Depth Compression"
+    },
+    {
+      "author": "Huaiyuan Yao, Xiaoou Liu, Charles Fleming, Tianlong Chen, Hua Wei",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02094",
+      "title": "MASkills: Continual Skills Optimization for Multi-Agent LLM Systems"
+    },
+    {
+      "author": "Ziyuan Jin, Yuxuan Ge, Zheng Tian",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02133",
+      "title": "EmoStance: Response-Side Affective-Orientation Control for Empathetic Response Generation via Emoji Weak Supervision"
+    },
+    {
+      "author": "Jie Ding, Rui Sun, Xinyuan Zhang, Zeyu Zhang, Xin Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02253",
+      "title": "APEx: Distillation of Agent Procedural Experience for Adaptive Deep Research Question Answering"
+    },
+    {
+      "author": "Mingjie Zheng, Zihao Chen, Wenqing Chen, Weile Yuan, Zhixuan Chu, Jianxing Yu, Zibin Zheng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02273",
+      "title": "CoMerge: Conflict-Driven Preference Optimization for Multi-Task Model Merging"
+    },
+    {
+      "author": "Ihor Stepanov, Aleksandr Smechov, Mykhailo Shtopko, Dmytro Vodianytskyi, Oleksandr Lukashov",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02292",
+      "title": "SCX Router: Streaming Zero-Shot Model Selection with a Decoder-KV Classifier and a Real-World Task Ontology"
+    },
+    {
+      "author": "Zhao Ji, Wenqing Chen, Zhixuan Chu, Jianxing Yu, Jingping Liu, Shanhe Zhao, Zibin Zheng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02336",
+      "title": "SALA: Semantic-Aware Logical Alignment for Complex Reasoning in In-Context Learning"
+    },
+    {
+      "author": "Zineb Lahrichi, Marc Ferras, Ga\\\"el Richard, Geoffroy Peeters",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02343",
+      "title": "SonicCaps: Large-Scale Diverse and Fine-Grained Captioning for Improved Audio-Retrieval"
+    },
+    {
+      "author": "Etcharla Revanth Rao, Priyanshu Karmakar, Shubhojit Mallick, Manish Gupta, Shreya Ghosh, Abhik Jana",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02421",
+      "title": "UTP-Bench: Uncertainty-aware Travel Planning Benchmark"
+    },
+    {
+      "author": "Viacheslav Yusupov, Daria Cherniuk, Evgeny Frolov",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02451",
+      "title": "Scalable Kronecker-Fisher Approximation: Efficient Hessian Analysis for Billion-Parameter Language Models Compression"
+    },
+    {
+      "author": "Kenichi Fujita, Yusuke Ijima",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02623",
+      "title": "Scalable Direction-Following TTS via Voice Impression-Guided Pseudo Triplet Construction"
+    },
+    {
+      "author": "Max Nelson, Hanoz Bhathena, Aviral Joshi, Saket Sharma",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02745",
+      "title": "Incremental Pooled LLM Evaluation for Cost-Effective Retrieval Model Selection"
+    },
+    {
+      "author": "Jianlyu Chen, Yuyang Hu, Hongjin Qian, Jiawei Liu, Wenqing Wei, Xiaolong Chen, Defu Lian, Zhicheng Dou, Chaozhuo Li, Qiwei Ye, Zheng Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02749",
+      "title": "Repo-To-Skill: Distilling GitHub Repositories Into AI4AI Skills"
+    },
+    {
+      "author": "Isaiah Andrews, Suproteem Sarkar",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02797",
+      "title": "Dutch Books for Language Models"
+    },
+    {
+      "author": "Aleksander Ficek, Sean Narenthiran, Mehrzad Samadi, Somshubra Majumdar, Boris Ginsburg",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02849",
+      "title": "Post-Training Language Models for Gold-Medal Performance in Coding Competitions"
+    },
+    {
+      "author": "Wazib Ansar, Saptarsi Goswami, Amlan Chakrabarti",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2406.16893",
+      "title": "A Survey of Transformer-based Language Models with Focus on Efficiency"
+    },
+    {
+      "author": "Garima Agrawal, Sashank Gummuluri, Cosimo Spera",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2410.10136",
+      "title": "Beyond-RAG: Question Identification and Answer Generation in Real-Time Conversations"
+    },
+    {
+      "author": "Jeremy Barnes, Naiara Perez, Alba Bonet-Jover, Bego\\~na Altuna",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2503.17039",
+      "title": "Evaluating the Evaluator: Summarization Metrics and LLM-Judges beyond English"
+    },
+    {
+      "author": "Zixiang Xu, Yanbo Wang, Yue Huang, Haomin Zhuang, Yujun Zhou, Jiayi Ye, Sixian Li, Zirui Song, Lang Gao, Chenxi Wang, Zhaorun Chen, Wang Pan, Yue Zhao, Jieyu Zhao, Xiangliang Zhang, Xiuying Chen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2505.23713",
+      "title": "SocialMaze: A Benchmark for Evaluating and Enhancing Social Reasoning in Large Language Models in Complex Social Environments"
+    },
+    {
+      "author": "Tianqi Chen, Shujian Zhang, Mingyuan Zhou",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2506.00290",
+      "title": "DLM-One: Diffusion Language Models for One-Step Sequence Generation"
+    },
+    {
+      "author": "Marina Luketina, Andrea Benkel, Christoph G. Schuetz",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2507.08468",
+      "title": "Using Large Language Models for Legal Decision-Making in Austrian Value-Added Tax Law: A Comparative Study"
+    },
+    {
+      "author": "Kaixuan Wang, Chenxin Diao, Jason T. Jacques, Zhongliang Guo, Shuai Zhao",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2507.21815",
+      "title": "HarmReduction: Benchmarking LLMs in Harm Reduction Information Provision to Support People Who Use Drugs"
+    },
+    {
+      "author": "Marshall Thomas, Edward Fish, Richard Bowden",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2509.00030",
+      "title": "SignBind-LLM: Multi-Stage Modality Fusion for Sign Language Translation"
+    },
+    {
+      "author": "Yihang Sun, Encheng Xie, Tao Feng, Jiaxuan You",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2511.08590",
+      "title": "GMTRouter: Personalized LLM Router over Multi-turn User Interactions"
+    },
+    {
+      "author": "Xuemei Tang, Chengxi Yan, Jinghang Gu, Chu-Ren Huang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.05520",
+      "title": "CHisAgent: A Multi-Agent Framework for Event Taxonomy Construction in Ancient Chinese Cultural Systems"
+    },
+    {
+      "author": "Davide Baldelli, Ali Parviz, Amal Zouaq, Sarath Chandar",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.06973",
+      "title": "LLMs Can\u0027t Play Hangman: On the Necessity of a Private Working Memory for Language Agents"
+    },
+    {
+      "author": "Khumaisa Nur\u0027aini, Ayu Purwarianti, Alham Fikri Aji, Derry Wijaya",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.08146",
+      "title": "Beyond Transfer Accuracy: Mechanism-Guided Controlled Adaptation for Low-Resource Languages"
+    },
+    {
+      "author": "Jesus-German Ortiz-Barajas, Jonathan Tonglet, Vivek Gupta, Iryna Gurevych",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.12983",
+      "title": "ChartAttack: Testing the Vulnerability of LLMs to Malicious Prompting in Chart Generation"
+    },
+    {
+      "author": "Candida M. Greco, Lucio La Cava, Andrea Tagarelli",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.22396",
+      "title": "Culturally Grounded Personas in Large Language Models: Characterization and Alignment with Socio-Psychological Value Frameworks"
+    },
+    {
+      "author": "Sukannya Purkayastha, Qile Wan, Anne Lauscher, Lizhen Qu, Iryna Gurevych",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.10118",
+      "title": "Reviewing the Reviewer: LLM-Assisted Reviewer Feedback Generation for Guideline Compliance"
+    },
+    {
+      "author": "Yiran Rex Ma, Yuxiao Ye, Huiyuan Xie",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.12639",
+      "title": "CLASE: A Hybrid Method for Chinese Legalese Stylistic Evaluation"
+    },
+    {
+      "author": "Shaswat Patel, Vishvesh Trivedi, Yue Han, Yihuai Hong, Eunsol Choi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.22453",
+      "title": "Bridging Latent Reasoning and Target-Language Generation via Retrieval-Transition Heads"
+    },
+    {
+      "author": "Valentin Lafargue, Ariel Guerra-Adames, Emmanuelle Claeys, Elouan Vuichard, Jean-Michel Loubes",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.16749",
+      "title": "Probing Cultural Signals in Large Language Models through Author Profiling"
+    },
+    {
+      "author": "Shachar Don-Yehiya, Asaf Yehudai, Leshem Choshen, Omri Abend",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.16848",
+      "title": "Mediocrity is the key for LLM as a Judge Anchor Selection"
+    },
+    {
+      "author": "Abhinaba Basu, Pavan Chakraborty",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.18579",
+      "title": "ICE: Intervention-Consistent Explanation Evaluation with Statistical Grounding for LLMs"
+    },
+    {
+      "author": "Momose Oyama, Yusuke Takase, Hidetoshi Shimodaira",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.18593",
+      "title": "Language Model Maps for Prompt-Response Distributions via Log-Likelihood Vectors"
+    },
+    {
+      "author": "Uri Z. Kialy, Avi Shtarkberg, Ayal Klein",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.26236",
+      "title": "A Universal Vibe? Finding and Controlling Language-Agnostic Informal Register with SAEs"
+    },
+    {
+      "author": "Jan Net\\\u0027ik, Patr\\\u0027icia Martinkov\\\u0027a",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.16991",
+      "title": "Response-free item difficulty modelling for multiple-choice items with fine-tuned transformers: Component-wise representation and multi-task learning"
+    },
+    {
+      "author": "Marcell Fekete, Johannes Bjerva, Tam\\\u0027as K\\\u0027aldi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.28346",
+      "title": "When Discourse Pressures Conflict: Information Structure in Vision-Language Model Outputs"
+    },
+    {
+      "author": "Xueqing Wu, Yu-Chi Lin, Kai-Wei Chang, Nanyun Peng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.29496",
+      "title": "On Asymmetric Optimization of Reasoning and Perception in Vision-Language Model Post-Training"
+    },
+    {
+      "author": "Pierre-Antoine Lequeu, Camille Barboule, Benjamin Piwowarski",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.30022",
+      "title": "Give it Space! Explicit Disentangling of Positional and Semantic Representations in Encoders"
+    },
+    {
+      "author": "Sourabrata Mukherjee, Hamna Hamna, Kalika Bali, Sunayana Sitaram",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.03043",
+      "title": "The Geometry of LLM-as-Judge: Why Inter-LLM Consensus Is Not Human Alignment"
+    },
+    {
+      "author": "David Setiawan, Temuulen Khishigsuren, Milind Agarwal, Pagnarith Pit, Aso Mahmudi, Ekaterina Vylomova",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.09435",
+      "title": "MUDIDI: A Two-Stage Framework for Multilingual Dictionary Digitization with Language Models"
+    },
+    {
+      "author": "Viswonathan Manoranjan, Amogh Gupta, Anvesh Rao Vijjini, Thomas Hofweber, Snigdha Chaturvedi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.15517",
+      "title": "SHARD: Safe and Helpful Alignment via Self-Reframing Distillation"
+    },
+    {
+      "author": "Yizhen Yao, Qinglin Zhu, Runcong Zhao, Xiangxiang Dai, Yanzheng Xiang, Yulan He, Lin Gui",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.16847",
+      "title": "Follow the Latent Roadmap: Navigating Revocable Decoding for Diffusion LLMs with Anchor Tokens"
+    },
+    {
+      "author": "Thennal DK, Hans Ole Hatzel",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.17350",
+      "title": "Do Large Language Models Always Tell The Same Stories?"
+    },
+    {
+      "author": "Peter Zeng, Amie J. Paige, Weiling Li, Susan E. Brennan, Owen Rambow, Cameron R. Jones",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.17372",
+      "title": "Implicit vs. Explicit Prompting Strategies for LVLMs in Referential Communication"
+    },
+    {
+      "author": "Xingyu Chen, Rui Wang, Zhaopeng Tu, Liefeng Bo",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.21144",
+      "title": "AdaMem: Learning What to Remember with Adaptive Memory Policies for Personalized Agents"
+    },
+    {
+      "author": "Shuxiang Zhang, Yiting Yin, Wenxuan Song, Yuhang Wu, Miao Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.23092",
+      "title": "PIVOTSBench: Evaluating Fine-Grained Interpersonal Relationship Reasoning in Multimodal Large Language Models"
+    },
+    {
+      "author": "Yangda Peng, Yunjia Qi, Haotian Xia, Guanzhong He, Xintong Shi, Richeng Xuan, Songyuanyi Lu, Yixian Liu, Zhichao Hu, Yuhong Liu, Hao Peng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.29920",
+      "title": "Can LLM-as-a-Judge Reliably Verify Rubrics in Agentic Scenarios?"
+    },
+    {
+      "author": "Tianhao Niu, Qingfu Zhu, Wanxiang Che",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.04726",
+      "title": "What You See Is What You Get: Observation-Aligned Supervision for Chart-to-Code Generation"
+    },
+    {
+      "author": "Sijin Chen, Yinuo Ren, Heyang Zhao, Ziheng Cheng, Quanquan Gu, Lexing Ying",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.19686",
+      "title": "Multi-Mask Diffusion Language Models for Few-Step Generation"
+    },
+    {
+      "author": "Wonjun Choi, Yerim Kim, Yukyung Lee, Susik Yoon",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.01708",
+      "title": "PGMem: Tightly Coupled Persona-Memory Graph for Lifelong Personalized Agents"
+    },
+    {
+      "author": "Yujia Hu, Tuan-Phong Nguyen, Simon Razniewski",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.03729",
+      "title": "Direct Construction of Disambiguated Knowledge Bases from Large Language Models"
+    },
+    {
+      "author": "Yujia Hu, Tuan-Phong Nguyen, Simon Razniewski",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.06992",
+      "title": "GPTKB 2.0: Browsing, Querying, and Auditing a Disambiguated LLM-Derived Knowledge Base"
+    },
+    {
+      "author": "Thanh-Dan Bui, Thanh-Trung Do, Tuan-Phong Nguyen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.10963",
+      "title": "REAP: Relation-Aware Elicitation and Parsing for Closed-Book Knowledge Base Construction from LLMs"
+    },
+    {
+      "author": "Lior Baruch, Moshe Butman, Kfir Bar, Doron Friedman",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.12062",
+      "title": "Preference Tree Optimization: Enhancing Goal-Oriented Dialogue with Look-Ahead Simulations"
+    },
+    {
+      "author": "Thantham Jittham",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.21377",
+      "title": "Agentic Scaffolding Amplifies Sycophantic Behavior in Large Language Models"
+    },
+    {
+      "author": "Zhuochun Li, Yuelyu Ji, Yiming Zeng, Daqing He",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.26550",
+      "title": "SPEAR: Distilling Domain-Adaptive Reasoning Skeletons via Sequential Symbolic Alignment in Reinforcement Learning"
+    },
+    {
+      "author": "Kiyan Rezaee",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.28980",
+      "title": "The Illusion of Replacement: Rethinking Specialized Machine Learning Models in the Foundation Model Era"
+    },
+    {
+      "author": "Hojae Han, Jongyoon Kim, Sanghyeok Park, Dongwook Cheon, Yeachan Park, Myung Jae Jeon, Sunjong Choe, Soonho Kong, Wonseok Hur, Seung-won Hwang, Donghoon Hyeon",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.29270",
+      "title": "SHADOWBENCH: Toward Reliable Automatic Evaluation of Semantic Alignment in Autoformalization"
+    },
+    {
+      "author": "Boqi Chen, Xudong Liu, Yunke Ao, Heejin Do, Jianing Qiu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.30188",
+      "title": "GPAgentBench-2K: Benchmarking Large Language Model Agents in Complex Clinical Action Space"
+    },
+    {
+      "author": "Harini S I, Somesh Singh, Yaman K Singla, Rajiv Ratn Shah, David Doermann, Balaji Krishnamurthy",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00474",
+      "title": "Exploring Collaboration between a language and a non-language agent"
+    },
+    {
+      "author": "Guangyu Chen, Boxuan Lyu, Hidetaka Kamigaito, Kotaro Funakoshi, Manabu Okumura",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00588",
+      "title": "Quit While You\u0027re Ahead: Quit for Efficient Candidate Generation in Machine Translation Reranking"
+    },
+    {
+      "author": "Ze Yu Zhang, Arun Verma, Finale Doshi-Velez, Bryan Kian Hsiang Low",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2407.14845",
+      "title": "Prompting the Unknown: Understanding Response Uncertainty in Large Language Models"
+    },
+    {
+      "author": "Rongzhi Zhu, Yi Liu, Jiancheng Wang, Xiangyu Liu, Zequn Sun, Yiwei Wang, Yu Deng, Zijian Zhou, Wei Hu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2505.15276",
+      "title": "When Can Large Reasoning Models Save Thinking? Mechanistic Analysis of Behavioral Divergence in Reasoning"
+    },
+    {
+      "author": "Yuxuan Qiao, Dongqin Liu, Hongchang Yang, Wei Zhou, Songlin Hu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2512.16310",
+      "title": "Agent Tools Orchestration Leaks More: Dataset, Benchmark, and Mitigation"
+    },
+    {
+      "author": "Christian Greisinger, Steffen Eger",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.03072",
+      "title": "TikZilla: Scaling Text-to-TikZ with High-Quality Data and Reinforcement Learning"
+    },
+    {
+      "author": "Bao Pham, Mohammed J. Zaki, Luca Ambrogioni, Dmitry Krotov, Matteo Negri",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.26841",
+      "title": "Language Diffusion Models are Associative Memories Capable of Retrieving Unseen Data"
+    },
+    {
+      "author": "Ali \\c{S}enol, Garima Agrawal, Huan Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.24661",
+      "title": "Measuring Reasoning Quality in LLMs: A Multi-Dimensional Behavioral Framework"
+    },
+    {
+      "author": "Heng Cao, Fan Zhang, Jian Yao, Yujie Zheng, Changlin Zhao, Lu Hao, Yuxuan Wei, Wangze Ni, Huaiyu Fu, Yuqian Sun, Xuyan Mo",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.04547",
+      "title": "Beyond Retrieval: Learning Compact User Representations for Scalable LLM Personalization"
+    },
+    {
+      "author": "Zeyao Du, Tong Li, Haibo Zhang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.17698",
+      "title": "EComAgentBench: Benchmarking Shopping Agents on Long-Horizon Tasks with Distributed Hidden Intent"
+    },
+    {
+      "author": "Nikolay Georgiev, Maria Drencheva, Kseniia Ibragimova, Ivo Petrov, Dimitar I. Dimitrov, Martin Vechev",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.29894",
+      "title": "SABER-Math: Automated Benchmark for Information Retrieval Evaluation in Mathematics"
+    },
+    {
+      "author": "Huy Phan, Kieu Dang, Ojaswi Dulal, Aiham AL Shukairi, Abby Shine, Chase Garner, Phung Lai",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.10103",
+      "title": "LLM Watermarking as Big Data Provenance: A Deployment-Oriented Systematization"
+    },
+    {
+      "author": "Haoyan Luo, Mateo Espinosa Zarlenga, Mateja Jamnik",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.17117",
+      "title": "Persistent Sparse Autoencoders: Learning Feature-Specific Timescales in Language Model Representations"
+    },
+    {
+      "author": "Gwang Gook Lee, Kenan Emir Ak, Jay Mohta, Yan Xu, Dimitrios Dimitriadis",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.21617",
+      "title": "Do VLMs Read or Rewrite? On Transcription Faithfulness in Vision-Language Models"
+    },
+    {
+      "author": "Chen Yueh-Han, Jiaxin Wen, Jan Hendrik Kirchner",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.28945",
+      "title": "Automated Researchers Can Mitigate Well-characterized Alignment Failures"
+    },
+    {
+      "author": "Giovanni Bonetta, Matteo Merler, Davide Zago, Rossella Cancelliere, Bernardo Magnini",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01567",
+      "title": "Selective Agent Guidance via Entropy: Learning Autonomous Policies from Imperfect VLM Teachers"
+    },
+    {
+      "author": "nlsarcos",
+      "date": "2026-09-03T01:43:31.000Z",
+      "domain": "simplex.lat",
+      "image": "",
+      "image_caption": "",
+      "link": "https://memhub.simplex.lat",
+      "title": "MemHub \u2013 Persistent shared memory for AI coding agents"
+    },
+    {
+      "author": "taiar",
+      "date": "2026-09-02T23:03:38.000Z",
+      "domain": "akitaonrails.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://akitaonrails.com/en/2026/09/02/ai-memory-2-0-best-memory-system-for-agents-and-teams/",
+      "title": "AI-Memory 2.0 \u2013 The Best Memory System for Agents and Teams"
+    },
+    {
+      "author": "Yisi Ke, Tianyu Huang, Yankai Shu, Di He, Jingchu Gai, Liwei Wang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.22365",
+      "title": "Towards Solving the Gilbert-Pollak Conjecture via Large Language Models"
+    },
+    {
+      "date": "2026-09-02T14:46:26.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMioAFBVV95cUxNNDlURVZWZjJyVVNITTFvMW1YaW9mVWpDWl9DNVVpOVlnbTR6cGh6S1ljN0UySU5sOElWLWlIdVZkdFhjLW5saDRxLXJybjRpU3JGTDNVWXVseC1QNEppLXNsMU00V1FDSDNvS2ZKazJwam1GMU44dFU1VUFyRUhCb2RyXzRjODhSdGY3VW5tUXRYT2ozN2NHazRYN2xVVlNn",
+      "title": "I Gave an On-Device LLM a Search Tool. It Ignored It and Made Up Data Instead - HackerNoon"
+    },
+    {
+      "date": "2026-09-02T01:18:58.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMikwFBVV95cUxNc2Y1NE5uU1BuZG9FemdwdS1DRmlaQ3hPdTM5dmpteEVwYUQtSHRtWm93WjlqZWtNczZVV2dhWk1yUll2MWNIN2RockNZaF9xQ05OWFNkUDJUalZYWnF1aXA5aHdlcjFmYTJOLUE2UVpGLUIwMU5RT3ExY2xrRUh6Nk1qUjdCSlNWUGxDWGo1Z01IT00",
+      "title": "How and Why to Benchmark LLM Hallucination in Legal Research - Legal Reader"
+    },
+    {
+      "date": "2026-09-02T20:40:04.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/atom/articles/CBMikAFBVV95cUxQd2RIdGpKMXFvZlVPZmVxd2tYbVBoUmFyelB3UWxlUThhdlF4MTduREN4aE8xeUN1c3hYc1JveWZhV3hSenVSc1NSN3p6bzRNaHQ0clFxWFZkR0hQOW9wWU9vYXp5d1ZKa09UNXQ5a0hxY3loLUJMNHc3bFM1QUtONFptR2JlUHVzWWlkYUFIdk0",
+      "title": "Researchers develop cost-efficient method for detecting hallucinations in large language models - Tech Xplore"
+    },
+    {
+      "author": "pampas",
+      "date": "2026-09-03T00:11:55.000Z",
+      "domain": "redactle.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://redactle.net/llm-leaderboard",
+      "title": "Show HN: Redactle LLM Leaderboard"
+    },
+    {
+      "author": "aals777",
+      "date": "2026-09-02T23:01:19.000Z",
+      "domain": "antithetical-labs.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://antithetical-labs.com/blog/the-judge-liked-it-better/",
+      "title": "Ontologies catch untrustworthy LLM claims"
+    },
+    {
+      "author": "buildbot",
+      "date": "2026-09-02T22:05:40.000Z",
+      "domain": "nvidia.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://developer.nvidia.com/blog/co-designing-ai-models-using-speculative-decoding-for-faster-llm-inference/",
+      "title": "Co-Designing AI Models Using Speculative Decoding for Faster LLM Inference"
+    },
+    {
+      "author": "bturtel",
+      "date": "2026-09-02T18:59:47.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.28482",
+      "title": "Proper Scoring Rules Shape LLM Forecasting"
+    },
+    {
+      "author": "cyndunlop",
+      "date": "2026-09-02T18:45:10.000Z",
+      "domain": "substack.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://writethatblog.substack.com/p/rubber-ducking-your-blog-post-with-llms",
+      "title": "Rubber ducking your blog post with an LLM"
+    },
+    {
+      "author": "tokencanopy",
+      "date": "2026-09-02T17:46:53.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/tokencanopy/price",
+      "title": "Show HN: Price Dashboard for LLM Inference"
+    },
+    {
+      "author": "splxai",
+      "date": "2026-09-02T13:51:19.000Z",
+      "domain": "searchplex.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.searchplex.net/blog/llm-judge-search-relevance",
+      "title": "What Is Your LLM Judge Measuring?"
+    },
+    {
+      "author": "sbulaev",
+      "date": "2026-09-02T11:07:07.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.31016",
+      "title": "LLM Judges Verify Presence, Not Absence: Omission Blindness in AI Clinical Notes"
+    },
+    {
+      "author": "/u/Fun-Crow-1812",
+      "date": "2026-09-02T15:26:10.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1w5dje5/architectural_proposal_for_future_qwen_models/",
+      "title": "Architectural Proposal for Future Qwen Models: Dynamic Depth-Scaling and Macro-Expert Modularity for Composable AI"
+    },
+    {
+      "author": "Shunk",
+      "date": "2026-09-02T23:12:25.000Z",
+      "domain": "lesswrong.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lesswrong.com/posts/GTWDGHjZ9C7f5YxqE/notes-on-a-global-workspace-in-language-models",
+      "title": "Notes on \"A global workspace in language models\""
+    },
+    {
+      "author": "AdriansSkapars",
+      "date": "2026-09-02T23:24:36.000Z",
+      "domain": "lesswrong.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lesswrong.com/posts/finpDcZidhcdCa4cS/bloom-wilt-on-policy-examples-of-any-llm-behaviour-from-a-1",
+      "title": "BLOOM-WILT: on-policy examples of any LLM behaviour, from a one-line description and logits alone"
+    },
+    {
+      "author": "Liam Byrne, David Dylan, Orla Fitzgerald, Eoin Doyle, Ciara Nolan, Padraig Lynch, Sinead Gallagher",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01615",
+      "title": "Prompt-Space Meta-Learning Does Not Transfer Across Users: A Frozen-LLM Negative Result"
+    },
+    {
+      "author": "Emil Laftchiev, Prachi Agrawal, Moe Kayali, Bixing Yan, Qi Xu, Zijie Lei, Chen Qiu, Zhi Hua, Ke Li, Luke Simon",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01807",
+      "title": "hLLM: Single Pass Decoding for Generative Reranking"
+    },
+    {
+      "author": "Yanting Yang, Can Jin, Jinman Zhao, Jiahao Wu, Yang Zhou, Zhepeng Wang, Zhendong Wang, Mu Zhou, Dimitris N. Metaxas",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02042",
+      "title": "Act More, Decide Less: Skill-Guided Adaptive Action Chunking for Long-Horizon LLM Agents"
+    },
+    {
+      "author": "S M Asif Hossain, Ruksat Khan Shayoni, Md Kishor Morol",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02265",
+      "title": "CAPTURE: Disentangling Preference Drift from Memory Poisoning in Personalized LLM Agents"
+    },
+    {
+      "author": "Alexey Potapov",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02339",
+      "title": "AGI Maze Prediction Datasets: A Compact Benchmark for Learning World Dynamics with Transformers"
+    },
+    {
+      "author": "Xixiang He, Xingming Li, Baiqi Wu, Qiyao Sun, Xuanyu Ji, Ao Cheng, Qingyong Hu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02548",
+      "title": "Learn from Whoever Is Right: Answer-Verified Multi-Teacher Distillation for Multi-Domain LLMs"
+    },
+    {
+      "author": "Pier-Jean Malandrino (Scub)",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02652",
+      "title": "Unfolding the Leech Lattice: Fused Multi-Shell Decoding and VRAM Layouts for 2-Bit LLM Weights"
+    },
+    {
+      "author": "Robert Hu, Carlo Luschi, Paul Balanca",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02846",
+      "title": "UE5M3 FP4 Block Scaling for Stable Language Model Pretraining"
+    },
+    {
+      "author": "James Mickens",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02852",
+      "title": "The Implications of Linguistic Illegibility for LLM Security"
+    },
+    {
+      "author": "Vahid Reza Khazaie, Ahmed Y. Radwan, Shaina Raza",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01691",
+      "title": "FairLens: Benchmarking Fairness in Vision-Language Models for High-Stakes Decision-Making"
+    },
+    {
+      "author": "Kunlin Cai, Kaiyuan Zhang, Zihang Xiang, Jinghuai Zhang, Abeer Alwan, Fnu Suya, Yuan Tian",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01723",
+      "title": "Hearing the Whispers: Black-Box Membership Inference Attacks on Finetuned TTS Models"
+    },
+    {
+      "author": "Anirudh Malik, M Sparsh Mehra, Poojith Devan",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01962",
+      "title": "Post-Training Ternarization of Qwen3-4B Capability, Effective Bit Budget, Storage Compression, and Deployment"
+    },
+    {
+      "author": "Zhuoran Yu, Le Thien Phuc Nguyen, Jaden Park, Xinyi Gu, Zexue He, Soochahn Lee, Rogerio Feris, Yong Jae Lee",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02059",
+      "title": "DocHop: Benchmarking Out-of-domain Multi-hop Reasoning in Information-Dense Documents"
+    },
+    {
+      "author": "Gang-Hyun Park, Ju-Hyeong Lee, Hee-Youl Kwak, Dae-Young Yun",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02177",
+      "title": "WeaveMark: Robust and Scalable Multi-bit LLM Watermarking via Coded Payload Spreading"
+    },
+    {
+      "author": "Vansh Wahi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02246",
+      "title": "LLM-as-a-Judge Is Not an Oracle: Why Self-Improving Agents Need Deterministic Guardrails"
+    },
+    {
+      "author": "Jinxi Yu, Yubei Li, Eric Hanchen Jiang, Zhi Zhang, Dong Liu, Wenxiao Zhao, Levina Li, Kai-Wei Chang, Ying Nian Wu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02264",
+      "title": "Codebook Agent: Amortized Topology Design for LLM Multi-Agent Systems"
+    },
+    {
+      "author": "Naoto Nishida, Yoshio Ishiguro",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02510",
+      "title": "Orthogonal Ensembles and Tested Explanations for Performer-Independent Body-Motion Emotion Recognition"
+    },
+    {
+      "author": "Jiaji Zhang, Hailiang Zhao, Jiaju Wu, Ruichao Sun, Xinkui Zhao, Shuiguang Deng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2602.05605",
+      "title": "Shiva-DiT: Residual-Based Differentiable Top-$k$ Selection for Efficient Diffusion Transformers"
+    },
+    {
+      "author": "Chen-Hao Chao, Wei-Fang Sun, Junwei Quan, Chun-Yi Lee, Rahul G. Krishnan",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.16077",
+      "title": "MDM-Prime-v2: Binary Encoding and Index Shuffling Enable Scaling of Diffusion Language Models"
+    },
+    {
+      "author": "Yutang Ge, Yaning Cui, Hanzheng Li, Jun-Jie Wang, Fanjie Xu, Jinhan Dong, Yongqi Jin, Dongxu Cui, Peng Jin, Guojiang Zhao, Hengxing Cai, Tianci Yangfeng, Xueqing Chen, Hongshuai Wang, Rong Zhu, Linfeng Zhang, Xiaohong Ji, Zhifeng Gao",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.23101",
+      "title": "SpecXMaster Technical Report"
+    },
+    {
+      "author": "Jiahao Wu, Ning Lu, Shengcai Liu, Kun Wang, Yanting Yang, Baijiong Lin, Chen Jason Zhang, Li Qing, Ke Tang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.25184",
+      "title": "Train at Moving Edge: Online-Verified Prompt Selection for Efficient RL Training of Large Reasoning Model"
+    },
+    {
+      "author": "Nikola Zubi\\\u0027c, Qian Li, Yuyi Wang, Davide Scaramuzza",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.14501",
+      "title": "On the Expressive Power and Limitations of Multi-Layer SSMs"
+    },
+    {
+      "author": "Yiming Bian, Joshua M. Akey",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.20819",
+      "title": "Stream-CQSA: Exact Out-of-Memory Recovery for Attention"
+    },
+    {
+      "author": "Younghun Go, Jaehoon Han, Changyong Shin, Chuck Yoo, Gyeongsik Yang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.07571",
+      "title": "Enabling KV Caching of Shared Prefix for Diffusion Language Models"
+    },
+    {
+      "author": "Yi Nian, Tiankai Yang, Yudi Zhang, Qi Pan, Zelong Xu, Shenzhe Zhu, Qingqing Luan, Yue Huang, Xiangliang Zhang, Yue Zhao",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.07678",
+      "title": "DOG-DPO:Dynamic Optimization in Geometry for Safety Alignment"
+    },
+    {
+      "author": "Young D. Kwon, Miles Williams, Rui Li, Alexandros Kouris, Stylianos I. Venieris",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.07710",
+      "title": "WhiFlash: Accelerating Speculative Decoding with Token-Level Cross-Paradigm Routing"
+    },
+    {
+      "author": "Riccardo Emanuele Landi, Jo\\~ao M. F. Rodrigues, Marta Chinnici",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.13081",
+      "title": "Emotional regulation improves deep learning-based image classification"
+    },
+    {
+      "author": "Antonio Mone, Zuzanna Osika, Florian Felten, Pradeep K. Murukannaiah, Mark Fuge, Frans A. Oliehoek, Luciano Cavalcante Siebert",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.21321",
+      "title": "Objective-Behavior Alignment: Diagnostics for MORL Policy Selection"
+    },
+    {
+      "author": "Yeongho Kim, Yeonje Choi, Kijung Shin",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.22975",
+      "title": "TaLK: Text-attributed Graph Dataset Distillation via Coupling Language Model with Graph-Aware Kernel"
+    },
+    {
+      "author": "Seokhee Jin, Changhwan Sung, Sunung Mun, Hoyoung Kim, Jungseul Ok",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.00684",
+      "title": "AdaBoosting Text Prompts for Vision-Language Models"
+    },
+    {
+      "author": "Francesco Karim Vicidomini",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.16741",
+      "title": "The Anatomy of a Truth Direction: Knowledge-Dependent Dimensionality, a Relational Law, and a Shared Category Geometry in Small Language Models"
+    },
+    {
+      "author": "Jiayi Yang, Yifang Chen, Yuanfu Sun, Jiajin Liu, Qiaoyu Tan",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.19128",
+      "title": "One Model, Many Graphs: Learning over Attributed Graphs across Heterogeneous Modalities with Vision-Language Models"
+    },
+    {
+      "author": "Ilya Loshchilov, Boris Ginsburg",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.01284",
+      "title": "Training nGPT"
+    },
+    {
+      "author": "Aleksandr Sharipov, Yusif Mukhtarov, Igor Molybog",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.02961",
+      "title": "Scaling an Autoregressive Transformer for Single-Cell Generation"
+    },
+    {
+      "author": "Yipin Guo, Arun M George, Jie Fu, Tareq Mahmoud, Sixue Xing, Siddharth Joshi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00224",
+      "title": "QTEA: Ternary LLMs with Sparse Residual Salient Weight and By-Column Optimization"
+    },
+    {
+      "author": "Pingbing Ming, Han Wang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00528",
+      "title": "Why Multi-Layer Message Passing Works: Completeness Theory for Graph Neural Network Interatomic Potentials"
+    },
+    {
+      "author": "Guanzhong Sun, Junyi Ma, Yuxuan Wu, Yanzi Miao",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00566",
+      "title": "EEG-VID: Task-Guided Latent Predictive Pretraining for EEG Decoding and Assistive Target Selection"
+    },
+    {
+      "author": "Toan Nguyen, Yang Liu, Celso De Melo, Flora D. Salim",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.06662",
+      "title": "DynaTokens: Controlling Token Dynamics for Continual Video-Language Understanding"
+    },
+    {
+      "author": "Thomas Stefani, Johann Maximilian Christensen, Elena Hoemann, Frank K\\\"oster, Sven Hallerbach",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.02198",
+      "title": "From High-Dimensional Spaces to Verifiable ODD Coverage for Safety-Critical AI-based Systems"
+    },
+    {
+      "author": "S. Sutharya, Remya K. Sasi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.29531",
+      "title": "Half-Truth Audio Detection and Localisation: A Lightweight Cross-Attentive Architecture and a Cross-Corpus Diagnostic Study"
+    },
+    {
+      "author": "Haochen Yang, Ke Zhao, Mengyuan Ma, Xingyu Lu, Xiangfeng Wang, Hong Qian",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.29829",
+      "title": "OptSkills: Learning Generalizable Optimization Skills from Problem Archetypes via Cluster-Based Distillation"
+    },
+    {
+      "author": "Sha Li, Naren Ramakrishnan",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.23286",
+      "title": "Adaptive Graph-of-Islands Evolution for Automatic Feature Engineering with LLMs"
+    },
+    {
+      "author": "Josef Chen (Independent Researcher), Erim Hayretci (Imperial College London)",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.20574",
+      "title": "FlavourBench: Executable Culinary Reward Maps for Language Model Evaluation and Post-Training"
+    },
+    {
+      "author": "Ramit Pahwa, Parivesh Priye, Apoorva Beedu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00570",
+      "title": "VoiceLongMemEval: Do Assistants Remember How You Sounded?"
+    },
+    {
+      "author": "/u/debankad",
+      "date": "2026-09-02T06:01:35.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLM/comments/1w51tzg/openroutiq_architecture_benchmarks_and_safety/",
+      "title": "OpenRoutiQ: Architecture, benchmarks, and safety controls for an explainable self-learning LLM router"
+    },
+    {
+      "author": "Wasu Top Piriyakulkij, Sam Acquaviva, Cassidy Langenfeld, Joshua Tenenbaum, Kevin Ellis",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01815",
+      "title": "Induction and Inquiry via Probabilistic Reasoning over Language and Code"
+    },
+    {
+      "author": "Joseph Axisa",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01834",
+      "title": "Architecting Conversational Data Systems for Stateless LLM APIs: The Hydration Proxy Pattern"
+    },
+    {
+      "author": "Przemys{\\l}aw Stok{\\l}osa, Janusz A. Starzyk, Pawe{\\l} Raif",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01849",
+      "title": "SSAKG 2.0: An Open-Source Package for Structural Associative Sequence Memory and Context-Based Retrieval"
+    },
+    {
+      "author": "Wenlong Wang, Fergal Reid",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01924",
+      "title": "Looped Transformers under the Jacobian Lens: Does the Global Workspace Survive Recurrence?"
+    },
+    {
+      "author": "Chen Wang, Junzhe Zhao, Xin Cong, Wanlu Deng, Ke Deng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01982",
+      "title": "Benchmarking Language Models for Statistical Problem Formulation"
+    },
+    {
+      "author": "Phanindra Reddy Madduru",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01985",
+      "title": "When Agents Implement Systems: A Case Study in Defects, Detection, and Evaluation Rigor"
+    },
+    {
+      "author": "Renjie Xie, Juncheng Yang, Aoting Hu, Mingxi Zhang, Liyao Wu, Zheheng Hong, Wei Xu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02029",
+      "title": "HeadWiseKV: Budgeted Per-Head Cache Residency for Hybrid Long-Context Language Models"
+    },
+    {
+      "author": "Yiran Zhao, Lu Zhou, Liming Fang, Yufei Chen, Jiafei Wu, Zhe Liu, Xiaogang Xu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02092",
+      "title": "Beyond Outcome Gaps: Process-Aware Fairness Diagnosis for LLM-based Multi-Agent Decision Systems"
+    },
+    {
+      "author": "Zhengyi Jin, Ru Zhang, Xiao Chen, Xinbo Liu, Jiaxuan Lin, Jia Huang, Jianyi Liu, Zhen Yang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02168",
+      "title": "FUSE: An Evaluating Framework for Dangerous Capabilities of LLMs"
+    },
+    {
+      "author": "Da Cheng Gu, Yifei Dong, Xinghao Yang, Yongshun Gong, Wei Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02215",
+      "title": "ASCII Attack: Recontextualising Harmful Requests as Artistic Critique in Large Language Models"
+    },
+    {
+      "author": "Ao Yan, Xin Zhang, Jiawei Du, Joey Tianyi Zhou",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02217",
+      "title": "SkillGLoW: Procedural-Family Skill Consolidation for Self-Improving Agents on Long-Horizon Task Streams"
+    },
+    {
+      "author": "Jian Gao, Xiao Zhang, Xun Zhu, Miao Li, Ji Wu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02244",
+      "title": "Task-Level Natural Language Priors as Learning Signals for Low-Resource LLM Training"
+    },
+    {
+      "author": "Jiayi Bi, Yanjie Gao, Yuanmin Xie, Liqun Li, Tianyin Xu, Fan Yang, Mao Yang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02371",
+      "title": "Diagnosing with Insights: Structured Analysis of Agent Failures via Behavioral Abstractions"
+    },
+    {
+      "author": "Xiang Yin, Nico Potyka, Antonio Rago, Francesca Toni",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02399",
+      "title": "Contrastive Explanations in Quantitative Bipolar Argumentation Frameworks"
+    },
+    {
+      "author": "Yihang Chen, Yuxiang Chen, Yuxuan Huang, Meng Fang, Weilin Luo, Jun Wang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02750",
+      "title": "Bilevel Coordinated Reflection: A Game-Theoretic Approach to Multi-Agent LLM Systems"
+    },
+    {
+      "author": "Qinghua Mao, Wanying Qu, Dadi Guo, Leitao Yuan, Qingyu Liu, Yu Li, Guanxu Chen, Yanwei Fu, Xi Lin, Xia Hu, Dongrui Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02786",
+      "title": "SafeEvolve: Harness-Policy Co-Evolution from Agent Experience for Safety Alignment"
+    },
+    {
+      "author": "Hao Zhou (Jianzhong), Mandar Kulkarni (Jianzhong), Hao Chen (Jianzhong), Yan Xin (Jianzhong), Charlie (Jianzhong), Zhang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02805",
+      "title": "Large Language Models (LLMs) for Telecom Root Cause Analysis (RCA): A Structured Reasoning Framework for Evidence-Grounded Diagnosis"
+    },
+    {
+      "author": "Aur\\\u0027elien Lac, Tony Wu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01657",
+      "title": "NeoMME: A Single-Tower Multimodal-Native Multilingual Foundation Encoder for Efficient Fine-Tuning and Inference"
+    },
+    {
+      "author": "Shubhra Mittal",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01660",
+      "title": "How Fast Do Agents Rot? An Empirical Study of Long-Horizon Degradation in LLM Agents for Production Decision-Making"
+    },
+    {
+      "author": "Zekai Jin, Hanrong Zhang, Yihong Tang, Fei Hu, Zhen Dong, Yi Shao",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01662",
+      "title": "Not All Agreement Counts as Corroboration: Provenance-Conserving Multi-View Fusion for Typed Action Admission in Human-Robot Collaboration"
+    },
+    {
+      "author": "Hatim Chergui, Carolina Fern\\\u0027{a}ndez-Mart\\\u0027{i}nez, Mehdi Bennis, Merouane Debbah",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01779",
+      "title": "Agents That Model Agents: Five Principles Toward a Theory of Mind for 6G Networks"
+    },
+    {
+      "author": "Tommaso Cerruti, Mika Okamoto, Ansel Kaplan Erol",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01836",
+      "title": "Agent Memory Is a Surface for Endogenous Authorization Laundering"
+    },
+    {
+      "author": "Xinyu Fu, Narayan Ramasubbu, Dennis Galletta",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01976",
+      "title": "Knowing Is Not Enough: Information Retrievability as a Precondition to Effective LLM Oversight"
+    },
+    {
+      "author": "Hongshen Gou, Zuyu Zhang, Yuze Sun, Peng Xu, Feng Tian, Long Wang, Jianguo Wang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02106",
+      "title": "Git4Data: Database-Native Version Control for AI Agents"
+    },
+    {
+      "author": "Yixiong Xiao, Lang An, Hucheng Yang, Pinxue Ma, Yongquan Chen, Jingjia Cao, Yusai Zhao, Ting Wang, Ting Liu, Siqi Bao, Jingbo Zhou, Hua Wu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02149",
+      "title": "OmegaUse-SOP: SOP Engineering for Professional Computer Use from Human Demonstrations"
+    },
+    {
+      "author": "Chengyin Hu, Dingyi Lu, Jiaju Han, Xiang Chen, Weiwen Shi, Jiahuan Long, Yiwei Wei, Jiujiang Guo",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02233",
+      "title": "InfraPatch: Cross-Task Targeted Grayscale Patch Attacks on Infrared-Adapted Vision-Language Models"
+    },
+    {
+      "author": "Hayoon Kim, Eunice Hong, Kyogu Lee",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02277",
+      "title": "Auditory Illusion Benchmark for Large Audio Language Models"
+    },
+    {
+      "author": "Maitreyee Tewari, Michele Persiani",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02364",
+      "title": "Towards a Foundational Ontology for Identifying and Resolving Contradictions in Dialogue-based Human-Robot Interactions"
+    },
+    {
+      "author": "Pawel Struski, Jakub Swistak, Inez Okulska, Przemyslaw Biecek",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02580",
+      "title": "Competitive Market Behavior of LLMs"
+    },
+    {
+      "author": "Canjie Liu, Jiawen Kang, Jinbo Wen, Zishao Zhong",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.02731",
+      "title": "RVSD: Retrieval Vision Sparse Decoding for Mitigating Visual Hallucinations in Large Vision-Language Models"
+    },
+    {
+      "author": "Yuanhang Liu, Yanxing Huang, Yanqiao Wang, Peng Li, Yang Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2505.22451",
+      "title": "AI Mathematician: Towards Fully Automated Frontier Mathematical Research"
+    },
+    {
+      "author": "Haiteng Zhao, Junhao Shen, Yiming Zhang, Songyang Gao, Kuikun Liu, Tianyou Ma, Fan Zheng, Dahua Lin, Wenwei Zhang, Kai Chen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2512.10534",
+      "title": "Achieving Olympiad-Level Geometry Large Language Model Agent via Complexity Boosting Reinforcement Learning"
+    },
+    {
+      "author": "Jiaqi Xu, Cuiling Lan, Xuejin Chen, Yan Lu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2512.15662",
+      "title": "Stepwise Think-Critique: Interleaved Reasoning and Self-Critique in a Single LLM"
+    },
+    {
+      "author": "Miao Su, Yucan Guo, Zhongni Hou, Long Bai, Zixuan Li, Yufei Zhang, Guojun Yin, Wei Lin, Xiaolong Jin, Jiafeng Guo, Xueqi Cheng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2601.07468",
+      "title": "Beyond Dialogue Time: Temporal Semantic Memory for Personalized LLM Agents"
+    },
+    {
+      "author": "Haijian Lu, Wei Wang, Jing Liu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.19828",
+      "title": "FormalEvolve: Neuro-Symbolic Evolutionary Search for Diverse Autoformalization"
+    },
+    {
+      "author": "Taeyun Roh, Suhyeong Park, Dongyoung Lee, Eunyeong Jo, Wonjune Jang, Junha Jung, Jaewoo Kang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2603.28026",
+      "title": "BUZZY: Contrastive Scoring to Mitigate Text-Induced Bias in Multimodal Multiple-Choice QA"
+    },
+    {
+      "author": "Yijuan Liang, Xinghao Chen, Yifan Ge, Ziyi Wu, Hao Wu, Changyu Zeng, Wei Xing, Xiaoyu Shen",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2604.11557",
+      "title": "UniToolCall: Unifying Tool-Use Representation, Data, and Evaluation for LLM Agents"
+    },
+    {
+      "author": "Louis Nisiotis, Aimilios Hadjiliasi",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.03557",
+      "title": "From Prompt to Service: An SLM-Based Agent Orchestration Gateway for AI-Driven Virtual Worlds"
+    },
+    {
+      "author": "MY Pitsane, Hope Mogale",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.04562",
+      "title": "Heaviside Continuity of Rolling Coefficients for Eliminating Epistemic Entropy in Large Language Models"
+    },
+    {
+      "author": "Zhenxuan Yu, Takeshi Kojima, Yutaka Matsuo, Yusuke Iwasawa",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.10110",
+      "title": "CHASE: Cache-Hole-Adapted Skip Exit for Looped State-Space Language Models"
+    },
+    {
+      "author": "Huihao Jing, Wenbin Hu, Shaojin Chen, Haochen Shi, Sirui Zhang, Hanyu Yang, Changxuan Fan, Zhongwei Xie, Hongyu Luo, Wun Yu Chan, Wei Fan, Haoran Li, Yangqiu Song",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.12406",
+      "title": "Isolation as a First-Class Principle for LLM-Agent System Safety: Concepts, Taxonomy, Challenges and Future Directions"
+    },
+    {
+      "author": "El Hassane Ettifouri, Ayoub Belfatmi, Mahaman Sanoussi Yahaya Alassan, Walid Dahhane",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.20129",
+      "title": "CUSUM-Shaped Inference-Time Monitoring and Targeted Re-Decoding for Quantized Small Language Model Reasoning"
+    },
+    {
+      "author": "Xingyu Chen, Rui Wang, Zhaopeng Tu, Liefeng Bo",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2607.24780",
+      "title": "LivingArena: Do LLMs Know What Other LLMs Don\u0027t? Peer-Probing as Scalable Evaluation"
+    },
+    {
+      "author": "Harshitha Kolukuluru, Reshma Ashok, Kirat Arora, Evan William Ciccarelli, Nischal Ashok Kumar, Lunyiu Nie, Franck Dernoncourt, Samyadeep Basu, Ryan A. Rossi, Nedim Lipka",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.08389",
+      "title": "Not Worth Another Token: Marginal Value Estimation for Efficient Deep Research Agents"
+    },
+    {
+      "author": "Sanket Badhe, Priyanka Tiwari, Jonghyun Chung",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.26263",
+      "title": "SKILL.state: Scalable Long-Horizon Agent Skills"
+    },
+    {
+      "author": "Pratik S. Sachdeva, Nathan Boudol",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.27463",
+      "title": "Rating the Raters: Rasch Measurement Theory for LLM Evaluation"
+    },
+    {
+      "author": "Wengyi Zhan, Chenqian Yan, Songwei Liu, Mingbao Lin, Rongrong Ji",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.29291",
+      "title": "Accelerating Unified Multimodal Models with Core-Expansion Routing and Unified Computation Scheduling"
+    },
+    {
+      "author": "Dongsheng Chen, Xiangyu Zhao, Xin Yao, Xuetao Wei",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00015",
+      "title": "OpenAgentFlow: Enabling System-Wide Safety Boundaries for Heterogeneous AI Agent Fleets"
+    },
+    {
+      "author": "Seungwoo Jung, Dohyeok Kwon, Seungmin Cha, Junseok Lee, Yeonho Yoo, Chuck Yoo, Gyeongsik Yang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00575",
+      "title": "Residual Sparsification via Output Importance for Compressing Mixture-of-Experts LLMs"
+    },
+    {
+      "author": "Qingde Li, Qingqi Hong, Zihan Li, Jie Tian",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.01408",
+      "title": "Neuro-Symbolic Geometric Abstraction (NeuSOGA): From Observations to Symbolic Mathematical Representations"
+    },
+    {
+      "author": "Michael J. Wooldridge, Attila Bagoly, Jonathan J. Ward, Emanuele La Malfa, Gabriel Paludo Licks",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2510.18699",
+      "title": "Fetch.ai: An Architecture for Modern Multi-Agent Systems"
+    },
+    {
+      "author": "Ziyang Mai, Yu-Wing Tai",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2512.07328",
+      "title": "ContextAnyone: Context-Aware Diffusion for Character-Consistent Text-to-Video Generation"
+    },
+    {
+      "author": "Bernini Team, Chenchen Liu, Junyi Chen, Lei Li, Lu Chi, Mingzhen Sun, Zhuoying Li, Yi Fu, Ruoyu Guo, Yiheng Wu, Ge Bai, Zehuan Yuan",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.22344",
+      "title": "Bernini: Latent Semantic Planning for Video Diffusion"
+    },
+    {
+      "author": "Xintong Hu, Xuhong Huang, Jinyu Zhang, Yutong Yao, Yuchong Sun, Qiuyue Wang, Mingsheng Li, Sicheng Xie, Yitao Liu, Junhao Chen, Yixuan Chen, Yingming Zheng, Shuai Bai, Tao Yu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2605.27284",
+      "title": "FineVLA: Fine-Grained Instruction Alignment for Steerable Vision-Language-Action Policies"
+    },
+    {
+      "author": "Yongbin Huang, Xihao Xie, Jia Zhang",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2606.21052",
+      "title": "Backdoor Attacks on Speech Emotion Recognition via TTS-Generated Poisoning"
+    },
+    {
+      "author": "Shyam Agarwal, Anmol Singhal, Travis Breaux, Bogdan Vasilescu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.25202",
+      "title": "SpecMine: A Large-Scale Corpus of Spec-Driven Development Artifacts"
+    },
+    {
+      "author": "Chenhao Wu, Haoxuan Jia, Yang Liu, Yingguang Yang, Yuhan Lin, Chongyang Zhang, Hao Zheng, Yulin Huang, Jianshen Zhang, Yongzhi Qi, Shang Luo, Kefu Xu, Jifeng Zhu, Bin Chong",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.27141",
+      "title": "Safety Does Not Compose: Non-Decaying Loop State for Autonomous LLM Agents"
+    },
+    {
+      "author": "Botong Zhao, Fang Yu, Tim Yu, Senhua Zhu, Xinyuan Chen, Yue Lu",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2608.30378",
+      "title": "PAVE: Predictive Alignment and Value-Guided Evolution for World-Action Policies"
+    },
+    {
+      "author": "Jincheng Zhang, Chen Huang, Wenqiang Lei, See-Kiong Ng, Yang Deng",
+      "date": "2026-09-03T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.00618",
+      "title": "Towards Effective Structured Context Modeling for Conversational Recommender Systems via Dual-node Monte Carlo Tree Search"
+    },
+    {
+      "author": "/u/Tyb0wls",
+      "date": "2026-09-03T03:07:49.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1w5vlz5/llm_test_wrapper/",
+      "title": "LLM Test Wrapper"
+    },
+    {
+      "author": "/u/redouanea",
+      "date": "2026-09-02T19:48:39.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1w5l0gh/i_built_a_comparison_tool_for_166_models_llmttsstt/",
+      "title": "I built a comparison tool for 166 models LLM/TTS/STT"
+    },
+    {
+      "date": "2026-09-02T08:30:28.000Z",
+      "domain": "sebastianraschka.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://sebastianraschka.com/blog/2026/openai-astra-looped-transformers.html",
+      "title": "OpenAI Astra and Looped Transformers"
+    },
+    {
+      "author": "/u/Old_Rock_9457",
+      "date": "2026-09-02T08:47:36.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/MachineLearning/comments/1w54qkk/mir_with_audiomuseaisae_p/",
+      "title": "MIR with AudioMuse-AI-SAE [P]"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=simplex.lat\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "simplex.lat"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=akitaonrails.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "akitaonrails.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=redactle.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "redactle.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=antithetical-labs.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "antithetical-labs.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nvidia.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nvidia.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=substack.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "substack.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=searchplex.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "searchplex.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lesswrong.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lesswrong.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sebastianraschka.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sebastianraschka.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\uddea",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Contact centers: Beyond-RAG described a Minerva CQ deployment that identifies customer questions in real time and returns FAQ or RAG-generated answers to human agents within 2 seconds [arxiv.org#54].",
+    "Financial RAG: Incremental pooled LLM evaluation reused 65-80% of relevance judgments and cut evaluation costs by up to 4.9 times when comparing 62 retrieval configurations for financial news QA [arxiv.org#49].",
+    "Tool ecosystems: HEART used ToolFace, a repository of 25,519 functions, and reported up to 85% lower API cost while outperforming listed frontier commercial models on tool-use benchmarks [arxiv.org#33]."
+  ],
+  "international_reactions": [],
+  "item_category": "Model Evaluation",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 241,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.01658"
+        }
+      ],
+      "text": "Retrieval-augmented generation researchers: PRO-Step\u0027s authors said outcome-only optimization misses intermediate retrieval and reasoning errors, so they used step-level preference optimization guided by a process reward model."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.01611"
+        }
+      ],
+      "text": "AI safety benchmark researchers: EvalDetectBench\u0027s authors said evaluation awareness can undermine safety testing if systems behave differently under benchmark conditions than in deployment."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.01737"
+        }
+      ],
+      "text": "Accessibility-focused speech researchers: SpeakPay\u0027s author described Nepali voice-wallet recognition as an accessibility problem for visually impaired users and released code, data and model weights with the deployed web application."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.01852"
+        }
+      ],
+      "text": "Persistent-memory agent researchers: The Memory Trust Gap paper reported that metadata helped larger models handle stale-memory conflicts, while smaller checkpoints needed conflicts resolved in advance."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-09-03T12:00:12.034Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "Benchmark dependence: Several reported gains come from task-specific benchmarks or controlled diagnostic setups, including 50-query samples in text2ql, synthetic perception-reasoning tasks for vision-language post-training and a clinical benchmark built from expert-validated GP encounters [arxiv.org#18][arxiv.org#77][arxiv.org#99].",
+    "Evaluation uncertainty: The LLM-judge papers in this batch flagged measurement risks: RuVerBench found substantial noise in rubric verification, BASSE found proprietary judges correlated best with human summarization judgments, and ICE reported operator-dependent explanation faithfulness [arxiv.org#87][arxiv.org#55][arxiv.org#72].",
+    "Research integrity: One withdrawn arXiv paper on agentic sycophancy said its reported results did not match the executed evaluation and \"should not be cited,\" a direct caution against treating unreconciled preprints as evidence [arxiv.org#95]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://arxiv.org/abs/2609.01691",
+    "https://arxiv.org/abs/2607.10110",
+    "https://arxiv.org/abs/2609.02364",
+    "https://arxiv.org/abs/2512.15662",
+    "https://arxiv.org/abs/2608.26263",
+    "https://arxiv.org/abs/2608.02961",
+    "https://arxiv.org/abs/2410.10136",
+    "https://arxiv.org/abs/2608.06992",
+    "https://arxiv.org/abs/2609.02089",
+    "https://arxiv.org/abs/2609.02082",
+    "https://arxiv.org/abs/2603.18579",
+    "https://arxiv.org/abs/2507.21815",
+    "https://arxiv.org/abs/2609.01834",
+    "https://arxiv.org/abs/2607.16741",
+    "https://arxiv.org/abs/2609.02339",
+    "https://www.lesswrong.com/posts/GTWDGHjZ9C7f5YxqE/notes-on-a-global-workspace-in-language-models",
+    "https://arxiv.org/abs/2609.01611",
+    "https://arxiv.org/abs/2606.21321",
+    "https://sebastianraschka.com/blog/2026/openai-astra-looped-transformers.html",
+    "https://arxiv.org/abs/2609.00575",
+    "https://arxiv.org/abs/2609.02548",
+    "https://arxiv.org/abs/2609.02745",
+    "https://arxiv.org/abs/2511.08590",
+    "https://arxiv.org/abs/2606.15517",
+    "https://www.reddit.com/r/LLMDevs/comments/1w5vlz5/llm_test_wrapper/",
+    "https://arxiv.org/abs/2609.02371",
+    "https://arxiv.org/abs/2406.16893",
+    "https://arxiv.org/abs/2609.00474",
+    "https://arxiv.org/abs/2605.29531",
+    "https://arxiv.org/abs/2609.01658",
+    "https://arxiv.org/abs/2609.02480",
+    "https://arxiv.org/abs/2608.29270",
+    "https://arxiv.org/abs/2609.00528",
+    "https://writethatblog.substack.com/p/rubber-ducking-your-blog-post-with-llms",
+    "https://arxiv.org/abs/2609.02399",
+    "https://arxiv.org/abs/2608.01708",
+    "https://arxiv.org/abs/2609.01833",
+    "https://arxiv.org/abs/2603.16749",
+    "https://arxiv.org/abs/2607.21617",
+    "https://arxiv.org/abs/2607.24780",
+    "https://arxiv.org/abs/2609.01737",
+    "https://arxiv.org/abs/2606.07710",
+    "https://arxiv.org/abs/2609.02510",
+    "https://arxiv.org/abs/2609.00566",
+    "https://github.com/tokencanopy/price",
+    "https://arxiv.org/abs/2605.29496",
+    "https://arxiv.org/abs/2609.02451",
+    "https://arxiv.org/abs/2609.02749",
+    "https://arxiv.org/abs/2609.02133",
+    "https://arxiv.org/abs/2605.16991",
+    "https://arxiv.org/abs/2609.00588",
+    "https://arxiv.org/abs/2507.08468",
+    "https://arxiv.org/abs/2608.08389",
+    "https://arxiv.org/abs/2602.12639",
+    "https://arxiv.org/abs/2609.02106",
+    "https://arxiv.org/abs/2608.01284",
+    "https://arxiv.org/abs/2505.15276",
+    "https://arxiv.org/abs/2603.16077",
+    "https://arxiv.org/abs/2606.03557",
+    "https://arxiv.org/abs/2609.02233",
+    "https://arxiv.org/abs/2608.20574",
+    "https://arxiv.org/abs/2512.07328",
+    "https://arxiv.org/abs/2607.00684",
+    "https://arxiv.org/abs/2605.22344",
+    "https://arxiv.org/abs/2608.31016",
+    "https://arxiv.org/abs/2609.02273",
+    "https://arxiv.org/abs/2503.17039",
+    "https://arxiv.org/abs/2609.02092",
+    "https://arxiv.org/abs/2609.01936",
+    "https://arxiv.org/abs/2609.02253",
+    "https://arxiv.org/abs/2609.02846",
+    "https://arxiv.org/abs/2609.02059",
+    "https://arxiv.org/abs/2605.27284",
+    "https://arxiv.org/abs/2509.00030",
+    "https://arxiv.org/abs/2603.19828",
+    "https://arxiv.org/abs/2609.01815",
+    "https://arxiv.org/abs/2605.30022",
+    "https://arxiv.org/abs/2604.11557",
+    "https://arxiv.org/abs/2609.01736",
+    "https://arxiv.org/abs/2609.01687",
+    "https://arxiv.org/abs/2608.12062",
+    "https://arxiv.org/abs/2607.17117",
+    "https://arxiv.org/abs/2607.10103",
+    "https://arxiv.org/abs/2608.28482",
+    "https://arxiv.org/abs/2609.02852",
+    "https://arxiv.org/abs/2609.02750",
+    "https://arxiv.org/abs/2605.28346",
+    "https://arxiv.org/abs/2603.18593",
+    "https://arxiv.org/abs/2609.02115",
+    "https://arxiv.org/abs/2609.02737",
+    "https://arxiv.org/abs/2609.02797",
+    "https://arxiv.org/abs/2602.10118",
+    "https://akitaonrails.com/en/2026/09/02/ai-memory-2-0-best-memory-system-for-agents-and-teams/",
+    "https://arxiv.org/abs/2603.06662",
+    "https://arxiv.org/abs/2608.26550",
+    "https://news.google.com/atom/articles/CBMikwFBVV95cUxNc2Y1NE5uU1BuZG9FemdwdS1DRmlaQ3hPdTM5dmpteEVwYUQtSHRtWm93WjlqZWtNczZVV2dhWk1yUll2MWNIN2RockNZaF9xQ05OWFNkUDJUalZYWnF1aXA5aHdlcjFmYTJOLUE2UVpGLUIwMU5RT3ExY2xrRUh6Nk1qUjdCSlNWUGxDWGo1Z01IT00",
+    "https://arxiv.org/abs/2601.05520",
+    "https://news.google.com/atom/articles/CBMioAFBVV95cUxNNDlURVZWZjJyVVNITTFvMW1YaW9mVWpDWl9DNVVpOVlnbTR6cGh6S1ljN0UySU5sOElWLWlIdVZkdFhjLW5saDRxLXJybjRpU3JGTDNVWXVseC1QNEppLXNsMU00V1FDSDNvS2ZKazJwam1GMU44dFU1VUFyRUhCb2RyXzRjODhSdGY3VW5tUXRYT2ozN2NHazRYN2xVVlNn",
+    "https://arxiv.org/abs/2608.30188",
+    "https://news.google.com/atom/articles/CBMikAFBVV95cUxQd2RIdGpKMXFvZlVPZmVxd2tYbVBoUmFyelB3UWxlUThhdlF4MTduREN4aE8xeUN1c3hYc1JveWZhV3hSenVSc1NSN3p6bzRNaHQ0clFxWFZkR0hQOW9wWU9vYXp5d1ZKa09UNXQ5a0hxY3loLUJMNHc3bFM1QUtONFptR2JlUHVzWWlkYUFIdk0",
+    "https://arxiv.org/abs/2607.04562",
+    "https://arxiv.org/abs/2608.29291",
+    "https://arxiv.org/abs/2609.02786",
+    "https://arxiv.org/abs/2606.29920",
+    "https://arxiv.org/abs/2608.30378",
+    "https://arxiv.org/abs/2606.17372",
+    "https://arxiv.org/abs/2609.02685",
+    "https://arxiv.org/abs/2609.02796",
+    "https://arxiv.org/abs/2605.24661",
+    "https://www.reddit.com/r/ollama/comments/1w5dje5/architectural_proposal_for_future_qwen_models/",
+    "https://arxiv.org/abs/2609.00224",
+    "https://arxiv.org/abs/2512.16310",
+    "https://arxiv.org/abs/2505.23713",
+    "https://arxiv.org/abs/2609.01867",
+    "https://arxiv.org/abs/2603.28026",
+    "https://arxiv.org/abs/2609.02421",
+    "https://arxiv.org/abs/2607.23286",
+    "https://arxiv.org/abs/2608.28980",
+    "https://arxiv.org/abs/2505.22451",
+    "https://arxiv.org/abs/2607.04726",
+    "https://arxiv.org/abs/2609.01985",
+    "https://arxiv.org/abs/2606.04547",
+    "https://arxiv.org/abs/2609.02482",
+    "https://arxiv.org/abs/2609.02679",
+    "https://arxiv.org/abs/2609.01836",
+    "https://arxiv.org/abs/2609.02029",
+    "https://arxiv.org/abs/2601.07468",
+    "https://arxiv.org/abs/2609.02859",
+    "https://arxiv.org/abs/2609.02168",
+    "https://arxiv.org/abs/2609.01832",
+    "https://arxiv.org/abs/2609.01660",
+    "https://arxiv.org/abs/2603.16848",
+    "https://arxiv.org/abs/2609.02108",
+    "https://arxiv.org/abs/2606.07571",
+    "https://arxiv.org/abs/2606.29894",
+    "https://arxiv.org/abs/2609.02049",
+    "https://arxiv.org/abs/2609.01971",
+    "https://arxiv.org/abs/2609.02849",
+    "https://arxiv.org/abs/2609.02336",
+    "https://arxiv.org/abs/2609.01810",
+    "https://www.lesswrong.com/posts/finpDcZidhcdCa4cS/bloom-wilt-on-policy-examples-of-any-llm-behaviour-from-a-1",
+    "https://arxiv.org/abs/2607.19128",
+    "https://arxiv.org/abs/2603.25184",
+    "https://arxiv.org/abs/2603.23101",
+    "https://arxiv.org/abs/2609.02215",
+    "https://arxiv.org/abs/2609.01615",
+    "https://arxiv.org/abs/2601.22396",
+    "https://arxiv.org/abs/2609.01772",
+    "https://arxiv.org/abs/2609.01925",
+    "https://arxiv.org/abs/2609.01788",
+    "https://arxiv.org/abs/2609.01982",
+    "https://arxiv.org/abs/2606.13081",
+    "https://arxiv.org/abs/2608.10963",
+    "https://arxiv.org/abs/2609.02244",
+    "https://arxiv.org/abs/2608.03729",
+    "https://arxiv.org/abs/2407.14845",
+    "https://arxiv.org/abs/2605.29829",
+    "https://arxiv.org/abs/2607.19686",
+    "https://arxiv.org/abs/2601.06973",
+    "https://arxiv.org/abs/2606.21144",
+    "https://arxiv.org/abs/2604.26841",
+    "https://arxiv.org/abs/2604.20819",
+    "https://arxiv.org/abs/2609.02343",
+    "https://arxiv.org/abs/2512.10534",
+    "https://arxiv.org/abs/2609.02054",
+    "https://arxiv.org/abs/2606.17698",
+    "https://arxiv.org/abs/2609.01807",
+    "https://arxiv.org/abs/2609.01962",
+    "https://www.reddit.com/r/LLMDevs/comments/1w5l0gh/i_built_a_comparison_tool_for_166_models_llmttsstt/",
+    "https://arxiv.org/abs/2609.02623",
+    "https://arxiv.org/abs/2609.00570",
+    "https://arxiv.org/abs/2608.28945",
+    "https://arxiv.org/abs/2609.02438",
+    "https://arxiv.org/abs/2609.02265",
+    "https://arxiv.org/abs/2601.08146",
+    "https://arxiv.org/abs/2609.01657",
+    "https://arxiv.org/abs/2609.02275",
+    "https://www.reddit.com/r/LLM/comments/1w51tzg/openroutiq_architecture_benchmarks_and_safety/",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1w5u9w8/wvy_is_a_handwritten_language_model_every/",
+    "https://arxiv.org/abs/2603.03072",
+    "https://arxiv.org/abs/2609.00618",
+    "https://arxiv.org/abs/2609.02083",
+    "https://arxiv.org/abs/2609.02149",
+    "https://arxiv.org/abs/2606.23092",
+    "https://arxiv.org/abs/2604.14501",
+    "https://arxiv.org/abs/2609.01828",
+    "https://arxiv.org/abs/2609.02702",
+    "https://arxiv.org/abs/2609.02264",
+    "https://arxiv.org/abs/2609.01662",
+    "https://arxiv.org/abs/2601.12983",
+    "https://arxiv.org/abs/2606.09435",
+    "https://arxiv.org/abs/2602.05605",
+    "https://arxiv.org/abs/2606.16847",
+    "https://antithetical-labs.com/blog/the-judge-liked-it-better/",
+    "https://arxiv.org/abs/2609.01878",
+    "https://arxiv.org/abs/2609.01723",
+    "https://www.reddit.com/r/MachineLearning/comments/1w54qkk/mir_with_audiomuseaisae_p/",
+    "https://arxiv.org/abs/2609.01408",
+    "https://arxiv.org/abs/2609.01849",
+    "https://arxiv.org/abs/2606.03043",
+    "https://www.searchplex.net/blog/llm-judge-search-relevance",
+    "https://arxiv.org/abs/2606.07678",
+    "https://arxiv.org/abs/2607.20129",
+    "https://arxiv.org/abs/2608.25202",
+    "https://arxiv.org/abs/2609.02580",
+    "https://arxiv.org/abs/2609.00015",
+    "https://arxiv.org/abs/2603.26236",
+    "https://arxiv.org/abs/2609.02277",
+    "https://arxiv.org/abs/2608.21377",
+    "https://arxiv.org/abs/2609.02805",
+    "https://arxiv.org/abs/2606.17350",
+    "https://arxiv.org/abs/2609.02094",
+    "https://arxiv.org/abs/2609.02042",
+    "https://developer.nvidia.com/blog/co-designing-ai-models-using-speculative-decoding-for-faster-llm-inference/",
+    "https://arxiv.org/abs/2609.02177",
+    "https://memhub.simplex.lat",
+    "https://arxiv.org/abs/2510.18699",
+    "https://arxiv.org/abs/2601.22365",
+    "https://arxiv.org/abs/2609.01976",
+    "https://arxiv.org/abs/2602.22453",
+    "https://arxiv.org/abs/2609.02131",
+    "https://arxiv.org/abs/2607.12406",
+    "https://arxiv.org/abs/2609.01779",
+    "https://arxiv.org/abs/2506.00290",
+    "https://arxiv.org/abs/2609.02246",
+    "https://arxiv.org/abs/2609.01924",
+    "https://arxiv.org/abs/2609.02217",
+    "https://arxiv.org/abs/2609.02652",
+    "https://arxiv.org/abs/2609.02731",
+    "https://arxiv.org/abs/2609.02292",
+    "https://arxiv.org/abs/2604.02198",
+    "https://arxiv.org/abs/2606.21052",
+    "https://redactle.net/llm-leaderboard",
+    "https://arxiv.org/abs/2609.01852",
+    "https://arxiv.org/abs/2609.02272",
+    "https://arxiv.org/abs/2609.01567",
+    "https://arxiv.org/abs/2606.22975",
+    "https://arxiv.org/abs/2608.27141",
+    "https://arxiv.org/abs/2609.01918",
+    "https://arxiv.org/abs/2609.02526",
+    "https://arxiv.org/abs/2608.27463"
+  ],
+  "suggested_qna": [],
+  "summary": "A batch of AI research papers posted or revised on arXiv around Sept. 1-2 focused on making language models more reliable for factual grounding, safety, efficiency and user intent. Several papers targeted retrieval-augmented generation and grounded question answering, including PRO-Step, which trains a process reward model to evaluate logical validity and evidential grounding at each reasoning step, and Evidence Sufficiency Boundary Training, which teaches models when to abstain until evidence is sufficient [arxiv.org#1][arxiv.org#2].\n\nThe batch also included work on culturally and linguistically grounded evaluation, with new resources for South Asian meme understanding, Indic pragmatics, Farsi dialogue, discourse-aware sign-language gloss translation and multilingual dictionary digitization [arxiv.org#4][arxiv.org#5][arxiv.org#6][arxiv.org#30][arxiv.org#80]. Other studies examined safety and trust failures in deployment-style systems, including stale memories overriding current evidence, visual prompts weakening safety refusals, unreliable LLM judges in subjective evaluations and clinical agents violating safety constraints in high-risk cases [arxiv.org#34][arxiv.org#37][arxiv.org#79][arxiv.org#99].\n\nEfficiency and agentic workflows formed another major thread. Papers proposed faster diffusion language model decoding, sparse long-context attention, model routing, tool-use harnesses, repository-to-skill distillation and paper-to-code generation frameworks [arxiv.org#17][arxiv.org#29][arxiv.org#35][arxiv.org#43][arxiv.org#50][arxiv.org#20]. One coding-competition paper reported that a competition-specific Ultra-CC system scored 535.4 out of 600 under IOI 2026 constraints, exceeding the gold threshold of 438.3 [arxiv.org#52].",
+  "talking_points": [
+    "Grounding methods: DKL merges knowledge-infused base-model weights into an instruction model without another instruction-tuning phase [arxiv.org#27].",
+    "Clinical limits: GPAgentBench-2K evaluated 16 LLMs in primary-care decision workflows and found that even frontier models violated safety constraints in over half of high-risk cases [arxiv.org#99].",
+    "Cultural gaps: MemeCULT-1K found that adding minimal cultural context improved mean SBERT similarity from 44.6 to 56.4 and LLM-as-a-judge scores from 2.57 to 3.43 out of 5 across South Asian meme tasks [arxiv.org#4].",
+    "Judge reliability: A multilingual LLM-judge study found judges matched one another on subjective rubrics but reached only 58-66% of human agreement, while the gap narrowed on a rubric with a verifiable answer [arxiv.org#79]."
+  ],
+  "technical_details": [
+    "Step-level DPO: PRO-Step constructs preference pairs between valid and flawed intermediate RAG steps, then applies Direct Preference Optimization at the step level instead of rewarding only final answers [arxiv.org#1].",
+    "KV-cache skipping: Declarative Attention asks the model to mark generation as global, focus or local, letting the inference engine skip much of the key-value cache read during long-context decoding [arxiv.org#29].",
+    "Constrained MDP benchmark: GPAgentBench-2K models primary-care decisions as a constrained Markov decision process with six foundational clinical actions and safety-informed abstention as an explicit outcome [arxiv.org#99]."
+  ],
+  "timeline": [],
+  "title": "AI researchers publish benchmarks for safer language models",
+  "travel_advisory": "",
+  "unique_domains": 13,
+  "url": "https://arxiv.org/abs/2609.02054",
+  "user_action_items": [
+    "Check benchmark status before citing: Review each arXiv record for comments such as accepted venue, under review, preprint or withdrawn before relying on a result; some preprints may be withdrawn or contain errors.",
+    "Audit LLM-judge evaluations: When using LLM judges, compare judge scores with held-out human ratings or reference-matched checks because several papers found judge agreement can diverge from human alignment [arxiv.org#55][arxiv.org#79][arxiv.org#87]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
