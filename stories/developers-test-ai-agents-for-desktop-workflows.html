@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Developers test AI agents for desktop workflows - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Developers test AI agents for desktop workflows</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.latent.space/p/grok-bot"><img src="https://kagiproxy.com/img/Gq9kvrydM7vl8Luc7qhHnTStt0LvrFV5GSYd2la4BR_0aEyi0ewBk9_DanZxXChp6KDQQS59MThvPa9Tp_X4xCtLWvGep-uMbLScQc3ou34YQ68u8A3HRVyX3BBna5SJE7vgfy-Dh7QGG6LNDZ1Uas7IwU66SMpqF2LlpEQvg74cuzL-3WYW8_2nCjSy0WLfBv6ktP_WM7Y_9XhI_Uq8EO3qwUB9pgK2xdbslKSZMwTKOomdKNmEdao5Cotn5bdjHkP01_hwYT5DXb0252fvoVn1dqcPAB3d4g92glIK4u-S8iLZIU8cd-qWgbKDnO2eLcule6o8M1dTmA" alt="Image from Latent Space’s Grok Bot article" title="Image from Latent Space’s Grok Bot article (latent.space)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Image from Latent Space’s Grok Bot article <span class='credit'>(latent.space)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Developers and writers described hands-on experiments using AI coding agents to control desktop software, connect services and build small macOS apps. Simon Willison wrote that modern frontier models can use Blender to create editable `.blend` files, render still images and make movies by rendering image sequences and combining them with `ffmpeg` <a href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/" class="footnote-ref">[1]</a>.
+
+Latent Space’s Dan McAteer said Grok Bot let him connect services through browser logins instead of MCP server JSON files or pasted API credentials. PCMag’s Edward Mendelson said he used Claude Code and Xcode in macOS Golden Gate to build KeyRun, a free Mac App Store app for Windows-style hotkeys on the Mac <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a><a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the" class="footnote-ref">[4]</a>. A Reddit post titled “Grok” appeared in r/ArtificialInteligence, but the provided source text contains only submission metadata <a href="https://www.reddit.com/r/ArtificialInteligence/comments/1w81136/grok/" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>That ease of setup is what’s really new here.</p>
+
+<cite>— Dan McAteer (Latent Space)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Blender setup: Willison said the workflow required installing the full Mac application from blender.org and prompting the agent to use `/Applications/Blender` for rendering <a href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/" class="footnote-ref">[1]</a>.</li>
+
+<li>Support automation: McAteer connected Grok Bot to Freshdesk through a work account and set a support bot to check newly opened tickets every 15 minutes <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a>.</li>
+
+<li>Configuration trade-off: McAteer compared Grok Bot’s browser-based setup with OpenClaw, saying OpenClaw offers more customization but requires more setup overhead <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a>.</li>
+
+<li>Mac shortcut gap: Mendelson said Windows lets users assign launch hotkeys from shortcut properties, while macOS requires Shortcuts or third-party utilities such as FastScripts 3, Karabiner-Elements, Keyboard Maestro or Raycast <a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Simon Willison: Willison tested Blender with coding agents and showed an example in which follow-up prompts added a background and more visual detail to a rendered scene.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/">Simon Willison’s Weblog</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Dan McAteer: McAteer said he asked Grok Bot to review his X posts and interests and generate a daily news brief tailored to him.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.latent.space/p/grok-bot">Latent Space</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Edward Mendelson: Mendelson built KeyRun after deciding existing Mac hotkey options were too feature-heavy, too costly or unavailable for current Mac requirements.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the">PCMag</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Developer tools: Mendelson used Claude Code and Xcode together to build and publish a macOS utility <a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the" class="footnote-ref">[4]</a>.</li>
+
+<li>Content curation: McAteer used Grok Bot to generate a personalized daily news brief based on his X posts and interests <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a>.</li>
+
+<li>Creative software: Blender’s scriptable interface let an AI agent generate editable project files and rendered media beyond code repositories <a href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Agent platforms that use browser authentication reduce manual credential and configuration work compared with systems requiring MCP server JSON files or pasted API credentials <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a>.</li><li>Small AI-built utilities can reach users through existing app stores; Mendelson distributed KeyRun through the Mac App Store <a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the" class="footnote-ref">[4]</a>[common].</li><li>Enterprise use requires access controls for recurring workflows such as ticket checks, because the agent connects to business systems through account permissions <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a>[common].</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Iterate with follow-up prompts: After an initial Blender render, use prompts like &#x27;add a background and a lot of flair&#x27; to refine the scene, as Willison demonstrated <a href="https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/" class="footnote-ref">[1]</a>.</li>
+
+<li>Audit plugin permissions: When connecting an agent to services through browser login, review which accounts and systems the plugin can access before enabling recurring tasks <a href="https://www.latent.space/p/grok-bot" class="footnote-ref">[3]</a>[common].</li>
+
+<li>Experiment with vibe coding: Use Claude Code and Xcode to build a small Mac utility, following Mendelson&#x27;s example of creating a hotkey app <a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the">https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the</a></li>
+
+
+
+<li><a href="https://www.latent.space/p/grok-bot">https://www.latent.space/p/grok-bot</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1w81136/grok/">https://www.reddit.com/r/ArtificialInteligence/comments/1w81136/grok/</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, simonwillison.net, latent.space, pcmag.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 4 unique domains, 4 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-09-05T15:51:09.000Z",
+      "domain": "simonwillison.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/",
+      "title": "Using Blender with coding agents on macOS"
+    },
+    {
+      "author": "/u/ExpensiveCoat8912",
+      "date": "2026-09-05T13:38:54.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1w81136/grok/",
+      "title": "Grok"
+    },
+    {
+      "author": "Dan McAteer",
+      "date": "2026-09-05T15:01:02.000Z",
+      "domain": "latent.space",
+      "image": "https://kagiproxy.com/img/LnY8CARfvOx3hMbemNCTiWMK-CSVgOCKUgSXORGbgacYbWWN5Yhf6h1ehWCZkPQZuAllgVu800r95i_wPqW0kxIM8hHZLzw6mARoFk68R83VP-hCPVjlEa-NqMm-emoUFB6bewHHkpZ80igHCMCqqlXAEmFRC_rXqMCzmdALxYpiRBeQMtYq0alo2GaDUuS-blk_y9zcgZdqa_dfzPhiodwFLp4pkg_vHwFqVLezYzwvHpUrWs4AU4wEbBa2bWuZjekSEjJ-vEdLO5hdLCQovtZD42LqQT2slj79wY60N9Tlq-iI5LbmguySVmVNPDZbN5qPnu16hg8_6g",
+      "image_caption": "",
+      "link": "https://www.latent.space/p/grok-bot",
+      "title": "OpenClaw Power, MacBook Simplicity: Five Days With Grok Bot"
+    },
+    {
+      "date": "2026-09-05T14:00:00.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the",
+      "title": "I Vibe Coded the One Mac Feature Apple Refuses to Build\u2014and Put It on the App Store"
+    }
+  ],
+  "business_angle": [
+    "Agent platforms that use browser authentication reduce manual credential and configuration work compared with systems requiring MCP server JSON files or pasted API credentials [latent.space#1].",
+    "Small AI-built utilities can reach users through existing app stores; Mendelson distributed KeyRun through the Mac App Store [pcmag.com#1][common].",
+    "Enterprise use requires access controls for recurring workflows such as ticket checks, because the agent connects to business systems through account permissions [latent.space#1][common]."
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=simonwillison.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "simonwillison.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=latent.space\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "latent.space"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Developer tools: Mendelson used Claude Code and Xcode together to build and publish a macOS utility [pcmag.com#1].",
+    "Content curation: McAteer used Grok Bot to generate a personalized daily news brief based on his X posts and interests [latent.space#1].",
+    "Creative software: Blender\u2019s scriptable interface let an AI agent generate editable project files and rendered media beyond code repositories [simonwillison.net#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 4,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Simon Willison\u2019s Weblog",
+          "url": "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/"
+        }
+      ],
+      "text": "Simon Willison: Willison tested Blender with coding agents and showed an example in which follow-up prompts added a background and more visual detail to a rendered scene."
+    },
+    {
+      "sources": [
+        {
+          "name": "Latent Space",
+          "url": "https://www.latent.space/p/grok-bot"
+        }
+      ],
+      "text": "Dan McAteer: McAteer said he asked Grok Bot to review his X posts and interests and generate a daily news brief tailored to him."
+    },
+    {
+      "sources": [
+        {
+          "name": "PCMag",
+          "url": "https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the"
+        }
+      ],
+      "text": "Edward Mendelson: Mendelson built KeyRun after deciding existing Mac hotkey options were too feature-heavy, too costly or unavailable for current Mac requirements."
+    }
+  ],
+  "primary_image": {
+    "caption": "Image from Latent Space\u2019s Grok Bot article",
+    "credit": "latent.space",
+    "link": "https://www.latent.space/p/grok-bot",
+    "url": "https://kagiproxy.com/img/Gq9kvrydM7vl8Luc7qhHnTStt0LvrFV5GSYd2la4BR_0aEyi0ewBk9_DanZxXChp6KDQQS59MThvPa9Tp_X4xCtLWvGep-uMbLScQc3ou34YQ68u8A3HRVyX3BBna5SJE7vgfy-Dh7QGG6LNDZ1Uas7IwU66SMpqF2LlpEQvg74cuzL-3WYW8_2nCjSy0WLfBv6ktP_WM7Y_9XhI_Uq8EO3qwUB9pgK2xdbslKSZMwTKOomdKNmEdao5Cotn5bdjHkP01_hwYT5DXb0252fvoVn1dqcPAB3d4g92glIK4u-S8iLZIU8cd-qWgbKDnO2eLcule6o8M1dTmA"
+  },
+  "published": "2026-09-06T12:00:07.552Z",
+  "quote": "That ease of setup is what\u2019s really new here.",
+  "quote_attribution": "Latent Space",
+  "quote_author": "Dan McAteer",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.pcmag.com/explainers/i-vibe-coded-the-one-mac-feature-apple-refuses-to-build-and-put-it-on-the",
+    "https://www.latent.space/p/grok-bot",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1w81136/grok/",
+    "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/"
+  ],
+  "suggested_qna": [],
+  "summary": "Developers and writers described hands-on experiments using AI coding agents to control desktop software, connect services and build small macOS apps. Simon Willison wrote that modern frontier models can use Blender to create editable `.blend` files, render still images and make movies by rendering image sequences and combining them with `ffmpeg` [simonwillison.net#1].\n\nLatent Space\u2019s Dan McAteer said Grok Bot let him connect services through browser logins instead of MCP server JSON files or pasted API credentials. PCMag\u2019s Edward Mendelson said he used Claude Code and Xcode in macOS Golden Gate to build KeyRun, a free Mac App Store app for Windows-style hotkeys on the Mac [latent.space#1][pcmag.com#1]. A Reddit post titled \u201cGrok\u201d appeared in r/ArtificialInteligence, but the provided source text contains only submission metadata [reddit.com#1].",
+  "talking_points": [
+    "Blender setup: Willison said the workflow required installing the full Mac application from blender.org and prompting the agent to use `/Applications/Blender` for rendering [simonwillison.net#1].",
+    "Support automation: McAteer connected Grok Bot to Freshdesk through a work account and set a support bot to check newly opened tickets every 15 minutes [latent.space#1].",
+    "Configuration trade-off: McAteer compared Grok Bot\u2019s browser-based setup with OpenClaw, saying OpenClaw offers more customization but requires more setup overhead [latent.space#1].",
+    "Mac shortcut gap: Mendelson said Windows lets users assign launch hotkeys from shortcut properties, while macOS requires Shortcuts or third-party utilities such as FastScripts 3, Karabiner-Elements, Keyboard Maestro or Raycast [pcmag.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Developers test AI agents for desktop workflows",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://simonwillison.net/2026/Sep/5/blender-coding-agents-macos/",
+  "user_action_items": [
+    "Iterate with follow-up prompts: After an initial Blender render, use prompts like \u0027add a background and a lot of flair\u0027 to refine the scene, as Willison demonstrated [simonwillison.net#1].",
+    "Audit plugin permissions: When connecting an agent to services through browser login, review which accounts and systems the plugin can access before enabling recurring tasks [latent.space#1][common].",
+    "Experiment with vibe coding: Use Claude Code and Xcode to build a small Mac utility, following Mendelson\u0027s example of creating a hotkey app [pcmag.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
