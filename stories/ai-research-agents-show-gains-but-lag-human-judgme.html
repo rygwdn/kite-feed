@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>AI research agents show gains but lag human judgment - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>AI research agents show gains but lag human judgment</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>New research and open-source releases are testing how far AI agents can conduct research, interpret models and operate software without step-by-step human control. A telecom-ticket case study found that autonomous research showed promise on an open-ended industry task but performed best at narrow hyperparameter optimization, lacking human-like intuition and creativity <a href="https://arxiv.org/abs/2609.13073" class="footnote-ref">[1]</a>. A separate benchmark evaluates whether agents can use sparse autoencoders to identify features in Gemma-2-9B-IT, measuring activation rank, concept selectivity and causal steering <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>. Google published Artemis, an open-source project that lets AI assistants and test suites operate real phones, while OpenResearch describes itself as a local-first workspace for research agents and autoresearch <a href="https://github.com/google/artemis" class="footnote-ref">[4]</a><a href="https://github.com/alphaXiv/OpenResearch" class="footnote-ref">[6]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://arxiv.org/abs/2609.13073">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>SAEScientist-Bench uses Gemma Scope&#x27;s dictionary of more than 131,000 features in Gemma-2-9B-IT as the search space for target-concept discovery <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>.</li>
+
+<li>In an Artemis live demo, the system set driving routes and calculated total travel times in Google Maps, then opened YouTube to play a Coldplay song <a href="https://github.com/google/artemis" class="footnote-ref">[4]</a>.</li>
+
+<li>OpenResearch is MIT-licensed, and its repository includes a UI and workspace components for macOS and Windows beta users <a href="https://github.com/alphaXiv/OpenResearch" class="footnote-ref">[6]</a>.</li>
+
+<li>Deep Dog 2 describes itself in Reddit posts as the fifth-best-ranked deep-research agent and says it supports multiple language-model and search providers. Those claims come from project posts, not an independent evaluation <a href="https://www.reddit.com/r/LLMDevs/comments/1wfuksw/deep_dog_2_fully_open_source_deep_research_agent/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/opensource/comments/1wf03sq/deep_dog_2_i_made_the_fifth_best_ranked_deep/" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Telecom research authors: The case study evaluates commercial and open-source agents on telecom-ticket retrieval, which the authors describe as an industry-grade task <a href="https://arxiv.org/abs/2609.13073" class="footnote-ref">[1]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.13073">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>SAEScientist-Bench authors: They describe interpretability as a need for post-hoc monitoring and auditing of recursive self-improvement, rather than only a model-training problem <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arxiv.org/abs/2609.09113">arXiv</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Google Artemis project: Its repository includes an MCP server, playground, apps and tests alongside phone-automation code <a href="https://github.com/google/artemis" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/google/artemis">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>OpenResearch project: Its README says the CLI can turn Claude Code, Codex, OpenCode or Cursor into research agents <a href="https://github.com/alphaXiv/OpenResearch" class="footnote-ref">[6]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://github.com/alphaXiv/OpenResearch">GitHub</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>8 September 2026:</strong> SAEScientist-Bench was first submitted for autonomous interpretability evaluation <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>11 September 2026:</strong> SAEScientist-Bench was revised, and the telecom research paper was submitted <a href="https://arxiv.org/abs/2609.13073" class="footnote-ref">[1]</a><a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a></li>
+
+
+
+<li><strong>13 September 2026:</strong> Android Police reported that controls for AI agents appeared in Android developer documentation <a href="https://www.androidpolice.com/android-ai-agent-permissions-cage-built-before-agents-arrive/" class="footnote-ref">[7]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>The telecom paper identifies representation, architecture and training-data generation as separate design choices in its retrieval task <a href="https://arxiv.org/abs/2609.13073" class="footnote-ref">[1]</a>.</li>
+
+<li>The benchmark evaluates identified features using activation rank, concept selectivity on contrastive texts and causal steering <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>.</li>
+
+<li>Android Police reported that controls for AI agents appeared in Android developer documentation, rather than as an ordinary user-facing setting <a href="https://www.androidpolice.com/android-ai-agent-permissions-cage-built-before-agents-arrive/" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Scientific Significance</h2><ul>
+
+<li>The telecom case treats representation, architecture and training-data generation as research variables in an open-ended ML research task <a href="https://arxiv.org/abs/2609.13073" class="footnote-ref">[1]</a>.</li>
+
+<li>The SAE benchmark evaluates feature discovery through selectivity measurement and causal intervention, rather than inspection alone <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>.</li>
+
+<li>OpenResearch&#x27;s README lists Claude Code, Codex, OpenCode and Cursor as compatible agent front ends <a href="https://github.com/alphaXiv/OpenResearch" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>The telecom paper distinguishes between open-ended research work and narrow hyperparameter optimization, with stronger performance in the narrower task <a href="https://arxiv.org/abs/2609.13073" class="footnote-ref">[1]</a>.</li><li>SAEScientist-Bench compares discovered features with expert references and measures activation rank, concept selectivity and causal steering <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>.</li><li>Artemis targets real-device phone control, while OpenResearch describes a local-first research workspace <a href="https://github.com/google/artemis" class="footnote-ref">[4]</a><a href="https://github.com/alphaXiv/OpenResearch" class="footnote-ref">[6]</a>.</li><li>Deep Dog 2&#x27;s Reddit posts identify DeepSeek and Exa as default model and search providers and describe asynchronous Python execution. Its reported cost and ranking claims may depend on configuration <a href="https://www.reddit.com/r/LLMDevs/comments/1wfuksw/deep_dog_2_fully_open_source_deep_research_agent/" class="footnote-ref">[3]</a><a href="https://www.reddit.com/r/opensource/comments/1wf03sq/deep_dog_2_i_made_the_fifth_best_ranked_deep/" class="footnote-ref">[5]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>For an SAE-agent trial, record the target concept, contrastive-probe design, feature dictionary, expert reference set and scoring measures to support reproducibility <a href="https://arxiv.org/abs/2609.09113" class="footnote-ref">[2]</a>.</li>
+
+<li>For Android or research agents, require logs, screenshots, experiment records and an operator path for blocked actions before allowing unattended runs <a href="https://github.com/google/artemis" class="footnote-ref">[4]</a><a href="https://github.com/alphaXiv/OpenResearch" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.reddit.com/r/opensource/comments/1wf03sq/deep_dog_2_i_made_the_fifth_best_ranked_deep/">https://www.reddit.com/r/opensource/comments/1wf03sq/deep_dog_2_i_made_the_fifth_best_ranked_deep/</a></li>
+
+
+
+<li><a href="https://github.com/alphaXiv/OpenResearch">https://github.com/alphaXiv/OpenResearch</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LLMDevs/comments/1wfuksw/deep_dog_2_fully_open_source_deep_research_agent/">https://www.reddit.com/r/LLMDevs/comments/1wfuksw/deep_dog_2_fully_open_source_deep_research_agent/</a></li>
+
+
+
+<li><a href="https://arxiv.org/abs/2609.09113">https://arxiv.org/abs/2609.09113</a></li>
+
+
+
+<li><a href="https://www.androidpolice.com/android-ai-agent-permissions-cage-built-before-agents-arrive/">https://www.androidpolice.com/android-ai-agent-permissions-cage-built-before-agents-arrive/</a></li>
+
+
+
+
+
+<li><a href="https://github.com/google/artemis">https://github.com/google/artemis</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, arxiv.org, github.com, androidpolice.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 4 unique domains, 7 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Junghyun Min, Huseyin Uzunalioglu, Mohamed Trabelsi",
+      "date": "2026-09-14T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.13073",
+      "title": "Autonomous Research for Open-Ended Problems: A Case Study on Telecom Ticket Retrieval"
+    },
+    {
+      "author": "Yuqiao Tan, Shizhu He, Jun Zhao, Kang Liu",
+      "date": "2026-09-14T04:00:00.000Z",
+      "domain": "arxiv.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arxiv.org/abs/2609.09113",
+      "title": "SAEScientist-Bench: Can AI Agents Conduct Autonomous SAE Interpretability Research?"
+    },
+    {
+      "author": "/u/pizzababa21",
+      "date": "2026-09-14T05:30:09.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LLMDevs/comments/1wfuksw/deep_dog_2_fully_open_source_deep_research_agent/",
+      "title": "Deep Dog 2: Fully open source deep research agent which significantly outperforms Gemini and OpenAI on DeepResearch bench at a fraction of the cost. Easy to install and runs with a variety of LLM and search engine providers (default is deepseek + exa). It is completely free to use and runs async out"
+    },
+    {
+      "author": "yarapavan",
+      "date": "2026-09-14T02:57:26.000Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/google/artemis",
+      "title": "Google Artemis: Let AI assistants and test suites use real phones like a human"
+    },
+    {
+      "author": "/u/pizzababa21",
+      "date": "2026-09-13T06:36:24.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/opensource/comments/1wf03sq/deep_dog_2_i_made_the_fifth_best_ranked_deep/",
+      "title": "Deep Dog 2: I made the fifth best ranked deep research agent and am releasing it completely open source. It is easy to install and runs with a variety of LLM and search engine providers (default is deepseek + exa). It is completely free to use and runs async in python by default."
+    },
+    {
+      "date": "2026-09-14T07:05:51.077Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/alphaXiv/OpenResearch",
+      "title": "alphaXiv/OpenResearch"
+    },
+    {
+      "author": "Ali Salman Zia",
+      "date": "2026-09-13T17:30:10.000Z",
+      "domain": "androidpolice.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.androidpolice.com/android-ai-agent-permissions-cage-built-before-agents-arrive/",
+      "title": "Google built a security cage for AI agents on Android, but it\u0027s still empty"
+    }
+  ],
+  "business_angle": [
+    "The telecom paper distinguishes between open-ended research work and narrow hyperparameter optimization, with stronger performance in the narrower task [arxiv.org#1].",
+    "SAEScientist-Bench compares discovered features with expert references and measures activation rank, concept selectivity and causal steering [arxiv.org#2].",
+    "Artemis targets real-device phone control, while OpenResearch describes a local-first research workspace [github.com#1][github.com#2].",
+    "Deep Dog 2\u0027s Reddit posts identify DeepSeek and Exa as default model and search providers and describe asynchronous Python execution. Its reported cost and ranking claims may depend on configuration [reddit.com#1][reddit.com#2]."
+  ],
+  "category": "AI",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arxiv.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arxiv.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidpolice.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidpolice.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 7,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.13073"
+        }
+      ],
+      "text": "Telecom research authors: The case study evaluates commercial and open-source agents on telecom-ticket retrieval, which the authors describe as an industry-grade task [arxiv.org#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "arXiv",
+          "url": "https://arxiv.org/abs/2609.09113"
+        }
+      ],
+      "text": "SAEScientist-Bench authors: They describe interpretability as a need for post-hoc monitoring and auditing of recursive self-improvement, rather than only a model-training problem [arxiv.org#2]."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/google/artemis"
+        }
+      ],
+      "text": "Google Artemis project: Its repository includes an MCP server, playground, apps and tests alongside phone-automation code [github.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "GitHub",
+          "url": "https://github.com/alphaXiv/OpenResearch"
+        }
+      ],
+      "text": "OpenResearch project: Its README says the CLI can turn Claude Code, Codex, OpenCode or Cursor into research agents [github.com#2]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-09-14T12:00:09.921Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [
+    "The telecom case treats representation, architecture and training-data generation as research variables in an open-ended ML research task [arxiv.org#1].",
+    "The SAE benchmark evaluates feature discovery through selectivity measurement and causal intervention, rather than inspection alone [arxiv.org#2].",
+    "OpenResearch\u0027s README lists Claude Code, Codex, OpenCode and Cursor as compatible agent front ends [github.com#2]."
+  ],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.reddit.com/r/opensource/comments/1wf03sq/deep_dog_2_i_made_the_fifth_best_ranked_deep/",
+    "https://github.com/alphaXiv/OpenResearch",
+    "https://www.reddit.com/r/LLMDevs/comments/1wfuksw/deep_dog_2_fully_open_source_deep_research_agent/",
+    "https://arxiv.org/abs/2609.09113",
+    "https://www.androidpolice.com/android-ai-agent-permissions-cage-built-before-agents-arrive/",
+    "https://arxiv.org/abs/2609.13073",
+    "https://github.com/google/artemis"
+  ],
+  "suggested_qna": [],
+  "summary": "New research and open-source releases are testing how far AI agents can conduct research, interpret models and operate software without step-by-step human control. A telecom-ticket case study found that autonomous research showed promise on an open-ended industry task but performed best at narrow hyperparameter optimization, lacking human-like intuition and creativity [arxiv.org#1]. A separate benchmark evaluates whether agents can use sparse autoencoders to identify features in Gemma-2-9B-IT, measuring activation rank, concept selectivity and causal steering [arxiv.org#2]. Google published Artemis, an open-source project that lets AI assistants and test suites operate real phones, while OpenResearch describes itself as a local-first workspace for research agents and autoresearch [github.com#1][github.com#2].",
+  "talking_points": [
+    "SAEScientist-Bench uses Gemma Scope\u0027s dictionary of more than 131,000 features in Gemma-2-9B-IT as the search space for target-concept discovery [arxiv.org#2].",
+    "In an Artemis live demo, the system set driving routes and calculated total travel times in Google Maps, then opened YouTube to play a Coldplay song [github.com#1].",
+    "OpenResearch is MIT-licensed, and its repository includes a UI and workspace components for macOS and Windows beta users [github.com#2].",
+    "Deep Dog 2 describes itself in Reddit posts as the fifth-best-ranked deep-research agent and says it supports multiple language-model and search providers. Those claims come from project posts, not an independent evaluation [reddit.com#1][reddit.com#2]."
+  ],
+  "technical_details": [
+    "The telecom paper identifies representation, architecture and training-data generation as separate design choices in its retrieval task [arxiv.org#1].",
+    "The benchmark evaluates identified features using activation rank, concept selectivity on contrastive texts and causal steering [arxiv.org#2].",
+    "Android Police reported that controls for AI agents appeared in Android developer documentation, rather than as an ordinary user-facing setting [androidpolice.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "SAEScientist-Bench was first submitted for autonomous interpretability evaluation [arxiv.org#2]",
+      "date": "8 September 2026",
+      "date_iso": "2026-09-08"
+    },
+    {
+      "content": "SAEScientist-Bench was revised, and the telecom research paper was submitted [arxiv.org#1][arxiv.org#2]",
+      "date": "11 September 2026",
+      "date_iso": "2026-09-11"
+    },
+    {
+      "content": "Android Police reported that controls for AI agents appeared in Android developer documentation [androidpolice.com#1]",
+      "date": "13 September 2026",
+      "date_iso": "2026-09-13"
+    }
+  ],
+  "title": "AI research agents show gains but lag human judgment",
+  "travel_advisory": "",
+  "unique_domains": 4,
+  "url": "https://arxiv.org/abs/2609.13073",
+  "user_action_items": [
+    "For an SAE-agent trial, record the target concept, contrastive-probe design, feature dictionary, expert reference set and scoring measures to support reproducibility [arxiv.org#2].",
+    "For Android or research agents, require logs, screenshots, experiment records and an operator path for blocked actions before allowing unattended runs [github.com#1][github.com#2]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
