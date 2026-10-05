@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic routes Claude inference through AWS Bedrock in India - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic routes Claude inference through AWS Bedrock in India</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Anthropic has made Claude requests available for in-country inference in India through Amazon Bedrock, allowing those requests to be processed within India <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUdIBzgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUQ" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTmRueUFjLWliVW5nVHZPZUZYQ0x5WnRsakl5dHRSeFJjUm5xYzdFb0NHclZyYi1DMDBkX2t0RHlGa1VPQm1iM0lWVkw1U2lvWHFjaDVvMGdoamRhSGNMZFdzRGxZQlR3S1huS3dPaVUtNElxOUlfdm1QakY0VHE1RFhuaXFRekFJbVhqdVVtc3B1UWxQbkNqUE85RXV6Y0YzTmNJay1VdzZXaWlJdDdUNkRUYzdIUmNwM0pr0gHIAUFVX3lxTE1JVmplcVY5eTBxcEFpZEJMMWNDWTIyN3lzU3hKWWVPMFBvRWRlOGNRMjdSRENtWDI5YXpEbmNtWktTZjlSNlNBNzhocHhyWlM5NDJPRU5CdEpjRnRCNEQwLTNyVktjQ1cwZHV1V3VLaUhQMjk5ZzI0eGJmVkdOcnltUFBZTkpnTENBLXJvX0V5V1NUVENGSjJZY01iUjlpU0E5S1VkUDN1a3JnQzB2QXdKSjM5NkoweDBNQXBYMFExNUxVejNQSWMx" class="footnote-ref">[2]</a><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVVk1bWVjVGVlU2RIZE5DOWRaTktPNkZnWkZ3ZWd4dU5rNXdMaVc4X3pWWml1MG5iZGdLUV9aMEpXY2ZFWXF4SldEODJXa1FmOFc0NlhmMFFLRWxoMDZkX21FdUJ1a0VTRUduM19aUUFEamhhRnM2SFN0ZmcxNkxfczNIaXN6d3JtcGdjM3JxS2FSZkthZGp2dU1KMjktNnpzVTlPcHZkZVZaNUN5c2Y3dHVEeWJ0eGVoY3RGTFI1X2lhNWtobzFHWjlOWndnbDhUd2FEenl30gHbAUFVX3lxTFB0eU1UZGNRREQxb1drN2lUQVlXSzBzLUwzSFFnRU9GSThMNEdsWVg5MzgtblJnajh1dFpPUHZQZnU4U0xNU3RodTJLXzFXM1pCSk1qS2tkVjhjZW5KVE5Ld0MzX3lTY01uOGNkNFNqS2V5QkhmcGRqckVDeFFwck5pU1FlTGF0Tnl4TFdhNUhaaDMtblJveVVHLUI0UjNSSjFlRjEtZjNVZ0N6MXhnWUJWXzdieW04RUFVNWhEZ1NSVGxuMFBwdS1hNUhMYTg5NktHNVAtOVlacXZOMA" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdDhveHNtY2FScEZ2akM0MV9Wd2JZcjVjamRkSkc4cDNnSUZmQWM2TUlWMjhsUGRXUkQ4TXFrWnlpb1VpYU05eXhYWEQ3UHdRUFhPUndDYlRscWpBbXRZQWRCSmlSSXV4SllUcXhMc2hXNVJQNmJQc19KSEN6dVFWYXBGMXdldmR6TVFQb0JnTHVHeDZuVEMwdFhDTjNuTUsySzFEVUZPU3dLRVllY1AtN28yOE5SeHp5d3djZ3pjQjYtT0dDLUR2clFlUXhWeTJjN1QySg" class="footnote-ref">[4]</a>. The rollout was reported on Oct. 5, 2026, with coverage describing Claude as live in India on the AWS service <a href="https://news.google.com/rss/articles/CBMi7gFBVV95cUxPcVduYjN0b2l3R25BNFdJenlNYnRlUkhua1NoMWlIVU1UM3NEaGRHd3UtX280c0J0RDdpYUlEVU9yLS1RQmxtdXpCRUNLSWdZaTc3WmlPSURvbUZ6QUt1M09xbkJPb0V0VjR1cERfVXFMZElVdHhZUXpOcjlQbFNacWc1RGoweGFRbDdIZ2h2WnFkLTZUMFFIRUNmNTgyTUcyRHZRanE1aTA0RjVBNHBHcG9kY0EtU0FjRHRWLU9MMlItVTdrTG4zaEpjSWp6eUpOdHRKUjN5TzVmQmdWc2VVMlVBNTNzRmIySklMbmN30gHnAUFVX3lxTFB4X3RuckJkeGd1dFc2SmxOSkNneUZvbzY4WVVRQmRmWVdpaG1YYjV3U1BzQkJXTFVxZ3RHUzNmM2FlZEVjQjNFa1N4OFlEWjlnSWhWVVRnNExMZzUyVHVBUm9YZG4wRlIwNmYzUm5oQzJjSnFqMkVCam1mbWgwa1YxZFpzYXVYSG54b0tJX1pkUDhCdDBFblIzdzJCMFpKQm9rNEdTMXZCWUNUQ1p5b0EycGlzWjdoTmtZX09sT0E0bGlwUnZ4T0RmVko3b2xjRDg1WDlyUnljajlRbWMtOFY3Q1RQMlVaQQ" class="footnote-ref">[5]</a><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ" class="footnote-ref">[6]</a>.
+
+The development gives organizations using Amazon Bedrock an India-based route for Claude inference <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTmRueUFjLWliVW5nVHZPZUZYQ0x5WnRsakl5dHRSeFJjUm5xYzdFb0NHclZyYi1DMDBkX2t0RHlGa1VPQm1iM0lWVkw1U2lvWHFjaDVvMGdoamRhSGNMZFdzRGxZQlR3S1huS3dPaVUtNElxOUlfdm1QakY0VHE1RFhuaXFRekFJbVhqdVVtc3B1UWxQbkNqUE85RXV6Y0YzTmNJay1VdzZXaWlJdDdUNkRUYzdIUmNwM0pr0gHIAUFVX3lxTE1JVmplcVY5eTBxcEFpZEJMMWNDWTIyN3lzU3hKWWVPMFBvRWRlOGNRMjdSRENtWDI5YXpEbmNtWktTZjlSNlNBNzhocHhyWlM5NDJPRU5CdEpjRnRCNEQwLTNyVktjQ1cwZHV1V3VLaUhQMjk5ZzI0eGJmVkdOcnltUFBZTkpnTENBLXJvX0V5V1NUVENGSjJZY01iUjlpU0E5S1VkUDN1a3JnQzB2QXdKSjM5NkoweDBNQXBYMFExNUxVejNQSWMx" class="footnote-ref">[2]</a><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ" class="footnote-ref">[6]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMizgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUdIBzgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUQ">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Local processing: The announcement specifically concerns where Claude requests are processed—in India—rather than a reported change to Claude itself <a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVVk1bWVjVGVlU2RIZE5DOWRaTktPNkZnWkZ3ZWd4dU5rNXdMaVc4X3pWWml1MG5iZGdLUV9aMEpXY2ZFWXF4SldEODJXa1FmOFc0NlhmMFFLRWxoMDZkX21FdUJ1a0VTRUduM19aUUFEamhhRnM2SFN0ZmcxNkxfczNIaXN6d3JtcGdjM3JxS2FSZkthZGp2dU1KMjktNnpzVTlPcHZkZVZaNUN5c2Y3dHVEeWJ0eGVoY3RGTFI1X2lhNWtobzFHWjlOWndnbDhUd2FEenl30gHbAUFVX3lxTFB0eU1UZGNRREQxb1drN2lUQVlXSzBzLUwzSFFnRU9GSThMNEdsWVg5MzgtblJnajh1dFpPUHZQZnU4U0xNU3RodTJLXzFXM1pCSk1qS2tkVjhjZW5KVE5Ld0MzX3lTY01uOGNkNFNqS2V5QkhmcGRqckVDeFFwck5pU1FlTGF0Tnl4TFdhNUhaaDMtblJveVVHLUI0UjNSSjFlRjEtZjNVZ0N6MXhnWUJWXzdieW04RUFVNWhEZ1NSVGxuMFBwdS1hNUhMYTg5NktHNVAtOVlacXZOMA" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTmRueUFjLWliVW5nVHZPZUZYQ0x5WnRsakl5dHRSeFJjUm5xYzdFb0NHclZyYi1DMDBkX2t0RHlGa1VPQm1iM0lWVkw1U2lvWHFjaDVvMGdoamRhSGNMZFdzRGxZQlR3S1huS3dPaVUtNElxOUlfdm1QakY0VHE1RFhuaXFRekFJbVhqdVVtc3B1UWxQbkNqUE85RXV6Y0YzTmNJay1VdzZXaWlJdDdUNkRUYzdIUmNwM0pr0gHIAUFVX3lxTE1JVmplcVY5eTBxcEFpZEJMMWNDWTIyN3lzU3hKWWVPMFBvRWRlOGNRMjdSRENtWDI5YXpEbmNtWktTZjlSNlNBNzhocHhyWlM5NDJPRU5CdEpjRnRCNEQwLTNyVktjQ1cwZHV1V3VLaUhQMjk5ZzI0eGJmVkdOcnltUFBZTkpnTENBLXJvX0V5V1NUVENGSjJZY01iUjlpU0E5S1VkUDN1a3JnQzB2QXdKSjM5NkoweDBNQXBYMFExNUxVejNQSWMx">https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTmRueUFjLWliVW5nVHZPZUZYQ0x5WnRsakl5dHRSeFJjUm5xYzdFb0NHclZyYi1DMDBkX2t0RHlGa1VPQm1iM0lWVkw1U2lvWHFjaDVvMGdoamRhSGNMZFdzRGxZQlR3S1huS3dPaVUtNElxOUlfdm1QakY0VHE1RFhuaXFRekFJbVhqdVVtc3B1UWxQbkNqUE85RXV6Y0YzTmNJay1VdzZXaWlJdDdUNkRUYzdIUmNwM0pr0gHIAUFVX3lxTE1JVmplcVY5eTBxcEFpZEJMMWNDWTIyN3lzU3hKWWVPMFBvRWRlOGNRMjdSRENtWDI5YXpEbmNtWktTZjlSNlNBNzhocHhyWlM5NDJPRU5CdEpjRnRCNEQwLTNyVktjQ1cwZHV1V3VLaUhQMjk5ZzI0eGJmVkdOcnltUFBZTkpnTENBLXJvX0V5V1NUVENGSjJZY01iUjlpU0E5S1VkUDN1a3JnQzB2QXdKSjM5NkoweDBNQXBYMFExNUxVejNQSWMx</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi7gFBVV95cUxPcVduYjN0b2l3R25BNFdJenlNYnRlUkhua1NoMWlIVU1UM3NEaGRHd3UtX280c0J0RDdpYUlEVU9yLS1RQmxtdXpCRUNLSWdZaTc3WmlPSURvbUZ6QUt1M09xbkJPb0V0VjR1cERfVXFMZElVdHhZUXpOcjlQbFNacWc1RGoweGFRbDdIZ2h2WnFkLTZUMFFIRUNmNTgyTUcyRHZRanE1aTA0RjVBNHBHcG9kY0EtU0FjRHRWLU9MMlItVTdrTG4zaEpjSWp6eUpOdHRKUjN5TzVmQmdWc2VVMlVBNTNzRmIySklMbmN30gHnAUFVX3lxTFB4X3RuckJkeGd1dFc2SmxOSkNneUZvbzY4WVVRQmRmWVdpaG1YYjV3U1BzQkJXTFVxZ3RHUzNmM2FlZEVjQjNFa1N4OFlEWjlnSWhWVVRnNExMZzUyVHVBUm9YZG4wRlIwNmYzUm5oQzJjSnFqMkVCam1mbWgwa1YxZFpzYXVYSG54b0tJX1pkUDhCdDBFblIzdzJCMFpKQm9rNEdTMXZCWUNUQ1p5b0EycGlzWjdoTmtZX09sT0E0bGlwUnZ4T0RmVko3b2xjRDg1WDlyUnljajlRbWMtOFY3Q1RQMlVaQQ">https://news.google.com/rss/articles/CBMi7gFBVV95cUxPcVduYjN0b2l3R25BNFdJenlNYnRlUkhua1NoMWlIVU1UM3NEaGRHd3UtX280c0J0RDdpYUlEVU9yLS1RQmxtdXpCRUNLSWdZaTc3WmlPSURvbUZ6QUt1M09xbkJPb0V0VjR1cERfVXFMZElVdHhZUXpOcjlQbFNacWc1RGoweGFRbDdIZ2h2WnFkLTZUMFFIRUNmNTgyTUcyRHZRanE1aTA0RjVBNHBHcG9kY0EtU0FjRHRWLU9MMlItVTdrTG4zaEpjSWp6eUpOdHRKUjN5TzVmQmdWc2VVMlVBNTNzRmIySklMbmN30gHnAUFVX3lxTFB4X3RuckJkeGd1dFc2SmxOSkNneUZvbzY4WVVRQmRmWVdpaG1YYjV3U1BzQkJXTFVxZ3RHUzNmM2FlZEVjQjNFa1N4OFlEWjlnSWhWVVRnNExMZzUyVHVBUm9YZG4wRlIwNmYzUm5oQzJjSnFqMkVCam1mbWgwa1YxZFpzYXVYSG54b0tJX1pkUDhCdDBFblIzdzJCMFpKQm9rNEdTMXZCWUNUQ1p5b0EycGlzWjdoTmtZX09sT0E0bGlwUnZ4T0RmVko3b2xjRDg1WDlyUnljajlRbWMtOFY3Q1RQMlVaQQ</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdDhveHNtY2FScEZ2akM0MV9Wd2JZcjVjamRkSkc4cDNnSUZmQWM2TUlWMjhsUGRXUkQ4TXFrWnlpb1VpYU05eXhYWEQ3UHdRUFhPUndDYlRscWpBbXRZQWRCSmlSSXV4SllUcXhMc2hXNVJQNmJQc19KSEN6dVFWYXBGMXdldmR6TVFQb0JnTHVHeDZuVEMwdFhDTjNuTUsySzFEVUZPU3dLRVllY1AtN28yOE5SeHp5d3djZ3pjQjYtT0dDLUR2clFlUXhWeTJjN1QySg">https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdDhveHNtY2FScEZ2akM0MV9Wd2JZcjVjamRkSkc4cDNnSUZmQWM2TUlWMjhsUGRXUkQ4TXFrWnlpb1VpYU05eXhYWEQ3UHdRUFhPUndDYlRscWpBbXRZQWRCSmlSSXV4SllUcXhMc2hXNVJQNmJQc19KSEN6dVFWYXBGMXdldmR6TVFQb0JnTHVHeDZuVEMwdFhDTjNuTUsySzFEVUZPU3dLRVllY1AtN28yOE5SeHp5d3djZ3pjQjYtT0dDLUR2clFlUXhWeTJjN1QySg</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ">https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVVk1bWVjVGVlU2RIZE5DOWRaTktPNkZnWkZ3ZWd4dU5rNXdMaVc4X3pWWml1MG5iZGdLUV9aMEpXY2ZFWXF4SldEODJXa1FmOFc0NlhmMFFLRWxoMDZkX21FdUJ1a0VTRUduM19aUUFEamhhRnM2SFN0ZmcxNkxfczNIaXN6d3JtcGdjM3JxS2FSZkthZGp2dU1KMjktNnpzVTlPcHZkZVZaNUN5c2Y3dHVEeWJ0eGVoY3RGTFI1X2lhNWtobzFHWjlOWndnbDhUd2FEenl30gHbAUFVX3lxTFB0eU1UZGNRREQxb1drN2lUQVlXSzBzLUwzSFFnRU9GSThMNEdsWVg5MzgtblJnajh1dFpPUHZQZnU4U0xNU3RodTJLXzFXM1pCSk1qS2tkVjhjZW5KVE5Ld0MzX3lTY01uOGNkNFNqS2V5QkhmcGRqckVDeFFwck5pU1FlTGF0Tnl4TFdhNUhaaDMtblJveVVHLUI0UjNSSjFlRjEtZjNVZ0N6MXhnWUJWXzdieW04RUFVNWhEZ1NSVGxuMFBwdS1hNUhMYTg5NktHNVAtOVlacXZOMA">https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVVk1bWVjVGVlU2RIZE5DOWRaTktPNkZnWkZ3ZWd4dU5rNXdMaVc4X3pWWml1MG5iZGdLUV9aMEpXY2ZFWXF4SldEODJXa1FmOFc0NlhmMFFLRWxoMDZkX21FdUJ1a0VTRUduM19aUUFEamhhRnM2SFN0ZmcxNkxfczNIaXN6d3JtcGdjM3JxS2FSZkthZGp2dU1KMjktNnpzVTlPcHZkZVZaNUN5c2Y3dHVEeWJ0eGVoY3RGTFI1X2lhNWtobzFHWjlOWndnbDhUd2FEenl30gHbAUFVX3lxTFB0eU1UZGNRREQxb1drN2lUQVlXSzBzLUwzSFFnRU9GSThMNEdsWVg5MzgtblJnajh1dFpPUHZQZnU4U0xNU3RodTJLXzFXM1pCSk1qS2tkVjhjZW5KVE5Ld0MzX3lTY01uOGNkNFNqS2V5QkhmcGRqckVDeFFwck5pU1FlTGF0Tnl4TFdhNUhaaDMtblJveVVHLUI0UjNSSjFlRjEtZjNVZ0N6MXhnWUJWXzdieW04RUFVNWhEZ1NSVGxuMFBwdS1hNUhMYTg5NktHNVAtOVlacXZOMA</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> storyboard18.com, fortuneindia.com, indiatimes.com, tradingview.com, bestmediainfo.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 5 unique domains, 6 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-10-05T03:45:49.000Z",
+      "domain": "storyboard18.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUdIBzgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUQ",
+      "title": "Anthropic brings Claude in-country inference to India through Amazon Bedrock"
+    },
+    {
+      "date": "2026-10-05T06:30:53.000Z",
+      "domain": "fortuneindia.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTmRueUFjLWliVW5nVHZPZUZYQ0x5WnRsakl5dHRSeFJjUm5xYzdFb0NHclZyYi1DMDBkX2t0RHlGa1VPQm1iM0lWVkw1U2lvWHFjaDVvMGdoamRhSGNMZFdzRGxZQlR3S1huS3dPaVUtNElxOUlfdm1QakY0VHE1RFhuaXFRekFJbVhqdVVtc3B1UWxQbkNqUE85RXV6Y0YzTmNJay1VdzZXaWlJdDdUNkRUYzdIUmNwM0pr0gHIAUFVX3lxTE1JVmplcVY5eTBxcEFpZEJMMWNDWTIyN3lzU3hKWWVPMFBvRWRlOGNRMjdSRENtWDI5YXpEbmNtWktTZjlSNlNBNzhocHhyWlM5NDJPRU5CdEpjRnRCNEQwLTNyVktjQ1cwZHV1V3VLaUhQMjk5ZzI0eGJmVkdOcnltUFBZTkpnTENBLXJvX0V5V1NUVENGSjJZY01iUjlpU0E5S1VkUDN1a3JnQzB2QXdKSjM5NkoweDBNQXBYMFExNUxVejNQSWMx",
+      "title": "Anthropic brings Claude in-country inference to India via Amazon Bedrock"
+    },
+    {
+      "date": "2026-10-05T01:30:00.000Z",
+      "domain": "indiatimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVVk1bWVjVGVlU2RIZE5DOWRaTktPNkZnWkZ3ZWd4dU5rNXdMaVc4X3pWWml1MG5iZGdLUV9aMEpXY2ZFWXF4SldEODJXa1FmOFc0NlhmMFFLRWxoMDZkX21FdUJ1a0VTRUduM19aUUFEamhhRnM2SFN0ZmcxNkxfczNIaXN6d3JtcGdjM3JxS2FSZkthZGp2dU1KMjktNnpzVTlPcHZkZVZaNUN5c2Y3dHVEeWJ0eGVoY3RGTFI1X2lhNWtobzFHWjlOWndnbDhUd2FEenl30gHbAUFVX3lxTFB0eU1UZGNRREQxb1drN2lUQVlXSzBzLUwzSFFnRU9GSThMNEdsWVg5MzgtblJnajh1dFpPUHZQZnU4U0xNU3RodTJLXzFXM1pCSk1qS2tkVjhjZW5KVE5Ld0MzX3lTY01uOGNkNFNqS2V5QkhmcGRqckVDeFFwck5pU1FlTGF0Tnl4TFdhNUhaaDMtblJveVVHLUI0UjNSSjFlRjEtZjNVZ0N6MXhnWUJWXzdieW04RUFVNWhEZ1NSVGxuMFBwdS1hNUhMYTg5NktHNVAtOVlacXZOMA",
+      "title": "Anthropic brings in-country Claude inference to India"
+    },
+    {
+      "date": "2026-10-05T04:40:59.000Z",
+      "domain": "tradingview.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdDhveHNtY2FScEZ2akM0MV9Wd2JZcjVjamRkSkc4cDNnSUZmQWM2TUlWMjhsUGRXUkQ4TXFrWnlpb1VpYU05eXhYWEQ3UHdRUFhPUndDYlRscWpBbXRZQWRCSmlSSXV4SllUcXhMc2hXNVJQNmJQc19KSEN6dVFWYXBGMXdldmR6TVFQb0JnTHVHeDZuVEMwdFhDTjNuTUsySzFEVUZPU3dLRVllY1AtN28yOE5SeHp5d3djZ3pjQjYtT0dDLUR2clFlUXhWeTJjN1QySg",
+      "title": "Anthropic\u2019s Claude live in India with in-country inference through Amazon Bedrock"
+    },
+    {
+      "date": "2026-10-05T06:31:48.000Z",
+      "domain": "indiatimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPcVduYjN0b2l3R25BNFdJenlNYnRlUkhua1NoMWlIVU1UM3NEaGRHd3UtX280c0J0RDdpYUlEVU9yLS1RQmxtdXpCRUNLSWdZaTc3WmlPSURvbUZ6QUt1M09xbkJPb0V0VjR1cERfVXFMZElVdHhZUXpOcjlQbFNacWc1RGoweGFRbDdIZ2h2WnFkLTZUMFFIRUNmNTgyTUcyRHZRanE1aTA0RjVBNHBHcG9kY0EtU0FjRHRWLU9MMlItVTdrTG4zaEpjSWp6eUpOdHRKUjN5TzVmQmdWc2VVMlVBNTNzRmIySklMbmN30gHnAUFVX3lxTFB4X3RuckJkeGd1dFc2SmxOSkNneUZvbzY4WVVRQmRmWVdpaG1YYjV3U1BzQkJXTFVxZ3RHUzNmM2FlZEVjQjNFa1N4OFlEWjlnSWhWVVRnNExMZzUyVHVBUm9YZG4wRlIwNmYzUm5oQzJjSnFqMkVCam1mbWgwa1YxZFpzYXVYSG54b0tJX1pkUDhCdDBFblIzdzJCMFpKQm9rNEdTMXZCWUNUQ1p5b0EycGlzWjdoTmtZX09sT0E0bGlwUnZ4T0RmVko3b2xjRDg1WDlyUnljajlRbWMtOFY3Q1RQMlVaQQ",
+      "title": "Claude comes closer to India\u2019s data: Anthropic brings in-country inference to AWS"
+    },
+    {
+      "date": "2026-10-05T06:07:23.000Z",
+      "domain": "bestmediainfo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ",
+      "title": "Claude requests can now be processed in India through Amazon Bedrock"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=storyboard18.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "storyboard18.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=fortuneindia.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "fortuneindia.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indiatimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indiatimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tradingview.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tradingview.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bestmediainfo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bestmediainfo.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Infrastructure",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 6,
+  "perspectives": [],
+  "primary_image": null,
+  "published": "2026-10-05T12:00:10.195Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxOTmRueUFjLWliVW5nVHZPZUZYQ0x5WnRsakl5dHRSeFJjUm5xYzdFb0NHclZyYi1DMDBkX2t0RHlGa1VPQm1iM0lWVkw1U2lvWHFjaDVvMGdoamRhSGNMZFdzRGxZQlR3S1huS3dPaVUtNElxOUlfdm1QakY0VHE1RFhuaXFRekFJbVhqdVVtc3B1UWxQbkNqUE85RXV6Y0YzTmNJay1VdzZXaWlJdDdUNkRUYzdIUmNwM0pr0gHIAUFVX3lxTE1JVmplcVY5eTBxcEFpZEJMMWNDWTIyN3lzU3hKWWVPMFBvRWRlOGNRMjdSRENtWDI5YXpEbmNtWktTZjlSNlNBNzhocHhyWlM5NDJPRU5CdEpjRnRCNEQwLTNyVktjQ1cwZHV1V3VLaUhQMjk5ZzI0eGJmVkdOcnltUFBZTkpnTENBLXJvX0V5V1NUVENGSjJZY01iUjlpU0E5S1VkUDN1a3JnQzB2QXdKSjM5NkoweDBNQXBYMFExNUxVejNQSWMx",
+    "https://news.google.com/rss/articles/CBMi7gFBVV95cUxPcVduYjN0b2l3R25BNFdJenlNYnRlUkhua1NoMWlIVU1UM3NEaGRHd3UtX280c0J0RDdpYUlEVU9yLS1RQmxtdXpCRUNLSWdZaTc3WmlPSURvbUZ6QUt1M09xbkJPb0V0VjR1cERfVXFMZElVdHhZUXpOcjlQbFNacWc1RGoweGFRbDdIZ2h2WnFkLTZUMFFIRUNmNTgyTUcyRHZRanE1aTA0RjVBNHBHcG9kY0EtU0FjRHRWLU9MMlItVTdrTG4zaEpjSWp6eUpOdHRKUjN5TzVmQmdWc2VVMlVBNTNzRmIySklMbmN30gHnAUFVX3lxTFB4X3RuckJkeGd1dFc2SmxOSkNneUZvbzY4WVVRQmRmWVdpaG1YYjV3U1BzQkJXTFVxZ3RHUzNmM2FlZEVjQjNFa1N4OFlEWjlnSWhWVVRnNExMZzUyVHVBUm9YZG4wRlIwNmYzUm5oQzJjSnFqMkVCam1mbWgwa1YxZFpzYXVYSG54b0tJX1pkUDhCdDBFblIzdzJCMFpKQm9rNEdTMXZCWUNUQ1p5b0EycGlzWjdoTmtZX09sT0E0bGlwUnZ4T0RmVko3b2xjRDg1WDlyUnljajlRbWMtOFY3Q1RQMlVaQQ",
+    "https://news.google.com/rss/articles/CBMizgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUdIBzgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUQ",
+    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxPdDhveHNtY2FScEZ2akM0MV9Wd2JZcjVjamRkSkc4cDNnSUZmQWM2TUlWMjhsUGRXUkQ4TXFrWnlpb1VpYU05eXhYWEQ3UHdRUFhPUndDYlRscWpBbXRZQWRCSmlSSXV4SllUcXhMc2hXNVJQNmJQc19KSEN6dVFWYXBGMXdldmR6TVFQb0JnTHVHeDZuVEMwdFhDTjNuTUsySzFEVUZPU3dLRVllY1AtN28yOE5SeHp5d3djZ3pjQjYtT0dDLUR2clFlUXhWeTJjN1QySg",
+    "https://news.google.com/rss/articles/CBMiywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSdIBywFBVV95cUxQU1R4ZVF4YWw1NklPdjNheW5vWU41Y0VncjdIaHFLUzl1Y0ZkN0JwNzM1a2NjbURBXy1uOV9pdUR1bmZsN2JHOExoa2hBQ2JiUHQxUjZuZ25HLUFueFd2YWRxSE1FTXl5RWljcmxFNmZBdmRHNXMxZzU5SjA4emVNWDFOVHdOQ0tjajNSX185amVrWk1YcExHaTJrR2FaRktjd3oyTF9ZTFpOeWQ1QjBiZW55MmdJT0tKLW5naTYwalIyUEhDblpxZElUSQ",
+    "https://news.google.com/rss/articles/CBMi1gFBVV95cUxPVVk1bWVjVGVlU2RIZE5DOWRaTktPNkZnWkZ3ZWd4dU5rNXdMaVc4X3pWWml1MG5iZGdLUV9aMEpXY2ZFWXF4SldEODJXa1FmOFc0NlhmMFFLRWxoMDZkX21FdUJ1a0VTRUduM19aUUFEamhhRnM2SFN0ZmcxNkxfczNIaXN6d3JtcGdjM3JxS2FSZkthZGp2dU1KMjktNnpzVTlPcHZkZVZaNUN5c2Y3dHVEeWJ0eGVoY3RGTFI1X2lhNWtobzFHWjlOWndnbDhUd2FEenl30gHbAUFVX3lxTFB0eU1UZGNRREQxb1drN2lUQVlXSzBzLUwzSFFnRU9GSThMNEdsWVg5MzgtblJnajh1dFpPUHZQZnU4U0xNU3RodTJLXzFXM1pCSk1qS2tkVjhjZW5KVE5Ld0MzX3lTY01uOGNkNFNqS2V5QkhmcGRqckVDeFFwck5pU1FlTGF0Tnl4TFdhNUhaaDMtblJveVVHLUI0UjNSSjFlRjEtZjNVZ0N6MXhnWUJWXzdieW04RUFVNWhEZ1NSVGxuMFBwdS1hNUhMYTg5NktHNVAtOVlacXZOMA"
+  ],
+  "suggested_qna": [],
+  "summary": "Anthropic has made Claude requests available for in-country inference in India through Amazon Bedrock, allowing those requests to be processed within India [storyboard18.com#1][fortuneindia.com#1][indiatimes.com#1][tradingview.com#1]. The rollout was reported on Oct. 5, 2026, with coverage describing Claude as live in India on the AWS service [indiatimes.com#2][bestmediainfo.com#1].\n\nThe development gives organizations using Amazon Bedrock an India-based route for Claude inference [fortuneindia.com#1][bestmediainfo.com#1].",
+  "talking_points": [
+    "Local processing: The announcement specifically concerns where Claude requests are processed\u2014in India\u2014rather than a reported change to Claude itself [indiatimes.com#1][bestmediainfo.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Anthropic routes Claude inference through AWS Bedrock in India",
+  "travel_advisory": "",
+  "unique_domains": 5,
+  "url": "https://news.google.com/rss/articles/CBMizgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUdIBzgFBVV95cUxPeXB1T19KbzhpcmVaOS1INmh2eDFFZGZqVEk1QXVfUEt0SWpZdHlLSXlRcFpRSHNzcU9UbEtUSXZ4bU8tMGRsdEphME5pR0x2NnpVN0xPOUFHMW9jUnNMQ3lrRXAtYnp5RnpjYmp5eXBHbVlZa2paQTd0ZlN1NXdPR0thZDE0T1R3dXdoVDBZYjZsdUV3cHNiSEQyVWZXT01UZFg3WkJFVTY0ZHFrVmF2S09hOXEzQW1XTC1wUjhCZEpLMW5Ca1l4UEl2OF9ZUQ",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
