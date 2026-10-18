@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Cryptographer validates Claude’s reconstruction of five NIST curve seeds - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Cryptographer validates Claude’s reconstruction of five NIST curve seeds</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Cryptographer Filippo Valsorda validated Anthropic’s reconstruction of five seeds that the U.S. National Security Agency supplied for elliptic curves adopted by the National Institute of Standards and Technology (NIST), resolving a long-running question about how the parameters were generated <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a><a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>. Anthropic said its Claude research model traced the seeds to lrand48, a 1990s C-library random-number generator initialized with Unix timestamps. Valsorda rewrote the check in Go and accepted the solution <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a>.
+
+The result explains how the public curve parameters were produced but does not provide a way to recover private keys or break encryption, Anthropic said <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>. Its researchers published code to reproduce the results but said some related choices remain unexplained, including why the original process skipped other seemingly suitable candidates <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a><a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE16YUdJX2RaZmpDNlFMRm15ZTY2eWR3cE9sVDJLWEhmZTdvajUwX2IxR1Itblg0WVREdE92RUczaFl6TVZjRmptVUtvc3h0cEVveVUzOVZHT0V4QlNBSEN4MklrR1ExeDVZT1JlNkJMS3VISTlvUkE">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Recovery method: Claude scanned 34 combinations of random-number generators and output slices; for prime-curve seeds it used the Lenstra–Lenstra–Lovász lattice-reduction algorithm to recover generator states from partial outputs <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</li>
+
+<li>P-256 sequence: The published P-256 seed matched the 1,842nd candidate from a generator run initialized on Aug. 16, 1997, at 01:52:34 UTC <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</li>
+
+<li>Remaining gaps: The origin of the B-163 seed and several curve base points remains unexplained <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</li>
+
+<li>No system changes: Anthropic’s report called for no changes to deployed systems based on this discovery alone <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Anthropic: The company said the recovered, repeatable generation process makes deliberate manipulation of the seeds less plausible <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/">Cybersecurity News</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>2000:</strong> NIST adopted standards containing unexplained NSA-provided curve seeds <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a></li>
+
+
+
+<li><strong>2015:</strong> Neal Koblitz and Alfred Menezes published an analysis of the seed controversy <a href="https://thecurrencyanalytics.com/technology/anthropics-claude-cracks-nsas-25-year-cryptographic-seed-mystery-in-30-minutes-304414" class="footnote-ref">[7]</a></li>
+
+
+
+<li><strong>2018:</strong> Steve Weis sought records about the seeds from NIST and NSA <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a></li>
+
+
+
+<li><strong>2023:</strong> Filippo Valsorda offered a bounty for tracing the seeds’ origins <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a><a href="https://thecurrencyanalytics.com/technology/anthropics-claude-cracks-nsas-25-year-cryptographic-seed-mystery-in-30-minutes-304414" class="footnote-ref">[7]</a></li>
+
+
+
+<li><strong>16 October 2026:</strong> Anthropic announced Claude’s reconstruction of the five NIST curve seeds <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Lrand48 output: The generator emits 31-bit values from a 48-bit internal state; Claude used that output pattern to identify candidate states that produced the published seeds <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</li>
+
+<li>Binary-curve clue: Anthropic calculated that the zero-high-bit pattern found in four of ten seeds had about a 1 in 5,810 chance of occurring by chance <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Secure messaging: Cybersecurity News noted that Apple’s PQ3 iMessage protocol uses ECDSA with the P-256 curve for message authentication <a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/" class="footnote-ref">[6]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Suspicion about the unexplained seeds intensified after the Snowden disclosures and controversy over the NSA-linked Dual_EC_DRBG generator <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a>. An early theory held that the seeds were hashes of a humorous phrase recalled by former NSA mathematician Jerry Solinas, but no records surfaced to confirm it <a href="https://habr.com/ru/news/1095620/" class="footnote-ref">[8]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxQUjlnWlp2b1hSS1J3UTloMERqSlo0VnY4ZS1FMkpqX0VTLVlKWjU2OFJZa2xGN01KS2xZd0d6cVgtQVV5TmxTcXJlaTgxV2ttZ3NxYlVIdHVDdG1DbXZYUTZpbThJOEdETkJ2cTA3R3Mzano2WE1iQ1VaWTNVblM2WDhmeUhwQjFKdmZPRkpBcHFmSkdwY2R0NFJBZWl1WjM1dGQzd2JPRmRMQjZlY0k2bk14NlhtN054UUFIeU5JZ1Jqdjh0UHh4YWFaWGRUaVN3SU9VRVlOcFNlR3U2NWdmUGl2a1JJUEZha1E">https://news.google.com/rss/articles/CBMi6gFBVV95cUxQUjlnWlp2b1hSS1J3UTloMERqSlo0VnY4ZS1FMkpqX0VTLVlKWjU2OFJZa2xGN01KS2xZd0d6cVgtQVV5TmxTcXJlaTgxV2ttZ3NxYlVIdHVDdG1DbXZYUTZpbThJOEdETkJ2cTA3R3Mzano2WE1iQ1VaWTNVblM2WDhmeUhwQjFKdmZPRkpBcHFmSkdwY2R0NFJBZWl1WjM1dGQzd2JPRmRMQjZlY0k2bk14NlhtN054UUFIeU5JZ1Jqdjh0UHh4YWFaWGRUaVN3SU9VRVlOcFNlR3U2NWdmUGl2a1JJUEZha1E</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxPbjZ1MzZ6clVYZmItTGI1TnZuZkl0cFFoX2NoeTBadC1KUFVsYW54THVXVndhcTRHUTFYWFlQSFRwekRQSldvY0w2WXU3LU1mRmpzUFVWT2pBaDdfWWthS09WZlItajBOM21yZlZjaDZYdTVRb1lpOFZ4a3NxbUNrTWNmWGQ2TzF2djdJNHpfcmF0NnJ0M0Jic1g2aFM1T195UXpMTEs0UDFmUTl4aGc">https://news.google.com/rss/articles/CBMirgFBVV95cUxPbjZ1MzZ6clVYZmItTGI1TnZuZkl0cFFoX2NoeTBadC1KUFVsYW54THVXVndhcTRHUTFYWFlQSFRwekRQSldvY0w2WXU3LU1mRmpzUFVWT2pBaDdfWWthS09WZlItajBOM21yZlZjaDZYdTVRb1lpOFZ4a3NxbUNrTWNmWGQ2TzF2djdJNHpfcmF0NnJ0M0Jic1g2aFM1T195UXpMTEs0UDFmUTl4aGc</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxQMHNJOTNfRnpwZEE5VldHUmcyeUgxZkYyY090TjlIME1Yc0JGcGxfNG84U0ozVldrSFpsOHBEVXdYQkhhSEdhMFJTazIzT2NhSmw5SWZzWHlucmlWZ1RVY2Y5dWdpUTM5bUs5b0Q5bUZCTENyZ1k4UG1yOVNXa2lCa2tTX2dpd0w1WUt5SnZzbXhOUTRVZWJhR2loYVlBWkJqc25uUjduZTlOY3Qy">https://news.google.com/rss/articles/CBMirAFBVV95cUxQMHNJOTNfRnpwZEE5VldHUmcyeUgxZkYyY090TjlIME1Yc0JGcGxfNG84U0ozVldrSFpsOHBEVXdYQkhhSEdhMFJTazIzT2NhSmw5SWZzWHlucmlWZ1RVY2Y5dWdpUTM5bUs5b0Q5bUZCTENyZ1k4UG1yOVNXa2lCa2tTX2dpd0w1WUt5SnZzbXhOUTRVZWJhR2loYVlBWkJqc25uUjduZTlOY3Qy</a></li>
+
+
+
+<li><a href="https://habr.com/ru/news/1095620/">https://habr.com/ru/news/1095620/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/ArtificialInteligence/comments/1x8ucek/claude_mogging_us_is_it_suspicious_that_such_an/">https://www.reddit.com/r/ArtificialInteligence/comments/1x8ucek/claude_mogging_us_is_it_suspicious_that_such_an/</a></li>
+
+
+
+<li><a href="https://cybersecuritynews.com/claude-ai-cryptography-mystery/">https://cybersecuritynews.com/claude-ai-cryptography-mystery/</a></li>
+
+
+
+<li><a href="https://thecurrencyanalytics.com/technology/anthropics-claude-cracks-nsas-25-year-cryptographic-seed-mystery-in-30-minutes-304414">https://thecurrencyanalytics.com/technology/anthropics-claude-cracks-nsas-25-year-cryptographic-seed-mystery-in-30-minutes-304414</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, biggo.com, the-decoder.com, coindesk.com, newscord.org, cybersecuritynews.com, thecurrencyanalytics.com, habr.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 8 unique domains, 8 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-10-17T18:05:00.000Z",
+      "domain": "biggo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE16YUdJX2RaZmpDNlFMRm15ZTY2eWR3cE9sVDJLWEhmZTdvajUwX2IxR1Itblg0WVREdE92RUczaFl6TVZjRmptVUtvc3h0cEVveVUzOVZHT0V4QlNBSEN4MklrR1ExeDVZT1JlNkJMS3VISTlvUkE",
+      "title": "Anthropic Says Claude Cracked a 25-Year NSA Cryptography Seed Mystery in 30 Minutes"
+    },
+    {
+      "date": "2026-10-17T14:43:40.000Z",
+      "domain": "the-decoder.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMHNJOTNfRnpwZEE5VldHUmcyeUgxZkYyY090TjlIME1Yc0JGcGxfNG84U0ozVldrSFpsOHBEVXdYQkhhSEdhMFJTazIzT2NhSmw5SWZzWHlucmlWZ1RVY2Y5dWdpUTM5bUs5b0Q5bUZCTENyZ1k4UG1yOVNXa2lCa2tTX2dpd0w1WUt5SnZzbXhOUTRVZWJhR2loYVlBWkJqc25uUjduZTlOY3Qy",
+      "title": "Anthropics\u0027 Claude cracks a 25-year-old NSA cryptography mystery in under 30 minutes"
+    },
+    {
+      "date": "2026-10-17T06:39:48.000Z",
+      "domain": "coindesk.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxPbjZ1MzZ6clVYZmItTGI1TnZuZkl0cFFoX2NoeTBadC1KUFVsYW54THVXVndhcTRHUTFYWFlQSFRwekRQSldvY0w2WXU3LU1mRmpzUFVWT2pBaDdfWWthS09WZlItajBOM21yZlZjaDZYdTVRb1lpOFZ4a3NxbUNrTWNmWGQ2TzF2djdJNHpfcmF0NnJ0M0Jic1g2aFM1T195UXpMTEs0UDFmUTl4aGc",
+      "title": "\u2018Wow, it\u2019s a real discovery\u2019: Claude cracks a 25-year NSA number mystery"
+    },
+    {
+      "author": "/u/Decent-Decision-9028",
+      "date": "2026-10-18T04:46:49.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ArtificialInteligence/comments/1x8ucek/claude_mogging_us_is_it_suspicious_that_such_an/",
+      "title": "Claude mogging us: \u201cis it suspicious that such an obvious thing wasn\u2019t discovered in 25 years\u201d"
+    },
+    {
+      "date": "2026-10-17T23:21:13.000Z",
+      "domain": "newscord.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQUjlnWlp2b1hSS1J3UTloMERqSlo0VnY4ZS1FMkpqX0VTLVlKWjU2OFJZa2xGN01KS2xZd0d6cVgtQVV5TmxTcXJlaTgxV2ttZ3NxYlVIdHVDdG1DbXZYUTZpbThJOEdETkJ2cTA3R3Mzano2WE1iQ1VaWTNVblM2WDhmeUhwQjFKdmZPRkpBcHFmSkdwY2R0NFJBZWl1WjM1dGQzd2JPRmRMQjZlY0k2bk14NlhtN054UUFIeU5JZ1Jqdjh0UHh4YWFaWGRUaVN3SU9VRVlOcFNlR3U2NWdmUGl2a1JJUEZha1E",
+      "title": "Claude Traces NIST Elliptic-Curve Seeds To lrand48 Unix Timestamps In Under 30 Minutes: 12 outlets compared"
+    },
+    {
+      "author": "Guru Baran",
+      "date": "2026-10-17T16:59:29.000Z",
+      "domain": "cybersecuritynews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cybersecuritynews.com/claude-ai-cryptography-mystery/",
+      "title": "Claude AI Solves 25-Year NSA Cryptography Mystery in Just 30 Minutes"
+    },
+    {
+      "author": "The Currency Analytics",
+      "date": "2026-10-17T13:55:43.000Z",
+      "domain": "thecurrencyanalytics.com",
+      "image": "https://kagiproxy.com/img/vDeXYOsuYdmxiZcCORtKePQA7cn3Ir6vtxYU0kwcKP-SCUvrknVptX5c7K52o3KkSAm6vM1D1Cy57espnGikhUuEQfZQp3aShrrIk3HWFld5Xj5rF1pq-Pv6PRNuPUAenq2x8z1I_ycXrGtS9iBkZvRF93rioVulG1a4PG4Oi8TYqQAj0_hspCxFQes1Y6XaURNrsML-LltivHHWKpusabxpboVGXB3iVwIIMokk00YNw6wBZQ",
+      "image_caption": "",
+      "link": "https://thecurrencyanalytics.com/technology/anthropics-claude-cracks-nsas-25-year-cryptographic-seed-mystery-in-30-minutes-304414",
+      "title": "Anthropic\u0027s Claude Solves Decades-Old NSA Cryptographic Challenge Efficiently"
+    },
+    {
+      "author": "runaway_llm",
+      "date": "2026-10-17T13:08:38.000Z",
+      "domain": "habr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://habr.com/ru/news/1095620/",
+      "title": "Claude \u0437\u0430 \u043f\u043e\u043b\u0447\u0430\u0441\u0430 \u0440\u0430\u0437\u0433\u0430\u0434\u0430\u043b \u0437\u0430\u0433\u0430\u0434\u043a\u0443 \u0410\u041d\u0411, \u043a\u043e\u0442\u043e\u0440\u043e\u0439 \u0431\u043e\u043b\u044c\u0448\u0435 25 \u043b\u0435\u0442. \u041e\u0442\u0432\u0435\u0442 \u0431\u044b\u043b \u0443 \u043a\u0440\u0438\u043f\u0442\u043e\u0433\u0440\u0430\u0444\u043e\u0432 \u043f\u043e\u0434 \u043d\u043e\u0441\u043e\u043c"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=biggo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "biggo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=the-decoder.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "the-decoder.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=coindesk.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "coindesk.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=newscord.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "newscord.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cybersecuritynews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cybersecuritynews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thecurrencyanalytics.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thecurrencyanalytics.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=habr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "habr.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd10",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Suspicion about the unexplained seeds intensified after the Snowden disclosures and controversy over the NSA-linked Dual_EC_DRBG generator [habr.com#1]. An early theory held that the seeds were hashes of a humorous phrase recalled by former NSA mathematician Jerry Solinas, but no records surfaced to confirm it [habr.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Secure messaging: Cybersecurity News noted that Apple\u2019s PQ3 iMessage protocol uses ECDSA with the P-256 curve for message authentication [cybersecuritynews.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Research",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 8,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Cybersecurity News",
+          "url": "https://cybersecuritynews.com/claude-ai-cryptography-mystery/"
+        }
+      ],
+      "text": "Anthropic: The company said the recovered, repeatable generation process makes deliberate manipulation of the seeds less plausible [cybersecuritynews.com#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-10-18T12:00:12.811Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMi6gFBVV95cUxQUjlnWlp2b1hSS1J3UTloMERqSlo0VnY4ZS1FMkpqX0VTLVlKWjU2OFJZa2xGN01KS2xZd0d6cVgtQVV5TmxTcXJlaTgxV2ttZ3NxYlVIdHVDdG1DbXZYUTZpbThJOEdETkJ2cTA3R3Mzano2WE1iQ1VaWTNVblM2WDhmeUhwQjFKdmZPRkpBcHFmSkdwY2R0NFJBZWl1WjM1dGQzd2JPRmRMQjZlY0k2bk14NlhtN054UUFIeU5JZ1Jqdjh0UHh4YWFaWGRUaVN3SU9VRVlOcFNlR3U2NWdmUGl2a1JJUEZha1E",
+    "https://news.google.com/rss/articles/CBMirgFBVV95cUxPbjZ1MzZ6clVYZmItTGI1TnZuZkl0cFFoX2NoeTBadC1KUFVsYW54THVXVndhcTRHUTFYWFlQSFRwekRQSldvY0w2WXU3LU1mRmpzUFVWT2pBaDdfWWthS09WZlItajBOM21yZlZjaDZYdTVRb1lpOFZ4a3NxbUNrTWNmWGQ2TzF2djdJNHpfcmF0NnJ0M0Jic1g2aFM1T195UXpMTEs0UDFmUTl4aGc",
+    "https://news.google.com/rss/articles/CBMidkFVX3lxTE16YUdJX2RaZmpDNlFMRm15ZTY2eWR3cE9sVDJLWEhmZTdvajUwX2IxR1Itblg0WVREdE92RUczaFl6TVZjRmptVUtvc3h0cEVveVUzOVZHT0V4QlNBSEN4MklrR1ExeDVZT1JlNkJMS3VISTlvUkE",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxQMHNJOTNfRnpwZEE5VldHUmcyeUgxZkYyY090TjlIME1Yc0JGcGxfNG84U0ozVldrSFpsOHBEVXdYQkhhSEdhMFJTazIzT2NhSmw5SWZzWHlucmlWZ1RVY2Y5dWdpUTM5bUs5b0Q5bUZCTENyZ1k4UG1yOVNXa2lCa2tTX2dpd0w1WUt5SnZzbXhOUTRVZWJhR2loYVlBWkJqc25uUjduZTlOY3Qy",
+    "https://habr.com/ru/news/1095620/",
+    "https://www.reddit.com/r/ArtificialInteligence/comments/1x8ucek/claude_mogging_us_is_it_suspicious_that_such_an/",
+    "https://cybersecuritynews.com/claude-ai-cryptography-mystery/",
+    "https://thecurrencyanalytics.com/technology/anthropics-claude-cracks-nsas-25-year-cryptographic-seed-mystery-in-30-minutes-304414"
+  ],
+  "suggested_qna": [],
+  "summary": "Cryptographer Filippo Valsorda validated Anthropic\u2019s reconstruction of five seeds that the U.S. National Security Agency supplied for elliptic curves adopted by the National Institute of Standards and Technology (NIST), resolving a long-running question about how the parameters were generated [habr.com#1][cybersecuritynews.com#1]. Anthropic said its Claude research model traced the seeds to lrand48, a 1990s C-library random-number generator initialized with Unix timestamps. Valsorda rewrote the check in Go and accepted the solution [habr.com#1].\n\nThe result explains how the public curve parameters were produced but does not provide a way to recover private keys or break encryption, Anthropic said [cybersecuritynews.com#1]. Its researchers published code to reproduce the results but said some related choices remain unexplained, including why the original process skipped other seemingly suitable candidates [cybersecuritynews.com#1][habr.com#1].",
+  "talking_points": [
+    "Recovery method: Claude scanned 34 combinations of random-number generators and output slices; for prime-curve seeds it used the Lenstra\u2013Lenstra\u2013Lov\u00e1sz lattice-reduction algorithm to recover generator states from partial outputs [cybersecuritynews.com#1].",
+    "P-256 sequence: The published P-256 seed matched the 1,842nd candidate from a generator run initialized on Aug. 16, 1997, at 01:52:34 UTC [cybersecuritynews.com#1].",
+    "Remaining gaps: The origin of the B-163 seed and several curve base points remains unexplained [cybersecuritynews.com#1].",
+    "No system changes: Anthropic\u2019s report called for no changes to deployed systems based on this discovery alone [cybersecuritynews.com#1]."
+  ],
+  "technical_details": [
+    "Lrand48 output: The generator emits 31-bit values from a 48-bit internal state; Claude used that output pattern to identify candidate states that produced the published seeds [cybersecuritynews.com#1].",
+    "Binary-curve clue: Anthropic calculated that the zero-high-bit pattern found in four of ten seeds had about a 1 in 5,810 chance of occurring by chance [habr.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "NIST adopted standards containing unexplained NSA-provided curve seeds [cybersecuritynews.com#1]",
+      "date": "2000",
+      "date_iso": "2000"
+    },
+    {
+      "content": "Neal Koblitz and Alfred Menezes published an analysis of the seed controversy [thecurrencyanalytics.com#1]",
+      "date": "2015",
+      "date_iso": "2015"
+    },
+    {
+      "content": "Steve Weis sought records about the seeds from NIST and NSA [habr.com#1]",
+      "date": "2018",
+      "date_iso": "2018"
+    },
+    {
+      "content": "Filippo Valsorda offered a bounty for tracing the seeds\u2019 origins [habr.com#1][thecurrencyanalytics.com#1]",
+      "date": "2023",
+      "date_iso": "2023"
+    },
+    {
+      "content": "Anthropic announced Claude\u2019s reconstruction of the five NIST curve seeds [habr.com#1]",
+      "date": "16 October 2026",
+      "date_iso": "2026-10-16"
+    }
+  ],
+  "title": "Cryptographer validates Claude\u2019s reconstruction of five NIST curve seeds",
+  "travel_advisory": "",
+  "unique_domains": 8,
+  "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE16YUdJX2RaZmpDNlFMRm15ZTY2eWR3cE9sVDJLWEhmZTdvajUwX2IxR1Itblg0WVREdE92RUczaFl6TVZjRmptVUtvc3h0cEVveVUzOVZHT0V4QlNBSEN4MklrR1ExeDVZT1JlNkJMS3VISTlvUkE",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
