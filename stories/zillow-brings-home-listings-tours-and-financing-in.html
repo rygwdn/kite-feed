@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Zillow brings home listings, tours and financing into Claude - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Zillow brings home listings, tours and financing into Claude</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Zillow, the U.S. real estate marketplace, launched a connector on Oct. 19 that lets users search for homes for sale or rent inside Anthropic’s Claude assistant, view maps and home-value estimates, and check affordability <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc" class="footnote-ref">[3]</a>. Users can then follow listing links, request a tour, contact an agent or explore financing in the conversation <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc" class="footnote-ref">[3]</a>.
+
+Zillow said it does not send data to Anthropic; listings shown in Claude use Zillow’s multiple listing service (MLS)-approved presentation, including broker and MLS attribution <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc" class="footnote-ref">[3]</a>. Zillow previously launched integrations with ChatGPT and Google Gemini <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Finding a home is one of the most important decisions people make, and it deserves specialized intelligence — real listings, real home values and real affordability math, built on two decades of housing data.</p>
+
+<cite>— Josh Weisberg, senior vice president of AI at Zillow (PR Newswire)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Fair housing: Zillow says its ethical AI team reviews its tools and that its open-source Fair Housing Classifier is designed to flag potential bias in real estate conversations <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc" class="footnote-ref">[3]</a>.</li>
+
+<li>Gemini tours: Renters can see listings with available tour times in chat; after they link their accounts, confirmed tours appear in their Zillow itinerary <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a>.</li>
+
+<li>In-app AI: Zillow&#x27;s AI mode launched in beta for a limited group, and the company said it planned to expand access throughout 2026 <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>6 October 2025:</strong> Zillow launched its real estate app inside ChatGPT <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>25 March 2026:</strong> Zillow announced its in-app conversational AI mode <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>9 July 2026:</strong> Zillow Rentals went live as a connected app in Gemini <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>19 October 2026:</strong> Zillow announced its Claude connector for listings and housing tools <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc" class="footnote-ref">[3]</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Connect Zillow to Claude: In Claude, open Customize, choose Connectors and connect Zillow to search listings and use the available housing tools <a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc">https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWDdHZnB6OWdqdHF0YzRDVGFRallhSFlXUVdsSXBmRDd0VVVEMnV2dTJsamhfMFVIc3B4UEY1YmREQUlja0tMa2NmOUEycFZ0YVpJQlAtbXJnUWdGYlB3VG1QRmVlVUtKbDFsWHJtaFpyVDNlYnQ5SVEtN2w1Q0N5WXRxZlJlTW5HWFMzeU1nZ0xjUlFIR1ZWbTc0YXU5UWNQaVp1MmNuWThJUVdxQkRSOXhmdW9uQ3hS">https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWDdHZnB6OWdqdHF0YzRDVGFRallhSFlXUVdsSXBmRDd0VVVEMnV2dTJsamhfMFVIc3B4UEY1YmREQUlja0tMa2NmOUEycFZ0YVpJQlAtbXJnUWdGYlB3VG1QRmVlVUtKbDFsWHJtaFpyVDNlYnQ5SVEtN2w1Q0N5WXRxZlJlTW5HWFMzeU1nZ0xjUlFIR1ZWbTc0YXU5UWNQaVp1MmNuWThJUVdxQkRSOXhmdW9uQ3hS</a></li>
+
+
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> unite.ai, gurufocus.com, prnewswire.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 3 unique domains, 3 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-10-19T19:35:10.000Z",
+      "domain": "unite.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo",
+      "title": "Zillow Launches Claude Connector for Listings, Tours, and Financing"
+    },
+    {
+      "date": "2026-10-19T20:19:29.000Z",
+      "domain": "gurufocus.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWDdHZnB6OWdqdHF0YzRDVGFRallhSFlXUVdsSXBmRDd0VVVEMnV2dTJsamhfMFVIc3B4UEY1YmREQUlja0tMa2NmOUEycFZ0YVpJQlAtbXJnUWdGYlB3VG1QRmVlVUtKbDFsWHJtaFpyVDNlYnQ5SVEtN2w1Q0N5WXRxZlJlTW5HWFMzeU1nZ0xjUlFIR1ZWbTc0YXU5UWNQaVp1MmNuWThJUVdxQkRSOXhmdW9uQ3hS",
+      "title": "Zillow (Z) Launches AI Connector with Claude for Enhanced Home S"
+    },
+    {
+      "date": "2026-10-19T19:13:00.000Z",
+      "domain": "prnewswire.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc",
+      "title": "Zillow brings specialized housing intelligence to Claude, with a path to tours, agents and financing"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=unite.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "unite.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gurufocus.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gurufocus.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=prnewswire.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "prnewswire.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83c\udfe0",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 3,
+  "perspectives": [],
+  "primary_image": null,
+  "published": "2026-10-20T12:00:14.048Z",
+  "quote": "Finding a home is one of the most important decisions people make, and it deserves specialized intelligence \u2014 real listings, real home values and real affordability math, built on two decades of housing data.",
+  "quote_attribution": "PR Newswire",
+  "quote_author": "Josh Weisberg, senior vice president of AI at Zillow",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNLWNJMlhIWXV0SHZwNldleTBwQUtjZEEza3JSR2wzZVpDMkFmV0hZV0hqcUVhSXdiRnMzcjU3Uno2RkxWQVFnZ3FMNE5aNkpoSzZuVENhbVBScmZySm1GLU9YSHhLNzVIcjhMVkVKMm5NUjQ0OWpXZXZBdDFOcjNJYjlSdk5BUDFwRzdCSDlKcTEzSHpYNmZSN0VqNlc4eU9IRWdUMjVVWnFkc0laOVFBenFwN2o4cFI5YWlOY0NOTG1SRi1RVHJiN1QwbThvY3Fzb0RfUXdqenRpLTVBRGZhclFCX0RiUk9CbHc",
+    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxQWDdHZnB6OWdqdHF0YzRDVGFRallhSFlXUVdsSXBmRDd0VVVEMnV2dTJsamhfMFVIc3B4UEY1YmREQUlja0tMa2NmOUEycFZ0YVpJQlAtbXJnUWdGYlB3VG1QRmVlVUtKbDFsWHJtaFpyVDNlYnQ5SVEtN2w1Q0N5WXRxZlJlTW5HWFMzeU1nZ0xjUlFIR1ZWbTc0YXU5UWNQaVp1MmNuWThJUVdxQkRSOXhmdW9uQ3hS",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo"
+  ],
+  "suggested_qna": [],
+  "summary": "Zillow, the U.S. real estate marketplace, launched a connector on Oct. 19 that lets users search for homes for sale or rent inside Anthropic\u2019s Claude assistant, view maps and home-value estimates, and check affordability [unite.ai#1][prnewswire.com#1]. Users can then follow listing links, request a tour, contact an agent or explore financing in the conversation [unite.ai#1][prnewswire.com#1].\n\nZillow said it does not send data to Anthropic; listings shown in Claude use Zillow\u2019s multiple listing service (MLS)-approved presentation, including broker and MLS attribution [unite.ai#1][prnewswire.com#1]. Zillow previously launched integrations with ChatGPT and Google Gemini [unite.ai#1].",
+  "talking_points": [
+    "Fair housing: Zillow says its ethical AI team reviews its tools and that its open-source Fair Housing Classifier is designed to flag potential bias in real estate conversations [unite.ai#1][prnewswire.com#1].",
+    "Gemini tours: Renters can see listings with available tour times in chat; after they link their accounts, confirmed tours appear in their Zillow itinerary [unite.ai#1].",
+    "In-app AI: Zillow\u0027s AI mode launched in beta for a limited group, and the company said it planned to expand access throughout 2026 [unite.ai#1]."
+  ],
+  "technical_details": [],
+  "timeline": [
+    {
+      "content": "Zillow launched its real estate app inside ChatGPT [unite.ai#1]",
+      "date": "6 October 2025",
+      "date_iso": "2025-10-06"
+    },
+    {
+      "content": "Zillow announced its in-app conversational AI mode [unite.ai#1]",
+      "date": "25 March 2026",
+      "date_iso": "2026-03-25"
+    },
+    {
+      "content": "Zillow Rentals went live as a connected app in Gemini [unite.ai#1]",
+      "date": "9 July 2026",
+      "date_iso": "2026-07-09"
+    },
+    {
+      "content": "Zillow announced its Claude connector for listings and housing tools [unite.ai#1][prnewswire.com#1]",
+      "date": "19 October 2026",
+      "date_iso": "2026-10-19"
+    }
+  ],
+  "title": "Zillow brings home listings, tours and financing into Claude",
+  "travel_advisory": "",
+  "unique_domains": 3,
+  "url": "https://news.google.com/rss/articles/CBMikAFBVV95cUxNM3JQVzhYdC0xZ0NwcmljcDRlaDE0azBIUXdQQldhTk5HTjhjOERVRXRVcTRJM29XV3pzVWxscFRYYlRSRy1YS0p2eGs0Z1VkdVpzQVU3RlZoR2E3dm9NeG9BLXo0V0NjU1RmNXgwY29laklHc2pERWd0TnUyT1p0VlhRNk1tYml6cTQ0Qkh6bHo",
+  "user_action_items": [
+    "Connect Zillow to Claude: In Claude, open Customize, choose Connectors and connect Zillow to search listings and use the available housing tools [unite.ai#1][prnewswire.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
