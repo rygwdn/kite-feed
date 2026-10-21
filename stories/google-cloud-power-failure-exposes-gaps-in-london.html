@@ -1,0 +1,1817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Google Cloud power failure exposes gaps in London zone resilience - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Google Cloud power failure exposes gaps in London zone resilience</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.nzherald.co.nz/world/google-cloud-outage-near-london-disrupts-revolut-lloyds-and-hsbc-services/PVXV47ELGFEUFFI3RREFPC4TM4/"><img src="https://kagiproxy.com/img/1BzaV1bYs-YGSYi0-9-Uwuc80_lWo00oA5T4WzhGxW1leq_nMA3Smv9_rVdwLPowkTypymgrQBichJwdvGsfXsbwkivuXtEfspuLFYvdzQYMymgIAu7FP3MjmSol8DfBDQwG2MPvfnjUSvqueX9-df65FbSm_QAdf02LIZW-y6uFQNyaatkBt4PzX-19P1YXbS1W5rtunTUv1nZLts38rMYa7--Q0-5YFltuj7rXxTO8Wu2IfBcbLQGzeGPnKIzHUmnWicZ5Ug" alt="A power outage at a Google Cloud data centre in London caused serious network disruptions to its services on Tuesday, October 20, the US tech giant said. Photo / Ben Stansall, AFP" title="A power outage at a Google Cloud data centre in London caused serious network disruptions to its services on Tuesday, October 20, the US tech giant said. Photo / Ben Stansall, AFP (nzherald.co.nz)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+A power outage at a Google Cloud data centre in London caused serious network disruptions to its services on Tuesday, October 20, the US tech giant said. Photo / Ben Stansall, AFP <span class='credit'>(nzherald.co.nz)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>The two availability zones that stayed online during a power failure in Google Cloud’s London region did not fully absorb production demand after zone europe-west2-b failed, an engineer told Computer Weekly <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a>. The outage affected Google’s europe-west2 region, which serves customers in the UK and elsewhere in Europe <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ" class="footnote-ref">[54]</a><a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a>.
+
+The incident began at 06:08 GMT on Oct. 20 and caused elevated error rates and intermittent network failures across several Google Cloud products, including Cloud Run, Google App Engine, Google Kubernetes Engine and Cloud Filestore <a href="https://www.theregister.com/paas-and-iaas/2026/10/20/google-clouds-london-zones-takes-a-nap-multiple-services-disrupted/5304084" class="footnote-ref">[9]</a><a href="https://www.theregister.com/paas-and-iaas/2026/10/20/google-cloud-says-a-power-event-caused-todays-outage/5304160" class="footnote-ref">[16]</a>. Google said it had mitigated the power event and was prioritizing recovery of existing workloads; customers could still be unable to create new workloads during recovery <a href="https://www.theregister.com/paas-and-iaas/2026/10/20/google-cloud-says-a-power-event-caused-todays-outage/5304160" class="footnote-ref">[16]</a>.
+
+Computer Weekly reported that europe-west2 is Google’s only UK cloud region, leaving customers without a second UK region for failover <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a>. Google advised customers to move affected workloads to another zone or region where feasible <a href="https://www.firstpost.com/tech/google-cloud-outage-hits-europe-disrupting-banking-apps-major-retailers-and-more-14054099.html" class="footnote-ref">[5]</a> and said it would publish an incident analysis after its investigation <a href="https://www.bbc.co.uk/news/articles/cxdd8mm6qy4mo" class="footnote-ref">[8]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.albawaba.com/business/google-cloud-services-suffer-outages-1639423">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Hyperscalers have become too big to not fail. But worse, they’ve become so deeply ingrained into the very fabric of our digital lives that switching away from them seems unimaginable.</p>
+
+<cite>— Michał “rysiek” Woźniak, internet infrastructure expert (The Guardian)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Apigee gateway: An engineer told Computer Weekly it was the “big problem system” during the outage <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a>.</li>
+
+<li>Regional reach: The disruption affected Revolut services in Singapore, where all 27 services listed on its status page were still partially unavailable when CNA checked at 6:30 p.m. <a href="https://www.channelnewsasia.com/business/google-cloud-service-outage-london-revolut-6475076" class="footnote-ref">[59]</a>.</li>
+
+<li>Cloudflare services: Cloudflare said the Google incident had not affected its services, despite earlier user reports of problems on the outage-tracking site Downdetector <a href="https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/" class="footnote-ref">[14]</a>.</li>
+
+<li>Delivery impact: Royal Mail said the reported outage had not affected letter or parcel deliveries <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ" class="footnote-ref">[54]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>UK Financial Conduct Authority: The regulator said it was engaging with Google and affected firms to understand the incident’s impact <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ" class="footnote-ref">[54]</a>.</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Criminal Bar Association: The association said the outage was hampering efforts to clear court backlogs because prosecution and defence counsel could not proceed with some trials and hearings <a href="https://www.reddit.com/r/uknews/comments/1xap0b4/uk_companies_disrupted_as_google_clouds_london/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/">Reddit</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>20 October 2026:</strong> Network and connectivity problems in europe-west2 began at 07:05 BST <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a></li>
+
+
+
+<li><strong>20 October 2026:</strong> Google said it had mitigated the power event at 12:27 BST <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a></li>
+
+
+
+<li><strong>20 October 2026:</strong> Google reported that most regional workloads had recovered at 14:48 BST <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a></li>
+
+
+
+<li><strong>20 October 2026:</strong> The Ministry of Justice said its systems were not fully restored at 15:52 BST <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Backup power: An administrator relaying Google’s engineering update said backup generators failed to engage during the initial outage, even after mains power returned <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a>.</li>
+
+<li>Network scope: Computer Weekly’s incident log recorded problems with VPC, Cloud NAT and load balancers in europe-west2; one administrator also reported problems with these services in europe-north2 <a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Google’s europe-west2 region also experienced a major outage in July 2022, which the company attributed to cooling-system failure during a record heatwave in Britain <a href="https://www.bbc.com/russian/articles/c6073vmm28vxo" class="footnote-ref">[39]</a>. The Guardian reported that Amazon Web Services suffered a separate outage the previous year that lasted nearly 15 hours and caused disruptions to online services worldwide <a href="https://www.theguardian.com/uk-news/2026/oct/20/power-outage-google-datacentre-london-widespread-disruption" class="footnote-ref">[23]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> Did all reported service problems stem from Google Cloud?</p>
+
+<p><strong>A:</strong> No. Some companies had not confirmed a connection, and ING Germany said it had no indication its login problems were caused by an external provider <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ" class="footnote-ref">[54]</a><a href="https://www.scotsman.com/news/is-google-down-here-is-everything-affected-by-major-google-outage-9298645" class="footnote-ref">[42]</a>.</p>
+
+</div>
+
+
+
+<div class='qna'><p><strong>Q:</strong> Were customers’ funds or data at risk?</p>
+
+<p><strong>A:</strong> Revolut said its customers’ money and data remained safe during the disruption <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ" class="footnote-ref">[54]</a>.</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://www.theguardian.com/business/2026/oct/20/revolut-down-app-cards-service-disruption">https://www.theguardian.com/business/2026/oct/20/revolut-down-app-cards-service-disruption</a></li>
+
+
+
+<li><a href="https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers">https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers</a></li>
+
+
+
+<li><a href="https://appleinsider.com/articles/26/10/20/google-outage-hitting-eu-uk-hard">https://appleinsider.com/articles/26/10/20/google-outage-hitting-eu-uk-hard</a></li>
+
+
+
+<li><a href="https://meduza.io/news/2026/10/20/sboy-google-cloud-v-londone-privel-k-problemam-v-rabote-neobanka-revolut-u-klientov-po-vsemu-miru">https://meduza.io/news/2026/10/20/sboy-google-cloud-v-londone-privel-k-problemam-v-rabote-neobanka-revolut-u-klientov-po-vsemu-miru</a></li>
+
+
+
+<li><a href="https://cybersecuritynews.com/google-cloud-outage/">https://cybersecuritynews.com/google-cloud-outage/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQUS1RVmR4bmNpODlVLWtfM0pfa1J4a3A2YjgxdnlaQ01LU0ZqZE5MdXdtQUFobVVST1FkeTdaeFJiQ0lEMnpMaWRvTXg4XzRfOE92c0tOR0g1M0RBMXJFNFJwVVFZMlY4bGZ6YUNob0JHay1SdnA4VDlmYVRBMlZwWFgwUDVYOTNCX0RzSjE5Vk5GWDdoVWdYVFd4Yw">https://news.google.com/rss/articles/CBMimwFBVV95cUxQUS1RVmR4bmNpODlVLWtfM0pfa1J4a3A2YjgxdnlaQ01LU0ZqZE5MdXdtQUFobVVST1FkeTdaeFJiQ0lEMnpMaWRvTXg4XzRfOE92c0tOR0g1M0RBMXJFNFJwVVFZMlY4bGZ6YUNob0JHay1SdnA4VDlmYVRBMlZwWFgwUDVYOTNCX0RzSjE5Vk5GWDdoVWdYVFd4Yw</a></li>
+
+
+
+<li><a href="https://www.enca.com/business/power-outage-hits-google-cloud-services-disrupting-uk-banks">https://www.enca.com/business/power-outage-hits-google-cloud-services-disrupting-uk-banks</a></li>
+
+
+
+<li><a href="https://indianexpress.com/article/technology/google-cloud-outage-uk-banks-revolut-10929524/">https://indianexpress.com/article/technology/google-cloud-outage-uk-banks-revolut-10929524/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxQMmRodDFJemVJQnIySzZhdzBjckJkeFN0VUdjNmJGQU14RF8wbTFUQjh6WFljc1FZMjBNRXJ2ODdoVVlMR0ZxWUxXNDJpVDFkM3Rralc3Vk0xM1VaUERDRTdia1BfQjZPOHZpN1ZZV0pFRjRMdTRNeFdfaXJfNWpUWjJXcUxONmcyRzFzVkxsSS0yQ29ISkw5MTJodi1xNU1NV2RvQVgzMW5OMmIwRTVpX253SHpqMHBFU2Y4bEJZOFRVOFREM0ZkSHZJcHN0WEhM">https://news.google.com/rss/articles/CBMi0AFBVV95cUxQMmRodDFJemVJQnIySzZhdzBjckJkeFN0VUdjNmJGQU14RF8wbTFUQjh6WFljc1FZMjBNRXJ2ODdoVVlMR0ZxWUxXNDJpVDFkM3Rralc3Vk0xM1VaUERDRTdia1BfQjZPOHZpN1ZZV0pFRjRMdTRNeFdfaXJfNWpUWjJXcUxONmcyRzFzVkxsSS0yQ29ISkw5MTJodi1xNU1NV2RvQVgzMW5OMmIwRTVpX253SHpqMHBFU2Y4bEJZOFRVOFREM0ZkSHZJcHN0WEhM</a></li>
+
+
+
+<li><a href="https://www.theregister.com/paas-and-iaas/2026/10/20/google-cloud-says-a-power-event-caused-todays-outage/5304160">https://www.theregister.com/paas-and-iaas/2026/10/20/google-cloud-says-a-power-event-caused-todays-outage/5304160</a></li>
+
+
+
+<li><a href="https://www.fark.com/comments/14233022">https://www.fark.com/comments/14233022</a></li>
+
+
+
+<li><a href="https://kursors.lv/2026/10/20/eiropa-nopietni-trauceta-google-cloud-darbiba-problemas-skarusas-ari-revolut/">https://kursors.lv/2026/10/20/eiropa-nopietni-trauceta-google-cloud-darbiba-problemas-skarusas-ari-revolut/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GSDJLX3RGbTdBTjN1RU9qZVN2RVpnODc1dFBuajdJdlgtSTRfZW9qSXM0OXVvWWowWnVsdU1sdzdzQUFjVkZ3dG42ZFRCbDFFU1YweEd3">https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GSDJLX3RGbTdBTjN1RU9qZVN2RVpnODc1dFBuajdJdlgtSTRfZW9qSXM0OXVvWWowWnVsdU1sdzdzQUFjVkZ3dG42ZFRCbDFFU1YweEd3</a></li>
+
+
+
+<li><a href="https://english.aawsat.com/node/5331528">https://english.aawsat.com/node/5331528</a></li>
+
+
+
+<li><a href="https://www.watson.ch/fr/international/technologie/198427586-grosse-panne-chez-google-la-banque-revolut-affectee">https://www.watson.ch/fr/international/technologie/198427586-grosse-panne-chez-google-la-banque-revolut-affectee</a></li>
+
+
+
+<li><a href="https://techxplore.com/news/2026-10-google-cloud-outage-uk-banks.html">https://techxplore.com/news/2026-10-google-cloud-outage-uk-banks.html</a></li>
+
+
+
+<li><a href="https://www.siliconrepublic.com/enterprise/revolut-services-affected-in-fresh-google-cloud-outage">https://www.siliconrepublic.com/enterprise/revolut-services-affected-in-fresh-google-cloud-outage</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNRXRoZm5NcUs1U3B3OFJZU1JidHdGUW91bDE0bG9jOVFrbkFjeXFsOEtjUnNta1FrdWtVWmJVd29BVkxLVGhUOG0tNTVJZ0pJem84SGd5Q2Z1UlpCTmVTTXlCYk5vUzRGRFlIajZ4cnFRdTc4U2lZLTM0RlJWdEtkQWpGNV9SZGF3NGtKaF96a3NGM3F1SjNKOElzN0ZuVl9pbjBkeEVVZw">https://news.google.com/rss/articles/CBMipwFBVV95cUxNRXRoZm5NcUs1U3B3OFJZU1JidHdGUW91bDE0bG9jOVFrbkFjeXFsOEtjUnNta1FrdWtVWmJVd29BVkxLVGhUOG0tNTVJZ0pJem84SGd5Q2Z1UlpCTmVTTXlCYk5vUzRGRFlIajZ4cnFRdTc4U2lZLTM0RlJWdEtkQWpGNV9SZGF3NGtKaF96a3NGM3F1SjNKOElzN0ZuVl9pbjBkeEVVZw</a></li>
+
+
+
+<li><a href="https://www.rte.ie/news/business/2026/1020/1596063-some-revolut-services-down/">https://www.rte.ie/news/business/2026/1020/1596063-some-revolut-services-down/</a></li>
+
+
+
+<li><a href="https://www.dw.com/ru/сбой-в-работе-google-cloud-привел-к-проблемам-с-доступом-к-revolut-и-другим-сервисам-в-разных-странах-европы/a-79713010">https://www.dw.com/ru/сбой-в-работе-google-cloud-привел-к-проблемам-с-доступом-к-revolut-и-другим-сервисам-в-разных-странах-европы/a-79713010</a></li>
+
+
+
+<li><a href="https://www.derstandard.at/story/3000000345124/dominoeffekt-in-london-ausfall-der-google-cloud-legt-banken-und-onlinedienste-lahm">https://www.derstandard.at/story/3000000345124/dominoeffekt-in-london-ausfall-der-google-cloud-legt-banken-und-onlinedienste-lahm</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMisAFBVV95cUxNZy12Q25TMUJxYjhSamg3ZGZYUlkwUkZBSU1nYlhRbnd5U1V5VmNXQTlBR2NSaVVJUk9zYlhSOWo0Q2NGQTdDbTBGbnZ3Sm1QczZIbG10VzZraUJSeVlJdTlXSUktV3lNZERId2pLVlNZU1pheHZKZUp6MUdWRUxiMEcyaDJuU0g2aWJ1bUhrdUhzVTJKNzJSMmlJSndiMEFEZXBQUjJKRXRXVnliQ2NnSQ">https://news.google.com/rss/articles/CBMisAFBVV95cUxNZy12Q25TMUJxYjhSamg3ZGZYUlkwUkZBSU1nYlhRbnd5U1V5VmNXQTlBR2NSaVVJUk9zYlhSOWo0Q2NGQTdDbTBGbnZ3Sm1QczZIbG10VzZraUJSeVlJdTlXSUktV3lNZERId2pLVlNZU1pheHZKZUp6MUdWRUxiMEcyaDJuU0g2aWJ1bUhrdUhzVTJKNzJSMmlJSndiMEFEZXBQUjJKRXRXVnliQ2NnSQ</a></li>
+
+
+
+<li><a href="https://www.ft.com/content/c88b07df-d30e-401a-aca9-4b054d6dfd7b">https://www.ft.com/content/c88b07df-d30e-401a-aca9-4b054d6dfd7b</a></li>
+
+
+
+<li><a href="https://www.theregister.com/paas-and-iaas/2026/10/20/google-clouds-london-zones-takes-a-nap-multiple-services-disrupted/5304084">https://www.theregister.com/paas-and-iaas/2026/10/20/google-clouds-london-zones-takes-a-nap-multiple-services-disrupted/5304084</a></li>
+
+
+
+<li><a href="https://betanews.com/article/revolut-suffers-massive-outage-affecting-banking-services-worldwide/">https://betanews.com/article/revolut-suffers-massive-outage-affecting-banking-services-worldwide/</a></li>
+
+
+
+<li><a href="https://www.bleepingcomputer.com/news/security/revolut-outage-disrupts-online-banking-operations-worldwide/">https://www.bleepingcomputer.com/news/security/revolut-outage-disrupts-online-banking-operations-worldwide/</a></li>
+
+
+
+<li><a href="https://www.bbc.com/russian/articles/c6073vmm28vxo">https://www.bbc.com/russian/articles/c6073vmm28vxo</a></li>
+
+
+
+<li><a href="https://hu.euronews.com/2026/10/20/aramszunet-zavarja-a-google-cloudot-brit-bankok-is-erintettek">https://hu.euronews.com/2026/10/20/aramszunet-zavarja-a-google-cloudot-brit-bankok-is-erintettek</a></li>
+
+
+
+<li><a href="https://www.deccanchronicle.com/world/europe/power-outage-hits-google-cloud-services-disrupting-uk-banks-1997439">https://www.deccanchronicle.com/world/europe/power-outage-hits-google-cloud-services-disrupting-uk-banks-1997439</a></li>
+
+
+
+<li><a href="https://www.krone.at/4342100">https://www.krone.at/4342100</a></li>
+
+
+
+<li><a href="https://mixnews.lv/v-mire/2026/10/21/masshtabnyy-sboy-google-cloud-vo-vtornik-narushil-rabotu-revolut-i-drugih-bankov-chto-izvestno/">https://mixnews.lv/v-mire/2026/10/21/masshtabnyy-sboy-google-cloud-vo-vtornik-narushil-rabotu-revolut-i-drugih-bankov-chto-izvestno/</a></li>
+
+
+
+<li><a href="https://arynews.tv/google-cloud-services-face-outage-in-london-revolut-services-down-too">https://arynews.tv/google-cloud-services-face-outage-in-london-revolut-services-down-too</a></li>
+
+
+
+<li><a href="https://mashable.com/tech/google-cloud-outage-revolut-down">https://mashable.com/tech/google-cloud-outage-revolut-down</a></li>
+
+
+
+<li><a href="https://cafe-dc.com/security/google-experiences-service-disruption-in-uk-cloud-region/">https://cafe-dc.com/security/google-experiences-service-disruption-in-uk-cloud-region/</a></li>
+
+
+
+<li><a href="https://www.cna.com.tw/news/aopl/202610200357.aspx">https://www.cna.com.tw/news/aopl/202610200357.aspx</a></li>
+
+
+
+<li><a href="https://www.euronews.com/2026/10/20/power-outage-hits-google-cloud-services-disrupting-uk-banks">https://www.euronews.com/2026/10/20/power-outage-hits-google-cloud-services-disrupting-uk-banks</a></li>
+
+
+
+<li><a href="https://www.theguardian.com/business/live/2026/oct/20/uk-unemployment-rate-pre-budget-boost-wages-vacancies-latest-news-updates">https://www.theguardian.com/business/live/2026/oct/20/uk-unemployment-rate-pre-budget-boost-wages-vacancies-latest-news-updates</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/google-cloud-outage-hits-europe-disrupting-banking-apps-major-retailers-and-more-14054099.html">https://www.firstpost.com/tech/google-cloud-outage-hits-europe-disrupting-banking-apps-major-retailers-and-more-14054099.html</a></li>
+
+
+
+<li><a href="https://www.abc.net.au/news/2026-10-20/google-cloud-failure-europe-banks/107290238">https://www.abc.net.au/news/2026-10-20/google-cloud-failure-europe-banks/107290238</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/">https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/uknews/comments/1xap0b4/uk_companies_disrupted_as_google_clouds_london/">https://www.reddit.com/r/uknews/comments/1xap0b4/uk_companies_disrupted_as_google_clouds_london/</a></li>
+
+
+
+<li><a href="https://tvrain.tv/news/masshtabnyj-sboj-google-cloud-narushil-rabotu-bankov-i-onlajn-servisov-577417/">https://tvrain.tv/news/masshtabnyj-sboj-google-cloud-narushil-rabotu-bankov-i-onlajn-servisov-577417/</a></li>
+
+
+
+<li><a href="https://www.lesoirdalgerie.com/flash/une-panne-electrique-sur-google-cloud-perturbe-les-services-de-plusieurs-banques-britanniques-19476">https://www.lesoirdalgerie.com/flash/une-panne-electrique-sur-google-cloud-perturbe-les-services-de-plusieurs-banques-britanniques-19476</a></li>
+
+
+
+<li><a href="https://www.heise.de/news/Google-Cloud-Ausfall-legt-Revolut-und-weitere-Unternehmen-lahm-11494278.html">https://www.heise.de/news/Google-Cloud-Ausfall-legt-Revolut-und-weitere-Unternehmen-lahm-11494278.html</a></li>
+
+
+
+<li><a href="https://www.arabtimesonline.com/news/google-cloud-outage-disrupts-uk-banks-retailers-and-delivery-services/">https://www.arabtimesonline.com/news/google-cloud-outage-disrupts-uk-banks-retailers-and-delivery-services/</a></li>
+
+
+
+<li><a href="https://www.scotsman.com/news/is-google-down-here-is-everything-affected-by-major-google-outage-9298645">https://www.scotsman.com/news/is-google-down-here-is-everything-affected-by-major-google-outage-9298645</a></li>
+
+
+
+<li><a href="https://www.bbc.co.uk/news/articles/cxdd8mm6qy4mo">https://www.bbc.co.uk/news/articles/cxdd8mm6qy4mo</a></li>
+
+
+
+<li><a href="https://www.channelnewsasia.com/business/google-cloud-service-outage-london-revolut-6475076">https://www.channelnewsasia.com/business/google-cloud-service-outage-london-revolut-6475076</a></li>
+
+
+
+<li><a href="https://www.nzherald.co.nz/world/google-cloud-outage-near-london-disrupts-revolut-lloyds-and-hsbc-services/PVXV47ELGFEUFFI3RREFPC4TM4/">https://www.nzherald.co.nz/world/google-cloud-outage-near-london-disrupts-revolut-lloyds-and-hsbc-services/PVXV47ELGFEUFFI3RREFPC4TM4/</a></li>
+
+
+
+<li><a href="https://www.tomsguide.com/computing/live/google-cloud-services-down-oct-20">https://www.tomsguide.com/computing/live/google-cloud-services-down-oct-20</a></li>
+
+
+
+<li><a href="https://www.neowin.net/news/google-cloud-outage-takes-down-hsbc-revolut-bank-of-scotland-llyods-equifax-more/">https://www.neowin.net/news/google-cloud-outage-takes-down-hsbc-revolut-bank-of-scotland-llyods-equifax-more/</a></li>
+
+
+
+<li><a href="https://www.thenews.com.pk/latest/1420620-google-cloud-outage-hits-london-as-revolut-services-face-disruption">https://www.thenews.com.pk/latest/1420620-google-cloud-outage-hits-london-as-revolut-services-face-disruption</a></li>
+
+
+
+<li><a href="https://www.marktspiegel.de/bayern/c-panorama/stoerungen-bei-banken_a138168">https://www.marktspiegel.de/bayern/c-panorama/stoerungen-bei-banken_a138168</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/google/comments/1xapw87/there_goes_london_google_cloud_says_outage/">https://www.reddit.com/r/google/comments/1xapw87/there_goes_london_google_cloud_says_outage/</a></li>
+
+
+
+<li><a href="https://www.theguardian.com/uk-news/2026/oct/20/power-outage-google-datacentre-london-widespread-disruption">https://www.theguardian.com/uk-news/2026/oct/20/power-outage-google-datacentre-london-widespread-disruption</a></li>
+
+
+
+<li><a href="https://www.lamontagne.fr/france-monde/economie/revolut-hsbc-lloyds-une-panne-google-cloud-perturbe-plusieurs-services-en-europe_15066755/">https://www.lamontagne.fr/france-monde/economie/revolut-hsbc-lloyds-une-panne-google-cloud-perturbe-plusieurs-services-en-europe_15066755/</a></li>
+
+
+
+<li><a href="https://www.nytimes.com/2026/10/20/technology/google-cloud-down-outage-europe.html">https://www.nytimes.com/2026/10/20/technology/google-cloud-down-outage-europe.html</a></li>
+
+
+
+<li><a href="https://www.dawn.com/news/2038530/google-says-multiple-cloud-services-suffer-network-failures-in-europe">https://www.dawn.com/news/2038530/google-says-multiple-cloud-services-suffer-network-failures-in-europe</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ">https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> albawaba.com, lesoirdalgerie.com, reddit.com, theguardian.com, firstpost.com, indianexpress.com, techxplore.com, bbc.co.uk, theregister.com, neowin.net, mashable.com, dawn.com, computerweekly.com, bleepingcomputer.com, fark.com, appleinsider.com, nytimes.com, siliconrepublic.com, betanews.com, bloomberg.com, arabtimesonline.com, ft.com, thenews.com.pk, arynews.tv, euronews.com, telegraphherald.com, thetimes.com, enca.com, cafe-dc.com, deccanchronicle.com, abc.net.au, cybersecuritynews.com, nzherald.co.nz, krone.at, bbc.com, 77.lt, cna.com.tw, scotsman.com, derstandard.at, meduza.io, dw.com, watson.ch, lamontagne.fr, tomsguide.com, kursors.lv, marktspiegel.de, mixnews.lv, aawsat.com, reuters.com, rte.ie, tvrain.tv, heise.de, channelnewsasia.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 53 unique domains, 60 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.nytimes.com/2026/10/20/technology/google-cloud-down-outage-europe.html"><img src="https://kagiproxy.com/img/XXSY2D7hjfKfeIdrYNWTJ59doiJJEtzlDMZYnzsqZHBla7U6mOFb9N0OWZ0jlnzIRcktMLDPChr3tXqUIln6arUO6nClxyqPInAdhH1Gcr8s1PxIcpiETCfbLKfKVVo9TtbFj7FF7FuaWYe6hXSadAdFb78pitqqiLBCay2S9AHpWzphrewL0yYOdP4QDLX5Pgw" alt="A Google office in London. Its cloud services were experiencing intermittent network failures in the region, the company said on Tuesday." style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+A Google office in London. Its cloud services were experiencing intermittent network failures in the region, the company said on Tuesday. <span class='credit'>(nytimes.com)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "khalid.samara",
+      "date": "2026-10-20T10:57:17.000Z",
+      "domain": "albawaba.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.albawaba.com/business/google-cloud-services-suffer-outages-1639423",
+      "title": "Google Cloud services suffer outages in Europe"
+    },
+    {
+      "date": "2026-10-20T16:59:00.000Z",
+      "domain": "lesoirdalgerie.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lesoirdalgerie.com/flash/une-panne-electrique-sur-google-cloud-perturbe-les-services-de-plusieurs-banques-britanniques-19476",
+      "title": "Une panne \u00e9lectrique sur Google Cloud perturbe les services de plusieurs banques britanniques"
+    },
+    {
+      "author": "/u/HotMinuteUK",
+      "date": "2026-10-20T10:56:06.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/uknews/comments/1xap0b4/uk_companies_disrupted_as_google_clouds_london/",
+      "title": "UK companies disrupted as Google Cloud\u2019s London hub goes down"
+    },
+    {
+      "author": "Kalyeena Makortoff and Julia Kollewe",
+      "date": "2026-10-20T09:45:39.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/1S9l0EEeDuwnstJa13D_zD_a6dt0JhuxgQOWFn8vswT4nikwFb2-osw1h9P8piDYL8G_QqPWRKbxAJ7J26jE26KW7mihBl8xS04fK_OOH9uExtIUVwyuQDfKKVSLIFj1ZutumKqT151tLGXzHGv-VHs7gZ0Twi8OT7-dOTJXKunopR2kZWdMUI76EXDFzjzY7FsE8L3XzR2_MNBJ_yp04p4d7a0WPh4T78-4WcGWZu87zh1_NKQb-ybBgwi9eB5u52fUzYJuZTNDOwqdmCyQ",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/business/2026/oct/20/revolut-down-app-cards-service-disruption",
+      "title": "Google cloud failure hits millions as UK courts and banks knocked offline"
+    },
+    {
+      "author": "Shriyansh.Garg",
+      "date": "2026-10-20T11:57:45.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/Xk_Ag0cpzQFIaqLGMFUSbmcMhtwFKuOO-QqKAwh0trSGFtO8Xe_dDo_Dt-RzEteZgsrt-R3BVHjynvv7endeR2hg6WxHyc0YUj66BeD3Ioqft43XUElKBdp2X8YXVJo8a3flMTpPnKUD6w7yr5vnP8oRPDx8zqMUlXsL2MwWThsBRyWIdugIt58ui-vFKiW27a3Cyicj7JHwTc6a4aZn3mflHDpx-pRSJBHwEsoeObj4Eb75FhzmVcqQQA5dbNw",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/google-cloud-outage-hits-europe-disrupting-banking-apps-major-retailers-and-more-14054099.html",
+      "title": "Google Cloud outage hits Europe, disrupting banking apps, major retailers and more"
+    },
+    {
+      "date": "2026-10-20T11:35:20.000Z",
+      "domain": "indianexpress.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://indianexpress.com/article/technology/google-cloud-outage-uk-banks-revolut-10929524/",
+      "title": "Google Cloud outage triggers service disruptions across UK banks and websites"
+    },
+    {
+      "date": "2026-10-20T18:20:01.000Z",
+      "domain": "techxplore.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techxplore.com/news/2026-10-google-cloud-outage-uk-banks.html",
+      "title": "Google Cloud outage hits UK banks"
+    },
+    {
+      "date": "2026-10-20T18:03:19.000Z",
+      "domain": "bbc.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.co.uk/news/articles/cxdd8mm6qy4mo",
+      "title": "Google resolves cloud outage affecting UK banks and websites"
+    },
+    {
+      "author": "Paul Kunert",
+      "date": "2026-10-20T09:34:28.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/paas-and-iaas/2026/10/20/google-clouds-london-zones-takes-a-nap-multiple-services-disrupted/5304084",
+      "title": "Google Cloud\u0027s London zones takes a nap, multiple services disrupted"
+    },
+    {
+      "author": "Sayan Sen",
+      "date": "2026-10-20T10:04:02.000Z",
+      "domain": "neowin.net",
+      "image": "https://kagiproxy.com/img/bnbMO-Zp0RgAyQWb2HY_jo6R461NuCCjueAbpddMO-b1J_j08uhSbSzCH6UONJ3fyJqN27BkPyCu15yQ7tMuTmB3XYN9BelRrQWCpbbChu3lhBTcyKcqQ9rP-5RMdutEMMz27IXmbFqSM1vqdCELbMo",
+      "image_caption": "",
+      "link": "https://www.neowin.net/news/google-cloud-outage-takes-down-hsbc-revolut-bank-of-scotland-llyods-equifax-more/",
+      "title": "Google cloud outage takes down HSBC, Revolut, Bank of Scotland, Lloyds, Equifax, more"
+    },
+    {
+      "date": "2026-10-20T16:16:39.000Z",
+      "domain": "mashable.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mashable.com/tech/google-cloud-outage-revolut-down",
+      "title": "Google Cloud outage: Revolut down as multiple services experience issues"
+    },
+    {
+      "author": "AFP",
+      "date": "2026-10-20T11:05:41.000Z",
+      "domain": "dawn.com",
+      "image": "https://kagiproxy.com/img/eeY16Li2cNQPex9Ao-LQz86y6kLoUojgxeTYwHuj2sIv_OjY6CDw42OHiwXevX-DC-4RGo5glLwMu9veb_AgH6ytxMExw_Sz_4zIGgRbyMCG",
+      "image_caption": "A pedestrian walks past the Google offices in London, Britain. \u2014 Reuters/File",
+      "link": "https://www.dawn.com/news/2038530/google-says-multiple-cloud-services-suffer-network-failures-in-europe",
+      "title": "Google says \u0027multiple\u0027 Cloud services suffer network failures in Europe"
+    },
+    {
+      "date": "2026-10-20T12:50:00.000Z",
+      "domain": "computerweekly.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers",
+      "title": "Google Cloud power event knocks out UK banks, courts and couriers"
+    },
+    {
+      "author": "/u/dailymail",
+      "date": "2026-10-20T10:32:49.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/",
+      "title": "Google is DOWN: Huge outage hits hundreds of websites and apps due to Google Cloud service issues"
+    },
+    {
+      "author": "/u/-Dark-Lord-Belmont-",
+      "date": "2026-10-20T11:43:26.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/google/comments/1xapw87/there_goes_london_google_cloud_says_outage/",
+      "title": "There goes London - Google Cloud says outage affecting banks and court video links caused by \u0027power event\u0027"
+    },
+    {
+      "author": "Carly Page",
+      "date": "2026-10-20T12:49:56.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/paas-and-iaas/2026/10/20/google-cloud-says-a-power-event-caused-todays-outage/5304160",
+      "title": "Google Cloud says a \u0027power event\u0027 caused today\u0027s outage"
+    },
+    {
+      "author": "Sergiu Gatlan",
+      "date": "2026-10-20T09:46:44.000Z",
+      "domain": "bleepingcomputer.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bleepingcomputer.com/news/security/revolut-outage-disrupts-online-banking-operations-worldwide/",
+      "title": "Revolut outage disrupts online banking operations worldwide"
+    },
+    {
+      "date": "2026-10-20T12:40:46.000Z",
+      "domain": "fark.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.fark.com/comments/14233022",
+      "title": "Breaking: Google Cloud Europe, along with the banks and infrastructure that rely on it [News]"
+    },
+    {
+      "author": "Mike Wuerthele",
+      "date": "2026-10-20T11:07:39.000Z",
+      "domain": "appleinsider.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://appleinsider.com/articles/26/10/20/google-outage-hitting-eu-uk-hard",
+      "title": "Google outage hitting EU, UK hard"
+    },
+    {
+      "author": "Leo Sands",
+      "date": "2026-10-20T13:04:12.000Z",
+      "domain": "nytimes.com",
+      "image": "https://kagiproxy.com/img/mr3onhGSWe1v4Lola20aGZnjTowYfoP39IsqXBCKAUq_GRn_ZhB2-_sw5R--lePCR9d2r-NaVSa-vWmA7_VZrZGHPi6YhfOcSkk2LM2NOcZxVO0BOrf142BDiaDRo0MkThsufVTsX_L_2ewBLCWluy97C6Cr5BNvOLACfoI14KKCoYCY-s7nrQyEE6Hv0jYCHFA",
+      "image_caption": "A Google office in London. Its cloud services were experiencing intermittent network failures in the region, the company said on Tuesday.",
+      "link": "https://www.nytimes.com/2026/10/20/technology/google-cloud-down-outage-europe.html",
+      "title": "Google Reports Cloud Disruptions in Europe"
+    },
+    {
+      "author": "Suhasini Srinivasaragavan",
+      "date": "2026-10-20T12:27:12.000Z",
+      "domain": "siliconrepublic.com",
+      "image": "https://kagiproxy.com/img/QW_MH5DvDxXFNVsmDKiepjNIUAcb1G9rgcPUk83JAecgFVlp8Q7ItCQVVQqu1lHmL7_vvIBrg_4LUSpwHE6cPY9miS3qagfz4Os2ysPD0S1nNLQUNKpYoGOihtJpe225dYpesvN5jTstwzQGi2Y",
+      "image_caption": "",
+      "link": "https://www.siliconrepublic.com/enterprise/revolut-services-affected-in-fresh-google-cloud-outage",
+      "title": "Revolut services affected in fresh Google Cloud outage"
+    },
+    {
+      "author": "Sofia Elizabella Wyci\u015blik-Wilson",
+      "date": "2026-10-20T14:50:09.000Z",
+      "domain": "betanews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://betanews.com/article/revolut-suffers-massive-outage-affecting-banking-services-worldwide/",
+      "title": "Revolut suffers massive outage affecting banking services worldwide"
+    },
+    {
+      "author": "Aisha Down",
+      "date": "2026-10-20T16:50:31.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/59V5FnlsfkoVbPZEzbIUY_vYTZUQggSWcrtw86_JK2xmMCZalBva26_AzBk2B4i2RnFzJAR0WOAio15jHc2Fs53565QI_nmteWNRIdUwYF7sZq6CfgkgI2RmdFsoQXzUVmpOuStAf5_oYG-cpsHj4yHAgAqH1QVjEp4tBRz0h6SzWe2kJ7S15yYxyuA9bsTlwV40yQetvgtELPA-8_jetN9jEagRXDtqYwi3aLA2b14bQ0MbvFqJMQBiTxiYbpTAgZcjWPfSE0NCo-HpUq0N",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/uk-news/2026/oct/20/power-outage-google-datacentre-london-widespread-disruption",
+      "title": "\u2018Too big to not fail\u2019: Google outage exposes UK reliance on a handful of cloud providers"
+    },
+    {
+      "date": "2026-10-20T10:29:12.000Z",
+      "domain": "bloomberg.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMisAFBVV95cUxNZy12Q25TMUJxYjhSamg3ZGZYUlkwUkZBSU1nYlhRbnd5U1V5VmNXQTlBR2NSaVVJUk9zYlhSOWo0Q2NGQTdDbTBGbnZ3Sm1QczZIbG10VzZraUJSeVlJdTlXSUktV3lNZERId2pLVlNZU1pheHZKZUp6MUdWRUxiMEcyaDJuU0g2aWJ1bUhrdUhzVTJKNzJSMmlJSndiMEFEZXBQUjJKRXRXVnliQ2NnSQ",
+      "title": "Google Cloud Outage Takes Down Revolut and Other Banks in UK"
+    },
+    {
+      "author": "arabtimes",
+      "date": "2026-10-20T10:44:00.000Z",
+      "domain": "arabtimesonline.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.arabtimesonline.com/news/google-cloud-outage-disrupts-uk-banks-retailers-and-delivery-services/",
+      "title": "Google Cloud Outage Disrupts UK Banks, Retailers and Delivery Services"
+    },
+    {
+      "date": "2026-10-20T12:03:03.000Z",
+      "domain": "ft.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ft.com/content/c88b07df-d30e-401a-aca9-4b054d6dfd7b",
+      "title": "UK banks hit by Google Cloud outage"
+    },
+    {
+      "date": "2026-10-20T10:11:00.000Z",
+      "domain": "thenews.com.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.thenews.com.pk/latest/1420620-google-cloud-outage-hits-london-as-revolut-services-face-disruption",
+      "title": "Google Cloud outage hits London as Revolut services face disruption"
+    },
+    {
+      "date": "2026-10-20T10:20:14.000Z",
+      "domain": "arynews.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arynews.tv/google-cloud-services-face-outage-in-london-revolut-services-down-too",
+      "title": "Google Cloud services face outage in London, Revolut services down too"
+    },
+    {
+      "date": "2026-10-20T12:56:28.000Z",
+      "domain": "euronews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.euronews.com/2026/10/20/power-outage-hits-google-cloud-services-disrupting-uk-banks",
+      "title": "Power outage hits Google Cloud services disrupting UK banks"
+    },
+    {
+      "date": "2026-10-21T05:30:00.000Z",
+      "domain": "telegraphherald.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQUS1RVmR4bmNpODlVLWtfM0pfa1J4a3A2YjgxdnlaQ01LU0ZqZE5MdXdtQUFobVVST1FkeTdaeFJiQ0lEMnpMaWRvTXg4XzRfOE92c0tOR0g1M0RBMXJFNFJwVVFZMlY4bGZ6YUNob0JHay1SdnA4VDlmYVRBMlZwWFgwUDVYOTNCX0RzSjE5Vk5GWDdoVWdYVFd4Yw",
+      "title": "Google Cloud outage hits U.K. banks"
+    },
+    {
+      "date": "2026-10-20T16:45:00.000Z",
+      "domain": "thetimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQMmRodDFJemVJQnIySzZhdzBjckJkeFN0VUdjNmJGQU14RF8wbTFUQjh6WFljc1FZMjBNRXJ2ODdoVVlMR0ZxWUxXNDJpVDFkM3Rralc3Vk0xM1VaUERDRTdia1BfQjZPOHZpN1ZZV0pFRjRMdTRNeFdfaXJfNWpUWjJXcUxONmcyRzFzVkxsSS0yQ29ISkw5MTJodi1xNU1NV2RvQVgzMW5OMmIwRTVpX253SHpqMHBFU2Y4bEJZOFRVOFREM0ZkSHZJcHN0WEhM",
+      "title": "Google Cloud outage: banks among businesses hit by IT failure"
+    },
+    {
+      "date": "2026-10-20T14:16:29.000Z",
+      "domain": "enca.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.enca.com/business/power-outage-hits-google-cloud-services-disrupting-uk-banks",
+      "title": "Power outage hits Google Cloud services, disrupting UK banks"
+    },
+    {
+      "author": "Data Center Dynamics",
+      "date": "2026-10-21T02:34:28.000Z",
+      "domain": "cafe-dc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cafe-dc.com/security/google-experiences-service-disruption-in-uk-cloud-region/",
+      "title": "Google\u306eUK\u30af\u30e9\u30a6\u30c9\u30ea\u30fc\u30b8\u30e7\u30f3\u3067\u30b5\u30fc\u30d3\u30b9\u969c\u5bb3"
+    },
+    {
+      "author": "Chetan",
+      "date": "2026-10-20T13:07:50.000Z",
+      "domain": "deccanchronicle.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.deccanchronicle.com/world/europe/power-outage-hits-google-cloud-services-disrupting-uk-banks-1997439",
+      "title": "Power Outage Hits Google Cloud Services, Disrupting UK Banks"
+    },
+    {
+      "author": "Thomas Morgan",
+      "date": "2026-10-20T10:36:07.000Z",
+      "domain": "abc.net.au",
+      "image": "https://kagiproxy.com/img/kL-nF0X3cC4pEgn6toroLL3Bfzmd9n5gjmndOVlH6efCpg0Fm97QnQLm64334ZnhtGpgPJpZMELAWS1aNBAZeIfmoSr9jeIwIZDoVFlCyO3BRk_AZ0-1V3VvBebua62q-mEWGV5pnBefPP1O9TrEJ9qRkSTV3CxO9EPzRnNdWRApOMDQOY8WPLHcJ6nY1NM58WCNzXJDN0FelHdMSLXeeMdW4UcVuWr3euL0apWMn2h-t9c-8AXIb8Rvuw",
+      "image_caption": "Google says its London-based data centre is experiencing \"service disruption\".",
+      "link": "https://www.abc.net.au/news/2026-10-20/google-cloud-failure-europe-banks/107290238",
+      "title": "European banks, websites hit as Google Cloud data centre goes offline for hours"
+    },
+    {
+      "author": "Guru Baran",
+      "date": "2026-10-20T17:17:56.000Z",
+      "domain": "cybersecuritynews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cybersecuritynews.com/google-cloud-outage/",
+      "title": "Google Cloud Outage Knocks UK Banks, Websites and Court Systems Offline"
+    },
+    {
+      "author": "Alexandra Bacon",
+      "date": "2026-10-20T17:39:47.000Z",
+      "domain": "nzherald.co.nz",
+      "image": "https://kagiproxy.com/img/3ifxTxQB2_-z-at-yM9LFJpLg1fYcrd0XGLXVNuhusrRZthALTGVGa8M9ulJYE6dl73w5qG4R6gmTW789znRyjssHF0FYiiqFleGMyJKJynk_7TuxDTMr7nUcuaMc_dBQ-nFU5QCg28qv7R9kdMGfSaX_g-pq2teFBPZUsIBfqBHXRhzAC7LcH6gXJsrndJ5y_13AiLfbfWWEI0zlMG4mmepYX9hYBQXdiPXG7p-UyBwF_Ft_DU9eJqZKhpvyY5XBMFoHm2fSA",
+      "image_caption": "A power outage at a Google Cloud data centre in London caused serious network disruptions to its services on Tuesday, October 20, the US tech giant said. Photo / Ben Stansall, AFP",
+      "link": "https://www.nzherald.co.nz/world/google-cloud-outage-near-london-disrupts-revolut-lloyds-and-hsbc-services/PVXV47ELGFEUFFI3RREFPC4TM4/",
+      "title": "Google Cloud outage near London disrupts Revolut, Lloyds and HSBC services"
+    },
+    {
+      "date": "2026-10-20T11:27:11.000Z",
+      "domain": "krone.at",
+      "image": "https://kagiproxy.com/img/rfAj3ARQew2JuNpTIXC_C3dc3oWtWCVBCV_jLGJULKejtErBgSm15unt-Hi58qNVvW141OpDGQ5noCneGFq2uDT0OaPpDcPClVRU_xItC_bm",
+      "image_caption": "Annual Meetings of the IMF and the World Bank Group in Bangkok",
+      "link": "https://www.krone.at/4342100",
+      "title": "Technische St\u00f6rung - Google-Ausfall sorgt f\u00fcr Bankchaos in Europa"
+    },
+    {
+      "date": "2026-10-20T20:12:40.000Z",
+      "domain": "bbc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.com/russian/articles/c6073vmm28vxo",
+      "title": "\u0421\u0431\u043e\u0439 Google Cloud \u0438\u0437-\u0437\u0430 \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u044b \u0432 \u0434\u0430\u0442\u0430-\u0446\u0435\u043d\u0442\u0440\u0435 \u0432 \u041b\u043e\u043d\u0434\u043e\u043d\u0435 \u043d\u0430\u0440\u0443\u0448\u0438\u043b \u0440\u0430\u0431\u043e\u0442\u0443 \u0441\u0435\u0440\u0432\u0438\u0441\u043e\u0432 \u043f\u043e \u0432\u0441\u0435\u0439 \u0415\u0432\u0440\u043e\u043f\u0435, \u0432 \u0442\u043e\u043c \u0447\u0438\u0441\u043b\u0435 Revolut"
+    },
+    {
+      "date": "2026-10-20T14:53:04.000Z",
+      "domain": "77.lt",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNRXRoZm5NcUs1U3B3OFJZU1JidHdGUW91bDE0bG9jOVFrbkFjeXFsOEtjUnNta1FrdWtVWmJVd29BVkxLVGhUOG0tNTVJZ0pJem84SGd5Q2Z1UlpCTmVTTXlCYk5vUzRGRFlIajZ4cnFRdTc4U2lZLTM0RlJWdEtkQWpGNV9SZGF3NGtKaF96a3NGM3F1SjNKOElzN0ZuVl9pbjBkeEVVZw",
+      "title": "\u201eGoogle Cloud\u201c sutrikimas paraly\u017eiavo dal\u012f JK bank\u0173: neveik\u0117 \u201eRevolut\u201c, HSBC ir kitos internetin\u0117s paslaugos"
+    },
+    {
+      "date": "2026-10-20T13:15:15.000Z",
+      "domain": "cna.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cna.com.tw/news/aopl/202610200357.aspx",
+      "title": "Google Cloud\u82f1\u570b\u7576\u6a5f\u3000\u9280\u884c\u8207\u516c\u5171\u670d\u52d9\u5927\u898f\u6a21\u4e2d\u65b7"
+    },
+    {
+      "author": "Lauren Jack",
+      "date": "2026-10-20T11:34:17.000Z",
+      "domain": "scotsman.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.scotsman.com/news/is-google-down-here-is-everything-affected-by-major-google-outage-9298645",
+      "title": "Is Google Down? Here are all of the websites and apps affected by the Google Cloud outage"
+    },
+    {
+      "date": "2026-10-20T11:42:32.000Z",
+      "domain": "derstandard.at",
+      "image": "https://kagiproxy.com/img/POscuWHP2T4Te3BkThJJSzu-mLyw2Yi9XEYz28pLr5umNwBZXT26sbTlPVP8jzU_fHQCJreDWaFkjcRYUg-kGCkg2njAoN2InF20skDxrnpSazoIhkjuMQ5etjGJtO1OxFEeFBKzZH4xqOcij74guleVnOVZMp4DhH-WeupgPzZ0zoxKf2g",
+      "image_caption": "",
+      "link": "https://www.derstandard.at/story/3000000345124/dominoeffekt-in-london-ausfall-der-google-cloud-legt-banken-und-onlinedienste-lahm",
+      "title": "Dominoeffekt in London: Ausfall der Google Cloud legt Banken und Onlinedienste lahm"
+    },
+    {
+      "date": "2026-10-20T17:22:46.000Z",
+      "domain": "meduza.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://meduza.io/news/2026/10/20/sboy-google-cloud-v-londone-privel-k-problemam-v-rabote-neobanka-revolut-u-klientov-po-vsemu-miru",
+      "title": "\u0421\u0431\u043e\u0439 Google Cloud \u0432\u00a0\u041b\u043e\u043d\u0434\u043e\u043d\u0435 \u043f\u0440\u0438\u0432\u0435\u043b \u043a\u00a0\u043f\u0440\u043e\u0431\u043b\u0435\u043c\u0430\u043c \u0432\u00a0\u0440\u0430\u0431\u043e\u0442\u0435 Revolut \u0443\u00a0\u043a\u043b\u0438\u0435\u043d\u0442\u043e\u0432 \u043f\u043e\u00a0\u0432\u0441\u0435\u043c\u0443 \u043c\u0438\u0440\u0443"
+    },
+    {
+      "date": "2026-10-20T13:31:00.000Z",
+      "domain": "dw.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.dw.com/ru/\u0441\u0431\u043e\u0439-\u0432-\u0440\u0430\u0431\u043e\u0442\u0435-google-cloud-\u043f\u0440\u0438\u0432\u0435\u043b-\u043a-\u043f\u0440\u043e\u0431\u043b\u0435\u043c\u0430\u043c-\u0441-\u0434\u043e\u0441\u0442\u0443\u043f\u043e\u043c-\u043a-revolut-\u0438-\u0434\u0440\u0443\u0433\u0438\u043c-\u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c-\u0432-\u0440\u0430\u0437\u043d\u044b\u0445-\u0441\u0442\u0440\u0430\u043d\u0430\u0445-\u0435\u0432\u0440\u043e\u043f\u044b/a-79713010",
+      "title": "\u0421\u0431\u043e\u0439 \u0432 \u0440\u0430\u0431\u043e\u0442\u0435 Google Cloud \u043f\u0440\u0438\u0432\u0435\u043b \u043a \u043f\u0440\u043e\u0431\u043b\u0435\u043c\u0430\u043c \u0441 \u0434\u043e\u0441\u0442\u0443\u043f\u043e\u043c \u043a Revolut \u0438 \u0434\u0440\u0443\u0433\u0438\u043c \u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c \u0432 \u0440\u0430\u0437\u043d\u044b\u0445 \u0441\u0442\u0440\u0430\u043d\u0430\u0445 \u0415\u0432\u0440\u043e\u043f\u044b"
+    },
+    {
+      "author": "https://www.watson.ch/fr",
+      "date": "2026-10-20T10:45:28.000Z",
+      "domain": "watson.ch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.watson.ch/fr/international/technologie/198427586-grosse-panne-chez-google-la-banque-revolut-affectee",
+      "title": "Vaste panne chez Google: la banque Revolut affect\u00e9e"
+    },
+    {
+      "date": "2026-10-20T11:52:09.000Z",
+      "domain": "lamontagne.fr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.lamontagne.fr/france-monde/economie/revolut-hsbc-lloyds-une-panne-google-cloud-perturbe-plusieurs-services-en-europe_15066755/",
+      "title": "Revolut, HSBC, Lloyds\u2026 une panne Google Cloud perturbe plusieurs services en Europe"
+    },
+    {
+      "author": "Jason England",
+      "date": "2026-10-20T10:25:02.000Z",
+      "domain": "tomsguide.com",
+      "image": "https://kagiproxy.com/img/QApjehCpI1_cJ0EM31Rg6tY7jNsvQD9WaLxQF-nfvljOIeYIsgAvu__oQVSNiX9j2KDnI9Tpx9R_QOTmokNWHgpK8rQTvUpIbfYYRHVfxbvr7j5N5mPv-nIl0cL2sb6g",
+      "image_caption": "",
+      "link": "https://www.tomsguide.com/computing/live/google-cloud-services-down-oct-20",
+      "title": "Google Cloud was down \u2014  \u0027Power event\u0027 took out Spotify, Revolut bank and more"
+    },
+    {
+      "author": "Graeme Wearden",
+      "date": "2026-10-20T15:38:25.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/siF1BUw819x6HnZeZmg6UVQrYTHiLBPTjQZBijFOntMosPDTe3GzZt8xMUyC_2tblQKGrUJGMrM1dy1cnwWKsB0bk5_N_AdtyL8HM8BWDqs7rcnuglJKtgmvamoU8yX6BQB28Hqfqab8HM0bIsrZS1E3DQN8MaQ0UDDQDN4rF9SRLaieeecmDQe96CdQytRLzQFm71WQIRI_q3CqoKUULi1ErZ_UfTMMGAYkDoYf0fQUhgpWwIw0Kg6AkAprU141vbvgo-vkJmWIPUYWG4pU",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/business/live/2026/oct/20/uk-unemployment-rate-pre-budget-boost-wages-vacancies-latest-news-updates",
+      "title": "Google Cloud outage: problems fixed for \u2018most\u2018 customers, as regulators push for details \u2013 as it happened"
+    },
+    {
+      "author": "Keitija Krasti\u0146a",
+      "date": "2026-10-20T10:30:00.000Z",
+      "domain": "kursors.lv",
+      "image": "https://kagiproxy.com/img/MQsOMyPrXS2YUYi7Z6c9od7_xuOXG7nBLI36aDkqwPzd1tl6ZgPaNKS_TBGLxcfF_ycWOlNtPHwQ0zcPnAhGzjNMj_YWfovYoEjdJUQpw6l6oNOJjajiMfdn-6LQ9l3TBA",
+      "image_caption": "",
+      "link": "https://kursors.lv/2026/10/20/eiropa-nopietni-trauceta-google-cloud-darbiba-problemas-skarusas-ari-revolut/",
+      "title": "Eirop\u0101 nopietni trauc\u0113ta \u201cGoogle Cloud\u201d darb\u012bba \u2013 probl\u0113mas sk\u0101ru\u0161as ar\u012b \u201cRevolut\u201d"
+    },
+    {
+      "author": "Uwe M\u00fcller",
+      "date": "2026-10-21T06:49:34.000Z",
+      "domain": "marktspiegel.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.marktspiegel.de/bayern/c-panorama/stoerungen-bei-banken_a138168",
+      "title": "St\u00f6rungen bei Banken!"
+    },
+    {
+      "author": "\u0420\u0438\u0442\u0430 \u0422\u0440\u043e\u0448\u043a\u0438\u043d\u0430",
+      "date": "2026-10-21T04:58:21.000Z",
+      "domain": "mixnews.lv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mixnews.lv/v-mire/2026/10/21/masshtabnyy-sboy-google-cloud-vo-vtornik-narushil-rabotu-revolut-i-drugih-bankov-chto-izvestno/",
+      "title": "\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u043d\u044b\u0439 \u0441\u0431\u043e\u0439 Google Cloud \u0432\u043e \u0432\u0442\u043e\u0440\u043d\u0438\u043a \u043d\u0430\u0440\u0443\u0448\u0438\u043b \u0440\u0430\u0431\u043e\u0442\u0443 Revolut \u0438 \u0434\u0440\u0443\u0433\u0438\u0445 \u0431\u0430\u043d\u043a\u043e\u0432: \u0447\u0442\u043e \u0438\u0437\u0432\u0435\u0441\u0442\u043d\u043e"
+    },
+    {
+      "author": "author",
+      "date": "2026-10-20T10:47:22.000Z",
+      "domain": "aawsat.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://english.aawsat.com/node/5331528",
+      "title": "Google Says \u0027Multiple\u0027 Cloud Services Suffer Network Failures in Europe"
+    },
+    {
+      "date": "2026-10-20T13:59:50.000Z",
+      "domain": "reuters.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ",
+      "title": "Google Cloud outage in UK eases after impacting digital banks, public sector websites"
+    },
+    {
+      "date": "2026-10-20T07:15:27.000Z",
+      "domain": "rte.ie",
+      "image": "https://kagiproxy.com/img/Fo8C3A3RVBWZ2N4BDlhcvbiHbIuEKU8a4DP1LbLlgN6w957tchI2nUt22e8mBCY8Htcez8qqfVVOHIk2sJRVhFk6eFww2w",
+      "image_caption": "",
+      "link": "https://www.rte.ie/news/business/2026/1020/1596063-some-revolut-services-down/",
+      "title": "Google Cloud outage eases after impacting Revolut"
+    },
+    {
+      "date": "2026-10-20T12:57:48.000Z",
+      "domain": "euronews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hu.euronews.com/2026/10/20/aramszunet-zavarja-a-google-cloudot-brit-bankok-is-erintettek",
+      "title": "\u00c1ramsz\u00fcnet zavarja a Google Cloudot, brit bankok is \u00e9rintettek"
+    },
+    {
+      "date": "2026-10-20T14:59:39.000Z",
+      "domain": "tvrain.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tvrain.tv/news/masshtabnyj-sboj-google-cloud-narushil-rabotu-bankov-i-onlajn-servisov-577417/",
+      "title": "\u041c\u0430\u0441\u0448\u0442\u0430\u0431\u043d\u044b\u0439 \u0441\u0431\u043e\u0439 Google Cloud \u043d\u0430\u0440\u0443\u0448\u0438\u043b \u0440\u0430\u0431\u043e\u0442\u0443 \u0431\u0430\u043d\u043a\u043e\u0432 \u0438 \u043e\u043d\u043b\u0430\u0439\u043d-\u0441\u0435\u0440\u0432\u0438\u0441\u043e\u0432"
+    },
+    {
+      "author": "Andreas Floemer",
+      "date": "2026-10-20T13:02:00.000Z",
+      "domain": "heise.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.heise.de/news/Google-Cloud-Ausfall-legt-Revolut-und-weitere-Unternehmen-lahm-11494278.html",
+      "title": "Google-Cloud-Ausfall legt Revolut und weitere Unternehmen lahm"
+    },
+    {
+      "date": "2026-10-20T09:11:00.000Z",
+      "domain": "channelnewsasia.com",
+      "image": "https://kagiproxy.com/img/Mx9EOqtiigXc9BH1CW1PkVWioTQ4DusoyaRKPO2Fhccx_PJt_RTy111LQpGo0omN-204VMAGg0RkPzqu4gYvFpx9m80qXjeOIXl1PHtv_VKmiZ2IVo5DtGNz2IY3yRSAehVH1KO6uJgUsWDh9v5IPXySdEzU1AB7MY6n8Gwaor5_2tBc_Sx4dk8IEKVOPr_kRJGw2thHyoKDKIOws4PUViTxHbrv6NbnujxO9xVafrsRdEDCVoC-zw6RVKOL9pDjZXsDC8YKnjkWoKRz8ME9eLMwFfe--5qKxjQCjFMzLFSbY5ZY2S6Ca8wboSNnQZ_rkvKaf62z8oT6pyQ4rXEUb8P9RfS_omf9a1g5oaMk55shPmVLAS3T_3AF2xq3PVEU8rblOPg",
+      "image_caption": "",
+      "link": "https://www.channelnewsasia.com/business/google-cloud-service-outage-london-revolut-6475076",
+      "title": "Google Cloud services largely restored in UK; Revolut services back up in Singapore"
+    },
+    {
+      "date": "2026-10-20T13:18:25.000Z",
+      "domain": "bbc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GSDJLX3RGbTdBTjN1RU9qZVN2RVpnODc1dFBuajdJdlgtSTRfZW9qSXM0OXVvWWowWnVsdU1sdzdzQUFjVkZ3dG42ZFRCbDFFU1YweEd3",
+      "title": "Google Cloud says outage affecting banks and court video links caused by \u0027power event\u0027"
+    }
+  ],
+  "business_angle": "",
+  "category": "Technology",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=albawaba.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "albawaba.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lesoirdalgerie.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "lesoirdalgerie.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theguardian.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theguardian.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techxplore.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techxplore.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bbc.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bbc.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theregister.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theregister.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=neowin.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "neowin.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dawn.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dawn.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerweekly.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "computerweekly.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bleepingcomputer.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bleepingcomputer.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=fark.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "fark.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=appleinsider.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "appleinsider.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=siliconrepublic.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "siliconrepublic.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=betanews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "betanews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bloomberg.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "bloomberg.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arabtimesonline.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arabtimesonline.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ft.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "ft.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thenews.com.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thenews.com.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arynews.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arynews.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=euronews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "euronews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=telegraphherald.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "telegraphherald.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thetimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "thetimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=enca.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "enca.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cafe-dc.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cafe-dc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=deccanchronicle.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "deccanchronicle.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=abc.net.au\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "abc.net.au"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cybersecuritynews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cybersecuritynews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nzherald.co.nz\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nzherald.co.nz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=krone.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "krone.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bbc.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "bbc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=77.lt\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "77.lt"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cna.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cna.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=scotsman.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "scotsman.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=derstandard.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "derstandard.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=meduza.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "meduza.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dw.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dw.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=watson.ch\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "watson.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lamontagne.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "lamontagne.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomsguide.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomsguide.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kursors.lv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "kursors.lv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=marktspiegel.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "marktspiegel.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mixnews.lv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mixnews.lv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aawsat.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aawsat.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reuters.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "reuters.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rte.ie\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rte.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tvrain.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tvrain.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=channelnewsasia.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "channelnewsasia.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\u26a1",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Google\u2019s europe-west2 region also experienced a major outage in July 2022, which the company attributed to cooling-system failure during a record heatwave in Britain [bbc.com#1]. The Guardian reported that Amazon Web Services suffered a separate outage the previous year that lasted nearly 15 hours and caused disruptions to online services worldwide [theguardian.com#2].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Cloud Computing",
+  "key_players": [],
+  "location": "London, United Kingdom",
+  "number_of_titles": 60,
+  "perspectives": [
+    {
+      "sources": [],
+      "text": "UK Financial Conduct Authority: The regulator said it was engaging with Google and affected firms to understand the incident\u2019s impact [reuters.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Reddit",
+          "url": "https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/"
+        }
+      ],
+      "text": "Criminal Bar Association: The association said the outage was hampering efforts to clear court backlogs because prosecution and defence counsel could not proceed with some trials and hearings [reddit.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "A power outage at a Google Cloud data centre in London caused serious network disruptions to its services on Tuesday, October 20, the US tech giant said. Photo / Ben Stansall, AFP",
+    "credit": "nzherald.co.nz",
+    "link": "https://www.nzherald.co.nz/world/google-cloud-outage-near-london-disrupts-revolut-lloyds-and-hsbc-services/PVXV47ELGFEUFFI3RREFPC4TM4/",
+    "url": "https://kagiproxy.com/img/1BzaV1bYs-YGSYi0-9-Uwuc80_lWo00oA5T4WzhGxW1leq_nMA3Smv9_rVdwLPowkTypymgrQBichJwdvGsfXsbwkivuXtEfspuLFYvdzQYMymgIAu7FP3MjmSol8DfBDQwG2MPvfnjUSvqueX9-df65FbSm_QAdf02LIZW-y6uFQNyaatkBt4PzX-19P1YXbS1W5rtunTUv1nZLts38rMYa7--Q0-5YFltuj7rXxTO8Wu2IfBcbLQGzeGPnKIzHUmnWicZ5Ug"
+  },
+  "published": "2026-10-21T12:00:13.897Z",
+  "quote": "Hyperscalers have become too big to not fail. But worse, they\u2019ve become so deeply ingrained into the very fabric of our digital lives that switching away from them seems unimaginable.",
+  "quote_attribution": "The Guardian",
+  "quote_author": "Micha\u0142 \u201crysiek\u201d Wo\u017aniak, internet infrastructure expert",
+  "scientific_significance": [],
+  "secondary_image": {
+    "caption": "A Google office in London. Its cloud services were experiencing intermittent network failures in the region, the company said on Tuesday.",
+    "credit": "nytimes.com",
+    "link": "https://www.nytimes.com/2026/10/20/technology/google-cloud-down-outage-europe.html",
+    "url": "https://kagiproxy.com/img/XXSY2D7hjfKfeIdrYNWTJ59doiJJEtzlDMZYnzsqZHBla7U6mOFb9N0OWZ0jlnzIRcktMLDPChr3tXqUIln6arUO6nClxyqPInAdhH1Gcr8s1PxIcpiETCfbLKfKVVo9TtbFj7FF7FuaWYe6hXSadAdFb78pitqqiLBCay2S9AHpWzphrewL0yYOdP4QDLX5Pgw"
+  },
+  "source_urls": [
+    "https://www.albawaba.com/business/google-cloud-services-suffer-outages-1639423",
+    "https://www.theguardian.com/business/2026/oct/20/revolut-down-app-cards-service-disruption",
+    "https://www.computerweekly.com/news/366652539/Google-Cloud-power-event-knocks-out-UK-banks-courts-and-couriers",
+    "https://appleinsider.com/articles/26/10/20/google-outage-hitting-eu-uk-hard",
+    "https://meduza.io/news/2026/10/20/sboy-google-cloud-v-londone-privel-k-problemam-v-rabote-neobanka-revolut-u-klientov-po-vsemu-miru",
+    "https://cybersecuritynews.com/google-cloud-outage/",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxQUS1RVmR4bmNpODlVLWtfM0pfa1J4a3A2YjgxdnlaQ01LU0ZqZE5MdXdtQUFobVVST1FkeTdaeFJiQ0lEMnpMaWRvTXg4XzRfOE92c0tOR0g1M0RBMXJFNFJwVVFZMlY4bGZ6YUNob0JHay1SdnA4VDlmYVRBMlZwWFgwUDVYOTNCX0RzSjE5Vk5GWDdoVWdYVFd4Yw",
+    "https://www.enca.com/business/power-outage-hits-google-cloud-services-disrupting-uk-banks",
+    "https://indianexpress.com/article/technology/google-cloud-outage-uk-banks-revolut-10929524/",
+    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxQMmRodDFJemVJQnIySzZhdzBjckJkeFN0VUdjNmJGQU14RF8wbTFUQjh6WFljc1FZMjBNRXJ2ODdoVVlMR0ZxWUxXNDJpVDFkM3Rralc3Vk0xM1VaUERDRTdia1BfQjZPOHZpN1ZZV0pFRjRMdTRNeFdfaXJfNWpUWjJXcUxONmcyRzFzVkxsSS0yQ29ISkw5MTJodi1xNU1NV2RvQVgzMW5OMmIwRTVpX253SHpqMHBFU2Y4bEJZOFRVOFREM0ZkSHZJcHN0WEhM",
+    "https://www.theregister.com/paas-and-iaas/2026/10/20/google-cloud-says-a-power-event-caused-todays-outage/5304160",
+    "https://www.fark.com/comments/14233022",
+    "https://kursors.lv/2026/10/20/eiropa-nopietni-trauceta-google-cloud-darbiba-problemas-skarusas-ari-revolut/",
+    "https://news.google.com/rss/articles/CBMiVkFVX3lxTE5GSDJLX3RGbTdBTjN1RU9qZVN2RVpnODc1dFBuajdJdlgtSTRfZW9qSXM0OXVvWWowWnVsdU1sdzdzQUFjVkZ3dG42ZFRCbDFFU1YweEd3",
+    "https://english.aawsat.com/node/5331528",
+    "https://www.watson.ch/fr/international/technologie/198427586-grosse-panne-chez-google-la-banque-revolut-affectee",
+    "https://techxplore.com/news/2026-10-google-cloud-outage-uk-banks.html",
+    "https://www.siliconrepublic.com/enterprise/revolut-services-affected-in-fresh-google-cloud-outage",
+    "https://news.google.com/rss/articles/CBMipwFBVV95cUxNRXRoZm5NcUs1U3B3OFJZU1JidHdGUW91bDE0bG9jOVFrbkFjeXFsOEtjUnNta1FrdWtVWmJVd29BVkxLVGhUOG0tNTVJZ0pJem84SGd5Q2Z1UlpCTmVTTXlCYk5vUzRGRFlIajZ4cnFRdTc4U2lZLTM0RlJWdEtkQWpGNV9SZGF3NGtKaF96a3NGM3F1SjNKOElzN0ZuVl9pbjBkeEVVZw",
+    "https://www.rte.ie/news/business/2026/1020/1596063-some-revolut-services-down/",
+    "https://www.dw.com/ru/\u0441\u0431\u043e\u0439-\u0432-\u0440\u0430\u0431\u043e\u0442\u0435-google-cloud-\u043f\u0440\u0438\u0432\u0435\u043b-\u043a-\u043f\u0440\u043e\u0431\u043b\u0435\u043c\u0430\u043c-\u0441-\u0434\u043e\u0441\u0442\u0443\u043f\u043e\u043c-\u043a-revolut-\u0438-\u0434\u0440\u0443\u0433\u0438\u043c-\u0441\u0435\u0440\u0432\u0438\u0441\u0430\u043c-\u0432-\u0440\u0430\u0437\u043d\u044b\u0445-\u0441\u0442\u0440\u0430\u043d\u0430\u0445-\u0435\u0432\u0440\u043e\u043f\u044b/a-79713010",
+    "https://www.derstandard.at/story/3000000345124/dominoeffekt-in-london-ausfall-der-google-cloud-legt-banken-und-onlinedienste-lahm",
+    "https://news.google.com/rss/articles/CBMisAFBVV95cUxNZy12Q25TMUJxYjhSamg3ZGZYUlkwUkZBSU1nYlhRbnd5U1V5VmNXQTlBR2NSaVVJUk9zYlhSOWo0Q2NGQTdDbTBGbnZ3Sm1QczZIbG10VzZraUJSeVlJdTlXSUktV3lNZERId2pLVlNZU1pheHZKZUp6MUdWRUxiMEcyaDJuU0g2aWJ1bUhrdUhzVTJKNzJSMmlJSndiMEFEZXBQUjJKRXRXVnliQ2NnSQ",
+    "https://www.ft.com/content/c88b07df-d30e-401a-aca9-4b054d6dfd7b",
+    "https://www.theregister.com/paas-and-iaas/2026/10/20/google-clouds-london-zones-takes-a-nap-multiple-services-disrupted/5304084",
+    "https://betanews.com/article/revolut-suffers-massive-outage-affecting-banking-services-worldwide/",
+    "https://www.bleepingcomputer.com/news/security/revolut-outage-disrupts-online-banking-operations-worldwide/",
+    "https://www.bbc.com/russian/articles/c6073vmm28vxo",
+    "https://hu.euronews.com/2026/10/20/aramszunet-zavarja-a-google-cloudot-brit-bankok-is-erintettek",
+    "https://www.deccanchronicle.com/world/europe/power-outage-hits-google-cloud-services-disrupting-uk-banks-1997439",
+    "https://www.krone.at/4342100",
+    "https://mixnews.lv/v-mire/2026/10/21/masshtabnyy-sboy-google-cloud-vo-vtornik-narushil-rabotu-revolut-i-drugih-bankov-chto-izvestno/",
+    "https://arynews.tv/google-cloud-services-face-outage-in-london-revolut-services-down-too",
+    "https://mashable.com/tech/google-cloud-outage-revolut-down",
+    "https://cafe-dc.com/security/google-experiences-service-disruption-in-uk-cloud-region/",
+    "https://www.cna.com.tw/news/aopl/202610200357.aspx",
+    "https://www.euronews.com/2026/10/20/power-outage-hits-google-cloud-services-disrupting-uk-banks",
+    "https://www.theguardian.com/business/live/2026/oct/20/uk-unemployment-rate-pre-budget-boost-wages-vacancies-latest-news-updates",
+    "https://www.firstpost.com/tech/google-cloud-outage-hits-europe-disrupting-banking-apps-major-retailers-and-more-14054099.html",
+    "https://www.abc.net.au/news/2026-10-20/google-cloud-failure-europe-banks/107290238",
+    "https://www.reddit.com/r/google/comments/1xaolv0/google_is_down_huge_outage_hits_hundreds_of/",
+    "https://www.reddit.com/r/uknews/comments/1xap0b4/uk_companies_disrupted_as_google_clouds_london/",
+    "https://tvrain.tv/news/masshtabnyj-sboj-google-cloud-narushil-rabotu-bankov-i-onlajn-servisov-577417/",
+    "https://www.lesoirdalgerie.com/flash/une-panne-electrique-sur-google-cloud-perturbe-les-services-de-plusieurs-banques-britanniques-19476",
+    "https://www.heise.de/news/Google-Cloud-Ausfall-legt-Revolut-und-weitere-Unternehmen-lahm-11494278.html",
+    "https://www.arabtimesonline.com/news/google-cloud-outage-disrupts-uk-banks-retailers-and-delivery-services/",
+    "https://www.scotsman.com/news/is-google-down-here-is-everything-affected-by-major-google-outage-9298645",
+    "https://www.bbc.co.uk/news/articles/cxdd8mm6qy4mo",
+    "https://www.channelnewsasia.com/business/google-cloud-service-outage-london-revolut-6475076",
+    "https://www.nzherald.co.nz/world/google-cloud-outage-near-london-disrupts-revolut-lloyds-and-hsbc-services/PVXV47ELGFEUFFI3RREFPC4TM4/",
+    "https://www.tomsguide.com/computing/live/google-cloud-services-down-oct-20",
+    "https://www.neowin.net/news/google-cloud-outage-takes-down-hsbc-revolut-bank-of-scotland-llyods-equifax-more/",
+    "https://www.thenews.com.pk/latest/1420620-google-cloud-outage-hits-london-as-revolut-services-face-disruption",
+    "https://www.marktspiegel.de/bayern/c-panorama/stoerungen-bei-banken_a138168",
+    "https://www.reddit.com/r/google/comments/1xapw87/there_goes_london_google_cloud_says_outage/",
+    "https://www.theguardian.com/uk-news/2026/oct/20/power-outage-google-datacentre-london-widespread-disruption",
+    "https://www.lamontagne.fr/france-monde/economie/revolut-hsbc-lloyds-une-panne-google-cloud-perturbe-plusieurs-services-en-europe_15066755/",
+    "https://www.nytimes.com/2026/10/20/technology/google-cloud-down-outage-europe.html",
+    "https://www.dawn.com/news/2038530/google-says-multiple-cloud-services-suffer-network-failures-in-europe",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxQS0VTdUFWc1FhZzJaWWZDMkN3dkl0RzdnMU84OHNOS1g0eDdGZ0RNWDVJcVd1MXZzMHU2Unp0QXBXN0tvc3ZZcW1iRlg1Y1h4TFl3Yi1oM2pWRW5KLUNTT0M1NU1YMGdrUjY2MkZTNW82U2FOX0VYRkRVaTlmckJ0ZElGcjJYNzlhSnVCQzA3X0tiVTZ2Z092U2haTQ"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "No. Some companies had not confirmed a connection, and ING Germany said it had no indication its login problems were caused by an external provider [reuters.com#1][scotsman.com#1].",
+      "question": "Did all reported service problems stem from Google Cloud?"
+    },
+    {
+      "answer": "Revolut said its customers\u2019 money and data remained safe during the disruption [reuters.com#1].",
+      "question": "Were customers\u2019 funds or data at risk?"
+    }
+  ],
+  "summary": "The two availability zones that stayed online during a power failure in Google Cloud\u2019s London region did not fully absorb production demand after zone europe-west2-b failed, an engineer told Computer Weekly [computerweekly.com#1]. The outage affected Google\u2019s europe-west2 region, which serves customers in the UK and elsewhere in Europe [reuters.com#1][computerweekly.com#1].\n\nThe incident began at 06:08 GMT on Oct. 20 and caused elevated error rates and intermittent network failures across several Google Cloud products, including Cloud Run, Google App Engine, Google Kubernetes Engine and Cloud Filestore [theregister.com#1][theregister.com#2]. Google said it had mitigated the power event and was prioritizing recovery of existing workloads; customers could still be unable to create new workloads during recovery [theregister.com#2].\n\nComputer Weekly reported that europe-west2 is Google\u2019s only UK cloud region, leaving customers without a second UK region for failover [computerweekly.com#1]. Google advised customers to move affected workloads to another zone or region where feasible [firstpost.com#1] and said it would publish an incident analysis after its investigation [bbc.co.uk#1].",
+  "talking_points": [
+    "Apigee gateway: An engineer told Computer Weekly it was the \u201cbig problem system\u201d during the outage [computerweekly.com#1].",
+    "Regional reach: The disruption affected Revolut services in Singapore, where all 27 services listed on its status page were still partially unavailable when CNA checked at 6:30 p.m. [channelnewsasia.com#1].",
+    "Cloudflare services: Cloudflare said the Google incident had not affected its services, despite earlier user reports of problems on the outage-tracking site Downdetector [reddit.com#2].",
+    "Delivery impact: Royal Mail said the reported outage had not affected letter or parcel deliveries [reuters.com#1]."
+  ],
+  "technical_details": [
+    "Backup power: An administrator relaying Google\u2019s engineering update said backup generators failed to engage during the initial outage, even after mains power returned [computerweekly.com#1].",
+    "Network scope: Computer Weekly\u2019s incident log recorded problems with VPC, Cloud NAT and load balancers in europe-west2; one administrator also reported problems with these services in europe-north2 [computerweekly.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Network and connectivity problems in europe-west2 began at 07:05 BST [computerweekly.com#1]",
+      "date": "20 October 2026",
+      "date_iso": "2026-10-20"
+    },
+    {
+      "content": "Google said it had mitigated the power event at 12:27 BST [computerweekly.com#1]",
+      "date": "20 October 2026",
+      "date_iso": "2026-10-20"
+    },
+    {
+      "content": "Google reported that most regional workloads had recovered at 14:48 BST [computerweekly.com#1]",
+      "date": "20 October 2026",
+      "date_iso": "2026-10-20"
+    },
+    {
+      "content": "The Ministry of Justice said its systems were not fully restored at 15:52 BST [computerweekly.com#1]",
+      "date": "20 October 2026",
+      "date_iso": "2026-10-20"
+    }
+  ],
+  "title": "Google Cloud power failure exposes gaps in London zone resilience",
+  "travel_advisory": "",
+  "unique_domains": 53,
+  "url": "https://www.albawaba.com/business/google-cloud-services-suffer-outages-1639423",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>

@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Open-source llm-d 1.0 adds controls for production AI inference - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Open-source llm-d 1.0 adds controls for production AI inference</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Contributors to llm-d, an open-source system for distributing large language model inference across computing clusters, released version 1.0 on Oct. 20 at the PyTorch Conference North America. The project, governed by the Cloud Native Computing Foundation (CNCF), adds controls for sharing infrastructure among users, upgrading services without interruption and routing multi-step AI-agent requests to servers that retain reusable context <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE" class="footnote-ref">[1]</a><a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a><a href="https://www.redhat.com/en/blog/crossing-threshold-dependable-open-source-ai-serving" class="footnote-ref">[16]</a>.
+
+The release targets operating and computing costs as agents generate repeated bursts of requests. In a separate benchmark, IBM and Red Hat said llm-d served up to 3,000 coding agents on 544 Nvidia H100 GPUs, with peak output above 6.6 million tokens per minute. They estimated the cost per token was one-fifth to one-tenth of equivalent commercial API pricing <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww" class="footnote-ref">[7]</a><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE" class="footnote-ref">[1]</a>. The companies reported those results from demonstrations. The software is available as open source, and Google Cloud said it is integrating it into Google Kubernetes Engine <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxONTJzUjJ2dFpCd01XQk9ydUJpX3JSeUYxRGpKYWNjVnoxUHIwZEdieHQxN2lIYnY5NUdVRElIRTFBV1k0bXVOQzNtX0ZWbldEMFNDZlBPSS1rNU44RDMxT2ZfcXROb3FCcXFZSHRDbjUyNk5FX0xVMVJPbW1URnFDc3hzT2N1M2kxMmk3Z2NEdVk1VG96SHIzbWxvcFdoWS1KZXd3" class="footnote-ref">[13]</a><a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>It delivers high-performance, distributed inference with the reliability and scale enterprises need within an operational model they already know</p>
+
+<cite>— Stephen Watt, vice president in Red Hat’s chief technology officer’s office (SiliconANGLE)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Cache reuse: IBM Research reported a prefix-cache hit rate of approximately 98% and a blended serving cost of about $0.11 per million tokens in a quantum error-correction research workload <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZkRXZXY3YnpfZnlBOE43QWpWc09QdWZsQTZGd2xaZkdJaDhMTlhHZlJCTlBHWC00NGNhWG5fcW1jeUFUM1lwT1ZZVUhBclBKN0E2UFlwU2UxaENyeUZEV3JzSkZHNGNMR2lfVGQ2X1REY0ZDSHNCU2piWHNjSnUya1EyUFRwWHpYRjRwUFdXdVBmdUZlNndJbE8yVk04NGQtZjdvV0gweUZjZ3JwZjZ5SVNvaVU0WUNTblZ3" class="footnote-ref">[3]</a>.</li>
+
+<li>Google test: Google reported that cache-aware routing and host-memory offloading on its Ironwood TPU cut median time to first token by more than 85% and increased throughput to 2.4 times that of a standard Kubernetes service <a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a>.</li>
+
+<li>Flow controls: The version 1.0 router can queue and prioritize requests by workload and tenant. It retains first-come, first-served scheduling unless operators enable new policies <a href="https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2" class="footnote-ref">[10]</a><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU" class="footnote-ref">[9]</a>.</li>
+
+<li>Current adoption: DigitalOcean uses its own llm-d fork for Managed Agents and Serverless Inference, while JetBrains runs the framework behind its Junie Lite plan <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ" class="footnote-ref">[12]</a><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOX195cFZ2MlpWQTlPLUJYLVRaZVEwNHdmLWJGT21nSGZYN2ZfZThTOUdpUGJfQ04tbVFBR0VibmNJUWxIdDdReGtwYWZJanItMjF4S3ppV0E0T2VJRjhzRlFmWFBsR2hlczF3aWY4MzVybko0VHFtbnZVampnZndMeU50UlF3Q09ZdmF1N3VuU2lSNlpZclNhZEc0b3NNeDFhN21tbWJKcmtWaHJvMUVtYXF1YUJJVE85" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>DigitalOcean: Salman Paracha, senior vice president of AI engineering, said distributed serving is essential to scaling the company&#x27;s GPU fleet and improving cache reuse. He cautioned that software components optimized for different chip architectures are not readily interchangeable today <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ" class="footnote-ref">[12]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ">TechTarget</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Moor Insights &amp; Strategy analyst Jason Andersen said llm-d could help extend the useful life of older GPUs as performance gains from newer generations eventually slow. He warned that vendor support does not necessarily amount to a firm commitment to the project <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ" class="footnote-ref">[12]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ">TechTarget</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>2025:</strong> Red Hat, IBM, Google, CoreWeave and Nvidia founded llm-d <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE" class="footnote-ref">[1]</a>.</li>
+
+
+
+<li><strong>22 July 2026:</strong> Project benchmark detailed agentic serving costs and cache reuse <a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww" class="footnote-ref">[7]</a>.</li>
+
+
+
+<li><strong>8 September 2026:</strong> A benchmark tested 3,000 coding agents on 544 H100 GPUs <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU" class="footnote-ref">[9]</a>.</li>
+
+
+
+<li><strong>20 October 2026:</strong> Contributors announced llm-d 1.0 at the PyTorch Conference <a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE" class="footnote-ref">[1]</a><a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Disaggregated serving: The system separates prompt processing (prefill) and token generation (decode) into distinct pools. It coordinates updates to both as one logical unit so traffic can be routed to compatible versions <a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww" class="footnote-ref">[7]</a>.</li>
+
+<li>Tiered KV cache: When accelerator memory fills, llm-d integrations can move cached context to host memory and then to storage, preserving reusable state for later requests rather than immediately evicting it <a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a>.</li>
+
+<li>Priority scheduling: The router maintains separate request queues by tenant and priority, dispatches higher-priority work first and cycles fairly among tenants within a priority band. A probabilistic admission controller can shed excess load <a href="https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2" class="footnote-ref">[10]</a><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Cloud inference: Google Cloud says its GKE Inference Gateway runs the llm-d router. The project reports that a separate production integration reduced time to first token by more than 35% and doubled the prefix-cache hit rate from 35% to 70% in Vertex AI <a href="https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2" class="footnote-ref">[10]</a>.</li>
+
+<li>GPU utilization: Google says scheduling asynchronous inference during idle reinforcement-learning cycles can raise aggregate accelerator duty cycles from about 40% to above 70% <a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference" class="footnote-ref">[2]</a>.</li>
+
+<li>Cloud providers: The project describes deployments on AWS and Oracle Cloud Infrastructure, including AWS-reported gains of up to 70% in tokens per second compared with standard vLLM on SageMaker HyperPod <a href="https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Red Hat said its team initially focused on vLLM, an open-source inference server, as open-weight models spread. It then found that enterprise users needed cluster-level orchestration to coordinate model serving across infrastructure <a href="https://www.redhat.com/en/blog/crossing-threshold-dependable-open-source-ai-serving" class="footnote-ref">[16]</a><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUI0R3lZTGpCVDllNUEta3AxWVNpbUFHbDh2NElRZm5uOVp3cTVVZHNGUE5kd0NYYXRXM0lkWFFkRlRJYTB1NWlnazFpREpKOTNaaGFxdEdlZi1mZkp2dzVEOU1VLU5HT0tjVG83dS1fX2JzTTRRSlFEQzRKaVFVZGl6VkxfOVk" class="footnote-ref">[6]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> Which reliability feature is still planned rather than included in version 1.0?</p>
+
+<p><strong>A:</strong> Active-active routing and failover for individual inference requests remain planned; version 1.0 provides a standby router and high availability <a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU" class="footnote-ref">[9]</a>.</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxONTJzUjJ2dFpCd01XQk9ydUJpX3JSeUYxRGpKYWNjVnoxUHIwZEdieHQxN2lIYnY5NUdVRElIRTFBV1k0bXVOQzNtX0ZWbldEMFNDZlBPSS1rNU44RDMxT2ZfcXROb3FCcXFZSHRDbjUyNk5FX0xVMVJPbW1URnFDc3hzT2N1M2kxMmk3Z2NEdVk1VG96SHIzbWxvcFdoWS1KZXd3">https://news.google.com/rss/articles/CBMiowFBVV95cUxONTJzUjJ2dFpCd01XQk9ydUJpX3JSeUYxRGpKYWNjVnoxUHIwZEdieHQxN2lIYnY5NUdVRElIRTFBV1k0bXVOQzNtX0ZWbldEMFNDZlBPSS1rNU44RDMxT2ZfcXROb3FCcXFZSHRDbjUyNk5FX0xVMVJPbW1URnFDc3hzT2N1M2kxMmk3Z2NEdVk1VG96SHIzbWxvcFdoWS1KZXd3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww">https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUI0R3lZTGpCVDllNUEta3AxWVNpbUFHbDh2NElRZm5uOVp3cTVVZHNGUE5kd0NYYXRXM0lkWFFkRlRJYTB1NWlnazFpREpKOTNaaGFxdEdlZi1mZkp2dzVEOU1VLU5HT0tjVG83dS1fX2JzTTRRSlFEQzRKaVFVZGl6VkxfOVk">https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUI0R3lZTGpCVDllNUEta3AxWVNpbUFHbDh2NElRZm5uOVp3cTVVZHNGUE5kd0NYYXRXM0lkWFFkRlRJYTB1NWlnazFpREpKOTNaaGFxdEdlZi1mZkp2dzVEOU1VLU5HT0tjVG83dS1fX2JzTTRRSlFEQzRKaVFVZGl6VkxfOVk</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU">https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxPbTU2QWtMRmZ0TDlFNkxRYVhfTFUtR2FIOWpzRGxzbzRQamNtQWdkTTBOOWM1WUNCVk1WaVV5Q29QTVg4aU1PajA1M3laY2ZZR01pNHFvRnJoN181ckYxaUk4d21UNjFpeXJqeUVjc1Jyb0ttLVQyczk2VFVhclgxRWk1SGVsYWRSc3R1U3FoX0xQckR3VzdoU05lcm1pN2VZMWY5aWpQclQzcVpJT1NpaDBOX2ZVZzl5MUJGcnE4TFY">https://news.google.com/rss/articles/CBMiwAFBVV95cUxPbTU2QWtMRmZ0TDlFNkxRYVhfTFUtR2FIOWpzRGxzbzRQamNtQWdkTTBOOWM1WUNCVk1WaVV5Q29QTVg4aU1PajA1M3laY2ZZR01pNHFvRnJoN181ckYxaUk4d21UNjFpeXJqeUVjc1Jyb0ttLVQyczk2VFVhclgxRWk1SGVsYWRSc3R1U3FoX0xQckR3VzdoU05lcm1pN2VZMWY5aWpQclQzcVpJT1NpaDBOX2ZVZzl5MUJGcnE4TFY</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQZWUza010VldFSy1mdnJaSy1NdVZkS0wyVkppdElKc243ZE1FN1d6UFhVYS15eTU5YkczZURla3lDZUd1TWhLMEVoYjhjQUdOVTZKWVgycnRlZkFFU1dfaDBNNS0wc2pzQnNLUGZLTFZ0Q0laZkFoZjZQZ3JHSGhvc1A4NjZ5c0Vjc2FwTTBYbFkzUQ">https://news.google.com/rss/articles/CBMikgFBVV95cUxQZWUza010VldFSy1mdnJaSy1NdVZkS0wyVkppdElKc243ZE1FN1d6UFhVYS15eTU5YkczZURla3lDZUd1TWhLMEVoYjhjQUdOVTZKWVgycnRlZkFFU1dfaDBNNS0wc2pzQnNLUGZLTFZ0Q0laZkFoZjZQZ3JHSGhvc1A4NjZ5c0Vjc2FwTTBYbFkzUQ</a></li>
+
+
+
+<li><a href="https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2">https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ">https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxNSmx4M0FhSjdXRW94R0t5X1BoSDU0NVdjSjd3ZEhDRGI2OGRvdWZRWDkxbUFjc2RKZDlVdTRjVUk5aTRwenFzdmRqYV9JVFBBUEo0aFFXLXV3YlpzY1ZGMUpmeVdUbWtmemFmbHVJRUlkQUhtRUpraldFdWt2bHJSVzl5MWpMREdWcmc3Q2Y5MV9pSW10cEU5QlNVRksyeERoZUtfWkswNXV1ZmxHU1p6Rktpdw">https://news.google.com/rss/articles/CBMiswFBVV95cUxNSmx4M0FhSjdXRW94R0t5X1BoSDU0NVdjSjd3ZEhDRGI2OGRvdWZRWDkxbUFjc2RKZDlVdTRjVUk5aTRwenFzdmRqYV9JVFBBUEo0aFFXLXV3YlpzY1ZGMUpmeVdUbWtmemFmbHVJRUlkQUhtRUpraldFdWt2bHJSVzl5MWpMREdWcmc3Q2Y5MV9pSW10cEU5QlNVRksyeERoZUtfWkswNXV1ZmxHU1p6Rktpdw</a></li>
+
+
+
+<li><a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference/">https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference/</a></li>
+
+
+
+<li><a href="https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference">https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference</a></li>
+
+
+
+<li><a href="https://www.redhat.com/en/blog/crossing-threshold-dependable-open-source-ai-serving">https://www.redhat.com/en/blog/crossing-threshold-dependable-open-source-ai-serving</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZkRXZXY3YnpfZnlBOE43QWpWc09QdWZsQTZGd2xaZkdJaDhMTlhHZlJCTlBHWC00NGNhWG5fcW1jeUFUM1lwT1ZZVUhBclBKN0E2UFlwU2UxaENyeUZEV3JzSkZHNGNMR2lfVGQ2X1REY0ZDSHNCU2piWHNjSnUya1EyUFRwWHpYRjRwUFdXdVBmdUZlNndJbE8yVk04NGQtZjdvV0gweUZjZ3JwZjZ5SVNvaVU0WUNTblZ3">https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZkRXZXY3YnpfZnlBOE43QWpWc09QdWZsQTZGd2xaZkdJaDhMTlhHZlJCTlBHWC00NGNhWG5fcW1jeUFUM1lwT1ZZVUhBclBKN0E2UFlwU2UxaENyeUZEV3JzSkZHNGNMR2lfVGQ2X1REY0ZDSHNCU2piWHNjSnUya1EyUFRwWHpYRjRwUFdXdVBmdUZlNndJbE8yVk04NGQtZjdvV0gweUZjZ3JwZjZ5SVNvaVU0WUNTblZ3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuAFBVV95cUxOX195cFZ2MlpWQTlPLUJYLVRaZVEwNHdmLWJGT21nSGZYN2ZfZThTOUdpUGJfQ04tbVFBR0VibmNJUWxIdDdReGtwYWZJanItMjF4S3ppV0E0T2VJRjhzRlFmWFBsR2hlczF3aWY4MzVybko0VHFtbnZVampnZndMeU50UlF3Q09ZdmF1N3VuU2lSNlpZclNhZEc0b3NNeDFhN21tbWJKcmtWaHJvMUVtYXF1YUJJVE85">https://news.google.com/rss/articles/CBMiuAFBVV95cUxOX195cFZ2MlpWQTlPLUJYLVRaZVEwNHdmLWJGT21nSGZYN2ZfZThTOUdpUGJfQ04tbVFBR0VibmNJUWxIdDdReGtwYWZJanItMjF4S3ppV0E0T2VJRjhzRlFmWFBsR2hlczF3aWY4MzVybko0VHFtbnZVampnZndMeU50UlF3Q09ZdmF1N3VuU2lSNlpZclNhZEc0b3NNeDFhN21tbWJKcmtWaHJvMUVtYXF1YUJJVE85</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxNUjhSeUlXVVNqZmFOdWNVVVcxMVVDMnRIb1RwSHRJMURDcnJlSVNKYTYxNnZEVnRuMWRFTUxzQ3BRd0RYazNiSFdUcWg3ZTRmeGo3RGhJVm1tejdNdEJaTEpKV0p5clRiVlB4Tk1abjUtRlRjV2djTXNVSEszWERKMWw1Q3cyZlR6cTJkWTVKMmpXT2xoR0Ixb05ya1VTLTZTd0h5QXBTa0VYX2p1">https://news.google.com/rss/articles/CBMirAFBVV95cUxNUjhSeUlXVVNqZmFOdWNVVVcxMVVDMnRIb1RwSHRJMURDcnJlSVNKYTYxNnZEVnRuMWRFTUxzQ3BRd0RYazNiSFdUcWg3ZTRmeGo3RGhJVm1tejdNdEJaTEpKV0p5clRiVlB4Tk1abjUtRlRjV2djTXNVSEszWERKMWw1Q3cyZlR6cTJkWTVKMmpXT2xoR0Ixb05ya1VTLTZTd0h5QXBTa0VYX2p1</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> yahoo.com, investing.com, ibm.com, google.com, hpcwire.com, streetinsider.com, unite.ai, tokenpost.com, llm-d.ai, siliconangle.com, techtarget.com, martincid.com, forkast.news, redhat.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 14 unique domains, 16 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-10-20T12:02:52.000Z",
+      "domain": "ibm.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE",
+      "title": "llm-d 1.0 Advances Open, Cost-Efficient AI Inference for Production Scale"
+    },
+    {
+      "author": "ilreb",
+      "date": "2026-10-20T11:48:47.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference",
+      "title": "LLM-d 1.0, an open source stack for distributed inference"
+    },
+    {
+      "date": "2026-10-21T00:15:48.000Z",
+      "domain": "hpcwire.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZkRXZXY3YnpfZnlBOE43QWpWc09QdWZsQTZGd2xaZkdJaDhMTlhHZlJCTlBHWC00NGNhWG5fcW1jeUFUM1lwT1ZZVUhBclBKN0E2UFlwU2UxaENyeUZEV3JzSkZHNGNMR2lfVGQ2X1REY0ZDSHNCU2piWHNjSnUya1EyUFRwWHpYRjRwUFdXdVBmdUZlNndJbE8yVk04NGQtZjdvV0gweUZjZ3JwZjZ5SVNvaVU0WUNTblZ3",
+      "title": "IBM: llm-d 1.0 Advances Open, Cost-Efficient AI Inference for Production Scale"
+    },
+    {
+      "date": "2026-10-20T12:14:00.000Z",
+      "domain": "investing.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOX195cFZ2MlpWQTlPLUJYLVRaZVEwNHdmLWJGT21nSGZYN2ZfZThTOUdpUGJfQ04tbVFBR0VibmNJUWxIdDdReGtwYWZJanItMjF4S3ppV0E0T2VJRjhzRlFmWFBsR2hlczF3aWY4MzVybko0VHFtbnZVampnZndMeU50UlF3Q09ZdmF1N3VuU2lSNlpZclNhZEc0b3NNeDFhN21tbWJKcmtWaHJvMUVtYXF1YUJJVE85",
+      "title": "llm-d 1.0 released for distributed AI inference deployment By Investing.com"
+    },
+    {
+      "date": "2026-10-20T12:09:32.000Z",
+      "domain": "streetinsider.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPbTU2QWtMRmZ0TDlFNkxRYVhfTFUtR2FIOWpzRGxzbzRQamNtQWdkTTBOOWM1WUNCVk1WaVV5Q29QTVg4aU1PajA1M3laY2ZZR01pNHFvRnJoN181ckYxaUk4d21UNjFpeXJqeUVjc1Jyb0ttLVQyczk2VFVhclgxRWk1SGVsYWRSc3R1U3FoX0xQckR3VzdoU05lcm1pN2VZMWY5aWpQclQzcVpJT1NpaDBOX2ZVZzl5MUJGcnE4TFY",
+      "title": "llm-d 1.0 open-source AI inference project reaches major release"
+    },
+    {
+      "date": "2026-10-20T12:00:00.000Z",
+      "domain": "ibm.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUI0R3lZTGpCVDllNUEta3AxWVNpbUFHbDh2NElRZm5uOVp3cTVVZHNGUE5kd0NYYXRXM0lkWFFkRlRJYTB1NWlnazFpREpKOTNaaGFxdEdlZi1mZkp2dzVEOU1VLU5HT0tjVG83dS1fX2JzTTRRSlFEQzRKaVFVZGl6VkxfOVk",
+      "title": "llm-d 1.0 hardens open-source AI inference for day 2 production operations"
+    },
+    {
+      "date": "2026-10-20T12:37:09.000Z",
+      "domain": "unite.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww",
+      "title": "llm-d 1.0 Debuts at PyTorch Conference with Production Inference Stack"
+    },
+    {
+      "date": "2026-10-20T16:08:47.000Z",
+      "domain": "yahoo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQZWUza010VldFSy1mdnJaSy1NdVZkS0wyVkppdElKc243ZE1FN1d6UFhVYS15eTU5YkczZURla3lDZUd1TWhLMEVoYjhjQUdOVTZKWVgycnRlZkFFU1dfaDBNNS0wc2pzQnNLUGZLTFZ0Q0laZkFoZjZQZ3JHSGhvc1A4NjZ5c0Vjc2FwTTBYbFkzUQ",
+      "title": "IBM (IBM) Introduces Llm D 1.0 For Enterprise AI Inference"
+    },
+    {
+      "date": "2026-10-20T19:18:47.000Z",
+      "domain": "tokenpost.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU",
+      "title": "IBM-Backed llm-d 1.0 Adds Controls for AI Inference Workloads"
+    },
+    {
+      "author": "iLuddite",
+      "date": "2026-10-20T16:07:41.000Z",
+      "domain": "llm-d.ai",
+      "image": "",
+      "image_caption": "",
+      "link": "https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2",
+      "title": "llm-d v1.0: State-of-the-art inference"
+    },
+    {
+      "date": "2026-10-20T12:00:00.000Z",
+      "domain": "siliconangle.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxNUjhSeUlXVVNqZmFOdWNVVVcxMVVDMnRIb1RwSHRJMURDcnJlSVNKYTYxNnZEVnRuMWRFTUxzQ3BRd0RYazNiSFdUcWg3ZTRmeGo3RGhJVm1tejdNdEJaTEpKV0p5clRiVlB4Tk1abjUtRlRjV2djTXNVSEszWERKMWw1Q3cyZlR6cTJkWTVKMmpXT2xoR0Ixb05ya1VTLTZTd0h5QXBTa0VYX2p1",
+      "title": "IBM-backed llm-d framework adds controls for running AI models in-house"
+    },
+    {
+      "date": "2026-10-20T21:17:23.000Z",
+      "domain": "techtarget.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ",
+      "title": "CNCF\u0027s llm-d 1.0 tackles high AI inference costs"
+    },
+    {
+      "date": "2026-10-20T14:42:01.000Z",
+      "domain": "martincid.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxONTJzUjJ2dFpCd01XQk9ydUJpX3JSeUYxRGpKYWNjVnoxUHIwZEdieHQxN2lIYnY5NUdVRElIRTFBV1k0bXVOQzNtX0ZWbldEMFNDZlBPSS1rNU44RDMxT2ZfcXROb3FCcXFZSHRDbjUyNk5FX0xVMVJPbW1URnFDc3hzT2N1M2kxMmk3Z2NEdVk1VG96SHIzbWxvcFdoWS1KZXd3",
+      "title": "llm-d 1.0: Red Hat, IBM, Google and Nvidia bet that AI\u2019s real bill is inference, not training"
+    },
+    {
+      "date": "2026-10-21T02:36:00.000Z",
+      "domain": "forkast.news",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSmx4M0FhSjdXRW94R0t5X1BoSDU0NVdjSjd3ZEhDRGI2OGRvdWZRWDkxbUFjc2RKZDlVdTRjVUk5aTRwenFzdmRqYV9JVFBBUEo0aFFXLXV3YlpzY1ZGMUpmeVdUbWtmemFmbHVJRUlkQUhtRUpraldFdWt2bHJSVzl5MWpMREdWcmc3Q2Y5MV9pSW10cEU5QlNVRksyeERoZUtfWkswNXV1ZmxHU1p6Rktpdw",
+      "title": "llm-d 1.0 Ships the Serving Layer DeepSeek Withheld. The Sponsors Sell the Managed Version."
+    },
+    {
+      "date": "2026-10-20T11:30:00.000Z",
+      "domain": "google.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference/",
+      "title": "Announcing llm-d 1.0: Open distributed inference for agents on Google Cloud TPUs and GPUs"
+    },
+    {
+      "date": "2026-10-20T00:00:00.000Z",
+      "domain": "redhat.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.redhat.com/en/blog/crossing-threshold-dependable-open-source-ai-serving",
+      "title": "Crossing the threshold to dependable open source AI serving"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=yahoo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yahoo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=investing.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "investing.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ibm.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ibm.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=google.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "google.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hpcwire.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hpcwire.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=streetinsider.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "streetinsider.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=unite.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "unite.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tokenpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tokenpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=llm-d.ai\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "llm-d.ai"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=siliconangle.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "siliconangle.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techtarget.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "techtarget.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=martincid.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "martincid.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=forkast.news\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "forkast.news"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=redhat.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "redhat.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udda5\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Red Hat said its team initially focused on vLLM, an open-source inference server, as open-weight models spread. It then found that enterprise users needed cluster-level orchestration to coordinate model serving across infrastructure [redhat.com#1][ibm.com#2].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Cloud inference: Google Cloud says its GKE Inference Gateway runs the llm-d router. The project reports that a separate production integration reduced time to first token by more than 35% and doubled the prefix-cache hit rate from 35% to 70% in Vertex AI [llm-d.ai#1].",
+    "GPU utilization: Google says scheduling asynchronous inference during idle reinforcement-learning cycles can raise aggregate accelerator duty cycles from about 40% to above 70% [google.com#1].",
+    "Cloud providers: The project describes deployments on AWS and Oracle Cloud Infrastructure, including AWS-reported gains of up to 70% in tokens per second compared with standard vLLM on SageMaker HyperPod [llm-d.ai#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Infrastructure",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 16,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "TechTarget",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ"
+        }
+      ],
+      "text": "DigitalOcean: Salman Paracha, senior vice president of AI engineering, said distributed serving is essential to scaling the company\u0027s GPU fleet and improving cache reuse. He cautioned that software components optimized for different chip architectures are not readily interchangeable today [techtarget.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechTarget",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ"
+        }
+      ],
+      "text": "Moor Insights \u0026 Strategy analyst Jason Andersen said llm-d could help extend the useful life of older GPUs as performance gains from newer generations eventually slow. He warned that vendor support does not necessarily amount to a firm commitment to the project [techtarget.com#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-10-21T12:00:13.897Z",
+  "quote": "It delivers high-performance, distributed inference with the reliability and scale enterprises need within an operational model they already know",
+  "quote_attribution": "SiliconANGLE",
+  "quote_author": "Stephen Watt, vice president in Red Hat\u2019s chief technology officer\u2019s office",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMiowFBVV95cUxONTJzUjJ2dFpCd01XQk9ydUJpX3JSeUYxRGpKYWNjVnoxUHIwZEdieHQxN2lIYnY5NUdVRElIRTFBV1k0bXVOQzNtX0ZWbldEMFNDZlBPSS1rNU44RDMxT2ZfcXROb3FCcXFZSHRDbjUyNk5FX0xVMVJPbW1URnFDc3hzT2N1M2kxMmk3Z2NEdVk1VG96SHIzbWxvcFdoWS1KZXd3",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOSWV0cmxCLVpwV0taa3phVXl0ejFkRUZDbURacVZpZ2JqV1FybTRqOXZmaEF5YzRlNkNDSVR4VVJobHVFQVpiZU9pdnVKZzlUWWNZaFBNOUwwSkNwWlpmQWVEdWhPUmo1NkFtTE9vMjM4Z1FNaDJtWHg1MC1yZVZ0dVlGanBnY3JWaW5ZSm9YdWhvMGdfdEww",
+    "https://news.google.com/rss/articles/CBMihwFBVV95cUxPTUI0R3lZTGpCVDllNUEta3AxWVNpbUFHbDh2NElRZm5uOVp3cTVVZHNGUE5kd0NYYXRXM0lkWFFkRlRJYTB1NWlnazFpREpKOTNaaGFxdEdlZi1mZkp2dzVEOU1VLU5HT0tjVG83dS1fX2JzTTRRSlFEQzRKaVFVZGl6VkxfOVk",
+    "https://news.google.com/rss/articles/CBMiW0FVX3lxTE52R2JCUFlVcmNwMnVMdUVIUFo1STZCVTNtcUtxZUtyd0hOY2IzNzJnQW5icmViR2VpTVlxVjZmQUdKSTBQVFc3THNtckVUSGpTWDRrTGRCUXZBeFU",
+    "https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE",
+    "https://news.google.com/rss/articles/CBMiwAFBVV95cUxPbTU2QWtMRmZ0TDlFNkxRYVhfTFUtR2FIOWpzRGxzbzRQamNtQWdkTTBOOWM1WUNCVk1WaVV5Q29QTVg4aU1PajA1M3laY2ZZR01pNHFvRnJoN181ckYxaUk4d21UNjFpeXJqeUVjc1Jyb0ttLVQyczk2VFVhclgxRWk1SGVsYWRSc3R1U3FoX0xQckR3VzdoU05lcm1pN2VZMWY5aWpQclQzcVpJT1NpaDBOX2ZVZzl5MUJGcnE4TFY",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQZWUza010VldFSy1mdnJaSy1NdVZkS0wyVkppdElKc243ZE1FN1d6UFhVYS15eTU5YkczZURla3lDZUd1TWhLMEVoYjhjQUdOVTZKWVgycnRlZkFFU1dfaDBNNS0wc2pzQnNLUGZLTFZ0Q0laZkFoZjZQZ3JHSGhvc1A4NjZ5c0Vjc2FwTTBYbFkzUQ",
+    "https://llm-d.ai/blog/llm-d-v1.0-state-of-the-art-inference-ready-for-day-2",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxNbUpERHVVSzFqeXJFUl81MlFWSVo4NmNxbUpPUkx3TG5pcHM3ZTRzVlBEWnN6cEd5Q2lLc3lHWS1faXMwUkV6VGpNaHFkWmU3dTA4WnpneUpLenJ1elpHZEx3cHpIM0VXUGJScmctNkFlcnVoU3dKU3BJOW41Y1JmOVZzaXRIX3dJVmpmdE9RWFpTOXdZakN2M0EyMzZsZG5meGVLOG02RXdkUQ",
+    "https://news.google.com/rss/articles/CBMiswFBVV95cUxNSmx4M0FhSjdXRW94R0t5X1BoSDU0NVdjSjd3ZEhDRGI2OGRvdWZRWDkxbUFjc2RKZDlVdTRjVUk5aTRwenFzdmRqYV9JVFBBUEo0aFFXLXV3YlpzY1ZGMUpmeVdUbWtmemFmbHVJRUlkQUhtRUpraldFdWt2bHJSVzl5MWpMREdWcmc3Q2Y5MV9pSW10cEU5QlNVRksyeERoZUtfWkswNXV1ZmxHU1p6Rktpdw",
+    "https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference/",
+    "https://cloud.google.com/blog/topics/ai-infrastructure/llm-d-1-0-an-open-source-stack-for-distributed-inference",
+    "https://www.redhat.com/en/blog/crossing-threshold-dependable-open-source-ai-serving",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxNZkRXZXY3YnpfZnlBOE43QWpWc09QdWZsQTZGd2xaZkdJaDhMTlhHZlJCTlBHWC00NGNhWG5fcW1jeUFUM1lwT1ZZVUhBclBKN0E2UFlwU2UxaENyeUZEV3JzSkZHNGNMR2lfVGQ2X1REY0ZDSHNCU2piWHNjSnUya1EyUFRwWHpYRjRwUFdXdVBmdUZlNndJbE8yVk04NGQtZjdvV0gweUZjZ3JwZjZ5SVNvaVU0WUNTblZ3",
+    "https://news.google.com/rss/articles/CBMiuAFBVV95cUxOX195cFZ2MlpWQTlPLUJYLVRaZVEwNHdmLWJGT21nSGZYN2ZfZThTOUdpUGJfQ04tbVFBR0VibmNJUWxIdDdReGtwYWZJanItMjF4S3ppV0E0T2VJRjhzRlFmWFBsR2hlczF3aWY4MzVybko0VHFtbnZVampnZndMeU50UlF3Q09ZdmF1N3VuU2lSNlpZclNhZEc0b3NNeDFhN21tbWJKcmtWaHJvMUVtYXF1YUJJVE85",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxNUjhSeUlXVVNqZmFOdWNVVVcxMVVDMnRIb1RwSHRJMURDcnJlSVNKYTYxNnZEVnRuMWRFTUxzQ3BRd0RYazNiSFdUcWg3ZTRmeGo3RGhJVm1tejdNdEJaTEpKV0p5clRiVlB4Tk1abjUtRlRjV2djTXNVSEszWERKMWw1Q3cyZlR6cTJkWTVKMmpXT2xoR0Ixb05ya1VTLTZTd0h5QXBTa0VYX2p1"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "Active-active routing and failover for individual inference requests remain planned; version 1.0 provides a standby router and high availability [tokenpost.com#1].",
+      "question": "Which reliability feature is still planned rather than included in version 1.0?"
+    }
+  ],
+  "summary": "Contributors to llm-d, an open-source system for distributing large language model inference across computing clusters, released version 1.0 on Oct. 20 at the PyTorch Conference North America. The project, governed by the Cloud Native Computing Foundation (CNCF), adds controls for sharing infrastructure among users, upgrading services without interruption and routing multi-step AI-agent requests to servers that retain reusable context [ibm.com#1][google.com#1][redhat.com#1].\n\nThe release targets operating and computing costs as agents generate repeated bursts of requests. In a separate benchmark, IBM and Red Hat said llm-d served up to 3,000 coding agents on 544 Nvidia H100 GPUs, with peak output above 6.6 million tokens per minute. They estimated the cost per token was one-fifth to one-tenth of equivalent commercial API pricing [unite.ai#1][ibm.com#1]. The companies reported those results from demonstrations. The software is available as open source, and Google Cloud said it is integrating it into Google Kubernetes Engine [martincid.com#1][google.com#1].",
+  "talking_points": [
+    "Cache reuse: IBM Research reported a prefix-cache hit rate of approximately 98% and a blended serving cost of about $0.11 per million tokens in a quantum error-correction research workload [ibm.com#1][hpcwire.com#1].",
+    "Google test: Google reported that cache-aware routing and host-memory offloading on its Ironwood TPU cut median time to first token by more than 85% and increased throughput to 2.4 times that of a standard Kubernetes service [google.com#1].",
+    "Flow controls: The version 1.0 router can queue and prioritize requests by workload and tenant. It retains first-come, first-served scheduling unless operators enable new policies [llm-d.ai#1][tokenpost.com#1].",
+    "Current adoption: DigitalOcean uses its own llm-d fork for Managed Agents and Serverless Inference, while JetBrains runs the framework behind its Junie Lite plan [techtarget.com#1][investing.com#1]."
+  ],
+  "technical_details": [
+    "Disaggregated serving: The system separates prompt processing (prefill) and token generation (decode) into distinct pools. It coordinates updates to both as one logical unit so traffic can be routed to compatible versions [google.com#1][unite.ai#1].",
+    "Tiered KV cache: When accelerator memory fills, llm-d integrations can move cached context to host memory and then to storage, preserving reusable state for later requests rather than immediately evicting it [google.com#1].",
+    "Priority scheduling: The router maintains separate request queues by tenant and priority, dispatches higher-priority work first and cycles fairly among tenants within a priority band. A probabilistic admission controller can shed excess load [llm-d.ai#1][unite.ai#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Red Hat, IBM, Google, CoreWeave and Nvidia founded llm-d [ibm.com#1].",
+      "date": "2025",
+      "date_iso": "2025"
+    },
+    {
+      "content": "Project benchmark detailed agentic serving costs and cache reuse [unite.ai#1].",
+      "date": "22 July 2026",
+      "date_iso": "2026-07-22"
+    },
+    {
+      "content": "A benchmark tested 3,000 coding agents on 544 H100 GPUs [tokenpost.com#1].",
+      "date": "8 September 2026",
+      "date_iso": "2026-09-08"
+    },
+    {
+      "content": "Contributors announced llm-d 1.0 at the PyTorch Conference [ibm.com#1][google.com#1].",
+      "date": "20 October 2026",
+      "date_iso": "2026-10-20"
+    }
+  ],
+  "title": "Open-source llm-d 1.0 adds controls for production AI inference",
+  "travel_advisory": "",
+  "unique_domains": 14,
+  "url": "https://news.google.com/rss/articles/CBMirgFBVV95cUxNZXI4b3ZOV1VvRUIxdmJXRTRLVVluX2ViQUwxdV8yZnlQcGxFak5QeWV2MnhvbUtVQ3N4SDZHM3d2dHZWR1R4M1FFZmNrZWo1cXRsRE5nTDJtTjA0R19IZFFpS2xnYXZFbzR1aUxGUnVfQ19NdVo5RTRuNGlNN0FlRnB1eWtDa1NSZFo5bXFRU1l0c1UzZjBwVHdsVXV2WVFIcFMxQjQ0eE1TckhWYlE",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
