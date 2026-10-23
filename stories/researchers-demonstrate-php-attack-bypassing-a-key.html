@@ -1,0 +1,2210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Researchers demonstrate PHP attack bypassing a key server defense - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Researchers demonstrate PHP attack bypassing a key server defense</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.nytimes.com/2026/10/22/technology/what-is-php-vulnerability-risks.html"><img src="https://kagiproxy.com/img/yuKQI2gf5CW1oWupT36ItkZ6YD-F4iLaFqfy1jvj4RLx028hgTuYsqnU2AJ7F1Z-zVC0YNanuihwLO0DhfLgsJx1-WFrib99StrVG2eArC7fOSfJeSGORpTYmSCqXBz8l1Dcu5sMNXxXzGtUT4v7PJlysB30z1UO2JKXy0PpYkv3NQ" alt="A programmer in Guernica, Spain, on Thursday, working on PHP code, software used throughout the internet." title="A programmer in Guernica, Spain, on Thursday, working on PHP code, software used throughout the internet. (nytimes.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+A programmer in Guernica, Spain, on Thursday, working on PHP code, software used throughout the internet. <span class='credit'>(nytimes.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Cybersecurity firm VulnCheck has developed an exploit that bypasses Address Space Layout Randomization (ASLR), a defense previously considered a major obstacle to exploiting PHP’s PHP2Shell flaw on real-world x86-64 servers <a href="https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883" class="footnote-ref">[22]</a>. The two PHP vulnerabilities can let attackers run code remotely without authentication, and VulnCheck’s demonstration bypasses a widely used server protection <a href="https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html" class="footnote-ref">[19]</a><a href="https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883" class="footnote-ref">[22]</a>. VulnCheck has restricted access to the exploit to its paying intelligence customers <a href="https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883" class="footnote-ref">[22]</a>.
+
+The PHP Foundation says cybersecurity contractor Chainguard violated an agreed embargo, after which details began circulating and the project moved its patch release forward <a href="https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html" class="footnote-ref">[59]</a>. Cloud providers and security researchers have also reported probes before public disclosure <a href="https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/" class="footnote-ref">[24]</a><a href="https://www.bleepingcomputer.com/news/security/amazon-says-php2shell-exploitation-began-4-days-before-patches/" class="footnote-ref">[35]</a>.
+
+PHP is also bundled into services and third-party products. Updating a content-management system or its plugins alone does not necessarily fix the underlying PHP runtime, and security vendors are still assessing products that bundle it <a href="https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/" class="footnote-ref">[8]</a><a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" class="footnote-ref">[21]</a>. Cogent Security reported that, by 8 p.m. ET Wednesday, fewer than 1% of affected assets it tracked had been patched <a href="https://mashable.com/tech/php-vulnerability-security-update-explained" class="footnote-ref">[4]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.theregister.com/cyber-crime/2026/10/22/hackers-pile-on-php2shell-as-aws-reveals-attacks-began-before-disclosure/5304749">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>Adversaries are clearly spending time (and tokens) on this bug</p>
+
+<cite>— Spencer McIntyre, director of exploit development at VulnCheck (The Register)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Cloudflare’s Matthew Prince said the company saw thousands of exploit attempts in the 10 hours before public disclosure, tens of thousands within 45 minutes afterward, hundreds of thousands within two hours, and millions by the time of his post <a href="https://mashable.com/tech/php-vulnerability-security-update-explained" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>PHP Foundation: The foundation called the prolonged delay in resolving the out-of-memory flaw a structural failure, citing a consensus-driven decision process and a shortage of developers with deep engine expertise. It said it would move to majority decisions and encourage compromises <a href="https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/" class="footnote-ref">[23]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/">Neowin</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Red Hat: Red Hat rated the vulnerabilities less severely than the National Vulnerability Database did. It said reliable exploitation of one requires precise heap manipulation and timing, and that remote code execution is difficult in practice and typically depends on non-default behavior <a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" class="footnote-ref">[21]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/">SecurityWeek</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>2024:</strong> PHP developers identified early signs of the out-of-memory issue <a href="https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html" class="footnote-ref">[59]</a></li>
+
+
+
+<li><strong>17 October 2026:</strong> Amazon detected an attempt to exploit PHP2Shell against its MadPot honeypot <a href="https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html" class="footnote-ref">[19]</a></li>
+
+
+
+<li><strong>20 October 2026:</strong> PHP vulnerability identifiers began circulating online before scheduled disclosure <a href="https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html" class="footnote-ref">[59]</a></li>
+
+
+
+<li><strong>21 October 2026:</strong> PHP issued emergency fixes a day ahead of planned disclosure <a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" class="footnote-ref">[21]</a></li>
+
+
+
+<li><strong>22 October 2026:</strong> VulnCheck reported an exploit bypassing ASLR on x86-64 servers <a href="https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883" class="footnote-ref">[22]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>VulnCheck&#x27;s demonstration targeted CVE-2026-109618, an out-of-memory corruption flaw that can lead to remote code execution <a href="https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883" class="footnote-ref">[22]</a>.</li>
+
+<li>Exploit traces: CrowdStrike said exploitation can leave worker processes stable and return normal HTTP 200 responses, with no application code recorded. It identified a memory-limit fatal error in the web server error log as the only server-side trace <a href="https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html" class="footnote-ref">[19]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Software and cloud vendors: Cisco was reviewing more than 30 products and cloud services; AWS was addressing exposure in Elastic Beanstalk, WorkMail, Amazon Linux and Lightsail, while Google Cloud updated supported PHP runtimes in App Engine <a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" class="footnote-ref">[21]</a>.</li>
+
+<li>Legacy deployments: Cisco Talos estimated that about half of PHP systems may not receive a patch and urged operators using PHP 8.1 or earlier to move to a supported release <a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/" class="footnote-ref">[21]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>The PHP Foundation said it had known about the underlying out-of-memory issue since 2024, but researchers had not yet found a concrete route to remote code execution <a href="https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html" class="footnote-ref">[59]</a><a href="https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/" class="footnote-ref">[23]</a>. An external security audit helped identify the problem, and AI-assisted research later clarified how attackers could exploit it <a href="https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html" class="footnote-ref">[59]</a><a href="https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/" class="footnote-ref">[23]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> What should operators do if they cannot secure an affected system promptly?</p>
+
+<p><strong>A:</strong> U.S. cybersecurity agencies urged organizations to disconnect affected systems that cannot be secured promptly <a href="https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/" class="footnote-ref">[8]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Check for PHP bundled into services and products: Inventory server images, hosting components and third-party products rather than checking only websites that explicitly advertise PHP. Update the runtime itself because content-management system or plugin updates may not address the underlying flaw <a href="https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/" class="footnote-ref">[8]</a><a href="https://www.linuxinsider.com/story/internet-wide-threat-has-security-teams-scrambling-to-patch-php-180689.html" class="footnote-ref">[60]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.computerweekly.com/news/366652674/Botched-PHP2Shell-disclosure-revealed-as-panic-continues">https://www.computerweekly.com/news/366652674/Botched-PHP2Shell-disclosure-revealed-as-panic-continues</a></li>
+
+
+
+<li><a href="https://www.schneier.com/blog/archives/2026/10/new-serious-php-vulnerabilities-released-and-patched.html">https://www.schneier.com/blog/archives/2026/10/new-serious-php-vulnerabilities-released-and-patched.html</a></li>
+
+
+
+<li><a href="https://business.nikkei.com/atcl/seminar/19/00030/102200816/">https://business.nikkei.com/atcl/seminar/19/00030/102200816/</a></li>
+
+
+
+<li><a href="https://www.business-standard.com/world-news/governments-firms-rush-to-patch-php-flaws-as-cyberattacks-surge-globally-126102201717_1.html">https://www.business-standard.com/world-news/governments-firms-rush-to-patch-php-flaws-as-cyberattacks-surge-globally-126102201717_1.html</a></li>
+
+
+
+<li><a href="https://www.computerworld.dk/art/297258/morgen-briefing-kritisk-php-fejl-sender-hjemmesider-over-hele-verden-i-sort-du-skal-opdatere-oejeblikkeligt-antal-af-angrebsforsoeg-eksploderer-via-saarbarhed-i-php-saadan-blev-ukendte-saarbarheder-i-php-opdaget-efter-20-aar">https://www.computerworld.dk/art/297258/morgen-briefing-kritisk-php-fejl-sender-hjemmesider-over-hele-verden-i-sort-du-skal-opdatere-oejeblikkeligt-antal-af-angrebsforsoeg-eksploderer-via-saarbarhed-i-php-saadan-blev-ukendte-saarbarheder-i-php-opdaget-efter-20-aar</a></li>
+
+
+
+<li><a href="https://arstechnica.com/security/2026/10/hackers-got-a-four-day-head-start-on-epic-php2shell-vulnerability/">https://arstechnica.com/security/2026/10/hackers-got-a-four-day-head-start-on-epic-php2shell-vulnerability/</a></li>
+
+
+
+<li><a href="https://www.theguardian.com/technology/2026/oct/22/websites-across-world-hit-by-millions-of-attempts-to-exploit-php-code-flaw">https://www.theguardian.com/technology/2026/oct/22/websites-across-world-hit-by-millions-of-attempts-to-exploit-php-code-flaw</a></li>
+
+
+
+<li><a href="https://www.bbc.com/thai/articles/ckjwe9945ywyo">https://www.bbc.com/thai/articles/ckjwe9945ywyo</a></li>
+
+
+
+<li><a href="https://www.capital.bg/biznes/tehnologii_i_nauka/2026/10/22/4969864_bezprecedentna_kritichna_uiazvimost_v_php_raztursi_ueb/">https://www.capital.bg/biznes/tehnologii_i_nauka/2026/10/22/4969864_bezprecedentna_kritichna_uiazvimost_v_php_raztursi_ueb/</a></li>
+
+
+
+<li><a href="https://exxpress.at/economy/millionen-hacker-angriffe-experte-fordert-unsichere-webseiten-sofort-abschalten/">https://exxpress.at/economy/millionen-hacker-angriffe-experte-fordert-unsichere-webseiten-sofort-abschalten/</a></li>
+
+
+
+<li><a href="https://www.bbc.com/korean/articles/ck3r5j1pr119o">https://www.bbc.com/korean/articles/ck3r5j1pr119o</a></li>
+
+
+
+<li><a href="https://tech.slashdot.org/story/26/10/22/1717246/zoe-kleinman-php-is-the-cyber-equivalent-of-an-unexploded-bomb">https://tech.slashdot.org/story/26/10/22/1717246/zoe-kleinman-php-is-the-cyber-equivalent-of-an-unexploded-bomb</a></li>
+
+
+
+<li><a href="https://www.business-standard.com/world-news/what-is-php-why-are-governments-and-businesses-worldwide-going-offline-126102300108_1.html">https://www.business-standard.com/world-news/what-is-php-why-are-governments-and-businesses-worldwide-going-offline-126102300108_1.html</a></li>
+
+
+
+<li><a href="https://polizeiticker.ch/artikel/php-sicherheitsluecke-weltweit-zahlreiche-websites-betroffen-292856">https://polizeiticker.ch/artikel/php-sicherheitsluecke-weltweit-zahlreiche-websites-betroffen-292856</a></li>
+
+
+
+<li><a href="https://mashable.com/tech/php-vulnerability-security-update-explained">https://mashable.com/tech/php-vulnerability-security-update-explained</a></li>
+
+
+
+<li><a href="https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html">https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html</a></li>
+
+
+
+<li><a href="https://www.storm.mg/article/11175311">https://www.storm.mg/article/11175311</a></li>
+
+
+
+<li><a href="https://www.dawn.com/news/2038965/websites-down-what-is-php-and-how-has-it-raised-ai-hacking-fears">https://www.dawn.com/news/2038965/websites-down-what-is-php-and-how-has-it-raised-ai-hacking-fears</a></li>
+
+
+
+<li><a href="https://www.bleepingcomputer.com/news/security/amazon-says-php2shell-exploitation-began-4-days-before-patches/">https://www.bleepingcomputer.com/news/security/amazon-says-php2shell-exploitation-began-4-days-before-patches/</a></li>
+
+
+
+<li><a href="https://www.tomshardware.com/tech-industry/cyber-security/openai-says-gpt-5-6-sol-helped-uncover-critical-php-flaws-that-could-affect-70-percent-of-websites-ai-assisted-researchers-turned-two-year-old-bug-that-stumped-human-developers-into-working-exploits-in-two-weeks">https://www.tomshardware.com/tech-industry/cyber-security/openai-says-gpt-5-6-sol-helped-uncover-critical-php-flaws-that-could-affect-70-percent-of-websites-ai-assisted-researchers-turned-two-year-old-bug-that-stumped-human-developers-into-working-exploits-in-two-weeks</a></li>
+
+
+
+<li><a href="https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/">https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/</a></li>
+
+
+
+<li><a href="https://www.linuxinsider.com/story/internet-wide-threat-has-security-teams-scrambling-to-patch-php-180689.html">https://www.linuxinsider.com/story/internet-wide-threat-has-security-teams-scrambling-to-patch-php-180689.html</a></li>
+
+
+
+<li><a href="https://decrypt.co/381662/internet-safe-again-after-php-nightmare-what-you-need-know">https://decrypt.co/381662/internet-safe-again-after-php-nightmare-what-you-need-know</a></li>
+
+
+
+<li><a href="https://www.koreaherald.com/article/10912068">https://www.koreaherald.com/article/10912068</a></li>
+
+
+
+<li><a href="https://en.dailypakistan.com.pk/22-Oct-2026/bbc-wikipedia-among-major-sites-hit-by-global-cybersecurity-scare-over-critical-php-flaws">https://en.dailypakistan.com.pk/22-Oct-2026/bbc-wikipedia-among-major-sites-hit-by-global-cybersecurity-scare-over-critical-php-flaws</a></li>
+
+
+
+<li><a href="https://9to5mac.com/2026/10/22/whats-going-on-with-the-web-the-php-issue-and-sites-going-offline/">https://9to5mac.com/2026/10/22/whats-going-on-with-the-web-the-php-issue-and-sites-going-offline/</a></li>
+
+
+
+<li><a href="https://insiderpaper.com/list-of-websites-affected-by-critical-php-flaws/">https://insiderpaper.com/list-of-websites-affected-by-critical-php-flaws/</a></li>
+
+
+
+<li><a href="https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/">https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/</a></li>
+
+
+
+<li><a href="https://www.rte.ie/news/2026/1022/1596428-php-ai-issue/">https://www.rte.ie/news/2026/1022/1596428-php-ai-issue/</a></li>
+
+
+
+<li><a href="https://www.cumhuriyet.com.tr/dunya/dunya-genelinde-siber-alarm-internetin-yuzde-70-ini-ilgilendiren-kritik-acik-dakikada-milyonlarca-saldiri-2549458">https://www.cumhuriyet.com.tr/dunya/dunya-genelinde-siber-alarm-internetin-yuzde-70-ini-ilgilendiren-kritik-acik-dakikada-milyonlarca-saldiri-2549458</a></li>
+
+
+
+<li><a href="https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/">https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/</a></li>
+
+
+
+<li><a href="https://www.nzz.ch/meinung/die-php-luecke-zeigt-das-internet-ist-nicht-sicher-genug-fuer-das-ki-zeitalter-ld.10042034">https://www.nzz.ch/meinung/die-php-luecke-zeigt-das-internet-ist-nicht-sicher-genug-fuer-das-ki-zeitalter-ld.10042034</a></li>
+
+
+
+<li><a href="https://www.siliconrepublic.com/enterprise/ai-helps-uncover-critical-php-flaw-threatening-70pc-of-internet">https://www.siliconrepublic.com/enterprise/ai-helps-uncover-critical-php-flaw-threatening-70pc-of-internet</a></li>
+
+
+
+<li><a href="https://www.bbc.co.uk/news/articles/c3qjnwye0ep5o">https://www.bbc.co.uk/news/articles/c3qjnwye0ep5o</a></li>
+
+
+
+<li><a href="https://www.lalibre.be/economie/digital/2026/10/22/des-sites-web-perturbes-dans-le-monde-entier-lune-des-vulnerabilites-les-plus-marquantes-de-ces-dernieres-annees-FWCHOIXVB5ENXBDLFRNF2XTE64/">https://www.lalibre.be/economie/digital/2026/10/22/des-sites-web-perturbes-dans-le-monde-entier-lune-des-vulnerabilites-les-plus-marquantes-de-ces-dernieres-annees-FWCHOIXVB5ENXBDLFRNF2XTE64/</a></li>
+
+
+
+<li><a href="https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883">https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883</a></li>
+
+
+
+<li><a href="https://www.faz.net/aktuell/wirtschaft/unternehmen/jackpot-fuer-angreifer-it-fachmann-mirko-ross-ueber-die-php-schwachstelle-201611025.html">https://www.faz.net/aktuell/wirtschaft/unternehmen/jackpot-fuer-angreifer-it-fachmann-mirko-ross-ueber-die-php-schwachstelle-201611025.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi1AFBVV95cUxNekpxdWgweU5UYmpFNm1fdWNFN19OQXZHUmJPR2lOazVKMFlNVUMxS0p6MlVrUEEwc1pNN3loblh3bHdDQ2poQzJBUGhIUkhYbHZPUUFRcWdrWEd2dmhROXM2Y0ZCcDBFdnh3N1YyTU00UFhzSEFxRS1nMFJoRG9vczBLTmdsOS1leDRzZ3BkVG5lYzlWX3M0ZkdjZkRmLTE0UmJvdEFtdGEtZUU5cmc5WDd1LU9Cd0VyRFFLclJUaTdkRFFPTjJLNzlFWTF5Zm83dTRLQw">https://news.google.com/rss/articles/CBMi1AFBVV95cUxNekpxdWgweU5UYmpFNm1fdWNFN19OQXZHUmJPR2lOazVKMFlNVUMxS0p6MlVrUEEwc1pNN3loblh3bHdDQ2poQzJBUGhIUkhYbHZPUUFRcWdrWEd2dmhROXM2Y0ZCcDBFdnh3N1YyTU00UFhzSEFxRS1nMFJoRG9vczBLTmdsOS1leDRzZ3BkVG5lYzlWX3M0ZkdjZkRmLTE0UmJvdEFtdGEtZUU5cmc5WDd1LU9Cd0VyRFFLclJUaTdkRFFPTjJLNzlFWTF5Zm83dTRLQw</a></li>
+
+
+
+
+
+<li><a href="https://www.wsws.org/en/articles/2026/10/23/rfdk-o23.html">https://www.wsws.org/en/articles/2026/10/23/rfdk-o23.html</a></li>
+
+
+
+<li><a href="https://www.dhakatribune.com/bangladesh/422690/php-security-flaw-triggers-global-cyber-alert">https://www.dhakatribune.com/bangladesh/422690/php-security-flaw-triggers-global-cyber-alert</a></li>
+
+
+
+<li><a href="https://indianexpress.com/article/technology/cert-in-php-vulnerability-alert-india-cybersecurity-warning-us-nsa-php-alert-10931962/">https://indianexpress.com/article/technology/cert-in-php-vulnerability-alert-india-cybersecurity-warning-us-nsa-php-alert-10931962/</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/cloudflare-sees-millions-of-exploit-attempts-after-php-disclosure-14054496.html">https://www.firstpost.com/tech/cloudflare-sees-millions-of-exploit-attempts-after-php-disclosure-14054496.html</a></li>
+
+
+
+<li><a href="https://www.theglobeandmail.com/world/article-what-to-know-php-ai-detected-security-bug-websites/">https://www.theglobeandmail.com/world/article-what-to-know-php-ai-detected-security-bug-websites/</a></li>
+
+
+
+<li><a href="https://www.theregister.com/security/2026/10/22/php2shell-puts-dozens-of-uk-government-services-out-of-service/5304840">https://www.theregister.com/security/2026/10/22/php2shell-puts-dozens-of-uk-government-services-out-of-service/5304840</a></li>
+
+
+
+<li><a href="https://www.bbc.co.uk/news/articles/cw98z6qlyvg3o">https://www.bbc.co.uk/news/articles/cw98z6qlyvg3o</a></li>
+
+
+
+<li><a href="https://www.storm.mg/article/11175259">https://www.storm.mg/article/11175259</a></li>
+
+
+
+<li><a href="https://www.ovb-online.de/weltspiegel/leute/was-die-php-sicherheitsluecke-fuer-das-internet-bedeutet-zr-94552760.html">https://www.ovb-online.de/weltspiegel/leute/was-die-php-sicherheitsluecke-fuer-das-internet-bedeutet-zr-94552760.html</a></li>
+
+
+
+<li><a href="https://www.techmeme.com/261022/p58#a261022p58">https://www.techmeme.com/261022/p58#a261022p58</a></li>
+
+
+
+<li><a href="https://www.bbc.co.uk/news/articles/c9j34zgmkxx1o">https://www.bbc.co.uk/news/articles/c9j34zgmkxx1o</a></li>
+
+
+
+<li><a href="https://www.techcentral.ie/websites-go-dark-as-ai-exposes-critical-security-flaws/">https://www.techcentral.ie/websites-go-dark-as-ai-exposes-critical-security-flaws/</a></li>
+
+
+
+<li><a href="https://techxplore.com/news/2026-10-patch-software-vulnerability-impact-websites.html">https://techxplore.com/news/2026-10-patch-software-vulnerability-impact-websites.html</a></li>
+
+
+
+<li><a href="https://www.nacion.com/el-mundo/hallazgo-en-sistema-php-amenaza-la-seguridad-de/BNF344J6EVEGPACMEIQBPCSR7E/story/">https://www.nacion.com/el-mundo/hallazgo-en-sistema-php-amenaza-la-seguridad-de/BNF344J6EVEGPACMEIQBPCSR7E/story/</a></li>
+
+
+
+<li><a href="https://news.ltn.com.tw/news/world/paper/1775607">https://news.ltn.com.tw/news/world/paper/1775607</a></li>
+
+
+
+<li><a href="https://www.swr.de/swraktuell-radio/sicherheitsluecke-internet-php-hacker-bilanz-100.html">https://www.swr.de/swraktuell-radio/sicherheitsluecke-internet-php-hacker-bilanz-100.html</a></li>
+
+
+
+<li><a href="https://www.404media.co/php2shell-black-october-ai-is-changing-everything-about-hacking-no-one-knows-what-happens-next/">https://www.404media.co/php2shell-black-october-ai-is-changing-everything-about-hacking-no-one-knows-what-happens-next/</a></li>
+
+
+
+<li><a href="https://www.nytimes.com/2026/10/22/technology/what-is-php-vulnerability-risks.html">https://www.nytimes.com/2026/10/22/technology/what-is-php-vulnerability-risks.html</a></li>
+
+
+
+<li><a href="https://www.prensa.com/bbc/que-es-php-y-por-que-genero-una-falla-de-seguridad-en-internet-que-desato-una-alerta-global/">https://www.prensa.com/bbc/que-es-php-y-por-que-genero-una-falla-de-seguridad-en-internet-que-desato-una-alerta-global/</a></li>
+
+
+
+<li><a href="https://www.ft.com/content/d438af1e-a48c-4aeb-8c84-00cdb5e741e3">https://www.ft.com/content/d438af1e-a48c-4aeb-8c84-00cdb5e741e3</a></li>
+
+
+
+<li><a href="https://techxplore.com/news/2026-10-critical-flaw-affecting-websites-cybersecurity.html">https://techxplore.com/news/2026-10-critical-flaw-affecting-websites-cybersecurity.html</a></li>
+
+
+
+<li><a href="https://www.cna.com.tw/news/ait/202610220064.aspx">https://www.cna.com.tw/news/ait/202610220064.aspx</a></li>
+
+
+
+<li><a href="https://thematter.co/brief/266760/266760">https://thematter.co/brief/266760/266760</a></li>
+
+
+
+<li><a href="https://www.pcworld.com/article/3266558/ai-helped-uncover-a-security-nightmare-in-the-webs-backbone-should-you-be-worried.html">https://www.pcworld.com/article/3266558/ai-helped-uncover-a-security-nightmare-in-the-webs-backbone-should-you-be-worried.html</a></li>
+
+
+
+<li><a href="https://www.nytimes.com/2026/10/22/world/php-vulnerability-websites-cybersecurity-ai.html">https://www.nytimes.com/2026/10/22/world/php-vulnerability-websites-cybersecurity-ai.html</a></li>
+
+
+
+<li><a href="https://www.defenceeye.co.uk/2026/10/22/php-vulnerability-affecting-websites/">https://www.defenceeye.co.uk/2026/10/22/php-vulnerability-affecting-websites/</a></li>
+
+
+
+<li><a href="https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html">https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html</a></li>
+
+
+
+<li><a href="https://abcnews.com/Technology/wireStory/rush-patch-ai-discovered-software-vulnerability-impact-70-137453246">https://abcnews.com/Technology/wireStory/rush-patch-ai-discovered-software-vulnerability-impact-70-137453246</a></li>
+
+
+
+<li><a href="https://www.theguardian.com/news/video/2026/oct/22/the-race-to-fix-huge-php-flaw-at-the-heart-of-the-internet-the-latest">https://www.theguardian.com/news/video/2026/oct/22/the-race-to-fix-huge-php-flaw-at-the-heart-of-the-internet-the-latest</a></li>
+
+
+
+<li><a href="https://www.zdfheute.de/politik/php-sicherheitsluecke-faq-websites-internet-100.html">https://www.zdfheute.de/politik/php-sicherheitsluecke-faq-websites-internet-100.html</a></li>
+
+
+
+<li><a href="https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/">https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/</a></li>
+
+
+
+<li><a href="https://abcnews.com/Technology/wireStory/ai-detected-security-hole-impacting-wide-swaths-internet-137483311">https://abcnews.com/Technology/wireStory/ai-detected-security-hole-impacting-wide-swaths-internet-137483311</a></li>
+
+
+
+<li><a href="https://www.lalibre.be/economie/conjoncture/2026/10/22/failles-php-aujourdhui-on-nhesite-plus-a-mettre-des-systemes-a-larret-par-precaution-RQCXXHBTABHTHIUHSOPW3PH2RI/">https://www.lalibre.be/economie/conjoncture/2026/10/22/failles-php-aujourdhui-on-nhesite-plus-a-mettre-des-systemes-a-larret-par-precaution-RQCXXHBTABHTHIUHSOPW3PH2RI/</a></li>
+
+
+
+<li><a href="https://www.techradar.com/computing/internet/no-the-internet-isnt-dying-due-to-one-of-the-most-significant-vulnerabilities-of-2026-but-this-is-what-you-need-to-know">https://www.techradar.com/computing/internet/no-the-internet-isnt-dying-due-to-one-of-the-most-significant-vulnerabilities-of-2026-but-this-is-what-you-need-to-know</a></li>
+
+
+
+<li><a href="https://forbes.cz/chyba-v-php-ohrozuje-weby-po-celem-svete-urady-varuji-pred-utoky-hackeru/">https://forbes.cz/chyba-v-php-ohrozuje-weby-po-celem-svete-urady-varuji-pred-utoky-hackeru/</a></li>
+
+
+
+<li><a href="https://www.elfinancierocr.com/tecnologia/fallos-de-seguridad-detectados-por-la-ia-obligan-a/V7NZAEYTYRDP3OD2NBFA3S7FXY/story/">https://www.elfinancierocr.com/tecnologia/fallos-de-seguridad-detectados-por-la-ia-obligan-a/V7NZAEYTYRDP3OD2NBFA3S7FXY/story/</a></li>
+
+
+
+<li><a href="https://www.computerwoche.de/article/4238904/php-panik-greift-um-sich-das-raten-experten.html">https://www.computerwoche.de/article/4238904/php-panik-greift-um-sich-das-raten-experten.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE55c0JDMXh2V0lOa1c0T0MtMkwzcnc3WWxFMGJ1NGdZcXVURFZ4MkkzVEZDT1VBRjYycFpZU24wU2o3ei1reXAtX1dGdl9jYnJXck10ZXRqd2lzbEJtUXpvTUNiNzNKZ2c">https://news.google.com/rss/articles/CBMiZ0FVX3lxTE55c0JDMXh2V0lOa1c0T0MtMkwzcnc3WWxFMGJ1NGdZcXVURFZ4MkkzVEZDT1VBRjYycFpZU24wU2o3ei1reXAtX1dGdl9jYnJXck10ZXRqd2lzbEJtUXpvTUNiNzNKZ2c</a></li>
+
+
+
+<li><a href="https://www.svd.se/a/ElArpG/php-svenska-sajter-drabbade-fra-varnar">https://www.svd.se/a/ElArpG/php-svenska-sajter-drabbade-fra-varnar</a></li>
+
+
+
+<li><a href="https://www.neowin.net/news/millions-of-php-exploit-attempts-surge-within-hours-of-critical-rce-vulnerability-disclosure/">https://www.neowin.net/news/millions-of-php-exploit-attempts-surge-within-hours-of-critical-rce-vulnerability-disclosure/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> theregister.com, nytimes.com, mashable.com, theguardian.com, firstpost.com, techcentral.ie, nextgov.com, dawn.com, computerweekly.com, bbc.co.uk, slashdot.org, techxplore.com, insiderpaper.com, pcworld.com, techradar.com, neowin.net, thehackernews.com, siliconrepublic.com, securityweek.com, indianexpress.com, abcnews.com, 404media.co, arstechnica.com, schneier.com, tomshardware.com, bleepingcomputer.com, 9to5mac.com, techmeme.com, wsws.org, theglobeandmail.com, defenceeye.co.uk, ft.com, dailypakistan.com.pk, business-standard.com, forbes.cz, computerwoche.de, computerworld.dk, thelec.net, cybersecurity-insiders.com, nzz.ch, elfinancierocr.com, thematter.co, prensa.com, lalibre.be, capital.bg, nacion.com, infoworld.com, linuxinsider.com, faz.net, ltn.com.tw, storm.mg, cumhuriyet.com.tr, bbc.com, polizeiticker.ch, dhakatribune.com, cna.com.tw, zdfheute.de, nikkei.com, swr.de, exxpress.at, svd.se, rte.ie, ovb-online.de, koreaherald.com, decrypt.co</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 65 unique domains, 79 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.pcworld.com/article/3266558/ai-helped-uncover-a-security-nightmare-in-the-webs-backbone-should-you-be-worried.html"><img src="https://kagiproxy.com/img/dkRs8gdkHY0VqwTLAZpXlZwEzfEWFmNbHMTFc_5egOM5_zMelNw4WAH2paH9upBaSIqHUiQin3RFTkFFvnSChmfw9iYQN2GvJtAY3IHgdbcsos6SEjMCNJZpz94795InGk5GqzT-a6r5uJxzqgjFmIm9" alt="Researchers demonstrate PHP attack bypassing a key server defense" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+ <span class='credit'>(pcworld.com)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Carly Page",
+      "date": "2026-10-22T12:15:00.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/cyber-crime/2026/10/22/hackers-pile-on-php2shell-as-aws-reveals-attacks-began-before-disclosure/5304749",
+      "title": "Hackers pile on PHP2Shell as AWS reveals attacks began before disclosure"
+    },
+    {
+      "author": "Lynsey Chutel, Amelia Nierenberg and Brian O. Otieno",
+      "date": "2026-10-22T16:01:36.000Z",
+      "domain": "nytimes.com",
+      "image": "https://kagiproxy.com/img/SmLPhDSGUGlfhOSfV8QU-xuo_A0P0RC8xwDPAjJ4QZMd5j8F_ToZRTUM2mtiT_uZ0oAQri-PoCutvLXwLad6zXcuu7rE1eSubYFGkzvS2nkF-3dhKMsjeUZgT7zBArSSsIUyVD2IcflsfmdbVq-7HnzgaNYnwSm5sWAVQajEvU4Vw9r8XEjNLKfkmJcSoZH5MUsFVxkvV8E",
+      "image_caption": "Prime Minister Rob Jetten of the Netherlands in Brussels last week. He said that his cabinet was closely monitoring the online vulnerability caused by a security flaw in PHP.",
+      "link": "https://www.nytimes.com/2026/10/22/world/php-vulnerability-websites-cybersecurity-ai.html",
+      "title": "PHP Security Flaw Sets Off Global Rush to Patch, Leaving Websites Offline"
+    },
+    {
+      "author": "Karla Adam and Dustin Volz",
+      "date": "2026-10-22T21:31:29.000Z",
+      "domain": "nytimes.com",
+      "image": "https://kagiproxy.com/img/5rvPGef2V5813rMaF511BgvkCYIfeAa0lIitd47u6y_zRyqFilqgQw6_H31487zAYGlT2R-rrOl-ToqM6DcLCoJMzaF-UOaxTtYgMKJta4L6J7Cp5LlpWfUTVKiee7uyj6Z9Z_GahXs8EjVbl-11ZAdbFIjaNXpAJ06EzJVAtJpKew",
+      "image_caption": "A programmer in Guernica, Spain, on Thursday, working on PHP code, software used throughout the internet.",
+      "link": "https://www.nytimes.com/2026/10/22/technology/what-is-php-vulnerability-risks.html",
+      "title": "What Is PHP? Why Are Government and Business Websites Going Offline?"
+    },
+    {
+      "date": "2026-10-22T16:26:24.000Z",
+      "domain": "mashable.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mashable.com/tech/php-vulnerability-security-update-explained",
+      "title": "PHP vulnerability: PHP security issues today explained"
+    },
+    {
+      "author": "Robert Booth and Aisha Down",
+      "date": "2026-10-22T16:42:54.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/pw0KXXklCBU7mYFHnyOj5HkUfqngwDYp_MwyIdcClX2vVH981Zw6QoeKRUaurTxIOXbZrVp-LuD3n6qR-hOuX0qjk6kPRtG9VJPr6Qv6_xSBXOeN_L4VXrfxL47nUR_F1qiTPK3vgqw6gVf1X_ZZQfTgLwGdZsYUCRmad4Swf-JIujTXEoYprw57mtNMTNcTvgR1K11g_Kxh5W_5Bz-F6bfkNFk7p-ByYEbCCiog9AzMCngla0Ql5owVzsEOtWEwc6blTj347sCKNfeouQ",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/technology/2026/oct/22/websites-across-world-hit-by-millions-of-attempts-to-exploit-php-code-flaw",
+      "title": "Websites across world hit by millions of attempts to exploit PHP code flaw"
+    },
+    {
+      "author": "Unnati Gusain",
+      "date": "2026-10-22T05:18:31.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/3241-r_TPFoihNtt1R-Mvgb1n6eYJsBJSp5mRusgLGr_ysok2Jcz3X85dmXfLuv2Po0dpzbY3_e9wAt-Fq2SRcY3sCKaVq8rQ3GdLPxM3cymKfARMpzrrCUoI8RYKXb1gw-x_CoLRwSzodBmsWQjPH3jvxcmbtI6-ydGOFd3OoK19oOB-d0aeFc",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/cloudflare-sees-millions-of-exploit-attempts-after-php-disclosure-14054496.html",
+      "title": "Cloudflare sees millions of exploit attempts after PHP disclosure"
+    },
+    {
+      "author": "Niall Kitson",
+      "date": "2026-10-22T13:31:33.000Z",
+      "domain": "techcentral.ie",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techcentral.ie/websites-go-dark-as-ai-exposes-critical-security-flaws/",
+      "title": "Websites go dark as AI exposes critical PHP security flaws"
+    },
+    {
+      "author": "David DiMolfetta",
+      "date": "2026-10-22T21:38:00.000Z",
+      "domain": "nextgov.com",
+      "image": "https://kagiproxy.com/img/2Z9NMudsBT7igge5HZ0wQxPPMKDdZE6eGnNEnKZn8gWacAmO9RVCOIS_g5m3i3H7UFu1RWkvVaRmZ0SQm3s6IkDy59X3FkoIQ7T0yLV-6nacHf2OSyf0p9eKyCkAT3Y_sEu9uogVzS5aizkZ",
+      "image_caption": "",
+      "link": "https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/",
+      "title": "PHP flaws draw millions of hacking attempts amid global push for fixes"
+    },
+    {
+      "author": "AFP",
+      "date": "2026-10-22T05:36:32.000Z",
+      "domain": "dawn.com",
+      "image": "https://kagiproxy.com/img/nMNmx6lsWKbT5SuEHmlX2IzQ-oKLy0OJnQZtEjfHu9YMCoK8TyeW7b8OIYJdL4vlfRYF6Y2luPIVbxdKqfOndgxWIqFuEAHoc9GuuH6RCO0c",
+      "image_caption": "Unplugged LAN network cables at a computer server, as cyber agencies warn that websites may be taken offline while PHP prepares a critical fix, in Berlin, Germany, on October 21, 2026. \u2014Reuters",
+      "link": "https://www.dawn.com/news/2038965/websites-down-what-is-php-and-how-has-it-raised-ai-hacking-fears",
+      "title": "Websites down: What is PHP and how has it raised AI hacking fears?"
+    },
+    {
+      "date": "2026-10-22T16:19:00.000Z",
+      "domain": "computerweekly.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.computerweekly.com/news/366652674/Botched-PHP2Shell-disclosure-revealed-as-panic-continues",
+      "title": "Botched PHP2Shell disclosure revealed as panic continues"
+    },
+    {
+      "date": "2026-10-22T11:15:58.000Z",
+      "domain": "bbc.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.co.uk/news/articles/c3qjnwye0ep5o",
+      "title": "What is PHP and why did it spark a global cyber-security scramble?"
+    },
+    {
+      "date": "2026-10-22T17:12:51.000Z",
+      "domain": "bbc.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.co.uk/news/articles/c9j34zgmkxx1o",
+      "title": "Race to update services\u0027 computer systems after cyber-security flaw found"
+    },
+    {
+      "author": "BeauHD",
+      "date": "2026-10-22T18:00:00.000Z",
+      "domain": "slashdot.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tech.slashdot.org/story/26/10/22/1717246/zoe-kleinman-php-is-the-cyber-equivalent-of-an-unexploded-bomb",
+      "title": "Zoe Kleinman: PHP Is the Cyber Equivalent of an Unexploded Bomb"
+    },
+    {
+      "date": "2026-10-22T13:20:06.000Z",
+      "domain": "techxplore.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techxplore.com/news/2026-10-critical-flaw-affecting-websites-cybersecurity.html",
+      "title": "A critical flaw affecting 70% of all websites has the cybersecurity world panicked"
+    },
+    {
+      "author": "Brendan Taylor",
+      "date": "2026-10-22T19:28:11.000Z",
+      "domain": "insiderpaper.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://insiderpaper.com/list-of-websites-affected-by-critical-php-flaws/",
+      "title": "PHP security flaws send websites offline worldwide: Which services were affected?"
+    },
+    {
+      "date": "2026-10-22T17:14:31.000Z",
+      "domain": "pcworld.com",
+      "image": "https://kagiproxy.com/img/IThh_xbjLlvJFmFcX6yOMIg5wKdy0GmgbbtUVNl_r24c1R0JsgNModTngtif4xYE7R2Xf4g-7IAgAAbraxUHFXa_3zXfDp-ZclpDMt01sispIUwpiDlDe9Zgimk",
+      "image_caption": "",
+      "link": "https://www.pcworld.com/article/3266558/ai-helped-uncover-a-security-nightmare-in-the-webs-backbone-should-you-be-worried.html",
+      "title": "The internet runs on PHP. AI just found a big problem. Should you be worried?"
+    },
+    {
+      "author": "Darren Allan",
+      "date": "2026-10-22T12:26:03.000Z",
+      "domain": "techradar.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techradar.com/computing/internet/no-the-internet-isnt-dying-due-to-one-of-the-most-significant-vulnerabilities-of-2026-but-this-is-what-you-need-to-know",
+      "title": "No, the internet isn\u0027t dying due to \u0027one of the most significant vulnerabilities of 2026\u0027 - but this is what you need to know"
+    },
+    {
+      "author": "Paul Hill",
+      "date": "2026-10-22T06:14:51.000Z",
+      "domain": "neowin.net",
+      "image": "https://kagiproxy.com/img/SrbSLmZtmQ2LMJkWTZZPWizjUAqPPXHBVPbt9tRxSLGu9dklQlLp5UfiZMZXROgqU70gRia3ZC73DdLoqFuk4ZVQcZWUpXt2b0-BDqsV5RWtPH_yVngW_jw3E_0MLQYRsky9LogtkbVBAJ6gwQ",
+      "image_caption": "",
+      "link": "https://www.neowin.net/news/millions-of-php-exploit-attempts-surge-within-hours-of-critical-rce-vulnerability-disclosure/",
+      "title": "Millions of PHP exploit attempts surge within hours of critical RCE vulnerability disclosure"
+    },
+    {
+      "author": "The Hacker News",
+      "date": "2026-10-22T06:34:10.000Z",
+      "domain": "thehackernews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html",
+      "title": "Someone Tried to Exploit PHP2Shell 4 Days Before the Vulnerabilities Were Publicly Disclosed"
+    },
+    {
+      "author": "Suhasini Srinivasaragavan",
+      "date": "2026-10-22T08:10:27.000Z",
+      "domain": "siliconrepublic.com",
+      "image": "https://kagiproxy.com/img/qfRdS7XryghHEvg3tR3Jz-CaXW6Dl_F2dQYT3j9bZAiMNJSJ4sw4OWB2iOiBShUHoEbShv-krkG7T8PlBtGKhmOv-ZZ_TyMtibDPbNsuGqviMfI6A-tgIgTYG9qnOA",
+      "image_caption": "",
+      "link": "https://www.siliconrepublic.com/enterprise/ai-helps-uncover-critical-php-flaw-threatening-70pc-of-internet",
+      "title": "AI helps uncover critical PHP flaws threatening 70pc of internet"
+    },
+    {
+      "author": "Eduard Kovacs",
+      "date": "2026-10-22T12:20:23.000Z",
+      "domain": "securityweek.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/",
+      "title": "Tech and Security Companies Respond to PHP2Shell Vulnerabilities"
+    },
+    {
+      "author": "Jessica Lyons",
+      "date": "2026-10-22T20:37:52.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883",
+      "title": "PHP2Shell exploit bypasses protections designed to stop remote code execution"
+    },
+    {
+      "author": "Paul Hill",
+      "date": "2026-10-22T09:34:02.000Z",
+      "domain": "neowin.net",
+      "image": "https://kagiproxy.com/img/Ic8ceTuK1zy-NWklF7KyuMV5VMNOkc7ca8Bzx7OWMNr9lDAs6BrGK4mx1DM3a9Wp1jrg5iI5CraCb-UrSp4xl1w9ODS4PJW2A4ZT_1mMsG1szY0h6jm7Igy0xIgm2pZDY8Mm0lEgQZKE1o5Sxv_8INjc9qYbSvXztMEa2N8Plstfj-VxAQV1Eaw",
+      "image_caption": "",
+      "link": "https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/",
+      "title": "PHP rushed emergency patch after critical RCE flaws leaked online"
+    },
+    {
+      "author": "Ionut Arghire",
+      "date": "2026-10-22T09:48:58.000Z",
+      "domain": "securityweek.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/",
+      "title": "PHP2Shell Exploitation Started Days Before Patches"
+    },
+    {
+      "author": "Bijin Jose",
+      "date": "2026-10-22T07:56:24.000Z",
+      "domain": "indianexpress.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://indianexpress.com/article/technology/cert-in-php-vulnerability-alert-india-cybersecurity-warning-us-nsa-php-alert-10931962/",
+      "title": "PHP security alert: What US and Indian government warnings mean for websites"
+    },
+    {
+      "date": "2026-10-22T13:38:09.000Z",
+      "domain": "abcnews.com",
+      "image": "https://kagiproxy.com/img/0Ts-pcQTp2R_76GdjEIt_8sF_ACo7q8VY93ZLHdzjIOhb60X2ohFYg4Ht3Se7rt3Xm1tfD67NUY8FDSlMxBSbpkwftkBB70Ci3ru8HnbaaFzOiHs5Y0ReUttX_kw95JZSeRgzKKt7z_roxeqWWnIYAv2sTM",
+      "image_caption": "",
+      "link": "https://abcnews.com/Technology/wireStory/rush-patch-ai-discovered-software-vulnerability-impact-70-137453246",
+      "title": "Rush is on to patch AI-discovered software vulnerability that could impact 70% of websites worldwide"
+    },
+    {
+      "date": "2026-10-22T17:40:21.000Z",
+      "domain": "techxplore.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techxplore.com/news/2026-10-patch-software-vulnerability-impact-websites.html",
+      "title": "Rush is on to patch a software vulnerability that could impact 70% of websites worldwide"
+    },
+    {
+      "author": "Jason Koebler",
+      "date": "2026-10-22T14:23:36.000Z",
+      "domain": "404media.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.404media.co/php2shell-black-october-ai-is-changing-everything-about-hacking-no-one-knows-what-happens-next/",
+      "title": "AI Is Changing Everything About Hacking. No One Knows What Happens Next"
+    },
+    {
+      "date": "2026-10-22T17:14:25.000Z",
+      "domain": "abcnews.com",
+      "image": "https://kagiproxy.com/img/5vI1RdrCJknmzRUkt5VsEGHisA0BJIlF63FR1upz-JUlrv3lZfWx95_EhIpAl_Qs0HQptVo_i6uTZMDPkv9OogzvSplcAtVp1BAFFbXsjMidsq2xkS-IXg5lKI3dZdJL5KHj8ukx3FvwTDmJiBEsoPTceOs",
+      "image_caption": "",
+      "link": "https://abcnews.com/Technology/wireStory/ai-detected-security-hole-impacting-wide-swaths-internet-137483311",
+      "title": "What to know about the AI-detected security bug impacting wide swaths of the internet"
+    },
+    {
+      "author": "Carly Page",
+      "date": "2026-10-22T16:05:53.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/security/2026/10/22/php2shell-puts-dozens-of-uk-government-services-out-of-service/5304840",
+      "title": "PHP2Shell puts dozens of UK government services out of service"
+    },
+    {
+      "author": "Tom Wilson and Rafe Rosner-Uddin, Financial Times",
+      "date": "2026-10-22T15:25:02.000Z",
+      "domain": "arstechnica.com",
+      "image": "https://kagiproxy.com/img/Y7sTpD20p6ekQGUMbe2Dio8X3GxAVgozlgljpGSaPKwrHGpy-olBKn0CHjdByonxL7rXFAUrkRvlc-NMog8PMqaHmFIOBrri1Cmxaw-KNQLeWQaAFlnor2rIsdukYPnXVAaJDofJ74EHLrNijW9c5Sw",
+      "image_caption": "",
+      "link": "https://arstechnica.com/security/2026/10/hackers-got-a-four-day-head-start-on-epic-php2shell-vulnerability/",
+      "title": "Hackers got a four-day head start on epic PHP2Shell vulnerability"
+    },
+    {
+      "date": "2026-10-22T10:17:26.000Z",
+      "domain": "bbc.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.co.uk/news/articles/cw98z6qlyvg3o",
+      "title": "Zoe Kleinman: PHP is the cyber equivalent of an unexploded bomb"
+    },
+    {
+      "author": "Bruce Schneier",
+      "date": "2026-10-22T13:26:51.000Z",
+      "domain": "schneier.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.schneier.com/blog/archives/2026/10/new-serious-php-vulnerabilities-released-and-patched.html",
+      "title": "New Serious PHP Vulnerabilities Released and Patched"
+    },
+    {
+      "author": "Etiido Uko",
+      "date": "2026-10-22T10:30:00.000Z",
+      "domain": "tomshardware.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.tomshardware.com/tech-industry/cyber-security/openai-says-gpt-5-6-sol-helped-uncover-critical-php-flaws-that-could-affect-70-percent-of-websites-ai-assisted-researchers-turned-two-year-old-bug-that-stumped-human-developers-into-working-exploits-in-two-weeks",
+      "title": "OpenAI says ChatGPT Sol helped uncover critical PHP flaws that could affect 70% of websites"
+    },
+    {
+      "author": "Sergiu Gatlan",
+      "date": "2026-10-22T13:09:12.000Z",
+      "domain": "bleepingcomputer.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bleepingcomputer.com/news/security/amazon-says-php2shell-exploitation-began-4-days-before-patches/",
+      "title": "Amazon says PHP2Shell exploitation began 4 days before patches"
+    },
+    {
+      "author": "Ben Lovejoy",
+      "date": "2026-10-22T12:10:22.000Z",
+      "domain": "9to5mac.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://9to5mac.com/2026/10/22/whats-going-on-with-the-web-the-php-issue-and-sites-going-offline/",
+      "title": "What\u2019s going on with the web? The PHP issue and sites going offline"
+    },
+    {
+      "date": "2026-10-23T00:30:02.000Z",
+      "domain": "techmeme.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techmeme.com/261022/p58#a261022p58",
+      "title": "An interview with Ond\u0159ej Sur\u00fd, a volunteer who maintains PHP and automates its patches, about his role in fixing two critical PHP security vulnerabilities (Charlie Warzel/The Atlantic)"
+    },
+    {
+      "date": "2026-10-23T04:25:49.000Z",
+      "domain": "wsws.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.wsws.org/en/articles/2026/10/23/rfdk-o23.html",
+      "title": "Discovery of security vulnerabilities in PHP programming language triggers global internet shutdowns"
+    },
+    {
+      "author": "Kaitlyn Huamani And Emma Burrows",
+      "date": "2026-10-22T17:10:55.000Z",
+      "domain": "theglobeandmail.com",
+      "image": "https://kagiproxy.com/img/Jo2zTnC_6QwCs01im0zGzqjg2qMc-jHLlX3NeqEPwPNH_aW9J2PsO5AKfZ22zuWaYnqdU0Drj17v3ERg4IFBd3yJKjJiS_xJ_2l-HoZgTVbm9I64zULbIEhutmeTm6RFFBGjFuZ_bPM5qgiyOJ900s03JSToUuAUCtA_ccxlgt4jeVRON8BAwYPEr0--U4oJXJmreOi4oO5e0fEPCk0-O9qeCOSNSi7mIMx8RxNgMyqe85FchSP4-NXD3Eg-thR5WVvo1KpBAcOtrPq3YA",
+      "image_caption": "A programmer works with PHP code at RK Solutions software development company in Guernica, Spain, October 22, 2026. Government websites across Europe went dark on October 21, as operators raced to patch two critical vulnerabilities in PHP, one of the most widely used programming languages on the web. REUTERS/Vincent West",
+      "link": "https://www.theglobeandmail.com/world/article-what-to-know-php-ai-detected-security-bug-websites/",
+      "title": "What is PHP? The AI-detected bug prompting a global security scramble"
+    },
+    {
+      "author": "Cityforum",
+      "date": "2026-10-22T16:11:40.000Z",
+      "domain": "defenceeye.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.defenceeye.co.uk/2026/10/22/php-vulnerability-affecting-websites/",
+      "title": "PHP vulnerability affecting websites"
+    },
+    {
+      "date": "2026-10-22T10:13:57.000Z",
+      "domain": "ft.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ft.com/content/d438af1e-a48c-4aeb-8c84-00cdb5e741e3",
+      "title": "Websites taken offline in race to patch PHP security flaw"
+    },
+    {
+      "author": "News Desk",
+      "date": "2026-10-22T07:51:57.000Z",
+      "domain": "dailypakistan.com.pk",
+      "image": "https://kagiproxy.com/img/a5pDom0jP40lmuEs-PiXpt-a2XtB1DJmfN9_M0mKEdIKx6uMGitD2-3yYm2XSpRIvzbh7YD1dbN64lTRXUTx3sCr-oQr7bOEDUfIlC9NSbes42ezfCAF9NP9qGT1GNpSMbBZgnSQMy2KkLYPznhaY1iT33t9Fv6RQA1--QsGQxb0MwRz8wEs4J_Cso5zoqKO1aWbE7wbJFcy3BvVUGqdHdAjy6aZnVhGFsGNnieMIq_mFUbrdqJkYsJ0W5WOy3s_G0E",
+      "image_caption": "",
+      "link": "https://en.dailypakistan.com.pk/22-Oct-2026/bbc-wikipedia-among-major-sites-hit-by-global-cybersecurity-scare-over-critical-php-flaws",
+      "title": "BBC, Wikipedia among Major Sites hit by Global Cybersecurity Scare over Critical PHP Flaws"
+    },
+    {
+      "author": "NYT",
+      "date": "2026-10-23T03:12:00.000Z",
+      "domain": "business-standard.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.business-standard.com/world-news/what-is-php-why-are-governments-and-businesses-worldwide-going-offline-126102300108_1.html",
+      "title": "What is PHP? Why are governments and businesses worldwide going offline?"
+    },
+    {
+      "author": "Johana Mal\u00e1tov\u00e1",
+      "date": "2026-10-22T07:54:13.000Z",
+      "domain": "forbes.cz",
+      "image": "https://kagiproxy.com/img/XuZDFYfqh3Of_egOsj0VJNJ7xv7NEbrFH7_lemMD_FsGgt0WV3hOMd9ROB0Ga4KmQBJueXmGp2x77qvTw7hB8NWFM-Zmgqv7TOdfT1fDki0SjyWBDsSmPrW5gA",
+      "image_caption": "",
+      "link": "https://forbes.cz/chyba-v-php-ohrozuje-weby-po-celem-svete-urady-varuji-pred-utoky-hackeru/",
+      "title": "Chyba v\u00a0PHP ohro\u017euje weby po\u00a0cel\u00e9m sv\u011bt\u011b. \u00da\u0159ady varuj\u00ed p\u0159ed \u00fatoky hacker\u016f"
+    },
+    {
+      "date": "2026-10-22T09:17:17.000Z",
+      "domain": "computerwoche.de",
+      "image": "https://kagiproxy.com/img/-ip610K0ftgiD2pl9a4FisSs8keYO7LLoS7PIHk4LQEZJ70RsVQQW9_nqm-o3K4SSXj0HOYDtTuDgwdgHFuDi8MgvmZgn9d03Or7JHF747J14G2fESR1nNep1S7OmL-dyjw0GC1kNUJ6PpdMbzsNaiSqIyIdP1nbZ27m6xszvfOTD106ivLGhXWrdUYWgTDaWPKMdp_jSyKg4wG_cDs",
+      "image_caption": "",
+      "link": "https://www.computerwoche.de/article/4238904/php-panik-greift-um-sich-das-raten-experten.html",
+      "title": "\u201ePHP2Shell\u201c-Panik greift um sich \u2013 das raten Experten"
+    },
+    {
+      "author": "Dan Jensen",
+      "date": "2026-10-22T06:00:00.000Z",
+      "domain": "computerworld.dk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.computerworld.dk/art/297258/morgen-briefing-kritisk-php-fejl-sender-hjemmesider-over-hele-verden-i-sort-du-skal-opdatere-oejeblikkeligt-antal-af-angrebsforsoeg-eksploderer-via-saarbarhed-i-php-saadan-blev-ukendte-saarbarheder-i-php-opdaget-efter-20-aar",
+      "title": "Morgen-briefing: Kritisk PHP-fejl sender hjemmesider over hele verden i sort: Du skal opdatere \u00f8jeblikkeligt / Antal af angrebsfors\u00f8g eksploderer via s\u00e5rbarhed i PHP / S\u00e5dan blev ukendte s\u00e5rbarheder i PHP opdaget efter 20 \u00e5r"
+    },
+    {
+      "date": "2026-10-22T23:58:46.000Z",
+      "domain": "thelec.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE55c0JDMXh2V0lOa1c0T0MtMkwzcnc3WWxFMGJ1NGdZcXVURFZ4MkkzVEZDT1VBRjYycFpZU24wU2o3ei1reXAtX1dGdl9jYnJXck10ZXRqd2lzbEJtUXpvTUNiNzNKZ2c",
+      "title": "PHP Flaw Sparks Global Cybersecurity Alert"
+    },
+    {
+      "date": "2026-10-22T12:46:25.000Z",
+      "domain": "cybersecurity-insiders.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNekpxdWgweU5UYmpFNm1fdWNFN19OQXZHUmJPR2lOazVKMFlNVUMxS0p6MlVrUEEwc1pNN3loblh3bHdDQ2poQzJBUGhIUkhYbHZPUUFRcWdrWEd2dmhROXM2Y0ZCcDBFdnh3N1YyTU00UFhzSEFxRS1nMFJoRG9vczBLTmdsOS1leDRzZ3BkVG5lYzlWX3M0ZkdjZkRmLTE0UmJvdEFtdGEtZUU5cmc5WDd1LU9Cd0VyRFFLclJUaTdkRFFPTjJLNzlFWTF5Zm83dTRLQw",
+      "title": "PHP Vulnerabilities trigger Cybersecurity Alerts: Understanding the Risks and Prevention Strategies"
+    },
+    {
+      "date": "2026-10-23T06:55:34.000Z",
+      "domain": "nzz.ch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nzz.ch/meinung/die-php-luecke-zeigt-das-internet-ist-nicht-sicher-genug-fuer-das-ki-zeitalter-ld.10042034",
+      "title": "Die PHP-L\u00fccke zeigt: Das Internet ist nicht sicher genug f\u00fcr das KI-Zeitalter"
+    },
+    {
+      "author": "AFP",
+      "date": "2026-10-22T14:58:28.000Z",
+      "domain": "elfinancierocr.com",
+      "image": "https://kagiproxy.com/img/QOJSbpXJipFAtFJJyFzP32GrkkemD_6qxPRCfbOIROzPfG-G6LC16882uZVp2nFQVSXOI2aeabeWrrV1b8cxoJeZqBhRxt_QMTLBBGFJEQj9bj4lQ7sePTe2Ut1AO-gJuUg1YKG26uv9_yyGDxN8kqBwmeoPC4jSZ_OPF51BKaNw1My7ZpqofDvggHkIaY_Y111sqX-pj4dmu3uw5yamBvhdwCShiXQkyKxfKGlHwSTvOY9E5q_X1vhOILlr4EH2Wv3LvHkXHXIFsxc6",
+      "image_caption": "Utilizando modelos de IA de \u00faltima generaci\u00f3n, como los de los gigantes estadounidenses OpenAI y Google, se detectaron puntos d\u00e9biles de PHP en agosto pasado que fueron dados a conocer esta semana.",
+      "link": "https://www.elfinancierocr.com/tecnologia/fallos-de-seguridad-detectados-por-la-ia-obligan-a/V7NZAEYTYRDP3OD2NBFA3S7FXY/story/",
+      "title": "Fallos de seguridad detectados por la IA obligan a cerrar sitios Web y aplicar parches para prevenir ataques en todo el mundo"
+    },
+    {
+      "author": "Agencies",
+      "date": "2026-10-22T18:29:57.000Z",
+      "domain": "business-standard.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.business-standard.com/world-news/governments-firms-rush-to-patch-php-flaws-as-cyberattacks-surge-globally-126102201717_1.html",
+      "title": "Governments, firms rush to patch PHP flaws as cyberattacks surge globally"
+    },
+    {
+      "author": "The MATTER",
+      "date": "2026-10-22T06:50:02.000Z",
+      "domain": "thematter.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thematter.co/brief/266760/266760",
+      "title": "\u0e1e\u0e1a\u0e0a\u0e48\u0e2d\u0e07\u0e42\u0e2b\u0e27\u0e48\u0e43\u0e19\u0e20\u0e32\u0e29\u0e32 PHP \u0e17\u0e35\u0e48\u0e43\u0e0a\u0e49\u0e23\u0e31\u0e19\u0e40\u0e27\u0e47\u0e1a\u0e2a\u0e33\u0e04\u0e31\u0e0d\u0e17\u0e31\u0e48\u0e27\u0e42\u0e25\u0e01 \u0e2b\u0e25\u0e32\u0e22\u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e1b\u0e34\u0e14\u0e40\u0e27\u0e47\u0e1a\u0e02\u0e2d\u0e07\u0e23\u0e31\u0e10 \u0e41\u0e25\u0e30\u0e2d\u0e2d\u0e01\u0e21\u0e32\u0e15\u0e23\u0e01\u0e32\u0e23\u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19 \u0e2b\u0e25\u0e31\u0e07\u0e21\u0e35\u0e02\u0e49\u0e2d\u0e01\u0e31\u0e07\u0e27\u0e25\u0e27\u0e48\u0e32\u0e2d\u0e32\u0e08\u0e40\u0e01\u0e34\u0e14\u0e01\u0e32\u0e23\u0e42\u0e08\u0e21\u0e15\u0e35\u0e17\u0e32\u0e07\u0e44\u0e0b\u0e40\u0e1a\u0e2d\u0e23\u0e4c"
+    },
+    {
+      "author": "BBC News Mundo",
+      "date": "2026-10-22T10:40:10.000Z",
+      "domain": "prensa.com",
+      "image": "https://kagiproxy.com/img/QyyDTWDUWukpzdzF3u7rnI-YhW597jZmUDrnnE6-OeZvTte7AnJYE_9rR6NmllUT1WOGzxw7vw97KhhyKHvEwoyHch-JmN4tbLapJz5e3erLUgWXQ1MNT1i91YwOA71oXBEbpxqZbEXD15jFze4XbC2R52mubEsu4Fk-Oas_c-Q3vG6v4FtLOq7rILrhK-AW7vHn9jZY0Wc07ETkWX4WU6KRdC_VZbQgSOCJbnDQqwaR3aR2Hw_bdeGgMC_sY1KKYUU",
+      "image_caption": "Foto de la pantalla de un computador en donde se pueden leer las siglas PHP en color blanco sobre un fondo negro / Getty",
+      "link": "https://www.prensa.com/bbc/que-es-php-y-por-que-genero-una-falla-de-seguridad-en-internet-que-desato-una-alerta-global/",
+      "title": "\u00bfQu\u00e9 es PHP y por qu\u00e9 gener\u00f3 una falla de seguridad en internet que desat\u00f3 una alerta global?"
+    },
+    {
+      "author": "Juliette Vandestraete",
+      "date": "2026-10-22T16:44:13.000Z",
+      "domain": "lalibre.be",
+      "image": "https://kagiproxy.com/img/MHwpwrH_Tf7bPd25phTwBRSECODPsmOJpzPOpEfvHcOCLYPwenso8MK2JfzaJD4-W9dNvnREFoGUkD-n8L_2potZUWKKc5XcWNsPNNftkPoI72TgdROg_spRDnT5i3lTunIGLpQKSALnPfr_TgNa-KbUlgdkd9xBBYjv4ULZJEeK46rRzYKUiSrwpQt4oPDg0IXVB7L25zrUP1Wp3ZGATexEqLpB87gCugyleb4jhRTP_oZtIORznPTTZBaYaRa6jD9s",
+      "image_caption": "Le site SmartSchool \u00e9tait indisponible ce mercredi. ...",
+      "link": "https://www.lalibre.be/economie/conjoncture/2026/10/22/failles-php-aujourdhui-on-nhesite-plus-a-mettre-des-systemes-a-larret-par-precaution-RQCXXHBTABHTHIUHSOPW3PH2RI/",
+      "title": "Que se cache-t-il derri\u00e8re la faille PHP qui a secou\u00e9 Internet ?"
+    },
+    {
+      "author": "AFP -",
+      "date": "2026-10-22T08:39:58.000Z",
+      "domain": "lalibre.be",
+      "image": "https://kagiproxy.com/img/evA9FcZq50-di1jhU0ttPFDwL_ox9H3uQ9dmcQW96iel-N24H2ZpwKtqTfJ_iv0fN2nKVWKhNAFhBg0qVsvgHqZn9Wlx6cRgY2ihQr9GoxPNIM6ksKRyiE8UjtapBh0sLtMGsQKawbk0jCra8QK0aB5VOrPWsorG313mO697_KeEWAv1qnLd7vrhJFIiQpQ4cV2T9HiXjXGzjPebl0rsvYQOdaIbRTvG7sFaLhh3M7Ft9omazvh2aIwj-5gjT3t_NKqH",
+      "image_caption": "L\u0027intelligence artificielle a d\u00e9couvert des failles de s\u00e9curit\u00e9 critiques dans PHP, un langage de programmation qui fait tourner la plupart des sites web dans le monde, ce qui a entra\u00een\u00e9 des mises hors-ligne massives pour chercher des correctifs de s\u00e9curit\u00e9. ...",
+      "link": "https://www.lalibre.be/economie/digital/2026/10/22/des-sites-web-perturbes-dans-le-monde-entier-lune-des-vulnerabilites-les-plus-marquantes-de-ces-dernieres-annees-FWCHOIXVB5ENXBDLFRNF2XTE64/",
+      "title": "Des sites web perturb\u00e9s dans le monde entier : \"L\u0027une des vuln\u00e9rabilit\u00e9s les plus marquantes de ces derni\u00e8res ann\u00e9es\""
+    },
+    {
+      "author": "\u0410\u043b\u0435\u043a\u0441\u0430\u043d\u0434\u044a\u0440 \u0413\u043b\u0430\u0432\u0447\u0435\u0432",
+      "date": "2026-10-22T14:12:00.000Z",
+      "domain": "capital.bg",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.capital.bg/biznes/tehnologii_i_nauka/2026/10/22/4969864_bezprecedentna_kritichna_uiazvimost_v_php_raztursi_ueb/",
+      "title": "\u0411\u0435\u0437\u043f\u0440\u0435\u0446\u0435\u0434\u0435\u043d\u0442\u043d\u0430 \u043a\u0440\u0438\u0442\u0438\u0447\u043d\u0430 \u0443\u044f\u0437\u0432\u0438\u043c\u043e\u0441\u0442 \u0432 PHP \u0440\u0430\u0437\u0442\u044a\u0440\u0441\u0438 \u0443\u0435\u0431 \u043f\u0440\u043e\u0441\u0442\u0440\u0430\u043d\u0441\u0442\u0432\u043e\u0442\u043e"
+    },
+    {
+      "author": "Presented by Michael Safi with Aisha Down ; producer Angus Neale ; senior producer Leonore Schick ; executive producer Zoe Hitch",
+      "date": "2026-10-22T17:12:07.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/zz8mHRasz7gNRpF3cNjVMLFgoO7rOYf2_Dpd7cBBfyaqeqVFF9tvKxi3A-w8oCpy_XaF-k9YiDYQnEtcFif1j9UEHALqxJdNxXDNQqHXV3nL-7s4pfawMwG7WrjSTbUoMWloep_-AxrAGtOuaW88u0TYT1ai_Umg4dUrwCh-KdgksGSlEh5bhMtBEqRTCXKPZf5qURUx3J-fv_UC4mkacCc6dasPN0lo2vgZ7U_YhlMgrQ2kEXtGY3THOQZ6oUwNv-oRwFXCMAmfa4kpKFBD",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/news/video/2026/oct/22/the-race-to-fix-huge-php-flaw-at-the-heart-of-the-internet-the-latest",
+      "title": "The race to fix huge PHP code flaw at the heart of the internet - The Latest"
+    },
+    {
+      "author": "AFP, Marianela Arias Vilchez",
+      "date": "2026-10-22T13:43:35.000Z",
+      "domain": "nacion.com",
+      "image": "https://kagiproxy.com/img/YtRnUboAbuPabto6gv7FOf08yph1ij5718iwybiveKbu8cO-61ufN8BNJ7hNWwuBlJpF8QpkdUVbjxA1lDWi8Feo7swV_LiMPfCH9HtzSF6UsMbEwJxHHM81I5vzNrcxb2jhTmJJLGqDHPaYSvyZ_IivsIecdFGV4zUiqZr6P9x_wT7Unt4slTemEepHpvCWb3B2VnKveocdUwkkOL3UPj51I3N4MePTq1jx6AiSR3pDpxazgmR8LZ9ZGQYMMikib6jYKg",
+      "image_caption": "Gobiernos y empresas apagaron portales clave para corregir brechas de seguridad que permiten controlar servidores sin usar contrase\u00f1as.",
+      "link": "https://www.nacion.com/el-mundo/hallazgo-en-sistema-php-amenaza-la-seguridad-de/BNF344J6EVEGPACMEIQBPCSR7E/story/",
+      "title": "Hallazgo en sistema PHP amenaza la seguridad de sitios web en el mundo: conozca los detalles del fallo"
+    },
+    {
+      "date": "2026-10-23T00:39:33.000Z",
+      "domain": "infoworld.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html",
+      "title": "PHP2Shell exposes the weakness in coordinated vulnerability disclosure"
+    },
+    {
+      "author": "LinuxInsider",
+      "date": "2026-10-22T00:25:09.000Z",
+      "domain": "linuxinsider.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.linuxinsider.com/story/internet-wide-threat-has-security-teams-scrambling-to-patch-php-180689.html",
+      "title": "Internet-Wide Threat Has Security Teams Scrambling to Patch PHP"
+    },
+    {
+      "author": "Maximilian Sachse",
+      "date": "2026-10-22T16:16:58.000Z",
+      "domain": "faz.net",
+      "image": "https://kagiproxy.com/img/rWnb_TFl2yJNCYm7VhdJV4gOrHRilNeASqLaHaEYEOk7S-ltjSr2kG78hnvYg0bWGSD3upOnvc1TWZilDk7uWO3kuNBha_clVMAAFQaMoRkVBzLm3gYxnySK2x9rcbtkH518caKM6yY5VbWXEnkS26aJ732T4BVmY9FQ3cUd9_kGWvZGIHr3OCcAOwE22A",
+      "image_caption": "",
+      "link": "https://www.faz.net/aktuell/wirtschaft/unternehmen/jackpot-fuer-angreifer-it-fachmann-mirko-ross-ueber-die-php-schwachstelle-201611025.html",
+      "title": "PHP-SIcherheitsl\u00fccken: \u201eDas ist eine Schwachstellen-Apokalypse\u201c"
+    },
+    {
+      "date": "2026-10-22T21:30:00.000Z",
+      "domain": "ltn.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.ltn.com.tw/news/world/paper/1775607",
+      "title": "PHP\u7206\u91cd\u5927\u6f0f\u6d1e \u5168\u7db2\u6e67\u73fe\u95dc\u7ad9\u7dad\u8b77\u6f6e"
+    },
+    {
+      "author": "\u91d1\u725b\u5e6b\u5e6b\u5fd9",
+      "date": "2026-10-23T02:30:00.000Z",
+      "domain": "storm.mg",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.storm.mg/article/11175259",
+      "title": "\u79d1\u6280\u71b1\u8b70\u300b\u300c\u6f0f\u6d1e\u672b\u65e5\u300d\u73fe\u5f62\uff1fPHP\u662f\u4ec0\u9ebc\uff1f\u5168\u740370%\u7684\u7db2\u7ad9\u9762\u81e8\u98a8\u96aa\uff0c\u9023\u65e5\u672c\u9996\u76f8\u9ad8\u5e02\u65e9\u82d7\u90fd\u767c\u51fa\u8b66\u544a\uff01"
+    },
+    {
+      "date": "2026-10-23T06:41:00.000Z",
+      "domain": "cumhuriyet.com.tr",
+      "image": "https://kagiproxy.com/img/5jC_u1ISUCBMY_Q-FrgiGIUxQqxaaWCJbb13255BxzAyPPQtq6OXkrNg4RhntHlkjYQBetzUz8yMUWMerPAbBDFzCw4MoyBT9KxpWiFoS0o4CWEqchtaPOQK4Zx3HyslO9nloCOwM6W66iNo",
+      "image_caption": "",
+      "link": "https://www.cumhuriyet.com.tr/dunya/dunya-genelinde-siber-alarm-internetin-yuzde-70-ini-ilgilendiren-kritik-acik-dakikada-milyonlarca-saldiri-2549458",
+      "title": "D\u00fcnya genelinde siber alarm! \u0130nternetin y\u00fczde 70\u0027ini ilgilendiren kritik a\u00e7\u0131k: Dakikada milyonlarca sald\u0131r\u0131"
+    },
+    {
+      "date": "2026-10-22T09:45:08.000Z",
+      "domain": "bbc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.com/korean/articles/ck3r5j1pr119o",
+      "title": "PHP\ub780 \ubb34\uc5c7\uc774\uba70, \uc65c \uc804 \uc138\uacc4\uc801\uc73c\ub85c \uc0ac\uc774\ubc84 \ubcf4\uc548 \ube44\uc0c1\uc0ac\ud0dc\ub97c \ucd09\ubc1c\ud588\ub098?"
+    },
+    {
+      "author": "Redaktion Polizeiticker Schweiz",
+      "date": "2026-10-23T05:59:07.000Z",
+      "domain": "polizeiticker.ch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://polizeiticker.ch/artikel/php-sicherheitsluecke-weltweit-zahlreiche-websites-betroffen-292856",
+      "title": "PHP-Sicherheitsl\u00fccke \u2013 Weltweit zahlreiche Websites betroffen"
+    },
+    {
+      "date": "2026-10-22T13:27:19.000Z",
+      "domain": "dhakatribune.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.dhakatribune.com/bangladesh/422690/php-security-flaw-triggers-global-cyber-alert",
+      "title": "PHP security flaw triggers global cyber alert, millions of websites at risk"
+    },
+    {
+      "date": "2026-10-22T02:49:33.000Z",
+      "domain": "cna.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cna.com.tw/news/ait/202610220064.aspx",
+      "title": "PHP\u7206\u91cd\u5927\u8cc7\u5b89\u6f0f\u6d1e\u3000\u5c08\u5bb6\u8b66\u544a\u6050\u5f15\u767c\u99ed\u5ba2\u5165\u4fb5\u6f6e"
+    },
+    {
+      "date": "2026-10-22T14:00:00.000Z",
+      "domain": "zdfheute.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.zdfheute.de/politik/php-sicherheitsluecke-faq-websites-internet-100.html",
+      "title": "Was die PHP-Krise f\u00fcr das Internet bedeutet - und f\u00fcr Sie"
+    },
+    {
+      "date": "2026-10-21T23:37:52.000Z",
+      "domain": "nikkei.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://business.nikkei.com/atcl/seminar/19/00030/102200816/",
+      "title": "\u30b5\u30a4\u30c8\u306e\u505c\u6b62\u3084\u7dca\u6025\u30e1\u30f3\u30c6\u30ca\u30f3\u30b9\u76f8\u6b21\u3050\u3000PHP\u306e\u91cd\u5927\u8106\u5f31\u6027\u3001\u30ea\u30b9\u30af\u3068\u767a\u898b\u7d4c\u7def (Views)"
+    },
+    {
+      "date": "2026-10-22T12:25:29.000Z",
+      "domain": "swr.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.swr.de/swraktuell-radio/sicherheitsluecke-internet-php-hacker-bilanz-100.html",
+      "title": "Internet-Sicherheitsl\u00fccke PHP: Vielleicht kommen wir mit einem blauen Auge davon"
+    },
+    {
+      "author": "Redaktion",
+      "date": "2026-10-22T13:30:02.000Z",
+      "domain": "exxpress.at",
+      "image": "https://kagiproxy.com/img/_-DVUKaL0EhTR28xToP5oNamyW4da3Sv4yXLjY_uK18-V81_hZvZ03u6dmt7xtw-My5Uw68RFPhfYdGMa774UhJzVk0IeeNOgyV-auQTmBxsTl5ZxSLApA6xtjHzYdwYArX48FsyvwTXPU7J7-w7mXFTdGk",
+      "image_caption": "Millionen Hacker-Angriffe! Experte fordert: Unsichere Webseiten sofort abschalten",
+      "link": "https://exxpress.at/economy/millionen-hacker-angriffe-experte-fordert-unsichere-webseiten-sofort-abschalten/",
+      "title": "Millionen Hacker-Angriffe! Experte fordert: Unsichere Webseiten sofort abschalten"
+    },
+    {
+      "date": "2026-10-22T15:13:29.000Z",
+      "domain": "svd.se",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.svd.se/a/ElArpG/php-svenska-sajter-drabbade-fra-varnar",
+      "title": "Varnar efter s\u00e4kerhetsh\u00e5len i PHP"
+    },
+    {
+      "date": "2026-10-22T09:53:59.000Z",
+      "domain": "rte.ie",
+      "image": "https://kagiproxy.com/img/1rovNk2O7ofgslyDs0NaxIw4dbc-t5rmmF24UPdYcyQDiwJn-NG0oXLpe1kAFajGC9DZ7ACA6OUeq1uOaIOOPGmvqNNOzA",
+      "image_caption": "",
+      "link": "https://www.rte.ie/news/2026/1022/1596428-php-ai-issue/",
+      "title": "Companies and govts step up cyber defences after PHP flaw"
+    },
+    {
+      "date": "2026-10-22T07:25:30.000Z",
+      "domain": "ovb-online.de",
+      "image": "https://kagiproxy.com/img/024XnLEFbgnMesPPwaR_efUloRUEtb9GLJGbplZQqh7sLu3cglxbcgGo0Cbx4Tyo5rEbtyT-1v3W9d8d2VTBFBwbnjzDPsS6uwSjDf4dxm_AszyaP6VGmwl_UFe_qVZatEivNvDU_lzkwwAohX5pVe0pndrSAU1YsNPqoiKZ0KvSgQcei4cdQ7pKXS-Spix6FOIWhg",
+      "image_caption": "Gravierende Sicherheitsl\u00fccke bedroht weltweit Webseiten",
+      "link": "https://www.ovb-online.de/weltspiegel/leute/was-die-php-sicherheitsluecke-fuer-das-internet-bedeutet-zr-94552760.html",
+      "title": "Was die PHP-Sicherheitsl\u00fccke f\u00fcr das Internet bedeutet"
+    },
+    {
+      "author": "The Korea Herald",
+      "date": "2026-10-23T08:06:29.000Z",
+      "domain": "koreaherald.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.koreaherald.com/article/10912068",
+      "title": "Hacking attempts surge as companies, governments rush to patch PHP flaws"
+    },
+    {
+      "date": "2026-10-22T04:54:49.000Z",
+      "domain": "bbc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bbc.com/thai/articles/ckjwe9945ywyo",
+      "title": "\u0e2d\u0e30\u0e44\u0e23\u0e2d\u0e22\u0e39\u0e48\u0e40\u0e1a\u0e37\u0e49\u0e2d\u0e07\u0e2b\u0e25\u0e31\u0e07\u0e0a\u0e48\u0e2d\u0e07\u0e42\u0e2b\u0e27\u0e48\u0e14\u0e49\u0e32\u0e19\u0e04\u0e27\u0e32\u0e21\u0e1b\u0e25\u0e2d\u0e14\u0e20\u0e31\u0e22\u0e17\u0e35\u0e48\u0e40\u0e2d\u0e44\u0e2d\u0e40\u0e1e\u0e34\u0e48\u0e07\u0e08\u0e31\u0e1a\u0e44\u0e14\u0e49 \u0e08\u0e19\u0e17\u0e33\u0e43\u0e2b\u0e49\u0e40\u0e27\u0e47\u0e1a\u0e44\u0e0b\u0e15\u0e4c\u0e17\u0e31\u0e48\u0e27\u0e42\u0e25\u0e01\u0e15\u0e49\u0e2d\u0e07\u0e1b\u0e34\u0e14\u0e43\u0e2b\u0e49\u0e1a\u0e23\u0e34\u0e01\u0e32\u0e23\u0e0a\u0e31\u0e48\u0e27\u0e04\u0e23\u0e32\u0e27"
+    },
+    {
+      "author": "Jose Antonio Lanz",
+      "date": "2026-10-22T22:21:46.000Z",
+      "domain": "decrypt.co",
+      "image": "https://kagiproxy.com/img/VEI3R2E3RKZuwlYV7Hjra0Ti6bTysq3z--x10Psz3r0wz1UHhm9IWVwaOqPn_pDFYAUp4RZDcbt0fonqMyO26BLWAjZFCxhOqBcXTMIIvmT8WG0LMj-O7nYy1Kz6vboIy3csHpX5w4V6GCM",
+      "image_caption": "",
+      "link": "https://decrypt.co/381662/internet-safe-again-after-php-nightmare-what-you-need-know",
+      "title": "Is the Internet Safe Again After the PHP Nightmare? What You Need to Know"
+    },
+    {
+      "author": "\u5fb7\u570b\u4e4b\u8072",
+      "date": "2026-10-23T04:17:33.000Z",
+      "domain": "storm.mg",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.storm.mg/article/11175311",
+      "title": "PHP\u6f0f\u6d1e\u85cf\u5341\u591a\u5e74\u88abAI\u63ea\u51fa\uff1aWordPress\u3001Drupal\u7b49\u7cfb\u7d71\u90fd\u7528\u5230\uff0c\u5c0f\u578b\u7db2\u7ad9\u98a8\u96aa\u66f4\u9ad8"
+    }
+  ],
+  "business_angle": "",
+  "category": "Technology",
+  "cluster_number": 1,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=theregister.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theregister.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theguardian.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theguardian.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcentral.ie\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcentral.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nextgov.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nextgov.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dawn.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dawn.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerweekly.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "computerweekly.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bbc.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bbc.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=slashdot.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "slashdot.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techxplore.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techxplore.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=insiderpaper.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "insiderpaper.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techradar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techradar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=neowin.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "neowin.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thehackernews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thehackernews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=siliconrepublic.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "siliconrepublic.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=securityweek.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "securityweek.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=abcnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "abcnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=404media.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "404media.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arstechnica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arstechnica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=schneier.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "schneier.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomshardware.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomshardware.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bleepingcomputer.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bleepingcomputer.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=9to5mac.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "9to5mac.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techmeme.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techmeme.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wsws.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wsws.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theglobeandmail.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "theglobeandmail.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=defenceeye.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "defenceeye.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ft.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "ft.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dailypakistan.com.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dailypakistan.com.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=business-standard.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "business-standard.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=forbes.cz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "forbes.cz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerwoche.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerwoche.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerworld.dk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerworld.dk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thelec.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thelec.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cybersecurity-insiders.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cybersecurity-insiders.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nzz.ch\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nzz.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=elfinancierocr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "elfinancierocr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thematter.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thematter.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=prensa.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "prensa.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lalibre.be\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "lalibre.be"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=capital.bg\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "capital.bg"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nacion.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nacion.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=infoworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "infoworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=linuxinsider.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "linuxinsider.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=faz.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "faz.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ltn.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ltn.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=storm.mg\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "storm.mg"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cumhuriyet.com.tr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cumhuriyet.com.tr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bbc.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "bbc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=polizeiticker.ch\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "polizeiticker.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dhakatribune.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dhakatribune.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cna.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cna.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=zdfheute.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zdfheute.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nikkei.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nikkei.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=swr.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "swr.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=exxpress.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "exxpress.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=svd.se\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "svd.se"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rte.ie\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rte.ie"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ovb-online.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "ovb-online.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=koreaherald.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "koreaherald.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=decrypt.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "decrypt.co"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd10",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "The PHP Foundation said it had known about the underlying out-of-memory issue since 2024, but researchers had not yet found a concrete route to remote code execution [infoworld.com#1][neowin.net#2]. An external security audit helped identify the problem, and AI-assisted research later clarified how attackers could exploit it [infoworld.com#1][neowin.net#2].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Software and cloud vendors: Cisco was reviewing more than 30 products and cloud services; AWS was addressing exposure in Elastic Beanstalk, WorkMail, Amazon Linux and Lightsail, while Google Cloud updated supported PHP runtimes in App Engine [securityweek.com#1].",
+    "Legacy deployments: Cisco Talos estimated that about half of PHP systems may not receive a patch and urged operators using PHP 8.1 or earlier to move to a supported release [securityweek.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Cybersecurity",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 79,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Neowin",
+          "url": "https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/"
+        }
+      ],
+      "text": "PHP Foundation: The foundation called the prolonged delay in resolving the out-of-memory flaw a structural failure, citing a consensus-driven decision process and a shortage of developers with deep engine expertise. It said it would move to majority decisions and encourage compromises [neowin.net#2]."
+    },
+    {
+      "sources": [
+        {
+          "name": "SecurityWeek",
+          "url": "https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/"
+        }
+      ],
+      "text": "Red Hat: Red Hat rated the vulnerabilities less severely than the National Vulnerability Database did. It said reliable exploitation of one requires precise heap manipulation and timing, and that remote code execution is difficult in practice and typically depends on non-default behavior [securityweek.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "A programmer in Guernica, Spain, on Thursday, working on PHP code, software used throughout the internet.",
+    "credit": "nytimes.com",
+    "link": "https://www.nytimes.com/2026/10/22/technology/what-is-php-vulnerability-risks.html",
+    "url": "https://kagiproxy.com/img/yuKQI2gf5CW1oWupT36ItkZ6YD-F4iLaFqfy1jvj4RLx028hgTuYsqnU2AJ7F1Z-zVC0YNanuihwLO0DhfLgsJx1-WFrib99StrVG2eArC7fOSfJeSGORpTYmSCqXBz8l1Dcu5sMNXxXzGtUT4v7PJlysB30z1UO2JKXy0PpYkv3NQ"
+  },
+  "published": "2026-10-23T12:00:13.489Z",
+  "quote": "Adversaries are clearly spending time (and tokens) on this bug",
+  "quote_attribution": "The Register",
+  "quote_author": "Spencer McIntyre, director of exploit development at VulnCheck",
+  "scientific_significance": [],
+  "secondary_image": {
+    "caption": "",
+    "credit": "pcworld.com",
+    "link": "https://www.pcworld.com/article/3266558/ai-helped-uncover-a-security-nightmare-in-the-webs-backbone-should-you-be-worried.html",
+    "url": "https://kagiproxy.com/img/dkRs8gdkHY0VqwTLAZpXlZwEzfEWFmNbHMTFc_5egOM5_zMelNw4WAH2paH9upBaSIqHUiQin3RFTkFFvnSChmfw9iYQN2GvJtAY3IHgdbcsos6SEjMCNJZpz94795InGk5GqzT-a6r5uJxzqgjFmIm9"
+  },
+  "source_urls": [
+    "https://www.computerweekly.com/news/366652674/Botched-PHP2Shell-disclosure-revealed-as-panic-continues",
+    "https://www.schneier.com/blog/archives/2026/10/new-serious-php-vulnerabilities-released-and-patched.html",
+    "https://business.nikkei.com/atcl/seminar/19/00030/102200816/",
+    "https://www.business-standard.com/world-news/governments-firms-rush-to-patch-php-flaws-as-cyberattacks-surge-globally-126102201717_1.html",
+    "https://www.computerworld.dk/art/297258/morgen-briefing-kritisk-php-fejl-sender-hjemmesider-over-hele-verden-i-sort-du-skal-opdatere-oejeblikkeligt-antal-af-angrebsforsoeg-eksploderer-via-saarbarhed-i-php-saadan-blev-ukendte-saarbarheder-i-php-opdaget-efter-20-aar",
+    "https://arstechnica.com/security/2026/10/hackers-got-a-four-day-head-start-on-epic-php2shell-vulnerability/",
+    "https://www.theguardian.com/technology/2026/oct/22/websites-across-world-hit-by-millions-of-attempts-to-exploit-php-code-flaw",
+    "https://www.bbc.com/thai/articles/ckjwe9945ywyo",
+    "https://www.capital.bg/biznes/tehnologii_i_nauka/2026/10/22/4969864_bezprecedentna_kritichna_uiazvimost_v_php_raztursi_ueb/",
+    "https://exxpress.at/economy/millionen-hacker-angriffe-experte-fordert-unsichere-webseiten-sofort-abschalten/",
+    "https://www.bbc.com/korean/articles/ck3r5j1pr119o",
+    "https://tech.slashdot.org/story/26/10/22/1717246/zoe-kleinman-php-is-the-cyber-equivalent-of-an-unexploded-bomb",
+    "https://www.business-standard.com/world-news/what-is-php-why-are-governments-and-businesses-worldwide-going-offline-126102300108_1.html",
+    "https://polizeiticker.ch/artikel/php-sicherheitsluecke-weltweit-zahlreiche-websites-betroffen-292856",
+    "https://mashable.com/tech/php-vulnerability-security-update-explained",
+    "https://www.infoworld.com/article/4239342/php2shell-exposes-the-weakness-in-coordinated-vulnerability-disclosure.html",
+    "https://www.storm.mg/article/11175311",
+    "https://www.dawn.com/news/2038965/websites-down-what-is-php-and-how-has-it-raised-ai-hacking-fears",
+    "https://www.bleepingcomputer.com/news/security/amazon-says-php2shell-exploitation-began-4-days-before-patches/",
+    "https://www.tomshardware.com/tech-industry/cyber-security/openai-says-gpt-5-6-sol-helped-uncover-critical-php-flaws-that-could-affect-70-percent-of-websites-ai-assisted-researchers-turned-two-year-old-bug-that-stumped-human-developers-into-working-exploits-in-two-weeks",
+    "https://www.securityweek.com/tech-and-security-companies-respond-to-php2shell-vulnerabilities/",
+    "https://www.linuxinsider.com/story/internet-wide-threat-has-security-teams-scrambling-to-patch-php-180689.html",
+    "https://decrypt.co/381662/internet-safe-again-after-php-nightmare-what-you-need-know",
+    "https://www.koreaherald.com/article/10912068",
+    "https://en.dailypakistan.com.pk/22-Oct-2026/bbc-wikipedia-among-major-sites-hit-by-global-cybersecurity-scare-over-critical-php-flaws",
+    "https://9to5mac.com/2026/10/22/whats-going-on-with-the-web-the-php-issue-and-sites-going-offline/",
+    "https://insiderpaper.com/list-of-websites-affected-by-critical-php-flaws/",
+    "https://www.securityweek.com/php2shell-exploitation-started-days-before-patches/",
+    "https://www.rte.ie/news/2026/1022/1596428-php-ai-issue/",
+    "https://www.cumhuriyet.com.tr/dunya/dunya-genelinde-siber-alarm-internetin-yuzde-70-ini-ilgilendiren-kritik-acik-dakikada-milyonlarca-saldiri-2549458",
+    "https://www.neowin.net/news/php-rushed-emergency-patch-after-critical-rce-flaws-leaked-online/",
+    "https://www.nzz.ch/meinung/die-php-luecke-zeigt-das-internet-ist-nicht-sicher-genug-fuer-das-ki-zeitalter-ld.10042034",
+    "https://www.siliconrepublic.com/enterprise/ai-helps-uncover-critical-php-flaw-threatening-70pc-of-internet",
+    "https://www.bbc.co.uk/news/articles/c3qjnwye0ep5o",
+    "https://www.lalibre.be/economie/digital/2026/10/22/des-sites-web-perturbes-dans-le-monde-entier-lune-des-vulnerabilites-les-plus-marquantes-de-ces-dernieres-annees-FWCHOIXVB5ENXBDLFRNF2XTE64/",
+    "https://www.theregister.com/security/2026/10/22/php2shell-exploit-bypasses-protections-designed-to-stop-remote-code-execution/5304883",
+    "https://www.faz.net/aktuell/wirtschaft/unternehmen/jackpot-fuer-angreifer-it-fachmann-mirko-ross-ueber-die-php-schwachstelle-201611025.html",
+    "https://news.google.com/rss/articles/CBMi1AFBVV95cUxNekpxdWgweU5UYmpFNm1fdWNFN19OQXZHUmJPR2lOazVKMFlNVUMxS0p6MlVrUEEwc1pNN3loblh3bHdDQ2poQzJBUGhIUkhYbHZPUUFRcWdrWEd2dmhROXM2Y0ZCcDBFdnh3N1YyTU00UFhzSEFxRS1nMFJoRG9vczBLTmdsOS1leDRzZ3BkVG5lYzlWX3M0ZkdjZkRmLTE0UmJvdEFtdGEtZUU5cmc5WDd1LU9Cd0VyRFFLclJUaTdkRFFPTjJLNzlFWTF5Zm83dTRLQw",
+    "https://www.theregister.com/cyber-crime/2026/10/22/hackers-pile-on-php2shell-as-aws-reveals-attacks-began-before-disclosure/5304749",
+    "https://www.wsws.org/en/articles/2026/10/23/rfdk-o23.html",
+    "https://www.dhakatribune.com/bangladesh/422690/php-security-flaw-triggers-global-cyber-alert",
+    "https://indianexpress.com/article/technology/cert-in-php-vulnerability-alert-india-cybersecurity-warning-us-nsa-php-alert-10931962/",
+    "https://www.firstpost.com/tech/cloudflare-sees-millions-of-exploit-attempts-after-php-disclosure-14054496.html",
+    "https://www.theglobeandmail.com/world/article-what-to-know-php-ai-detected-security-bug-websites/",
+    "https://www.theregister.com/security/2026/10/22/php2shell-puts-dozens-of-uk-government-services-out-of-service/5304840",
+    "https://www.bbc.co.uk/news/articles/cw98z6qlyvg3o",
+    "https://www.storm.mg/article/11175259",
+    "https://www.ovb-online.de/weltspiegel/leute/was-die-php-sicherheitsluecke-fuer-das-internet-bedeutet-zr-94552760.html",
+    "https://www.techmeme.com/261022/p58#a261022p58",
+    "https://www.bbc.co.uk/news/articles/c9j34zgmkxx1o",
+    "https://www.techcentral.ie/websites-go-dark-as-ai-exposes-critical-security-flaws/",
+    "https://techxplore.com/news/2026-10-patch-software-vulnerability-impact-websites.html",
+    "https://www.nacion.com/el-mundo/hallazgo-en-sistema-php-amenaza-la-seguridad-de/BNF344J6EVEGPACMEIQBPCSR7E/story/",
+    "https://news.ltn.com.tw/news/world/paper/1775607",
+    "https://www.swr.de/swraktuell-radio/sicherheitsluecke-internet-php-hacker-bilanz-100.html",
+    "https://www.404media.co/php2shell-black-october-ai-is-changing-everything-about-hacking-no-one-knows-what-happens-next/",
+    "https://www.nytimes.com/2026/10/22/technology/what-is-php-vulnerability-risks.html",
+    "https://www.prensa.com/bbc/que-es-php-y-por-que-genero-una-falla-de-seguridad-en-internet-que-desato-una-alerta-global/",
+    "https://www.ft.com/content/d438af1e-a48c-4aeb-8c84-00cdb5e741e3",
+    "https://techxplore.com/news/2026-10-critical-flaw-affecting-websites-cybersecurity.html",
+    "https://www.cna.com.tw/news/ait/202610220064.aspx",
+    "https://thematter.co/brief/266760/266760",
+    "https://www.pcworld.com/article/3266558/ai-helped-uncover-a-security-nightmare-in-the-webs-backbone-should-you-be-worried.html",
+    "https://www.nytimes.com/2026/10/22/world/php-vulnerability-websites-cybersecurity-ai.html",
+    "https://www.defenceeye.co.uk/2026/10/22/php-vulnerability-affecting-websites/",
+    "https://thehackernews.com/2026/10/someone-tried-to-exploit-php2shell-4.html",
+    "https://abcnews.com/Technology/wireStory/rush-patch-ai-discovered-software-vulnerability-impact-70-137453246",
+    "https://www.theguardian.com/news/video/2026/oct/22/the-race-to-fix-huge-php-flaw-at-the-heart-of-the-internet-the-latest",
+    "https://www.zdfheute.de/politik/php-sicherheitsluecke-faq-websites-internet-100.html",
+    "https://www.nextgov.com/cybersecurity/2026/10/php-flaws-draw-millions-hacking-attempts-amid-global-push-fixes/416771/",
+    "https://abcnews.com/Technology/wireStory/ai-detected-security-hole-impacting-wide-swaths-internet-137483311",
+    "https://www.lalibre.be/economie/conjoncture/2026/10/22/failles-php-aujourdhui-on-nhesite-plus-a-mettre-des-systemes-a-larret-par-precaution-RQCXXHBTABHTHIUHSOPW3PH2RI/",
+    "https://www.techradar.com/computing/internet/no-the-internet-isnt-dying-due-to-one-of-the-most-significant-vulnerabilities-of-2026-but-this-is-what-you-need-to-know",
+    "https://forbes.cz/chyba-v-php-ohrozuje-weby-po-celem-svete-urady-varuji-pred-utoky-hackeru/",
+    "https://www.elfinancierocr.com/tecnologia/fallos-de-seguridad-detectados-por-la-ia-obligan-a/V7NZAEYTYRDP3OD2NBFA3S7FXY/story/",
+    "https://www.computerwoche.de/article/4238904/php-panik-greift-um-sich-das-raten-experten.html",
+    "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE55c0JDMXh2V0lOa1c0T0MtMkwzcnc3WWxFMGJ1NGdZcXVURFZ4MkkzVEZDT1VBRjYycFpZU24wU2o3ei1reXAtX1dGdl9jYnJXck10ZXRqd2lzbEJtUXpvTUNiNzNKZ2c",
+    "https://www.svd.se/a/ElArpG/php-svenska-sajter-drabbade-fra-varnar",
+    "https://www.neowin.net/news/millions-of-php-exploit-attempts-surge-within-hours-of-critical-rce-vulnerability-disclosure/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "U.S. cybersecurity agencies urged organizations to disconnect affected systems that cannot be secured promptly [nextgov.com#1].",
+      "question": "What should operators do if they cannot secure an affected system promptly?"
+    }
+  ],
+  "summary": "Cybersecurity firm VulnCheck has developed an exploit that bypasses Address Space Layout Randomization (ASLR), a defense previously considered a major obstacle to exploiting PHP\u2019s PHP2Shell flaw on real-world x86-64 servers [theregister.com#2]. The two PHP vulnerabilities can let attackers run code remotely without authentication, and VulnCheck\u2019s demonstration bypasses a widely used server protection [thehackernews.com#1][theregister.com#2]. VulnCheck has restricted access to the exploit to its paying intelligence customers [theregister.com#2].\n\nThe PHP Foundation says cybersecurity contractor Chainguard violated an agreed embargo, after which details began circulating and the project moved its patch release forward [infoworld.com#1]. Cloud providers and security researchers have also reported probes before public disclosure [securityweek.com#2][bleepingcomputer.com#1].\n\nPHP is also bundled into services and third-party products. Updating a content-management system or its plugins alone does not necessarily fix the underlying PHP runtime, and security vendors are still assessing products that bundle it [nextgov.com#1][securityweek.com#1]. Cogent Security reported that, by 8 p.m. ET Wednesday, fewer than 1% of affected assets it tracked had been patched [mashable.com#1].",
+  "talking_points": [
+    "Cloudflare\u2019s Matthew Prince said the company saw thousands of exploit attempts in the 10 hours before public disclosure, tens of thousands within 45 minutes afterward, hundreds of thousands within two hours, and millions by the time of his post [mashable.com#1]."
+  ],
+  "technical_details": [
+    "VulnCheck\u0027s demonstration targeted CVE-2026-109618, an out-of-memory corruption flaw that can lead to remote code execution [theregister.com#2].",
+    "Exploit traces: CrowdStrike said exploitation can leave worker processes stable and return normal HTTP 200 responses, with no application code recorded. It identified a memory-limit fatal error in the web server error log as the only server-side trace [thehackernews.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "PHP developers identified early signs of the out-of-memory issue [infoworld.com#1]",
+      "date": "2024",
+      "date_iso": "2024"
+    },
+    {
+      "content": "Amazon detected an attempt to exploit PHP2Shell against its MadPot honeypot [thehackernews.com#1]",
+      "date": "17 October 2026",
+      "date_iso": "2026-10-17"
+    },
+    {
+      "content": "PHP vulnerability identifiers began circulating online before scheduled disclosure [infoworld.com#1]",
+      "date": "20 October 2026",
+      "date_iso": "2026-10-20"
+    },
+    {
+      "content": "PHP issued emergency fixes a day ahead of planned disclosure [securityweek.com#1]",
+      "date": "21 October 2026",
+      "date_iso": "2026-10-21"
+    },
+    {
+      "content": "VulnCheck reported an exploit bypassing ASLR on x86-64 servers [theregister.com#2]",
+      "date": "22 October 2026",
+      "date_iso": "2026-10-22"
+    }
+  ],
+  "title": "Researchers demonstrate PHP attack bypassing a key server defense",
+  "travel_advisory": "",
+  "unique_domains": 65,
+  "url": "https://www.theregister.com/cyber-crime/2026/10/22/hackers-pile-on-php2shell-as-aws-reveals-attacks-began-before-disclosure/5304749",
+  "user_action_items": [
+    "Check for PHP bundled into services and products: Inventory server images, hosting components and third-party products rather than checking only websites that explicitly advertise PHP. Update the runtime itself because content-management system or plugin updates may not address the underlying flaw [nextgov.com#1][linuxinsider.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
