@@ -1,0 +1,2485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>iFixit teardown identifies possible hinge stress behind iPhone Duo screen failures - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>iFixit teardown identifies possible hinge stress behind iPhone Duo screen failures</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work"><img src="https://kagiproxy.com/img/PyB-jyyOe2CBaXRei4QrD7nx_abywWSbAxgiegCjGSz-eNznoesBUkkKvJQyaMp3ysBezKowa2zCLQyODIiY0Oay0Pe12qbiDATgD9ZN9HT5gn3qHYlLv_e0XW8qTa91" alt="iFixit has tested every aspect of the iPhone Duo" title="iFixit has tested every aspect of the iPhone Duo (techradar.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+iFixit has tested every aspect of the iPhone Duo <span class='credit'>(techradar.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Repair specialists at iFixit published a teardown of Apple’s first foldable phone, the iPhone Duo, identifying hinge mechanisms that could concentrate pressure where owners have reported inner-screen failures. Using CT scans, teardown footage and Apple patents, the team said a central support bar might not retract fully as the phone closes, or curved hinge rails might not move as intended. Either could press against the display. iFixit stressed that these are hypotheses, not a confirmed cause <a href="https://www.ifixit.com/News/119895/iphone-duo-teardown" class="footnote-ref">[61]</a><a href="https://www.androidauthority.com/iphone-duo-durability-3727717/" class="footnote-ref">[12]</a>.
+
+A separate teardown by YouTuber CuriousHagi found a sheared hinge component and a possible impact mark beneath a damaged phone’s display after deliberate stress testing. The findings suggest another possible mechanical explanation but do not establish what caused customer failures during ordinary use <a href="https://www.theverge.com/tech/1018290/dissected-iphone-duo-crackgate-hinge-screen" class="footnote-ref">[6]</a><a href="https://www.apfeltalk.de/magazin/feature/iphone-duo-defekte-scharnierteile-koennten-displayrisse-verursachen/" class="footnote-ref">[53]</a>. The number of affected devices remains unclear, and Apple has not publicly identified a cause <a href="https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/" class="footnote-ref">[3]</a><a href="https://www.thenationalnews.com/future/technology/2026/10/25/apples-iphone-duo-faces-screen-damage-complaints-as-first-buyers-report-cracks/" class="footnote-ref">[44]</a>.
+
+Apple’s troubleshooting guidance says hinge problems have no software fix. If removing a case and checking for dirt do not resolve them, a technician may need to replace the inner display assembly. iFixit lists the price of an out-of-warranty inner-screen replacement at $999 <a href="https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/" class="footnote-ref">[55]</a><a href="https://www.ifixit.com/News/119895/iphone-duo-teardown" class="footnote-ref">[61]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>It&#x27;s been a lot of fun trying the Duo out for a week, but it feels like I&#x27;ve gotten to use an extraordinarily polished prototype — not a finished product that I&#x27;d want to buy and carry.</p>
+
+<cite>— John Gruber, Apple commentator and author of Daring Fireball (Ada Derana)</cite>
+
+</blockquote>
+
+
+
+
+<div class='did-you-know'><p><strong>Did you know:</strong> The Delta emulator has been updated to make the iPhone Duo resemble a Nintendo DS, with closing the phone putting a game into sleep mode <a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbW9xaVpRZGtnZjJYTkNfSTUxRmZ2cVE2S01ia3FtdGh0dzVPUFRKY3NRT3pGMkZnM3huVHk4NkpVQ2t1R1AyUEpMdWNkdWFnbEp2OUNFRFlwN3dQcUMxZGZEX2hGckJqck5QbFVlNXdXSEV4dVcyOGhlbEJkMU1NVXVxcW0tMEsxbGFrZjF3TUE3b3k1SnlDNGtIVzlvWlR5cUt2QjV2bUpiblRBZTRDblZqb1NpNHVMMno40gHAAUFVX3lxTE5yNG5wM1BYaFhWbXVfVktLZ0xSOURlSU1wSVJHbDJadDdINWo5TDYzTk9jT1BZSjJSbWtBbTctN043S3k1by05UF9KZ2dNSy05dkhYdDJnak1welFGbEJNbmlZSDhzNllTN19LOW1rZGZyQVNYLWQyR0ttS3FGUUZNS2Q3bnNiSVQ4Y3VDNkVtUURHc3RmLXZvNE1QWUswVHExaml3NDVIZnBfR2p6akZqTFVDWXBsSjBZVmRaSHhxTw" class="footnote-ref">[81]</a>.</p></div>
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Case setting: Apple’s “Shift Left Edge” setting moves outer-screen content inward when a case covers the display’s left edge. The phone prompts users to enable it when using Apple’s official case <a href="https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/" class="footnote-ref">[29]</a><a href="https://www.macerkopf.de/2026/10/25/iphone-duo-erste-teardowns-akku/" class="footnote-ref">[63]</a>.</li>
+
+<li>Supplier response: Korean hinge supplier Fine M-Tec warned it may take legal action over unsupported claims linking its parts to the failures <a href="https://www.seoul.co.kr/news/newsView.php?id=20261026500221" class="footnote-ref">[66]</a>.</li>
+
+<li>Dust ingress: In iFixit’s fluorescent-powder test, particles reached the hinge and caused crunching noises, although less dust entered than in comparable Galaxy Z Fold8 and Pixel 11 Pro Fold tests <a href="https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/" class="footnote-ref">[1]</a><a href="https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work" class="footnote-ref">[11]</a>.</li>
+
+<li>Apple guidance: Apple lists a hinge that will not open or close fully, unusual folding noises or looseness as warning signs <a href="https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/" class="footnote-ref">[55]</a>.</li>
+
+<li>Hinge shortcuts: Owners can configure the open-or-close trigger to lock the phone when shut or switch wallpapers between display states <a href="https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/" class="footnote-ref">[1]</a><a href="https://stadt-bremerhaven.de/ifixit-zerlegt-iphone-duo/" class="footnote-ref">[57]</a>.</li>
+
+<li>Repairability score: iFixit gave the Duo a provisional 5 out of 10, its highest score for a foldable; the final rating depends on replacement-parts availability <a href="https://www.ifixit.com/News/119895/iphone-duo-teardown" class="footnote-ref">[61]</a><a href="https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/" class="footnote-ref">[3]</a>.</li>
+
+<li>Button repair: After a replacement Touch ID side button is installed, Apple’s repair assistant must calibrate it. Until then, fingerprint unlocking, payments and app sign-ins are unavailable, though a passcode still works <a href="https://www.macerkopf.de/2026/10/25/iphone-duo-erste-teardowns-akku/" class="footnote-ref">[63]</a>.</li>
+
+<li>Selfie alternatives: Owners can use the outer selfie camera or rear cameras for self-portraits; the outer display can serve as a viewfinder for the rear cameras <a href="https://hk.news.yahoo.com/iphone-duo-%E5%85%A7%E5%B1%8F%E6%8E%A1%E7%94%A8%E5%B1%8F%E4%B8%8B%E9%8F%A1%E9%A0%AD%E8%A8%AD%E8%A8%88-%E7%95%AB%E8%B3%AA%E6%88%90%E7%96%91%E6%88%96%E5%BD%B1%E9%9F%BF%E8%87%AA%E6%8B%8D%E7%9B%B8%E7%89%87%E8%B3%AA%E7%B4%A0-003022370.html" class="footnote-ref">[84]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Fine M-Tec: The Korean hinge supplier argued that linking a finished phone’s fault to a particular component requires objective technical verification <a href="https://www.seoul.co.kr/news/newsView.php?id=20261026500221" class="footnote-ref">[66]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.seoul.co.kr/news/newsView.php?id=20261026500221">Seoul Newspaper</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Verizon customer chimchambam: The customer said Apple declined warranty coverage for a damaged phone, concluding it had been dropped; this contrasts with accounts of some buyers receiving replacement devices <a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4" class="footnote-ref">[67]</a><a href="https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/" class="footnote-ref">[3]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4">PhoneArena</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Technology reviewer Marques Brownlee, known as MKBHD, said the Duo would probably not suit people who mainly text, use social media and browse, but could appeal to buyers comfortable with its $2,000 price and adjustment period <a href="https://adaderana.lk/news/250422" class="footnote-ref">[80]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://adaderana.lk/news/250422">Ada Derana</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>9 September 2026:</strong> Apple unveiled the iPhone Duo, its first foldable phone <a href="https://kite.kagi.com/tech/2026102512/cracked-screens-reported-on-apples-first-foldable-iphone" class="footnote-ref">[69]</a></li>
+
+
+
+<li><strong>23 October 2026:</strong> The iPhone Duo went on sale as owners began reporting screen damage <a href="https://kite.kagi.com/tech/2026102512/cracked-screens-reported-on-apples-first-foldable-iphone" class="footnote-ref">[69]</a></li>
+
+
+
+<li><strong>25 October 2026:</strong> iFixit published a teardown with possible hinge-related explanations <a href="https://www.ifixit.com/News/119895/iphone-duo-teardown" class="footnote-ref">[61]</a></li>
+
+
+
+<li><strong>26 October 2026:</strong> Fine M-Tec denied its components caused the reported quality issue <a href="https://www.seoul.co.kr/news/newsView.php?id=20261026500221" class="footnote-ref">[66]</a></li>
+
+
+
+<li><strong>9 September 2026:</strong> Apple announced its first foldable iPhone, the iPhone Duo <a href="https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html" class="footnote-ref">[17]</a></li>
+
+
+
+<li><strong>16 October 2026:</strong> Preorders opened as delivery estimates began extending into January <a href="https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html" class="footnote-ref">[17]</a><a href="https://adaderana.lk/news/250422" class="footnote-ref">[80]</a></li>
+
+
+
+<li><strong>23 October 2026:</strong> Retail sales began in more than 70 countries and regions <a href="https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html" class="footnote-ref">[17]</a></li>
+
+
+
+<li><strong>25 October 2026:</strong> A new open-or-close automation trigger was documented for the Duo <a href="https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/" class="footnote-ref">[1]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Screen-ratio comparison: Samsung’s Galaxy Z Fold 8 Ultra uses a 21:9 cover screen and a 10:9 inner screen, requiring different app layouts for the two displays <a href="https://www.cnet.com/tech/mobile/iphone-duo-owners-your-apps-will-look-better-soon/" class="footnote-ref">[75]</a>.</li>
+
+<li>Replaceable cover layer: Apple designed the nano-texture cover layer to be replaced without removing the OLED panel beneath it; iFixit reported replacement prices of $19 with AppleCare+ and $49 without it <a href="https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/" class="footnote-ref">[1]</a><a href="https://www.freepressjournal.in/tech/iphone-duo-teardown-exposes-costly-inner-screen-weakness-as-early-buyers-report-display-damage" class="footnote-ref">[23]</a>.</li>
+
+<li>Crease-masking optics: The flexible display’s matte nano-texture scatters reflected light to make the fold less conspicuous; iFixit also found oval subpixels oriented at different angles, which may reduce visual artifacts <a href="https://www.theverge.com/tech/1018233/ifixit-iphone-duo-teardown-repairability-hinge" class="footnote-ref">[4]</a><a href="https://www.ifixit.com/News/119895/iphone-duo-teardown" class="footnote-ref">[61]</a>.</li>
+
+<li>Under-display camera: The internal selfie camera sits beneath the display. Its listed specifications include an ƒ/1.8 aperture and 1080p video at 60 frames per second; one review attributed soft, low-detail images to its 4-megapixel resolution <a href="https://hk.news.yahoo.com/iphone-duo-%E5%85%A7%E5%B1%8F%E6%8E%A1%E7%94%A8%E5%B1%8F%E4%B8%8B%E9%8F%A1%E9%A0%AD%E8%A8%AD%E8%A8%88-%E7%95%AB%E8%B3%AA%E6%88%90%E7%96%91%E6%88%96%E5%BD%B1%E9%9F%BF%E8%87%AA%E6%8B%8D%E7%9B%B8%E7%89%87%E8%B3%AA%E7%B4%A0-003022370.html" class="footnote-ref">[84]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Foldable competition: IDC forecast that Apple would lead the foldable category by both units and value in 2027, ahead of established vendors Samsung and Huawei <a href="https://adaderana.lk/news/250422" class="footnote-ref">[80]</a>.</li>
+
+<li>Foldable-phone components: Fine M-Tec shares closed down 15.07% on Oct. 26 amid speculation about the supplier’s role in the reported quality issue <a href="https://www.seoul.co.kr/news/newsView.php?id=20261026500221" class="footnote-ref">[66]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>A separate teardown article recalled that Samsung delayed the original Galaxy Fold launch after review units suffered screen failures <a href="https://www.makeuseof.com/apple-iphone-duo-ifixit-teardown/" class="footnote-ref">[34]</a>. That episode involved a different product and does not establish whether the iPhone Duo’s reported failures share the same cause <a href="https://www.makeuseof.com/apple-iphone-duo-ifixit-teardown/" class="footnote-ref">[34]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Stop using the phone if bent hardware or damage to the outer shell prevents it from working properly; Apple’s guide advises seeking service in those cases <a href="https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/" class="footnote-ref">[55]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://twit.tv/shows/this-week-in-tech/episodes/1107">https://twit.tv/shows/this-week-in-tech/episodes/1107</a></li>
+
+
+
+<li><a href="https://www.freepressjournal.in/tech/iphone-duo-teardown-exposes-costly-inner-screen-weakness-as-early-buyers-report-display-damage">https://www.freepressjournal.in/tech/iphone-duo-teardown-exposes-costly-inner-screen-weakness-as-early-buyers-report-display-damage</a></li>
+
+
+
+<li><a href="https://tozsdeforum.hu/extra/tech/itt-az-uj-apple-orulet-megerkezett-a-hajlithato-iphone-duo-ami-kozel-ketezer-dollarba-kerul-es-honapokat-varhatunk-ra/">https://tozsdeforum.hu/extra/tech/itt-az-uj-apple-orulet-megerkezett-a-hajlithato-iphone-duo-ami-kozel-ketezer-dollarba-kerul-es-honapokat-varhatunk-ra/</a></li>
+
+
+
+<li><a href="https://www.infobae.com/tecno/2026/10/26/por-que-se-esta-rompiendo-la-pantalla-del-nuevo-iphone-duo/">https://www.infobae.com/tecno/2026/10/26/por-que-se-esta-rompiendo-la-pantalla-del-nuevo-iphone-duo/</a></li>
+
+
+
+<li><a href="https://www.androidauthority.com/iphone-duo-durability-3727717/">https://www.androidauthority.com/iphone-duo-durability-3727717/</a></li>
+
+
+
+<li><a href="https://adaderana.lk/news/250422">https://adaderana.lk/news/250422</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/iphone/comments/1xfgyu9/mark_gurman_on_iphone_duo/">https://www.reddit.com/r/iphone/comments/1xfgyu9/mark_gurman_on_iphone_duo/</a></li>
+
+
+
+<li><a href="https://www.youtube.com/shorts/jeML9beR6Hg">https://www.youtube.com/shorts/jeML9beR6Hg</a></li>
+
+
+
+<li><a href="https://www.macrumors.com/how-to/iphone-duo-setting-makes-room-for-case/">https://www.macrumors.com/how-to/iphone-duo-setting-makes-room-for-case/</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/iphone-duo-owners-report-screens-cracking-days-after-unboxing-flag-possible-hinge-defect-14055198.html">https://www.firstpost.com/tech/iphone-duo-owners-report-screens-cracking-days-after-unboxing-flag-possible-hinge-defect-14055198.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxPY25YUEtyVHZOdEs2X3NCcGpmMHlidXN1a1IzSUg3ekxsSUdTRS1LYjBrSTJqVEp1NWFIYzBPcS13dXJGcjZnOWdoYWtxQXNqRjRfYnZKSGZUTHR6SW9pazdMbDJaMHlod082TU4xeUI3Qm1iVmFPOVU0UXBPSWhoUWF0QXBJT3dyWDNqb0Zqd2t4MHcwV2dMdFdWVUdDXzFES3NDSjlB">https://news.google.com/rss/articles/CBMipgFBVV95cUxPY25YUEtyVHZOdEs2X3NCcGpmMHlidXN1a1IzSUg3ekxsSUdTRS1LYjBrSTJqVEp1NWFIYzBPcS13dXJGcjZnOWdoYWtxQXNqRjRfYnZKSGZUTHR6SW9pazdMbDJaMHlod082TU4xeUI3Qm1iVmFPOVU0UXBPSWhoUWF0QXBJT3dyWDNqb0Zqd2t4MHcwV2dMdFdWVUdDXzFES3NDSjlB</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/iphone-duo-durability-test-reveals-major-hinge-and-display-weaknesses/">https://www.macobserver.com/news/iphone-duo-durability-test-reveals-major-hinge-and-display-weaknesses/</a></li>
+
+
+
+<li><a href="https://www.apfeltalk.de/magazin/feature/iphone-duo-defekte-scharnierteile-koennten-displayrisse-verursachen/">https://www.apfeltalk.de/magazin/feature/iphone-duo-defekte-scharnierteile-koennten-displayrisse-verursachen/</a></li>
+
+
+
+<li><a href="https://www.iphoneincanada.ca/2026/10/25/iphone-duo-phonebuff-drop-test/">https://www.iphoneincanada.ca/2026/10/25/iphone-duo-phonebuff-drop-test/</a></li>
+
+
+
+<li><a href="https://news.jtbc.co.kr/article/NB12324770">https://news.jtbc.co.kr/article/NB12324770</a></li>
+
+
+
+<li><a href="https://www.intomobile.com/2026/10/25/apples-iphone-duo-is-getting-a-left-hand-reachability-mode/">https://www.intomobile.com/2026/10/25/apples-iphone-duo-is-getting-a-left-hand-reachability-mode/</a></li>
+
+
+
+<li><a href="https://arstechnica.com/civis/threads/iphone-duo.1514734/">https://arstechnica.com/civis/threads/iphone-duo.1514734/</a></li>
+
+
+
+<li><a href="https://www.theverge.com/tech/1018290/dissected-iphone-duo-crackgate-hinge-screen">https://www.theverge.com/tech/1018290/dissected-iphone-duo-crackgate-hinge-screen</a></li>
+
+
+
+<li><a href="https://www.frandroid.com/marques/apple/3298563_iphone-duo-mieux-protege-de-la-poussiere-que-les-galaxy-et-pixel-pourtant-ifixit-trouve-une-faiblesse-au-coeur-de-la-charniere">https://www.frandroid.com/marques/apple/3298563_iphone-duo-mieux-protege-de-la-poussiere-que-les-galaxy-et-pixel-pourtant-ifixit-trouve-une-faiblesse-au-coeur-de-la-charniere</a></li>
+
+
+
+<li><a href="https://stadt-bremerhaven.de/iphone-duo-automationen-beim-oeffnen-oder-schliessen-nutzen/">https://stadt-bremerhaven.de/iphone-duo-automationen-beim-oeffnen-oder-schliessen-nutzen/</a></li>
+
+
+
+<li><a href="https://www.hardwarezone.com.sg/mobile/iphone-duo-inner-diplay-cracking-possible-hinge-issues">https://www.hardwarezone.com.sg/mobile/iphone-duo-inner-diplay-cracking-possible-hinge-issues</a></li>
+
+
+
+<li><a href="https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/">https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirgFBVV95cUxOdDZyZkp6dHMzMGt4WXRKeEJiV1R5WC14SHE4LXZkMXNJTTFENThXTnJPZmVzSWVpT1dvX00tYmQ0RXlzQzUtU3gzSkUwdGZTdS16QVZ4bV9VenozVnZuSHhRN2FwQ0hVbFJvTHNXRDJOZmhMM1E4YlZ0STkyckVIcVNEOHZYMzNKb1l3TnFYeWxza01pbFd5RmpaY3JJRklMTXdzOTJtVTV2THNNZHc">https://news.google.com/rss/articles/CBMirgFBVV95cUxOdDZyZkp6dHMzMGt4WXRKeEJiV1R5WC14SHE4LXZkMXNJTTFENThXTnJPZmVzSWVpT1dvX00tYmQ0RXlzQzUtU3gzSkUwdGZTdS16QVZ4bV9VenozVnZuSHhRN2FwQ0hVbFJvTHNXRDJOZmhMM1E4YlZ0STkyckVIcVNEOHZYMzNKb1l3TnFYeWxza01pbFd5RmpaY3JJRklMTXdzOTJtVTV2THNNZHc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMixAFBVV95cUxQZF9KUGFtZk9fV2ZoLXI4TFFlR29uRVFPQkhsRXF6U3RMQ1ZiRWxQbzI3cllFQlgtSFlybl9XWWQ4aENMTnUxRE80SWlNVVZwVGdNNHByOTBSY2RHSjVTVUJfSnJxTHdMTTNHVFFnemc5VVd0WnBJQlUxNVNUZ0wxeVNTbXo2MWpING5oOGZUSHEyaGFLYjlnaFFzcGs4OUgyZnpJdS1QUDZCU1FUMXR1RGN1dHFlLXJoWUxIOTUwSF9EX0R10gHAAUFVX3lxTE44YkVaVFo4Y0dzOVJva2VVcThFLXpDeFFwVUZhY3piTXgyY2NBbFpsaXhOTkxZUmpabHM1eFBETldOYTlPNWFNTm9jU3NJNXdNTF9kYkZoUGRoR2Roa3M4QUdKOTlUalA2R3NPVHNwNFVheTFaMXRmRThHa1pxSlVLQm1lVnJ2N1ZoaHV0Q1JKeXhIQ00yLWN5cnlTR2JpaFZzUkk1QXFKT2pCcTRRLWxnUVRCWVlhei16anBNZlVpeQ">https://news.google.com/rss/articles/CBMixAFBVV95cUxQZF9KUGFtZk9fV2ZoLXI4TFFlR29uRVFPQkhsRXF6U3RMQ1ZiRWxQbzI3cllFQlgtSFlybl9XWWQ4aENMTnUxRE80SWlNVVZwVGdNNHByOTBSY2RHSjVTVUJfSnJxTHdMTTNHVFFnemc5VVd0WnBJQlUxNVNUZ0wxeVNTbXo2MWpING5oOGZUSHEyaGFLYjlnaFFzcGs4OUgyZnpJdS1QUDZCU1FUMXR1RGN1dHFlLXJoWUxIOTUwSF9EX0R10gHAAUFVX3lxTE44YkVaVFo4Y0dzOVJva2VVcThFLXpDeFFwVUZhY3piTXgyY2NBbFpsaXhOTkxZUmpabHM1eFBETldOYTlPNWFNTm9jU3NJNXdNTF9kYkZoUGRoR2Roa3M4QUdKOTlUalA2R3NPVHNwNFVheTFaMXRmRThHa1pxSlVLQm1lVnJ2N1ZoaHV0Q1JKeXhIQ00yLWN5cnlTR2JpaFZzUkk1QXFKT2pCcTRRLWxnUVRCWVlhei16anBNZlVpeQ</a></li>
+
+
+
+<li><a href="https://www.yna.co.kr/view/AKR20261026114800017">https://www.yna.co.kr/view/AKR20261026114800017</a></li>
+
+
+
+<li><a href="https://thanhnien.vn/thao-roi-iphone-duo-ifixit-tim-ra-hai-nguyen-nhan-co-the-gay-nut-man-hinh-185261026104156361.htm">https://thanhnien.vn/thao-roi-iphone-duo-ifixit-tim-ra-hai-nguyen-nhan-co-the-gay-nut-man-hinh-185261026104156361.htm</a></li>
+
+
+
+<li><a href="https://www.ifixit.com/News/119895/iphone-duo-teardown">https://www.ifixit.com/News/119895/iphone-duo-teardown</a></li>
+
+
+
+<li><a href="https://www.ithome.com/1/017/906.htm">https://www.ithome.com/1/017/906.htm</a></li>
+
+
+
+<li><a href="https://ototekno.harianjogja.com/r-1276431/ifixit-bongkar-iphone-duo-temukan-dugaan-penyebab-layar-rusak">https://ototekno.harianjogja.com/r-1276431/ifixit-bongkar-iphone-duo-temukan-dugaan-penyebab-layar-rusak</a></li>
+
+
+
+<li><a href="https://www.youtube.com/shorts/qZsfkq86B0s">https://www.youtube.com/shorts/qZsfkq86B0s</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/">https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/</a></li>
+
+
+
+<li><a href="https://www.thenationalnews.com/future/technology/2026/10/25/apples-iphone-duo-faces-screen-damage-complaints-as-first-buyers-report-cracks/">https://www.thenationalnews.com/future/technology/2026/10/25/apples-iphone-duo-faces-screen-damage-complaints-as-first-buyers-report-cracks/</a></li>
+
+
+
+<li><a href="https://9to5mac.com/2026/10/25/iphone-duo-displays-cracking/">https://9to5mac.com/2026/10/25/iphone-duo-displays-cracking/</a></li>
+
+
+
+<li><a href="https://kite.kagi.com/tech/2026102512/cracked-screens-reported-on-apples-first-foldable-iphone">https://kite.kagi.com/tech/2026102512/cracked-screens-reported-on-apples-first-foldable-iphone</a></li>
+
+
+
+<li><a href="https://www.frandroid.com/os/ios/3298431_crackgate-et-iphone-duo-des-ecrans-pliables-cassent-a-la-charniere-un-serieux-probleme-ou-des-cas-isoles">https://www.frandroid.com/os/ios/3298431_crackgate-et-iphone-duo-des-ecrans-pliables-cassent-a-la-charniere-un-serieux-probleme-ou-des-cas-isoles</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/apple/comments/1xfm4ij/apples_folding_iphone_duo_might_have_a_screen/">https://www.reddit.com/r/apple/comments/1xfm4ij/apples_folding_iphone_duo_might_have_a_screen/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/iphone/comments/1xfgbqy/another_touchid_trick/">https://www.reddit.com/r/iphone/comments/1xfgbqy/another_touchid_trick/</a></li>
+
+
+
+<li><a href="https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/">https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/iphone/comments/1xfoxx7/tried_iphone_duo/">https://www.reddit.com/r/iphone/comments/1xfoxx7/tried_iphone_duo/</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/iphone-duo-cracked-screens-white-lines-whats-happening-to-apples-foldable-iphone-14055318.html">https://www.firstpost.com/tech/iphone-duo-cracked-screens-white-lines-whats-happening-to-apples-foldable-iphone-14055318.html</a></li>
+
+
+
+<li><a href="https://spidersweb.pl/2026/10/iphone-duo-ekrany-problem.html">https://spidersweb.pl/2026/10/iphone-duo-ekrany-problem.html</a></li>
+
+
+
+<li><a href="https://www.macrumors.com/2026/10/25/iphone-duo-automation-opened-or-closed/">https://www.macrumors.com/2026/10/25/iphone-duo-automation-opened-or-closed/</a></li>
+
+
+
+<li><a href="https://stadt-bremerhaven.de/ifixit-zerlegt-iphone-duo/">https://stadt-bremerhaven.de/ifixit-zerlegt-iphone-duo/</a></li>
+
+
+
+<li><a href="https://www.cultofmac.com/news/iphone-duo-drop-test-results">https://www.cultofmac.com/news/iphone-duo-drop-test-results</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/iphone-duo-teardown-reveals-dual-batteries-and-internal-changes/">https://www.macobserver.com/news/iphone-duo-teardown-reveals-dual-batteries-and-internal-changes/</a></li>
+
+
+
+<li><a href="https://www.apfeltalk.de/magazin/news/iphone-duo-ifixit-untersucht-moegliche-ursachen-fuer-displaybrueche/">https://www.apfeltalk.de/magazin/news/iphone-duo-ifixit-untersucht-moegliche-ursachen-fuer-displaybrueche/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE9KRzA1ZzlQMzJ2Z3VJRnZDYWtMRnVONUwzNnpoMzBzNnhKQVBmblRZUTAyWjNnNlhxTUhxbHFpcGpyby1UdjRwbXlLcW9wSjhUUElR">https://news.google.com/rss/articles/CBMiU0FVX3lxTE9KRzA1ZzlQMzJ2Z3VJRnZDYWtMRnVONUwzNnpoMzBzNnhKQVBmblRZUTAyWjNnNlhxTUhxbHFpcGpyby1UdjRwbXlLcW9wSjhUUElR</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/iphone-duo-owners-are-reporting-cracks-in-their-screens-users-call-it-crackgate">https://www.pcmag.com/news/iphone-duo-owners-are-reporting-cracks-in-their-screens-users-call-it-crackgate</a></li>
+
+
+
+<li><a href="https://www.mirrordaily.news/story/93823">https://www.mirrordaily.news/story/93823</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4">https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4</a></li>
+
+
+
+<li><a href="https://www.theverge.com/tech/1018233/ifixit-iphone-duo-teardown-repairability-hinge">https://www.theverge.com/tech/1018233/ifixit-iphone-duo-teardown-repairability-hinge</a></li>
+
+
+
+<li><a href="https://techaeris.com/2026/10/25/iphone-duo-screen-cracking/">https://techaeris.com/2026/10/25/iphone-duo-screen-cracking/</a></li>
+
+
+
+<li><a href="https://www.macerkopf.de/2026/10/26/iphone-duo-apple-support-dokumente/">https://www.macerkopf.de/2026/10/26/iphone-duo-apple-support-dokumente/</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/early-iphone-duo-owners-report-screen-cracks-along-the-hinge/">https://www.macobserver.com/news/early-iphone-duo-owners-report-screen-cracks-along-the-hinge/</a></li>
+
+
+
+<li><a href="https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work">https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxQSVFCWkNuYnZ3cnhkbDFwNy1wM3FyRU1IN210VXZqQ2w1cHNJZ0xOYi02Um1XRzlzUWQ4YmVvaUI2YVhWWXZVdmtNb2JhN1FzRVMwbndGWkhtSHVoYnhMVlpDdDNpbWgtS05sZ0tPeUh5TVQ2dlptLUNvdUk5YlEwSVJjX19VdE9RVVdhSWQ2c3VoTXNBQWJOZ0dnNVB0MnJ6eWJwR1dwajd5bTJvQ09HZS1n">https://news.google.com/rss/articles/CBMisgFBVV95cUxQSVFCWkNuYnZ3cnhkbDFwNy1wM3FyRU1IN210VXZqQ2w1cHNJZ0xOYi02Um1XRzlzUWQ4YmVvaUI2YVhWWXZVdmtNb2JhN1FzRVMwbndGWkhtSHVoYnhMVlpDdDNpbWgtS05sZ0tPeUh5TVQ2dlptLUNvdUk5YlEwSVJjX19VdE9RVVdhSWQ2c3VoTXNBQWJOZ0dnNVB0MnJ6eWJwR1dwajd5bTJvQ09HZS1n</a></li>
+
+
+
+<li><a href="https://www.makeuseof.com/apple-iphone-duo-ifixit-teardown/">https://www.makeuseof.com/apple-iphone-duo-ifixit-teardown/</a></li>
+
+
+
+<li><a href="https://refresher.sk/214088-Najvacsi-Apple-fail-tohto-roka-Majitelia-iPhonu-Duo-hromadne-hlasia-prasknute-displeje">https://refresher.sk/214088-Najvacsi-Apple-fail-tohto-roka-Majitelia-iPhonu-Duo-hromadne-hlasia-prasknute-displeje</a></li>
+
+
+
+<li><a href="https://www.seoul.co.kr/news/newsView.php?id=20261026500221">https://www.seoul.co.kr/news/newsView.php?id=20261026500221</a></li>
+
+
+
+<li><a href="https://www.blognone.com/node/152020">https://www.blognone.com/node/152020</a></li>
+
+
+
+<li><a href="https://www.iphoneincanada.ca/2026/10/25/iphone-duo-techrax-real-life-drop-test/">https://www.iphoneincanada.ca/2026/10/25/iphone-duo-techrax-real-life-drop-test/</a></li>
+
+
+
+<li><a href="https://www.indiatoday.in/technology/news/story/iphone-duo-display-failing-teardown-shows-possible-reason-for-it-3024962-2026-10-26">https://www.indiatoday.in/technology/news/story/iphone-duo-display-failing-teardown-shows-possible-reason-for-it-3024962-2026-10-26</a></li>
+
+
+
+<li><a href="https://www.ettoday.net/news/20261026/3260970.htm">https://www.ettoday.net/news/20261026/3260970.htm</a></li>
+
+
+
+<li><a href="https://mashdigi.com/despite-reports-of-the-internal-screen-cracking-after-being-opened-and-closed-a-few-times-the-iphone-duo-is-the-easiest-foldable-phone-ifixit-has-ever-disassembled-and-repaired/">https://mashdigi.com/despite-reports-of-the-internal-screen-cracking-after-being-opened-and-closed-a-few-times-the-iphone-duo-is-the-easiest-foldable-phone-ifixit-has-ever-disassembled-and-repaired/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/iphone/comments/1xflvl9/the_duo_makes_me_want_iphone_hand_off_so_badly/">https://www.reddit.com/r/iphone/comments/1xflvl9/the_duo_makes_me_want_iphone_hand_off_so_badly/</a></li>
+
+
+
+<li><a href="https://hk.news.yahoo.com/iphone-duo-%E5%85%A7%E5%B1%8F%E6%8E%A1%E7%94%A8%E5%B1%8F%E4%B8%8B%E9%8F%A1%E9%A0%AD%E8%A8%AD%E8%A8%88-%E7%95%AB%E8%B3%AA%E6%88%90%E7%96%91%E6%88%96%E5%BD%B1%E9%9F%BF%E8%87%AA%E6%8B%8D%E7%9B%B8%E7%89%87%E8%B3%AA%E7%B4%A0-003022370.html">https://hk.news.yahoo.com/iphone-duo-%E5%85%A7%E5%B1%8F%E6%8E%A1%E7%94%A8%E5%B1%8F%E4%B8%8B%E9%8F%A1%E9%A0%AD%E8%A8%AD%E8%A8%88-%E7%95%AB%E8%B3%AA%E6%88%90%E7%96%91%E6%88%96%E5%BD%B1%E9%9F%BF%E8%87%AA%E6%8B%8D%E7%9B%B8%E7%89%87%E8%B3%AA%E7%B4%A0-003022370.html</a></li>
+
+
+
+<li><a href="https://biz.heraldcorp.com/article/10914741">https://biz.heraldcorp.com/article/10914741</a></li>
+
+
+
+<li><a href="https://tribune.com.pk/story/2636846/apples-iphone-duo-faces-early-durability-concerns-as-users-report-cracked-screens">https://tribune.com.pk/story/2636846/apples-iphone-duo-faces-early-durability-concerns-as-users-report-cracked-screens</a></li>
+
+
+
+<li><a href="https://www.gadgets360.com/mobiles/news/iphone-duo-foldable-displays-cracking-faulty-hinges-ifixit-teardown-12235969">https://www.gadgets360.com/mobiles/news/iphone-duo-foldable-displays-cracking-faulty-hinges-ifixit-teardown-12235969</a></li>
+
+
+
+<li><a href="https://www.cultofmac.com/news/apple-packed-the-iphone-duo-with-clever-repair-tricks">https://www.cultofmac.com/news/apple-packed-the-iphone-duo-with-clever-repair-tricks</a></li>
+
+
+
+<li><a href="https://vnexpress.net/tra-tan-iphone-duo-kiem-tra-do-ben-5136699.html">https://vnexpress.net/tra-tan-iphone-duo-kiem-tra-do-ben-5136699.html</a></li>
+
+
+
+
+
+<li><a href="https://www.techmeme.com/261025/p13#a261025p13">https://www.techmeme.com/261025/p13#a261025p13</a></li>
+
+
+
+<li><a href="https://www.iphone-ticker.de/iphone-duo-display-schaeden-koennten-durch-das-scharnier-entstehen-289138/">https://www.iphone-ticker.de/iphone-duo-display-schaeden-koennten-durch-das-scharnier-entstehen-289138/</a></li>
+
+
+
+<li><a href="https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html">https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html</a></li>
+
+
+
+<li><a href="https://www.macerkopf.de/2026/10/25/iphone-duo-erste-teardowns-akku/">https://www.macerkopf.de/2026/10/25/iphone-duo-erste-teardowns-akku/</a></li>
+
+
+
+<li><a href="https://www.maclife.de/news/iphone-duo-ifixit-untersucht-ursache-display-schaeden-100127797.html">https://www.maclife.de/news/iphone-duo-ifixit-untersucht-ursache-display-schaeden-100127797.html</a></li>
+
+
+
+<li><a href="https://www.evrensel.net/haber/6006609/applein-katlanabilir-telefonu-iphone-duoda-ekran-krizi-darbe-almadan-catliyor">https://www.evrensel.net/haber/6006609/applein-katlanabilir-telefonu-iphone-duoda-ekran-krizi-darbe-almadan-catliyor</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1vY3MxWExhZmVHaVJ3Q3hNUHh3UlFCQm5nUjNLWlR0QWRhc2lHc2I2WTgyTTZybnQ5UnpoNktKUVdWU2lJaWlPUGhNbGp6VmtsY01GSldsNE9Lbmd5UHI5Vmp0R2pyTkdSTUZiMkdMYzNyUHVVYl9v">https://news.google.com/rss/articles/CBMid0FVX3lxTE1vY3MxWExhZmVHaVJ3Q3hNUHh3UlFCQm5nUjNLWlR0QWRhc2lHc2I2WTgyTTZybnQ5UnpoNktKUVdWU2lJaWlPUGhNbGp6VmtsY01GSldsNE9Lbmd5UHI5Vmp0R2pyTkdSTUZiMkdMYzNyUHVVYl9v</a></li>
+
+
+
+<li><a href="https://www.egyptindependent.com/the-iphone-duo-is-apples-coolest-phone-in-years-theres-just-one-problem/">https://www.egyptindependent.com/the-iphone-duo-is-apples-coolest-phone-in-years-theres-just-one-problem/</a></li>
+
+
+
+<li><a href="https://propakistani.pk/2026/10/25/iphone-duo-fails-basic-durability-test-in-huge-blow-to-apple/">https://propakistani.pk/2026/10/25/iphone-duo-fails-basic-durability-test-in-huge-blow-to-apple/</a></li>
+
+
+
+<li><a href="https://www.cultofmac.com/news/iphone-duo-cracked-screens">https://www.cultofmac.com/news/iphone-duo-cracked-screens</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/iphone/comments/1xf0pcq/theres_a_tech_youtuber_who_streams_an_iphone_duo/">https://www.reddit.com/r/iphone/comments/1xf0pcq/theres_a_tech_youtuber_who_streams_an_iphone_duo/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/apple/comments/1xf50lz/iphone_duo_teardown_duo_much_to_unpack_rewa/">https://www.reddit.com/r/apple/comments/1xf50lz/iphone_duo_teardown_duo_much_to_unpack_rewa/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiU0FVX3lxTE1POTZUM2ppMFJrMkRPMnFVR2pzNlUwM1BPS3RKTEVpam5HdlZfR0hzRFotQmRLc1h5c01lT3NzMURvcG1MRWh6NjNHa09WdG1RTHhZ">https://news.google.com/rss/articles/CBMiU0FVX3lxTE1POTZUM2ppMFJrMkRPMnFVR2pzNlUwM1BPS3RKTEVpam5HdlZfR0hzRFotQmRLc1h5c01lT3NzMURvcG1MRWh6NjNHa09WdG1RTHhZ</a></li>
+
+
+
+<li><a href="https://www.cnet.com/tech/mobile/iphone-duo-owners-your-apps-will-look-better-soon/">https://www.cnet.com/tech/mobile/iphone-duo-owners-your-apps-will-look-better-soon/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxNTnV1NmdCaVNkRTRHaWUyRGpuWTdPQngwc2wwYjZxSEk2dWlNdFFteG5PenNoNVdyVGxtaWlXY2R4RDJBVXpwbWNJRmFmdGJ5d3RaM1EwV3FvQlFNMVRKMkthYjBiUWVoZE1OVXhrRnliMGhkam95cTZDYzdVdUVrSFNBbHFFR2N4eE8tZnFjZURlUHphWGhYM1VsTmd6UWs4MDVBbWJPUlEtZlQwNDBHZ1kwRQ">https://news.google.com/rss/articles/CBMiswFBVV95cUxNTnV1NmdCaVNkRTRHaWUyRGpuWTdPQngwc2wwYjZxSEk2dWlNdFFteG5PenNoNVdyVGxtaWlXY2R4RDJBVXpwbWNJRmFmdGJ5d3RaM1EwV3FvQlFNMVRKMkthYjBiUWVoZE1OVXhrRnliMGhkam95cTZDYzdVdUVrSFNBbHFFR2N4eE8tZnFjZURlUHphWGhYM1VsTmd6UWs4MDVBbWJPUlEtZlQwNDBHZ1kwRQ</a></li>
+
+
+
+<li><a href="https://tweakers.net/nieuws/253722/scherm-iphone-duo-breekt-bij-tientallen-klanten-op-hetzelfde-punt.html">https://tweakers.net/nieuws/253722/scherm-iphone-duo-breekt-bij-tientallen-klanten-op-hetzelfde-punt.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbW9xaVpRZGtnZjJYTkNfSTUxRmZ2cVE2S01ia3FtdGh0dzVPUFRKY3NRT3pGMkZnM3huVHk4NkpVQ2t1R1AyUEpMdWNkdWFnbEp2OUNFRFlwN3dQcUMxZGZEX2hGckJqck5QbFVlNXdXSEV4dVcyOGhlbEJkMU1NVXVxcW0tMEsxbGFrZjF3TUE3b3k1SnlDNGtIVzlvWlR5cUt2QjV2bUpiblRBZTRDblZqb1NpNHVMMno40gHAAUFVX3lxTE5yNG5wM1BYaFhWbXVfVktLZ0xSOURlSU1wSVJHbDJadDdINWo5TDYzTk9jT1BZSjJSbWtBbTctN043S3k1by05UF9KZ2dNSy05dkhYdDJnak1welFGbEJNbmlZSDhzNllTN19LOW1rZGZyQVNYLWQyR0ttS3FGUUZNS2Q3bnNiSVQ4Y3VDNkVtUURHc3RmLXZvNE1QWUswVHExaml3NDVIZnBfR2p6akZqTFVDWXBsSjBZVmRaSHhxTw">https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbW9xaVpRZGtnZjJYTkNfSTUxRmZ2cVE2S01ia3FtdGh0dzVPUFRKY3NRT3pGMkZnM3huVHk4NkpVQ2t1R1AyUEpMdWNkdWFnbEp2OUNFRFlwN3dQcUMxZGZEX2hGckJqck5QbFVlNXdXSEV4dVcyOGhlbEJkMU1NVXVxcW0tMEsxbGFrZjF3TUE3b3k1SnlDNGtIVzlvWlR5cUt2QjV2bUpiblRBZTRDblZqb1NpNHVMMno40gHAAUFVX3lxTE5yNG5wM1BYaFhWbXVfVktLZ0xSOURlSU1wSVJHbDJadDdINWo5TDYzTk9jT1BZSjJSbWtBbTctN043S3k1by05UF9KZ2dNSy05dkhYdDJnak1welFGbEJNbmlZSDhzNllTN19LOW1rZGZyQVNYLWQyR0ttS3FGUUZNS2Q3bnNiSVQ4Y3VDNkVtUURHc3RmLXZvNE1QWUswVHExaml3NDVIZnBfR2p6akZqTFVDWXBsSjBZVmRaSHhxTw</a></li>
+
+
+
+<li><a href="https://www.apfeltalk.de/magazin/news/iphone-duo-mehrere-innere-displays-brechen-auf-aehnliche-weise/">https://www.apfeltalk.de/magazin/news/iphone-duo-mehrere-innere-displays-brechen-auf-aehnliche-weise/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> macrumors.com, reddit.com, 9to5mac.com, theverge.com, appleinsider.com, techmeme.com, cultofmac.com, firstpost.com, techradar.com, androidauthority.com, macobserver.com, macworld.com, pcmag.com, twit.tv, freepressjournal.in, techaeris.com, tribune.com.pk, hardwarezone.com.sg, thanhnien.vn, gadgets360.com, frandroid.com, apfeltalk.de, harianjogja.com, makeuseof.com, dday.it, iphoneincanada.ca, ettoday.net, spidersweb.pl, maclife.de, evrensel.net, blognone.com, indiatoday.in, thenationalnews.com, iphone-ticker.de, tweakers.net, propakistani.pk, heraldcorp.com, 36kr.com, jtbc.co.kr, gsmarena.com, ithome.com, wallstreetcn.com, stadt-bremerhaven.de, yna.co.kr, mashdigi.com, vnexpress.net, ifixit.com, refresher.sk, macerkopf.de, mirrordaily.news, infobae.com, seoul.co.kr, phonearena.com, news.kagi.com, macrumors.com, reddit.com, macworld.com, stadt-bremerhaven.de, macerkopf.de, forbes.com, intomobile.com, cnet.com, youtube.com, egyptindependent.com, arstechnica.com, adaderana.lk, sapo.pt, tozsdeforum.hu, yahoo.com, macwelt.de, myzaker.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #1, 53 unique domains, 68 articles</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/"><img src="https://kagiproxy.com/img/mLp9gjEZnbnhYBh1wNMabD60ib5zcIZ4b84FzDDG2IatlurueggsZifdV6QwRdDwcoDRlcbdzBmhiR3INtJrK4RPQ_9OiuxJZIbziSGWuKBYyiLa7jw9Kp8XZOzJec1rHkeUf-oM-iA" alt="iFixit teardown identifies possible hinge stress behind iPhone Duo screen failures" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+ <span class='credit'>(macrumors.com)</span>
+</figcaption>
+
+</figure>
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Juli Clover",
+      "date": "2026-10-25T21:44:03.000Z",
+      "domain": "macrumors.com",
+      "image": "https://kagiproxy.com/img/aq-0s97-tv1MvMXcqsk869gs0Dfo5ecEjkHZuZOsnLURh8Ve0mNYXv_HqKJMncFpEbHAybSHraj4_Ly1yiP3MWaTRMqcq5A-jQxeW21Xi6Lh6XgG_Dvzew_vkfn3g2OJKcEiuwEFNdax-Ho",
+      "image_caption": "",
+      "link": "https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/",
+      "title": "iFixit iPhone Duo Teardown Points to Possible Cause of Screen Cracks"
+    },
+    {
+      "author": "/u/ControlCAD",
+      "date": "2026-10-26T03:27:59.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/apple/comments/1xfm4ij/apples_folding_iphone_duo_might_have_a_screen/",
+      "title": "Apple\u2019s Folding iPhone Duo Might Have a Screen Problem! (Teardown) - iFixit"
+    },
+    {
+      "author": "Marcus Mendes",
+      "date": "2026-10-25T21:36:58.000Z",
+      "domain": "9to5mac.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/",
+      "title": "iFixit tears down iPhone Duo, finds possible causes of early screen failures"
+    },
+    {
+      "author": "Terrence O\u2019Brien",
+      "date": "2026-10-25T21:40:27.000Z",
+      "domain": "theverge.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theverge.com/tech/1018233/ifixit-iphone-duo-teardown-repairability-hinge",
+      "title": "iFixit\u0026#8217;s look inside the iPhone Duo may explain those broken screens and hinges"
+    },
+    {
+      "date": "2026-10-25T21:28:00.000Z",
+      "domain": "appleinsider.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPY25YUEtyVHZOdEs2X3NCcGpmMHlidXN1a1IzSUg3ekxsSUdTRS1LYjBrSTJqVEp1NWFIYzBPcS13dXJGcjZnOWdoYWtxQXNqRjRfYnZKSGZUTHR6SW9pazdMbDJaMHlod082TU4xeUI3Qm1iVmFPOVU0UXBPSWhoUWF0QXBJT3dyWDNqb0Zqd2t4MHcwV2dMdFdWVUdDXzFES3NDSjlB",
+      "title": "Hinge damage suspected to be behind iPhone Duo screen cracks"
+    },
+    {
+      "author": "Terrence O\u2019Brien",
+      "date": "2026-10-25T20:16:19.000Z",
+      "domain": "theverge.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theverge.com/tech/1018290/dissected-iphone-duo-crackgate-hinge-screen",
+      "title": "A YouTuber dissected an iPhone Duo and thinks he found the cause of crackgate"
+    },
+    {
+      "date": "2026-10-26T00:40:01.000Z",
+      "domain": "techmeme.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techmeme.com/261025/p13#a261025p13",
+      "title": "iPhone Duo teardown: 5/10 repairability, a foldable record, but some screens crack along the fold, possibly because a hinge support bar fails to drop far enough (Elizabeth Chamberlain/iFixit News)"
+    },
+    {
+      "author": "Lewis Wallace",
+      "date": "2026-10-25T16:34:20.000Z",
+      "domain": "cultofmac.com",
+      "image": "https://kagiproxy.com/img/dhagm0GOYje_paj1Hd3-nM_viRARhPGJzZwv_3q42fT7qfE3_UNKQ99mG7LZtuPnhvqB7QEoOfGUgm3SFIzu_JkoNrkOFgUZrUYy2N_LLEPaxRCJgcTPZgTT3J5XC3ZDNq4UcaMsp--TZDQqZRepK6_9aLpNpZss_AYopprZ3qlS",
+      "image_caption": "",
+      "link": "https://www.cultofmac.com/news/iphone-duo-cracked-screens",
+      "title": "iPhone Duo photos show bizarrely cracked screens on launch day [Updated]"
+    },
+    {
+      "author": "Benjamin Mayo",
+      "date": "2026-10-25T10:45:33.000Z",
+      "domain": "9to5mac.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://9to5mac.com/2026/10/25/iphone-duo-displays-cracking/",
+      "title": "Some iPhone Duo displays are cracking, seemingly all in the same way"
+    },
+    {
+      "author": "Unnati Gusain",
+      "date": "2026-10-26T05:58:13.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/xwvQEn_eQkH708XszudjsA0t48MWeZnHxT_Pb8l2IL8POnbM6PnaYCQ_rQfGO2xmQ9Mv4DYNoOtOO8mDvq_Jm2moP83uwcEbQrRwnMcC43DjWsf9T_BN02j44gTvgKP_Qch3igYlr2zzsCiJ3x1uDRbN0GXwEwfjxngpMYQaJsidQ6UAB8AWQI4sIu-I",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/iphone-duo-cracked-screens-white-lines-whats-happening-to-apples-foldable-iphone-14055318.html",
+      "title": "Cracked screens, white lines: What\u0027s happening to Apple\u0027s foldable iPhone?"
+    },
+    {
+      "author": "David Nield",
+      "date": "2026-10-25T21:50:34.000Z",
+      "domain": "techradar.com",
+      "image": "https://kagiproxy.com/img/0fFEgvrHtnFQEEdyOOfmr0fVAzQrl7bFmfMB0K540-fLtoeLUQT4LXpWGczVut9BzTIO5OXX_26LJ_qI0TrUQY7R9UKez-bSPasKwBv8yRAeB_n7xdBFOhlTnogqiVg9",
+      "image_caption": "iFixit has tested every aspect of the iPhone Duo",
+      "link": "https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work",
+      "title": "iFixit awards the iPhone Duo the highest repair score yet for a foldable"
+    },
+    {
+      "author": "Adamya Sharma",
+      "date": "2026-10-26T01:28:34.000Z",
+      "domain": "androidauthority.com",
+      "image": "https://kagiproxy.com/img/PjF-sUqillxu6Uzc7tMPdvNO2WmAdN8R1PgkwqMUq1y4BjVwYCuyOwaGQ99X4KkANxGqYhVzHKVOhsuxxQrpj7B4IfHk3fSr8ZH5GwuinWV1RRzHEIFijIQmZkWvCCNbJN0XDbnKgTeNZphFfNR0fucHW4FPmW0EFTMpxuT537x_CgiOrxRrfege4I_6CumJUDPIP6CDjELchek",
+      "image_caption": "",
+      "link": "https://www.androidauthority.com/iphone-duo-durability-3727717/",
+      "title": "After day-one screen failures, the iPhone Duo is facing more durability questions"
+    },
+    {
+      "author": "Rajesh Pandey",
+      "date": "2026-10-26T04:31:50.000Z",
+      "domain": "cultofmac.com",
+      "image": "https://kagiproxy.com/img/SexQvEQgVawgsZW8z3L0a7xC_UJQKvmFfRf_KBOmNztoq3t8yUKd82FQPvahMA53SCSkCAUmbHOGaBmebRwG229gNqmTk9BPfnzd9i7-O3vedQNovS3zhS_MhqR1LP5ge-aPmcJu2jkSXVpuaDGHLeCKhcPtLorlS10xORo",
+      "image_caption": "",
+      "link": "https://www.cultofmac.com/news/apple-packed-the-iphone-duo-with-clever-repair-tricks",
+      "title": "Apple packed the iPhone Duo with clever repair tricks"
+    },
+    {
+      "author": "Rajat Saini",
+      "date": "2026-10-25T07:37:26.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/iphone-duo-durability-test-reveals-major-hinge-and-display-weaknesses/",
+      "title": "iPhone Duo Durability Test Reveals Major Hinge and Display Weaknesses"
+    },
+    {
+      "author": "Shriyansh.Garg",
+      "date": "2026-10-25T11:49:37.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/ELqjXPp_3KBrslXPHiyAkm6c2hftBVbXTEKgwEM68YEDAM37ZP1U2GRzB_1bNZZAGw1PH1weTGSvFFbZ9ITlJnXnx9CLUqcKZeQ2Sut2hqMeAChneTpJN7SUJmhnPLcgW5vmI73hdOt1hHqFbmRVJh4f2ANREItriuV28svzZTkSAjjrmI3gvBvi0MtsUFnjqulAYwq0_H76g-I",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/iphone-duo-owners-report-screens-cracking-days-after-unboxing-flag-possible-hinge-defect-14055198.html",
+      "title": "iPhone Duo owners report screens cracking days after unboxing, flag possible hinge defect"
+    },
+    {
+      "author": "Ed Hardy",
+      "date": "2026-10-25T15:47:20.000Z",
+      "domain": "cultofmac.com",
+      "image": "https://kagiproxy.com/img/yjp2evdN1KJO2wBjNNeHS0ti-R5roeXuMtCNwAsdLj-nlFN2WtBBOvi3k8ZO8pFyMxxv-Sd0fQxvRNBxTSP3hgGH_jkv8rf-Z6NQFH65g1u6y1xD0_4sGiV3yUpp5rPf_h-f-b_BnDPDwdkq-y2yQBZgFCtEm11xoq4",
+      "image_caption": "",
+      "link": "https://www.cultofmac.com/news/iphone-duo-drop-test-results",
+      "title": "iPhone Duo drop test delivers a painful reality check"
+    },
+    {
+      "date": "2026-10-25T17:03:37.000Z",
+      "domain": "macworld.com",
+      "image": "https://kagiproxy.com/img/G2LQm9pPQF1zEF3UDnSHTRg-cOyQkLxuGLWz2PbAxYL1LDY40XDAkzHkdbfK0_EDPwlOOo7pDIB4yurBX9S-1u4sneFjsGKVP07zXcd6jldcW5qGIqtu_uO87mjsvYbPIgRprVybP6vW48yk",
+      "image_caption": "",
+      "link": "https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html",
+      "title": "iPhone Duo guide: Price, specs, availability, problems and reviews"
+    },
+    {
+      "author": "/u/ControlCAD",
+      "date": "2026-10-25T15:17:48.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/apple/comments/1xf50lz/iphone_duo_teardown_duo_much_to_unpack_rewa/",
+      "title": "iPhone Duo Teardown: Duo Much to Unpack? - REWA Technology"
+    },
+    {
+      "date": "2026-10-25T17:56:38.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/iphone-duo-owners-are-reporting-cracks-in-their-screens-users-call-it-crackgate",
+      "title": "iPhone Duo Owners Are Reporting Cracks in Their Screens. Users Call It \u2018Crackgate\u2019"
+    },
+    {
+      "author": "Akshay Kumar",
+      "date": "2026-10-25T14:48:36.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/iphone-duo-teardown-reveals-dual-batteries-and-internal-changes/",
+      "title": "iPhone Duo Teardown Reveals Dual Batteries and Internal Changes"
+    },
+    {
+      "author": "TWiT",
+      "date": "2026-10-25T23:36:03.000Z",
+      "domain": "twit.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://twit.tv/shows/this-week-in-tech/episodes/1107",
+      "title": "TWiT 1107: Spicy Hinges - Apple\u0027s 1st Foldable, GM Forward 2026, \u0026 PHP Vulnerabilities"
+    },
+    {
+      "author": "/u/PoProstuRobert6",
+      "date": "2026-10-25T12:08:09.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/iphone/comments/1xf0pcq/theres_a_tech_youtuber_who_streams_an_iphone_duo/",
+      "title": "There\u0027s a tech YouTuber who streams an iPhone duo test, up to a million folds or until it breaks (whichever comes first)"
+    },
+    {
+      "author": "Tasneem Kanchwala",
+      "date": "2026-10-26T04:01:09.000Z",
+      "domain": "freepressjournal.in",
+      "image": "https://kagiproxy.com/img/p8LJFyVNIEEoTvMTkV28Hj_KXPtEpdXeHU1G9KnOAC6Rn_y3a95Him5FmF9L7J31tPQyrEbKKW0p7C6u_VJSIlL71wY9r9rigcA3Z7xvZ--RtZvQwwpUux-b1VMdo2wBC28QGVimAHBoGMlKoDRryOI",
+      "image_caption": "iPhone Duo Teardown Exposes Costly Inner Screen Weakness As Early Buyers Report Display Damage",
+      "link": "https://www.freepressjournal.in/tech/iphone-duo-teardown-exposes-costly-inner-screen-weakness-as-early-buyers-report-display-damage",
+      "title": "iPhone Duo Teardown Exposes Costly Inner Screen Weakness As Early Buyers Report Display Damage"
+    },
+    {
+      "author": "Alex Hernandez",
+      "date": "2026-10-25T22:20:14.000Z",
+      "domain": "techaeris.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techaeris.com/2026/10/25/iphone-duo-screen-cracking/",
+      "title": "iPhone Duo Screen Cracking: iFixit Finds a Plausible Cause"
+    },
+    {
+      "author": "Web Desk",
+      "date": "2026-10-25T06:19:28.000Z",
+      "domain": "tribune.com.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tribune.com.pk/story/2636846/apples-iphone-duo-faces-early-durability-concerns-as-users-report-cracked-screens",
+      "title": "Apple\u0027s iPhone Duo faces early durability concerns as users report cracked screens"
+    },
+    {
+      "author": "Ken Wong",
+      "date": "2026-10-26T04:42:41.000Z",
+      "domain": "hardwarezone.com.sg",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.hardwarezone.com.sg/mobile/iphone-duo-inner-diplay-cracking-possible-hinge-issues",
+      "title": "Early user reports of iPhone Duo mishaps see cracked screens and faulty pixels"
+    },
+    {
+      "date": "2026-10-26T05:46:00.000Z",
+      "domain": "thanhnien.vn",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thanhnien.vn/thao-roi-iphone-duo-ifixit-tim-ra-hai-nguyen-nhan-co-the-gay-nut-man-hinh-185261026104156361.htm",
+      "title": "Th\u00e1o r\u1eddi iPhone Duo, iFixit t\u00ecm ra hai nguy\u00ean nh\u00e2n c\u00f3 th\u1ec3 g\u00e2y n\u1ee9t m\u00e0n h\u00ecnh"
+    },
+    {
+      "date": "2026-10-26T06:12:09.000Z",
+      "domain": "gadgets360.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.gadgets360.com/mobiles/news/iphone-duo-foldable-displays-cracking-faulty-hinges-ifixit-teardown-12235969",
+      "title": "Here\u0027s Why iPhone Duo Foldable Screens Could Be Breaking"
+    },
+    {
+      "author": "MacRumors",
+      "date": "2026-10-26T07:04:46.000Z",
+      "domain": "macrumors.com",
+      "image": "https://kagiproxy.com/img/10A8v9yVNXJh0lJPQHecqDEHvEhqx6PWyQk-TNDnMuaNlb0saD7JaI-Pr0dz0CuhzFSZMQ_FGb8UgXJ37PVRmopkx3s-_EazIBUvLe2e0GiaW9fLqGSNhT5MuQ9ydBDtgTb4XMeKNsY",
+      "image_caption": "",
+      "link": "https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/",
+      "title": "Crackgate? iPhone Duo Owners Report Screens Breaking Along the Hinge"
+    },
+    {
+      "author": "Ulrich Rozier",
+      "date": "2026-10-26T06:25:12.000Z",
+      "domain": "frandroid.com",
+      "image": "https://kagiproxy.com/img/Z2lrkwAZtynyWEhMXBX80F91pTb76CAoKCl8pA5JyKCCodvSjfBUO3X9kuB30a010Nw2Nw4hb3sRzHNhXaEl5VVWjGiy6vDww3L_L7vW0ADm8AHtAaFgrEOb2D2FGfhg1OGdCmayTZfwdvkR34H91GlsU227OvWTa3hOsh4Q2XyE5o9CA4X3XdkZOFcj8vBWAJ-0_voVeUL-hjqvyOMlGCvJdclP8xkm0OXU",
+      "image_caption": "",
+      "link": "https://www.frandroid.com/os/ios/3298431_crackgate-et-iphone-duo-des-ecrans-pliables-cassent-a-la-charniere-un-serieux-probleme-ou-des-cas-isoles",
+      "title": "Alerte CrackGate : les \u00e9crans de l\u2019iPhone Duo semblent se briser avec une extr\u00eame facilit\u00e9"
+    },
+    {
+      "author": "Michael Reimann",
+      "date": "2026-10-26T06:00:00.000Z",
+      "domain": "apfeltalk.de",
+      "image": "https://kagiproxy.com/img/pJN5_F67yiWH4fL8NNfANhOoeXVknIDg3TrgeCVc40rto0yKdToJelQciuNkvqvRuojD2rToD1LzooSr-Wod5glLwZsJQFAvv0qiqOz-nAUc4PzWNzkruBOvOCzD9478cAqjhLufFGLgQnRp9EP9YNjW0KVPIA",
+      "image_caption": "",
+      "link": "https://www.apfeltalk.de/magazin/news/iphone-duo-ifixit-untersucht-moegliche-ursachen-fuer-displaybrueche/",
+      "title": "iPhone Duo: iFixit untersucht m\u00f6gliche Ursachen f\u00fcr Displaybr\u00fcche"
+    },
+    {
+      "author": "Jumali",
+      "date": "2026-10-26T07:07:01.000Z",
+      "domain": "harianjogja.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://ototekno.harianjogja.com/r-1276431/ifixit-bongkar-iphone-duo-temukan-dugaan-penyebab-layar-rusak",
+      "title": "iFixit Bongkar iPhone Duo, Temukan Dugaan Penyebab Layar Rusak"
+    },
+    {
+      "author": "Michael Reimann",
+      "date": "2026-10-26T05:00:00.000Z",
+      "domain": "apfeltalk.de",
+      "image": "https://kagiproxy.com/img/8qrlzXGL1L_8vGWLjQxL6Xcc5Nr8MLCE_GK4pfUMIXl2GgeSmbPbHmwI7098W8GD1Fmkcek3Z45LL1WehwhbiBapvsDdWT76RQ_SWpbyKcmRVlAtYp-QguqmA6JViYcsz_FJxi0ptFXEeLfrfWBXjfp2_6zBOisATQFavFsbeQIlnNkq_lBNCXA7pxczIKcE9E-G7cH87C2iapeW3K0WQg",
+      "image_caption": "",
+      "link": "https://www.apfeltalk.de/magazin/news/iphone-duo-mehrere-innere-displays-brechen-auf-aehnliche-weise/",
+      "title": "iPhone Duo: Mehrere innere Displays brechen auf \u00e4hnliche Weise"
+    },
+    {
+      "author": "Brady Snyder",
+      "date": "2026-10-25T21:45:17.000Z",
+      "domain": "makeuseof.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.makeuseof.com/apple-iphone-duo-ifixit-teardown/",
+      "title": "The iPhone Duo might be easy to break, but this teardown reveals how easy it is to fix"
+    },
+    {
+      "date": "2026-10-25T11:40:00.000Z",
+      "domain": "dday.it",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxQSVFCWkNuYnZ3cnhkbDFwNy1wM3FyRU1IN210VXZqQ2w1cHNJZ0xOYi02Um1XRzlzUWQ4YmVvaUI2YVhWWXZVdmtNb2JhN1FzRVMwbndGWkhtSHVoYnhMVlpDdDNpbWgtS05sZ0tPeUh5TVQ2dlptLUNvdUk5YlEwSVJjX19VdE9RVVdhSWQ2c3VoTXNBQWJOZ0dnNVB0MnJ6eWJwR1dwajd5bTJvQ09HZS1n",
+      "title": "iPhone Duo, alcuni schermi si rompono dopo poche ore. Tutti nello stesso punto"
+    },
+    {
+      "author": "John Quintet",
+      "date": "2026-10-25T13:00:08.000Z",
+      "domain": "iphoneincanada.ca",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.iphoneincanada.ca/2026/10/25/iphone-duo-phonebuff-drop-test/",
+      "title": "iPhone Duo Aces an Inner Screen Drop, Then Its Hinge Gives Out"
+    },
+    {
+      "date": "2026-10-26T04:16:00.000Z",
+      "domain": "ettoday.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ettoday.net/news/20261026/3260970.htm",
+      "title": "iPhone Duo\u87a2\u5e55\u707d\u60c5\u53ef\u80fd\u539f\u56e0\u66dd\uff01\u3000iFixit\u62c6\u89e3\uff1a\u53f2\u4e0a\u6700\u597d\u4fee\u647a\u758a\u6a5f"
+    },
+    {
+      "author": "Oliwier Nytko",
+      "date": "2026-10-26T05:08:00.000Z",
+      "domain": "spidersweb.pl",
+      "image": "",
+      "image_caption": "",
+      "link": "https://spidersweb.pl/2026/10/iphone-duo-ekrany-problem.html",
+      "title": "Ekrany iPhone\u2019\u00f3w Duo p\u0119kaj\u0105. Niestety nie z dumy"
+    },
+    {
+      "author": "Stefan Keller",
+      "date": "2026-10-26T07:00:00.000Z",
+      "domain": "maclife.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.maclife.de/news/iphone-duo-ifixit-untersucht-ursache-display-schaeden-100127797.html",
+      "title": "iPhone Duo: iFixit findet m\u00f6gliche Ursache f\u00fcr Display-Sch\u00e4den"
+    },
+    {
+      "date": "2026-10-26T04:53:00.000Z",
+      "domain": "evrensel.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.evrensel.net/haber/6006609/applein-katlanabilir-telefonu-iphone-duoda-ekran-krizi-darbe-almadan-catliyor",
+      "title": "Apple\u2019\u0131n katlanabilir telefonu iPhone Duo\u2019da ekran krizi: Darbe almadan \u00e7atl\u0131yor"
+    },
+    {
+      "author": "arjin",
+      "date": "2026-10-26T01:15:43.000Z",
+      "domain": "blognone.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.blognone.com/node/152020",
+      "title": "iFixit \u0e41\u0e01\u0e30 iPhone Duo \u0e41\u0e25\u0e49\u0e27 \u0e1e\u0e1a\u0e27\u0e48\u0e32\u0e1a\u0e32\u0e19\u0e1e\u0e31\u0e1a\u0e19\u0e48\u0e32\u0e08\u0e30\u0e40\u0e1b\u0e47\u0e19\u0e2a\u0e32\u0e40\u0e2b\u0e15\u0e38\u0e1b\u0e31\u0e0d\u0e2b\u0e32\u0e08\u0e2d\u0e40\u0e1b\u0e47\u0e19\u0e40\u0e2a\u0e49\u0e19 - \u0e04\u0e30\u0e41\u0e19\u0e19\u0e0b\u0e48\u0e2d\u0e21\u0e14\u0e35\u0e17\u0e35\u0e48\u0e2a\u0e38\u0e14\u0e43\u0e19\u0e01\u0e25\u0e38\u0e48\u0e21\u0e08\u0e2d\u0e1e\u0e31\u0e1a"
+    },
+    {
+      "date": "2026-10-26T03:05:57.000Z",
+      "domain": "indiatoday.in",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.indiatoday.in/technology/news/story/iphone-duo-display-failing-teardown-shows-possible-reason-for-it-3024962-2026-10-26",
+      "title": "iPhone Duo display failing? Teardown shows possible reason for it"
+    },
+    {
+      "author": "Akshay Kumar",
+      "date": "2026-10-25T01:29:52.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/early-iphone-duo-owners-report-screen-cracks-along-the-hinge/",
+      "title": "Early iPhone Duo Owners Report Screen Cracks Along The Hinge"
+    },
+    {
+      "author": "Shweta Jain",
+      "date": "2026-10-25T05:04:29.000Z",
+      "domain": "thenationalnews.com",
+      "image": "https://kagiproxy.com/img/rA0iNdGRyD1L9TsI9WjJympL5kMj1y0OjA6uBPujwccKSSPlbeb5cUvxFqVygHPzcHNm0c54FjPYdUBXoo1BbB5jU3skKucvSXgo4oV7KvYuJ-iyguBV4ERVYp5Bz9jYdNW7WTwhRhaYrgE6Aj0G7KPEWHIqUdkjc-Nn9pBFIo5m0nThEtuAFzf-LioL0C3HtukIYAUAPNLha1_Q7R14KBSdq753zyUo0_Qov1-xFldtcfh9F1yvhqwmxZaQFR4pwIDQW6mbM-l39hwRDQ",
+      "image_caption": "Tech reviewer Sam Kohl posted this image of his damaged iPhone, less than a week after the device\u0027s launch. Photo: X",
+      "link": "https://www.thenationalnews.com/future/technology/2026/10/25/apples-iphone-duo-faces-screen-damage-complaints-as-first-buyers-report-cracks/",
+      "title": "iPhone Duo buyers complain of cracks and display failures after just days of use"
+    },
+    {
+      "author": "chris",
+      "date": "2026-10-26T05:54:27.000Z",
+      "domain": "iphone-ticker.de",
+      "image": "https://kagiproxy.com/img/s8IEq_LZmCb53oy8jfDgM5Z5AM4szYRpLedJ_FrtO9gasfuIOszcRXSBC8u-M2vaFgFxzMb20t_w-FNw3FmwbGwW5Q0pLqpwmGvP0iYOrJo7L52aEyCqd9JYKKJmR280QBcyhXT_ZeaWj5_lpEjMeD1hZQdKuwzG3MzrBg",
+      "image_caption": "",
+      "link": "https://www.iphone-ticker.de/iphone-duo-display-schaeden-koennten-durch-das-scharnier-entstehen-289138/",
+      "title": "iPhone Duo: Display-Sch\u00e4den k\u00f6nnten durch das Scharnier entstehen"
+    },
+    {
+      "author": "Austin Blake",
+      "date": "2026-10-25T14:00:54.000Z",
+      "domain": "iphoneincanada.ca",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.iphoneincanada.ca/2026/10/25/iphone-duo-techrax-real-life-drop-test/",
+      "title": "The iPhone Duo Got Dropped Over and Over. Here\u2019s What Finally Broke"
+    },
+    {
+      "author": "Arnoud Wokke",
+      "date": "2026-10-25T11:44:00.000Z",
+      "domain": "tweakers.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tweakers.net/nieuws/253722/scherm-iphone-duo-breekt-bij-tientallen-klanten-op-hetzelfde-punt.html",
+      "title": "Scherm iPhone Duo breekt bij tientallen klanten op hetzelfde punt"
+    },
+    {
+      "author": "Business Desk",
+      "date": "2026-10-25T11:29:05.000Z",
+      "domain": "propakistani.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://propakistani.pk/2026/10/25/iphone-duo-fails-basic-durability-test-in-huge-blow-to-apple/",
+      "title": "iPhone Duo Fails Basic Durability Test in Huge Blow to Apple"
+    },
+    {
+      "author": "\ud5e4\ub7f4\ub4dc\uacbd\uc81c",
+      "date": "2026-10-26T11:34:50.000Z",
+      "domain": "heraldcorp.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://biz.heraldcorp.com/article/10914741",
+      "title": "20\ubc88 \uc811\uc5c8\ub294\ub370 \ud30c\uc190\u2026\uc544\uc774\ud3f0 \ub4c0\uc624, \ub0b4\uad6c\uc131 \ub17c\ub780"
+    },
+    {
+      "date": "2026-10-26T01:54:55.000Z",
+      "domain": "36kr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1POTZUM2ppMFJrMkRPMnFVR2pzNlUwM1BPS3RKTEVpam5HdlZfR0hzRFotQmRLc1h5c01lT3NzMURvcG1MRWh6NjNHa09WdG1RTHhZ",
+      "title": "iPhone Duo Screen Cracking Surge: Apple\u2019s Lost On-Site Supply Chain Oversight Exposed as Root Cause"
+    },
+    {
+      "date": "2026-10-25T23:33:12.000Z",
+      "domain": "jtbc.co.kr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.jtbc.co.kr/article/NB12324770",
+      "title": "20\ubc88\ub3c4 \uc548 \uc811\uc5c8\ub294\ub370 \ud654\uba74 \u0027\uca4d\u0027\u2026\uc544\uc774\ud3f0 \ub4c0\uc624 \u0027\ud06c\ub799\uac8c\uc774\ud2b8\u0027 \ub17c\ub780 [\uc18c\uc15c\ud53d]"
+    },
+    {
+      "date": "2026-10-25T18:42:50.000Z",
+      "domain": "gsmarena.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMixAFBVV95cUxQZF9KUGFtZk9fV2ZoLXI4TFFlR29uRVFPQkhsRXF6U3RMQ1ZiRWxQbzI3cllFQlgtSFlybl9XWWQ4aENMTnUxRE80SWlNVVZwVGdNNHByOTBSY2RHSjVTVUJfSnJxTHdMTTNHVFFnemc5VVd0WnBJQlUxNVNUZ0wxeVNTbXo2MWpING5oOGZUSHEyaGFLYjlnaFFzcGs4OUgyZnpJdS1QUDZCU1FUMXR1RGN1dHFlLXJoWUxIOTUwSF9EX0R10gHAAUFVX3lxTE44YkVaVFo4Y0dzOVJva2VVcThFLXpDeFFwVUZhY3piTXgyY2NBbFpsaXhOTkxZUmpabHM1eFBETldOYTlPNWFNTm9jU3NJNXdNTF9kYkZoUGRoR2Roa3M4QUdKOTlUalA2R3NPVHNwNFVheTFaMXRmRThHa1pxSlVLQm1lVnJ2N1ZoaHV0Q1JKeXhIQ00yLWN5cnlTR2JpaFZzUkk1QXFKT2pCcTRRLWxnUVRCWVlhei16anBNZlVpeQ",
+      "title": "Early iPhone Duo buyers report inner display damage caused by a potential hinge defect - GSMArena.com news"
+    },
+    {
+      "author": "Michael Reimann",
+      "date": "2026-10-25T22:00:00.000Z",
+      "domain": "apfeltalk.de",
+      "image": "https://kagiproxy.com/img/YHhBI0sbnkvonm3Ev88nimGVqMGYpKW5uYoSjQ_agEOEe40VKesuq9E7bl0Hd4TiAXGo-71QrNytM7nL4M2nG3GMvzl7Q569uk205L4ALL7JqIr_A9wMRwZXetNDH_wi_wdWq_EVtWmCr9ra1KF9rxWZLfTZ",
+      "image_caption": "",
+      "link": "https://www.apfeltalk.de/magazin/feature/iphone-duo-defekte-scharnierteile-koennten-displayrisse-verursachen/",
+      "title": "iPhone Duo: Defekte Scharnierteile k\u00f6nnten Displayrisse verursachen"
+    },
+    {
+      "date": "2026-10-26T06:51:24.000Z",
+      "domain": "ithome.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ithome.com/1/017/906.htm",
+      "title": "\u6d88\u606f\u79f0\u66f4\u591a\u7528\u6237\u53cd\u9988\u82f9\u679c iPhone Duo \u5185\u5c4f\u51fa\u73b0\u201c\u5f00\u88c2\u201d\u95ee\u9898"
+    },
+    {
+      "author": "Akshay Kumar",
+      "date": "2026-10-25T01:32:36.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/",
+      "title": "Apple Drops iPhone Duo Support Docs For Hinge And Screen Issues"
+    },
+    {
+      "date": "2026-10-25T02:23:53.000Z",
+      "domain": "wallstreetcn.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9KRzA1ZzlQMzJ2Z3VJRnZDYWtMRnVONUwzNnpoMzBzNnhKQVBmblRZUTAyWjNnNlhxTUhxbHFpcGpyby1UdjRwbXlLcW9wSjhUUElR",
+      "title": "\u82f9\u679c\u9996\u6b3e\u6298\u53e0\u5c4fiPhone Duo\u51fa\u5e08\u4e0d\u5229\uff1a\u6709\u4eba\u6298\u4e0d\u523020\u6b21\u5c31\u88c2\u5c4f\u4e86"
+    },
+    {
+      "author": "Oliver Posselt",
+      "date": "2026-10-26T05:30:51.000Z",
+      "domain": "stadt-bremerhaven.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://stadt-bremerhaven.de/ifixit-zerlegt-iphone-duo/",
+      "title": "iFixit zerlegt das iPhone Duo"
+    },
+    {
+      "author": "\ubc15\ud615\ube48",
+      "date": "2026-10-26T06:05:58.000Z",
+      "domain": "yna.co.kr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.yna.co.kr/view/AKR20261026114800017",
+      "title": "329\ub9cc\uc6d0 \uc560\ud50c \uccab \ud3f4\ub354\ube14\ud3f0, \ucd9c\uc2dc\ud558\uc790\ub9c8\uc790 \ud654\uba74 \ud30c\uc190 \ub17c\ub780"
+    },
+    {
+      "author": "\u694a\u53c8\u8087 (Mash Yang)",
+      "date": "2026-10-26T00:00:12.000Z",
+      "domain": "mashdigi.com",
+      "image": "https://kagiproxy.com/img/u6KKxQByEV9hgHnxskn3li8jwxbbBPsR8eP4L33MRkYmte_8BeEo1PT01j95Pc0wvumXnVbolEjw-Z4NH7PB0-_55E4PljVuuyohRtUQ3ixiOIjfzxKtBIDeoY6aIwFGNww",
+      "image_caption": "",
+      "link": "https://mashdigi.com/despite-reports-of-the-internal-screen-cracking-after-being-opened-and-closed-a-few-times-the-iphone-duo-is-the-easiest-foldable-phone-ifixit-has-ever-disassembled-and-repaired/",
+      "title": "\u96d6\u7136\u50b3\u51fa\u300c\u5167\u87a2\u5e55\u958b\u5408\u5e7e\u6b21\u5c31\u88c2\u958b\u300d\u707d\u60c5\uff0ciPhone Duo\u537b\u662fiFixit\u62c6\u89e3\u904e\u6700\u5bb9\u6613\u7dad\u4fee\u7684\u647a\u758a\u624b\u6a5f"
+    },
+    {
+      "date": "2026-10-26T02:30:23.000Z",
+      "domain": "vnexpress.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://vnexpress.net/tra-tan-iphone-duo-kiem-tra-do-ben-5136699.html",
+      "title": "\u0027Tra t\u1ea5n\u0027 iPhone Duo ki\u1ec3m tra \u0111\u1ed9 b\u1ec1n"
+    },
+    {
+      "date": "2026-10-26T01:23:24.000Z",
+      "domain": "ifixit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ifixit.com/News/119895/iphone-duo-teardown",
+      "title": "iPhone Duo Teardown"
+    },
+    {
+      "date": "2026-10-25T13:12:00.000Z",
+      "domain": "refresher.sk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://refresher.sk/214088-Najvacsi-Apple-fail-tohto-roka-Majitelia-iPhonu-Duo-hromadne-hlasia-prasknute-displeje",
+      "title": "Najv\u00e4\u010d\u0161\u00ed Apple fail tohto roka? Majitelia iPhonu Duo hromadne hl\u00e1sia prasknut\u00e9 displeje"
+    },
+    {
+      "author": "Volker",
+      "date": "2026-10-25T17:35:22.000Z",
+      "domain": "macerkopf.de",
+      "image": "https://kagiproxy.com/img/ZtJigpkuWz3C6wEY99CPeVBKsUbiQM5t1radefvvVIs4AYxrcxTCPJ3OQ-InDp1t-3hlINDLW_ggywVS0_S5H3tU5DQXUUVwtDCW5uIYLjM5XMlCftYmZBjzXmsRuExhfw",
+      "image_caption": "",
+      "link": "https://www.macerkopf.de/2026/10/25/iphone-duo-erste-teardowns-akku/",
+      "title": "iPhone Duo: Erste Teardowns zeigen das neue Akku-System und mehr [Videos]"
+    },
+    {
+      "author": "\u674e\u7fbf\u7487",
+      "date": "2026-10-26T05:27:00.000Z",
+      "domain": "mirrordaily.news",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.mirrordaily.news/story/93823",
+      "title": "\u4e0d\u5230\u4e00\u5929\u5c31\u8f49\u624b\uff01iPhone Duo\u7206\u87a2\u5e55\u707d\u60c5\u3000\u7db2\u66dd3\u5927\u52f8\u9000\u95dc\u9375"
+    },
+    {
+      "author": "Rafael Montoro",
+      "date": "2026-10-26T03:36:57.000Z",
+      "domain": "infobae.com",
+      "image": "https://kagiproxy.com/img/6ZLWpK5OxKaFjLj8l2NgiQuq354DCxWQgDEW1abofbMAs6WJhwkglegovksHJfrNoTDReCkb85eH89DB6vqQwqpKMzcdNRAVXqWLguH92Jyj5Jfg1ayH4BI9wkfJm1WUq3vLfMTbaUK0nn22mwCJDVnUaLlAAOh-e9Nxw4Uq3jtBp6851kP5LaE9fOt2MbKKusAHunybMVw018w81DnRoqwPqUHwDC_o7MbpTcR3ArFWTOKMGbVFDUq-sYqi3nwqFPw8RJw",
+      "image_caption": "Apple lanz\u00f3 el iPhone Duo, su primer tel\u00e9fono plegable, el 23 de octubre pasado a USD 1.999. REUTERS/Isabel Infantes",
+      "link": "https://www.infobae.com/tecno/2026/10/26/por-que-se-esta-rompiendo-la-pantalla-del-nuevo-iphone-duo/",
+      "title": "Por qu\u00e9 se est\u00e1 rompiendo la pantalla del nuevo iPhone Duo"
+    },
+    {
+      "author": "\uc2e0\uc9c4\ud638 \uae30\uc790",
+      "date": "2026-10-26T06:57:15.000Z",
+      "domain": "seoul.co.kr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.seoul.co.kr/news/newsView.php?id=20261026500221",
+      "title": "\uc544\uc774\ud3f0 \ub4c0\uc624 \u2018\uc561\uc815 \ud30c\uc190\u2019 \ub17c\ub780\uc5d0 \uc560\uafce\uc740 \uad6d\ub0b4\uc5c5\uccb4 \u2018\ubd88\ub625\u2019\u2026\uc785\uc7a5\ubb38\uae4c\uc9c0 \ub0c8\ub2e4 [\uc774\uc288\ud53d]"
+    },
+    {
+      "date": "2026-10-25T09:12:27.000Z",
+      "domain": "phonearena.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4",
+      "title": "Apple refuses to honor iPhone Duo warranty when display breaks after just 3 hours of use"
+    },
+    {
+      "author": "Ulrich Rozier",
+      "date": "2026-10-26T06:04:35.000Z",
+      "domain": "frandroid.com",
+      "image": "https://kagiproxy.com/img/at9FnSGA1W_4jSr4aNtR-Qtud7y472DLvmSEt22NtBC308rUyRaK4iCUEGXvQTmWWZkJGuqnq1HBGVACFD8KtOc6XDj7RvltgOig0HWC71wTUaG9ZWHW1nTvOpHR-dmKaYPwE6ouvHVQq_3NPhH2xhI8WjjfJOZZ_v9ACj-uDBYOqSxtk2HsanrmuAtEk4VSs6kp041VAl0uR_Kzvc_3xNNvWUvpqeyAvjI5T4HNGCmootE35z5B9aoP6U4fqcZwbV4bUjMbnVLK",
+      "image_caption": "",
+      "link": "https://www.frandroid.com/marques/apple/3298563_iphone-duo-mieux-protege-de-la-poussiere-que-les-galaxy-et-pixel-pourtant-ifixit-trouve-une-faiblesse-au-coeur-de-la-charniere",
+      "title": "iPhone Duo : mieux prot\u00e9g\u00e9 de la poussi\u00e8re que les Galaxy et Pixel, pourtant iFixit trouve une faiblesse au c\u0153ur de la charni\u00e8re"
+    },
+    {
+      "date": "2026-10-25T12:00:16.812Z",
+      "domain": "news.kagi.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://kite.kagi.com/tech/2026102512/cracked-screens-reported-on-apples-first-foldable-iphone",
+      "title": "Kagi News earlier coverage: Cracked screens reported on Apple\u0027s first foldable iPhone"
+    },
+    {
+      "author": "Dusan Belic",
+      "date": "2026-10-25T19:08:55.000Z",
+      "domain": "intomobile.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.intomobile.com/2026/10/25/apples-iphone-duo-is-getting-a-left-hand-reachability-mode/",
+      "title": "Apple\u2019s iPhone Duo is getting a left-hand Reachability mode"
+    },
+    {
+      "author": "/u/bitcoin1mil",
+      "date": "2026-10-26T06:09:30.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/iphone/comments/1xfoxx7/tried_iphone_duo/",
+      "title": "Tried iPhone Duo."
+    },
+    {
+      "date": "2026-10-25T08:30:12.000Z",
+      "domain": "forbes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdDZyZkp6dHMzMGt4WXRKeEJiV1R5WC14SHE4LXZkMXNJTTFENThXTnJPZmVzSWVpT1dvX00tYmQ0RXlzQzUtU3gzSkUwdGZTdS16QVZ4bV9VenozVnZuSHhRN2FwQ0hVbFJvTHNXRDJOZmhMM1E4YlZ0STkyckVIcVNEOHZYMzNKb1l3TnFYeWxza01pbFd5RmpaY3JJRklMTXdzOTJtVTV2THNNZHc",
+      "title": "The iPhone Duo Likes \u0026 Dislikes After 4 Days Of Real World Use"
+    },
+    {
+      "author": "/u/Yellow_Bee",
+      "date": "2026-10-25T23:22:17.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/iphone/comments/1xfgyu9/mark_gurman_on_iphone_duo/",
+      "title": "Mark Gurman on iPhone Duo"
+    },
+    {
+      "author": "/u/Gabbe95",
+      "date": "2026-10-26T03:14:55.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/iphone/comments/1xflvl9/the_duo_makes_me_want_iphone_hand_off_so_badly/",
+      "title": "The Duo makes me want iPhone Hand Off so badly."
+    },
+    {
+      "author": "David Lumb",
+      "date": "2026-10-25T09:00:00.000Z",
+      "domain": "cnet.com",
+      "image": "https://kagiproxy.com/img/EUq5AWiiEuNp8ePTqLCfvk200fAjUFCu7OeyKrMq8JUrMfCJ-IwmHRVD5ADP4h_JDwl9k924j24IFFQB2l-joP71HmeJqk1X3MfIv2hVmj7u7OuSulhPLNN0vXuC8Jl16mNkwdi4lbEH2kEyx5xodD3jHVI",
+      "image_caption": "",
+      "link": "https://www.cnet.com/tech/mobile/iphone-duo-owners-your-apps-will-look-better-soon/",
+      "title": "iPhone Duo Owners: Your Apps Will Look Better Soon"
+    },
+    {
+      "author": "The Verge",
+      "date": "2026-10-25T16:00:38.000Z",
+      "domain": "youtube.com",
+      "image": "",
+      "image_caption": "The iPhone Duo probably should\u2019ve been an iPad, and Apple should\u2019ve just called it the Duo. What do you think? Subscribe: http://goo.gl/G5RXGs Like The Verge on Facebook: https://goo.gl/2P1aGc Follow on Twitter: https://goo.gl/XTWX61 Follow on Instagram: https://goo.gl/7ZeLv Watch The Vergecast on YouTube: https://bit.ly/40RFRkg The Vergecast Podcast: https://bit.ly/3WQDexZ Decoder with Nilay Patel: http://apple.co/3v29nDc More about our podcasts: https://www.theverge.com/podcasts Read More: http://www.theverge.com Community guidelines: http://bit.ly/2D0hlAv Wallpapers from The Verge: https://bit.ly/2xQXYJr Shop our Verge merch store here: https://bit.ly/4kPCmEc Subscribe to The Verge: https://bit.ly/3FT6n5S Subscribe to The Vergecast on YouTube, new episodes on Tuesday and Friday: https://bit.ly/3I6nJtz If you buy something from a Verge link, Vox Media may receive a commission without exerting any influence on editorial content. For more information about our ethics policy, visit: https://bit.ly/3ZWTlLs",
+      "link": "https://www.youtube.com/shorts/jeML9beR6Hg",
+      "title": "iPhone Duo should\u0027ve been an iPad #Vergecast"
+    },
+    {
+      "author": "CNN",
+      "date": "2026-10-25T12:42:22.000Z",
+      "domain": "egyptindependent.com",
+      "image": "https://kagiproxy.com/img/HEnRb7I5Pd_rORAFZ7tmd1TLI3snUhabD3qiRna2VDS1jL2XXYTWcreoWYovhyzFSeQhZQVm2wO0r6eh0sYF5Q0Lwqgl2P19Bw5qB2Qj4SxL-gQjsm4IRq0-YAekBXUXgMFh7uhn5UrPZYyS_MZxu5RSKuC8BOCoRA6cCeh3",
+      "image_caption": "",
+      "link": "https://www.egyptindependent.com/the-iphone-duo-is-apples-coolest-phone-in-years-theres-just-one-problem/",
+      "title": "The iPhone Duo is Apple\u2019s coolest phone in years. There\u2019s just one problem"
+    },
+    {
+      "author": "Oliver Posselt",
+      "date": "2026-10-26T06:30:22.000Z",
+      "domain": "stadt-bremerhaven.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://stadt-bremerhaven.de/iphone-duo-automationen-beim-oeffnen-oder-schliessen-nutzen/",
+      "title": "iPhone Duo: Automationen beim \u00d6ffnen oder Schlie\u00dfen nutzen"
+    },
+    {
+      "author": "thomahawk",
+      "date": "2026-10-25T22:26:29.000Z",
+      "domain": "arstechnica.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arstechnica.com/civis/threads/iphone-duo.1514734/",
+      "title": "iPhone Duo"
+    },
+    {
+      "date": "2026-10-26T07:07:36.603Z",
+      "domain": "adaderana.lk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://adaderana.lk/news/250422",
+      "title": "Apple launches into foldable market as iPhone Duo sales begin"
+    },
+    {
+      "date": "2026-10-25T12:00:00.000Z",
+      "domain": "sapo.pt",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbW9xaVpRZGtnZjJYTkNfSTUxRmZ2cVE2S01ia3FtdGh0dzVPUFRKY3NRT3pGMkZnM3huVHk4NkpVQ2t1R1AyUEpMdWNkdWFnbEp2OUNFRFlwN3dQcUMxZGZEX2hGckJqck5QbFVlNXdXSEV4dVcyOGhlbEJkMU1NVXVxcW0tMEsxbGFrZjF3TUE3b3k1SnlDNGtIVzlvWlR5cUt2QjV2bUpiblRBZTRDblZqb1NpNHVMMno40gHAAUFVX3lxTE5yNG5wM1BYaFhWbXVfVktLZ0xSOURlSU1wSVJHbDJadDdINWo5TDYzTk9jT1BZSjJSbWtBbTctN043S3k1by05UF9KZ2dNSy05dkhYdDJnak1welFGbEJNbmlZSDhzNllTN19LOW1rZGZyQVNYLWQyR0ttS3FGUUZNS2Q3bnNiSVQ4Y3VDNkVtUURHc3RmLXZvNE1QWUswVHExaml3NDVIZnBfR2p6akZqTFVDWXBsSjBZVmRaSHhxTw",
+      "title": "iPhone Duo j\u00e1 tem aplica\u00e7\u00f5es divertidas e gratuitas que exploram o ecr\u00e3 dobr\u00e1vel"
+    },
+    {
+      "author": "Oszl\u00e1nyi Gy\u00f6ngyv\u00e9r",
+      "date": "2026-10-26T05:21:00.000Z",
+      "domain": "tozsdeforum.hu",
+      "image": "",
+      "image_caption": "",
+      "link": "https://tozsdeforum.hu/extra/tech/itt-az-uj-apple-orulet-megerkezett-a-hajlithato-iphone-duo-ami-kozel-ketezer-dollarba-kerul-es-honapokat-varhatunk-ra/",
+      "title": "Itt az \u00faj Apple \u0151r\u00fclet \u2013Meg\u00e9rkezett a hajl\u00edthat\u00f3 iPhone Duo, ami k\u00f6zel k\u00e9tezer doll\u00e1rba ker\u00fcl \u00e9s h\u00f3napokat v\u00e1rhatunk r\u00e1"
+    },
+    {
+      "author": "Volker",
+      "date": "2026-10-26T06:07:55.000Z",
+      "domain": "macerkopf.de",
+      "image": "https://kagiproxy.com/img/Jd7N_fGO8PQ8cRgBl_UQPWSIrix1eG_Uh8sDuEbbYnxKdI_ZT3NqRkPd5ARlXhmXSNYcHmsxOricly7k4wfti6renevx-VpwW-h5QcwiwqG_h0F2oTQY1zVdurjZVIst-w",
+      "image_caption": "",
+      "link": "https://www.macerkopf.de/2026/10/26/iphone-duo-apple-support-dokumente/",
+      "title": "iPhone Duo: Apple ver\u00f6ffentlicht weitere Support-Dokumente"
+    },
+    {
+      "date": "2026-10-26T00:30:22.000Z",
+      "domain": "yahoo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hk.news.yahoo.com/iphone-duo-%E5%85%A7%E5%B1%8F%E6%8E%A1%E7%94%A8%E5%B1%8F%E4%B8%8B%E9%8F%A1%E9%A0%AD%E8%A8%AD%E8%A8%88-%E7%95%AB%E8%B3%AA%E6%88%90%E7%96%91%E6%88%96%E5%BD%B1%E9%9F%BF%E8%87%AA%E6%8B%8D%E7%9B%B8%E7%89%87%E8%B3%AA%E7%B4%A0-003022370.html",
+      "title": "iPhone Duo \u5167\u5c4f\u63a1\u7528\u5c4f\u4e0b\u93e1\u982d\u8a2d\u8a08\u3000\u756b\u8cea\u6210\u7591\u6216\u5f71\u97ff\u81ea\u62cd\u76f8\u7247\u8cea\u7d20"
+    },
+    {
+      "date": "2026-10-26T06:52:42.000Z",
+      "domain": "macwelt.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTnV1NmdCaVNkRTRHaWUyRGpuWTdPQngwc2wwYjZxSEk2dWlNdFFteG5PenNoNVdyVGxtaWlXY2R4RDJBVXpwbWNJRmFmdGJ5d3RaM1EwV3FvQlFNMVRKMkthYjBiUWVoZE1OVXhrRnliMGhkam95cTZDYzdVdUVrSFNBbHFFR2N4eE8tZnFjZURlUHphWGhYM1VsTmd6UWs4MDVBbWJPUlEtZlQwNDBHZ1kwRQ",
+      "title": "iPhone Duo bestellen: Bei diesen H\u00e4ndlern gibt es Apples erstes Falt-iPhone"
+    },
+    {
+      "date": "2026-10-25T06:10:20.000Z",
+      "domain": "myzaker.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1vY3MxWExhZmVHaVJ3Q3hNUHh3UlFCQm5nUjNLWlR0QWRhc2lHc2I2WTgyTTZybnQ5UnpoNktKUVdWU2lJaWlPUGhNbGp6VmtsY01GSldsNE9Lbmd5UHI5Vmp0R2pyTkdSTUZiMkdMYzNyUHVVYl9v",
+      "title": "\u82f9\u679c\u8ba1\u5212\u4f18\u5316iPhone Duo\u5916\u5c4fSafari\u5e03\u5c40"
+    },
+    {
+      "author": "Tim Hardwick",
+      "date": "2026-10-25T22:26:58.000Z",
+      "domain": "macrumors.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macrumors.com/2026/10/25/iphone-duo-automation-opened-or-closed/",
+      "title": "iPhone Duo Can Run Automations When You Open or Close It"
+    },
+    {
+      "author": "The Verge",
+      "date": "2026-10-25T14:00:38.000Z",
+      "domain": "youtube.com",
+      "image": "",
+      "image_caption": "If the iPhone Duo becomes popular, could it signal a comeback for landscape video? The Verge\u2019s Andru Marino and Nilay Patel explore how foldables could change the way we consume video. Subscribe: http://goo.gl/G5RXGs Like The Verge on Facebook: https://goo.gl/2P1aGc Follow on Twitter: https://goo.gl/XTWX61 Follow on Instagram: https://goo.gl/7ZeLv Watch The Vergecast on YouTube: https://bit.ly/40RFRkg The Vergecast Podcast: https://bit.ly/3WQDexZ Decoder with Nilay Patel: http://apple.co/3v29nDc More about our podcasts: https://www.theverge.com/podcasts Read More: http://www.theverge.com Community guidelines: http://bit.ly/2D0hlAv Wallpapers from The Verge: https://bit.ly/2xQXYJr Shop our Verge merch store here: https://bit.ly/4kPCmEc Subscribe to The Verge: https://bit.ly/3FT6n5S Subscribe to The Vergecast on YouTube, new episodes on Tuesday and Friday: https://bit.ly/3I6nJtz If you buy something from a Verge link, Vox Media may receive a commission without exerting any influence on editorial content. For more information about our ethics policy, visit: https://bit.ly/3ZWTlLs",
+      "link": "https://www.youtube.com/shorts/qZsfkq86B0s",
+      "title": "What the iPhone Duo come mean for vertical video"
+    },
+    {
+      "author": "Tim Hardwick",
+      "date": "2026-10-25T22:00:02.000Z",
+      "domain": "macrumors.com",
+      "image": "https://kagiproxy.com/img/DyAI1_-x7Wrhl9xvIZi-qOwyRudYh7uwvZUIilu4S_C4HUkti7-zWOeiXemfrIqm7v9CUgem_NdBAXPaI9t2scV-3LRSEiJWrUPEzmGGWl7JtOisnJWs8yZiD_s0TBfSB4SNRkdQbHDcsIb6Vr0dmhf6nWQM",
+      "image_caption": "",
+      "link": "https://www.macrumors.com/how-to/iphone-duo-setting-makes-room-for-case/",
+      "title": "Adjust iPhone Duo\u0027s Outer Display to Accommodate Your Case"
+    },
+    {
+      "author": "/u/ventura726",
+      "date": "2026-10-25T22:53:24.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/iphone/comments/1xfgbqy/another_touchid_trick/",
+      "title": "Another TouchID Trick"
+    }
+  ],
+  "business_angle": "",
+  "category": "Technology",
+  "cluster_number": 1,
+  "did_you_know": "The Delta emulator has been updated to make the iPhone Duo resemble a Nintendo DS, with closing the phone putting a game into sleep mode [sapo.pt#1].",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=macrumors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macrumors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=9to5mac.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "9to5mac.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theverge.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "theverge.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=appleinsider.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "appleinsider.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techmeme.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techmeme.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cultofmac.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cultofmac.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techradar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techradar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidauthority.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidauthority.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macobserver.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macobserver.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=twit.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "twit.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=freepressjournal.in\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "freepressjournal.in"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techaeris.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techaeris.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tribune.com.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tribune.com.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hardwarezone.com.sg\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hardwarezone.com.sg"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thanhnien.vn\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thanhnien.vn"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gadgets360.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gadgets360.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=frandroid.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "frandroid.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=apfeltalk.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "apfeltalk.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=harianjogja.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "harianjogja.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=makeuseof.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "makeuseof.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dday.it\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dday.it"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iphoneincanada.ca\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iphoneincanada.ca"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ettoday.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ettoday.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=spidersweb.pl\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "spidersweb.pl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=maclife.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "maclife.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=evrensel.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "evrensel.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=blognone.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "blognone.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indiatoday.in\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indiatoday.in"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thenationalnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thenationalnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iphone-ticker.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iphone-ticker.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tweakers.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tweakers.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=propakistani.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "propakistani.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heraldcorp.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "heraldcorp.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=36kr.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "36kr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=jtbc.co.kr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "jtbc.co.kr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gsmarena.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gsmarena.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ithome.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ithome.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wallstreetcn.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wallstreetcn.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stadt-bremerhaven.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "stadt-bremerhaven.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=yna.co.kr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yna.co.kr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashdigi.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashdigi.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=vnexpress.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "vnexpress.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ifixit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ifixit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=refresher.sk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "refresher.sk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macerkopf.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macerkopf.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mirrordaily.news\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mirrordaily.news"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=infobae.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "infobae.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=seoul.co.kr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "seoul.co.kr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=phonearena.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "phonearena.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=news.kagi.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "news.kagi.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macrumors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macrumors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stadt-bremerhaven.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "stadt-bremerhaven.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macerkopf.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macerkopf.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=forbes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "forbes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=intomobile.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "intomobile.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=youtube.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "youtube.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=egyptindependent.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "egyptindependent.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arstechnica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arstechnica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=adaderana.lk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "adaderana.lk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sapo.pt\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sapo.pt"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tozsdeforum.hu\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tozsdeforum.hu"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=yahoo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yahoo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macwelt.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macwelt.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=myzaker.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "myzaker.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udcf1",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "A separate teardown article recalled that Samsung delayed the original Galaxy Fold launch after review units suffered screen failures [makeuseof.com#1]. That episode involved a different product and does not establish whether the iPhone Duo\u2019s reported failures share the same cause [makeuseof.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Foldable competition: IDC forecast that Apple would lead the foldable category by both units and value in 2027, ahead of established vendors Samsung and Huawei [adaderana.lk#1].",
+    "Foldable-phone components: Fine M-Tec shares closed down 15.07% on Oct. 26 amid speculation about the supplier\u2019s role in the reported quality issue [seoul.co.kr#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Foldable Phones",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 68,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Seoul Newspaper",
+          "url": "https://www.seoul.co.kr/news/newsView.php?id=20261026500221"
+        }
+      ],
+      "text": "Fine M-Tec: The Korean hinge supplier argued that linking a finished phone\u2019s fault to a particular component requires objective technical verification [seoul.co.kr#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "PhoneArena",
+          "url": "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4"
+        }
+      ],
+      "text": "Verizon customer chimchambam: The customer said Apple declined warranty coverage for a damaged phone, concluding it had been dropped; this contrasts with accounts of some buyers receiving replacement devices [phonearena.com#1][9to5mac.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Ada Derana",
+          "url": "https://adaderana.lk/news/250422"
+        }
+      ],
+      "text": "Technology reviewer Marques Brownlee, known as MKBHD, said the Duo would probably not suit people who mainly text, use social media and browse, but could appeal to buyers comfortable with its $2,000 price and adjustment period [adaderana.lk#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "iFixit has tested every aspect of the iPhone Duo",
+    "credit": "techradar.com",
+    "link": "https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work",
+    "url": "https://kagiproxy.com/img/PyB-jyyOe2CBaXRei4QrD7nx_abywWSbAxgiegCjGSz-eNznoesBUkkKvJQyaMp3ysBezKowa2zCLQyODIiY0Oay0Pe12qbiDATgD9ZN9HT5gn3qHYlLv_e0XW8qTa91"
+  },
+  "published": "2026-10-26T12:00:13.144Z",
+  "quote": "It\u0027s been a lot of fun trying the Duo out for a week, but it feels like I\u0027ve gotten to use an extraordinarily polished prototype \u2014 not a finished product that I\u0027d want to buy and carry.",
+  "quote_attribution": "Ada Derana",
+  "quote_author": "John Gruber, Apple commentator and author of Daring Fireball",
+  "scientific_significance": [],
+  "secondary_image": {
+    "caption": "",
+    "credit": "macrumors.com",
+    "link": "https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/",
+    "url": "https://kagiproxy.com/img/mLp9gjEZnbnhYBh1wNMabD60ib5zcIZ4b84FzDDG2IatlurueggsZifdV6QwRdDwcoDRlcbdzBmhiR3INtJrK4RPQ_9OiuxJZIbziSGWuKBYyiLa7jw9Kp8XZOzJec1rHkeUf-oM-iA"
+  },
+  "source_urls": [
+    "https://twit.tv/shows/this-week-in-tech/episodes/1107",
+    "https://www.freepressjournal.in/tech/iphone-duo-teardown-exposes-costly-inner-screen-weakness-as-early-buyers-report-display-damage",
+    "https://tozsdeforum.hu/extra/tech/itt-az-uj-apple-orulet-megerkezett-a-hajlithato-iphone-duo-ami-kozel-ketezer-dollarba-kerul-es-honapokat-varhatunk-ra/",
+    "https://www.infobae.com/tecno/2026/10/26/por-que-se-esta-rompiendo-la-pantalla-del-nuevo-iphone-duo/",
+    "https://www.androidauthority.com/iphone-duo-durability-3727717/",
+    "https://adaderana.lk/news/250422",
+    "https://www.reddit.com/r/iphone/comments/1xfgyu9/mark_gurman_on_iphone_duo/",
+    "https://www.youtube.com/shorts/jeML9beR6Hg",
+    "https://www.macrumors.com/how-to/iphone-duo-setting-makes-room-for-case/",
+    "https://www.firstpost.com/tech/iphone-duo-owners-report-screens-cracking-days-after-unboxing-flag-possible-hinge-defect-14055198.html",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxPY25YUEtyVHZOdEs2X3NCcGpmMHlidXN1a1IzSUg3ekxsSUdTRS1LYjBrSTJqVEp1NWFIYzBPcS13dXJGcjZnOWdoYWtxQXNqRjRfYnZKSGZUTHR6SW9pazdMbDJaMHlod082TU4xeUI3Qm1iVmFPOVU0UXBPSWhoUWF0QXBJT3dyWDNqb0Zqd2t4MHcwV2dMdFdWVUdDXzFES3NDSjlB",
+    "https://www.macobserver.com/news/iphone-duo-durability-test-reveals-major-hinge-and-display-weaknesses/",
+    "https://www.apfeltalk.de/magazin/feature/iphone-duo-defekte-scharnierteile-koennten-displayrisse-verursachen/",
+    "https://www.iphoneincanada.ca/2026/10/25/iphone-duo-phonebuff-drop-test/",
+    "https://news.jtbc.co.kr/article/NB12324770",
+    "https://www.intomobile.com/2026/10/25/apples-iphone-duo-is-getting-a-left-hand-reachability-mode/",
+    "https://arstechnica.com/civis/threads/iphone-duo.1514734/",
+    "https://www.theverge.com/tech/1018290/dissected-iphone-duo-crackgate-hinge-screen",
+    "https://www.frandroid.com/marques/apple/3298563_iphone-duo-mieux-protege-de-la-poussiere-que-les-galaxy-et-pixel-pourtant-ifixit-trouve-une-faiblesse-au-coeur-de-la-charniere",
+    "https://stadt-bremerhaven.de/iphone-duo-automationen-beim-oeffnen-oder-schliessen-nutzen/",
+    "https://www.hardwarezone.com.sg/mobile/iphone-duo-inner-diplay-cracking-possible-hinge-issues",
+    "https://9to5mac.com/2026/10/25/ifixit-tears-down-iphone-duo-finds-possible-causes-of-early-screen-failures/",
+    "https://news.google.com/rss/articles/CBMirgFBVV95cUxOdDZyZkp6dHMzMGt4WXRKeEJiV1R5WC14SHE4LXZkMXNJTTFENThXTnJPZmVzSWVpT1dvX00tYmQ0RXlzQzUtU3gzSkUwdGZTdS16QVZ4bV9VenozVnZuSHhRN2FwQ0hVbFJvTHNXRDJOZmhMM1E4YlZ0STkyckVIcVNEOHZYMzNKb1l3TnFYeWxza01pbFd5RmpaY3JJRklMTXdzOTJtVTV2THNNZHc",
+    "https://news.google.com/rss/articles/CBMixAFBVV95cUxQZF9KUGFtZk9fV2ZoLXI4TFFlR29uRVFPQkhsRXF6U3RMQ1ZiRWxQbzI3cllFQlgtSFlybl9XWWQ4aENMTnUxRE80SWlNVVZwVGdNNHByOTBSY2RHSjVTVUJfSnJxTHdMTTNHVFFnemc5VVd0WnBJQlUxNVNUZ0wxeVNTbXo2MWpING5oOGZUSHEyaGFLYjlnaFFzcGs4OUgyZnpJdS1QUDZCU1FUMXR1RGN1dHFlLXJoWUxIOTUwSF9EX0R10gHAAUFVX3lxTE44YkVaVFo4Y0dzOVJva2VVcThFLXpDeFFwVUZhY3piTXgyY2NBbFpsaXhOTkxZUmpabHM1eFBETldOYTlPNWFNTm9jU3NJNXdNTF9kYkZoUGRoR2Roa3M4QUdKOTlUalA2R3NPVHNwNFVheTFaMXRmRThHa1pxSlVLQm1lVnJ2N1ZoaHV0Q1JKeXhIQ00yLWN5cnlTR2JpaFZzUkk1QXFKT2pCcTRRLWxnUVRCWVlhei16anBNZlVpeQ",
+    "https://www.yna.co.kr/view/AKR20261026114800017",
+    "https://thanhnien.vn/thao-roi-iphone-duo-ifixit-tim-ra-hai-nguyen-nhan-co-the-gay-nut-man-hinh-185261026104156361.htm",
+    "https://www.ifixit.com/News/119895/iphone-duo-teardown",
+    "https://www.ithome.com/1/017/906.htm",
+    "https://ototekno.harianjogja.com/r-1276431/ifixit-bongkar-iphone-duo-temukan-dugaan-penyebab-layar-rusak",
+    "https://www.youtube.com/shorts/qZsfkq86B0s",
+    "https://www.macobserver.com/news/apple-drops-iphone-duo-support-docs-for-hinge-and-screen-issues/",
+    "https://www.thenationalnews.com/future/technology/2026/10/25/apples-iphone-duo-faces-screen-damage-complaints-as-first-buyers-report-cracks/",
+    "https://9to5mac.com/2026/10/25/iphone-duo-displays-cracking/",
+    "https://kite.kagi.com/tech/2026102512/cracked-screens-reported-on-apples-first-foldable-iphone",
+    "https://www.frandroid.com/os/ios/3298431_crackgate-et-iphone-duo-des-ecrans-pliables-cassent-a-la-charniere-un-serieux-probleme-ou-des-cas-isoles",
+    "https://www.reddit.com/r/apple/comments/1xfm4ij/apples_folding_iphone_duo_might_have_a_screen/",
+    "https://www.reddit.com/r/iphone/comments/1xfgbqy/another_touchid_trick/",
+    "https://forums.macrumors.com/threads/crackgate-iphone-duo-owners-report-screens-breaking-along-the-hinge.2492517/",
+    "https://www.reddit.com/r/iphone/comments/1xfoxx7/tried_iphone_duo/",
+    "https://www.firstpost.com/tech/iphone-duo-cracked-screens-white-lines-whats-happening-to-apples-foldable-iphone-14055318.html",
+    "https://spidersweb.pl/2026/10/iphone-duo-ekrany-problem.html",
+    "https://www.macrumors.com/2026/10/25/iphone-duo-automation-opened-or-closed/",
+    "https://stadt-bremerhaven.de/ifixit-zerlegt-iphone-duo/",
+    "https://www.cultofmac.com/news/iphone-duo-drop-test-results",
+    "https://www.macobserver.com/news/iphone-duo-teardown-reveals-dual-batteries-and-internal-changes/",
+    "https://www.apfeltalk.de/magazin/news/iphone-duo-ifixit-untersucht-moegliche-ursachen-fuer-displaybrueche/",
+    "https://news.google.com/rss/articles/CBMiU0FVX3lxTE9KRzA1ZzlQMzJ2Z3VJRnZDYWtMRnVONUwzNnpoMzBzNnhKQVBmblRZUTAyWjNnNlhxTUhxbHFpcGpyby1UdjRwbXlLcW9wSjhUUElR",
+    "https://www.pcmag.com/news/iphone-duo-owners-are-reporting-cracks-in-their-screens-users-call-it-crackgate",
+    "https://www.mirrordaily.news/story/93823",
+    "https://news.google.com/rss/articles/CBMiiwFBVV95cUxPYTVBaWdUbFpzYXBJUjFhOHZOM0hmRHRsVWVOaDJuVzJKLTJOSTNRMXQxbHJlZUJUTExOM0V3dnpsMXBibjI0a3dpdlc0dGF1NVdicmFIRkFIVTVjcC00SE5ic1hQMng1YWFQdVB3TUQ2b3ZiWU9vTnpQdjVRelRaSDh3RHhub1pXdWg4",
+    "https://www.theverge.com/tech/1018233/ifixit-iphone-duo-teardown-repairability-hinge",
+    "https://techaeris.com/2026/10/25/iphone-duo-screen-cracking/",
+    "https://www.macerkopf.de/2026/10/26/iphone-duo-apple-support-dokumente/",
+    "https://www.macobserver.com/news/early-iphone-duo-owners-report-screen-cracks-along-the-hinge/",
+    "https://www.techradar.com/phones/iphone/ifixit-tears-down-the-iphone-duo-and-awards-it-the-highest-repair-score-yet-for-a-foldable-but-replacing-the-inner-screen-and-hinge-takes-a-lot-of-work",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxQSVFCWkNuYnZ3cnhkbDFwNy1wM3FyRU1IN210VXZqQ2w1cHNJZ0xOYi02Um1XRzlzUWQ4YmVvaUI2YVhWWXZVdmtNb2JhN1FzRVMwbndGWkhtSHVoYnhMVlpDdDNpbWgtS05sZ0tPeUh5TVQ2dlptLUNvdUk5YlEwSVJjX19VdE9RVVdhSWQ2c3VoTXNBQWJOZ0dnNVB0MnJ6eWJwR1dwajd5bTJvQ09HZS1n",
+    "https://www.makeuseof.com/apple-iphone-duo-ifixit-teardown/",
+    "https://refresher.sk/214088-Najvacsi-Apple-fail-tohto-roka-Majitelia-iPhonu-Duo-hromadne-hlasia-prasknute-displeje",
+    "https://www.seoul.co.kr/news/newsView.php?id=20261026500221",
+    "https://www.blognone.com/node/152020",
+    "https://www.iphoneincanada.ca/2026/10/25/iphone-duo-techrax-real-life-drop-test/",
+    "https://www.indiatoday.in/technology/news/story/iphone-duo-display-failing-teardown-shows-possible-reason-for-it-3024962-2026-10-26",
+    "https://www.ettoday.net/news/20261026/3260970.htm",
+    "https://mashdigi.com/despite-reports-of-the-internal-screen-cracking-after-being-opened-and-closed-a-few-times-the-iphone-duo-is-the-easiest-foldable-phone-ifixit-has-ever-disassembled-and-repaired/",
+    "https://www.reddit.com/r/iphone/comments/1xflvl9/the_duo_makes_me_want_iphone_hand_off_so_badly/",
+    "https://hk.news.yahoo.com/iphone-duo-%E5%85%A7%E5%B1%8F%E6%8E%A1%E7%94%A8%E5%B1%8F%E4%B8%8B%E9%8F%A1%E9%A0%AD%E8%A8%AD%E8%A8%88-%E7%95%AB%E8%B3%AA%E6%88%90%E7%96%91%E6%88%96%E5%BD%B1%E9%9F%BF%E8%87%AA%E6%8B%8D%E7%9B%B8%E7%89%87%E8%B3%AA%E7%B4%A0-003022370.html",
+    "https://biz.heraldcorp.com/article/10914741",
+    "https://tribune.com.pk/story/2636846/apples-iphone-duo-faces-early-durability-concerns-as-users-report-cracked-screens",
+    "https://www.gadgets360.com/mobiles/news/iphone-duo-foldable-displays-cracking-faulty-hinges-ifixit-teardown-12235969",
+    "https://www.cultofmac.com/news/apple-packed-the-iphone-duo-with-clever-repair-tricks",
+    "https://vnexpress.net/tra-tan-iphone-duo-kiem-tra-do-ben-5136699.html",
+    "https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/",
+    "https://www.techmeme.com/261025/p13#a261025p13",
+    "https://www.iphone-ticker.de/iphone-duo-display-schaeden-koennten-durch-das-scharnier-entstehen-289138/",
+    "https://www.macworld.com/article/2629813/iphone-duo-folding-design-guide-problems-price-specs.html",
+    "https://www.macerkopf.de/2026/10/25/iphone-duo-erste-teardowns-akku/",
+    "https://www.maclife.de/news/iphone-duo-ifixit-untersucht-ursache-display-schaeden-100127797.html",
+    "https://www.evrensel.net/haber/6006609/applein-katlanabilir-telefonu-iphone-duoda-ekran-krizi-darbe-almadan-catliyor",
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE1vY3MxWExhZmVHaVJ3Q3hNUHh3UlFCQm5nUjNLWlR0QWRhc2lHc2I2WTgyTTZybnQ5UnpoNktKUVdWU2lJaWlPUGhNbGp6VmtsY01GSldsNE9Lbmd5UHI5Vmp0R2pyTkdSTUZiMkdMYzNyUHVVYl9v",
+    "https://www.egyptindependent.com/the-iphone-duo-is-apples-coolest-phone-in-years-theres-just-one-problem/",
+    "https://propakistani.pk/2026/10/25/iphone-duo-fails-basic-durability-test-in-huge-blow-to-apple/",
+    "https://www.cultofmac.com/news/iphone-duo-cracked-screens",
+    "https://www.reddit.com/r/iphone/comments/1xf0pcq/theres_a_tech_youtuber_who_streams_an_iphone_duo/",
+    "https://www.reddit.com/r/apple/comments/1xf50lz/iphone_duo_teardown_duo_much_to_unpack_rewa/",
+    "https://news.google.com/rss/articles/CBMiU0FVX3lxTE1POTZUM2ppMFJrMkRPMnFVR2pzNlUwM1BPS3RKTEVpam5HdlZfR0hzRFotQmRLc1h5c01lT3NzMURvcG1MRWh6NjNHa09WdG1RTHhZ",
+    "https://www.cnet.com/tech/mobile/iphone-duo-owners-your-apps-will-look-better-soon/",
+    "https://news.google.com/rss/articles/CBMiswFBVV95cUxNTnV1NmdCaVNkRTRHaWUyRGpuWTdPQngwc2wwYjZxSEk2dWlNdFFteG5PenNoNVdyVGxtaWlXY2R4RDJBVXpwbWNJRmFmdGJ5d3RaM1EwV3FvQlFNMVRKMkthYjBiUWVoZE1OVXhrRnliMGhkam95cTZDYzdVdUVrSFNBbHFFR2N4eE8tZnFjZURlUHphWGhYM1VsTmd6UWs4MDVBbWJPUlEtZlQwNDBHZ1kwRQ",
+    "https://tweakers.net/nieuws/253722/scherm-iphone-duo-breekt-bij-tientallen-klanten-op-hetzelfde-punt.html",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxQbW9xaVpRZGtnZjJYTkNfSTUxRmZ2cVE2S01ia3FtdGh0dzVPUFRKY3NRT3pGMkZnM3huVHk4NkpVQ2t1R1AyUEpMdWNkdWFnbEp2OUNFRFlwN3dQcUMxZGZEX2hGckJqck5QbFVlNXdXSEV4dVcyOGhlbEJkMU1NVXVxcW0tMEsxbGFrZjF3TUE3b3k1SnlDNGtIVzlvWlR5cUt2QjV2bUpiblRBZTRDblZqb1NpNHVMMno40gHAAUFVX3lxTE5yNG5wM1BYaFhWbXVfVktLZ0xSOURlSU1wSVJHbDJadDdINWo5TDYzTk9jT1BZSjJSbWtBbTctN043S3k1by05UF9KZ2dNSy05dkhYdDJnak1welFGbEJNbmlZSDhzNllTN19LOW1rZGZyQVNYLWQyR0ttS3FGUUZNS2Q3bnNiSVQ4Y3VDNkVtUURHc3RmLXZvNE1QWUswVHExaml3NDVIZnBfR2p6akZqTFVDWXBsSjBZVmRaSHhxTw",
+    "https://www.apfeltalk.de/magazin/news/iphone-duo-mehrere-innere-displays-brechen-auf-aehnliche-weise/"
+  ],
+  "suggested_qna": [],
+  "summary": "Repair specialists at iFixit published a teardown of Apple\u2019s first foldable phone, the iPhone Duo, identifying hinge mechanisms that could concentrate pressure where owners have reported inner-screen failures. Using CT scans, teardown footage and Apple patents, the team said a central support bar might not retract fully as the phone closes, or curved hinge rails might not move as intended. Either could press against the display. iFixit stressed that these are hypotheses, not a confirmed cause [ifixit.com#1][androidauthority.com#1].\n\nA separate teardown by YouTuber CuriousHagi found a sheared hinge component and a possible impact mark beneath a damaged phone\u2019s display after deliberate stress testing. The findings suggest another possible mechanical explanation but do not establish what caused customer failures during ordinary use [theverge.com#2][apfeltalk.de#3]. The number of affected devices remains unclear, and Apple has not publicly identified a cause [9to5mac.com#1][thenationalnews.com#1].\n\nApple\u2019s troubleshooting guidance says hinge problems have no software fix. If removing a case and checking for dirt do not resolve them, a technician may need to replace the inner display assembly. iFixit lists the price of an out-of-warranty inner-screen replacement at $999 [macobserver.com#4][ifixit.com#1].",
+  "talking_points": [
+    "Case setting: Apple\u2019s \u201cShift Left Edge\u201d setting moves outer-screen content inward when a case covers the display\u2019s left edge. The phone prompts users to enable it when using Apple\u2019s official case [macrumors.com#2][macerkopf.de#1].",
+    "Supplier response: Korean hinge supplier Fine M-Tec warned it may take legal action over unsupported claims linking its parts to the failures [seoul.co.kr#1].",
+    "Dust ingress: In iFixit\u2019s fluorescent-powder test, particles reached the hinge and caused crunching noises, although less dust entered than in comparable Galaxy Z Fold8 and Pixel 11 Pro Fold tests [macrumors.com#1][techradar.com#1].",
+    "Apple guidance: Apple lists a hinge that will not open or close fully, unusual folding noises or looseness as warning signs [macobserver.com#4].",
+    "Hinge shortcuts: Owners can configure the open-or-close trigger to lock the phone when shut or switch wallpapers between display states [macrumors.com#1][stadt-bremerhaven.de#1].",
+    "Repairability score: iFixit gave the Duo a provisional 5 out of 10, its highest score for a foldable; the final rating depends on replacement-parts availability [ifixit.com#1][9to5mac.com#1].",
+    "Button repair: After a replacement Touch ID side button is installed, Apple\u2019s repair assistant must calibrate it. Until then, fingerprint unlocking, payments and app sign-ins are unavailable, though a passcode still works [macerkopf.de#1].",
+    "Selfie alternatives: Owners can use the outer selfie camera or rear cameras for self-portraits; the outer display can serve as a viewfinder for the rear cameras [yahoo.com#1]."
+  ],
+  "technical_details": [
+    "Screen-ratio comparison: Samsung\u2019s Galaxy Z Fold 8 Ultra uses a 21:9 cover screen and a 10:9 inner screen, requiring different app layouts for the two displays [cnet.com#1].",
+    "Replaceable cover layer: Apple designed the nano-texture cover layer to be replaced without removing the OLED panel beneath it; iFixit reported replacement prices of $19 with AppleCare+ and $49 without it [macrumors.com#1][freepressjournal.in#1].",
+    "Crease-masking optics: The flexible display\u2019s matte nano-texture scatters reflected light to make the fold less conspicuous; iFixit also found oval subpixels oriented at different angles, which may reduce visual artifacts [theverge.com#1][ifixit.com#1].",
+    "Under-display camera: The internal selfie camera sits beneath the display. Its listed specifications include an \u0192/1.8 aperture and 1080p video at 60 frames per second; one review attributed soft, low-detail images to its 4-megapixel resolution [yahoo.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Apple unveiled the iPhone Duo, its first foldable phone [news.kagi.com#1]",
+      "date": "9 September 2026",
+      "date_iso": "2026-09-09"
+    },
+    {
+      "content": "The iPhone Duo went on sale as owners began reporting screen damage [news.kagi.com#1]",
+      "date": "23 October 2026",
+      "date_iso": "2026-10-23"
+    },
+    {
+      "content": "iFixit published a teardown with possible hinge-related explanations [ifixit.com#1]",
+      "date": "25 October 2026",
+      "date_iso": "2026-10-25"
+    },
+    {
+      "content": "Fine M-Tec denied its components caused the reported quality issue [seoul.co.kr#1]",
+      "date": "26 October 2026",
+      "date_iso": "2026-10-26"
+    },
+    {
+      "content": "Apple announced its first foldable iPhone, the iPhone Duo [macworld.com#1]",
+      "date": "9 September 2026",
+      "date_iso": "2026-09-09"
+    },
+    {
+      "content": "Preorders opened as delivery estimates began extending into January [macworld.com#1][adaderana.lk#1]",
+      "date": "16 October 2026",
+      "date_iso": "2026-10-16"
+    },
+    {
+      "content": "Retail sales began in more than 70 countries and regions [macworld.com#1]",
+      "date": "23 October 2026",
+      "date_iso": "2026-10-23"
+    },
+    {
+      "content": "A new open-or-close automation trigger was documented for the Duo [macrumors.com#1]",
+      "date": "25 October 2026",
+      "date_iso": "2026-10-25"
+    }
+  ],
+  "title": "iFixit teardown identifies possible hinge stress behind iPhone Duo screen failures",
+  "travel_advisory": "",
+  "unique_domains": 53,
+  "url": "https://www.macrumors.com/2026/10/25/ifixit-iphone-duo-teardown/",
+  "user_action_items": [
+    "Stop using the phone if bent hardware or damage to the outer shell prevents it from working properly; Apple\u2019s guide advises seeking service in those cases [macobserver.com#4]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
