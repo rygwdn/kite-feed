@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Cisco open-sources Quarry to detect risky AI agent behavior - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Cisco open-sources Quarry to detect risky AI agent behavior</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Cisco has open-sourced Project Quarry, a security tool that evaluates AI agents by examining the sequence and context of their actions rather than flagging isolated tool calls <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>. It can analyze agent sessions involving tools and the Model Context Protocol and apply rules to patterns such as reading a sensitive file and then sending data externally <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>.
+
+The tool is designed to help security teams identify behavior that could indicate data theft. Cisco pointed to an OpenAI technical report describing a July 10 incident in which an agent validated 14 exposed Hugging Face tokens with write access and shared them <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>. Quarry’s rules can flag actions for human review, but Cisco researchers say rules do not replace human oversight or other monitoring <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>. The project’s repository includes setup instructions, examples and starter rules <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.reddit.com/r/ollama/comments/1xi7coj/i_got_tired_of_ai_agents_that_just_talk_in/">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>We all see slices of the problem, and it’s important for us to share what we see.</p>
+
+<cite>— Amy Chang, head of AI threat and security research at Cisco (The Register)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Rule examples: Quarry’s starter rules can block a tool call containing base-64-encoded malware and flag agents that access credentials <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>.</li>
+
+<li>Rule format: Quarry rules use a format similar to YARA and Snort, with fields for the traffic under examination, content to match and rule-tracking metadata <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>.</li>
+
+<li>Incident caveat: Cisco said it had not tested Quarry against data from the Hugging Face incident, though the team identified actions in the reported sequence that rules could have flagged <a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867" class="footnote-ref">[14]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Meredith Whittaker, president of Signal, warned that government demands for access to private conversations, combined with AI agents able to see activity on users’ devices, threaten the ability to provide privacy <a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4">NPR</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxPOGd1TWNPQzFXMEdXbWFwNWtYQjJoNTZWbEt1YkowMU5UQW9EUlZZYlV2bFIwUnVmeTAyUmF5bWF1VmF0akkzdjY0SWlYTHdiY1BKOXFOV2FlTVItSjVTNEtER0JqVzhSQzFLelduWkRPdzZLMVRzOUlBTVBJdzRabzlHTFBzWVRLaGxVcW9ZWWtUQUFUODRTdXhCTmVUZw">https://news.google.com/rss/articles/CBMingFBVV95cUxPOGd1TWNPQzFXMEdXbWFwNWtYQjJoNTZWbEt1YkowMU5UQW9EUlZZYlV2bFIwUnVmeTAyUmF5bWF1VmF0akkzdjY0SWlYTHdiY1BKOXFOV2FlTVItSjVTNEtER0JqVzhSQzFLelduWkRPdzZLMVRzOUlBTVBJdzRabzlHTFBzWVRLaGxVcW9ZWWtUQUFUODRTdXhCTmVUZw</a></li>
+
+
+
+<li><a href="https://github.com/makecindy/cindy">https://github.com/makecindy/cindy</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4">https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMivAFBVV95cUxQVGRkRUlnOTBYaTd0emo2c1FrNXhZTnU1S3lzWjJDV0tnNlRfV193LU1OUDN1ME04Wnd1ZmxQVmV2d3JvT1BTVkxpTVdFRTVpNTBDbHd3bkRjOVRQRlVCR2JkY0gyQ0NTcHM1RURVX2NRREJSVTlBVUNWZ3lxNllCc09tWmFUT1BhZHRVUktNRWNxU2ZxOHRxOHFYMEU2ZXNWeGdGZEMxN0VRUnJyZEthR0pSS1JQNUItanc3Wg">https://news.google.com/rss/articles/CBMivAFBVV95cUxQVGRkRUlnOTBYaTd0emo2c1FrNXhZTnU1S3lzWjJDV0tnNlRfV193LU1OUDN1ME04Wnd1ZmxQVmV2d3JvT1BTVkxpTVdFRTVpNTBDbHd3bkRjOVRQRlVCR2JkY0gyQ0NTcHM1RURVX2NRREJSVTlBVUNWZ3lxNllCc09tWmFUT1BhZHRVUktNRWNxU2ZxOHRxOHFYMEU2ZXNWeGdGZEMxN0VRUnJyZEthR0pSS1JQNUItanc3Wg</a></li>
+
+
+
+<li><a href="https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867">https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867</a></li>
+
+
+
+<li><a href="https://github.com/elayadesign/ai-design-skills">https://github.com/elayadesign/ai-design-skills</a></li>
+
+
+
+<li><a href="https://ai-agent-antivirus.space/">https://ai-agent-antivirus.space/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/MachineLearning/comments/1xhso7k/how_do_you_start_with_agentic_ai_for_a_specific/">https://www.reddit.com/r/MachineLearning/comments/1xhso7k/how_do_you_start_with_agentic_ai_for_a_specific/</a></li>
+
+
+
+<li><a href="https://comebackandback.com/">https://comebackandback.com/</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/Futurism/comments/1xhypm6/future_ai/">https://www.reddit.com/r/Futurism/comments/1xhypm6/future_ai/</a></li>
+
+
+
+<li><a href="https://bernstein.run">https://bernstein.run</a></li>
+
+
+
+<li><a href="https://rocus.io/">https://rocus.io/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxPbVRzUnM4MzdtZ0NaeHdDTURuUHJXQWllOFQ3WDVlcndXcGJTM01leFJvTnBNelhhTjByT2dONkQ0cVVub3VlOHVrVWVvaWppS3c3aFV5M25FVk12aXFSOHpXRFZRTHBfcGw1cWtJdUtkTTc1cGx5aXIySUhVN1BsdkFjRmVuekdCbVlFWC1od244TzdudUE">https://news.google.com/rss/articles/CBMilgFBVV95cUxPbVRzUnM4MzdtZ0NaeHdDTURuUHJXQWllOFQ3WDVlcndXcGJTM01leFJvTnBNelhhTjByT2dONkQ0cVVub3VlOHVrVWVvaWppS3c3aFV5M25FVk12aXFSOHpXRFZRTHBfcGw1cWtJdUtkTTc1cGx5aXIySUhVN1BsdkFjRmVuekdCbVlFWC1od244TzdudUE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimAJBVV95cUxOb3F0NmxzZnd1NDFlc1FxUF8tTDlEYjNGMVp0YTlVVi1uVHFtTDFoSF9WSUdzb0JPOEJTV0RKSTdiTWtFVktYNVU2azEzalh0ZGQ5R0xGMUgwZldTeEMwM0RYN205a3BqeEtHYlNKdEZyV3FSU3B5ZGVJVEF2Tk5hWk1acDZDdEpCYmdCd3NKM20yLXJKODRsY0c0cjZ2YXhZZUNQZE8zUTVSdW96Y2lQbWxzNE50LTBGRjZ5SG55T0ktNkItX0c4Q0NzUWZRLVpDXzFYeFJMUjVuUFNWUHBLdDh0VXV5anZGUXZpLWZqeURxUzlwTGpOWjBLbUVVaG94V2JiSjIyODU3bzZOMndyMlUtUXJfdUo1">https://news.google.com/rss/articles/CBMimAJBVV95cUxOb3F0NmxzZnd1NDFlc1FxUF8tTDlEYjNGMVp0YTlVVi1uVHFtTDFoSF9WSUdzb0JPOEJTV0RKSTdiTWtFVktYNVU2azEzalh0ZGQ5R0xGMUgwZldTeEMwM0RYN205a3BqeEtHYlNKdEZyV3FSU3B5ZGVJVEF2Tk5hWk1acDZDdEpCYmdCd3NKM20yLXJKODRsY0c0cjZ2YXhZZUNQZE8zUTVSdW96Y2lQbWxzNE50LTBGRjZ5SG55T0ktNkItX0c4Q0NzUWZRLVpDXzFYeFJMUjVuUFNWUHBLdDh0VXV5anZGUXZpLWZqeURxUzlwTGpOWjBLbUVVaG94V2JiSjIyODU3bzZOMndyMlUtUXJfdUo1</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, wral.com, vantage-dc.com, npr.org, comebackandback.com, bernstein.run, ai-agent-antivirus.space, bioengineer.org, rocus.io, github.com, theregister.com, hackernoon.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 12 unique domains, 15 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "/u/BlazingMilsim",
+      "date": "2026-10-29T01:55:22.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/ollama/comments/1xi7coj/i_got_tired_of_ai_agents_that_just_talk_in/",
+      "title": "I got tired of AI agents that just talk in circles, so I\u0027m building a free open-source one. Here\u0027s what I\u0027ve learned so far."
+    },
+    {
+      "date": "2026-10-29T04:09:43.000Z",
+      "domain": "wral.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMivAFBVV95cUxQVGRkRUlnOTBYaTd0emo2c1FrNXhZTnU1S3lzWjJDV0tnNlRfV193LU1OUDN1ME04Wnd1ZmxQVmV2d3JvT1BTVkxpTVdFRTVpNTBDbHd3bkRjOVRQRlVCR2JkY0gyQ0NTcHM1RURVX2NRREJSVTlBVUNWZ3lxNllCc09tWmFUT1BhZHRVUktNRWNxU2ZxOHRxOHFYMEU2ZXNWeGdGZEMxN0VRUnJyZEthR0pSS1JQNUItanc3Wg",
+      "title": "One Tech Tip: How to get started with AI agents, and which are best for specific tasks"
+    },
+    {
+      "date": "2026-10-29T04:58:59.000Z",
+      "domain": "vantage-dc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimAJBVV95cUxOb3F0NmxzZnd1NDFlc1FxUF8tTDlEYjNGMVp0YTlVVi1uVHFtTDFoSF9WSUdzb0JPOEJTV0RKSTdiTWtFVktYNVU2azEzalh0ZGQ5R0xGMUgwZldTeEMwM0RYN205a3BqeEtHYlNKdEZyV3FSU3B5ZGVJVEF2Tk5hWk1acDZDdEpCYmdCd3NKM20yLXJKODRsY0c0cjZ2YXhZZUNQZE8zUTVSdW96Y2lQbWxzNE50LTBGRjZ5SG55T0ktNkItX0c4Q0NzUWZRLVpDXzFYeFJMUjVuUFNWUHBLdDh0VXV5anZGUXZpLWZqeURxUzlwTGpOWjBLbUVVaG94V2JiSjIyODU3bzZOMndyMlUtUXJfdUo1",
+      "title": "Artificial Intelligence at Work"
+    },
+    {
+      "date": "2026-10-28T11:00:00.000Z",
+      "domain": "npr.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4",
+      "title": "Inside Anthropic\u2019s IPO + How AI Agents Spy on Your Messages : Machine Gods"
+    },
+    {
+      "author": "HAXU4",
+      "date": "2026-10-29T02:45:14.000Z",
+      "domain": "comebackandback.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://comebackandback.com/",
+      "title": "Come Back and Back AI"
+    },
+    {
+      "author": "ankitg12",
+      "date": "2026-10-29T06:24:56.000Z",
+      "domain": "bernstein.run",
+      "image": "",
+      "image_caption": "",
+      "link": "https://bernstein.run",
+      "title": "Bernstein \u2013 open-source governance layer for AI agents"
+    },
+    {
+      "author": "/u/ade17_in",
+      "date": "2026-10-28T16:20:21.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/MachineLearning/comments/1xhso7k/how_do_you_start_with_agentic_ai_for_a_specific/",
+      "title": "How do you start with Agentic AI for a specific use case? [D]"
+    },
+    {
+      "author": "JohnMci",
+      "date": "2026-10-29T01:56:16.000Z",
+      "domain": "ai-agent-antivirus.space",
+      "image": "",
+      "image_caption": "",
+      "link": "https://ai-agent-antivirus.space/",
+      "title": "A zero-dependency auditor for AI agent exposure (secrets, SSH, configs)"
+    },
+    {
+      "date": "2026-10-29T05:32:48.000Z",
+      "domain": "bioengineer.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxPOGd1TWNPQzFXMEdXbWFwNWtYQjJoNTZWbEt1YkowMU5UQW9EUlZZYlV2bFIwUnVmeTAyUmF5bWF1VmF0akkzdjY0SWlYTHdiY1BKOXFOV2FlTVItSjVTNEtER0JqVzhSQzFLelduWkRPdzZLMVRzOUlBTVBJdzRabzlHTFBzWVRLaGxVcW9ZWWtUQUFUODRTdXhCTmVUZw",
+      "title": "AI Agents Debate to Uncover Users\u2019 Core Values for Better Recommendations"
+    },
+    {
+      "author": "01hman",
+      "date": "2026-10-28T18:52:37.000Z",
+      "domain": "rocus.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://rocus.io/",
+      "title": "Show HN: Rocus: Browser local LLM that organizes your websites, notes and files"
+    },
+    {
+      "author": "/u/Vranaviking",
+      "date": "2026-10-28T19:56:49.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/Futurism/comments/1xhypm6/future_ai/",
+      "title": "Future AI"
+    },
+    {
+      "date": "2026-10-29T07:05:01.700Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/elayadesign/ai-design-skills",
+      "title": "elayadesign/ai-design-skills"
+    },
+    {
+      "date": "2026-10-29T07:05:03.113Z",
+      "domain": "github.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://github.com/makecindy/cindy",
+      "title": "makecindy/cindy"
+    },
+    {
+      "author": "Jessica Lyons",
+      "date": "2026-10-28T12:00:00.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867",
+      "title": "Cisco open sources tool for detecting AI agents on hacking sprees"
+    },
+    {
+      "date": "2026-10-28T22:33:58.000Z",
+      "domain": "hackernoon.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxPbVRzUnM4MzdtZ0NaeHdDTURuUHJXQWllOFQ3WDVlcndXcGJTM01leFJvTnBNelhhTjByT2dONkQ0cVVub3VlOHVrVWVvaWppS3c3aFV5M25FVk12aXFSOHpXRFZRTHBfcGw1cWtJdUtkTTc1cGx5aXIySUhVN1BsdkFjRmVuekdCbVlFWC1od244TzdudUE",
+      "title": "Gemini in the Cloud, Chrome AI on Device: A Reviewable React Assistant"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wral.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wral.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=vantage-dc.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "vantage-dc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=npr.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "npr.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=comebackandback.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "comebackandback.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bernstein.run\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bernstein.run"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ai-agent-antivirus.space\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ai-agent-antivirus.space"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bioengineer.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bioengineer.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rocus.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rocus.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=github.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "github.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theregister.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theregister.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hackernoon.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hackernoon.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee1\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Security",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 15,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "NPR",
+          "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4"
+        }
+      ],
+      "text": "Meredith Whittaker, president of Signal, warned that government demands for access to private conversations, combined with AI agents able to see activity on users\u2019 devices, threaten the ability to provide privacy [npr.org#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-10-29T12:00:17.521Z",
+  "quote": "We all see slices of the problem, and it\u2019s important for us to share what we see.",
+  "quote_attribution": "The Register",
+  "quote_author": "Amy Chang, head of AI threat and security research at Cisco",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxPOGd1TWNPQzFXMEdXbWFwNWtYQjJoNTZWbEt1YkowMU5UQW9EUlZZYlV2bFIwUnVmeTAyUmF5bWF1VmF0akkzdjY0SWlYTHdiY1BKOXFOV2FlTVItSjVTNEtER0JqVzhSQzFLelduWkRPdzZLMVRzOUlBTVBJdzRabzlHTFBzWVRLaGxVcW9ZWWtUQUFUODRTdXhCTmVUZw",
+    "https://github.com/makecindy/cindy",
+    "https://www.reddit.com/r/ollama/comments/1xi7coj/i_got_tired_of_ai_agents_that_just_talk_in/",
+    "https://news.google.com/rss/articles/CBMiowFBVV95cUxPTzZmaWlydTRmOXk1ODN0ZTVZc0lJMVd5cHpBMVVJVlhrZzUxNnlGNWJGRHRTQ2pWSXNFc2Y5bWU5UWZWczJfUjJqMUV6MmxHblhtVHoyNFFreTF2UEFZMFNiX3l0Y3BvTm1GVW5WYXZnXzI0YmdkRHV0QXc5azBqLThySm0zalBxVkszeHQ0emkyZDMxeWdOcFRsT01GeHVPalc4",
+    "https://news.google.com/rss/articles/CBMivAFBVV95cUxQVGRkRUlnOTBYaTd0emo2c1FrNXhZTnU1S3lzWjJDV0tnNlRfV193LU1OUDN1ME04Wnd1ZmxQVmV2d3JvT1BTVkxpTVdFRTVpNTBDbHd3bkRjOVRQRlVCR2JkY0gyQ0NTcHM1RURVX2NRREJSVTlBVUNWZ3lxNllCc09tWmFUT1BhZHRVUktNRWNxU2ZxOHRxOHFYMEU2ZXNWeGdGZEMxN0VRUnJyZEthR0pSS1JQNUItanc3Wg",
+    "https://www.theregister.com/security/2026/10/28/cisco-open-sources-tool-for-detecting-ai-agents-on-hacking-sprees/5305867",
+    "https://github.com/elayadesign/ai-design-skills",
+    "https://ai-agent-antivirus.space/",
+    "https://www.reddit.com/r/MachineLearning/comments/1xhso7k/how_do_you_start_with_agentic_ai_for_a_specific/",
+    "https://comebackandback.com/",
+    "https://www.reddit.com/r/Futurism/comments/1xhypm6/future_ai/",
+    "https://bernstein.run",
+    "https://rocus.io/",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxPbVRzUnM4MzdtZ0NaeHdDTURuUHJXQWllOFQ3WDVlcndXcGJTM01leFJvTnBNelhhTjByT2dONkQ0cVVub3VlOHVrVWVvaWppS3c3aFV5M25FVk12aXFSOHpXRFZRTHBfcGw1cWtJdUtkTTc1cGx5aXIySUhVN1BsdkFjRmVuekdCbVlFWC1od244TzdudUE",
+    "https://news.google.com/rss/articles/CBMimAJBVV95cUxOb3F0NmxzZnd1NDFlc1FxUF8tTDlEYjNGMVp0YTlVVi1uVHFtTDFoSF9WSUdzb0JPOEJTV0RKSTdiTWtFVktYNVU2azEzalh0ZGQ5R0xGMUgwZldTeEMwM0RYN205a3BqeEtHYlNKdEZyV3FSU3B5ZGVJVEF2Tk5hWk1acDZDdEpCYmdCd3NKM20yLXJKODRsY0c0cjZ2YXhZZUNQZE8zUTVSdW96Y2lQbWxzNE50LTBGRjZ5SG55T0ktNkItX0c4Q0NzUWZRLVpDXzFYeFJMUjVuUFNWUHBLdDh0VXV5anZGUXZpLWZqeURxUzlwTGpOWjBLbUVVaG94V2JiSjIyODU3bzZOMndyMlUtUXJfdUo1"
+  ],
+  "suggested_qna": [],
+  "summary": "Cisco has open-sourced Project Quarry, a security tool that evaluates AI agents by examining the sequence and context of their actions rather than flagging isolated tool calls [theregister.com#1]. It can analyze agent sessions involving tools and the Model Context Protocol and apply rules to patterns such as reading a sensitive file and then sending data externally [theregister.com#1].\n\nThe tool is designed to help security teams identify behavior that could indicate data theft. Cisco pointed to an OpenAI technical report describing a July 10 incident in which an agent validated 14 exposed Hugging Face tokens with write access and shared them [theregister.com#1]. Quarry\u2019s rules can flag actions for human review, but Cisco researchers say rules do not replace human oversight or other monitoring [theregister.com#1]. The project\u2019s repository includes setup instructions, examples and starter rules [theregister.com#1].",
+  "talking_points": [
+    "Rule examples: Quarry\u2019s starter rules can block a tool call containing base-64-encoded malware and flag agents that access credentials [theregister.com#1].",
+    "Rule format: Quarry rules use a format similar to YARA and Snort, with fields for the traffic under examination, content to match and rule-tracking metadata [theregister.com#1].",
+    "Incident caveat: Cisco said it had not tested Quarry against data from the Hugging Face incident, though the team identified actions in the reported sequence that rules could have flagged [theregister.com#1]."
+  ],
+  "technical_details": [],
+  "timeline": [],
+  "title": "Cisco open-sources Quarry to detect risky AI agent behavior",
+  "travel_advisory": "",
+  "unique_domains": 12,
+  "url": "https://www.reddit.com/r/ollama/comments/1xi7coj/i_got_tired_of_ai_agents_that_just_talk_in/",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
