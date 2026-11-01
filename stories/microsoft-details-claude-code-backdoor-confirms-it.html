@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Microsoft details Claude Code backdoor, confirms its marketplaces unaffected - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Microsoft details Claude Code backdoor, confirms its marketplaces unaffected</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>Microsoft has published a technical analysis of malicious Claude Code extension builds distributed through Cursor’s marketplace in a supply-chain attack that attempted to give attackers remote access to developers’ computers. The company said it found no distribution through either its Visual Studio Marketplace or its npm package, and Anthropic told Microsoft its systems were not compromised <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>. The affected builds in Cursor’s marketplace were versions 2.1.312 and 2.1.313; Cursor said the incident was limited to its marketplace <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ" class="footnote-ref">[6]</a>.
+
+Microsoft’s analysis says the injected code ran as soon as the extension loaded, collecting host details before attempting to add an SSH key, establish a reverse tunnel and install persistence mechanisms. The company cautioned that these actions did not necessarily succeed on every device. It advised organizations to identify machines that installed or automatically updated to the affected versions, preserve evidence, inspect endpoint and network activity, and rotate credentials or revoke sessions when investigations indicate exposure <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>We’re working with Cursor on this incident, but it wasn’t a compromise of Anthropic’s systems or employee laptops.</p>
+
+<cite>— Felix Rieseberg, member of Anthropic’s technical staff (The Next Web)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Environment variable names: The extension collected the names of up to 40 environment variables matching terms such as KEY, TOKEN, SECRET, PASS, AWS or GCP, but Microsoft’s analysis says it did not collect their values <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</li>
+
+<li>Update limits: Updating to a clean extension does not itself remove SSH keys or startup artifacts already written outside the extension directory, security researchers warned <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE1rNThSZ0RuMnEzTm5LMWlxU1dWcDl2Z2Fnc1I2RDV1U3k0alVJM052aTB5YnZCUWF1TktMaExNRmNMcE43dXdmSTliZkFOVUMtYmYzcGVqZjB0dm96a3A4MkNXeUhvaUdZX2FzRnQzQUFQUjYxZFE" class="footnote-ref">[3]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Microsoft Threat Intelligence: Microsoft said successful remote access depended on the device’s permissions and SSH configuration as well as the attacker’s server <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln">Microsoft</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Anthropic: The company said a malicious actor used access to Cursor’s marketplace to publish the tampered extension, and that Anthropic was not involved in building, publishing or hosting it <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ" class="footnote-ref">[6]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ">The Next Web</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>29 October 2026:</strong> Cursor reported the tampered extension was available in its marketplace <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</li>
+
+
+
+<li><strong>30 October 2026:</strong> Cursor updated its notice to include both affected extension versions <a href="https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/" class="footnote-ref">[7]</a>.</li>
+
+
+
+<li><strong>31 October 2026:</strong> Microsoft published technical analysis and organizational investigation guidance <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Reverse SSH forwarding: The loader invoked SSH with remote forwarding to port 22 on the affected workstation. On Unix-like systems, it preferred autossh; on Windows, it used a hidden PowerShell loop, with retries after 60 seconds <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</li>
+
+<li>Separate SSH identities: Microsoft found two embedded SSH identities with different roles: a public key added to the user’s authorized_keys file and a separate private key used for the outbound tunnel <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</li>
+
+<li>Persistence artifacts: The code wrote startup files outside the extension folder, including the macOS file com.apple.sysmond.plist, Linux files under ~/.config and Windows scripts or scheduled-task components <a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln" class="footnote-ref">[5]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> How many users may have downloaded the malicious extension?</p>
+
+<p><strong>A:</strong> Cursor said the incident affected at most 5,000 users <a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE" class="footnote-ref">[1]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Hunt for the reported network indicators: 134[.]209[.]82[.]225, SSH connections on TCP port 22, and HTTP POSTs to port 8099 at /beacon <a href="https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/" class="footnote-ref">[7]</a>.</li>
+
+<li>When checking authorized_keys, search for the attacker’s public-key fingerprint rather than relying only on the svc-telemetry label <a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPQzdKWXRiWk0zaGNvdzItNGg1VWZ5Vjc0U1RSRno5a1lKT1lLeTZaOUwwT2dMMU8yajMwN2pvQ1VKZF9BZFVpbndKNEQ1VDNGeG9JcUZ1Q0VyYUdkOHhYRFFSekY4WS1JeVVtZU8waktRNndNeEt2MVRvN1dIM29rOWJsWjA4R2stdDdqTzc4ZmVpeEJ2X3BvSWFPVk43T01XTjNtWm4tZjRtdEtBYWhnZEFKc1c" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMidkFVX3lxTE1rNThSZ0RuMnEzTm5LMWlxU1dWcDl2Z2Fnc1I2RDV1U3k0alVJM052aTB5YnZCUWF1TktMaExNRmNMcE43dXdmSTliZkFOVUMtYmYzcGVqZjB0dm96a3A4MkNXeUhvaUdZX2FzRnQzQUFQUjYxZFE">https://news.google.com/rss/articles/CBMidkFVX3lxTE1rNThSZ0RuMnEzTm5LMWlxU1dWcDl2Z2Fnc1I2RDV1U3k0alVJM052aTB5YnZCUWF1TktMaExNRmNMcE43dXdmSTliZkFOVUMtYmYzcGVqZjB0dm96a3A4MkNXeUhvaUdZX2FzRnQzQUFQUjYxZFE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ">https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ</a></li>
+
+
+
+<li><a href="https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/">https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6gFBVV95cUxNNUxRZnZLRkdjYWE1c2J0V19hazFSeVktMmpud0ltdWFGb0VBa3QxakNJMzduNF9iODdkMC1DN1RPWTRxU1lmM3Fhc3RocURNLXltNDlaUzkwMHdXdm9KdzE3U044Y2NOZ1ZLekc3Zk9seC1XR0h0YWJyTE5pckFyakI3Mk5nTkhJVWNxOWpKRnEwSl9ZQUZHUEJmZkVGNlViaGtfUlVwZ1NNU3ZoNVBTZnhQXzl0UDBRRWNrcVQxQWluaTFCSHE5WDJxQ2h2a0RVV1NSWDNhZE8zUkZUNHY3cWVGdDN2VmVtdmc">https://news.google.com/rss/articles/CBMi6gFBVV95cUxNNUxRZnZLRkdjYWE1c2J0V19hazFSeVktMmpud0ltdWFGb0VBa3QxakNJMzduNF9iODdkMC1DN1RPWTRxU1lmM3Fhc3RocURNLXltNDlaUzkwMHdXdm9KdzE3U044Y2NOZ1ZLekc3Zk9seC1XR0h0YWJyTE5pckFyakI3Mk5nTkhJVWNxOWpKRnEwSl9ZQUZHUEJmZkVGNlViaGtfUlVwZ1NNU3ZoNVBTZnhQXzl0UDBRRWNrcVQxQWluaTFCSHE5WDJxQ2h2a0RVV1NSWDNhZE8zUkZUNHY3cWVGdDN2VmVtdmc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln">https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxPQzdKWXRiWk0zaGNvdzItNGg1VWZ5Vjc0U1RSRno5a1lKT1lLeTZaOUwwT2dMMU8yajMwN2pvQ1VKZF9BZFVpbndKNEQ1VDNGeG9JcUZ1Q0VyYUdkOHhYRFFSekY4WS1JeVVtZU8waktRNndNeEt2MVRvN1dIM29rOWJsWjA4R2stdDdqTzc4ZmVpeEJ2X3BvSWFPVk43T01XTjNtWm4tZjRtdEtBYWhnZEFKc1c">https://news.google.com/rss/articles/CBMitAFBVV95cUxPQzdKWXRiWk0zaGNvdzItNGg1VWZ5Vjc0U1RSRno5a1lKT1lLeTZaOUwwT2dMMU8yajMwN2pvQ1VKZF9BZFVpbndKNEQ1VDNGeG9JcUZ1Q0VyYUdkOHhYRFFSekY4WS1JeVVtZU8waktRNndNeEt2MVRvN1dIM29rOWJsWjA4R2stdDdqTzc4ZmVpeEJ2X3BvSWFPVk43T01XTjNtWm4tZjRtdEtBYWhnZEFKc1c</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/cybersecurity/comments/1xkdwm8/inside_a_malicious_claude_codebranded_extension/">https://www.reddit.com/r/cybersecurity/comments/1xkdwm8/inside_a_malicious_claude_codebranded_extension/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> reddit.com, bankinfosecurity.com, newscord.org, 2-spyware.com, northeasttimes.com, microsoft.com, thenextweb.com, cybersecuritynews.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 8 unique domains, 8 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-10-31T06:48:57.000Z",
+      "domain": "bankinfosecurity.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE",
+      "title": "Cursor Confirms Anthropic Claude Code Extension Compromised"
+    },
+    {
+      "date": "2026-10-30T23:19:34.000Z",
+      "domain": "newscord.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNNUxRZnZLRkdjYWE1c2J0V19hazFSeVktMmpud0ltdWFGb0VBa3QxakNJMzduNF9iODdkMC1DN1RPWTRxU1lmM3Fhc3RocURNLXltNDlaUzkwMHdXdm9KdzE3U044Y2NOZ1ZLekc3Zk9seC1XR0h0YWJyTE5pckFyakI3Mk5nTkhJVWNxOWpKRnEwSl9ZQUZHUEJmZkVGNlViaGtfUlVwZ1NNU3ZoNVBTZnhQXzl0UDBRRWNrcVQxQWluaTFCSHE5WDJxQ2h2a0RVV1NSWDNhZE8zUkZUNHY3cWVGdDN2VmVtdmc",
+      "title": "Cursor Marketplace Trojanized Anthropic Claude Code Extension 2.1.313 With Persistent SSH Backdoor"
+    },
+    {
+      "date": "2026-10-31T20:59:09.000Z",
+      "domain": "2-spyware.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1rNThSZ0RuMnEzTm5LMWlxU1dWcDl2Z2Fnc1I2RDV1U3k0alVJM052aTB5YnZCUWF1TktMaExNRmNMcE43dXdmSTliZkFOVUMtYmYzcGVqZjB0dm96a3A4MkNXeUhvaUdZX2FzRnQzQUFQUjYxZFE",
+      "title": "Tampered Claude Code update on Cursor opened SSH backdoor"
+    },
+    {
+      "date": "2026-10-31T13:23:56.000Z",
+      "domain": "northeasttimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxPQzdKWXRiWk0zaGNvdzItNGg1VWZ5Vjc0U1RSRno5a1lKT1lLeTZaOUwwT2dMMU8yajMwN2pvQ1VKZF9BZFVpbndKNEQ1VDNGeG9JcUZ1Q0VyYUdkOHhYRFFSekY4WS1JeVVtZU8waktRNndNeEt2MVRvN1dIM29rOWJsWjA4R2stdDdqTzc4ZmVpeEJ2X3BvSWFPVk43T01XTjNtWm4tZjRtdEtBYWhnZEFKc1c",
+      "title": "Tampered Claude Code Extension Put SSH Backdoor on Up to 5,000 Cursor Users\u0027 Computers"
+    },
+    {
+      "date": "2026-10-31T01:02:57.000Z",
+      "domain": "microsoft.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln",
+      "title": "Inside a malicious Claude Code-branded extension and its persistent SSH backdoor"
+    },
+    {
+      "date": "2026-10-31T11:28:24.000Z",
+      "domain": "thenextweb.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ",
+      "title": "Anthropic denies breach as tampered Claude Code extension hits Cursor users"
+    },
+    {
+      "author": "Guru Baran",
+      "date": "2026-10-31T10:41:18.000Z",
+      "domain": "cybersecuritynews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/",
+      "title": "Cursor Confirms Malicious Claude Code Extension With SSH Backdoor Was Available for 11 Hours"
+    },
+    {
+      "author": "/u/0xdevbot",
+      "date": "2026-10-31T16:00:33.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/cybersecurity/comments/1xkdwm8/inside_a_malicious_claude_codebranded_extension/",
+      "title": "Inside a malicious Claude Code-branded extension and its persistent SSH backdoor | Microsoft Security Blog"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bankinfosecurity.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bankinfosecurity.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=newscord.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "newscord.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=2-spyware.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "2-spyware.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=northeasttimes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "northeasttimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=microsoft.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "microsoft.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thenextweb.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thenextweb.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cybersecuritynews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cybersecuritynews.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee1\ufe0f",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Cybersecurity",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 8,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Microsoft",
+          "url": "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln"
+        }
+      ],
+      "text": "Microsoft Threat Intelligence: Microsoft said successful remote access depended on the device\u2019s permissions and SSH configuration as well as the attacker\u2019s server [microsoft.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "The Next Web",
+          "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ"
+        }
+      ],
+      "text": "Anthropic: The company said a malicious actor used access to Cursor\u2019s marketplace to publish the tampered extension, and that Anthropic was not involved in building, publishing or hosting it [bankinfosecurity.com#1][thenextweb.com#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-11-01T12:00:12.139Z",
+  "quote": "We\u2019re working with Cursor on this incident, but it wasn\u2019t a compromise of Anthropic\u2019s systems or employee laptops.",
+  "quote_attribution": "The Next Web",
+  "quote_author": "Felix Rieseberg, member of Anthropic\u2019s technical staff",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMidkFVX3lxTE1rNThSZ0RuMnEzTm5LMWlxU1dWcDl2Z2Fnc1I2RDV1U3k0alVJM052aTB5YnZCUWF1TktMaExNRmNMcE43dXdmSTliZkFOVUMtYmYzcGVqZjB0dm96a3A4MkNXeUhvaUdZX2FzRnQzQUFQUjYxZFE",
+    "https://news.google.com/rss/articles/CBMihAFBVV95cUxOUnVaNnRJYmtXRlR1SkU3ZVpGLVROdUlCdENjeXR3N1BYZjNod1Z5Q2JxZTVBRmF6SzhhTUN5QldUSkZVVVlJeUktMXZPYWJucGtFRmIxanZCWVJIcmhYamlxeHBzWUZhZGFsTk9IWHJVQnRPb05qZDFrUEZ5Vm92c1pLeFQ",
+    "https://cybersecuritynews.com/malicious-claude-code-extension-with-cursor/",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE",
+    "https://news.google.com/rss/articles/CBMi6gFBVV95cUxNNUxRZnZLRkdjYWE1c2J0V19hazFSeVktMmpud0ltdWFGb0VBa3QxakNJMzduNF9iODdkMC1DN1RPWTRxU1lmM3Fhc3RocURNLXltNDlaUzkwMHdXdm9KdzE3U044Y2NOZ1ZLekc3Zk9seC1XR0h0YWJyTE5pckFyakI3Mk5nTkhJVWNxOWpKRnEwSl9ZQUZHUEJmZkVGNlViaGtfUlVwZ1NNU3ZoNVBTZnhQXzl0UDBRRWNrcVQxQWluaTFCSHE5WDJxQ2h2a0RVV1NSWDNhZE8zUkZUNHY3cWVGdDN2VmVtdmc",
+    "https://news.google.com/rss/articles/CBMi0AFBVV95cUxPVTNFbkFXZkZqc0wyZ2ZkWjdya3FsQWFxZmY3bndubkNxN0JVbFZVRmtyN1pQOHdLU2JEY0QzcXNLN0lzT2dUaTdmQjlFVnJLU0JiOUJobVMxUUdlWjZCNGRhVVpZem43XzdESUVsZkZJcDdWMmlkYzZBaDhtbEkwYVVQVDBib1MybE11QlY0Y0xsaXBDeFduR3o4R0EzX2VYaUZyMHhVUV9GN3FjeVV1bEZhZ08xZlpOaTd1NVBLWm9RbW1sTzdVb2x1aHgteUln",
+    "https://news.google.com/rss/articles/CBMitAFBVV95cUxPQzdKWXRiWk0zaGNvdzItNGg1VWZ5Vjc0U1RSRno5a1lKT1lLeTZaOUwwT2dMMU8yajMwN2pvQ1VKZF9BZFVpbndKNEQ1VDNGeG9JcUZ1Q0VyYUdkOHhYRFFSekY4WS1JeVVtZU8waktRNndNeEt2MVRvN1dIM29rOWJsWjA4R2stdDdqTzc4ZmVpeEJ2X3BvSWFPVk43T01XTjNtWm4tZjRtdEtBYWhnZEFKc1c",
+    "https://www.reddit.com/r/cybersecurity/comments/1xkdwm8/inside_a_malicious_claude_codebranded_extension/"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "Cursor said the incident affected at most 5,000 users [bankinfosecurity.com#1].",
+      "question": "How many users may have downloaded the malicious extension?"
+    }
+  ],
+  "summary": "Microsoft has published a technical analysis of malicious Claude Code extension builds distributed through Cursor\u2019s marketplace in a supply-chain attack that attempted to give attackers remote access to developers\u2019 computers. The company said it found no distribution through either its Visual Studio Marketplace or its npm package, and Anthropic told Microsoft its systems were not compromised [microsoft.com#1]. The affected builds in Cursor\u2019s marketplace were versions 2.1.312 and 2.1.313; Cursor said the incident was limited to its marketplace [microsoft.com#1][thenextweb.com#1].\n\nMicrosoft\u2019s analysis says the injected code ran as soon as the extension loaded, collecting host details before attempting to add an SSH key, establish a reverse tunnel and install persistence mechanisms. The company cautioned that these actions did not necessarily succeed on every device. It advised organizations to identify machines that installed or automatically updated to the affected versions, preserve evidence, inspect endpoint and network activity, and rotate credentials or revoke sessions when investigations indicate exposure [microsoft.com#1].",
+  "talking_points": [
+    "Environment variable names: The extension collected the names of up to 40 environment variables matching terms such as KEY, TOKEN, SECRET, PASS, AWS or GCP, but Microsoft\u2019s analysis says it did not collect their values [microsoft.com#1].",
+    "Update limits: Updating to a clean extension does not itself remove SSH keys or startup artifacts already written outside the extension directory, security researchers warned [bankinfosecurity.com#1][2-spyware.com#1]."
+  ],
+  "technical_details": [
+    "Reverse SSH forwarding: The loader invoked SSH with remote forwarding to port 22 on the affected workstation. On Unix-like systems, it preferred autossh; on Windows, it used a hidden PowerShell loop, with retries after 60 seconds [microsoft.com#1].",
+    "Separate SSH identities: Microsoft found two embedded SSH identities with different roles: a public key added to the user\u2019s authorized_keys file and a separate private key used for the outbound tunnel [microsoft.com#1].",
+    "Persistence artifacts: The code wrote startup files outside the extension folder, including the macOS file com.apple.sysmond.plist, Linux files under ~/.config and Windows scripts or scheduled-task components [microsoft.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Cursor reported the tampered extension was available in its marketplace [microsoft.com#1].",
+      "date": "29 October 2026",
+      "date_iso": "2026-10-29"
+    },
+    {
+      "content": "Cursor updated its notice to include both affected extension versions [cybersecuritynews.com#1].",
+      "date": "30 October 2026",
+      "date_iso": "2026-10-30"
+    },
+    {
+      "content": "Microsoft published technical analysis and organizational investigation guidance [microsoft.com#1].",
+      "date": "31 October 2026",
+      "date_iso": "2026-10-31"
+    }
+  ],
+  "title": "Microsoft details Claude Code backdoor, confirms its marketplaces unaffected",
+  "travel_advisory": "",
+  "unique_domains": 8,
+  "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxObjJqYTE0ZGVsdGk1cklsaDg2R2wxa2pvU3BtdnEzSkIxNFNqRGgzcVZrOGVBd09vUW1ubEdMQWFURUNPU3dyRjJ4RlhhbWx5Vkp5R2thMkhCVmRnQkZvZTNyTG1hZkFYN1lkQWNlU0lMRlpHTkJSZ2c0enUxQUFCZVhHWlUzZElsOFZFWS1SMUYzRXhmcndnemg1ZXRtbERNdVE",
+  "user_action_items": [
+    "Hunt for the reported network indicators: 134[.]209[.]82[.]225, SSH connections on TCP port 22, and HTTP POSTs to port 8099 at /beacon [cybersecuritynews.com#1].",
+    "When checking authorized_keys, search for the attacker\u2019s public-key fingerprint rather than relying only on the svc-telemetry label [northeasttimes.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
