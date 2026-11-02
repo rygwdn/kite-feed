@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>DeepSeek details agent design, reports 47% cut in tail task completion time - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>DeepSeek details agent design, reports 47% cut in tail task completion time</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+
+
+
+<div class='summary'><p>DeepSeek, a Chinese AI company, said its Harness team’s Super-agent architecture reduced the 95th-percentile time to complete a coding task from 29.5 minutes to 15.7 minutes in an internal test. The company’s open-source coding-agent prototype is designed to work across developer conversations and tools rather than rely on separate, manually prompted sessions <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a>.
+
+DeepSeek said it already uses an internal version to reproduce and fix reported bugs, respond to code reviews and help develop the Harness project. The architecture divides work between a Router, which manages task context and assignments, and Workers, which handle individual tasks <a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE9RdFo1X1ZxN3ZXMzBEcXZ2aG1xRGlLcTVfTzl4aWVkR29LaVBJcFRCQTMyMkJncTR3ZmJqUDdmMjF1VVJmTDRZNnBxdlRnZzlHZUY3Yi1GRjVfNGtzYkk4Qw" class="footnote-ref">[15]</a><a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a>.
+
+The benchmark used a synthetic workload of 300 messages and 20 work requests, which DeepSeek said does not replicate the complexity of large real-world teams. The team identified long-term memory, agent coordination, security and privacy as unresolved issues and said larger deployments still need testing <a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a><a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMiyAFBVV95cUxNU3ZjNTJLaFEza3NuN1FnWVJkSjNzVXdsLW1VMjFrZDVsOTFzVGd6S1BvU2VMRkNBVlpHU2huZzBIU0xTZ0VtcWVMSnFGZHFhazJKLU1BUU5VQXNEejUzbXVrRHZDS2dnTG5jSFdmTjEydU4yaExlRk1Ed1VHelJ1aVFMeDhfSnNjZGVYVFNsd1VsS0owbGxJQ0stVThkdmlmaHFqMGdpOUwwOTJfOFlpTFpEd0pCN1VSVmVsdVd4NHJuZExjSVJweg">View original article</a></p>
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Cross-channel context: DeepSeek illustrated how the Router could reconcile a user’s initial request in an instant-message conversation with a later, conflicting instruction in a GitHub pull request, without asking the user to repeat prior context <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a></li>
+
+<li>Event filtering: A two-stage filter first screens incoming events by source, group and allowlist rules, then sends only candidate events to a language model for semantic review <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a></li>
+
+<li>Pre-emptive work: The design includes speculative execution: an agent may begin reproducing a suspected bug discussed in a group chat before receiving a formal task <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a></li>
+
+<li>Scaling questions: DeepSeek flagged potential Router bottlenecks as the number of users and tasks grows, as well as unresolved conflicts between Workers handling related work <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a></li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>DeepSeek Harness team: The team framed its design as an application of established engineering patterns to agent workflows, rather than a new computing theory <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent">INSIDE</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Compute and state separation: The agent’s compute process can run on cloud servers while session state remains in a database. A lightweight daemon can let the cloud process access a user’s local environment without moving all local code and private data to the cloud <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a>.</li>
+
+<li>External watchdog: A separate monitoring mechanism tracks Worker execution and can intervene when tasks stall, loop indefinitely or drift from their goals, addressing reliability risks in long-running agent sessions <a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent" class="footnote-ref">[12]</a><a href="https://news.cnyes.com/news/id/6643211" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://technode.com/2026/11/02/deepseek-team-open-sources-proactive-coding-agent-research-prototype/">https://technode.com/2026/11/02/deepseek-team-open-sources-proactive-coding-agent-research-prototype/</a></li>
+
+
+
+<li><a href="https://www.huxiu.com/article/4902176.html">https://www.huxiu.com/article/4902176.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxPbFU5NlZJMVBaQ0txUnotazkwaWdmQzJwb3JvWUY4dTFHd2VERGZtdVJiMmxaTG9vR0pjZjFLOXZoZVRfRlFFZzM3dV81VVM3RDZLckQxZ01nc2ZFWGVvQlVoalk3X21iWDdBa29WcWNvblY1YVpGc3hPbDJCVVA3a2d2YVJDbFlZRUdkZ0NXTHplVTlEUGJ6RVBXTXZ1bWQ5eVRNNtIBpAFBVV95cUxQY3o3SXYteGFPRF9kQ3psaFZaTDJHMzhibnhoVE5LdjhGVUxkN2VBNnVuNHd2XzhodEpYLTRyMzhRcXNpWjY4SjBhMmdzek1oN0ZGRnh6RU5aWm12QUxYdDVvaktJUUU2UE1QVVdXUzhvdHFPZ0FrOHpOODJNQUlHYm5DSlI3aW8wS0dpMHFDWTNfNGpQeS0wYnU1TkIxbmtxVGRfSw">https://news.google.com/rss/articles/CBMipAFBVV95cUxPbFU5NlZJMVBaQ0txUnotazkwaWdmQzJwb3JvWUY4dTFHd2VERGZtdVJiMmxaTG9vR0pjZjFLOXZoZVRfRlFFZzM3dV81VVM3RDZLckQxZ01nc2ZFWGVvQlVoalk3X21iWDdBa29WcWNvblY1YVpGc3hPbDJCVVA3a2d2YVJDbFlZRUdkZ0NXTHplVTlEUGJ6RVBXTXZ1bWQ5eVRNNtIBpAFBVV95cUxQY3o3SXYteGFPRF9kQ3psaFZaTDJHMzhibnhoVE5LdjhGVUxkN2VBNnVuNHd2XzhodEpYLTRyMzhRcXNpWjY4SjBhMmdzek1oN0ZGRnh6RU5aWm12QUxYdDVvaktJUUU2UE1QVVdXUzhvdHFPZ0FrOHpOODJNQUlHYm5DSlI3aW8wS0dpMHFDWTNfNGpQeS0wYnU1TkIxbmtxVGRfSw</a></li>
+
+
+
+<li><a href="https://finance.mingpao.com/fin/instantf/20261101/1793529644804/deepseek%e6%8e%a8super-agent%e7%b7%a8%e7%a2%bc%e4%bb%a3%e7%90%86%e5%8e%9f%e5%9e%8b-ai%e5%8f%af%e9%95%b7%e6%99%82%e9%96%93%e5%9c%a8%e7%b7%9a%e8%b7%a8%e5%b9%b3%e5%8f%b0%e8%99%95%e7%90%86%e5%a4%9a%e9%a0%85%e4%bb%bb%e5%8b%99&#34; target=&#34;blank">https://finance.mingpao.com/fin/instantf/20261101/1793529644804/deepseek%e6%8e%a8super-agent%e7%b7%a8%e7%a2%bc%e4%bb%a3%e7%90%86%e5%8e%9f%e5%9e%8b-ai%e5%8f%af%e9%95%b7%e6%99%82%e9%96%93%e5%9c%a8%e7%b7%9a%e8%b7%a8%e5%b9%b3%e5%8f%b0%e8%99%95%e7%90%86%e5%a4%9a%e9%a0%85%e4%bb%bb%e5%8b%99&#34; target=&#34;blank</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi0gFBVV95cUxQN3JuZUVnTzh6d0I5eUN6YzZaWXd5Q0ttWWI5eGJmaGloYzI2TkJ6eHpJWEdleUF5QkU0dnoyb0czSDBILUNqS2s2empKeGxRTGk1V3pYWjFYNFdESEtVazBLOTY3QUxqNjE0b2h4RjRKWXBodGlISlRVVWEwNE5HdXBtYnNlNHMxQ29aY0UzeUE4RXBRTk5sQ3k1NmhuMTg1OFp3bDAzZ0NlRW4wQWtycGJfQzVocjIxNWE1cTRUS0EwRUlZQy1EbjFVRnFES25HaEE">https://news.google.com/rss/articles/CBMi0gFBVV95cUxQN3JuZUVnTzh6d0I5eUN6YzZaWXd5Q0ttWWI5eGJmaGloYzI2TkJ6eHpJWEdleUF5QkU0dnoyb0czSDBILUNqS2s2empKeGxRTGk1V3pYWjFYNFdESEtVazBLOTY3QUxqNjE0b2h4RjRKWXBodGlISlRVVWEwNE5HdXBtYnNlNHMxQ29aY0UzeUE4RXBRTk5sQ3k1NmhuMTg1OFp3bDAzZ0NlRW4wQWtycGJfQzVocjIxNWE1cTRUS0EwRUlZQy1EbjFVRnFES25HaEE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMitgFBVV95cUxOSGJoZUdrNzFHTjRVcm9OOVZ5a1Z4dVB4ME1aNjlmYmdjX1ZOTXNWTFJTNFFFUkQ2UUxxTGV4UDlOS0RjMnRlWlFUZ04yemVtQU9zU3FZbHlWY1YxMi1YSVBGb3k5cGszYnptNnZVZk1mR1NmS0RvLUhOeS1QUmxZamtoNGgzR21CR2tmY0JUd1c3YXBBMlc0SDhkZm9kOFRtZ3NvQ2RLNVZOYnFaV2x5Vy1ra3ZNUQ">https://news.google.com/rss/articles/CBMitgFBVV95cUxOSGJoZUdrNzFHTjRVcm9OOVZ5a1Z4dVB4ME1aNjlmYmdjX1ZOTXNWTFJTNFFFUkQ2UUxxTGV4UDlOS0RjMnRlWlFUZ04yemVtQU9zU3FZbHlWY1YxMi1YSVBGb3k5cGszYnptNnZVZk1mR1NmS0RvLUhOeS1QUmxZamtoNGgzR21CR2tmY0JUd1c3YXBBMlc0SDhkZm9kOFRtZ3NvQ2RLNVZOYnFaV2x5Vy1ra3ZNUQ</a></li>
+
+
+
+<li><a href="https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent">https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent</a></li>
+
+
+
+<li><a href="https://www.reddit.com/r/LocalLLaMA/comments/1xl1zn3/deepseek_exploring_superagent_design_towards_a/">https://www.reddit.com/r/LocalLLaMA/comments/1xl1zn3/deepseek_exploring_superagent_design_towards_a/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxNeWswVVhGbHVxSkE4WThBZFgxLXZ6cVFmU1pwUnc2Q3NyckVLdFhKbHZJZE9mQmZTZUVxRktqMWlTTmRTQkpCdGpuMW94OHJ6U2tIcDJKc01lWVpPSkVPY3gwallaQlNGclR2MFVhTFhLQlkyX0FJSXZBYTNEblpmLTB1TVVwbUNEV3d6bWRPb3BUUQ">https://news.google.com/rss/articles/CBMikgFBVV95cUxNeWswVVhGbHVxSkE4WThBZFgxLXZ6cVFmU1pwUnc2Q3NyckVLdFhKbHZJZE9mQmZTZUVxRktqMWlTTmRTQkpCdGpuMW94OHJ6U2tIcDJKc01lWVpPSkVPY3gwallaQlNGclR2MFVhTFhLQlkyX0FJSXZBYTNEblpmLTB1TVVwbUNEV3d6bWRPb3BUUQ</a></li>
+
+
+
+<li><a href="https://news.cnyes.com/news/id/6643211">https://news.cnyes.com/news/id/6643211</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiYEFVX3lxTE9RdFo1X1ZxN3ZXMzBEcXZ2aG1xRGlLcTVfTzl4aWVkR29LaVBJcFRCQTMyMkJncTR3ZmJqUDdmMjF1VVJmTDRZNnBxdlRnZzlHZUY3Yi1GRjVfNGtzYkk4Qw">https://news.google.com/rss/articles/CBMiYEFVX3lxTE9RdFo1X1ZxN3ZXMzBEcXZ2aG1xRGlLcTVfTzl4aWVkR29LaVBJcFRCQTMyMkJncTR3ZmJqUDdmMjF1VVJmTDRZNnBxdlRnZzlHZUY3Yi1GRjVfNGtzYkk4Qw</a></li>
+
+
+
+<li><a href="http://www.geekpark.net/news/373243">http://www.geekpark.net/news/373243</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiVkFVX3lxTE9FSDdKV2stMHlMWURQZEVQZWI3QkNXUi0zZk0wNGViZ3pUbFZRQjc4V2wtSUUwTzB4ekZCaDJ1X18wUGNtSnpnclFHUzR4Q2RYUGF4OEVn">https://news.google.com/rss/articles/CBMiVkFVX3lxTE9FSDdKV2stMHlMWURQZEVQZWI3QkNXUi0zZk0wNGViZ3pUbFZRQjc4V2wtSUUwTzB4ekZCaDJ1X18wUGNtSnpnclFHUzR4Q2RYUGF4OEVn</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMivwFBVV95cUxPaXBscHNvYmNNV2RfZTJ0ZXlEanNzeUx6bVU1RW1UOThQcjhkRVdOMVl4bHlLZ3dDaUZFc3RiWE0xWHd0Y3RDU2ZUTVprR09fZHhheGg1Vm55NnFKYjZxeXItR2s1LVZWWVM0akEtbmNvSU9fYl9PVFpXWDc0b2o0SlkyVTd6MGRwTTd4S2RZb1loNkFuNnlUS0VDaUhtenU0R2V1cmVtUWFfbWFBem9VVmllMUxrNGlOdTMxaGs4dw">https://news.google.com/rss/articles/CBMivwFBVV95cUxPaXBscHNvYmNNV2RfZTJ0ZXlEanNzeUx6bVU1RW1UOThQcjhkRVdOMVl4bHlLZ3dDaUZFc3RiWE0xWHd0Y3RDU2ZUTVprR09fZHhheGg1Vm55NnFKYjZxeXItR2s1LVZWWVM0akEtbmNvSU9fYl9PVFpXWDc0b2o0SlkyVTd6MGRwTTd4S2RZb1loNkFuNnlUS0VDaUhtenU0R2V1cmVtUWFfbWFBem9VVmllMUxrNGlOdTMxaGs4dw</a></li>
+
+
+
+<li><a href="https://www.business-standard.com/technology/tech-news/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-126110100865_1.html">https://www.business-standard.com/technology/tech-news/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-126110100865_1.html</a></li>
+
+
+
+<li><a href="https://www.deccanchronicle.com/technology/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-2000806">https://www.deccanchronicle.com/technology/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-2000806</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> scmp.com, digitaltrends.com, reddit.com, huxiu.com, bloomberg.com, thepaper.cn, investing.com, stocktwits.com, briefs.co, business-standard.com, deccanchronicle.com, mingpao.com, technode.com, inside.com.tw, cnyes.com, geekpark.net, jiemian.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 17 unique domains, 17 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-11-01T05:47:14.000Z",
+      "domain": "investing.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNU3ZjNTJLaFEza3NuN1FnWVJkSjNzVXdsLW1VMjFrZDVsOTFzVGd6S1BvU2VMRkNBVlpHU2huZzBIU0xTZ0VtcWVMSnFGZHFhazJKLU1BUU5VQXNEejUzbXVrRHZDS2dnTG5jSFdmTjEydU4yaExlRk1Ed1VHelJ1aVFMeDhfSnNjZGVYVFNsd1VsS0owbGxJQ0stVThkdmlmaHFqMGdpOUwwOTJfOFlpTFpEd0pCN1VSVmVsdVd4NHJuZExjSVJweg",
+      "title": "DeepSeek launches autonomous coding agent to challenge Anthropic\u2019s Claude Code"
+    },
+    {
+      "date": "2026-11-01T10:00:26.000Z",
+      "domain": "scmp.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxPbFU5NlZJMVBaQ0txUnotazkwaWdmQzJwb3JvWUY4dTFHd2VERGZtdVJiMmxaTG9vR0pjZjFLOXZoZVRfRlFFZzM3dV81VVM3RDZLckQxZ01nc2ZFWGVvQlVoalk3X21iWDdBa29WcWNvblY1YVpGc3hPbDJCVVA3a2d2YVJDbFlZRUdkZ0NXTHplVTlEUGJ6RVBXTXZ1bWQ5eVRNNtIBpAFBVV95cUxQY3o3SXYteGFPRF9kQ3psaFZaTDJHMzhibnhoVE5LdjhGVUxkN2VBNnVuNHd2XzhodEpYLTRyMzhRcXNpWjY4SjBhMmdzek1oN0ZGRnh6RU5aWm12QUxYdDVvaktJUUU2UE1QVVdXUzhvdHFPZ0FrOHpOODJNQUlHYm5DSlI3aW8wS0dpMHFDWTNfNGpQeS0wYnU1TkIxbmtxVGRfSw",
+      "title": "DeepSeek unveils AI \u2018super agent\u2019 in coding race with OpenAI, Anthropic"
+    },
+    {
+      "author": "/u/Nunki08",
+      "date": "2026-11-01T12:36:14.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/LocalLLaMA/comments/1xl1zn3/deepseek_exploring_superagent_design_towards_a/",
+      "title": "DeepSeek: Exploring Super-agent Design: Towards a More Autonomous Agent System"
+    },
+    {
+      "date": "2026-11-01T12:58:00.000Z",
+      "domain": "stocktwits.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMivwFBVV95cUxPaXBscHNvYmNNV2RfZTJ0ZXlEanNzeUx6bVU1RW1UOThQcjhkRVdOMVl4bHlLZ3dDaUZFc3RiWE0xWHd0Y3RDU2ZUTVprR09fZHhheGg1Vm55NnFKYjZxeXItR2s1LVZWWVM0akEtbmNvSU9fYl9PVFpXWDc0b2o0SlkyVTd6MGRwTTd4S2RZb1loNkFuNnlUS0VDaUhtenU0R2V1cmVtUWFfbWFBem9VVmllMUxrNGlOdTMxaGs4dw",
+      "title": "Weeks Ahead Of Expected Anthropic IPO, DeepSeek Launches Autonomous Coding Agent To Take On Claude Code"
+    },
+    {
+      "date": "2026-11-01T03:48:00.000Z",
+      "domain": "bloomberg.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMitgFBVV95cUxOSGJoZUdrNzFHTjRVcm9OOVZ5a1Z4dVB4ME1aNjlmYmdjX1ZOTXNWTFJTNFFFUkQ2UUxxTGV4UDlOS0RjMnRlWlFUZ04yemVtQU9zU3FZbHlWY1YxMi1YSVBGb3k5cGszYnptNnZVZk1mR1NmS0RvLUhOeS1QUmxZamtoNGgzR21CR2tmY0JUd1c3YXBBMlc0SDhkZm9kOFRtZ3NvQ2RLNVZOYnFaV2x5Vy1ra3ZNUQ",
+      "title": "DeepSeek Drops Enhanced Coding Agent With Aim to Rival Anthropic"
+    },
+    {
+      "date": "2026-11-01T15:07:42.000Z",
+      "domain": "briefs.co",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeWswVVhGbHVxSkE4WThBZFgxLXZ6cVFmU1pwUnc2Q3NyckVLdFhKbHZJZE9mQmZTZUVxRktqMWlTTmRTQkpCdGpuMW94OHJ6U2tIcDJKc01lWVpPSkVPY3gwallaQlNGclR2MFVhTFhLQlkyX0FJSXZBYTNEblpmLTB1TVVwbUNEV3d6bWRPb3BUUQ",
+      "title": "DeepSeek unveils open-source Super-Agent aimed at Claude Code\u0027s turf"
+    },
+    {
+      "date": "2026-11-01T16:15:39.000Z",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQN3JuZUVnTzh6d0I5eUN6YzZaWXd5Q0ttWWI5eGJmaGloYzI2TkJ6eHpJWEdleUF5QkU0dnoyb0czSDBILUNqS2s2empKeGxRTGk1V3pYWjFYNFdESEtVazBLOTY3QUxqNjE0b2h4RjRKWXBodGlISlRVVWEwNE5HdXBtYnNlNHMxQ29aY0UzeUE4RXBRTk5sQ3k1NmhuMTg1OFp3bDAzZ0NlRW4wQWtycGJfQzVocjIxNWE1cTRUS0EwRUlZQy1EbjFVRnFES25HaEE",
+      "title": "DeepSeek wants to steal Claude Code and Codex\u2019s lunch with an AI Super Agent that does not wait around"
+    },
+    {
+      "author": "Bloomberg",
+      "date": "2026-11-01T17:14:40.000Z",
+      "domain": "business-standard.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.business-standard.com/technology/tech-news/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-126110100865_1.html",
+      "title": "DeepSeek drops enhanced coding agent with aim to rival Anthropic"
+    },
+    {
+      "author": "Renju John Daniel",
+      "date": "2026-11-01T09:33:18.000Z",
+      "domain": "deccanchronicle.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.deccanchronicle.com/technology/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-2000806",
+      "title": "DeepSeek Drops Enhanced Coding Agent With Aim To Rival Anthropic"
+    },
+    {
+      "author": "\u660e\u5831\u65b0\u805e\u7db2-\u5373\u6642\u65b0\u805e",
+      "date": "2026-11-01T10:38:02.000Z",
+      "domain": "mingpao.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://finance.mingpao.com/fin/instantf/20261101/1793529644804/deepseek%e6%8e%a8super-agent%e7%b7%a8%e7%a2%bc%e4%bb%a3%e7%90%86%e5%8e%9f%e5%9e%8b-ai%e5%8f%af%e9%95%b7%e6%99%82%e9%96%93%e5%9c%a8%e7%b7%9a%e8%b7%a8%e5%b9%b3%e5%8f%b0%e8%99%95%e7%90%86%e5%a4%9a%e9%a0%85%e4%bb%bb%e5%8b%99\" target=\"blank",
+      "title": "DeepSeek\u63a8Super-agent\u7de8\u78bc\u4ee3\u7406\u539f\u578b AI\u53ef\u9577\u6642\u9593\u5728\u7dda\u8de8\u5e73\u53f0\u8655\u7406\u591a\u9805\u4efb\u52d9"
+    },
+    {
+      "author": "TechNode Feed",
+      "date": "2026-11-02T04:32:41.000Z",
+      "domain": "technode.com",
+      "image": "https://kagiproxy.com/img/mh3F39CREvVOvq8tSjP3SVDZqIiPwECchGFAe0d4hv5byhphpMNE-p3MCORSEtX7pApjYYyfiCuhwRNVBssSI9dgnTBFBTnaL0XYg3yneDfbda4pFCDT8a4ie2sTjsjgVIbRWIdKXzgG8x0k0MW1XmIPjGMc3mTRO4jjr351Mc0w-nUKlmzVir_7",
+      "image_caption": "",
+      "link": "https://technode.com/2026/11/02/deepseek-team-open-sources-proactive-coding-agent-research-prototype/",
+      "title": "DeepSeek team open-sources proactive coding agent research prototype"
+    },
+    {
+      "author": "\u9245\u4ea8\u7db2",
+      "date": "2026-11-02T03:09:00.000Z",
+      "domain": "inside.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent",
+      "title": "DeepSeek \u63a8\u51fa Super-agent \u67b6\u69cb\uff01\u6253\u9020 24 \u5c0f\u6642\u81ea\u4e3b AI \u4ee3\u7406\u3001\u8de8\u5e73\u53f0\u4e26\u884c\u8655\u7406\u591a\u9805\u4efb\u52d9"
+    },
+    {
+      "author": "\u9245\u4ea8\u7db2\u65b0\u805e\u4e2d\u5fc3",
+      "date": "2026-11-01T09:10:02.000Z",
+      "domain": "cnyes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.cnyes.com/news/id/6643211",
+      "title": "DeepSeek\u63a8\u51faSuper-agent\u67b6\u69cb\uff01\u6253\u902024\u5c0f\u6642\u81ea\u4e3bAI\u4ee3\u7406\u3001\u8de8\u5e73\u53f0\u4e26\u884c\u8655\u7406\u591a\u9805\u4efb\u52d9"
+    },
+    {
+      "author": "\u6570\u5b57\u751f\u547d\u5361\u5179\u514b\u00a9",
+      "date": "2026-11-02T01:33:00.000Z",
+      "domain": "huxiu.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.huxiu.com/article/4902176.html",
+      "title": "\u6298\u817e\u4e86\u6574\u65741\u5e74\uff0c\u6beb\u65e0\u4fdd\u7559\u5730\u5206\u4eab\u4e00\u4e0b\u6211\u8fd9\u5957Agent\u81ea\u52a8\u5316\u7cfb\u7edf\u3002"
+    },
+    {
+      "date": "2026-11-02T00:41:42.000Z",
+      "domain": "thepaper.cn",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9RdFo1X1ZxN3ZXMzBEcXZ2aG1xRGlLcTVfTzl4aWVkR29LaVBJcFRCQTMyMkJncTR3ZmJqUDdmMjF1VVJmTDRZNnBxdlRnZzlHZUY3Yi1GRjVfNGtzYkk4Qw",
+      "title": "DeepSeek\u53d1\u5e03\u5168\u65b0Agent\u67b6\u6784"
+    },
+    {
+      "date": "2026-11-01T00:29:48.000Z",
+      "domain": "geekpark.net",
+      "image": "",
+      "image_caption": "",
+      "link": "http://www.geekpark.net/news/373243",
+      "title": "DeepSeek \u516c\u5e03 Super Agent \u67b6\u6784\uff1b\u82f9\u679c\u8d85\u8d8a\u82f1\u4f1f\u8fbe\uff0c\u91cd\u56de\u5e02\u503c\u7b2c\u4e00\uff1b\u4f20 Meta \u4e0e\u5085\u5229\u53f6\u6253\u9020 Muse \u673a\u5668\u4eba"
+    },
+    {
+      "date": "2026-11-02T02:52:00.000Z",
+      "domain": "jiemian.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9FSDdKV2stMHlMWURQZEVQZWI3QkNXUi0zZk0wNGViZ3pUbFZRQjc4V2wtSUUwTzB4ekZCaDJ1X18wUGNtSnpnclFHUzR4Q2RYUGF4OEVn",
+      "title": "DeepSeek\u91cd\u78c5\u5f00\u6e90Agent\u5e95\u5ea7\u67b6\u6784\uff0c\u79d1\u521bAIETF\u535a\u65f6(588790)\u8ddf\u8e2a\u6307\u6570\u6da8\u8d851%"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=scmp.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "scmp.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=huxiu.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "huxiu.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bloomberg.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "bloomberg.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thepaper.cn\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thepaper.cn"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=investing.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "investing.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stocktwits.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "stocktwits.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=briefs.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "briefs.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=business-standard.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "business-standard.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=deccanchronicle.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "deccanchronicle.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mingpao.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mingpao.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=technode.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "technode.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=inside.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "inside.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnyes.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnyes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=geekpark.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "geekpark.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=jiemian.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "jiemian.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Agents",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 17,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "INSIDE",
+          "url": "https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent"
+        }
+      ],
+      "text": "DeepSeek Harness team: The team framed its design as an application of established engineering patterns to agent workflows, rather than a new computing theory [inside.com.tw#1]."
+    }
+  ],
+  "primary_image": null,
+  "published": "2026-11-02T12:00:13.196Z",
+  "quote": "",
+  "quote_attribution": "",
+  "quote_author": "",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://technode.com/2026/11/02/deepseek-team-open-sources-proactive-coding-agent-research-prototype/",
+    "https://www.huxiu.com/article/4902176.html",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxPbFU5NlZJMVBaQ0txUnotazkwaWdmQzJwb3JvWUY4dTFHd2VERGZtdVJiMmxaTG9vR0pjZjFLOXZoZVRfRlFFZzM3dV81VVM3RDZLckQxZ01nc2ZFWGVvQlVoalk3X21iWDdBa29WcWNvblY1YVpGc3hPbDJCVVA3a2d2YVJDbFlZRUdkZ0NXTHplVTlEUGJ6RVBXTXZ1bWQ5eVRNNtIBpAFBVV95cUxQY3o3SXYteGFPRF9kQ3psaFZaTDJHMzhibnhoVE5LdjhGVUxkN2VBNnVuNHd2XzhodEpYLTRyMzhRcXNpWjY4SjBhMmdzek1oN0ZGRnh6RU5aWm12QUxYdDVvaktJUUU2UE1QVVdXUzhvdHFPZ0FrOHpOODJNQUlHYm5DSlI3aW8wS0dpMHFDWTNfNGpQeS0wYnU1TkIxbmtxVGRfSw",
+    "https://finance.mingpao.com/fin/instantf/20261101/1793529644804/deepseek%e6%8e%a8super-agent%e7%b7%a8%e7%a2%bc%e4%bb%a3%e7%90%86%e5%8e%9f%e5%9e%8b-ai%e5%8f%af%e9%95%b7%e6%99%82%e9%96%93%e5%9c%a8%e7%b7%9a%e8%b7%a8%e5%b9%b3%e5%8f%b0%e8%99%95%e7%90%86%e5%a4%9a%e9%a0%85%e4%bb%bb%e5%8b%99\" target=\"blank",
+    "https://news.google.com/rss/articles/CBMi0gFBVV95cUxQN3JuZUVnTzh6d0I5eUN6YzZaWXd5Q0ttWWI5eGJmaGloYzI2TkJ6eHpJWEdleUF5QkU0dnoyb0czSDBILUNqS2s2empKeGxRTGk1V3pYWjFYNFdESEtVazBLOTY3QUxqNjE0b2h4RjRKWXBodGlISlRVVWEwNE5HdXBtYnNlNHMxQ29aY0UzeUE4RXBRTk5sQ3k1NmhuMTg1OFp3bDAzZ0NlRW4wQWtycGJfQzVocjIxNWE1cTRUS0EwRUlZQy1EbjFVRnFES25HaEE",
+    "https://news.google.com/rss/articles/CBMitgFBVV95cUxOSGJoZUdrNzFHTjRVcm9OOVZ5a1Z4dVB4ME1aNjlmYmdjX1ZOTXNWTFJTNFFFUkQ2UUxxTGV4UDlOS0RjMnRlWlFUZ04yemVtQU9zU3FZbHlWY1YxMi1YSVBGb3k5cGszYnptNnZVZk1mR1NmS0RvLUhOeS1QUmxZamtoNGgzR21CR2tmY0JUd1c3YXBBMlc0SDhkZm9kOFRtZ3NvQ2RLNVZOYnFaV2x5Vy1ra3ZNUQ",
+    "https://www.inside.com.tw/article/42792-deepseek-super-agent-router-worker-ai-agent",
+    "https://www.reddit.com/r/LocalLLaMA/comments/1xl1zn3/deepseek_exploring_superagent_design_towards_a/",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxNeWswVVhGbHVxSkE4WThBZFgxLXZ6cVFmU1pwUnc2Q3NyckVLdFhKbHZJZE9mQmZTZUVxRktqMWlTTmRTQkpCdGpuMW94OHJ6U2tIcDJKc01lWVpPSkVPY3gwallaQlNGclR2MFVhTFhLQlkyX0FJSXZBYTNEblpmLTB1TVVwbUNEV3d6bWRPb3BUUQ",
+    "https://news.cnyes.com/news/id/6643211",
+    "https://news.google.com/rss/articles/CBMiYEFVX3lxTE9RdFo1X1ZxN3ZXMzBEcXZ2aG1xRGlLcTVfTzl4aWVkR29LaVBJcFRCQTMyMkJncTR3ZmJqUDdmMjF1VVJmTDRZNnBxdlRnZzlHZUY3Yi1GRjVfNGtzYkk4Qw",
+    "http://www.geekpark.net/news/373243",
+    "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNU3ZjNTJLaFEza3NuN1FnWVJkSjNzVXdsLW1VMjFrZDVsOTFzVGd6S1BvU2VMRkNBVlpHU2huZzBIU0xTZ0VtcWVMSnFGZHFhazJKLU1BUU5VQXNEejUzbXVrRHZDS2dnTG5jSFdmTjEydU4yaExlRk1Ed1VHelJ1aVFMeDhfSnNjZGVYVFNsd1VsS0owbGxJQ0stVThkdmlmaHFqMGdpOUwwOTJfOFlpTFpEd0pCN1VSVmVsdVd4NHJuZExjSVJweg",
+    "https://news.google.com/rss/articles/CBMiVkFVX3lxTE9FSDdKV2stMHlMWURQZEVQZWI3QkNXUi0zZk0wNGViZ3pUbFZRQjc4V2wtSUUwTzB4ekZCaDJ1X18wUGNtSnpnclFHUzR4Q2RYUGF4OEVn",
+    "https://news.google.com/rss/articles/CBMivwFBVV95cUxPaXBscHNvYmNNV2RfZTJ0ZXlEanNzeUx6bVU1RW1UOThQcjhkRVdOMVl4bHlLZ3dDaUZFc3RiWE0xWHd0Y3RDU2ZUTVprR09fZHhheGg1Vm55NnFKYjZxeXItR2s1LVZWWVM0akEtbmNvSU9fYl9PVFpXWDc0b2o0SlkyVTd6MGRwTTd4S2RZb1loNkFuNnlUS0VDaUhtenU0R2V1cmVtUWFfbWFBem9VVmllMUxrNGlOdTMxaGs4dw",
+    "https://www.business-standard.com/technology/tech-news/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-126110100865_1.html",
+    "https://www.deccanchronicle.com/technology/deepseek-drops-enhanced-coding-agent-with-aim-to-rival-anthropic-2000806"
+  ],
+  "suggested_qna": [],
+  "summary": "DeepSeek, a Chinese AI company, said its Harness team\u2019s Super-agent architecture reduced the 95th-percentile time to complete a coding task from 29.5 minutes to 15.7 minutes in an internal test. The company\u2019s open-source coding-agent prototype is designed to work across developer conversations and tools rather than rely on separate, manually prompted sessions [inside.com.tw#1][cnyes.com#1].\n\nDeepSeek said it already uses an internal version to reproduce and fix reported bugs, respond to code reviews and help develop the Harness project. The architecture divides work between a Router, which manages task context and assignments, and Workers, which handle individual tasks [thepaper.cn#1][inside.com.tw#1].\n\nThe benchmark used a synthetic workload of 300 messages and 20 work requests, which DeepSeek said does not replicate the complexity of large real-world teams. The team identified long-term memory, agent coordination, security and privacy as unresolved issues and said larger deployments still need testing [cnyes.com#1][inside.com.tw#1].",
+  "talking_points": [
+    "Cross-channel context: DeepSeek illustrated how the Router could reconcile a user\u2019s initial request in an instant-message conversation with a later, conflicting instruction in a GitHub pull request, without asking the user to repeat prior context [inside.com.tw#1][cnyes.com#1]",
+    "Event filtering: A two-stage filter first screens incoming events by source, group and allowlist rules, then sends only candidate events to a language model for semantic review [inside.com.tw#1][cnyes.com#1]",
+    "Pre-emptive work: The design includes speculative execution: an agent may begin reproducing a suspected bug discussed in a group chat before receiving a formal task [inside.com.tw#1][cnyes.com#1]",
+    "Scaling questions: DeepSeek flagged potential Router bottlenecks as the number of users and tasks grows, as well as unresolved conflicts between Workers handling related work [inside.com.tw#1][cnyes.com#1]"
+  ],
+  "technical_details": [
+    "Compute and state separation: The agent\u2019s compute process can run on cloud servers while session state remains in a database. A lightweight daemon can let the cloud process access a user\u2019s local environment without moving all local code and private data to the cloud [inside.com.tw#1][cnyes.com#1].",
+    "External watchdog: A separate monitoring mechanism tracks Worker execution and can intervene when tasks stall, loop indefinitely or drift from their goals, addressing reliability risks in long-running agent sessions [inside.com.tw#1][cnyes.com#1]."
+  ],
+  "timeline": [],
+  "title": "DeepSeek details agent design, reports 47% cut in tail task completion time",
+  "travel_advisory": "",
+  "unique_domains": 17,
+  "url": "https://news.google.com/rss/articles/CBMiyAFBVV95cUxNU3ZjNTJLaFEza3NuN1FnWVJkSjNzVXdsLW1VMjFrZDVsOTFzVGd6S1BvU2VMRkNBVlpHU2huZzBIU0xTZ0VtcWVMSnFGZHFhazJKLU1BUU5VQXNEejUzbXVrRHZDS2dnTG5jSFdmTjEydU4yaExlRk1Ed1VHelJ1aVFMeDhfSnNjZGVYVFNsd1VsS0owbGxJQ0stVThkdmlmaHFqMGdpOUwwOTJfOFlpTFpEd0pCN1VSVmVsdVd4NHJuZExjSVJweg",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
