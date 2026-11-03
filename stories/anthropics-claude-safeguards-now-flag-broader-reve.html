@@ -1,0 +1,1752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic’s Claude safeguards now flag broader reverse-engineering tasks - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic’s Claude safeguards now flag broader reverse-engineering tasks</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.cnet.com/tech/gaming/anthropic-claude-update-video-game-cloning/"><img src="https://kagiproxy.com/img/H7NcUYATsT4x2C5JthrXIul3EdLLpWkQZUaTspoyLoWJnv357JW5FDRxachCpk38YUhyZB2TZC29Ogzsyv_XkJb2mxgso_dJnwkIORl2YS1-Fj-J8L4Rx07In5R24nq4r5KzuC9tHC9pdCU8Upqs4apCBlE" alt="Anthropic’s Claude safeguards now flag broader reverse-engineering tasks" title=" (cnet.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+ <span class='credit'>(cnet.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Developers say Anthropic’s Claude Code, paired with its Opus 5.5 model, is refusing some reverse-engineering and software-analysis requests beyond recreating commercial games, interfering with legitimate work <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOS05HZ2dCRU9yeXFscXlyU1FkZVJxeFUwSFQ5YzVUSHVWcFRxN1pKQllIWHhJRkZVVGtobGFZRXVVWHJIVHJIQnBSa3hpWXFhUGk2cUQteVIyYzdYNlJpbWJUc0JFNmFTZHJidGJpcUlSM2NTcVE2T1NKZHlrbnQ3cUkwNzljOXFjMnRhRWgwYWMzclFl" class="footnote-ref">[9]</a><a href="https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html" class="footnote-ref">[21]</a>. The game-copy rule directs Claude not to recreate a specific existing game while allowing original games, genre projects and work based on users’ own designs <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ" class="footnote-ref">[3]</a>.
+
+Tom’s Hardware reported that its former staff member Jarred Walton could no longer use Opus 5.5 to run software checks he had previously completed; switching to Opus 4.8 let him continue. Screenshots sent to the publication also showed Opus 5.5 refusing a request to reverse-engineer product activation <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a>. Other users reported refusals involving crash-dump analysis and anti-cheat work <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOS05HZ2dCRU9yeXFscXlyU1FkZVJxeFUwSFQ5YzVUSHVWcFRxN1pKQllIWHhJRkZVVGtobGFZRXVVWHJIVHJIQnBSa3hpWXFhUGk2cUQteVIyYzdYNlJpbWJUc0JFNmFTZHJidGJpcUlSM2NTcVE2T1NKZHlrbnQ3cUkwNzljOXFjMnRhRWgwYWMzclFl" class="footnote-ref">[9]</a><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOVG1GbDZqQWVjYUN1QV9aTl9Ja2NSX2F3VVJPa3NESjI4YmRIUWgxd2pDMmFfWDYxU1Z5cnBOQXpCU1lRWTJrN3EzdDI5UGl2TVJ2UEZJd1djSVduMnk5U0t4ZzRwSDJvSWxBZ3Zhcl9TUGpFOFlxVDRWc2t2UjhBN2NJOGxQZFdmdVp1eDlYNHZ0LVRFaEE" class="footnote-ref">[15]</a>.
+
+Anthropic has not said whether those cases stem from the game-specific instruction or separate safety controls <a href="https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html" class="footnote-ref">[21]</a><a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a>. Tom’s Hardware noted that Anthropic’s Cyber Verification Program gives only approved entities access to the full cybersecurity capabilities of its frontier models, but did not establish that the program caused the refusals <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a>. Anthropic technical staff member Addy Osmani said the company would keep refining the system and asked developers to report cases where Claude rejects work they own <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ" class="footnote-ref">[1]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>The basic distinction has always been that copyright protects a game’s original creative expression, but generally not its underlying ideas, rules, or gameplay mechanics.</p>
+
+<cite>— David Kocan, intellectual-property lawyer at Nixon Peabody (CNET)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Practical boundary: In CNET’s test, Claude generated a playable Breakout-like game with “Claude” on each brick. Testers said they did not mistake it for the original <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB" class="footnote-ref">[13]</a>.</li>
+
+<li>Infringement test: RTB Ruhan, founder of Null Station, said to remove a game’s title and logo; if players still cannot tell it apart from another game, the line has been crossed <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB" class="footnote-ref">[13]</a>.</li>
+
+<li>Demo cancellations: Digital Sun postponed a public playtest for ReVamp, while Alliance Arts canceled its Steam Next Fest demo for Drunken Goddess Reflux over concerns about copycats <a href="https://www.digitaltrends.com/computing/anthropic-cracks-down-on-video-game-cloning-with-new-claude-restrictions/" class="footnote-ref">[22]</a>.</li>
+
+<li>Enforcement limits: GamesIndustry noted that carefully worded prompts can bypass safety restrictions and that Claude has no obvious way to verify whether users own the designs or assets <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ" class="footnote-ref">[3]</a>.</li>
+
+<li>Workarounds: Ars Technica said users seeking to make copies could turn to other frontier AI systems or open-weight models despite one provider’s restriction <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</li>
+
+<li>AI acceleration: Ars Technica reported that AI has made formerly painstaking decompilation and porting orders of magnitude more efficient, though some veteran coders say vibe-coded projects fall short of their human-centered quality standards <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</li>
+
+<li>Other tools: Developers can use other AI services or open-weight models that lack the same restrictions <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a><a href="https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html" class="footnote-ref">[21]</a>.</li>
+
+<li>Refusal reports: Tom’s Hardware said a Reddit user’s account was suspended and later reinstated after the user used Opus 5.5 with Reverse Engineer Anything <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Eric Blatt, intellectual-property lawyer at Scale: Blatt said a company whose server-based AI copies a game at a user’s request could plausibly be accused of participating in the copying. Chat logs could become evidence in litigation, he said <a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB" class="footnote-ref">[13]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB">CNET</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Luke Street, decomp.dev community maintainer: Street said AI tools were allowing newcomers to race to port games, including from decompilations they had not contributed to, undermining the community’s collaborative approach <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/">Ars Technica</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Luke Street: The decomp.dev community maintainer said AI-assisted copying had turned the site’s progress-tracking system into a hollow numbers contest and weakened its community, explaining why the project shut down <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/">Ars Technica</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>27 October 2026:</strong> Users spotted the new server-delivered game-recreation rule <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ" class="footnote-ref">[3]</a><a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a></li>
+
+
+
+<li><strong>30 October 2026:</strong> Anthropic’s Addy Osmani publicly confirmed the prompt change <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ" class="footnote-ref">[3]</a><a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a></li>
+
+
+
+<li><strong>31 October 2026:</strong> Jarred Walton said Opus 5.5 would no longer run software checks it had previously completed <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a></li>
+
+
+
+<li><strong>27 October 2026:</strong> Users spotted the game-recreation instruction in Claude Code <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ" class="footnote-ref">[3]</a><a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a></li>
+
+
+
+<li><strong>30 October 2026:</strong> Addy Osmani confirmed the Opus 5.5 prompt change <a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a></li>
+
+
+
+<li><strong>2 November 2026:</strong> Tom’s Hardware published direct accounts of reverse-engineering refusals <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Prompt deployment: Ars Technica reported finding the instruction in Claude Code binary version 2.1.314 and identified a separate Opus 5.5 prompt bundle containing game-recreation guidance <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</li>
+
+<li>Server-delivered instruction: The game rule appeared under the internal flag “tengu_heron_brook”; XDA independently verified it in Claude Code binary version 2.1.314, released Oct. 30 <a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</li>
+
+<li>Model and tool scope: Reports indicate the game-related restriction applies to Claude Code paired with Opus 5.5; using Opus through another harness may avoid the tool-level instruction, though that workaround is not confirmed across all cases <a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k" class="footnote-ref">[10]</a><a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/" class="footnote-ref">[4]</a>.</li>
+
+<li>Restriction mechanism: The rule takes the form of a prompt instruction rather than a user-facing setting; reports said users could not disable it in Claude Code <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ" class="footnote-ref">[3]</a><a href="https://www.macobserver.com/news/anthropic-prevents-claude-from-recreating-existing-video-games/" class="footnote-ref">[23]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Game discovery platforms: Steam Next Fest received nearly 7,000 demos in October, about twice the June edition’s total, as developers and platform users faced copycat concerns <a href="https://www.computerbase.de/news/apps/ki-klone-im-gaming-anthropic-will-kopien-von-spielen-in-claude-sperren.100119/" class="footnote-ref">[31]</a>.</li>
+
+<li>Independent game launches: Digital Sun moved ReVamp’s public playtest to a controlled Discord session, while Alliance Arts and Who You withdrew Drunken Goddess Reflux from Steam Next Fest over concerns about copying <a href="https://www.digitaltrends.com/computing/anthropic-cracks-down-on-video-game-cloning-with-new-claude-restrictions/" class="footnote-ref">[22]</a><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBDcjBYeFZaVjB4SkVaSTVFSE10X2k2bV9GREJYbU1wMFFOR3d2NU1qOUFGTmE2aVRYV1dNYzZUbWJBVUQ1RVJkUDQzd25Ic2pNQl9HcWhDTUI4X25vZ01ldVFuYzRmbkV5VXc" class="footnote-ref">[5]</a>.</li>
+
+<li>Game discovery: Steam Next Fest received roughly 7,000 demo submissions in October, about twice the June edition’s total and up from around 1,000 in June 2022 <a href="https://www.computerbase.de/news/apps/ki-klone-im-gaming-anthropic-will-kopien-von-spielen-in-claude-sperren.100119/" class="footnote-ref">[31]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>In 2021, Grand Theft Auto publisher Take-Two sued developers of decompiled mods for Grand Theft Auto 3 and Grand Theft Auto: Vice City. The case settled after the mods were withdrawn from release <a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPVmUxbGgtTlFtRUg3Z05vVGNhQm82V200NDduOTVENTMzZ2VJWUVCc2tndm5DaDlxLUptRUo4NW1ycTUwd0JEQkt5Q09qX3RtNUc0RGtNVTFRVVNJczZhcXBKMWNYT3FWZVNXdG5FTlV0WW5TelJoQ0pSNzRCWHZHRHZZZmF3dlczVUdkalpROVNNamhoazhfUTZaUQ" class="footnote-ref">[12]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> Does the safeguard prevent every kind of game reverse engineering?</p>
+
+<p><strong>A:</strong> No. In a test cited by Yahoo, Claude refused to recreate Pokémon Diamond but helped with a project using the user’s own ROM copy, disassembled functions and rebuilding tools. The reported boundaries vary by task <a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNQkRTeGpoSEhra3dZU3ZCZk5mUTVaMHl4S3FmQ0d4R1JsVHNmYzJ0MUEzazNTNXpybk5iTHBFRjA5WkdFU1ZYdzZEcjlESk94NHpRQTJhVVdjWVhQemNrXzUwNldEMG1UbTBCX0l2em9rNWM4cHlnaUFzZ2tXS091SkZYdmJfdU83ZHFHVDFjSmJqSElR" class="footnote-ref">[16]</a>.</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.reddit.com/r/technology/comments/1xlwaqx/anthropic_confirms_new_claude_code_limits_to/">https://www.reddit.com/r/technology/comments/1xlwaqx/anthropic_confirms_new_claude_code_limits_to/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNQkRTeGpoSEhra3dZU3ZCZk5mUTVaMHl4S3FmQ0d4R1JsVHNmYzJ0MUEzazNTNXpybk5iTHBFRjA5WkdFU1ZYdzZEcjlESk94NHpRQTJhVVdjWVhQemNrXzUwNldEMG1UbTBCX0l2em9rNWM4cHlnaUFzZ2tXS091SkZYdmJfdU83ZHFHVDFjSmJqSElR">https://news.google.com/rss/articles/CBMilAFBVV95cUxNQkRTeGpoSEhra3dZU3ZCZk5mUTVaMHl4S3FmQ0d4R1JsVHNmYzJ0MUEzazNTNXpybk5iTHBFRjA5WkdFU1ZYdzZEcjlESk94NHpRQTJhVVdjWVhQemNrXzUwNldEMG1UbTBCX0l2em9rNWM4cHlnaUFzZ2tXS091SkZYdmJfdU83ZHFHVDFjSmJqSElR</a></li>
+
+
+
+<li><a href="https://www.rbc.ua/rus/news/anthropic-zaboronila-stvoryuvati-kloni-igor-1793610523.html">https://www.rbc.ua/rus/news/anthropic-zaboronila-stvoryuvati-kloni-igor-1793610523.html</a></li>
+
+
+
+<li><a href="https://www.gamesradar.com/games/amid-steams-battle-with-ai-clones-claude-stops-users-from-recreating-games-using-its-controversial-tech-to-prevent-ip-infringement/">https://www.gamesradar.com/games/amid-steams-battle-with-ai-clones-claude-stops-users-from-recreating-games-using-its-controversial-tech-to-prevent-ip-infringement/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMibEFVX3lxTFA1akEtS2NtM3NiOG9LcFF0TGtKSzNzZWZkbEZFZkhRVjVZUGFuanR0YmV3dXotenc0R28wOUp2S0pCU1c5Ry1tSVF5SmdoOXl6OVVrd1dyMVVadG5ZemhuRlBvWk9HZ29YY2Q2ZA">https://news.google.com/rss/articles/CBMibEFVX3lxTFA1akEtS2NtM3NiOG9LcFF0TGtKSzNzZWZkbEZFZkhRVjVZUGFuanR0YmV3dXotenc0R28wOUp2S0pCU1c5Ry1tSVF5SmdoOXl6OVVrd1dyMVVadG5ZemhuRlBvWk9HZ29YY2Q2ZA</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k">https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k</a></li>
+
+
+
+
+
+<li><a href="https://www.cnet.com/tech/gaming/anthropic-claude-update-video-game-cloning/">https://www.cnet.com/tech/gaming/anthropic-claude-update-video-game-cloning/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE5lZFZ2emJBZXhMUkpqV0FyX1ZFWlREaEFHY0htQS1UV3hHQzRmZFk1VlMteWV1RlFtd3lORDFxblhWV0RhNHFZcA">https://news.google.com/rss/articles/CBMiSEFVX3lxTE5lZFZ2emJBZXhMUkpqV0FyX1ZFWlREaEFHY0htQS1UV3hHQzRmZFk1VlMteWV1RlFtd3lORDFxblhWV0RhNHFZcA</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOVG1GbDZqQWVjYUN1QV9aTl9Ja2NSX2F3VVJPa3NESjI4YmRIUWgxd2pDMmFfWDYxU1Z5cnBOQXpCU1lRWTJrN3EzdDI5UGl2TVJ2UEZJd1djSVduMnk5U0t4ZzRwSDJvSWxBZ3Zhcl9TUGpFOFlxVDRWc2t2UjhBN2NJOGxQZFdmdVp1eDlYNHZ0LVRFaEE">https://news.google.com/rss/articles/CBMilgFBVV95cUxOVG1GbDZqQWVjYUN1QV9aTl9Ja2NSX2F3VVJPa3NESjI4YmRIUWgxd2pDMmFfWDYxU1Z5cnBOQXpCU1lRWTJrN3EzdDI5UGl2TVJ2UEZJd1djSVduMnk5U0t4ZzRwSDJvSWxBZ3Zhcl9TUGpFOFlxVDRWc2t2UjhBN2NJOGxQZFdmdVp1eDlYNHZ0LVRFaEE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiakFVX3lxTFBDcjBYeFZaVjB4SkVaSTVFSE10X2k2bV9GREJYbU1wMFFOR3d2NU1qOUFGTmE2aVRYV1dNYzZUbWJBVUQ1RVJkUDQzd25Ic2pNQl9HcWhDTUI4X25vZ01ldVFuYzRmbkV5VXc">https://news.google.com/rss/articles/CBMiakFVX3lxTFBDcjBYeFZaVjB4SkVaSTVFSE10X2k2bV9GREJYbU1wMFFOR3d2NU1qOUFGTmE2aVRYV1dNYzZUbWJBVUQ1RVJkUDQzd25Ic2pNQl9HcWhDTUI4X25vZ01ldVFuYzRmbkV5VXc</a></li>
+
+
+
+<li><a href="https://www.theverge.com/ai-artificial-intelligence/1024632/anthropic-claude-ai-video-game-clones">https://www.theverge.com/ai-artificial-intelligence/1024632/anthropic-claude-ai-video-game-clones</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxQYndhNmhyRVJBMVNocVIzRldNdjZPcW0xeVRnV21za29zOUswemY5Wlg2anc5TGRTWUs4T1ZPU0lFZmg1NDdDQTBpMVpIb1NHaS1pZFE5ai02N09mS3RmX25JN3Q5b0xDY2FhWU1ZbUpqTjk5Wld5Q1NnVGp0dVhpS0g5OVZEUFlxcGVrMGw0M1NOZmpiekVSdkZmY0ZpUW5OUnRfM2RGT3E0bVA2S0Rnd3RFZzFnWDVzbXI4eVFJbUHSAcYBQVVfeXFMTkpJRVlWQS1ZRUt0VUtBeVNrdlFQTGljNDNPVTlMZE9WOEgyOGZDY3FCZU90QmhyajZMMEp5QUpUcXV4dDBjU01xa0xDZUhoT0U5MkwwVXhITkRmRUV0RWZrZmhFTnJrQzBMSkZhMUFhU1pFLVZDMmFGWlJDcXE5akU1bFBJX25uQ1FRNWtJM2YzQnAtX0Z0Z3Vuc1o0dHN5VEFxU1hUdzJrdjdHbkMxU3gta2lfRU13Nld6ejN0YmdiaW9FenN3">https://news.google.com/rss/articles/CBMiwAFBVV95cUxQYndhNmhyRVJBMVNocVIzRldNdjZPcW0xeVRnV21za29zOUswemY5Wlg2anc5TGRTWUs4T1ZPU0lFZmg1NDdDQTBpMVpIb1NHaS1pZFE5ai02N09mS3RmX25JN3Q5b0xDY2FhWU1ZbUpqTjk5Wld5Q1NnVGp0dVhpS0g5OVZEUFlxcGVrMGw0M1NOZmpiekVSdkZmY0ZpUW5OUnRfM2RGT3E0bVA2S0Rnd3RFZzFnWDVzbXI4eVFJbUHSAcYBQVVfeXFMTkpJRVlWQS1ZRUt0VUtBeVNrdlFQTGljNDNPVTlMZE9WOEgyOGZDY3FCZU90QmhyajZMMEp5QUpUcXV4dDBjU01xa0xDZUhoT0U5MkwwVXhITkRmRUV0RWZrZmhFTnJrQzBMSkZhMUFhU1pFLVZDMmFGWlJDcXE5akU1bFBJX25uQ1FRNWtJM2YzQnAtX0Z0Z3Vuc1o0dHN5VEFxU1hUdzJrdjdHbkMxU3gta2lfRU13Nld6ejN0YmdiaW9FenN3</a></li>
+
+
+
+<li><a href="https://boingboing.net/2026/11/02/anthropic-clamps-down-on-using-claude-to-make-copycat-games-or-reverse-engineer-code.html">https://boingboing.net/2026/11/02/anthropic-clamps-down-on-using-claude-to-make-copycat-games-or-reverse-engineer-code.html</a></li>
+
+
+
+<li><a href="https://www.eurogamer.net/anthropic-claude-generative-ai-game-clones-update">https://www.eurogamer.net/anthropic-claude-generative-ai-game-clones-update</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMijwFBVV95cUxQWlotZEp4ZWhXLTdkTWIxNUVZYWpXZTdtQXNISUU2d1F3bXlxWlA2WE9pSmJzdXZRMDdIdkp2azdWa2RsRXZrYVBKbEF2Um5rQVZ5VzQyaGF6RXFncVVhLU1TY1g0ejBjQUVZVlg3c1FiLXdfN3dTcC1ZTjRacXV3RW9KZDJod1oxWHBjQXpFZw">https://news.google.com/rss/articles/CBMijwFBVV95cUxQWlotZEp4ZWhXLTdkTWIxNUVZYWpXZTdtQXNISUU2d1F3bXlxWlA2WE9pSmJzdXZRMDdIdkp2azdWa2RsRXZrYVBKbEF2Um5rQVZ5VzQyaGF6RXFncVVhLU1TY1g0ejBjQUVZVlg3c1FiLXdfN3dTcC1ZTjRacXV3RW9KZDJod1oxWHBjQXpFZw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxQcGZxYnRtOWhuU3NXcGNPYjFHX3Z0OUFaNS1SVEkwX0Nfd3l4Si1KYi1FY2Y1Y2hHWXFiX1QwV21aUGttbkNCZ1ByN2p5YUhhTTMybkx2d1VkMzZEZ21XM2h5TjZscGtTbkQ0MGl3T0g3NWpWa0hEWlVGVGliX2hzNnVzM3d5MnROeGtFU3VqMDdnTFFxaUoxU25BQ1lKdWc">https://news.google.com/rss/articles/CBMinwFBVV95cUxQcGZxYnRtOWhuU3NXcGNPYjFHX3Z0OUFaNS1SVEkwX0Nfd3l4Si1KYi1FY2Y1Y2hHWXFiX1QwV21aUGttbkNCZ1ByN2p5YUhhTTMybkx2d1VkMzZEZ21XM2h5TjZscGtTbkQ0MGl3T0g3NWpWa0hEWlVGVGliX2hzNnVzM3d5MnROeGtFU3VqMDdnTFFxaUoxU25BQ1lKdWc</a></li>
+
+
+
+<li><a href="https://www.gamespot.com/articles/claude-code-just-got-a-new-rule-stop-copying-other-people-games/">https://www.gamespot.com/articles/claude-code-just-got-a-new-rule-stop-copying-other-people-games/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilwFBVV95cUxOeExuWFRWbDVla3o0TjFJZ3FiTzl4aVdhNWtXUmFnanotaG9kRHhwN3p5OGJDOVgwZGJUSlpES1RqNEg2MEkxRU13aHJObEtodURKV1Axd1NPWkh4eDFyNGw0dmxlMDFUZWhpa0pDR0FONGdiS2hURWJTRloySXJuMVRLS3hjRVRuWmo4ZloxTHJDV1Z2OWRR">https://news.google.com/rss/articles/CBMilwFBVV95cUxOeExuWFRWbDVla3o0TjFJZ3FiTzl4aVdhNWtXUmFnanotaG9kRHhwN3p5OGJDOVgwZGJUSlpES1RqNEg2MEkxRU13aHJObEtodURKV1Axd1NPWkh4eDFyNGw0dmxlMDFUZWhpa0pDR0FONGdiS2hURWJTRloySXJuMVRLS3hjRVRuWmo4ZloxTHJDV1Z2OWRR</a></li>
+
+
+
+<li><a href="https://www.techjuice.pk/anthropic-claude-video-game-cloning-block/">https://www.techjuice.pk/anthropic-claude-video-game-cloning-block/</a></li>
+
+
+
+<li><a href="https://www.bug.hr/umjetna-inteligencija/anthropic-zabranio-claudeu-rekreiranje-postojecih-videoigara-64020">https://www.bug.hr/umjetna-inteligencija/anthropic-zabranio-claudeu-rekreiranje-postojecih-videoigara-64020</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB">https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxPVmUxbGgtTlFtRUg3Z05vVGNhQm82V200NDduOTVENTMzZ2VJWUVCc2tndm5DaDlxLUptRUo4NW1ycTUwd0JEQkt5Q09qX3RtNUc0RGtNVTFRVVNJczZhcXBKMWNYT3FWZVNXdG5FTlV0WW5TelJoQ0pSNzRCWHZHRHZZZmF3dlczVUdkalpROVNNamhoazhfUTZaUQ">https://news.google.com/rss/articles/CBMimwFBVV95cUxPVmUxbGgtTlFtRUg3Z05vVGNhQm82V200NDduOTVENTMzZ2VJWUVCc2tndm5DaDlxLUptRUo4NW1ycTUwd0JEQkt5Q09qX3RtNUc0RGtNVTFRVVNJczZhcXBKMWNYT3FWZVNXdG5FTlV0WW5TelJoQ0pSNzRCWHZHRHZZZmF3dlczVUdkalpROVNNamhoazhfUTZaUQ</a></li>
+
+
+
+<li><a href="https://www.pcworld.com/article/3274819/claude-wont-reverse-engineer-games-for-you-anymore.html">https://www.pcworld.com/article/3274819/claude-wont-reverse-engineer-games-for-you-anymore.html</a></li>
+
+
+
+<li><a href="https://www.computerbase.de/news/apps/ki-klone-im-gaming-anthropic-will-kopien-von-spielen-in-claude-sperren.100119/">https://www.computerbase.de/news/apps/ki-klone-im-gaming-anthropic-will-kopien-von-spielen-in-claude-sperren.100119/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ">https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ</a></li>
+
+
+
+<li><a href="https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/">https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/</a></li>
+
+
+
+<li><a href="https://www.timeextension.com/news/2026/11/anthropic-restricts-ai-bot-claudes-ability-to-clone-or-decompile-specific-existing-games">https://www.timeextension.com/news/2026/11/anthropic-restricts-ai-bot-claudes-ability-to-clone-or-decompile-specific-existing-games</a></li>
+
+
+
+<li><a href="https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-confirms-new-claude-code-limits-to-prevent-game-cloning-users-report-opus-5-5-is-also-actively-blocking-reverse-engineering-tasks">https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-confirms-new-claude-code-limits-to-prevent-game-cloning-users-report-opus-5-5-is-also-actively-blocking-reverse-engineering-tasks</a></li>
+
+
+
+<li><a href="https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html">https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxOS05HZ2dCRU9yeXFscXlyU1FkZVJxeFUwSFQ5YzVUSHVWcFRxN1pKQllIWHhJRkZVVGtobGFZRXVVWHJIVHJIQnBSa3hpWXFhUGk2cUQteVIyYzdYNlJpbWJUc0JFNmFTZHJidGJpcUlSM2NTcVE2T1NKZHlrbnQ3cUkwNzljOXFjMnRhRWgwYWMzclFl">https://news.google.com/rss/articles/CBMilAFBVV95cUxOS05HZ2dCRU9yeXFscXlyU1FkZVJxeFUwSFQ5YzVUSHVWcFRxN1pKQllIWHhJRkZVVGtobGFZRXVVWHJIVHJIQnBSa3hpWXFhUGk2cUQteVIyYzdYNlJpbWJUc0JFNmFTZHJidGJpcUlSM2NTcVE2T1NKZHlrbnQ3cUkwNzljOXFjMnRhRWgwYWMzclFl</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/anthropic-prevents-claude-from-recreating-existing-video-games/">https://www.macobserver.com/news/anthropic-prevents-claude-from-recreating-existing-video-games/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxNeFlHQTh2aFBURDh0Y3hZU1pEUXBVanRWTDBVSmNacWotZjZPMmpXT1dBdTlrT0pVeHpTcFFBQW5nXzNDRkpfZkRHMW0zeVZ3em5BUVhqWlItR1FJOFE4TTlOa1N1cndLZ0RxUjhtcmdYY29peEVPYVpWaWt4UHRGYjhlVFBKX2NmZ2dTRFBwRktSX25aclNKSDNxTDRiTXNVa2pOekNLZw">https://news.google.com/rss/articles/CBMipwFBVV95cUxNeFlHQTh2aFBURDh0Y3hZU1pEUXBVanRWTDBVSmNacWotZjZPMmpXT1dBdTlrT0pVeHpTcFFBQW5nXzNDRkpfZkRHMW0zeVZ3em5BUVhqWlItR1FJOFE4TTlOa1N1cndLZ0RxUjhtcmdYY29peEVPYVpWaWt4UHRGYjhlVFBKX2NmZ2dTRFBwRktSX25aclNKSDNxTDRiTXNVa2pOekNLZw</a></li>
+
+
+
+<li><a href="https://www.rockpapershotgun.com/fewer-genai-clones-of-someone-elses-specific-game-should-flood-the-net-going-forwards-as-anthropic-tell-claude-to-stop-messing-with-some-stuff-other-people-own">https://www.rockpapershotgun.com/fewer-genai-clones-of-someone-elses-specific-game-should-flood-the-net-going-forwards-as-anthropic-tell-claude-to-stop-messing-with-some-stuff-other-people-own</a></li>
+
+
+
+<li><a href="https://www.digitaltrends.com/computing/anthropic-cracks-down-on-video-game-cloning-with-new-claude-restrictions/">https://www.digitaltrends.com/computing/anthropic-cracks-down-on-video-game-cloning-with-new-claude-restrictions/</a></li>
+
+
+
+<li><a href="https://www.blognone.com/node/152086">https://www.blognone.com/node/152086</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxOcVRiZ1ROZGdLNy0xVDQ5VWxsN2kzVWxxT3RqWGNidVY0QmxvMFE0dk9ORzk1YmxJWVFSU2RLUjhMeWV4ZmphcVVtVDFZMnJIcGdDRERNY0ZiXzQzVXh0d0NQY1dQZGs0ZTI3ZFpKZ3I0TVN5eFQxZzdwZmtIQTMteFdB">https://news.google.com/rss/articles/CBMiggFBVV95cUxOcVRiZ1ROZGdLNy0xVDQ5VWxsN2kzVWxxT3RqWGNidVY0QmxvMFE0dk9ORzk1YmxJWVFSU2RLUjhMeWV4ZmphcVVtVDFZMnJIcGdDRERNY0ZiXzQzVXh0d0NQY1dQZGs0ZTI3ZFpKZ3I0TVN5eFQxZzdwZmtIQTMteFdB</a></li>
+
+
+
+<li><a href="https://80.lv/articles/claude-code-blocks-video-game-cloning-some-reverse-engineering-tasks/">https://80.lv/articles/claude-code-blocks-video-game-cloning-some-reverse-engineering-tasks/</a></li>
+
+
+
+<li><a href="https://gizmodo.com/software-is-dead-unless-anthropic-says-otherwise-2000833871">https://gizmodo.com/software-is-dead-unless-anthropic-says-otherwise-2000833871</a></li>
+
+
+
+<li><a href="https://mashdigi.com/claude-opus-5-5-anti-piracy-update/">https://mashdigi.com/claude-opus-5-5-anti-piracy-update/</a></li>
+
+
+
+<li><a href="https://hk.news.yahoo.com/anthropic-%E6%94%B6%E7%B7%8A-claude-code-%E6%8F%90%E7%A4%BA%E8%A9%9E-235931201.html">https://hk.news.yahoo.com/anthropic-%E6%94%B6%E7%B7%8A-claude-code-%E6%8F%90%E7%A4%BA%E8%A9%9E-235931201.html</a></li>
+
+
+
+<li><a href="https://t3n.de/news/anthropic-claude-games-1771064/">https://t3n.de/news/anthropic-claude-games-1771064/</a></li>
+
+
+
+<li><a href="https://www.ithome.com.tw/news/180173">https://www.ithome.com.tw/news/180173</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> yahoo.com, gizmodo.com, ithome.com.tw, mashdigi.com, theverge.com, boingboing.net, gamesindustry.biz, arstechnica.com, polygon.com, hothardware.com, shacknews.com, tomshardware.com, gamespot.com, pcworld.com, cnet.com, shattered.io, 80.lv, aftermath.site, techjuice.pk, timeextension.com, heise.de, digitaltrends.com, macobserver.com, eurogamer.net, t3n.de, rbc.ua, rockpapershotgun.com, pingwest.com, computerbase.de, bug.hr, blognone.com, gamesradar.com, tomshardware.com, reddit.com, gizmodo.com, digitaltrends.com, boingboing.net, macobserver.com, theverge.com, yahoo.com, techjuice.pk, gamesindustry.biz, arstechnica.com, cnet.com, pcworld.com, eurogamer.net, timeextension.com, heise.de, t3n.de, hothardware.com, gamespot.com, rockpapershotgun.com, polygon.com, computerbase.de, ithome.com.tw, rbc.ua, bug.hr, shacknews.com, pingwest.com, mashdigi.com, 80.lv, blognone.com, gamesradar.com, shattered.io, aftermath.site</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 32 unique domains, 37 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-11-02T18:56:02.000Z",
+      "domain": "theverge.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ",
+      "title": "Anthropic clamps down on Claude\u2019s AI video game clones"
+    },
+    {
+      "date": "2026-11-03T00:13:25.000Z",
+      "domain": "boingboing.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQYndhNmhyRVJBMVNocVIzRldNdjZPcW0xeVRnV21za29zOUswemY5Wlg2anc5TGRTWUs4T1ZPU0lFZmg1NDdDQTBpMVpIb1NHaS1pZFE5ai02N09mS3RmX25JN3Q5b0xDY2FhWU1ZbUpqTjk5Wld5Q1NnVGp0dVhpS0g5OVZEUFlxcGVrMGw0M1NOZmpiekVSdkZmY0ZpUW5OUnRfM2RGT3E0bVA2S0Rnd3RFZzFnWDVzbXI4eVFJbUHSAcYBQVVfeXFMTkpJRVlWQS1ZRUt0VUtBeVNrdlFQTGljNDNPVTlMZE9WOEgyOGZDY3FCZU90QmhyajZMMEp5QUpUcXV4dDBjU01xa0xDZUhoT0U5MkwwVXhITkRmRUV0RWZrZmhFTnJrQzBMSkZhMUFhU1pFLVZDMmFGWlJDcXE5akU1bFBJX25uQ1FRNWtJM2YzQnAtX0Z0Z3Vuc1o0dHN5VEFxU1hUdzJrdjdHbkMxU3gta2lfRU13Nld6ejN0YmdiaW9FenN3",
+      "title": "Anthropic clamps down on using Claude to make copycat games\u2014or reverse-engineer code"
+    },
+    {
+      "date": "2026-11-02T17:50:20.000Z",
+      "domain": "gamesindustry.biz",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ",
+      "title": "Anthropic adds rule to stop Claude Code recreating existing games"
+    },
+    {
+      "author": "martincmartin",
+      "date": "2026-11-03T03:05:58.000Z",
+      "domain": "arstechnica.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/",
+      "title": "Claude\u0027s new rules against game cloning won\u0027t stop the AI copying boom"
+    },
+    {
+      "date": "2026-11-02T15:20:15.000Z",
+      "domain": "polygon.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiakFVX3lxTFBDcjBYeFZaVjB4SkVaSTVFSE10X2k2bV9GREJYbU1wMFFOR3d2NU1qOUFGTmE2aVRYV1dNYzZUbWJBVUQ1RVJkUDQzd25Ic2pNQl9HcWhDTUI4X25vZ01ldVFuYzRmbkV5VXc",
+      "title": "Anthropic Is Officially Stepping In to Stop Claude from Cloning Games"
+    },
+    {
+      "date": "2026-11-02T18:05:31.000Z",
+      "domain": "arstechnica.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxNeFlHQTh2aFBURDh0Y3hZU1pEUXBVanRWTDBVSmNacWotZjZPMmpXT1dBdTlrT0pVeHpTcFFBQW5nXzNDRkpfZkRHMW0zeVZ3em5BUVhqWlItR1FJOFE4TTlOa1N1cndLZ0RxUjhtcmdYY29peEVPYVpWaWt4UHRGYjhlVFBKX2NmZ2dTRFBwRktSX25aclNKSDNxTDRiTXNVa2pOekNLZw",
+      "title": "Claude\u2019s new rules against game cloning won\u2019t stop the AI copying boom"
+    },
+    {
+      "date": "2026-11-02T16:03:00.000Z",
+      "domain": "hothardware.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilwFBVV95cUxOeExuWFRWbDVla3o0TjFJZ3FiTzl4aVdhNWtXUmFnanotaG9kRHhwN3p5OGJDOVgwZGJUSlpES1RqNEg2MEkxRU13aHJObEtodURKV1Axd1NPWkh4eDFyNGw0dmxlMDFUZWhpa0pDR0FONGdiS2hURWJTRloySXJuMVRLS3hjRVRuWmo4ZloxTHJDV1Z2OWRR",
+      "title": "Anthropic Clamps Down On AI Game Clones In Strict Claude Update And Devs React"
+    },
+    {
+      "date": "2026-11-02T17:46:00.000Z",
+      "domain": "shacknews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxOcVRiZ1ROZGdLNy0xVDQ5VWxsN2kzVWxxT3RqWGNidVY0QmxvMFE0dk9ORzk1YmxJWVFSU2RLUjhMeWV4ZmphcVVtVDFZMnJIcGdDRERNY0ZiXzQzVXh0d0NQY1dQZGs0ZTI3ZFpKZ3I0TVN5eFQxZzdwZmtIQTMteFdB",
+      "title": "Claude blocks AI-assisted video game reverse engineering and cloning"
+    },
+    {
+      "date": "2026-11-02T09:51:48.000Z",
+      "domain": "yahoo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxOS05HZ2dCRU9yeXFscXlyU1FkZVJxeFUwSFQ5YzVUSHVWcFRxN1pKQllIWHhJRkZVVGtobGFZRXVVWHJIVHJIQnBSa3hpWXFhUGk2cUQteVIyYzdYNlJpbWJUc0JFNmFTZHJidGJpcUlSM2NTcVE2T1NKZHlrbnQ3cUkwNzljOXFjMnRhRWgwYWMzclFl",
+      "title": "Anthropic Adds 2 Sentences to Claude Code to Stop AI Video Game Clones"
+    },
+    {
+      "date": "2026-11-02T12:30:00.000Z",
+      "domain": "tomshardware.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k",
+      "title": "Anthropic confirms new Claude Code limits to prevent game cloning \u2014 users report Opus 5.5 is also actively blocking reverse engineering tasks"
+    },
+    {
+      "date": "2026-11-02T15:36:59.000Z",
+      "domain": "gamespot.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxQcGZxYnRtOWhuU3NXcGNPYjFHX3Z0OUFaNS1SVEkwX0Nfd3l4Si1KYi1FY2Y1Y2hHWXFiX1QwV21aUGttbkNCZ1ByN2p5YUhhTTMybkx2d1VkMzZEZ21XM2h5TjZscGtTbkQ0MGl3T0g3NWpWa0hEWlVGVGliX2hzNnVzM3d5MnROeGtFU3VqMDdnTFFxaUoxU25BQ1lKdWc",
+      "title": "Claude Code Just Got A New Rule: Stop Copying Other People\u2019s Games"
+    },
+    {
+      "date": "2026-11-02T16:29:35.000Z",
+      "domain": "pcworld.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimwFBVV95cUxPVmUxbGgtTlFtRUg3Z05vVGNhQm82V200NDduOTVENTMzZ2VJWUVCc2tndm5DaDlxLUptRUo4NW1ycTUwd0JEQkt5Q09qX3RtNUc0RGtNVTFRVVNJczZhcXBKMWNYT3FWZVNXdG5FTlV0WW5TelJoQ0pSNzRCWHZHRHZZZmF3dlczVUdkalpROVNNamhoazhfUTZaUQ",
+      "title": "Claude won\u2019t reverse-engineer games for you anymore"
+    },
+    {
+      "date": "2026-11-03T00:06:13.000Z",
+      "domain": "cnet.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB",
+      "title": "Anthropic Addresses Video Game Cloning With Minor Claude Update"
+    },
+    {
+      "date": "2026-11-03T06:02:29.000Z",
+      "domain": "shattered.io",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMijwFBVV95cUxQWlotZEp4ZWhXLTdkTWIxNUVZYWpXZTdtQXNISUU2d1F3bXlxWlA2WE9pSmJzdXZRMDdIdkp2azdWa2RsRXZrYVBKbEF2Um5rQVZ5VzQyaGF6RXFncVVhLU1TY1g0ejBjQUVZVlg3c1FiLXdfN3dTcC1ZTjRacXV3RW9KZDJod1oxWHBjQXpFZw",
+      "title": "Can Claude Code Clone Games? 3 Allowed, 1 Banned [2026]"
+    },
+    {
+      "date": "2026-11-02T13:39:53.000Z",
+      "domain": "80.lv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOVG1GbDZqQWVjYUN1QV9aTl9Ja2NSX2F3VVJPa3NESjI4YmRIUWgxd2pDMmFfWDYxU1Z5cnBOQXpCU1lRWTJrN3EzdDI5UGl2TVJ2UEZJd1djSVduMnk5U0t4ZzRwSDJvSWxBZ3Zhcl9TUGpFOFlxVDRWc2t2UjhBN2NJOGxQZFdmdVp1eDlYNHZ0LVRFaEE",
+      "title": "Claude Code Now Refuses to Recreate Existing Video Games"
+    },
+    {
+      "date": "2026-11-02T16:04:48.000Z",
+      "domain": "yahoo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQkRTeGpoSEhra3dZU3ZCZk5mUTVaMHl4S3FmQ0d4R1JsVHNmYzJ0MUEzazNTNXpybk5iTHBFRjA5WkdFU1ZYdzZEcjlESk94NHpRQTJhVVdjWVhQemNrXzUwNldEMG1UbTBCX0l2em9rNWM4cHlnaUFzZ2tXS091SkZYdmJfdU83ZHFHVDFjSmJqSElR",
+      "title": "Claude Code Just Started Refusing to Help Game Developers \u2013 Even on Legitimate Projects"
+    },
+    {
+      "date": "2026-11-02T18:49:53.000Z",
+      "domain": "aftermath.site",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMibEFVX3lxTFA1akEtS2NtM3NiOG9LcFF0TGtKSzNzZWZkbEZFZkhRVjVZUGFuanR0YmV3dXotenc0R28wOUp2S0pCU1c5Ry1tSVF5SmdoOXl6OVVrd1dyMVVadG5ZemhuRlBvWk9HZ29YY2Q2ZA",
+      "title": "Anthropic Builds World\u0027s Tiniest Dam Against AI Clone Game Flood"
+    },
+    {
+      "author": "Bruno Ferreira",
+      "date": "2026-11-02T12:30:00.000Z",
+      "domain": "tomshardware.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-confirms-new-claude-code-limits-to-prevent-game-cloning-users-report-opus-5-5-is-also-actively-blocking-reverse-engineering-tasks",
+      "title": "Anthropic confirms new Claude Code limits to prevent game cloning, users report blocking reverse engineering tasks"
+    },
+    {
+      "author": "Abdul Wasay",
+      "date": "2026-11-03T06:46:39.000Z",
+      "domain": "techjuice.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techjuice.pk/anthropic-claude-video-game-cloning-block/",
+      "title": "Claude Now Refuses to Make Game Clones, But Devs Are Furious"
+    },
+    {
+      "date": "2026-11-02T16:00:00.000Z",
+      "domain": "timeextension.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.timeextension.com/news/2026/11/anthropic-restricts-ai-bot-claudes-ability-to-clone-or-decompile-specific-existing-games",
+      "title": "Anthropic Restricts AI Bot Claude\u0027s Ability to Clone or Decompile \u0027Specific Existing Games\u0027"
+    },
+    {
+      "author": "Tomislav Bezmalinovi\u0107",
+      "date": "2026-11-02T14:49:00.000Z",
+      "domain": "heise.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html",
+      "title": "Claude Code: Anthropic versch\u00e4rft Regeln gegen Spieleklone"
+    },
+    {
+      "author": "Sudhanshu Kumar Mangalam",
+      "date": "2026-11-02T06:00:34.000Z",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitaltrends.com/computing/anthropic-cracks-down-on-video-game-cloning-with-new-claude-restrictions/",
+      "title": "Anthropic cracks down on video game cloning with new Claude restrictions"
+    },
+    {
+      "author": "Akshay Kumar",
+      "date": "2026-11-02T11:11:44.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/anthropic-prevents-claude-from-recreating-existing-video-games/",
+      "title": "Anthropic Prevents Claude From Recreating Existing Video Games"
+    },
+    {
+      "author": "Connor Makar",
+      "date": "2026-11-02T14:29:41.000Z",
+      "domain": "eurogamer.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.eurogamer.net/anthropic-claude-generative-ai-game-clones-update",
+      "title": "As the controversy around AI-created video game copies continues, Anthropic seemingly restricts Claude\u0027s cloning abilities"
+    },
+    {
+      "date": "2026-11-02T23:59:31.000Z",
+      "domain": "yahoo.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://hk.news.yahoo.com/anthropic-%E6%94%B6%E7%B7%8A-claude-code-%E6%8F%90%E7%A4%BA%E8%A9%9E-235931201.html",
+      "title": "Anthropic \u6536\u7dca Claude Code \u63d0\u793a\u8a5e\u3000\u7981\u6b62\u6284\u8972\u904a\u6232"
+    },
+    {
+      "date": "2026-11-02T11:30:51.000Z",
+      "domain": "t3n.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://t3n.de/news/anthropic-claude-games-1771064/",
+      "title": "Anthropic verbietet Claude Nachbau von Games \u2013\u00a0doch die Regeln treffen auch legitime Projekte"
+    },
+    {
+      "author": "\u041e\u043b\u044c\u0433\u0430 \u0417\u0430\u0432\u0430\u0434\u0430",
+      "date": "2026-11-02T10:18:18.000Z",
+      "domain": "rbc.ua",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.rbc.ua/rus/news/anthropic-zaboronila-stvoryuvati-kloni-igor-1793610523.html",
+      "title": "Anthropic \u0437\u0430\u0431\u043e\u0440\u043e\u043d\u0438\u043b\u0430 \u0441\u0442\u0432\u043e\u0440\u044e\u0432\u0430\u0442\u0438 \u043a\u043b\u043e\u043d\u0438 \u0456\u0433\u043e\u0440 \u0443 Claude: \u044f\u043a\u0430 \u043f\u0440\u0438\u0447\u0438\u043d\u0430"
+    },
+    {
+      "author": "Mark Warren",
+      "date": "2026-11-02T16:51:17.000Z",
+      "domain": "rockpapershotgun.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.rockpapershotgun.com/fewer-genai-clones-of-someone-elses-specific-game-should-flood-the-net-going-forwards-as-anthropic-tell-claude-to-stop-messing-with-some-stuff-other-people-own",
+      "title": "Fewer genAI clones of \"someone else\u0027s specific game\" should flood the net going forwards, as Anthropic tell Claude to stop messing with some stuff other people own"
+    },
+    {
+      "author": "\u6797\u598d\u6eb1",
+      "date": "2026-11-03T05:50:02.000Z",
+      "domain": "ithome.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ithome.com.tw/news/180173",
+      "title": "Anthropic\u8abf\u6574Claude Code\u63d0\u793a\u8a5e\uff0c\u9650\u5236AI\u91cd\u88fd\u73fe\u6709\u904a\u6232"
+    },
+    {
+      "date": "2026-11-02T02:35:54.000Z",
+      "domain": "pingwest.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5lZFZ2emJBZXhMUkpqV0FyX1ZFWlREaEFHY0htQS1UV3hHQzRmZFk1VlMteWV1RlFtd3lORDFxblhWV0RhNHFZcA",
+      "title": "Anthropic\u66f4\u65b0Claude Code\u89c4\u5219 \u9650\u5236AI\u590d\u523b\u6e38\u620f"
+    },
+    {
+      "author": "Andreas Frischholz",
+      "date": "2026-11-02T12:15:00.000Z",
+      "domain": "computerbase.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.computerbase.de/news/apps/ki-klone-im-gaming-anthropic-will-kopien-von-spielen-in-claude-sperren.100119/",
+      "title": "Vibecoding-Klone: Claude soll Spiele wie Halo oder GTA V nicht mehr nachbauen"
+    },
+    {
+      "author": "Emma Collins",
+      "date": "2026-11-02T13:36:00.000Z",
+      "domain": "80.lv",
+      "image": "https://kagiproxy.com/img/UTO9nnbIdLwE3is6OashpV8S1CRhmDd1XL-ePkFhz8JoZ5oCise8_Bn0NSzBlGao8n59czwS-hvhhF1omavIMR1CdnuGxjpDoeUzMVciRjkfg5pbo6Ox9jYZVg9zv1Z4Zu12M1r1YxBhmQ",
+      "image_caption": "",
+      "link": "https://80.lv/articles/claude-code-blocks-video-game-cloning-some-reverse-engineering-tasks/",
+      "title": "Claude Code Blocks Video Game Cloning \u0026 Some Reverse Engineering Tasks"
+    },
+    {
+      "date": "2026-11-02T10:22:00.000Z",
+      "domain": "bug.hr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bug.hr/umjetna-inteligencija/anthropic-zabranio-claudeu-rekreiranje-postojecih-videoigara-64020",
+      "title": "Anthropic zabranio Claudeu rekreiranje postoje\u0107ih videoigara"
+    },
+    {
+      "author": "\u694a\u53c8\u8087 (Mash Yang)",
+      "date": "2026-11-03T04:51:50.000Z",
+      "domain": "mashdigi.com",
+      "image": "https://kagiproxy.com/img/Epvgwlhpvqxs9WI4s3QG5rs6u3N8o9WD0VnDXODUWJhc2H_IcUWPpelbKjFxIMhfuaQETybZVE9Sj6pX3F517_XsjBNfL7lW926qjMNct-FDiF-LCQur6m9tWj9NOWBn55olkJsfXZe0YBffnSp7WCDN8C3L7spPZQiigrgDrj1UsXEiuatMNWRJCwhT",
+      "image_caption": "",
+      "link": "https://mashdigi.com/claude-opus-5-5-anti-piracy-update/",
+      "title": "Vibe Coding\u6284\u8972\u6f6e\u8e22\u5230\u9435\u677f\uff01Anthropic \u66f4\u65b0 Claude Opus 5.5 \u8207 Claude Code \u5c01\u6bba\u300c\u5c71\u5be8\u73fe\u6709\u904a\u6232\u300d"
+    },
+    {
+      "author": "mk",
+      "date": "2026-11-03T02:25:26.000Z",
+      "domain": "blognone.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.blognone.com/node/152086",
+      "title": "Anthropic \u0e43\u0e2a\u0e48\u0e21\u0e32\u0e15\u0e23\u0e01\u0e32\u0e23\u0e1b\u0e49\u0e2d\u0e07\u0e01\u0e31\u0e19\u0e01\u0e32\u0e23\u0e2a\u0e31\u0e48\u0e07 Claude Code \u0e42\u0e04\u0e25\u0e19\u0e40\u0e01\u0e21\u0e02\u0e2d\u0e07\u0e04\u0e19\u0e2d\u0e37\u0e48\u0e19"
+    },
+    {
+      "author": "Catherine Lewis",
+      "date": "2026-11-02T11:30:06.000Z",
+      "domain": "gamesradar.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.gamesradar.com/games/amid-steams-battle-with-ai-clones-claude-stops-users-from-recreating-games-using-its-controversial-tech-to-prevent-ip-infringement/",
+      "title": "Amid Steam\u0027s battle with AI clones, Claude stops users from \"recreating\" games using its tech"
+    },
+    {
+      "author": "Tom Hawking",
+      "date": "2026-11-02T19:25:12.000Z",
+      "domain": "gizmodo.com",
+      "image": "https://kagiproxy.com/img/XNcnhFHpSay_xK9n9llb1HiBvHWuPeTJJgJrcZ6J8U6Zqn06DGNasWoJp6-l7IQEJrTat-8p1Lxn3YyvSqaGEg5ApYCjChWRlbjmSdmAcnQBIonguZ90",
+      "image_caption": "",
+      "link": "https://gizmodo.com/software-is-dead-unless-anthropic-says-otherwise-2000833871",
+      "title": "Software Is Dead\u2014Unless Anthropic Says Otherwise"
+    },
+    {
+      "author": "Jay Peters",
+      "date": "2026-11-02T18:56:02.000Z",
+      "domain": "theverge.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theverge.com/ai-artificial-intelligence/1024632/anthropic-claude-ai-video-game-clones",
+      "title": "Anthropic clamps down on Claude\u2019s AI video game clones"
+    },
+    {
+      "author": "Rob Beschizza",
+      "date": "2026-11-03T00:13:25.000Z",
+      "domain": "boingboing.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://boingboing.net/2026/11/02/anthropic-clamps-down-on-using-claude-to-make-copycat-games-or-reverse-engineer-code.html",
+      "title": "Anthropic clamps down on using Claude to make copycat games\u2014or reverse-engineer code"
+    },
+    {
+      "author": "/u/Hi_all_hwru",
+      "date": "2026-11-02T12:49:42.000Z",
+      "domain": "reddit.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.reddit.com/r/technology/comments/1xlwaqx/anthropic_confirms_new_claude_code_limits_to/",
+      "title": "Anthropic confirms new Claude Code limits to prevent game cloning \u2014 users report Opus 5.5 is also actively blocking reverse engineering tasks"
+    },
+    {
+      "author": "Omar Gallaga",
+      "date": "2026-11-03T00:06:12.000Z",
+      "domain": "cnet.com",
+      "image": "https://kagiproxy.com/img/qeWBGU7ygcpP1bFmnIIyp9USJmDUV6nnCgDXwsj4-ExDxM38qr0hU2TR4fxkvnZPYLnHJSDyPTwzSBqBogW2GJzDPpe03rjIyPeEYgwo15mbr1X9g0DhqPrNJn08XI9mFEh5R31OOZVyol5v_HpyYM_mRf8",
+      "image_caption": "",
+      "link": "https://www.cnet.com/tech/gaming/anthropic-claude-update-video-game-cloning/",
+      "title": "Anthropic Addresses Video Game Cloning With Minor Claude Update"
+    },
+    {
+      "date": "2026-11-02T16:28:56.000Z",
+      "domain": "pcworld.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcworld.com/article/3274819/claude-wont-reverse-engineer-games-for-you-anymore.html",
+      "title": "Claude won\u2019t reverse-engineer games for you anymore"
+    },
+    {
+      "author": "Darryn Bonthuys",
+      "date": "2026-11-02T15:36:59.000Z",
+      "domain": "gamespot.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.gamespot.com/articles/claude-code-just-got-a-new-rule-stop-copying-other-people-games/",
+      "title": "Claude Code Just Got A New Rule: Stop Copying Other People\u2019s Games"
+    }
+  ],
+  "business_angle": "",
+  "category": "AI",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=yahoo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yahoo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gizmodo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gizmodo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ithome.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ithome.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashdigi.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashdigi.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theverge.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "theverge.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=boingboing.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "boingboing.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gamesindustry.biz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gamesindustry.biz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arstechnica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arstechnica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=polygon.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "polygon.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hothardware.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hothardware.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=shacknews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "shacknews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomshardware.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomshardware.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gamespot.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gamespot.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=shattered.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "shattered.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=80.lv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "80.lv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aftermath.site\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aftermath.site"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techjuice.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techjuice.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=timeextension.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "timeextension.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macobserver.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macobserver.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=eurogamer.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "eurogamer.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=t3n.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "t3n.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rbc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rbc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rockpapershotgun.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rockpapershotgun.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pingwest.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pingwest.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerbase.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerbase.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bug.hr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bug.hr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=blognone.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "blognone.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gamesradar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gamesradar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomshardware.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomshardware.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=reddit.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "reddit.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gizmodo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gizmodo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=boingboing.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "boingboing.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macobserver.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macobserver.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theverge.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "theverge.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=yahoo.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "yahoo.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techjuice.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techjuice.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gamesindustry.biz\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gamesindustry.biz"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arstechnica.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arstechnica.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=eurogamer.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "eurogamer.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=timeextension.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "timeextension.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=heise.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "heise.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=t3n.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "t3n.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=hothardware.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "hothardware.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gamespot.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gamespot.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rockpapershotgun.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rockpapershotgun.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=polygon.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "polygon.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerbase.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerbase.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ithome.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ithome.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rbc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rbc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bug.hr\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bug.hr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=shacknews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "shacknews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pingwest.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pingwest.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashdigi.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashdigi.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=80.lv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "80.lv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=blognone.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "blognone.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gamesradar.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gamesradar.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=shattered.io\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "shattered.io"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aftermath.site\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aftermath.site"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udd16",
+  "feed_category": "AI, Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "In 2021, Grand Theft Auto publisher Take-Two sued developers of decompiled mods for Grand Theft Auto 3 and Grand Theft Auto: Vice City. The case settled after the mods were withdrawn from release [pcworld.com#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Game discovery platforms: Steam Next Fest received nearly 7,000 demos in October, about twice the June edition\u2019s total, as developers and platform users faced copycat concerns [computerbase.de#1].",
+    "Independent game launches: Digital Sun moved ReVamp\u2019s public playtest to a controlled Discord session, while Alliance Arts and Who You withdrew Drunken Goddess Reflux from Steam Next Fest over concerns about copying [digitaltrends.com#1][polygon.com#1].",
+    "Game discovery: Steam Next Fest received roughly 7,000 demo submissions in October, about twice the June edition\u2019s total and up from around 1,000 in June 2022 [computerbase.de#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Safety",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 37,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "CNET",
+          "url": "https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB"
+        }
+      ],
+      "text": "Eric Blatt, intellectual-property lawyer at Scale: Blatt said a company whose server-based AI copies a game at a user\u2019s request could plausibly be accused of participating in the copying. Chat logs could become evidence in litigation, he said [cnet.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Ars Technica",
+          "url": "https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/"
+        }
+      ],
+      "text": "Luke Street, decomp.dev community maintainer: Street said AI tools were allowing newcomers to race to port games, including from decompilations they had not contributed to, undermining the community\u2019s collaborative approach [arstechnica.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Ars Technica",
+          "url": "https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/"
+        }
+      ],
+      "text": "Luke Street: The decomp.dev community maintainer said AI-assisted copying had turned the site\u2019s progress-tracking system into a hollow numbers contest and weakened its community, explaining why the project shut down [arstechnica.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "",
+    "credit": "cnet.com",
+    "link": "https://www.cnet.com/tech/gaming/anthropic-claude-update-video-game-cloning/",
+    "url": "https://kagiproxy.com/img/H7NcUYATsT4x2C5JthrXIul3EdLLpWkQZUaTspoyLoWJnv357JW5FDRxachCpk38YUhyZB2TZC29Ogzsyv_XkJb2mxgso_dJnwkIORl2YS1-Fj-J8L4Rx07In5R24nq4r5KzuC9tHC9pdCU8Upqs4apCBlE"
+  },
+  "published": "2026-11-03T12:00:12.309Z",
+  "quote": "The basic distinction has always been that copyright protects a game\u2019s original creative expression, but generally not its underlying ideas, rules, or gameplay mechanics.",
+  "quote_attribution": "CNET",
+  "quote_author": "David Kocan, intellectual-property lawyer at Nixon Peabody",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.reddit.com/r/technology/comments/1xlwaqx/anthropic_confirms_new_claude_code_limits_to/",
+    "https://news.google.com/rss/articles/CBMilAFBVV95cUxNQkRTeGpoSEhra3dZU3ZCZk5mUTVaMHl4S3FmQ0d4R1JsVHNmYzJ0MUEzazNTNXpybk5iTHBFRjA5WkdFU1ZYdzZEcjlESk94NHpRQTJhVVdjWVhQemNrXzUwNldEMG1UbTBCX0l2em9rNWM4cHlnaUFzZ2tXS091SkZYdmJfdU83ZHFHVDFjSmJqSElR",
+    "https://www.rbc.ua/rus/news/anthropic-zaboronila-stvoryuvati-kloni-igor-1793610523.html",
+    "https://www.gamesradar.com/games/amid-steams-battle-with-ai-clones-claude-stops-users-from-recreating-games-using-its-controversial-tech-to-prevent-ip-infringement/",
+    "https://news.google.com/rss/articles/CBMibEFVX3lxTFA1akEtS2NtM3NiOG9LcFF0TGtKSzNzZWZkbEZFZkhRVjVZUGFuanR0YmV3dXotenc0R28wOUp2S0pCU1c5Ry1tSVF5SmdoOXl6OVVrd1dyMVVadG5ZemhuRlBvWk9HZ29YY2Q2ZA",
+    "https://news.google.com/rss/articles/CBMirwJBVV95cUxOQmtwU201Rm8zX2dFeGRGay0wY0F2UVZ2V0wydFFNVEU1Q1d1SzJlQmgwT0JhUnB3eHF2X3BmdGFQZ2dMajR4UHp1by1rUmlMZHBqd2Z1VkRwYlRhVmkxUG9GWE93X3JNd3dFbExob0VPcl9KN1czbFlJdXpqbTJxU1hCTTNSMWIxaEs4SHdoYVAwMlI2cEQ3dDlVVUF0bDdnV0RDOTBnQWpmUGJtSmZLOWQ5QUItTDhxWlN2ZEdhMTNuMGEwQ0gweDZvVWRLRWVZQ1BMeTNETzA2MTlwTnAxYXEyNTFFRFZUZTl1eDJMV0hCVExYRkFnazFKZjBybGRlQ2JWUG9BM2Y4U0MzOVF0NEJVRDV4RVNHNDBKczBRbk03di0zV0ppd1A2N3lCZ1k",
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ",
+    "https://www.cnet.com/tech/gaming/anthropic-claude-update-video-game-cloning/",
+    "https://news.google.com/rss/articles/CBMiSEFVX3lxTE5lZFZ2emJBZXhMUkpqV0FyX1ZFWlREaEFHY0htQS1UV3hHQzRmZFk1VlMteWV1RlFtd3lORDFxblhWV0RhNHFZcA",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxOVG1GbDZqQWVjYUN1QV9aTl9Ja2NSX2F3VVJPa3NESjI4YmRIUWgxd2pDMmFfWDYxU1Z5cnBOQXpCU1lRWTJrN3EzdDI5UGl2TVJ2UEZJd1djSVduMnk5U0t4ZzRwSDJvSWxBZ3Zhcl9TUGpFOFlxVDRWc2t2UjhBN2NJOGxQZFdmdVp1eDlYNHZ0LVRFaEE",
+    "https://news.google.com/rss/articles/CBMiakFVX3lxTFBDcjBYeFZaVjB4SkVaSTVFSE10X2k2bV9GREJYbU1wMFFOR3d2NU1qOUFGTmE2aVRYV1dNYzZUbWJBVUQ1RVJkUDQzd25Ic2pNQl9HcWhDTUI4X25vZ01ldVFuYzRmbkV5VXc",
+    "https://www.theverge.com/ai-artificial-intelligence/1024632/anthropic-claude-ai-video-game-clones",
+    "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQYndhNmhyRVJBMVNocVIzRldNdjZPcW0xeVRnV21za29zOUswemY5Wlg2anc5TGRTWUs4T1ZPU0lFZmg1NDdDQTBpMVpIb1NHaS1pZFE5ai02N09mS3RmX25JN3Q5b0xDY2FhWU1ZbUpqTjk5Wld5Q1NnVGp0dVhpS0g5OVZEUFlxcGVrMGw0M1NOZmpiekVSdkZmY0ZpUW5OUnRfM2RGT3E0bVA2S0Rnd3RFZzFnWDVzbXI4eVFJbUHSAcYBQVVfeXFMTkpJRVlWQS1ZRUt0VUtBeVNrdlFQTGljNDNPVTlMZE9WOEgyOGZDY3FCZU90QmhyajZMMEp5QUpUcXV4dDBjU01xa0xDZUhoT0U5MkwwVXhITkRmRUV0RWZrZmhFTnJrQzBMSkZhMUFhU1pFLVZDMmFGWlJDcXE5akU1bFBJX25uQ1FRNWtJM2YzQnAtX0Z0Z3Vuc1o0dHN5VEFxU1hUdzJrdjdHbkMxU3gta2lfRU13Nld6ejN0YmdiaW9FenN3",
+    "https://boingboing.net/2026/11/02/anthropic-clamps-down-on-using-claude-to-make-copycat-games-or-reverse-engineer-code.html",
+    "https://www.eurogamer.net/anthropic-claude-generative-ai-game-clones-update",
+    "https://news.google.com/rss/articles/CBMijwFBVV95cUxQWlotZEp4ZWhXLTdkTWIxNUVZYWpXZTdtQXNISUU2d1F3bXlxWlA2WE9pSmJzdXZRMDdIdkp2azdWa2RsRXZrYVBKbEF2Um5rQVZ5VzQyaGF6RXFncVVhLU1TY1g0ejBjQUVZVlg3c1FiLXdfN3dTcC1ZTjRacXV3RW9KZDJod1oxWHBjQXpFZw",
+    "https://news.google.com/rss/articles/CBMinwFBVV95cUxQcGZxYnRtOWhuU3NXcGNPYjFHX3Z0OUFaNS1SVEkwX0Nfd3l4Si1KYi1FY2Y1Y2hHWXFiX1QwV21aUGttbkNCZ1ByN2p5YUhhTTMybkx2d1VkMzZEZ21XM2h5TjZscGtTbkQ0MGl3T0g3NWpWa0hEWlVGVGliX2hzNnVzM3d5MnROeGtFU3VqMDdnTFFxaUoxU25BQ1lKdWc",
+    "https://www.gamespot.com/articles/claude-code-just-got-a-new-rule-stop-copying-other-people-games/",
+    "https://news.google.com/rss/articles/CBMilwFBVV95cUxOeExuWFRWbDVla3o0TjFJZ3FiTzl4aVdhNWtXUmFnanotaG9kRHhwN3p5OGJDOVgwZGJUSlpES1RqNEg2MEkxRU13aHJObEtodURKV1Axd1NPWkh4eDFyNGw0dmxlMDFUZWhpa0pDR0FONGdiS2hURWJTRloySXJuMVRLS3hjRVRuWmo4ZloxTHJDV1Z2OWRR",
+    "https://www.techjuice.pk/anthropic-claude-video-game-cloning-block/",
+    "https://www.bug.hr/umjetna-inteligencija/anthropic-zabranio-claudeu-rekreiranje-postojecih-videoigara-64020",
+    "https://news.google.com/rss/articles/CBMiggFBVV95cUxObGl6Z1lPb2hocjU2aGRvdWx6aVhQWU9HdGlNQVdyaTB5WWlUSy1OX2loVkJ3Mnh0M3l2M3lWS1NMdXk2SHNYTDI5ZmFkNnBFM1ZBd1RLYmQ1aDB1d3ZudlRlWTJZQUFDZlA3d09pQ25oVTFuRUF6WFEyNk5nQ3JtYzlB",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxPVmUxbGgtTlFtRUg3Z05vVGNhQm82V200NDduOTVENTMzZ2VJWUVCc2tndm5DaDlxLUptRUo4NW1ycTUwd0JEQkt5Q09qX3RtNUc0RGtNVTFRVVNJczZhcXBKMWNYT3FWZVNXdG5FTlV0WW5TelJoQ0pSNzRCWHZHRHZZZmF3dlczVUdkalpROVNNamhoazhfUTZaUQ",
+    "https://www.pcworld.com/article/3274819/claude-wont-reverse-engineer-games-for-you-anymore.html",
+    "https://www.computerbase.de/news/apps/ki-klone-im-gaming-anthropic-will-kopien-von-spielen-in-claude-sperren.100119/",
+    "https://news.google.com/rss/articles/CBMimwFBVV95cUxQN1kwaEVjT0ZUcUtveDdXdnNKUUVwMXM4X3AtM2RnR1JyRGU2VUZ6OEFHUEFGUjlkajBYZ2U5LXA1WEhSV1c2aG8ycjQ5R2RrbW80RkM2WVlPYWJLV2RuLTdhYnN5TWRiaVN6R2hmX01fd3lBXzYxMzhhSzJIbjZYQnR6S2EwX3J1VDNvODNlVW5uNDIyT2t6b3VvQQ",
+    "https://arstechnica.com/ai/2026/11/claudes-new-rules-against-game-cloning-wont-stop-the-ai-copying-boom/",
+    "https://www.timeextension.com/news/2026/11/anthropic-restricts-ai-bot-claudes-ability-to-clone-or-decompile-specific-existing-games",
+    "https://www.tomshardware.com/tech-industry/artificial-intelligence/anthropic-confirms-new-claude-code-limits-to-prevent-game-cloning-users-report-opus-5-5-is-also-actively-blocking-reverse-engineering-tasks",
+    "https://www.heise.de/news/Claude-Code-Anthropic-verschaerft-Regeln-gegen-Spieleklone-11508349.html",
+    "https://news.google.com/rss/articles/CBMilAFBVV95cUxOS05HZ2dCRU9yeXFscXlyU1FkZVJxeFUwSFQ5YzVUSHVWcFRxN1pKQllIWHhJRkZVVGtobGFZRXVVWHJIVHJIQnBSa3hpWXFhUGk2cUQteVIyYzdYNlJpbWJUc0JFNmFTZHJidGJpcUlSM2NTcVE2T1NKZHlrbnQ3cUkwNzljOXFjMnRhRWgwYWMzclFl",
+    "https://www.macobserver.com/news/anthropic-prevents-claude-from-recreating-existing-video-games/",
+    "https://news.google.com/rss/articles/CBMipwFBVV95cUxNeFlHQTh2aFBURDh0Y3hZU1pEUXBVanRWTDBVSmNacWotZjZPMmpXT1dBdTlrT0pVeHpTcFFBQW5nXzNDRkpfZkRHMW0zeVZ3em5BUVhqWlItR1FJOFE4TTlOa1N1cndLZ0RxUjhtcmdYY29peEVPYVpWaWt4UHRGYjhlVFBKX2NmZ2dTRFBwRktSX25aclNKSDNxTDRiTXNVa2pOekNLZw",
+    "https://www.rockpapershotgun.com/fewer-genai-clones-of-someone-elses-specific-game-should-flood-the-net-going-forwards-as-anthropic-tell-claude-to-stop-messing-with-some-stuff-other-people-own",
+    "https://www.digitaltrends.com/computing/anthropic-cracks-down-on-video-game-cloning-with-new-claude-restrictions/",
+    "https://www.blognone.com/node/152086",
+    "https://news.google.com/rss/articles/CBMiggFBVV95cUxOcVRiZ1ROZGdLNy0xVDQ5VWxsN2kzVWxxT3RqWGNidVY0QmxvMFE0dk9ORzk1YmxJWVFSU2RLUjhMeWV4ZmphcVVtVDFZMnJIcGdDRERNY0ZiXzQzVXh0d0NQY1dQZGs0ZTI3ZFpKZ3I0TVN5eFQxZzdwZmtIQTMteFdB",
+    "https://80.lv/articles/claude-code-blocks-video-game-cloning-some-reverse-engineering-tasks/",
+    "https://gizmodo.com/software-is-dead-unless-anthropic-says-otherwise-2000833871",
+    "https://mashdigi.com/claude-opus-5-5-anti-piracy-update/",
+    "https://hk.news.yahoo.com/anthropic-%E6%94%B6%E7%B7%8A-claude-code-%E6%8F%90%E7%A4%BA%E8%A9%9E-235931201.html",
+    "https://t3n.de/news/anthropic-claude-games-1771064/",
+    "https://www.ithome.com.tw/news/180173"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "No. In a test cited by Yahoo, Claude refused to recreate Pok\u00e9mon Diamond but helped with a project using the user\u2019s own ROM copy, disassembled functions and rebuilding tools. The reported boundaries vary by task [yahoo.com#2].",
+      "question": "Does the safeguard prevent every kind of game reverse engineering?"
+    }
+  ],
+  "summary": "Developers say Anthropic\u2019s Claude Code, paired with its Opus 5.5 model, is refusing some reverse-engineering and software-analysis requests beyond recreating commercial games, interfering with legitimate work [tomshardware.com#1][yahoo.com#1][heise.de#1]. The game-copy rule directs Claude not to recreate a specific existing game while allowing original games, genre projects and work based on users\u2019 own designs [theverge.com#1][gamesindustry.biz#1].\n\nTom\u2019s Hardware reported that its former staff member Jarred Walton could no longer use Opus 5.5 to run software checks he had previously completed; switching to Opus 4.8 let him continue. Screenshots sent to the publication also showed Opus 5.5 refusing a request to reverse-engineer product activation [tomshardware.com#1]. Other users reported refusals involving crash-dump analysis and anti-cheat work [yahoo.com#1][80.lv#1].\n\nAnthropic has not said whether those cases stem from the game-specific instruction or separate safety controls [heise.de#1][tomshardware.com#1]. Tom\u2019s Hardware noted that Anthropic\u2019s Cyber Verification Program gives only approved entities access to the full cybersecurity capabilities of its frontier models, but did not establish that the program caused the refusals [tomshardware.com#1]. Anthropic technical staff member Addy Osmani said the company would keep refining the system and asked developers to report cases where Claude rejects work they own [theverge.com#1].",
+  "talking_points": [
+    "Practical boundary: In CNET\u2019s test, Claude generated a playable Breakout-like game with \u201cClaude\u201d on each brick. Testers said they did not mistake it for the original [cnet.com#1].",
+    "Infringement test: RTB Ruhan, founder of Null Station, said to remove a game\u2019s title and logo; if players still cannot tell it apart from another game, the line has been crossed [cnet.com#1].",
+    "Demo cancellations: Digital Sun postponed a public playtest for ReVamp, while Alliance Arts canceled its Steam Next Fest demo for Drunken Goddess Reflux over concerns about copycats [digitaltrends.com#1].",
+    "Enforcement limits: GamesIndustry noted that carefully worded prompts can bypass safety restrictions and that Claude has no obvious way to verify whether users own the designs or assets [gamesindustry.biz#1].",
+    "Workarounds: Ars Technica said users seeking to make copies could turn to other frontier AI systems or open-weight models despite one provider\u2019s restriction [arstechnica.com#1].",
+    "AI acceleration: Ars Technica reported that AI has made formerly painstaking decompilation and porting orders of magnitude more efficient, though some veteran coders say vibe-coded projects fall short of their human-centered quality standards [arstechnica.com#1].",
+    "Other tools: Developers can use other AI services or open-weight models that lack the same restrictions [arstechnica.com#1][heise.de#1].",
+    "Refusal reports: Tom\u2019s Hardware said a Reddit user\u2019s account was suspended and later reinstated after the user used Opus 5.5 with Reverse Engineer Anything [tomshardware.com#1]."
+  ],
+  "technical_details": [
+    "Prompt deployment: Ars Technica reported finding the instruction in Claude Code binary version 2.1.314 and identified a separate Opus 5.5 prompt bundle containing game-recreation guidance [arstechnica.com#1].",
+    "Server-delivered instruction: The game rule appeared under the internal flag \u201ctengu_heron_brook\u201d; XDA independently verified it in Claude Code binary version 2.1.314, released Oct. 30 [arstechnica.com#1].",
+    "Model and tool scope: Reports indicate the game-related restriction applies to Claude Code paired with Opus 5.5; using Opus through another harness may avoid the tool-level instruction, though that workaround is not confirmed across all cases [tomshardware.com#1][arstechnica.com#1].",
+    "Restriction mechanism: The rule takes the form of a prompt instruction rather than a user-facing setting; reports said users could not disable it in Claude Code [gamesindustry.biz#1][macobserver.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Users spotted the new server-delivered game-recreation rule [gamesindustry.biz#1][arstechnica.com#1]",
+      "date": "27 October 2026",
+      "date_iso": "2026-10-27"
+    },
+    {
+      "content": "Anthropic\u2019s Addy Osmani publicly confirmed the prompt change [gamesindustry.biz#1][tomshardware.com#1]",
+      "date": "30 October 2026",
+      "date_iso": "2026-10-30"
+    },
+    {
+      "content": "Jarred Walton said Opus 5.5 would no longer run software checks it had previously completed [tomshardware.com#1]",
+      "date": "31 October 2026",
+      "date_iso": "2026-10-31"
+    },
+    {
+      "content": "Users spotted the game-recreation instruction in Claude Code [gamesindustry.biz#1][arstechnica.com#1]",
+      "date": "27 October 2026",
+      "date_iso": "2026-10-27"
+    },
+    {
+      "content": "Addy Osmani confirmed the Opus 5.5 prompt change [theverge.com#1][tomshardware.com#1]",
+      "date": "30 October 2026",
+      "date_iso": "2026-10-30"
+    },
+    {
+      "content": "Tom\u2019s Hardware published direct accounts of reverse-engineering refusals [tomshardware.com#1]",
+      "date": "2 November 2026",
+      "date_iso": "2026-11-02"
+    }
+  ],
+  "title": "Anthropic\u2019s Claude safeguards now flag broader reverse-engineering tasks",
+  "travel_advisory": "",
+  "unique_domains": 32,
+  "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxQMkIzZ1JjSFM3QmlOMXk0MGFDb0I5MGZiWTVCLUtyU1pSTFYyamdERkM3b3RoLVRfUGlESUlmNUtFVUtfb1kzemJZcHNxekhNdTQ3U0s1MmY2SE9BZVdlZ01BeVEwTXJMU25nRVN3MWJmemozSnpSQXdUSjMzVWhpb1BCNHdFcng3MDBPQm1iNnJCbUFJQ3hQSjN0aDlPUQ",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
