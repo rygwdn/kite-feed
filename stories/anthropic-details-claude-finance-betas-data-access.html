@@ -1,0 +1,1034 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Anthropic details Claude finance beta’s data access and privacy limits - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Anthropic details Claude finance beta’s data access and privacy limits</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.iphone-ticker.de/claude-prueft-die-haushaltskasse-neue-finanzfunktion-vorgestellt-290041/"><img src="https://kagiproxy.com/img/JL14QRvbuD9NFbcl6kbUSXUYB7VTtxxRP7-mgXaFYBUYX0PLrxTXxYYqXIU_LsdV-p4zLtR6QXdQiEfFo1gInoun2901h3ljbuohIu15myI5NHersq76NYGgt8kPZo9ezNjKpEnZFpGxr5TPuGNGM-89AsTOxuIOM0rOs7eLisQNV9-Khg" alt="Illustration accompanying coverage of Claude’s bank-account analysis feature" title="Illustration accompanying coverage of Claude’s bank-account analysis feature (iphone-ticker.de)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Illustration accompanying coverage of Claude’s bank-account analysis feature <span class='credit'>(iphone-ticker.de)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Anthropic’s new Personal Finance beta lets Claude analyze linked U.S. bank and card accounts through Plaid, but its read-only access does not prevent sensitive figures from appearing in chats or shared outputs. The feature is rolling out to Pro, Max and Ultra subscribers and can read balances, credit limits and up to 24 months of transactions <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNVUtlQnZCZm9uS3lENk8xWlVQMVFKdVozNFhIekVNZTJtd0IxeFFvM0hXLXAtaWpKVk5ocjN4RDJqYk52a3BkZFRSMzlXYk4zRGo4WGZwS1RnZEx0alI3U21aQ1FyaWo1YlJ6STBxU0c0aXFreGI5MEhYTndBbDdqZ2dxUzNiVGVELUdYZ1FmNnIyczFuSjREaEdCVDJ4Zzc5SlZfaDRB" class="footnote-ref">[6]</a><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>.
+
+Anthropic says it excludes conversations in the dedicated finance hub from model training; ordinary Claude chats follow users’ existing privacy settings. Financial details can remain in chat histories and shared links, and anyone with access to dashboards generated from account data can view them. Unlinking an account stops future reads but does not erase earlier answers or artifacts <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>.
+
+Claude cannot transfer funds, manage accounts or invest, and Anthropic says it is not an investment-advice tool. The company warns that balances can be one or two days out of date and that answers may be wrong, advising users to verify important figures with their bank <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>. Anthropic has not given a date for access outside the United States <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE1XVFVhNVVmeHZXQS1EZWR5RnJuamJNcnh1R1NDckFsVkJLSmdvb3pDY3hTUlkwaE5WV2VTcVBhR3EybTFLcHJOSg">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>most people don’t need more financial information.</p>
+
+<cite>— Will Robinson, Plaid chief technology officer (Plaid)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Data exposure: Claude may also read a full account number if a bank places it in an account label or transaction description, even though the interface normally shows only the last four digits <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>.</li>
+
+<li>Access boundaries: The beta excludes Free, Team and Enterprise accounts and supports U.S. banks; when a paid subscription ends, the hub closes but linked banks are not automatically disconnected <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a>.</li>
+
+<li>ChatGPT comparison: PYMNTS Intelligence found 15% of consumers used ChatGPT for money management from July through September, compared with 4% for Claude; 16% said they were interested in letting AI directly manage their money <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a>.</li>
+
+<li>Competitive features: ChatGPT’s finance tools include portfolio allocation and Experian credit information <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPOUxGQ2NoVWotWTd3Qk93Z0d6aFlBOTkwSWlYLWRDS0syTEFTc29CcURDdDJVcGkwcW8xTWRWeEcwaW4yWm54Y1pCUmlDNXBrRnV2YVRYaGdYeVRiblNRYUl0Zm15dm1wUHVTVllzNS1HZUltMEF6c0llenp3T0VENjdWMTU4WUZZRWpPOWl1Tk94WldEV2ZvVA" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Anthropic: The company described the beta as a first step, saying it is exploring how Claude could work alongside licensed professionals and regulated firms on larger financial decisions. It invited those firms to help shape the effort <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://betanews.com/article/claude-personal-finance-bank-accounts-plaid/">BetaNews</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Charles Schwab: The brokerage says it blocks outside personal agents from completing financial tasks independently and instead built an assistant that draws on its own internal data <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFAteC1vakJ6QjRVQXVTeFJfdWk0TUVGMm1URENFV3ZFNDZ0YmFwbXpTaXpDZW5jNWx1TXdqZjVkdDFzNlF6VmpMS1djWWVGZzhtR2tKTVl3NVRPaWx0QXFWRUhQRXVMOGJTTGlF" class="footnote-ref">[7]</a><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxOakNXYkNyNlBLeXFPREZxQjVRdG1FQjRMOW1NbVVmZWJDUldWUW43YXBVU0ZlcU5HcWlmWHdnVlpDbWtEcXJIOUhqUks0UGt2N1NhQklrQmgxUmZXeDZwNGEwUFUxV2ItYWtidlRLa0xjYjFTbHVHQzdMOTk1ZXRWQ2dCZTNnb0pHZ2dnYTZqZ1pFckpBdE50MXpibEtQV1NFOFc1QllYaw" class="footnote-ref">[16]</a>.</p>
+
+</div>
+
+
+
+<div class='perspective'><p>PYMNTS Intelligence: Its consumer research found 24% used AI for money management from May through September <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a>.</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>15 May 2026:</strong> OpenAI introduced a Plaid-linked personal finance preview for ChatGPT Pro users <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a></li>
+
+
+
+<li><strong>September 2026:</strong> Testers spotted an early Claude finance feature in the iOS app <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOQjFMRThlV2hKZ05pZ3c4QU5lWDdnbF9uT2syRW1EMzN4cXhPM181dkhxZTJHUmdhU0JBSE83bm0wQURrbUFnUE1HTnBIZ29QY2NCd0poMktPOWd4eHZBRFNrQVpXMzNzNVpTR2c0ZWVvR2V3MWlFWDR1LWZiWjlBLVp2MjNXLWxWNEZ6MjhqLVBYeUVqZUE" class="footnote-ref">[17]</a></li>
+
+
+
+<li><strong>5 November 2026:</strong> Anthropic began the U.S. beta for paid Claude subscribers <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNVUtlQnZCZm9uS3lENk8xWlVQMVFKdVozNFhIekVNZTJtd0IxeFFvM0hXLXAtaWpKVk5ocjN4RDJqYk52a3BkZFRSMzlXYk4zRGo4WGZwS1RnZEx0alI3U21aQ1FyaWo1YlJ6STBxU0c0aXFreGI5MEhYTndBbDdqZ2dxUzNiVGVELUdYZ1FmNnIyczFuSjREaEdCVDJ4Zzc5SlZfaDRB" class="footnote-ref">[6]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Account-data fields: Claude can access the bank name, account name and type, last four digits, balances, credit limits and transaction details including merchant, amount, posting date, category and bank description; loan terms, interest rates, trades and investment holdings are excluded <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPOUxGQ2NoVWotWTd3Qk93Z0d6aFlBOTkwSWlYLWRDS0syTEFTc29CcURDdDJVcGkwcW8xTWRWeEcwaW4yWm54Y1pCUmlDNXBrRnV2YVRYaGdYeVRiblNRYUl0Zm15dm1wUHVTVllzNS1HZUltMEF6c0llenp3T0VENjdWMTU4WUZZRWpPOWl1Tk94WldEV2ZvVA" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Personal finance apps: Nearly two-thirds of U.S. consumers who linked bank accounts to AI assistants through Plaid had never used a Plaid-powered personal finance app <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a>.</li>
+
+<li>AI integration risks: DigWatch described a recent case in which a personal assistant posted a bank report to a company Slack channel. Read-only account access did not prevent disclosure through an app with permission to post there <a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFAteC1vakJ6QjRVQXVTeFJfdWk0TUVGMm1URENFV3ZFNDZ0YmFwbXpTaXpDZW5jNWx1TXdqZjVkdDFzNlF6VmpMS1djWWVGZzhtR2tKTVl3NVRPaWx0QXFWRUhQRXVMOGJTTGlF" class="footnote-ref">[7]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>Four in 10 consumers who use AI for money management say it has fully or mostly replaced their earlier financial planning methods <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Remove financial data from old chats or shared outputs before unlinking an account: Delete chat histories and artifacts and remove shared links separately. Unlinking blocks future reads but leaves prior responses and generated outputs available <a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw" class="footnote-ref">[10]</a>.</li>
+
+<li>Verify important balances and totals: Check amounts in a bank app or statement, since balances may be one or two days behind and linked accounts can be double-counted if connected through multiple logins <a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE" class="footnote-ref">[4]</a><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw" class="footnote-ref">[13]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://www.rbc.ua/rus/news/claude-pidklyuchaetsya-bankivskih-rahunkiv-1793957316.html">https://www.rbc.ua/rus/news/claude-pidklyuchaetsya-bankivskih-rahunkiv-1793957316.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE">https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipwFBVV95cUxOakNXYkNyNlBLeXFPREZxQjVRdG1FQjRMOW1NbVVmZWJDUldWUW43YXBVU0ZlcU5HcWlmWHdnVlpDbWtEcXJIOUhqUks0UGt2N1NhQklrQmgxUmZXeDZwNGEwUFUxV2ItYWtidlRLa0xjYjFTbHVHQzdMOTk1ZXRWQ2dCZTNnb0pHZ2dnYTZqZ1pFckpBdE50MXpibEtQV1NFOFc1QllYaw">https://news.google.com/rss/articles/CBMipwFBVV95cUxOakNXYkNyNlBLeXFPREZxQjVRdG1FQjRMOW1NbVVmZWJDUldWUW43YXBVU0ZlcU5HcWlmWHdnVlpDbWtEcXJIOUhqUks0UGt2N1NhQklrQmgxUmZXeDZwNGEwUFUxV2ItYWtidlRLa0xjYjFTbHVHQzdMOTk1ZXRWQ2dCZTNnb0pHZ2dnYTZqZ1pFckpBdE50MXpibEtQV1NFOFc1QllYaw</a></li>
+
+
+
+<li><a href="https://www.iphoneincanada.ca/2026/11/06/claude-ai-gains-bank-account-access-to-help-fix-your-budget/">https://www.iphoneincanada.ca/2026/11/06/claude-ai-gains-bank-account-access-to-help-fix-your-budget/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMid0FVX3lxTE1YdEhBY2RyZ0QxVTZXQkNJb3BjRzVQY3BENURPZE9Na3BkMVY4VzVSMDJFZVJCOGVQWktzVUFGQ1pBZG5yZ1BpTzVBalJjNEpFLW1GeDZuN1JZelVCbjNZbU04RXpBb1RrUXFmd2V4Vk94RXEydHc0">https://news.google.com/rss/articles/CBMid0FVX3lxTE1YdEhBY2RyZ0QxVTZXQkNJb3BjRzVQY3BENURPZE9Na3BkMVY4VzVSMDJFZVJCOGVQWktzVUFGQ1pBZG5yZ1BpTzVBalJjNEpFLW1GeDZuN1JZelVCbjNZbU04RXpBb1RrUXFmd2V4Vk94RXEydHc0</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiogFBVV95cUxNaGEwdjl4QTY5N183SWZ4eUJJMzhyUWtUS24yU2syVDBvUkZNUklsUE9pb1RpMnZGUWtxNEkyNEJySWRvQkc4YkhJaDZDRzlxZ2lxU1NpWG55b1FYbWtQZ2wyeXAwTDFHVG9PTDBxVktqdmdtbVI2OXBHa0lCTjZ0X1phWHpYaVVJTFVSOFVzY25BMzhRRjhORzlxMWhNczRlNlE">https://news.google.com/rss/articles/CBMiogFBVV95cUxNaGEwdjl4QTY5N183SWZ4eUJJMzhyUWtUS24yU2syVDBvUkZNUklsUE9pb1RpMnZGUWtxNEkyNEJySWRvQkc4YkhJaDZDRzlxZ2lxU1NpWG55b1FYbWtQZ2wyeXAwTDFHVG9PTDBxVktqdmdtbVI2OXBHa0lCTjZ0X1phWHpYaVVJTFVSOFVzY25BMzhRRjhORzlxMWhNczRlNlE</a></li>
+
+
+
+<li><a href="https://www.inside.com.tw/article/42845-anthropic-claude-personal-finance-plaid-beta">https://www.inside.com.tw/article/42845-anthropic-claude-personal-finance-plaid-beta</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMie0FVX3lxTE1fMHFtV0dPdWVQX2N5LTI0T1VXX01tU3dYOHRqN3N2Q3RoQWhLUWE2VTdXY0E0VGQtYXlKTjg2Z3Y3UklKZkE0RUdGa1VBRlNyV0lib05ETjhPV1RGWDdQMlhpRUpTOFV4eVRaV3NPY0RKMkZMRDN4TlJvVQ">https://news.google.com/rss/articles/CBMie0FVX3lxTE1fMHFtV0dPdWVQX2N5LTI0T1VXX01tU3dYOHRqN3N2Q3RoQWhLUWE2VTdXY0E0VGQtYXlKTjg2Z3Y3UklKZkE0RUdGa1VBRlNyV0lib05ETjhPV1RGWDdQMlhpRUpTOFV4eVRaV3NPY0RKMkZMRDN4TlJvVQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimAFBVV95cUxPOUxGQ2NoVWotWTd3Qk93Z0d6aFlBOTkwSWlYLWRDS0syTEFTc29CcURDdDJVcGkwcW8xTWRWeEcwaW4yWm54Y1pCUmlDNXBrRnV2YVRYaGdYeVRiblNRYUl0Zm15dm1wUHVTVllzNS1HZUltMEF6c0llenp3T0VENjdWMTU4WUZZRWpPOWl1Tk94WldEV2ZvVA">https://news.google.com/rss/articles/CBMimAFBVV95cUxPOUxGQ2NoVWotWTd3Qk93Z0d6aFlBOTkwSWlYLWRDS0syTEFTc29CcURDdDJVcGkwcW8xTWRWeEcwaW4yWm54Y1pCUmlDNXBrRnV2YVRYaGdYeVRiblNRYUl0Zm15dm1wUHVTVllzNS1HZUltMEF6c0llenp3T0VENjdWMTU4WUZZRWpPOWl1Tk94WldEV2ZvVA</a></li>
+
+
+
+<li><a href="https://canaltech.com.br/inteligencia-artificial/claude-ganha-ferramenta-que-acessa-contas-bancarias-e-analisa-os-seus-gastos/">https://canaltech.com.br/inteligencia-artificial/claude-ganha-ferramenta-que-acessa-contas-bancarias-e-analisa-os-seus-gastos/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6wFBVV95cUxQWEoxQmVLNWFSbnNOSzJmM2NXekJWeUdzSWZNbmRVcWR3OGR3cnF5QjlyTWZXUWh1aTh0ZlJyWmdnYndGOGtudzlMY2JzNTJjQnFtMU9nR3Uxc09EVE5xT2lLYUlkcGpzaUlZR3ExNTF4X0g4SGRFU1liLTNxRU9GWVF2bEswakJtOS1KM0h5SGE3b1VUSl94bkpTckw1Qm81NHVMM1RvelQzbUtOMkYwTmxua0xiMXp4ZVhxbm9POU5fTkdyQURoZHFISnk3eVBzREx6ZXJscXdoRXQ3b0V5cnZaTElYLW1FdEF3">https://news.google.com/rss/articles/CBMi6wFBVV95cUxQWEoxQmVLNWFSbnNOSzJmM2NXekJWeUdzSWZNbmRVcWR3OGR3cnF5QjlyTWZXUWh1aTh0ZlJyWmdnYndGOGtudzlMY2JzNTJjQnFtMU9nR3Uxc09EVE5xT2lLYUlkcGpzaUlZR3ExNTF4X0g4SGRFU1liLTNxRU9GWVF2bEswakJtOS1KM0h5SGE3b1VUSl94bkpTckw1Qm81NHVMM1RvelQzbUtOMkYwTmxua0xiMXp4ZVhxbm9POU5fTkdyQURoZHFISnk3eVBzREx6ZXJscXdoRXQ3b0V5cnZaTElYLW1FdEF3</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcU9ZaHhETTA4YmZiMmMtMms5WVZneWtneDVTQ2RzbGNIcVRfNjBkT2MzbDltVnlWRlMyOUx2ZmtsclUwZ2JEVlBZdndkQmNxb01FZ0Q0cS10QnNNdWVmUUljcGNGS2w3QWVsX3ZtTDV5QVdrSUt3WVBQQ0t3Uk9MWFY1djk0U2R2NUlYUkdJalpQTnl2aE5VU2xqSWNHVjUzbE1VdXFYU2JsUQ">https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcU9ZaHhETTA4YmZiMmMtMms5WVZneWtneDVTQ2RzbGNIcVRfNjBkT2MzbDltVnlWRlMyOUx2ZmtsclUwZ2JEVlBZdndkQmNxb01FZ0Q0cS10QnNNdWVmUUljcGNGS2w3QWVsX3ZtTDV5QVdrSUt3WVBQQ0t3Uk9MWFY1djk0U2R2NUlYUkdJalpQTnl2aE5VU2xqSWNHVjUzbE1VdXFYU2JsUQ</a></li>
+
+
+
+<li><a href="https://betanews.com/article/claude-personal-finance-bank-accounts-plaid/">https://betanews.com/article/claude-personal-finance-bank-accounts-plaid/</a></li>
+
+
+
+<li><a href="https://highload.tech/uk/vash-domashnij-bankir-anthropic-zapuskaye-finansovogo-pomichnyka-na-bazi-claude/#new_tab">https://highload.tech/uk/vash-domashnij-bankir-anthropic-zapuskaye-finansovogo-pomichnyka-na-bazi-claude/#new_tab</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilgFBVV95cUxOQjFMRThlV2hKZ05pZ3c4QU5lWDdnbF9uT2syRW1EMzN4cXhPM181dkhxZTJHUmdhU0JBSE83bm0wQURrbUFnUE1HTnBIZ29QY2NCd0poMktPOWd4eHZBRFNrQVpXMzNzNVpTR2c0ZWVvR2V3MWlFWDR1LWZiWjlBLVp2MjNXLWxWNEZ6MjhqLVBYeUVqZUE">https://news.google.com/rss/articles/CBMilgFBVV95cUxOQjFMRThlV2hKZ05pZ3c4QU5lWDdnbF9uT2syRW1EMzN4cXhPM181dkhxZTJHUmdhU0JBSE83bm0wQURrbUFnUE1HTnBIZ29QY2NCd0poMktPOWd4eHZBRFNrQVpXMzNzNVpTR2c0ZWVvR2V3MWlFWDR1LWZiWjlBLVp2MjNXLWxWNEZ6MjhqLVBYeUVqZUE</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw">https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiV0FVX3lxTFB6dWt6d1hTdFF2SVFraXR2NTBoVjVMWFkzUV9oS1BHSkRtc2FuWjUyblpLQ0RkMllsc2dPUXRDRGJyV0xrZV9RU29lM3QyVm1US1pkN2VXWQ">https://news.google.com/rss/articles/CBMiV0FVX3lxTFB6dWt6d1hTdFF2SVFraXR2NTBoVjVMWFkzUV9oS1BHSkRtc2FuWjUyblpLQ0RkMllsc2dPUXRDRGJyV0xrZV9RU29lM3QyVm1US1pkN2VXWQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi1wFBVV95cUxOOGdxZEpVNkdXX2JoYmdyUzAzcEQyMENONUVIQkdwWE5XbjJyUU5fSDZ5d2Z6VVphMDBHei16U25GTVZ5QU1fR0RramFocmI1NmZDMXRBVVNCT1RkTGRFbm51WENhdlZ6TUhxSENHOU1oZl9xcExGSmZJX2RKb0p5em1YNzh6NmZrNlhKQmowa3llOTBfeUtUQ3NjRzhMWUdVa3NvcjlhaFFLRDFreGFBMWlaanB5S2JNVmt4ZXhtc2hfN1REY1I2ZXZJSkIybWdDRDZVZU9lQQ">https://news.google.com/rss/articles/CBMi1wFBVV95cUxOOGdxZEpVNkdXX2JoYmdyUzAzcEQyMENONUVIQkdwWE5XbjJyUU5fSDZ5d2Z6VVphMDBHei16U25GTVZ5QU1fR0RramFocmI1NmZDMXRBVVNCT1RkTGRFbm51WENhdlZ6TUhxSENHOU1oZl9xcExGSmZJX2RKb0p5em1YNzh6NmZrNlhKQmowa3llOTBfeUtUQ3NjRzhMWUdVa3NvcjlhaFFLRDFreGFBMWlaanB5S2JNVmt4ZXhtc2hfN1REY1I2ZXZJSkIybWdDRDZVZU9lQQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw">https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiggFBVV95cUxQX3VDWjRQT1d1X0NjejJtOTF4ZkticGxkNVFINEZoQ2hQVDVtRnpMZTVmenlqak9RaHBsUkhVcTFoUVlnOHV1N09WTkRiVFc1c2l1aUxhWGdyS3pPYTA4NkZTUzFYSUJOdkpUZjlfN25uMFhMNy00YXpaVlhxQ1k2QnZR">https://news.google.com/rss/articles/CBMiggFBVV95cUxQX3VDWjRQT1d1X0NjejJtOTF4ZkticGxkNVFINEZoQ2hQVDVtRnpMZTVmenlqak9RaHBsUkhVcTFoUVlnOHV1N09WTkRiVFc1c2l1aUxhWGdyS3pPYTA4NkZTUzFYSUJOdkpUZjlfN25uMFhMNy00YXpaVlhxQ1k2QnZR</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNVUtlQnZCZm9uS3lENk8xWlVQMVFKdVozNFhIekVNZTJtd0IxeFFvM0hXLXAtaWpKVk5ocjN4RDJqYk52a3BkZFRSMzlXYk4zRGo4WGZwS1RnZEx0alI3U21aQ1FyaWo1YlJ6STBxU0c0aXFreGI5MEhYTndBbDdqZ2dxUzNiVGVELUdYZ1FmNnIyczFuSjREaEdCVDJ4Zzc5SlZfaDRB">https://news.google.com/rss/articles/CBMipgFBVV95cUxNVUtlQnZCZm9uS3lENk8xWlVQMVFKdVozNFhIekVNZTJtd0IxeFFvM0hXLXAtaWpKVk5ocjN4RDJqYk52a3BkZFRSMzlXYk4zRGo4WGZwS1RnZEx0alI3U21aQ1FyaWo1YlJ6STBxU0c0aXFreGI5MEhYTndBbDdqZ2dxUzNiVGVELUdYZ1FmNnIyczFuSjREaEdCVDJ4Zzc5SlZfaDRB</a></li>
+
+
+
+<li><a href="https://www.iphone-ticker.de/claude-prueft-die-haushaltskasse-neue-finanzfunktion-vorgestellt-290041/">https://www.iphone-ticker.de/claude-prueft-die-haushaltskasse-neue-finanzfunktion-vorgestellt-290041/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMia0FVX3lxTFAteC1vakJ6QjRVQXVTeFJfdWk0TUVGMm1URENFV3ZFNDZ0YmFwbXpTaXpDZW5jNWx1TXdqZjVkdDFzNlF6VmpMS1djWWVGZzhtR2tKTVl3NVRPaWx0QXFWRUhQRXVMOGJTTGlF">https://news.google.com/rss/articles/CBMia0FVX3lxTFAteC1vakJ6QjRVQXVTeFJfdWk0TUVGMm1URENFV3ZFNDZ0YmFwbXpTaXpDZW5jNWx1TXdqZjVkdDFzNlF6VmpMS1djWWVGZzhtR2tKTVl3NVRPaWx0QXFWRUhQRXVMOGJTTGlF</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> benzinga.com, pingwest.com, rbc.ua, ffnews.com, connectmoney.com, macobserver.com, the-decoder.com, dig.watch, 247wallst.com, betanews.com, felloai.com, gadgetreview.com, pymnts.com, finextra.com, newscord.org, thepaypers.com, techrepublic.com, inside.com.tw, highload.tech, iphoneincanada.ca, iphone-ticker.de, canaltech.com.br, myzaker.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #3, 23 unique domains, 24 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-11-06T06:49:29.000Z",
+      "domain": "pingwest.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1XVFVhNVVmeHZXQS1EZWR5RnJuamJNcnh1R1NDckFsVkJLSmdvb3pDY3hTUlkwaE5WV2VTcVBhR3EybTFLcHJOSg",
+      "title": "Anthropic\u4e3aClaude\u63a8\u51fa\u4e2a\u4eba\u8d22\u52a1\u529f\u80fd \u652f\u6301\u81ea\u7136\u8bed\u8a00\u67e5\u8be2\u6d88\u8d39"
+    },
+    {
+      "author": "\u041e\u043b\u044c\u0433\u0430 \u0417\u0430\u0432\u0430\u0434\u0430",
+      "date": "2026-11-06T10:14:24.000Z",
+      "domain": "rbc.ua",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.rbc.ua/rus/news/claude-pidklyuchaetsya-bankivskih-rahunkiv-1793957316.html",
+      "title": "Claude \u043f\u0456\u0434\u043a\u043b\u044e\u0447\u0430\u0454\u0442\u044c\u0441\u044f \u0434\u043e \u0431\u0430\u043d\u043a\u0456\u0432\u0441\u044c\u043a\u0438\u0445 \u0440\u0430\u0445\u0443\u043d\u043a\u0456\u0432: \u0447\u0438 \u0432\u0430\u0440\u0442\u043e \u0434\u043e\u0432\u0456\u0440\u044f\u0442\u0438 \u0439\u043e\u043c\u0443 \u0433\u0440\u043e\u0448\u0456"
+    },
+    {
+      "date": "2026-11-06T15:33:48.000Z",
+      "domain": "ffnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMie0FVX3lxTE1fMHFtV0dPdWVQX2N5LTI0T1VXX01tU3dYOHRqN3N2Q3RoQWhLUWE2VTdXY0E0VGQtYXlKTjg2Z3Y3UklKZkE0RUdGa1VBRlNyV0lib05ETjhPV1RGWDdQMlhpRUpTOFV4eVRaV3NPY0RKMkZMRDN4TlJvVQ",
+      "title": "Anthropic Launches Personal Finance in Claude: AI-Powered Banking Insights via Plaid"
+    },
+    {
+      "date": "2026-11-06T15:58:38.000Z",
+      "domain": "connectmoney.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE",
+      "title": "Anthropic Rolls Out Personal Finance Tool in Claude"
+    },
+    {
+      "date": "2026-11-06T16:49:24.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNaGEwdjl4QTY5N183SWZ4eUJJMzhyUWtUS24yU2syVDBvUkZNUklsUE9pb1RpMnZGUWtxNEkyNEJySWRvQkc4YkhJaDZDRzlxZ2lxU1NpWG55b1FYbWtQZ2wyeXAwTDFHVG9PTDBxVktqdmdtbVI2OXBHa0lCTjZ0X1phWHpYaVVJTFVSOFVzY25BMzhRRjhORzlxMWhNczRlNlE",
+      "title": "Anthropic Adds Bank Account Linking To Claude For Personal Finance"
+    },
+    {
+      "date": "2026-11-06T11:40:33.000Z",
+      "domain": "the-decoder.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNVUtlQnZCZm9uS3lENk8xWlVQMVFKdVozNFhIekVNZTJtd0IxeFFvM0hXLXAtaWpKVk5ocjN4RDJqYk52a3BkZFRSMzlXYk4zRGo4WGZwS1RnZEx0alI3U21aQ1FyaWo1YlJ6STBxU0c0aXFreGI5MEhYTndBbDdqZ2dxUzNiVGVELUdYZ1FmNnIyczFuSjREaEdCVDJ4Zzc5SlZfaDRB",
+      "title": "Anthropic adds bank account access to Claude so users can track their spending"
+    },
+    {
+      "date": "2026-11-06T15:16:20.000Z",
+      "domain": "dig.watch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMia0FVX3lxTFAteC1vakJ6QjRVQXVTeFJfdWk0TUVGMm1URENFV3ZFNDZ0YmFwbXpTaXpDZW5jNWx1TXdqZjVkdDFzNlF6VmpMS1djWWVGZzhtR2tKTVl3NVRPaWx0QXFWRUhQRXVMOGJTTGlF",
+      "title": "Anthropic adds Plaid integration to Claude AI for Personal Finance"
+    },
+    {
+      "date": "2026-11-06T20:27:00.000Z",
+      "domain": "247wallst.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimAFBVV95cUxPOUxGQ2NoVWotWTd3Qk93Z0d6aFlBOTkwSWlYLWRDS0syTEFTc29CcURDdDJVcGkwcW8xTWRWeEcwaW4yWm54Y1pCUmlDNXBrRnV2YVRYaGdYeVRiblNRYUl0Zm15dm1wUHVTVllzNS1HZUltMEF6c0llenp3T0VENjdWMTU4WUZZRWpPOWl1Tk94WldEV2ZvVA",
+      "title": "Anthropic\u2019s Claude Can Now Read Your Bank Accounts"
+    },
+    {
+      "date": "2026-11-06T14:05:47.000Z",
+      "domain": "benzinga.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQWEoxQmVLNWFSbnNOSzJmM2NXekJWeUdzSWZNbmRVcWR3OGR3cnF5QjlyTWZXUWh1aTh0ZlJyWmdnYndGOGtudzlMY2JzNTJjQnFtMU9nR3Uxc09EVE5xT2lLYUlkcGpzaUlZR3ExNTF4X0g4SGRFU1liLTNxRU9GWVF2bEswakJtOS1KM0h5SGE3b1VUSl94bkpTckw1Qm81NHVMM1RvelQzbUtOMkYwTmxua0xiMXp4ZVhxbm9POU5fTkdyQURoZHFISnk3eVBzREx6ZXJscXdoRXQ3b0V5cnZaTElYLW1FdEF3",
+      "title": "Anthropic\u0027s Claude Can Now Link Bank Accounts and Analyze Transactions But Won\u0027t Offer Investment Advice"
+    },
+    {
+      "date": "2026-11-06T19:06:07.000Z",
+      "domain": "betanews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw",
+      "title": "Claude Personal Finance reads bank accounts via Plaid"
+    },
+    {
+      "date": "2026-11-07T06:10:05.000Z",
+      "domain": "felloai.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiV0FVX3lxTFB6dWt6d1hTdFF2SVFraXR2NTBoVjVMWFkzUV9oS1BHSkRtc2FuWjUyblpLQ0RkMllsc2dPUXRDRGJyV0xrZV9RU29lM3QyVm1US1pkN2VXWQ",
+      "title": "How to Use Claude Personal Finance: Setup, Prompts and What It Can See"
+    },
+    {
+      "date": "2026-11-06T15:05:44.000Z",
+      "domain": "gadgetreview.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcU9ZaHhETTA4YmZiMmMtMms5WVZneWtneDVTQ2RzbGNIcVRfNjBkT2MzbDltVnlWRlMyOUx2ZmtsclUwZ2JEVlBZdndkQmNxb01FZ0Q0cS10QnNNdWVmUUljcGNGS2w3QWVsX3ZtTDV5QVdrSUt3WVBQQ0t3Uk9MWFY1djk0U2R2NUlYUkdJalpQTnl2aE5VU2xqSWNHVjUzbE1VdXFYU2JsUQ",
+      "title": "Anthropic Just Gave Claude Access to Your Bank Accounts \u2013 Here\u2019s What It Can See"
+    },
+    {
+      "date": "2026-11-06T18:27:09.000Z",
+      "domain": "pymnts.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw",
+      "title": "Anthropic Launches Claude Personal Finance Ahead of Nasdaq Listing"
+    },
+    {
+      "date": "2026-11-06T14:11:00.000Z",
+      "domain": "finextra.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiggFBVV95cUxQX3VDWjRQT1d1X0NjejJtOTF4ZkticGxkNVFINEZoQ2hQVDVtRnpMZTVmenlqak9RaHBsUkhVcTFoUVlnOHV1N09WTkRiVFc1c2l1aUxhWGdyS3pPYTA4NkZTUzFYSUJOdkpUZjlfN25uMFhMNy00YXpaVlhxQ1k2QnZR",
+      "title": "Claude gets personal finance tool"
+    },
+    {
+      "date": "2026-11-05T23:19:22.000Z",
+      "domain": "newscord.org",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOOGdxZEpVNkdXX2JoYmdyUzAzcEQyMENONUVIQkdwWE5XbjJyUU5fSDZ5d2Z6VVphMDBHei16U25GTVZ5QU1fR0RramFocmI1NmZDMXRBVVNCT1RkTGRFbm51WENhdlZ6TUhxSENHOU1oZl9xcExGSmZJX2RKb0p5em1YNzh6NmZrNlhKQmowa3llOTBfeUtUQ3NjRzhMWUdVa3NvcjlhaFFLRDFreGFBMWlaanB5S2JNVmt4ZXhtc2hfN1REY1I2ZXZJSkIybWdDRDZVZU9lQQ",
+      "title": "Anthropic Launches Read-Only Personal Finance for Claude, Via Plaid: how 13 outlets framed it"
+    },
+    {
+      "date": "2026-11-06T13:11:37.000Z",
+      "domain": "thepaypers.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOakNXYkNyNlBLeXFPREZxQjVRdG1FQjRMOW1NbVVmZWJDUldWUW43YXBVU0ZlcU5HcWlmWHdnVlpDbWtEcXJIOUhqUks0UGt2N1NhQklrQmgxUmZXeDZwNGEwUFUxV2ItYWtidlRLa0xjYjFTbHVHQzdMOTk1ZXRWQ2dCZTNnb0pHZ2dnYTZqZ1pFckpBdE50MXpibEtQV1NFOFc1QllYaw",
+      "title": "Anthropic links Claude to Plaid for finance guidance"
+    },
+    {
+      "date": "2026-11-06T17:55:22.000Z",
+      "domain": "techrepublic.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilgFBVV95cUxOQjFMRThlV2hKZ05pZ3c4QU5lWDdnbF9uT2syRW1EMzN4cXhPM181dkhxZTJHUmdhU0JBSE83bm0wQURrbUFnUE1HTnBIZ29QY2NCd0poMktPOWd4eHZBRFNrQVpXMzNzNVpTR2c0ZWVvR2V3MWlFWDR1LWZiWjlBLVp2MjNXLWxWNEZ6MjhqLVBYeUVqZUE",
+      "title": "Claude Personal Finance: Features, Privacy and ChatGPT Comparison"
+    },
+    {
+      "author": "Claire",
+      "date": "2026-11-06T07:15:00.000Z",
+      "domain": "inside.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.inside.com.tw/article/42845-anthropic-claude-personal-finance-plaid-beta",
+      "title": "Claude \u8ddf\u9032 ChatGPT \u63a8\u500b\u4eba\u7406\u8ca1\uff0c\u9023\u7d50\u9280\u884c\u5e33\u6236\u5c31\u80fd\u554f\u9322\u82b1\u53bb\u54ea"
+    },
+    {
+      "author": "Camila Nogueira",
+      "date": "2026-11-06T19:06:07.000Z",
+      "domain": "betanews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://betanews.com/article/claude-personal-finance-bank-accounts-plaid/",
+      "title": "Claude can now read your bank balances and transactions through Plaid"
+    },
+    {
+      "author": "\u0421\u0438\u043c\u0430\u0433\u0438\u043d \u0414\u043c\u0438\u0442\u0440\u0438\u0439",
+      "date": "2026-11-06T12:18:21.000Z",
+      "domain": "highload.tech",
+      "image": "",
+      "image_caption": "",
+      "link": "https://highload.tech/uk/vash-domashnij-bankir-anthropic-zapuskaye-finansovogo-pomichnyka-na-bazi-claude/#new_tab",
+      "title": "\u0412\u0430\u0448 \u0434\u043e\u043c\u0430\u0448\u043d\u0456\u0439 \u0431\u0430\u043d\u043a\u0456\u0440: Anthropic \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0454 \u0444\u0456\u043d\u0430\u043d\u0441\u043e\u0432\u043e\u0433\u043e \u043f\u043e\u043c\u0456\u0447\u043d\u0438\u043a\u0430 \u043d\u0430 \u0431\u0430\u0437\u0456 Claude"
+    },
+    {
+      "author": "Usman Qureshi",
+      "date": "2026-11-06T18:35:21.000Z",
+      "domain": "iphoneincanada.ca",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.iphoneincanada.ca/2026/11/06/claude-ai-gains-bank-account-access-to-help-fix-your-budget/",
+      "title": "Claude Adds Personal Finance Tools, but Canada Misses Out for Now"
+    },
+    {
+      "author": "Ben",
+      "date": "2026-11-06T06:02:13.000Z",
+      "domain": "iphone-ticker.de",
+      "image": "https://kagiproxy.com/img/tCSKIEeG00-8wWlMyKz391ZuL9QLcpTu78SiaVvP1Z350hSznGMHG4S7CUdKti5Iz_1AHayTdlu5HwEGLOvqjPztbk6diX2pCyskcxOhCBzR6yb-86SlPFAMj4fzSTToAm6D2_ziDecrzgO-w4s58s516Qgi6PnHFZpxgcq5rCvBvAikaw",
+      "image_caption": "",
+      "link": "https://www.iphone-ticker.de/claude-prueft-die-haushaltskasse-neue-finanzfunktion-vorgestellt-290041/",
+      "title": "Claude pr\u00fcft die Haushaltskasse: Neue Finanzfunktion vorgestellt"
+    },
+    {
+      "author": "Viviane Fran\u00e7a",
+      "date": "2026-11-06T19:01:00.000Z",
+      "domain": "canaltech.com.br",
+      "image": "https://kagiproxy.com/img/wQXraoMaCGBe83ieFkA_JSKW-aO4S7Gr8jV5XSSpLLCGnrVZtZ0RVSIKQNBL9VpFQtm2uZOVL0tbBBI9CKoxQvA4TT80FVPXL1reZhMDnpBItKFHkiCsxJDUZrm91B9zAB0pd8pPyRohw8FFqrg_yndKjGRROD2Krnfxfjjhzb2vDI5kzWQElss_VvG5w72P9WSYpmnndiO_VmbBcBI",
+      "image_caption": "",
+      "link": "https://canaltech.com.br/inteligencia-artificial/claude-ganha-ferramenta-que-acessa-contas-bancarias-e-analisa-os-seus-gastos/",
+      "title": "Claude ganha ferramenta que acessa contas banc\u00e1rias e analisa os seus gastos"
+    },
+    {
+      "date": "2026-11-06T05:39:02.000Z",
+      "domain": "myzaker.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMid0FVX3lxTE1YdEhBY2RyZ0QxVTZXQkNJb3BjRzVQY3BENURPZE9Na3BkMVY4VzVSMDJFZVJCOGVQWktzVUFGQ1pBZG5yZ1BpTzVBalJjNEpFLW1GeDZuN1JZelVCbjNZbU04RXpBb1RrUXFmd2V4Vk94RXEydHc0",
+      "title": "Claude\u4e0a\u7ebf\u4e2a\u4eba\u7406\u8d22\uff1a\u53ef\u5173\u8054\u94f6\u884c\u8d26\u6237 \u4f46\u53ea\u6709\u53ea\u8bfb\u6743\u9650"
+    }
+  ],
+  "business_angle": [
+    "Four in 10 consumers who use AI for money management say it has fully or mostly replaced their earlier financial planning methods [pymnts.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 3,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=benzinga.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "benzinga.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pingwest.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pingwest.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rbc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rbc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ffnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ffnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=connectmoney.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "connectmoney.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macobserver.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macobserver.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=the-decoder.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "the-decoder.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dig.watch\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dig.watch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=247wallst.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "247wallst.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=betanews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "betanews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=felloai.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "felloai.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=gadgetreview.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "gadgetreview.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pymnts.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pymnts.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=finextra.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "finextra.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=newscord.org\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "newscord.org"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thepaypers.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thepaypers.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techrepublic.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techrepublic.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=inside.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "inside.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=highload.tech\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "highload.tech"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iphoneincanada.ca\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iphoneincanada.ca"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=iphone-ticker.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "iphone-ticker.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=canaltech.com.br\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "canaltech.com.br"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=myzaker.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "myzaker.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd10",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Personal finance apps: Nearly two-thirds of U.S. consumers who linked bank accounts to AI assistants through Plaid had never used a Plaid-powered personal finance app [pymnts.com#1].",
+    "AI integration risks: DigWatch described a recent case in which a personal assistant posted a bank report to a company Slack channel. Read-only account access did not prevent disclosure through an app with permission to post there [dig.watch#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Ai Finance",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 24,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "BetaNews",
+          "url": "https://betanews.com/article/claude-personal-finance-bank-accounts-plaid/"
+        }
+      ],
+      "text": "Anthropic: The company described the beta as a first step, saying it is exploring how Claude could work alongside licensed professionals and regulated firms on larger financial decisions. It invited those firms to help shape the effort [betanews.com#1]."
+    },
+    {
+      "sources": [],
+      "text": "Charles Schwab: The brokerage says it blocks outside personal agents from completing financial tasks independently and instead built an assistant that draws on its own internal data [dig.watch#1][thepaypers.com#1]."
+    },
+    {
+      "sources": [],
+      "text": "PYMNTS Intelligence: Its consumer research found 24% used AI for money management from May through September [pymnts.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "Illustration accompanying coverage of Claude\u2019s bank-account analysis feature",
+    "credit": "iphone-ticker.de",
+    "link": "https://www.iphone-ticker.de/claude-prueft-die-haushaltskasse-neue-finanzfunktion-vorgestellt-290041/",
+    "url": "https://kagiproxy.com/img/JL14QRvbuD9NFbcl6kbUSXUYB7VTtxxRP7-mgXaFYBUYX0PLrxTXxYYqXIU_LsdV-p4zLtR6QXdQiEfFo1gInoun2901h3ljbuohIu15myI5NHersq76NYGgt8kPZo9ezNjKpEnZFpGxr5TPuGNGM-89AsTOxuIOM0rOs7eLisQNV9-Khg"
+  },
+  "published": "2026-11-07T12:00:12.663Z",
+  "quote": "most people don\u2019t need more financial information.",
+  "quote_attribution": "Plaid",
+  "quote_author": "Will Robinson, Plaid chief technology officer",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://www.rbc.ua/rus/news/claude-pidklyuchaetsya-bankivskih-rahunkiv-1793957316.html",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxNM3NpYjhyMUQydzNHLXNidGNWZ2VSS2d4UUNwcURJZ19Bek5fY25jTGRDNHRmam44cEU4aUtCa09LSzFRRHRveXBCRUVDTExidWY0TE9YcU5QQjFGYzYwcmVHZzhoUzlraERJRzV6LUg3c3BYWXBMcVRnMHFoQVY4cjZDYU1RVjdLdHI0UXdrUDl3WUE",
+    "https://news.google.com/rss/articles/CBMipwFBVV95cUxOakNXYkNyNlBLeXFPREZxQjVRdG1FQjRMOW1NbVVmZWJDUldWUW43YXBVU0ZlcU5HcWlmWHdnVlpDbWtEcXJIOUhqUks0UGt2N1NhQklrQmgxUmZXeDZwNGEwUFUxV2ItYWtidlRLa0xjYjFTbHVHQzdMOTk1ZXRWQ2dCZTNnb0pHZ2dnYTZqZ1pFckpBdE50MXpibEtQV1NFOFc1QllYaw",
+    "https://www.iphoneincanada.ca/2026/11/06/claude-ai-gains-bank-account-access-to-help-fix-your-budget/",
+    "https://news.google.com/rss/articles/CBMid0FVX3lxTE1YdEhBY2RyZ0QxVTZXQkNJb3BjRzVQY3BENURPZE9Na3BkMVY4VzVSMDJFZVJCOGVQWktzVUFGQ1pBZG5yZ1BpTzVBalJjNEpFLW1GeDZuN1JZelVCbjNZbU04RXpBb1RrUXFmd2V4Vk94RXEydHc0",
+    "https://news.google.com/rss/articles/CBMiogFBVV95cUxNaGEwdjl4QTY5N183SWZ4eUJJMzhyUWtUS24yU2syVDBvUkZNUklsUE9pb1RpMnZGUWtxNEkyNEJySWRvQkc4YkhJaDZDRzlxZ2lxU1NpWG55b1FYbWtQZ2wyeXAwTDFHVG9PTDBxVktqdmdtbVI2OXBHa0lCTjZ0X1phWHpYaVVJTFVSOFVzY25BMzhRRjhORzlxMWhNczRlNlE",
+    "https://www.inside.com.tw/article/42845-anthropic-claude-personal-finance-plaid-beta",
+    "https://news.google.com/rss/articles/CBMie0FVX3lxTE1fMHFtV0dPdWVQX2N5LTI0T1VXX01tU3dYOHRqN3N2Q3RoQWhLUWE2VTdXY0E0VGQtYXlKTjg2Z3Y3UklKZkE0RUdGa1VBRlNyV0lib05ETjhPV1RGWDdQMlhpRUpTOFV4eVRaV3NPY0RKMkZMRDN4TlJvVQ",
+    "https://news.google.com/rss/articles/CBMimAFBVV95cUxPOUxGQ2NoVWotWTd3Qk93Z0d6aFlBOTkwSWlYLWRDS0syTEFTc29CcURDdDJVcGkwcW8xTWRWeEcwaW4yWm54Y1pCUmlDNXBrRnV2YVRYaGdYeVRiblNRYUl0Zm15dm1wUHVTVllzNS1HZUltMEF6c0llenp3T0VENjdWMTU4WUZZRWpPOWl1Tk94WldEV2ZvVA",
+    "https://canaltech.com.br/inteligencia-artificial/claude-ganha-ferramenta-que-acessa-contas-bancarias-e-analisa-os-seus-gastos/",
+    "https://news.google.com/rss/articles/CBMi6wFBVV95cUxQWEoxQmVLNWFSbnNOSzJmM2NXekJWeUdzSWZNbmRVcWR3OGR3cnF5QjlyTWZXUWh1aTh0ZlJyWmdnYndGOGtudzlMY2JzNTJjQnFtMU9nR3Uxc09EVE5xT2lLYUlkcGpzaUlZR3ExNTF4X0g4SGRFU1liLTNxRU9GWVF2bEswakJtOS1KM0h5SGE3b1VUSl94bkpTckw1Qm81NHVMM1RvelQzbUtOMkYwTmxua0xiMXp4ZVhxbm9POU5fTkdyQURoZHFISnk3eVBzREx6ZXJscXdoRXQ3b0V5cnZaTElYLW1FdEF3",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQcU9ZaHhETTA4YmZiMmMtMms5WVZneWtneDVTQ2RzbGNIcVRfNjBkT2MzbDltVnlWRlMyOUx2ZmtsclUwZ2JEVlBZdndkQmNxb01FZ0Q0cS10QnNNdWVmUUljcGNGS2w3QWVsX3ZtTDV5QVdrSUt3WVBQQ0t3Uk9MWFY1djk0U2R2NUlYUkdJalpQTnl2aE5VU2xqSWNHVjUzbE1VdXFYU2JsUQ",
+    "https://betanews.com/article/claude-personal-finance-bank-accounts-plaid/",
+    "https://highload.tech/uk/vash-domashnij-bankir-anthropic-zapuskaye-finansovogo-pomichnyka-na-bazi-claude/#new_tab",
+    "https://news.google.com/rss/articles/CBMilgFBVV95cUxOQjFMRThlV2hKZ05pZ3c4QU5lWDdnbF9uT2syRW1EMzN4cXhPM181dkhxZTJHUmdhU0JBSE83bm0wQURrbUFnUE1HTnBIZ29QY2NCd0poMktPOWd4eHZBRFNrQVpXMzNzNVpTR2c0ZWVvR2V3MWlFWDR1LWZiWjlBLVp2MjNXLWxWNEZ6MjhqLVBYeUVqZUE",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxQTGVPOGo1UDd1TUxtU3AybjA3MXhXeWJmU0lkNndvc29oeTBpTWFJTnJJR3ZWSXlPak9rQUVSM2ZsbEFVUGlEdjMxMm5VbEtSdWprb3liSkp3dFFSdnJXMVBoM1dyQTJZNDZMMTc3UmgxVTFiUHpEcEJubVNUYTZlOGVFMkRNdGh1b3VuX3F5ekJwSGdFV21GNWFHVFRlZDIzdkRUZnhfdVhRa25ZZXRPWG02S0FXSURhbjBYMUZTekRVZw",
+    "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1XVFVhNVVmeHZXQS1EZWR5RnJuamJNcnh1R1NDckFsVkJLSmdvb3pDY3hTUlkwaE5WV2VTcVBhR3EybTFLcHJOSg",
+    "https://news.google.com/rss/articles/CBMiV0FVX3lxTFB6dWt6d1hTdFF2SVFraXR2NTBoVjVMWFkzUV9oS1BHSkRtc2FuWjUyblpLQ0RkMllsc2dPUXRDRGJyV0xrZV9RU29lM3QyVm1US1pkN2VXWQ",
+    "https://news.google.com/rss/articles/CBMi1wFBVV95cUxOOGdxZEpVNkdXX2JoYmdyUzAzcEQyMENONUVIQkdwWE5XbjJyUU5fSDZ5d2Z6VVphMDBHei16U25GTVZ5QU1fR0RramFocmI1NmZDMXRBVVNCT1RkTGRFbm51WENhdlZ6TUhxSENHOU1oZl9xcExGSmZJX2RKb0p5em1YNzh6NmZrNlhKQmowa3llOTBfeUtUQ3NjRzhMWUdVa3NvcjlhaFFLRDFreGFBMWlaanB5S2JNVmt4ZXhtc2hfN1REY1I2ZXZJSkIybWdDRDZVZU9lQQ",
+    "https://news.google.com/rss/articles/CBMifkFVX3lxTE9PaUVTSFBuWHl1VkJidjRmMjlxWmJNRWcxN0sxTU5Jbm5UakVfR2NkRzFjRFFaSmYySmZabmw0Zjh3cWhjbUtHXy1IOWU5N1dhWmJpeFA1dG9NM3dyN2FuTE5FTWx1eWh0V2EwcTItb0Y1ejlkN3VJY0hJbHVxZw",
+    "https://news.google.com/rss/articles/CBMiggFBVV95cUxQX3VDWjRQT1d1X0NjejJtOTF4ZkticGxkNVFINEZoQ2hQVDVtRnpMZTVmenlqak9RaHBsUkhVcTFoUVlnOHV1N09WTkRiVFc1c2l1aUxhWGdyS3pPYTA4NkZTUzFYSUJOdkpUZjlfN25uMFhMNy00YXpaVlhxQ1k2QnZR",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxNVUtlQnZCZm9uS3lENk8xWlVQMVFKdVozNFhIekVNZTJtd0IxeFFvM0hXLXAtaWpKVk5ocjN4RDJqYk52a3BkZFRSMzlXYk4zRGo4WGZwS1RnZEx0alI3U21aQ1FyaWo1YlJ6STBxU0c0aXFreGI5MEhYTndBbDdqZ2dxUzNiVGVELUdYZ1FmNnIyczFuSjREaEdCVDJ4Zzc5SlZfaDRB",
+    "https://www.iphone-ticker.de/claude-prueft-die-haushaltskasse-neue-finanzfunktion-vorgestellt-290041/",
+    "https://news.google.com/rss/articles/CBMia0FVX3lxTFAteC1vakJ6QjRVQXVTeFJfdWk0TUVGMm1URENFV3ZFNDZ0YmFwbXpTaXpDZW5jNWx1TXdqZjVkdDFzNlF6VmpMS1djWWVGZzhtR2tKTVl3NVRPaWx0QXFWRUhQRXVMOGJTTGlF"
+  ],
+  "suggested_qna": [],
+  "summary": "Anthropic\u2019s new Personal Finance beta lets Claude analyze linked U.S. bank and card accounts through Plaid, but its read-only access does not prevent sensitive figures from appearing in chats or shared outputs. The feature is rolling out to Pro, Max and Ultra subscribers and can read balances, credit limits and up to 24 months of transactions [connectmoney.com#1][the-decoder.com#1][betanews.com#1].\n\nAnthropic says it excludes conversations in the dedicated finance hub from model training; ordinary Claude chats follow users\u2019 existing privacy settings. Financial details can remain in chat histories and shared links, and anyone with access to dashboards generated from account data can view them. Unlinking an account stops future reads but does not erase earlier answers or artifacts [betanews.com#1].\n\nClaude cannot transfer funds, manage accounts or invest, and Anthropic says it is not an investment-advice tool. The company warns that balances can be one or two days out of date and that answers may be wrong, advising users to verify important figures with their bank [connectmoney.com#1][betanews.com#1]. Anthropic has not given a date for access outside the United States [betanews.com#1].",
+  "talking_points": [
+    "Data exposure: Claude may also read a full account number if a bank places it in an account label or transaction description, even though the interface normally shows only the last four digits [betanews.com#1].",
+    "Access boundaries: The beta excludes Free, Team and Enterprise accounts and supports U.S. banks; when a paid subscription ends, the hub closes but linked banks are not automatically disconnected [betanews.com#1][pymnts.com#1].",
+    "ChatGPT comparison: PYMNTS Intelligence found 15% of consumers used ChatGPT for money management from July through September, compared with 4% for Claude; 16% said they were interested in letting AI directly manage their money [pymnts.com#1].",
+    "Competitive features: ChatGPT\u2019s finance tools include portfolio allocation and Experian credit information [pymnts.com#1][247wallst.com#1]."
+  ],
+  "technical_details": [
+    "Account-data fields: Claude can access the bank name, account name and type, last four digits, balances, credit limits and transaction details including merchant, amount, posting date, category and bank description; loan terms, interest rates, trades and investment holdings are excluded [betanews.com#1][247wallst.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "OpenAI introduced a Plaid-linked personal finance preview for ChatGPT Pro users [pymnts.com#1][betanews.com#1]",
+      "date": "15 May 2026",
+      "date_iso": "2026-05-15"
+    },
+    {
+      "content": "Testers spotted an early Claude finance feature in the iOS app [connectmoney.com#1][techrepublic.com#1]",
+      "date": "September 2026",
+      "date_iso": "2026-09"
+    },
+    {
+      "content": "Anthropic began the U.S. beta for paid Claude subscribers [connectmoney.com#1][the-decoder.com#1]",
+      "date": "5 November 2026",
+      "date_iso": "2026-11-05"
+    }
+  ],
+  "title": "Anthropic details Claude finance beta\u2019s data access and privacy limits",
+  "travel_advisory": "",
+  "unique_domains": 23,
+  "url": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE1XVFVhNVVmeHZXQS1EZWR5RnJuamJNcnh1R1NDckFsVkJLSmdvb3pDY3hTUlkwaE5WV2VTcVBhR3EybTFLcHJOSg",
+  "user_action_items": [
+    "Remove financial data from old chats or shared outputs before unlinking an account: Delete chat histories and artifacts and remove shared links separately. Unlinking blocks future reads but leaves prior responses and generated outputs available [betanews.com#1].",
+    "Verify important balances and totals: Check amounts in a bank app or statement, since balances may be one or two days behind and linked accounts can be double-counted if connected through multiple logins [connectmoney.com#1][pymnts.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
