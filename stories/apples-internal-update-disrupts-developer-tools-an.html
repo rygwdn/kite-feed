@@ -1,0 +1,2668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Apple&#39;s internal update disrupts developer tools and store systems - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Apple&#39;s internal update disrupts developer tools and store systems</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.nytimes.com/2026/11/17/technology/apple-down-outage-issues.html"><img src="https://kagiproxy.com/img/8ex-LyjZef727SxgdYCHnTj_iw9LVvNHFaLibnjIZVcLOjUEb_Q8vvUBJlYGj7sVkx7HxCMCxdeyCfFsgeBNIN214iVK_vzwks5-2CVRvKWshlGePdL7ZMJL7Udq2M1moC0ev_M36pqIC932npPKJAYHaV8e0wb9e_jdfQ" alt="Apple said it was addressing problems with its systems after an internal update caused outages to some of its services." title="Apple said it was addressing problems with its systems after an internal update caused outages to some of its services. (nytimes.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Apple said it was addressing problems with its systems after an internal update caused outages to some of its services. <span class='credit'>(nytimes.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Apple’s November 17 service outage affected more than consumer apps: developers reported trouble with App Store Connect, while Apple’s status listings also showed problems with account tools, music and podcast services, and school-management systems <a href="https://www.macrumors.com/2026/11/17/apple-accounts-experiencing-issues/" class="footnote-ref">[21]</a><a href="https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/" class="footnote-ref">[14]</a>. Staff at some stores could not complete purchases; a Philadelphia customer said both checkout and the Apple Store app’s self-checkout were unavailable at the Walnut Street location <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUlKRjItOTdLNHZCRlc1YzBnX3Ewbng1ZzNDVG5HNlVpbk1UeUVZZXkwcllJY2V3LS1UTG9uVGpaVmMzak9tVkQ1cG9nVmVLMkFyQXg1cllGQ2duVW84R1JKMlNia2puTnlNOEk4X2ZpNEx3bEJsLWN6ZFItNTFnbWp6aWxWM3FUVmVmcVFuXzRDOVA5Y28xdmFB0gGiAUFVX3lxTFA5MURsSmFZRS15S3BUcVhvWHlTTHNuRmpWZk05LUVONndaS2ZfNERZMEVTNHRrc1BSVnNFOGFJVnVDTVFpY0xTdmZnQ1dNY2lEQmR4VjFWZElHM2lNa1l2WnJSSUlOMzZtd2QtOENZUzFRVUlTVkNWNENsQ2JOOWVWSnZPZ2YtWlRMYU94S0RsLWpRTFR5VFFPMURjRVJYSW4tZw" class="footnote-ref">[49]</a>.
+
+Apple said an internal update caused the disruption but did not specify what the update changed or why it affected several systems <a href="https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/" class="footnote-ref">[10]</a><a href="https://www.freepressjournal.in/tech/apple-outage-why-were-icloud-app-store-apple-pay-music-more-services-down" class="footnote-ref">[43]</a>. Users also reported iCloud sign-in failures and device-activation errors, which can block setup of new Apple devices <a href="https://9to5mac.com/2026/11/17/icloud-app-store-and-other-apple-services-hit-by-ongoing-outage/" class="footnote-ref">[6]</a><a href="https://www.pcmag.com/news/icloud-down-users-report-outages-for-apple-services" class="footnote-ref">[13]</a>.
+
+The company’s public status page did not always match user reports: it initially showed services as available, then added and revised incident notices throughout the day <a href="https://www.freepressjournal.in/tech/apple-outage-why-were-icloud-app-store-apple-pay-music-more-services-down" class="footnote-ref">[43]</a><a href="https://www.digitaltrends.com/phones/apple-services-hit-by-widespread-outage-reports-users-flag-problems-with-icloud-app-store-and-apple-pay/" class="footnote-ref">[1]</a>. Apple listed all services as available by Tuesday evening, though users had reported lingering problems earlier that afternoon <a href="https://time.com/article/2026/11/17/apple-outage-down-update-issue/" class="footnote-ref">[7]</a><a href="https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/" class="footnote-ref">[10]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://www.digitaltrends.com/phones/apple-services-hit-by-widespread-outage-reports-users-flag-problems-with-icloud-app-store-and-apple-pay/">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>At this point, there is no indication that these incidents are the result of a cyberattack, foreign interference, or some coordinated effort</p>
+
+<cite>— Sen. Mark Warner, top Democrat on the Senate Intelligence Committee (Business Insider)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Outage reports: Reports to Downdetector began to spike around 11:40 a.m.; shortly before 1 p.m., roughly 2,000 users were reporting problems with Apple Support, Apple Pay and iCloud <a href="https://time.com/article/2026/11/17/apple-outage-down-update-issue/" class="footnote-ref">[7]</a>.</li>
+
+<li>NSA operations: The NSA said scheduled maintenance temporarily degraded some internal systems but left mission-critical capabilities operational <a href="https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption" class="footnote-ref">[67]</a><a href="https://www.derbund.ch/apple-ausfall-icloud-app-store-apple-pay-betroffen-669042870375" class="footnote-ref">[85]</a>.</li>
+
+<li>Hotel systems: Marriott operates 10,200 properties with more than 1.8 million rooms <a href="https://www.thehindubusinessline.com/info-tech/apple-outage-adds-to-growing-list-of-technology-disruptions-affecting-major-companies/article71714312.ece" class="footnote-ref">[80]</a><a href="https://www.theglobeandmail.com/world/article-apple-services-experience-widespread-outages/" class="footnote-ref">[83]</a>.</li>
+
+<li>Store disruption: At Apple’s flagship Michigan Avenue store in Chicago, systems were unavailable for at least an hour and operations appeared to resume by 12:20 p.m. local time <a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPaWg4RkxIUzZRa2pzMnZEWHJHTXhCNTd2dFF4ZWFSdDM5TUtITFBvMGRySFdzUXNzVnl6N3Qzd0NzZWJ6VmpITVZMT3pqYkVoLUxOekVUYUVqZ2NFWkFxSzhhU1MtR2c5alVvdDNQTWpRbExpQmJyWEotWEFKTEd0czBGUjd5YWd1U0U3OG42cEtmbmpfaU5JdmNjeHJiU045UWI1SE5pX19iVGg1SWNlNnVn" class="footnote-ref">[41]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Curt Esser, Appleton-based IT consultant: Esser pointed to software patches and transitions between old and new systems as possible contributors, while saying the outages did not appear related; he also cautioned that AI tools can produce faulty solutions if they lack complete information <a href="https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/" class="footnote-ref">[56]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/">WBAY</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Tony Sabai, cybersecurity expert: Sabai said frequent upgrades and maintenance on older systems can increase the chance of widespread problems, and argued that firms may be doing more such work to identify vulnerabilities <a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUlKRjItOTdLNHZCRlc1YzBnX3Ewbng1ZzNDVG5HNlVpbk1UeUVZZXkwcllJY2V3LS1UTG9uVGpaVmMzak9tVkQ1cG9nVmVLMkFyQXg1cllGQ2duVW84R1JKMlNia2puTnlNOEk4X2ZpNEx3bEJsLWN6ZFItNTFnbWp6aWxWM3FUVmVmcVFuXzRDOVA5Y28xdmFB0gGiAUFVX3lxTFA5MURsSmFZRS15S3BUcVhvWHlTTHNuRmpWZk05LUVONndaS2ZfNERZMEVTNHRrc1BSVnNFOGFJVnVDTVFpY0xTdmZnQ1dNY2lEQmR4VjFWZElHM2lNa1l2WnJSSUlOMzZtd2QtOENZUzFRVUlTVkNWNENsQ2JOOWVWSnZPZ2YtWlRMYU94S0RsLWpRTFR5VFFPMURjRVJYSW4tZw" class="footnote-ref">[49]</a>.</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Dr. Ali Butt, a computer science professor at Virginia Tech, cautioned against assuming the outages were connected. He said localized technical failures are plausible and the complexity of systems can turn small problems into substantial disruptions <a href="https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity" class="footnote-ref">[79]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity">FOX 26 Houston</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>12 November 2026:</strong> Microsoft outage disrupted Outlook and Teams services <a href="https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/" class="footnote-ref">[93]</a></li>
+
+
+
+<li><strong>13 November 2026:</strong> FAA communications problems triggered a nationwide flight ground stop <a href="https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/" class="footnote-ref">[93]</a></li>
+
+
+
+<li><strong>16 November 2026:</strong> Banking and United Airlines disruptions followed earlier system failures <a href="https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/" class="footnote-ref">[93]</a><a href="https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption" class="footnote-ref">[67]</a></li>
+
+
+
+<li><strong>17 November 2026:</strong> Apple services and the NSA internal network experienced disruptions <a href="https://www.cbsnews.com/news/apple-outage-icloud-apple-pay-services/" class="footnote-ref">[77]</a><a href="https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption" class="footnote-ref">[67]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Exchange gateway defect: Microsoft’s preliminary account described lock contention in an internal Windows process on some Microsoft 365 networking gateway servers. Newer machines with more cores worsened the defect, which tests focused on less powerful hardware failed to detect <a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE1lNmJPNzh3SlFOeFc5dVJpU3pxVG5JRWRoRS1hek9IR01XMXd2ZmtrRjRPdGRFUUY0ZXNES05aa3ZOUlhna2ExRDVEd3kzbTJMeHpzUWk5cUtlUmdwTF92Rlhjdkt1NFNvZnMxTHc1Y1owdXF4OFE4aDhB" class="footnote-ref">[75]</a>.</li>
+
+<li>FAA network overload: The FAA pointed in part to a router upgrade in southern Arkansas that overwhelmed its telecommunications network. The root cause remained under investigation <a href="https://www.cnbc.com/2026/11/17/apple-microsoft-faa-jpmorgan-outages.html" class="footnote-ref">[73]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Industry Impact</h2><ul>
+
+<li>Airlines: United Airlines’ separate technology outage lasted more than 90 minutes and delayed departing flights on Monday <a href="https://www.thehindubusinessline.com/info-tech/apple-outage-adds-to-growing-list-of-technology-disruptions-affecting-major-companies/article71714312.ece" class="footnote-ref">[80]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>No common cause has been established for the November 10 disruption and the November 17 outage <a href="https://www.macobserver.com/news/apple-outage-icloud-app-store-apple-music-and-more-services-down/" class="footnote-ref">[5]</a><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPaWg4RkxIUzZRa2pzMnZEWHJHTXhCNTd2dFF4ZWFSdDM5TUtITFBvMGRySFdzUXNzVnl6N3Qzd0NzZWJ6VmpITVZMT3pqYkVoLUxOekVUYUVqZ2NFWkFxSzhhU1MtR2c5alVvdDNQTWpRbExpQmJyWEotWEFKTEd0czBGUjd5YWd1U0U3OG42cEtmbmpfaU5JdmNjeHJiU045UWI1SE5pX19iVGg1SWNlNnVn" class="footnote-ref">[41]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Avoid repeated Apple Account sign-in attempts during verification errors: TechJuice reported that repeated attempts could lock the account. Wait for service to recover before trying again <a href="https://www.techjuice.pk/apple-hit-by-major-outage-as-icloud-apple-pay-remain-unresponsive-to-users-worldwide/" class="footnote-ref">[2]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiSEFVX3lxTE92V2hUZ2l5QVZoc3JtUnlQTnFSQnIxV0ZQSHBHTnJhWmxQRF9HdFVDN0V5XzVLNkhTVlJwMG5jdkRiM0NydGR4dg">https://news.google.com/rss/articles/CBMiSEFVX3lxTE92V2hUZ2l5QVZoc3JtUnlQTnFSQnIxV0ZQSHBHTnJhWmxQRF9HdFVDN0V5XzVLNkhTVlJwMG5jdkRiM0NydGR4dg</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMidEFVX3lxTFBLY2dabzlmVmtQT2FmODRlejctTnlGRGZYRV9ZaTBlMnl6bGV5Um8xMDZyOEsxRUlBZno1T3M1SUhoSWpIamdKdnZPYmxtbl80X1E1TzBZWDFvUnlsUmFfWFpyZ1pzMnFfRzZfaXJuSTlycGpp">https://news.google.com/rss/articles/CBMidEFVX3lxTFBLY2dabzlmVmtQT2FmODRlejctTnlGRGZYRV9ZaTBlMnl6bGV5Um8xMDZyOEsxRUlBZno1T3M1SUhoSWpIamdKdnZPYmxtbl80X1E1TzBZWDFvUnlsUmFfWFpyZ1pzMnFfRzZfaXJuSTlycGpp</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/world/apple-says-no-cyberattack-behind-massive-outage-that-crippled-its-ecosystem-14060750.html">https://www.firstpost.com/world/apple-says-no-cyberattack-behind-massive-outage-that-crippled-its-ecosystem-14060750.html</a></li>
+
+
+
+
+
+<li><a href="https://abcnews.com/Technology/wireStory/apple-joins-parade-technology-hiccups-recent-days-138227626">https://abcnews.com/Technology/wireStory/apple-joins-parade-technology-hiccups-recent-days-138227626</a></li>
+
+
+
+<li><a href="https://wgnradio.com/news/is-apple-down-users-report-problems-with-ios/">https://wgnradio.com/news/is-apple-down-users-report-problems-with-ios/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi2AFBVV95cUxQUHBvS25YS05VUjM5MkhteGw2SnVsbGctWWZ4NUhrOENDN3NkT1R1aTZxMUM2N2VDS2ktdVJ5YWF6OXd4Z2VCLVZYY05lUHhLM1FUYUxPYWQtYWk0U0VNUDNja2JVVnNPcHhpWml0S3pYYko2SEVOMHdTRzNsdXJHcHJDT2UyZ2Zudmd0aUJGUDllS3dIUWNGTW8yekJhN3hLeERRUDNfc1dGMXMtWUVRMnB3R3lNcE90YUlROFZDVGdHeXdxV0k0LUw1ZE9BeFp1QXNUT05TXzA">https://news.google.com/rss/articles/CBMi2AFBVV95cUxQUHBvS25YS05VUjM5MkhteGw2SnVsbGctWWZ4NUhrOENDN3NkT1R1aTZxMUM2N2VDS2ktdVJ5YWF6OXd4Z2VCLVZYY05lUHhLM1FUYUxPYWQtYWk0U0VNUDNja2JVVnNPcHhpWml0S3pYYko2SEVOMHdTRzNsdXJHcHJDT2UyZ2Zudmd0aUJGUDllS3dIUWNGTW8yekJhN3hLeERRUDNfc1dGMXMtWUVRMnB3R3lNcE90YUlROFZDVGdHeXdxV0k0LUw1ZE9BeFp1QXNUT05TXzA</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMilAFBVV95cUxNXzVsRUVrRUFmQWZreDF1aHFOeWZLbmt0WnNXMWNuaDRIcF9HQ3V3czNGVkNyQU11LW1wWVVGT1Q2RlVERDNRTHc3NzNsTDVldU0yTHVRUEt2SUt3a2lkeFdNamxoQTdvT1AxdGQtZHZOUWJLa2NHUFFoc1dlN01CNzJCemxmUjFGZGdPSTBKMHJ4U05U">https://news.google.com/rss/articles/CBMilAFBVV95cUxNXzVsRUVrRUFmQWZreDF1aHFOeWZLbmt0WnNXMWNuaDRIcF9HQ3V3czNGVkNyQU11LW1wWVVGT1Q2RlVERDNRTHc3NzNsTDVldU0yTHVRUEt2SUt3a2lkeFdNamxoQTdvT1AxdGQtZHZOUWJLa2NHUFFoc1dlN01CNzJCemxmUjFGZGdPSTBKMHJ4U05U</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxOMS1OTFlJLXRwY2VMSTlldWNzYjN3cEFMUXdoNVA4UHdJZ1Qzdkp4TWpBaTd6a1BDb3dTejU2Yk11M0hEVE9WUmFsSXZDbENsR0FTZHBJSk9rZzRDSnpGX21LQnZUVzIxQXVncUtock80QUV3YkVyMjhiWURqdlNKM1NJMzNRQzhFLUhES1R2Mm5hOVU4MndlQkJSZVpJNVVk">https://news.google.com/rss/articles/CBMioAFBVV95cUxOMS1OTFlJLXRwY2VMSTlldWNzYjN3cEFMUXdoNVA4UHdJZ1Qzdkp4TWpBaTd6a1BDb3dTejU2Yk11M0hEVE9WUmFsSXZDbENsR0FTZHBJSk9rZzRDSnpGX21LQnZUVzIxQXVncUtock80QUV3YkVyMjhiWURqdlNKM1NJMzNRQzhFLUhES1R2Mm5hOVU4MndlQkJSZVpJNVVk</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS09XbGJTQVhmMFdHUlo1Y25BSEJXb2I1UmtvREVYcmpMNGJKU2t3UlpxOENTcC04MkFHcnB3RWJjMUNBczIzd2I1NUotdDVzYkZrVHdodzIzYmEzQTR2NDh5V0NfSHZUcGFzb3JwYmNIRUdlYVJjRC1vQTlkcEdpdkJ3bl93cXlZc3V4R1F0Q0ZIajNtSmQ3QTBpbkNCNjdPR083cXNCbzlScm9sR1IzazBkY3BaYWFmUkpVaXNDblI">https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS09XbGJTQVhmMFdHUlo1Y25BSEJXb2I1UmtvREVYcmpMNGJKU2t3UlpxOENTcC04MkFHcnB3RWJjMUNBczIzd2I1NUotdDVzYkZrVHdodzIzYmEzQTR2NDh5V0NfSHZUcGFzb3JwYmNIRUdlYVJjRC1vQTlkcEdpdkJ3bl93cXlZc3V4R1F0Q0ZIajNtSmQ3QTBpbkNCNjdPR083cXNCbzlScm9sR1IzazBkY3BaYWFmUkpVaXNDblI</a></li>
+
+
+
+<li><a href="https://www.macworld.com/article/3288577/welp-its-apples-turn-icloud-and-other-services-are-struggling-to-stay-online-today.html">https://www.macworld.com/article/3288577/welp-its-apples-turn-icloud-and-other-services-are-struggling-to-stay-online-today.html</a></li>
+
+
+
+<li><a href="https://www.cnbc.com/2026/11/17/apple-microsoft-faa-jpmorgan-outages.html">https://www.cnbc.com/2026/11/17/apple-microsoft-faa-jpmorgan-outages.html</a></li>
+
+
+
+<li><a href="https://eastleighvoice.co.ke/news/424837/apple-users-locked-out-of-icloud-and-app-store-as-widespread-outage-hits-global-services">https://eastleighvoice.co.ke/news/424837/apple-users-locked-out-of-icloud-and-app-store-as-widespread-outage-hits-global-services</a></li>
+
+
+
+<li><a href="https://www.euronews.com/2026/11/17/us-banking-app-users-report-outages-from-software-bugs">https://www.euronews.com/2026/11/17/us-banking-app-users-report-outages-from-software-bugs</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUlKRjItOTdLNHZCRlc1YzBnX3Ewbng1ZzNDVG5HNlVpbk1UeUVZZXkwcllJY2V3LS1UTG9uVGpaVmMzak9tVkQ1cG9nVmVLMkFyQXg1cllGQ2duVW84R1JKMlNia2puTnlNOEk4X2ZpNEx3bEJsLWN6ZFItNTFnbWp6aWxWM3FUVmVmcVFuXzRDOVA5Y28xdmFB0gGiAUFVX3lxTFA5MURsSmFZRS15S3BUcVhvWHlTTHNuRmpWZk05LUVONndaS2ZfNERZMEVTNHRrc1BSVnNFOGFJVnVDTVFpY0xTdmZnQ1dNY2lEQmR4VjFWZElHM2lNa1l2WnJSSUlOMzZtd2QtOENZUzFRVUlTVkNWNENsQ2JOOWVWSnZPZ2YtWlRMYU94S0RsLWpRTFR5VFFPMURjRVJYSW4tZw">https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUlKRjItOTdLNHZCRlc1YzBnX3Ewbng1ZzNDVG5HNlVpbk1UeUVZZXkwcllJY2V3LS1UTG9uVGpaVmMzak9tVkQ1cG9nVmVLMkFyQXg1cllGQ2duVW84R1JKMlNia2puTnlNOEk4X2ZpNEx3bEJsLWN6ZFItNTFnbWp6aWxWM3FUVmVmcVFuXzRDOVA5Y28xdmFB0gGiAUFVX3lxTFA5MURsSmFZRS15S3BUcVhvWHlTTHNuRmpWZk05LUVONndaS2ZfNERZMEVTNHRrc1BSVnNFOGFJVnVDTVFpY0xTdmZnQ1dNY2lEQmR4VjFWZElHM2lNa1l2WnJSSUlOMzZtd2QtOENZUzFRVUlTVkNWNENsQ2JOOWVWSnZPZ2YtWlRMYU94S0RsLWpRTFR5VFFPMURjRVJYSW4tZw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinwFBVV95cUxNT2duLWJ6V3ZiRm01OVhNbW9jZjBLSnFRODlyNlU3RzlhRWNVX2JyTm9McXl6VnNMNGhNbHV4Qkx2X3Y0RXhDazBrN1lWd0tOa3p5TlJQbU1vRWQtRi1jOGY5dzgwTV9RNHlhcXVHc2J2eEZpV29FcE8zbnpHaGd1OWtHMGp5ME1QVF9iZTVYemctWjBZVG55NFVfV01xM3PSAaQBQVVfeXFMTVMxT2tIeVc5elpjNzBRZVZsNnItVHhGOEk5TEJsUTktRzgwRzhuMlJXYk1Rc0x4TDA0YUFJZ1MzQU9qbWlUd0E5SmtyUkdwRHRGMmR1SUdKc2hodVp3Zl9xcGZKdmpLRHpnNko4V0ZCc0FHREJEOWMwMWlBc3F2LTJ3by11dWlPZnNzbHNYRU5BQ3JaMkdoLUttckRJQzFmYnUxX0c">https://news.google.com/rss/articles/CBMinwFBVV95cUxNT2duLWJ6V3ZiRm01OVhNbW9jZjBLSnFRODlyNlU3RzlhRWNVX2JyTm9McXl6VnNMNGhNbHV4Qkx2X3Y0RXhDazBrN1lWd0tOa3p5TlJQbU1vRWQtRi1jOGY5dzgwTV9RNHlhcXVHc2J2eEZpV29FcE8zbnpHaGd1OWtHMGp5ME1QVF9iZTVYemctWjBZVG55NFVfV01xM3PSAaQBQVVfeXFMTVMxT2tIeVc5elpjNzBRZVZsNnItVHhGOEk5TEJsUTktRzgwRzhuMlJXYk1Rc0x4TDA0YUFJZ1MzQU9qbWlUd0E5SmtyUkdwRHRGMmR1SUdKc2hodVp3Zl9xcGZKdmpLRHpnNko4V0ZCc0FHREJEOWMwMWlBc3F2LTJ3by11dWlPZnNzbHNYRU5BQ3JaMkdoLUttckRJQzFmYnUxX0c</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMitAFBVV95cUxOWktmYjRMRmxKXy1CbTFPU0poNDNnT2VHVm1RbGRLYTFzRG50Wjg3STMxTUZwVXBqVDNXNnZJeU9nc3EzYlNoSlRfMUoyS0RITERlS1otZ0JRS0xvNVpNTE04OWZ3Y3U4bWpENjJhMS0wN0pMc1FudzJKX3NwWDhXY3l0VFpyMmdoS2ducmtRak9xSHpod0dqaHhWRjk0cGlrV0Y2aUU1QndMYU9YbGdKMHZpdlXSAcgBQVVfeXFMTV92VjItbVl0SjlXTG5feUxBWmJ6MVc0dzY5eDVNOGtvYTJCMUdEUUVPZTctYkJKdzlPaUZUUkcybE03MnEtRmhfc1NSNzhLRk9LR0FYQ1dmdGtiMjZOazJXczM2dmJINGFTOGFfTmpTc1FMVFFkWWY3N2hVOFBDaWJxbFFLR2M3M1hJblhsRDc3LVc5SWdjcWgxWjlBamxlR3pJTHk3OHRKMElmc0pldkJKRXNLQzBQQ3NtejRlTC1zX003NzQ5RXo">https://news.google.com/rss/articles/CBMitAFBVV95cUxOWktmYjRMRmxKXy1CbTFPU0poNDNnT2VHVm1RbGRLYTFzRG50Wjg3STMxTUZwVXBqVDNXNnZJeU9nc3EzYlNoSlRfMUoyS0RITERlS1otZ0JRS0xvNVpNTE04OWZ3Y3U4bWpENjJhMS0wN0pMc1FudzJKX3NwWDhXY3l0VFpyMmdoS2ducmtRak9xSHpod0dqaHhWRjk0cGlrV0Y2aUU1QndMYU9YbGdKMHZpdlXSAcgBQVVfeXFMTV92VjItbVl0SjlXTG5feUxBWmJ6MVc0dzY5eDVNOGtvYTJCMUdEUUVPZTctYkJKdzlPaUZUUkcybE03MnEtRmhfc1NSNzhLRk9LR0FYQ1dmdGtiMjZOazJXczM2dmJINGFTOGFfTmpTc1FMVFFkWWY3N2hVOFBDaWJxbFFLR2M3M1hJblhsRDc3LVc5SWdjcWgxWjlBamxlR3pJTHk3OHRKMElmc0pldkJKRXNLQzBQQ3NtejRlTC1zX003NzQ5RXo</a></li>
+
+
+
+<li><a href="https://www.dawn.com/news/2045368/apple-works-to-restore-services-after-outage-caused-by-internal-update">https://www.dawn.com/news/2045368/apple-works-to-restore-services-after-outage-caused-by-internal-update</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMisgFBVV95cUxPaWg4RkxIUzZRa2pzMnZEWHJHTXhCNTd2dFF4ZWFSdDM5TUtITFBvMGRySFdzUXNzVnl6N3Qzd0NzZWJ6VmpITVZMT3pqYkVoLUxOekVUYUVqZ2NFWkFxSzhhU1MtR2c5alVvdDNQTWpRbExpQmJyWEotWEFKTEd0czBGUjd5YWd1U0U3OG42cEtmbmpfaU5JdmNjeHJiU045UWI1SE5pX19iVGg1SWNlNnVn">https://news.google.com/rss/articles/CBMisgFBVV95cUxPaWg4RkxIUzZRa2pzMnZEWHJHTXhCNTd2dFF4ZWFSdDM5TUtITFBvMGRySFdzUXNzVnl6N3Qzd0NzZWJ6VmpITVZMT3pqYkVoLUxOekVUYUVqZ2NFWkFxSzhhU1MtR2c5alVvdDNQTWpRbExpQmJyWEotWEFKTEd0czBGUjd5YWd1U0U3OG42cEtmbmpfaU5JdmNjeHJiU045UWI1SE5pX19iVGg1SWNlNnVn</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipAFBVV95cUxNS01oRGJLdFFiNUtzYUdLbTJHTGlFNTJsVkRudElwQjJWMU8teDQ1bUpONW5NMlBXTUZWeUxockJMVjN0bHNmdXZhWHlBbHY1STk3Zm9zcmdVcTVKbmxfM0dLdVR4SU5idUwwZjAwczFxNkNKVVpoZnctb0M3TG5xVjJpdHBGbDhKaERscDFOTDNQbE9UU2hLeGwyNHMzSmdkSmhxWg">https://news.google.com/rss/articles/CBMipAFBVV95cUxNS01oRGJLdFFiNUtzYUdLbTJHTGlFNTJsVkRudElwQjJWMU8teDQ1bUpONW5NMlBXTUZWeUxockJMVjN0bHNmdXZhWHlBbHY1STk3Zm9zcmdVcTVKbmxfM0dLdVR4SU5idUwwZjAwczFxNkNKVVpoZnctb0M3TG5xVjJpdHBGbDhKaERscDFOTDNQbE9UU2hLeGwyNHMzSmdkSmhxWg</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/explainers/apple-microsoft-major-outages-cause-not-cyberattacks-ai-14060791.html">https://www.firstpost.com/explainers/apple-microsoft-major-outages-cause-not-cyberattacks-ai-14060791.html</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/icloud-down-users-report-outages-for-apple-services">https://www.pcmag.com/news/icloud-down-users-report-outages-for-apple-services</a></li>
+
+
+
+<li><a href="https://time.com/article/2026/11/17/apple-outage-down-update-issue/">https://time.com/article/2026/11/17/apple-outage-down-update-issue/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMinAFBVV95cUxPMDV6dFR5bml5T202bF9vV216RVU5WGVjRHlGN0FfUDV6bFpjWXF6c0xYNjJBTDVhd1loVDBCaTBEc0dvdmotUndGTTFNMUdqc1Vld0FjQm1wN21vdVh6NDdkLUlua0FoMGUtV3RtX2E4eE9zTFgxLXUzX01TcVhLcnlBR29RVmx6UENUWlN2TjIxeHU5SjZNMHJSWVY">https://news.google.com/rss/articles/CBMinAFBVV95cUxPMDV6dFR5bml5T202bF9vV216RVU5WGVjRHlGN0FfUDV6bFpjWXF6c0xYNjJBTDVhd1loVDBCaTBEc0dvdmotUndGTTFNMUdqc1Vld0FjQm1wN21vdVh6NDdkLUlua0FoMGUtV3RtX2E4eE9zTFgxLXUzX01TcVhLcnlBR29RVmx6UENUWlN2TjIxeHU5SjZNMHJSWVY</a></li>
+
+
+
+<li><a href="https://www.nytimes.com/2026/11/17/technology/apple-down-outage-issues.html">https://www.nytimes.com/2026/11/17/technology/apple-down-outage-issues.html</a></li>
+
+
+
+<li><a href="https://www.independent.co.uk/tech/apple-down-not-working-pay-icloud-music-app-store-iphone-status-b3086668.html">https://www.independent.co.uk/tech/apple-down-not-working-pay-icloud-music-app-store-iphone-status-b3086668.html</a></li>
+
+
+
+<li><a href="https://www.freepressjournal.in/tech/apple-outage-why-were-icloud-app-store-apple-pay-music-more-services-down">https://www.freepressjournal.in/tech/apple-outage-why-were-icloud-app-store-apple-pay-music-more-services-down</a></li>
+
+
+
+<li><a href="https://sentinelcolorado.com/uncategorized/apple-joins-a-parade-of-technology-hiccups-in-recent-days/">https://sentinelcolorado.com/uncategorized/apple-joins-a-parade-of-technology-hiccups-in-recent-days/</a></li>
+
+
+
+<li><a href="https://www.bankier.pl/wiadomosc/Awaria-szeregu-uslug-Apple-w-tym-App-Store-iCloud-i-Apple-Pay-Przyczyna-pozostaje-nieznana-9230543.html">https://www.bankier.pl/wiadomosc/Awaria-szeregu-uslug-Apple-w-tym-App-Store-iCloud-i-Apple-Pay-Przyczyna-pozostaje-nieznana-9230543.html</a></li>
+
+
+
+<li><a href="https://www.theregister.com/security/2026/11/17/daily-disruptive-outages-that-ground-planes-and-halt-work-welcome-to-the-new-normal/5310634">https://www.theregister.com/security/2026/11/17/daily-disruptive-outages-that-ground-planes-and-halt-work-welcome-to-the-new-normal/5310634</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNMHl4MS1nR0N6NVRkU3V0NGtmOEhVTHJMc2xETW5la19qaE1IWjQ3TU1ZME5pV1NVRjExWFI4Yy1LdXpCai1hMW5sZXJwbWlHU2RnUXo0S183dkNpeW8zVFZ5R1hFZXBkdngtd1NVaU83TzZuZXFKZE00N0ozQmVNUUpVenpWVWh2R1FHUXdYMUpBXzA">https://news.google.com/rss/articles/CBMikwFBVV95cUxNMHl4MS1nR0N6NVRkU3V0NGtmOEhVTHJMc2xETW5la19qaE1IWjQ3TU1ZME5pV1NVRjExWFI4Yy1LdXpCai1hMW5sZXJwbWlHU2RnUXo0S183dkNpeW8zVFZ5R1hFZXBkdngtd1NVaU83TzZuZXFKZE00N0ozQmVNUUpVenpWVWh2R1FHUXdYMUpBXzA</a></li>
+
+
+
+<li><a href="https://orf.at/stories/3448526/">https://orf.at/stories/3448526/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiuwFBVV95cUxPM1BRSlFGdnhCT0FYT0pOZjdWVDJYVWc1RG4ydFN2TDY1ZF9BQVktRi15N2FNb3lNUGxnMXVybXJaT1JOZ2hsbHQyMnBONzhFazd5WWNNeWp1cVJYd1k0MFVIUHdPajFCYVd4REt5am9CYmVUVzlhWG03YXgzZEZ3emlNdFljcDRSVzUwb0tuYkoxRVU1c2FBQmxZMkgyVklIZzdNMF91QTQxWWhYTXB1cUxWZzZBcHNrdG9v">https://news.google.com/rss/articles/CBMiuwFBVV95cUxPM1BRSlFGdnhCT0FYT0pOZjdWVDJYVWc1RG4ydFN2TDY1ZF9BQVktRi15N2FNb3lNUGxnMXVybXJaT1JOZ2hsbHQyMnBONzhFazd5WWNNeWp1cVJYd1k0MFVIUHdPajFCYVd4REt5am9CYmVUVzlhWG03YXgzZEZ3emlNdFljcDRSVzUwb0tuYkoxRVU1c2FBQmxZMkgyVklIZzdNMF91QTQxWWhYTXB1cUxWZzZBcHNrdG9v</a></li>
+
+
+
+<li><a href="https://www.macgadget.de/News/2026/11/17/Apple-Mehrere-Dienste-von-Ausfaellen-betroffen">https://www.macgadget.de/News/2026/11/17/Apple-Mehrere-Dienste-von-Ausfaellen-betroffen</a></li>
+
+
+
+<li><a href="https://zive.aktuality.sk/clanok/K75lNGR/apple-ma-vypadok-roznych-sluzieb-hlasia-pouzivatelia/">https://zive.aktuality.sk/clanok/K75lNGR/apple-ma-vypadok-roznych-sluzieb-hlasia-pouzivatelia/</a></li>
+
+
+
+<li><a href="https://www.politico.com/news/2026/11/17/tech-outages-2026-nsa-faa-apple-what-we-know-01170887">https://www.politico.com/news/2026/11/17/tech-outages-2026-nsa-faa-apple-what-we-know-01170887</a></li>
+
+
+
+<li><a href="https://www.neowin.net/news/apple-confirms-outage-as-app-store-pay-support-go-down/">https://www.neowin.net/news/apple-confirms-outage-as-app-store-pay-support-go-down/</a></li>
+
+
+
+<li><a href="https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity">https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxPbmh0aFdkQng5TDFLYnFiNTlEVXQ4X3l0WEhwdzlyQnNCazJaNU9DbnJOS2ZTU1lvbkZBdHlCZnJMSU5MbXhDLUFVYkFsNGJXSUNqdnFhVUpPRFU4azNYSzJnT043R0VmU0pwdHZVaXhwYWpNanE5Ukoxa1hTeWFiQjJWdE4xM203WWVobmVzVm9SbXMtanlGaXE4TnVubjFsdXU4YnFMVG4yWGxX">https://news.google.com/rss/articles/CBMirAFBVV95cUxPbmh0aFdkQng5TDFLYnFiNTlEVXQ4X3l0WEhwdzlyQnNCazJaNU9DbnJOS2ZTU1lvbkZBdHlCZnJMSU5MbXhDLUFVYkFsNGJXSUNqdnFhVUpPRFU4azNYSzJnT043R0VmU0pwdHZVaXhwYWpNanE5Ukoxa1hTeWFiQjJWdE4xM203WWVobmVzVm9SbXMtanlGaXE4TnVubjFsdXU4YnFMVG4yWGxX</a></li>
+
+
+
+<li><a href="https://mobilesyrup.com/2026/11/17/apple-icloud-outage/">https://mobilesyrup.com/2026/11/17/apple-icloud-outage/</a></li>
+
+
+
+<li><a href="https://developer.apple.com/system-status/">https://developer.apple.com/system-status/</a></li>
+
+
+
+<li><a href="https://www.thenews.com.pk/latest/1424030-apple-services-hit-by-fresh-outages-across-us">https://www.thenews.com.pk/latest/1424030-apple-services-hit-by-fresh-outages-across-us</a></li>
+
+
+
+<li><a href="https://www.businessinsider.com/tech-outages-list-microsoft-faa-apple-united-banking-2026-11">https://www.businessinsider.com/tech-outages-list-microsoft-faa-apple-united-banking-2026-11</a></li>
+
+
+
+<li><a href="https://www.allsides.com/news/2026-11-17-0800/technology-apple-services-down-apple-pay-app-store-and-apple-support-experience-outages">https://www.allsides.com/news/2026-11-17-0800/technology-apple-services-down-apple-pay-app-store-and-apple-support-experience-outages</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8wdWJMRnZxWC1UZmsxaVY4VXRDb0xtTzF5UDRWX18xSWFHVXVaZnh4VWpmSWNKVGw5WlZnX3hTbjhXVDlSR2Vqd001UzlpVlJhZXdKMkczSUdyeElHcEUyZk1NUTM5Rjg">https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8wdWJMRnZxWC1UZmsxaVY4VXRDb0xtTzF5UDRWX18xSWFHVXVaZnh4VWpmSWNKVGw5WlZnX3hTbjhXVDlSR2Vqd001UzlpVlJhZXdKMkczSUdyeElHcEUyZk1NUTM5Rjg</a></li>
+
+
+
+<li><a href="https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/">https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/</a></li>
+
+
+
+<li><a href="https://www.sfgate.com/tech/article/tech-outages-list-22536414.php">https://www.sfgate.com/tech/article/tech-outages-list-22536414.php</a></li>
+
+
+
+<li><a href="https://www.fastcompany.com/91644249/all-these-outages-show-how-corporate-america-needs-to-modernize-out-of-date-tech">https://www.fastcompany.com/91644249/all-these-outages-show-how-corporate-america-needs-to-modernize-out-of-date-tech</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMingFBVV95cUxQdWJPWEFuMlhPaHl3cGROdDdXR1M2clUtMGw0MWRoYXJDSzc5NTRkN1UyRTZRNW12QUMxQndaSjRpcHVjbmRzWE1DemV6WU00Rzg3NEUyMTJvenhvR0xNQ1hlQVp5dnZZVlZDM3ZKWHZSc0k5QkJPRDdBaGwxSUptb2pXMnhyT0U0NnBCQ2pqTWxneFQ0RmNMcmdybkFTUQ">https://news.google.com/rss/articles/CBMingFBVV95cUxQdWJPWEFuMlhPaHl3cGROdDdXR1M2clUtMGw0MWRoYXJDSzc5NTRkN1UyRTZRNW12QUMxQndaSjRpcHVjbmRzWE1DemV6WU00Rzg3NEUyMTJvenhvR0xNQ1hlQVp5dnZZVlZDM3ZKWHZSc0k5QkJPRDdBaGwxSUptb2pXMnhyT0U0NnBCQ2pqTWxneFQ0RmNMcmdybkFTUQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiekFVX3lxTE1lNmJPNzh3SlFOeFc5dVJpU3pxVG5JRWRoRS1hek9IR01XMXd2ZmtrRjRPdGRFUUY0ZXNES05aa3ZOUlhna2ExRDVEd3kzbTJMeHpzUWk5cUtlUmdwTF92Rlhjdkt1NFNvZnMxTHc1Y1owdXF4OFE4aDhB">https://news.google.com/rss/articles/CBMiekFVX3lxTE1lNmJPNzh3SlFOeFc5dVJpU3pxVG5JRWRoRS1hek9IR01XMXd2ZmtrRjRPdGRFUUY0ZXNES05aa3ZOUlhna2ExRDVEd3kzbTJMeHpzUWk5cUtlUmdwTF92Rlhjdkt1NFNvZnMxTHc1Y1owdXF4OFE4aDhB</a></li>
+
+
+
+<li><a href="https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/">https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiswFBVV95cUxQNldibmhuQ0JMekhWNnIxOHczX3pPQlRiZFZYc3Fqb0k0WnhaYW1IVUJVMDdfVHlySmRLZXV0UnRHMHkyZmpiZFBFRUpoOWhsT2U0YWh5ZWJNRG5rSTVRREdKdVNmUmFkNEFjaFFjWll1ZTRjRUZsUFNGLXZhT1dXS3V4YUdJT1d5MEJwamV0MTVsZmpQZkllWFc3YmVMZVZXYllqU0I5bkVBRGhzTkdpcXdVTQ">https://news.google.com/rss/articles/CBMiswFBVV95cUxQNldibmhuQ0JMekhWNnIxOHczX3pPQlRiZFZYc3Fqb0k0WnhaYW1IVUJVMDdfVHlySmRLZXV0UnRHMHkyZmpiZFBFRUpoOWhsT2U0YWh5ZWJNRG5rSTVRREdKdVNmUmFkNEFjaFFjWll1ZTRjRUZsUFNGLXZhT1dXS3V4YUdJT1d5MEJwamV0MTVsZmpQZkllWFc3YmVMZVZXYllqU0I5bkVBRGhzTkdpcXdVTQ</a></li>
+
+
+
+<li><a href="https://www.derbund.ch/apple-ausfall-icloud-app-store-apple-pay-betroffen-669042870375">https://www.derbund.ch/apple-ausfall-icloud-app-store-apple-pay-betroffen-669042870375</a></li>
+
+
+
+<li><a href="https://www.engadget.com/2319504/icloud-and-other-apple-services-are-down-in-an-apparent-outage/">https://www.engadget.com/2319504/icloud-and-other-apple-services-are-down-in-an-apparent-outage/</a></li>
+
+
+
+<li><a href="https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption">https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption</a></li>
+
+
+
+<li><a href="https://9to5mac.com/2026/11/17/icloud-app-store-and-other-apple-services-hit-by-ongoing-outage/">https://9to5mac.com/2026/11/17/icloud-app-store-and-other-apple-services-hit-by-ongoing-outage/</a></li>
+
+
+
+<li><a href="https://www.op-marburg.de/wirtschaft/apple-technische-stoerung-legt-app-store-music-und-icloud-lahm-3BOPOCTA6FB4PPM347YWW4U4IY.html">https://www.op-marburg.de/wirtschaft/apple-technische-stoerung-legt-app-store-music-und-icloud-lahm-3BOPOCTA6FB4PPM347YWW4U4IY.html</a></li>
+
+
+
+<li><a href="https://www.androidauthority.com/apple-outage-3736240/">https://www.androidauthority.com/apple-outage-3736240/</a></li>
+
+
+
+<li><a href="https://www.cbsnews.com/news/apple-outage-icloud-apple-pay-services/">https://www.cbsnews.com/news/apple-outage-icloud-apple-pay-services/</a></li>
+
+
+
+<li><a href="https://www.bluewin.ch/de/digital/stoerung-bei-apple-diensten-li.3677211">https://www.bluewin.ch/de/digital/stoerung-bei-apple-diensten-li.3677211</a></li>
+
+
+
+<li><a href="https://www.cbsnews.com/video/tech-outage-us-spy-agency-hampered-ability-communicate-internally/">https://www.cbsnews.com/video/tech-outage-us-spy-agency-hampered-ability-communicate-internally/</a></li>
+
+
+
+<li><a href="https://www.thenational.scot/news/26739125.apple-google-users-report-widespread-outages/">https://www.thenational.scot/news/26739125.apple-google-users-report-widespread-outages/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxOdHhZODlyc0x3OVVaWWxoclNTRjBhM2pqRUtlZnNqYWctY0NKczJLNEcyeFViVktlaDh2SXJQbndWcmRPMEhPdWM5MHVBaGd5ekZaQmUzeXhRU3JwSGo3VnVMOTRNQ1pHM1RlcW5wY0huVHNpTWtHMHBlazV0WnVBRHZWZWxSdw">https://news.google.com/rss/articles/CBMihgFBVV95cUxOdHhZODlyc0x3OVVaWWxoclNTRjBhM2pqRUtlZnNqYWctY0NKczJLNEcyeFViVktlaDh2SXJQbndWcmRPMEhPdWM5MHVBaGd5ekZaQmUzeXhRU3JwSGo3VnVMOTRNQ1pHM1RlcW5wY0huVHNpTWtHMHBlazV0WnVBRHZWZWxSdw</a></li>
+
+
+
+<li><a href="https://www.nachrichten.at/panorama/weltspiegel/icloud-apple-music-appstore-stoerung-bei-apple-diensten;art17,4233967#ref=rss">https://www.nachrichten.at/panorama/weltspiegel/icloud-apple-music-appstore-stoerung-bei-apple-diensten;art17,4233967#ref=rss</a></li>
+
+
+
+<li><a href="https://www.dawn.com/news/2045364/tech-outage-wave-reaches-us-government-trump-says-all-is-fine">https://www.dawn.com/news/2045364/tech-outage-wave-reaches-us-government-trump-says-all-is-fine</a></li>
+
+
+
+<li><a href="https://www.41nbc.com/apple-outage-marriott-technology-disruptions/">https://www.41nbc.com/apple-outage-marriott-technology-disruptions/</a></li>
+
+
+
+<li><a href="https://www.cbsnews.com/news/banks-online-service-outages-jpmorgan-chase-bank-of-america-wells-fargo/">https://www.cbsnews.com/news/banks-online-service-outages-jpmorgan-chase-bank-of-america-wells-fargo/</a></li>
+
+
+
+<li><a href="https://stirileprotv.ro/stiri/ilikeit/serviciile-apple-printre-care-icloud-apple-pay-app-store-si-apple-music-au-fost-afectate-de-o-pana-majora.html">https://stirileprotv.ro/stiri/ilikeit/serviciile-apple-printre-care-icloud-apple-pay-app-store-si-apple-music-au-fost-afectate-de-o-pana-majora.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirAFBVV95cUxPQkFiNjR2dnpqWmNlX2tvLThVSjJDQXRsSnNzRE12MHlIbjN6V1M3bjc0eVp2czQ3Tm5QdEs4NnJPUkJCT2FuUS10SDhtb0t3RHk5eUJmdFEzVHc5eVVwY2dIX3NfMW5pOEtVNHQ0MDBvd3JBdWxXeFZwNmJuYnBCU0p6SzE0eDFLZS1xRW4ycExiSFVqdTZNRjVqN1MzWGpzclRLQmpwbjVBTUty">https://news.google.com/rss/articles/CBMirAFBVV95cUxPQkFiNjR2dnpqWmNlX2tvLThVSjJDQXRsSnNzRE12MHlIbjN6V1M3bjc0eVp2czQ3Tm5QdEs4NnJPUkJCT2FuUS10SDhtb0t3RHk5eUJmdFEzVHc5eVVwY2dIX3NfMW5pOEtVNHQ0MDBvd3JBdWxXeFZwNmJuYnBCU0p6SzE0eDFLZS1xRW4ycExiSFVqdTZNRjVqN1MzWGpzclRLQmpwbjVBTUty</a></li>
+
+
+
+<li><a href="https://arynews.tv/major-apple-outage-brings-app-store-icloud-apple-music-and-apple-pay-to-a-halt-worldwide">https://arynews.tv/major-apple-outage-brings-app-store-icloud-apple-music-and-apple-pay-to-a-halt-worldwide</a></li>
+
+
+
+<li><a href="https://www.theglobeandmail.com/world/article-apple-services-experience-widespread-outages/">https://www.theglobeandmail.com/world/article-apple-services-experience-widespread-outages/</a></li>
+
+
+
+<li><a href="https://www.wbay.com/2026/11/17/apple-outage-affects-app-store-apple-music-icloud-sign-in/">https://www.wbay.com/2026/11/17/apple-outage-affects-app-store-apple-music-icloud-sign-in/</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/apple-outage-icloud-app-store-apple-music-and-more-services-down/">https://www.macobserver.com/news/apple-outage-icloud-app-store-apple-music-and-more-services-down/</a></li>
+
+
+
+<li><a href="https://www.techjuice.pk/apple-hit-by-major-outage-as-icloud-apple-pay-remain-unresponsive-to-users-worldwide/">https://www.techjuice.pk/apple-hit-by-major-outage-as-icloud-apple-pay-remain-unresponsive-to-users-worldwide/</a></li>
+
+
+
+<li><a href="https://www.macobserver.com/news/apple-corporate-offices-reportedly-offline-as-massive-outage-hits-internal-systems/">https://www.macobserver.com/news/apple-corporate-offices-reportedly-offline-as-massive-outage-hits-internal-systems/</a></li>
+
+
+
+<li><a href="https://www.leparisien.fr/high-tech/icloud-app-store-apple-victime-dune-panne-geante-dans-le-monde-entier-sur-plusieurs-de-ses-services-17-11-2026-6ZCYIWUR4RCFTIZNYNWVVTJLKU.php">https://www.leparisien.fr/high-tech/icloud-app-store-apple-victime-dune-panne-geante-dans-le-monde-entier-sur-plusieurs-de-ses-services-17-11-2026-6ZCYIWUR4RCFTIZNYNWVVTJLKU.php</a></li>
+
+
+
+<li><a href="https://appleinsider.com/articles/26/11/17/icloud-account-login-icloud-mail-services-are-having-trouble-today">https://appleinsider.com/articles/26/11/17/icloud-account-login-icloud-mail-services-are-having-trouble-today</a></li>
+
+
+
+<li><a href="https://www.koaa.com/life/tech-tips/apple-services-hit-by-outages-including-app-store-and-music">https://www.koaa.com/life/tech-tips/apple-services-hit-by-outages-including-app-store-and-music</a></li>
+
+
+
+<li><a href="https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/">https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxQUWRGU0lGZWI5cHJNLTloMEd2TExDWC1JbUVRU0padkFtTFdVSjlFbHhMY2xDV1UxX2hPc2J6U3FXZHVZQl83bmg5cHV2YUxFcFZseTlwNmhCNXdLMmNVSGhjcG15RGFjcGRLVTJMdnpQbElIb3BIVGxpcHNlQm5FWnRCVFUzNzVadE9HOUZqVkpXZw">https://news.google.com/rss/articles/CBMikgFBVV95cUxQUWRGU0lGZWI5cHJNLTloMEd2TExDWC1JbUVRU0padkFtTFdVSjlFbHhMY2xDV1UxX2hPc2J6U3FXZHVZQl83bmg5cHV2YUxFcFZseTlwNmhCNXdLMmNVSGhjcG15RGFjcGRLVTJMdnpQbElIb3BIVGxpcHNlQm5FWnRCVFUzNzVadE9HOUZqVkpXZw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMipgFBVV95cUxNYmwzVnVNX21ZbVpqT3NPREZXLVNtOXd1NkFNUjFGTE95VlI5UWR2aHZ5ZkhqOXNYaU5vVkpBVmNXcWdiV1BORUJTSW5CUllLSVBDXzhPTXlmSU12TUtDYzdrX3J4TDloaS1aS3hzOVBURTRXOTVqTFdTUndmamRyaUtFRFRLNS1RWlR6Tm9faXNhYkdqOGlCa3dNR3RhX2M3bFhzS2tR">https://news.google.com/rss/articles/CBMipgFBVV95cUxNYmwzVnVNX21ZbVpqT3NPREZXLVNtOXd1NkFNUjFGTE95VlI5UWR2aHZ5ZkhqOXNYaU5vVkpBVmNXcWdiV1BORUJTSW5CUllLSVBDXzhPTXlmSU12TUtDYzdrX3J4TDloaS1aS3hzOVBURTRXOTVqTFdTUndmamRyaUtFRFRLNS1RWlR6Tm9faXNhYkdqOGlCa3dNR3RhX2M3bFhzS2tR</a></li>
+
+
+
+<li><a href="https://www.macrumors.com/2026/11/17/apple-outage-internal-update/">https://www.macrumors.com/2026/11/17/apple-outage-internal-update/</a></li>
+
+
+
+<li><a href="https://www.thehindubusinessline.com/info-tech/apple-outage-adds-to-growing-list-of-technology-disruptions-affecting-major-companies/article71714312.ece">https://www.thehindubusinessline.com/info-tech/apple-outage-adds-to-growing-list-of-technology-disruptions-affecting-major-companies/article71714312.ece</a></li>
+
+
+
+<li><a href="https://www.wfla.com/news/national/string-of-major-technology-outages-raise-concerns-as-cybersecurity-expert-explains-possible-causes/">https://www.wfla.com/news/national/string-of-major-technology-outages-raise-concerns-as-cybersecurity-expert-explains-possible-causes/</a></li>
+
+
+
+<li><a href="https://indianexpress.com/article/technology/apple-outage-icloud-app-store-apple-pay-10967415/">https://indianexpress.com/article/technology/apple-outage-icloud-app-store-apple-pay-10967415/</a></li>
+
+
+
+<li><a href="https://rp-online.de/digitales/app-store-betroffen-stoerung-bei-apple-diensten_aid-158547573">https://rp-online.de/digitales/app-store-betroffen-stoerung-bei-apple-diensten_aid-158547573</a></li>
+
+
+
+<li><a href="https://mashable.com/tech/apple-outage-icloud-app-store-apple-pay-november-17">https://mashable.com/tech/apple-outage-icloud-app-store-apple-pay-november-17</a></li>
+
+
+
+<li><a href="https://www.macrumors.com/2026/11/17/apple-accounts-experiencing-issues/">https://www.macrumors.com/2026/11/17/apple-accounts-experiencing-issues/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigwFBVV95cUxQS1FzZ3h6UUJzenI2TmhvV3pwMEFiMGtMcVZWR1hqNDloYUlKOUlfSk1SZERZSVRPNm5tN1Y1eUdycm1iTlJscFJZcFpkVG05SVFPT0Z1U0M0YnZVMDRyVE9YVko1UWRzUTRvbzlzWVdEakttd0hYTjFIMGtpY21tdWFrRQ">https://news.google.com/rss/articles/CBMigwFBVV95cUxQS1FzZ3h6UUJzenI2TmhvV3pwMEFiMGtMcVZWR1hqNDloYUlKOUlfSk1SZERZSVRPNm5tN1Y1eUdycm1iTlJscFJZcFpkVG05SVFPT0Z1U0M0YnZVMDRyVE9YVko1UWRzUTRvbzlzWVdEakttd0hYTjFIMGtpY21tdWFrRQ</a></li>
+
+
+
+<li><a href="https://www.firstpost.com/tech/apple-outage-hits-icloud-app-store-apple-pay-and-other-services-across-the-us-what-users-need-to-know-14060747.html">https://www.firstpost.com/tech/apple-outage-hits-icloud-app-store-apple-pay-and-other-services-across-the-us-what-users-need-to-know-14060747.html</a></li>
+
+
+
+<li><a href="https://futurism.com/future-society/apple-iphone-services-suffers-major-outage">https://futurism.com/future-society/apple-iphone-services-suffers-major-outage</a></li>
+
+
+
+<li><a href="https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/">https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/</a></li>
+
+
+
+<li><a href="https://www.lalibre.be/economie/digital/2026/11/17/que-se-passe-t-il-des-apple-des-utilisateurs-signalent-des-problemes-7JBMQQSGDZBRZKHE6HOWDWKH3E/">https://www.lalibre.be/economie/digital/2026/11/17/que-se-passe-t-il-des-apple-des-utilisateurs-signalent-des-problemes-7JBMQQSGDZBRZKHE6HOWDWKH3E/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> digitaltrends.com, politico.com, firstpost.com, 9to5mac.com, nytimes.com, neowin.net, techcrunch.com, macobserver.com, dawn.com, appleinsider.com, fastcompany.com, engadget.com, theregister.com, pcmag.com, techjuice.pk, mashable.com, freepressjournal.in, bluewin.ch, indianexpress.com, time.com, androidauthority.com, bleepingcomputer.com, macworld.com, mobilesyrup.com, futurism.com, macrumors.com, abcnews.com, variety.com, calcalistech.com, sfchronicle.com, royanews.tv, samaa.tv, detroitnews.com, wctv.tv, arynews.tv, cleveland.com, ahram.org.eg, macgadget.de, thenational.scot, independent.co.uk, afr.com, wsmv.com, inc.com, nbcphiladelphia.com, wbay.com, eastleighvoice.co.ke, op-marburg.de, allsides.com, leparisien.fr, thedailybeast.com, stirileprotv.ro, aktuality.sk, lalibre.be, 41nbc.com, nachrichten.at, wgnradio.com, bankier.pl, koaa.com, euronews.com, businessinsider.com, nytimes.com, cnbc.com, theguardian.com, cbsnews.com, time.com, theverge.com, digitaltrends.com, indianexpress.com, thehindubusinessline.com, sfgate.com, nbcnews.com, apple.com, foxbusiness.com, wcvb.com, fox26houston.com, wsmv.com, detroitnews.com, macworld.com, nbcphiladelphia.com, wdsu.com, variety.com, calcalistech.com, royanews.tv, theglobeandmail.com, thedailybeast.com, macgadget.de, sfchronicle.com, samaa.tv, rp-online.de, stirileprotv.ro, derbund.ch, wfla.com, thenews.com.pk, wctv.tv, kktv.com, orf.at, sentinelcolorado.com, techjuice.pk, wmtv15news.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #2, 58 unique domains, 65 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "Moinak Pal",
+      "date": "2026-11-17T17:51:41.000Z",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.digitaltrends.com/phones/apple-services-hit-by-widespread-outage-reports-users-flag-problems-with-icloud-app-store-and-apple-pay/",
+      "title": "Apple services hit by widespread outage; users flag problems with iCloud, App Store and Apple Pay"
+    },
+    {
+      "author": "Abdul Wasay",
+      "date": "2026-11-18T04:42:04.000Z",
+      "domain": "techjuice.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techjuice.pk/apple-hit-by-major-outage-as-icloud-apple-pay-remain-unresponsive-to-users-worldwide/",
+      "title": "Apple Hit by Major Outage as iCloud, Apple Pay Remain Unresponsive to Users Worldwide"
+    },
+    {
+      "author": "Sayan Sen",
+      "date": "2026-11-17T20:09:49.000Z",
+      "domain": "neowin.net",
+      "image": "https://kagiproxy.com/img/CEGOXV6mLgs7bGRZn7AVdaDsRXxsxQMj22Z3fbB6XPEzzTMDweNqKBRDHa3rUt26FgS8Nwv9ZzHi0HRht9_oA2QFvAdLW8wumeEpVSgP5hKgMYoDeUbRpayGprKaFRiDayf_LKnJMTXCb2_e-ibH",
+      "image_caption": "",
+      "link": "https://www.neowin.net/news/apple-confirms-outage-as-app-store-pay-support-go-down/",
+      "title": "Apple confirms outage as App Store, iCloud account sign-ins, Apple Pay go down"
+    },
+    {
+      "date": "2026-11-17T18:58:13.000Z",
+      "domain": "indianexpress.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://indianexpress.com/article/technology/apple-outage-icloud-app-store-apple-pay-10967415/",
+      "title": "Apple services down: iCloud, App Store and Apple Pay users report disruptions"
+    },
+    {
+      "author": "Shane Watson",
+      "date": "2026-11-17T18:26:00.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/apple-outage-icloud-app-store-apple-music-and-more-services-down/",
+      "title": "Apple Outage: iCloud, App Store, Apple Music, and More Services Down"
+    },
+    {
+      "author": "Zac Hall",
+      "date": "2026-11-17T17:33:58.000Z",
+      "domain": "9to5mac.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://9to5mac.com/2026/11/17/icloud-app-store-and-other-apple-services-hit-by-ongoing-outage/",
+      "title": "iCloud, App Store, and other Apple services hit by ongoing outage [U]"
+    },
+    {
+      "author": "Connor Greene",
+      "date": "2026-11-17T20:53:37.000Z",
+      "domain": "time.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://time.com/article/2026/11/17/apple-outage-down-update-issue/",
+      "title": "What to Know About the Apple Outage"
+    },
+    {
+      "author": "Amanda Holpuch",
+      "date": "2026-11-17T23:17:38.000Z",
+      "domain": "nytimes.com",
+      "image": "https://kagiproxy.com/img/pzGyS_hO2dveDRo73fltiyRT5u9tow7E2_azsZSL4HcVoKjuyVzAFtLM_TkuI9PqH_atvwdcjL8E5LV97Kt0coQxtq5vR-huC8VtAV2jNCMPZfShgTbExuwuzPPk8WhDCr4OEuVVRz0h36aIA9SJmg55OxIx1Uw54sT6vA",
+      "image_caption": "Apple said it was addressing problems with its systems after an internal update caused outages to some of its services.",
+      "link": "https://www.nytimes.com/2026/11/17/technology/apple-down-outage-issues.html",
+      "title": "Apple Addresses Outages Affecting Apple Pay, iCloud and Apps"
+    },
+    {
+      "author": "Shriyansh.Garg",
+      "date": "2026-11-17T19:43:02.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/B-CvzuLiO-BhfGOdY2N9Gz38TPDEBhASBpJuX_rpRUwxZnuUakJy2AUpC_B7paazAAuAtnYCqM61LVzy_0wcveX2WPRMCEijUiBBkGrAQH8TSPqRW1AY0VoSDpKRGTrakETcnlNKTZzzECBr-gfE7CR4ZT2DG-p0NzwN2ou6J-fq",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/tech/apple-outage-hits-icloud-app-store-apple-pay-and-other-services-across-the-us-what-users-need-to-know-14060747.html",
+      "title": "Apple outage hits iCloud, App Store, Apple Pay and other services across the US: What users need to know"
+    },
+    {
+      "author": "Sarah Perez",
+      "date": "2026-11-17T18:55:40.000Z",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
+      "title": "Apple services, including iCloud, App Store, Apple Music, and more, hit by outage"
+    },
+    {
+      "author": "Igor Bonifacic",
+      "date": "2026-11-17T18:15:04.000Z",
+      "domain": "engadget.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.engadget.com/2319504/icloud-and-other-apple-services-are-down-in-an-apparent-outage/",
+      "title": "iCloud and other Apple services are down in an apparent outage"
+    },
+    {
+      "author": "Stephen Schenck",
+      "date": "2026-11-17T18:46:39.000Z",
+      "domain": "androidauthority.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.androidauthority.com/apple-outage-3736240/",
+      "title": "Apple services are down for users all over. Here\u2019s what\u2019s happening (Updated)"
+    },
+    {
+      "date": "2026-11-17T18:29:58.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/icloud-down-users-report-outages-for-apple-services",
+      "title": "iCloud Down? Users Report Outages Across Apple Services"
+    },
+    {
+      "author": "Mayank Parmar",
+      "date": "2026-11-17T19:24:07.000Z",
+      "domain": "bleepingcomputer.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/",
+      "title": "Apple reports outages affecting iCloud Mail, AppleCare and more"
+    },
+    {
+      "date": "2026-11-17T20:25:30.000Z",
+      "domain": "macworld.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macworld.com/article/3288577/welp-its-apples-turn-icloud-and-other-services-are-struggling-to-stay-online-today.html",
+      "title": "Welp, it\u2019s Apple\u2019s turn: iCloud and other services are struggling to stay online today"
+    },
+    {
+      "author": "Jonathan Lamont",
+      "date": "2026-11-17T19:25:00.000Z",
+      "domain": "mobilesyrup.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mobilesyrup.com/2026/11/17/apple-icloud-outage/",
+      "title": "Apple outage hits iCloud, Apple Pay, and more [Update]"
+    },
+    {
+      "author": "Sneha Swaminathan",
+      "date": "2026-11-18T00:13:36.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/jHTFR-7IoTAycLK1OKZshDmoPdKi3-6C9FPdL88uddAozOEBSGLiWgHa_8BAuQ9E7epB7IBXG2TkBIDMlEa7qI6KjlfhJMJZ0gZn31UldtL-R_1lFAxrUv_XzaR5BOcOm-z9SogFoBlxN7gKBFYDg7V_lle7GdpNAhs57WeeNItMokRB1cs",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/world/apple-says-no-cyberattack-behind-massive-outage-that-crippled-its-ecosystem-14060750.html",
+      "title": "Apple says no cyberattack behind massive outage that crippled its ecosystem"
+    },
+    {
+      "date": "2026-11-17T19:59:17.000Z",
+      "domain": "mashable.com",
+      "image": "https://kagiproxy.com/img/FaOMwDljQOfwizmtCCTPatG0OmMA6qparjkWPlIl1auQtP7h_T5DCVHUYESofA7dtH3zOwQIg3Dts27sdWGERa4UjHTp7WrVXRjLc3MgrHU_lXpR50fA6WAgpbqvrSNQ1dy26fhOZYdi9NMrneggjJaWBducqNSatZaV2MCyYhjXK8FbvzVzmNkUuyaKmA",
+      "image_caption": "",
+      "link": "https://mashable.com/tech/apple-outage-icloud-app-store-apple-pay-november-17",
+      "title": "Apple confirms iCloud sign-in issues, App Store and Apple Pay outages"
+    },
+    {
+      "author": "Malcolm Owen",
+      "date": "2026-11-17T21:02:29.000Z",
+      "domain": "appleinsider.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://appleinsider.com/articles/26/11/17/icloud-account-login-icloud-mail-services-are-having-trouble-today",
+      "title": "\u0027Not a cyber attack,\u0027 Apple says about outage that hit iCloud \u0026 internal services"
+    },
+    {
+      "author": "Victor Tangermann",
+      "date": "2026-11-17T18:56:24.000Z",
+      "domain": "futurism.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://futurism.com/future-society/apple-iphone-services-suffers-major-outage",
+      "title": "iPhones Suddenly Lose Functionality as Apple Suffers Major Outage"
+    },
+    {
+      "author": "Juli Clover",
+      "date": "2026-11-17T17:47:55.000Z",
+      "domain": "macrumors.com",
+      "image": "https://kagiproxy.com/img/dXpN_n92s13s90TYd_XikDZLXkl16qTJApVoQMFYhyPEnFutZ2G0B6Euum7f5pXlmZ-J_pWQBzcgFGRfzjZ0C7NpLsg2j87KC517CXObbp3ZUgYsPtJv6fV4EZ9VrbCjFQ",
+      "image_caption": "",
+      "link": "https://www.macrumors.com/2026/11/17/apple-accounts-experiencing-issues/",
+      "title": "Apple Accounts, App Store and Apple Music Experiencing Issues"
+    },
+    {
+      "date": "2026-11-17T21:39:22.000Z",
+      "domain": "abcnews.com",
+      "image": "https://kagiproxy.com/img/micWMtaog7lGbQBtE-rVK1bBzSHXhea-6Edk3NZd58cAdmGLcul6HcmwyMrV1FhV8PRvjQEkdHxHxxf6Bkiq304RzFxPkMBxCGQuDbQUt9ycSZtX1iFRUVQsmBMW2YIFNp9P9gvM5DdNCx5hbGSgiJ5ybLV-qjlSWN8",
+      "image_caption": "",
+      "link": "https://abcnews.com/Technology/wireStory/apple-joins-parade-technology-hiccups-recent-days-138227626",
+      "title": "Apple joins a parade of technology hiccups in recent days"
+    },
+    {
+      "author": "Juli Clover",
+      "date": "2026-11-17T19:31:33.000Z",
+      "domain": "macrumors.com",
+      "image": "https://kagiproxy.com/img/277uvRJfRZVX2CvBAOWY2g_Vx7ndjz31bFGdJGXMloTfUXQND2Y3APbOe-BvrHUw5o8RoHTccM5xw14TbX2qMBLslxwp3dm3XAbPSp-CKyN_mMb2TKkLJrMR6OSmeKlklvw",
+      "image_caption": "",
+      "link": "https://www.macrumors.com/2026/11/17/apple-outage-internal-update/",
+      "title": "Apple Blames Internal Update for Outage, Says It Wasn\u0027t a Cyberattack"
+    },
+    {
+      "author": "Mike Peterson",
+      "date": "2026-11-17T19:30:00.000Z",
+      "domain": "macobserver.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macobserver.com/news/apple-corporate-offices-reportedly-offline-as-massive-outage-hits-internal-systems/",
+      "title": "Apple Corporate Offices Reportedly Offline as Massive Outage Hits Internal Systems"
+    },
+    {
+      "author": "Jessica Lyons",
+      "date": "2026-11-17T23:41:31.000Z",
+      "domain": "theregister.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.theregister.com/security/2026/11/17/daily-disruptive-outages-that-ground-planes-and-halt-work-welcome-to-the-new-normal/5310634",
+      "title": "Daily disruptive outages that ground planes and halt work \u2013 welcome to the new normal"
+    },
+    {
+      "author": "Reuters",
+      "date": "2026-11-18T03:07:58.000Z",
+      "domain": "dawn.com",
+      "image": "https://kagiproxy.com/img/E_vrqkWES-Qf5ux49uKeGujR6Ei8irdUnBSPppFKttZabToSSSAPEtFdpvkg5k3bY34NTn7emaV1DSt0XWVKdkwzmFhH2kJpiQbg84HdnQ1u",
+      "image_caption": "The Apple Inc logo is seen at the entrance to the Apple store in Brussels, Belgium on November 28, 2022. \u2014Reuters/File",
+      "link": "https://www.dawn.com/news/2045368/apple-works-to-restore-services-after-outage-caused-by-internal-update",
+      "title": "Apple works to restore services after outage caused by internal update"
+    },
+    {
+      "author": "Roshneesh Kmaneck",
+      "date": "2026-11-18T03:57:00.000Z",
+      "domain": "firstpost.com",
+      "image": "https://kagiproxy.com/img/OaoOv-3Dlh4oeRNCdCqjHDen5HFHPV-CeEGKVMUsHIXkCmm8_oQyU0PR0o8F7dGsYF6Il3zJ8xYSOSI2JwsJGC-yXCPp8B6upbUDXIIfaeaaSWloX_m0Hq9z82aIXgAaCh_nQONIRBFbZMAwKElYX9d2S-4q7PsEeoS_ja0wxF8b",
+      "image_caption": "",
+      "link": "https://www.firstpost.com/explainers/apple-microsoft-major-outages-cause-not-cyberattacks-ai-14060791.html",
+      "title": "From Apple to Microsoft, 6 major outages in 6 days: If not cyberattacks, what\u2019s causing the failures?"
+    },
+    {
+      "author": "Jalen Beckford and Maggie Miller",
+      "date": "2026-11-17T22:22:49.000Z",
+      "domain": "politico.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.politico.com/news/2026/11/17/tech-outages-2026-nsa-faa-apple-what-we-know-01170887",
+      "title": "6 major outages in 6 days: From Outlook to the NSA, what we know so far"
+    },
+    {
+      "author": "Peter Saalfield",
+      "date": "2026-11-17T22:00:00.000Z",
+      "domain": "fastcompany.com",
+      "image": "https://kagiproxy.com/img/4RCk-u6w9597gMfegBHza5Z3mQTMfmg4wm66nqsuamKr86zOIgiTNuDHalpQf-pRgqDg_cN_vE4jsJ5mzduPrRE-QbN4WuRKQ3zrO0IWiYRsFoBsvRoIODDMgj1kcYb0K82K9m0dG8OOYmPKSEaef0ZXHnibX7hILeygb3Tlo8PG4cqLR98ngGdZPRinikVck5EG7dAL2Y80B5cJwBf4QtBzk_ivZqLkSLwYXYUiVn9PyNmFOOeV_6T1hBetIvEUGyhf2ae7LCqHLf98yWzvUa2Teo9I3SWWxpmnsTvDcI4tWFMLb-4BSJTOKrQ",
+      "image_caption": "",
+      "link": "https://www.fastcompany.com/91644249/all-these-outages-show-how-corporate-america-needs-to-modernize-out-of-date-tech",
+      "title": "All these outages show how corporate America needs to modernize out-of-date tech"
+    },
+    {
+      "author": "Reuters",
+      "date": "2026-11-18T04:38:35.000Z",
+      "domain": "dawn.com",
+      "image": "https://kagiproxy.com/img/RjxwN2fLPtkiWqKjVCgHnc0xmCtQf7bdXRSsRrreNgiatSakRZciLCWE4S4jzUz9LnbsQlY8cPFVsf-N5_Ol9uzZJ9WhutS-utHLaEUWzhy-",
+      "image_caption": "United States National Security Agency logo and US flag are seen in this illustration taken April 23, 2025. \u2014 Reuters/ File",
+      "link": "https://www.dawn.com/news/2045364/tech-outage-wave-reaches-us-government-trump-says-all-is-fine",
+      "title": "Tech outage wave reaches US government, Trump says all is \u0027fine\u0027"
+    },
+    {
+      "date": "2026-11-17T19:28:00.000Z",
+      "domain": "variety.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipgFBVV95cUxNYmwzVnVNX21ZbVpqT3NPREZXLVNtOXd1NkFNUjFGTE95VlI5UWR2aHZ5ZkhqOXNYaU5vVkpBVmNXcWdiV1BORUJTSW5CUllLSVBDXzhPTXlmSU12TUtDYzdrX3J4TDloaS1aS3hzOVBURTRXOTVqTFdTUndmamRyaUtFRFRLNS1RWlR6Tm9faXNhYkdqOGlCa3dNR3RhX2M3bFhzS2tR",
+      "title": "Apple Hit With Outages in iCloud, Apple Pay and More Services"
+    },
+    {
+      "date": "2026-11-17T19:28:00.000Z",
+      "domain": "calcalistech.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8wdWJMRnZxWC1UZmsxaVY4VXRDb0xtTzF5UDRWX18xSWFHVXVaZnh4VWpmSWNKVGw5WlZnX3hTbjhXVDlSR2Vqd001UzlpVlJhZXdKMkczSUdyeElHcEUyZk1NUTM5Rjg",
+      "title": "Apple services suffer widespread outage, disrupting iCloud, App Store and Apple Pay"
+    },
+    {
+      "date": "2026-11-17T18:42:06.000Z",
+      "domain": "sfchronicle.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOdHhZODlyc0x3OVVaWWxoclNTRjBhM2pqRUtlZnNqYWctY0NKczJLNEcyeFViVktlaDh2SXJQbndWcmRPMEhPdWM5MHVBaGd5ekZaQmUzeXhRU3JwSGo3VnVMOTRNQ1pHM1RlcW5wY0huVHNpTWtHMHBlazV0WnVBRHZWZWxSdw",
+      "title": "Apple users hit by widespread service outage affecting iCloud, App Store and more"
+    },
+    {
+      "date": "2026-11-17T19:19:14.000Z",
+      "domain": "royanews.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiSEFVX3lxTE92V2hUZ2l5QVZoc3JtUnlQTnFSQnIxV0ZQSHBHTnJhWmxQRF9HdFVDN0V5XzVLNkhTVlJwMG5jdkRiM0NydGR4dg",
+      "title": "Apple services hit by outage, disrupting iCloud, App Store, Apple Pay"
+    },
+    {
+      "date": "2026-11-17T19:36:42.000Z",
+      "domain": "engadget.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinAFBVV95cUxPMDV6dFR5bml5T202bF9vV216RVU5WGVjRHlGN0FfUDV6bFpjWXF6c0xYNjJBTDVhd1loVDBCaTBEc0dvdmotUndGTTFNMUdqc1Vld0FjQm1wN21vdVh6NDdkLUlua0FoMGUtV3RtX2E4eE9zTFgxLXUzX01TcVhLcnlBR29RVmx6UENUWlN2TjIxeHU5SjZNMHJSWVY",
+      "title": "iCloud And Other Apple Services Are Down In An Apparent Outage"
+    },
+    {
+      "date": "2026-11-18T03:54:57.000Z",
+      "domain": "samaa.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNMHl4MS1nR0N6NVRkU3V0NGtmOEhVTHJMc2xETW5la19qaE1IWjQ3TU1ZME5pV1NVRjExWFI4Yy1LdXpCai1hMW5sZXJwbWlHU2RnUXo0S183dkNpeW8zVFZ5R1hFZXBkdngtd1NVaU83TzZuZXFKZE00N0ozQmVNUUpVenpWVWh2R1FHUXdYMUpBXzA",
+      "title": "Apple outage disrupts iCloud, Apple Pay and other services"
+    },
+    {
+      "date": "2026-11-17T19:05:00.000Z",
+      "domain": "detroitnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPM1BRSlFGdnhCT0FYT0pOZjdWVDJYVWc1RG4ydFN2TDY1ZF9BQVktRi15N2FNb3lNUGxnMXVybXJaT1JOZ2hsbHQyMnBONzhFazd5WWNNeWp1cVJYd1k0MFVIUHdPajFCYVd4REt5am9CYmVUVzlhWG03YXgzZEZ3emlNdFljcDRSVzUwb0tuYkoxRVU1c2FBQmxZMkgyVklIZzdNMF91QTQxWWhYTXB1cUxWZzZBcHNrdG9v",
+      "title": "Apple Pay, iCloud, other Apple services hit by outages after bank disruptions"
+    },
+    {
+      "date": "2026-11-17T18:47:00.000Z",
+      "domain": "wctv.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPQkFiNjR2dnpqWmNlX2tvLThVSjJDQXRsSnNzRE12MHlIbjN6V1M3bjc0eVp2czQ3Tm5QdEs4NnJPUkJCT2FuUS10SDhtb0t3RHk5eUJmdFEzVHc5eVVwY2dIX3NfMW5pOEtVNHQ0MDBvd3JBdWxXeFZwNmJuYnBCU0p6SzE0eDFLZS1xRW4ycExiSFVqdTZNRjVqN1MzWGpzclRLQmpwbjVBTUty",
+      "title": "Widespread outage hits Apple services, including Apple Pay, iCloud, reports say"
+    },
+    {
+      "date": "2026-11-17T19:56:31.000Z",
+      "domain": "arynews.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://arynews.tv/major-apple-outage-brings-app-store-icloud-apple-music-and-apple-pay-to-a-halt-worldwide",
+      "title": "Major Apple outage brings App Store, iCloud, Apple Music, and Apple Pay to a halt worldwide"
+    },
+    {
+      "date": "2026-11-17T18:58:00.000Z",
+      "domain": "cleveland.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOWktmYjRMRmxKXy1CbTFPU0poNDNnT2VHVm1RbGRLYTFzRG50Wjg3STMxTUZwVXBqVDNXNnZJeU9nc3EzYlNoSlRfMUoyS0RITERlS1otZ0JRS0xvNVpNTE04OWZ3Y3U4bWpENjJhMS0wN0pMc1FudzJKX3NwWDhXY3l0VFpyMmdoS2ducmtRak9xSHpod0dqaHhWRjk0cGlrV0Y2aUU1QndMYU9YbGdKMHZpdlXSAcgBQVVfeXFMTV92VjItbVl0SjlXTG5feUxBWmJ6MVc0dzY5eDVNOGtvYTJCMUdEUUVPZTctYkJKdzlPaUZUUkcybE03MnEtRmhfc1NSNzhLRk9LR0FYQ1dmdGtiMjZOazJXczM2dmJINGFTOGFfTmpTc1FMVFFkWWY3N2hVOFBDaWJxbFFLR2M3M1hJblhsRDc3LVc5SWdjcWgxWjlBamxlR3pJTHk3OHRKMElmc0pldkJKRXNLQzBQQ3NtejRlTC1zX003NzQ5RXo",
+      "title": "Apple Pay and iCloud hit by outage reports: What\u2019s happening today?"
+    },
+    {
+      "date": "2026-11-17T19:59:50.000Z",
+      "domain": "ahram.org.eg",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaWg4RkxIUzZRa2pzMnZEWHJHTXhCNTd2dFF4ZWFSdDM5TUtITFBvMGRySFdzUXNzVnl6N3Qzd0NzZWJ6VmpITVZMT3pqYkVoLUxOekVUYUVqZ2NFWkFxSzhhU1MtR2c5alVvdDNQTWpRbExpQmJyWEotWEFKTEd0czBGUjd5YWd1U0U3OG42cEtmbmpfaU5JdmNjeHJiU045UWI1SE5pX19iVGg1SWNlNnVn",
+      "title": "Apple outage disrupts iCloud sign-ins, App Store and retail transactions - International - World"
+    },
+    {
+      "author": "Redaktion",
+      "date": "2026-11-17T18:30:00.000Z",
+      "domain": "macgadget.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macgadget.de/News/2026/11/17/Apple-Mehrere-Dienste-von-Ausfaellen-betroffen",
+      "title": "Apple: Mehrere Dienste von Ausf\u00e4llen betroffen (Update)"
+    },
+    {
+      "author": "Tasneem Kanchwala",
+      "date": "2026-11-18T03:50:40.000Z",
+      "domain": "freepressjournal.in",
+      "image": "https://kagiproxy.com/img/JXKStOfvnt4Ypiixbqf_Fn4lfP27GrwsyED3AsR19eijrQ7Y-5sXx1Lm8IoEGlqovnsyOYA4ZbYe5EFuN32KGUH29KJdCydG5WpurFdM3w8SgUXgLA3e0YEyRpmkXIFHib_BBI0uYQ",
+      "image_caption": "Apple Outage: Why Were iCloud, App Store, Apple Pay, Music \u0026 More Services Down?",
+      "link": "https://www.freepressjournal.in/tech/apple-outage-why-were-icloud-app-store-apple-pay-music-more-services-down",
+      "title": "Apple Outage: Why Were iCloud, App Store, Apple Pay, Music \u0026 More Services Down?"
+    },
+    {
+      "author": "laura.pollock@newsquest.co.uk | Laura Pollock",
+      "date": "2026-11-17T19:44:27.000Z",
+      "domain": "thenational.scot",
+      "image": "https://kagiproxy.com/img/rz5_aoZCdaH3uPo1zF5dBCUHzST-zfmCi9HAynUY4Su4Dmx62GOdAfFe-_dEIelUEgy9tGCYNBDuTW7mPAF4Rot-W7niqJlZceXY7YXAWIrVRjA",
+      "image_caption": "Is Apple down? Thousands of users have reported problems with iCloud, Apple Pay and the App Store",
+      "link": "https://www.thenational.scot/news/26739125.apple-google-users-report-widespread-outages/",
+      "title": "Is Apple down? Thousands report iCloud and Apple Pay outages"
+    },
+    {
+      "author": "Andrew Griffin",
+      "date": "2026-11-18T05:20:47.000Z",
+      "domain": "independent.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.independent.co.uk/tech/apple-down-not-working-pay-icloud-music-app-store-iphone-status-b3086668.html",
+      "title": "Apple down live: iPhones stop working properly as iCloud taken down by \u2018internal update\u2019"
+    },
+    {
+      "date": "2026-11-18T01:28:29.000Z",
+      "domain": "afr.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS09XbGJTQVhmMFdHUlo1Y25BSEJXb2I1UmtvREVYcmpMNGJKU2t3UlpxOENTcC04MkFHcnB3RWJjMUNBczIzd2I1NUotdDVzYkZrVHdodzIzYmEzQTR2NDh5V0NfSHZUcGFzb3JwYmNIRUdlYVJjRC1vQTlkcEdpdkJ3bl93cXlZc3V4R1F0Q0ZIajNtSmQ3QTBpbkNCNjdPR083cXNCbzlScm9sR1IzazBkY3BaYWFmUkpVaXNDblI",
+      "title": "Apple update sparks outage at internal, retail and iCloud operations"
+    },
+    {
+      "date": "2026-11-17T23:38:00.000Z",
+      "domain": "wsmv.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxQUWRGU0lGZWI5cHJNLTloMEd2TExDWC1JbUVRU0padkFtTFdVSjlFbHhMY2xDV1UxX2hPc2J6U3FXZHVZQl83bmg5cHV2YUxFcFZseTlwNmhCNXdLMmNVSGhjcG15RGFjcGRLVTJMdnpQbElIb3BIVGxpcHNlQm5FWnRCVFUzNzVadE9HOUZqVkpXZw",
+      "title": "Another tech outage hits: Apple joins string of disruptions"
+    },
+    {
+      "date": "2026-11-17T20:00:22.000Z",
+      "domain": "inc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirAFBVV95cUxPbmh0aFdkQng5TDFLYnFiNTlEVXQ4X3l0WEhwdzlyQnNCazJaNU9DbnJOS2ZTU1lvbkZBdHlCZnJMSU5MbXhDLUFVYkFsNGJXSUNqdnFhVUpPRFU4azNYSzJnT043R0VmU0pwdHZVaXhwYWpNanE5Ukoxa1hTeWFiQjJWdE4xM203WWVobmVzVm9SbXMtanlGaXE4TnVubjFsdXU4YnFMVG4yWGxX",
+      "title": "Apple\u2019s Outage Hit Stores, iCloud, and the App Store. Apple Just Revealed the Cause"
+    },
+    {
+      "date": "2026-11-17T18:19:42.000Z",
+      "domain": "nbcphiladelphia.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUlKRjItOTdLNHZCRlc1YzBnX3Ewbng1ZzNDVG5HNlVpbk1UeUVZZXkwcllJY2V3LS1UTG9uVGpaVmMzak9tVkQ1cG9nVmVLMkFyQXg1cllGQ2duVW84R1JKMlNia2puTnlNOEk4X2ZpNEx3bEJsLWN6ZFItNTFnbWp6aWxWM3FUVmVmcVFuXzRDOVA5Y28xdmFB0gGiAUFVX3lxTFA5MURsSmFZRS15S3BUcVhvWHlTTHNuRmpWZk05LUVONndaS2ZfNERZMEVTNHRrc1BSVnNFOGFJVnVDTVFpY0xTdmZnQ1dNY2lEQmR4VjFWZElHM2lNa1l2WnJSSUlOMzZtd2QtOENZUzFRVUlTVkNWNENsQ2JOOWVWSnZPZ2YtWlRMYU94S0RsLWpRTFR5VFFPMURjRVJYSW4tZw",
+      "title": "Apple reports outages for multiple services"
+    },
+    {
+      "author": "WBAY news staff",
+      "date": "2026-11-17T18:43:21.000Z",
+      "domain": "wbay.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.wbay.com/2026/11/17/apple-outage-affects-app-store-apple-music-icloud-sign-in/",
+      "title": "Apple outage affects App Store, Apple Music, iCloud sign-in"
+    },
+    {
+      "author": "Amina Wako",
+      "date": "2026-11-17T19:22:34.000Z",
+      "domain": "eastleighvoice.co.ke",
+      "image": "https://kagiproxy.com/img/HJBv7GvE-NE0GdWhNHe3W9GvaRbGQ12ISekCUdkRC6mPZD9EeP7nkhzBK_fZ4XBJ1eyFTGiQxaNUgtZ88qN6pZ9XCVr5kBwfCpZ4SNKWGQWCLyU68EXiX-1Bfo-w18wEjyh9H-h-ux9Lu5l7285T7bT4taKmCplZE2cr8C1xw39trkcYP5BhDwQ4ef1ZOw",
+      "image_caption": "Apple users across several countries faced disruptions on November 17, with outages affecting iCloud, the App Store, Apple Music and other digital services. (Ph...",
+      "link": "https://eastleighvoice.co.ke/news/424837/apple-users-locked-out-of-icloud-and-app-store-as-widespread-outage-hits-global-services",
+      "title": "Apple users locked out of iCloud and App Store as widespread outage hits global services"
+    },
+    {
+      "date": "2026-11-17T18:53:51.000Z",
+      "domain": "op-marburg.de",
+      "image": "https://kagiproxy.com/img/oyDD8SFyCXSqvwZX5VMzhz7cWEjLDhukm8DY9jwTCi7113JuzrbVlVFSUIxhC5d2F_7-0d1ux22F6zfndbE1tHXSPguWTZn81lVxcPJ525yKBRiF05S20eZln1dIajgvjf9Hdk_pT8NeN33xw3nnGP95w258Vt2ILtvAwKT9DvNyEU-Mgg7ODUUZFct4WPlPWHJst4xf-fMHm3PXoavd8ivFa4Exj1koLjhR4vb_e0U_GK6os9C8vsgKcg",
+      "image_caption": "Das Apple-Logo an der Fassade eines Apple Stores in Brooklyn. (Archivbild). Kathy Willens",
+      "link": "https://www.op-marburg.de/wirtschaft/apple-technische-stoerung-legt-app-store-music-und-icloud-lahm-3BOPOCTA6FB4PPM347YWW4U4IY.html",
+      "title": "Apple: Technische St\u00f6rung legt App Store, Music und iCloud lahm"
+    },
+    {
+      "date": "2026-11-17T18:52:45.000Z",
+      "domain": "allsides.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.allsides.com/news/2026-11-17-0800/technology-apple-services-down-apple-pay-app-store-and-apple-support-experience-outages",
+      "title": "Apple services down, as Apple Pay, App Store and Apple Support experience outages"
+    },
+    {
+      "date": "2026-11-18T07:13:43.913Z",
+      "domain": "leparisien.fr",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.leparisien.fr/high-tech/icloud-app-store-apple-victime-dune-panne-geante-dans-le-monde-entier-sur-plusieurs-de-ses-services-17-11-2026-6ZCYIWUR4RCFTIZNYNWVVTJLKU.php",
+      "title": "iCloud, App Store... Apple victime d\u2019une panne g\u00e9ante dans le monde entier sur plusieurs de ses services"
+    },
+    {
+      "date": "2026-11-17T19:40:10.000Z",
+      "domain": "thedailybeast.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigwFBVV95cUxQS1FzZ3h6UUJzenI2TmhvV3pwMEFiMGtMcVZWR1hqNDloYUlKOUlfSk1SZERZSVRPNm5tN1Y1eUdycm1iTlJscFJZcFpkVG05SVFPT0Z1U0M0YnZVMDRyVE9YVko1UWRzUTRvbzlzWVdEakttd0hYTjFIMGtpY21tdWFrRQ",
+      "title": "Apple Hit by Major Outage as Tech Chaos Spreads"
+    },
+    {
+      "author": "Drew Best",
+      "date": "2026-11-18T04:14:27.000Z",
+      "domain": "wbay.com",
+      "image": "https://kagiproxy.com/img/RIU-GH4FtTcQjZPD_AQWLZfOPxeXdqJyEaoXNtRI2SbU1tBTfZ8RXAvZaf7zcCtny4DO6HEOqhkx2sh_e4dwKbpuYVhPtjNlMPTi0J-YE4FD4tlgPYFk-rQMeraa2bQG7ZY4S-2c1VPZP0L6AoEbwIgOPB9X30FaRibqiEo6vnNirISC8apUFQCwkbqHlVz1oZOcQLpuUktEi3kRQ5r0rPOy6P_PCAan2BHfezfhZEmdKiw6KW09CKTU9Q",
+      "image_caption": "The outages are the latest of many across several industries in recent days.",
+      "link": "https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/",
+      "title": "Appleton IT consultant breaks down latest nationwide outages"
+    },
+    {
+      "date": "2026-11-17T19:43:04.000Z",
+      "domain": "stirileprotv.ro",
+      "image": "",
+      "image_caption": "",
+      "link": "https://stirileprotv.ro/stiri/ilikeit/serviciile-apple-printre-care-icloud-apple-pay-app-store-si-apple-music-au-fost-afectate-de-o-pana-majora.html",
+      "title": "Serviciile Apple, printre care iCloud, Apple Pay, App Store \u0219i Apple Music, au fost afectate de o pan\u0103 major\u0103"
+    },
+    {
+      "date": "2026-11-17T19:30:27.000Z",
+      "domain": "aktuality.sk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://zive.aktuality.sk/clanok/K75lNGR/apple-ma-vypadok-roznych-sluzieb-hlasia-pouzivatelia/",
+      "title": "Apple mal ve\u013ek\u00fd v\u00fdpadok r\u00f4znych slu\u017eieb"
+    },
+    {
+      "author": "Belga Belga",
+      "date": "2026-11-17T19:21:44.000Z",
+      "domain": "lalibre.be",
+      "image": "https://kagiproxy.com/img/lJxyFb2U07SUTZ1AP3y82Y4rXqQHQzR294s2j91rwkOM6uqnbLsC4p-pxhtf90BBHunCWSqvTTrpjd9RrNgl_eQZ8sLTDDdyVvzBKM3SaZZrfZMnzBKW7baKhvr16AzhEVXGW7W-UJpMR1bNNspRs6GTtxxRFdj-WM2BE07V_suZHaytPV0b0WVceQNw9iTl3n3NK6aapHSjdLY-y8dRSJmyY-ymCb8Sod8ouM8-Mc2XhwvHEQUiN6pnG-jv3yY5qeU2",
+      "image_caption": "Plusieurs services en ligne d\u0027Apple sont actuellement victimes de perturbations, a indiqu\u00e9 mardi soir le g\u00e9ant \u00e9tats-unien de l\u0027informatique sur son site web. ...",
+      "link": "https://www.lalibre.be/economie/digital/2026/11/17/que-se-passe-t-il-des-apple-des-utilisateurs-signalent-des-problemes-7JBMQQSGDZBRZKHE6HOWDWKH3E/",
+      "title": "Que se passe-t-il chez Apple? Des utilisateurs signalent des probl\u00e8mes"
+    },
+    {
+      "author": "Associated Press",
+      "date": "2026-11-17T21:52:54.000Z",
+      "domain": "41nbc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.41nbc.com/apple-outage-marriott-technology-disruptions/",
+      "title": "Apple outage adds to growing list of technology disruptions affecting major companies"
+    },
+    {
+      "date": "2026-11-17T18:52:00.000Z",
+      "domain": "nachrichten.at",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nachrichten.at/panorama/weltspiegel/icloud-apple-music-appstore-stoerung-bei-apple-diensten;art17,4233967#ref=rss",
+      "title": "iCloud, Apple Music, AppStore: St\u00f6rung bei Apple-Diensten"
+    },
+    {
+      "date": "2026-11-17T18:59:25.000Z",
+      "domain": "bluewin.ch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bluewin.ch/de/digital/stoerung-bei-apple-diensten-li.3677211",
+      "title": "Technische Probleme\u00a0jetzt auch bei Apple \u2013 iCloud und App Store betroffen"
+    },
+    {
+      "author": "Marty Hobe",
+      "date": "2026-11-17T18:42:09.000Z",
+      "domain": "wgnradio.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://wgnradio.com/news/is-apple-down-users-report-problems-with-ios/",
+      "title": "Is Apple down? Users report problems with Apple Pay, iCloud, more"
+    },
+    {
+      "date": "2026-11-18T06:25:00.000Z",
+      "domain": "bankier.pl",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.bankier.pl/wiadomosc/Awaria-szeregu-uslug-Apple-w-tym-App-Store-iCloud-i-Apple-Pay-Przyczyna-pozostaje-nieznana-9230543.html",
+      "title": "Awaria szeregu us\u0142ug Apple, w tym App Store, iCloud i Apple Pay. Przyczyna pozostaje nieznana"
+    },
+    {
+      "author": "Scripps News Group",
+      "date": "2026-11-17T18:51:37.000Z",
+      "domain": "koaa.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.koaa.com/life/tech-tips/apple-services-hit-by-outages-including-app-store-and-music",
+      "title": "Apple becomes latest major company hit by service outages"
+    },
+    {
+      "author": "Kelsey Vlamis",
+      "date": "2026-11-17T23:37:55.000Z",
+      "domain": "businessinsider.com",
+      "image": "https://kagiproxy.com/img/4WiROGX_gS8Hhmga4PI3wB8oZBNciauMKCgPURJWN7IDkEV_vGxmHZ1EUgO-MsMSGgonuM7LzjumBQMSA3KAK_CFFxT4TTmaK-XsvzMdBUKORw1VJlw",
+      "image_caption": "",
+      "link": "https://www.businessinsider.com/tech-outages-list-microsoft-faa-apple-united-banking-2026-11",
+      "title": "A string of tech outages disrupted flights, banking, and major apps. Here\u0027s what officials have said about the causes."
+    },
+    {
+      "author": "Anna Betts and Blake Montgomery",
+      "date": "2026-11-17T22:23:56.000Z",
+      "domain": "theguardian.com",
+      "image": "https://kagiproxy.com/img/fYjFzojn2TcndnjER7JVcdWPhMhJDSEYB9J1rR8wML6G2zbosgAuzctEBQT5jLgyUopoYeupgQalskH7MtUgA7zFpLx01cZZoQy6qZuRQZwlm4lHjIUnetMJ4IBmMFhJ_C2ByEB9jYODNG4XT--rFs2CcuWqt57Z_ES4gmpbkeMdm8D9Ub878JUTaUnLC9Ay6uTUAfSlwK3FLpvY6gZqcHeTH6Dw8F5jZExsnj0RXN62aAfK9ZWnB3EwOIZd13crV1UEZxdAadmM-KaUbIQo",
+      "image_caption": "",
+      "link": "https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption",
+      "title": "Apple outage: iPhone apps suffer disruption days after major Microsoft issues"
+    },
+    {
+      "author": "Madilynne Medina, Matthew Brown, Kent German",
+      "date": "2026-11-18T01:15:47.000Z",
+      "domain": "sfgate.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.sfgate.com/tech/article/tech-outages-list-22536414.php",
+      "title": "A guide to the recent tech outages affecting airlines, banking and more"
+    },
+    {
+      "date": "2026-11-17T23:42:43.000Z",
+      "domain": "nbcnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMipAFBVV95cUxNS01oRGJLdFFiNUtzYUdLbTJHTGlFNTJsVkRudElwQjJWMU8teDQ1bUpONW5NMlBXTUZWeUxockJMVjN0bHNmdXZhWHlBbHY1STk3Zm9zcmdVcTVKbmxfM0dLdVR4SU5idUwwZjAwczFxNkNKVVpoZnctb0M3TG5xVjJpdHBGbDhKaERscDFOTDNQbE9UU2hLeGwyNHMzSmdkSmhxWg",
+      "title": "Apple outages appear to be resolved after internal update takes popular services offline"
+    },
+    {
+      "date": "2026-11-17T17:47:14.000Z",
+      "domain": "apple.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://developer.apple.com/system-status/",
+      "title": "Apple Services Down"
+    },
+    {
+      "date": "2026-11-18T00:16:55.000Z",
+      "domain": "cbsnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cbsnews.com/video/tech-outage-us-spy-agency-hampered-ability-communicate-internally/",
+      "title": "Tech outage at U.S. spy agency hampered its ability to communicate internally"
+    },
+    {
+      "date": "2026-11-17T05:24:06.000Z",
+      "domain": "euronews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.euronews.com/2026/11/17/us-banking-app-users-report-outages-from-software-bugs",
+      "title": "US banking app users report widespread outages linked to software bugs"
+    },
+    {
+      "date": "2026-11-17T22:03:57.000Z",
+      "domain": "cnbc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cnbc.com/2026/11/17/apple-microsoft-faa-jpmorgan-outages.html",
+      "title": "Widespread outages hit banks, air travel, the NSA and Apple, disrupting seemingly everything"
+    },
+    {
+      "date": "2026-11-17T14:44:00.000Z",
+      "domain": "cbsnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cbsnews.com/news/banks-online-service-outages-jpmorgan-chase-bank-of-america-wells-fargo/",
+      "title": "Widespread service outages at major U.S. banks appear to be over"
+    },
+    {
+      "date": "2026-11-17T17:00:00.000Z",
+      "domain": "theverge.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1lNmJPNzh3SlFOeFc5dVJpU3pxVG5JRWRoRS1hek9IR01XMXd2ZmtrRjRPdGRFUUY0ZXNES05aa3ZOUlhna2ExRDVEd3kzbTJMeHpzUWk5cUtlUmdwTF92Rlhjdkt1NFNvZnMxTHc1Y1owdXF4OFE4aDhB",
+      "title": "Inside Microsoft\u2019s giant Outlook outage"
+    },
+    {
+      "date": "2026-11-17T21:35:36.000Z",
+      "domain": "foxbusiness.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNT2duLWJ6V3ZiRm01OVhNbW9jZjBLSnFRODlyNlU3RzlhRWNVX2JyTm9McXl6VnNMNGhNbHV4Qkx2X3Y0RXhDazBrN1lWd0tOa3p5TlJQbU1vRWQtRi1jOGY5dzgwTV9RNHlhcXVHc2J2eEZpV29FcE8zbnpHaGd1OWtHMGp5ME1QVF9iZTVYemctWjBZVG55NFVfV01xM3PSAaQBQVVfeXFMTVMxT2tIeVc5elpjNzBRZVZsNnItVHhGOEk5TEJsUTktRzgwRzhuMlJXYk1Rc0x4TDA0YUFJZ1MzQU9qbWlUd0E5SmtyUkdwRHRGMmR1SUdKc2hodVp3Zl9xcGZKdmpLRHpnNko4V0ZCc0FHREJEOWMwMWlBc3F2LTJ3by11dWlPZnNzbHNYRU5BQ3JaMkdoLUttckRJQzFmYnUxX0c",
+      "title": "Jay Clayton addresses concerns amid widespread tech outages"
+    },
+    {
+      "date": "2026-11-17T22:59:00.000Z",
+      "domain": "cbsnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.cbsnews.com/news/apple-outage-icloud-apple-pay-services/",
+      "title": "Apple restores services after internal update caused outages"
+    },
+    {
+      "date": "2026-11-17T22:13:00.000Z",
+      "domain": "wcvb.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMingFBVV95cUxQdWJPWEFuMlhPaHl3cGROdDdXR1M2clUtMGw0MWRoYXJDSzc5NTRkN1UyRTZRNW12QUMxQndaSjRpcHVjbmRzWE1DemV6WU00Rzg3NEUyMTJvenhvR0xNQ1hlQVp5dnZZVlZDM3ZKWHZSc0k5QkJPRDdBaGwxSUptb2pXMnhyT0U0NnBCQ2pqTWxneFQ0RmNMcmdybkFTUQ",
+      "title": "Outages at banks, airlines, Microsoft raise security concerns"
+    },
+    {
+      "date": "2026-11-18T04:30:18.000Z",
+      "domain": "fox26houston.com",
+      "image": "https://kagiproxy.com/img/fC2HxyB1BIhpTaIq9u9KNHs4KhkH8D5SW_OC_NFyHWxpH1ln_JaMnQL2_e2eSTAg9qHp5NDv_W8bNaDVEtk4ciwJNzW0LoSZaP3vEa5sp1ydBNOatY9oNMyN1m8hUVboR8yuLjStWcTNP5UtS3yojE2dxn6XsSYRzzElhm06v9soQZCigfsCcJK12x541KZlxnVtDcH8hlAZz-WRr22Pn8KLM2SZug",
+      "image_caption": "",
+      "link": "https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity",
+      "title": "Apple outage, banking disruptions raise questions about technology reliability, cybersecurity"
+    },
+    {
+      "date": "2026-11-17T23:54:55.000Z",
+      "domain": "thehindubusinessline.com",
+      "image": "https://kagiproxy.com/img/R2IN1jPvfAUPZv-02oMy5tA_VsVFtc8damzL-urlzAViqktNe33yuhaYnhExQWCGUj6BlIstBW3PU0wtQYIaSZb4ODMRoK4YpciWOi03MCnwvSGLjR72LmQTFyC4NNWMNf6L0EvvLACJmgRBNHE9Oh_WPy80dfkYf1lJb-xSvHlY2W3xkMR5ak6vmXeBI26_NJ3JVkFeW2jJca_FC7Bk9K7GZQwJg9zZrsU1eIFSAmxdq6clX8zSGC8v4QQ",
+      "image_caption": "",
+      "link": "https://www.thehindubusinessline.com/info-tech/apple-outage-adds-to-growing-list-of-technology-disruptions-affecting-major-companies/article71714312.ece",
+      "title": "Apple outage adds to growing list of technology disruptions affecting major companies"
+    },
+    {
+      "date": "2026-11-18T04:16:00.000Z",
+      "domain": "wdsu.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMidEFVX3lxTFBLY2dabzlmVmtQT2FmODRlejctTnlGRGZYRV9ZaTBlMnl6bGV5Um8xMDZyOEsxRUlBZno1T3M1SUhoSWpIamdKdnZPYmxtbl80X1E1TzBZWDFvUnlsUmFfWFpyZ1pzMnFfRzZfaXJuSTlycGpp",
+      "title": "NSA network and Apple services hit by outages amid recent tech disruptions"
+    },
+    {
+      "date": "2026-11-17T17:51:41.000Z",
+      "domain": "digitaltrends.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQUHBvS25YS05VUjM5MkhteGw2SnVsbGctWWZ4NUhrOENDN3NkT1R1aTZxMUM2N2VDS2ktdVJ5YWF6OXd4Z2VCLVZYY05lUHhLM1FUYUxPYWQtYWk0U0VNUDNja2JVVnNPcHhpWml0S3pYYko2SEVOMHdTRzNsdXJHcHJDT2UyZ2Zudmd0aUJGUDllS3dIUWNGTW8yekJhN3hLeERRUDNfc1dGMXMtWUVRMnB3R3lNcE90YUlROFZDVGdHeXdxV0k0LUw1ZE9BeFp1QXNUT05TXzA",
+      "title": "Apple services hit by widespread outage; users flag problems with iCloud, App Store and Apple Pay"
+    },
+    {
+      "author": "Matt Ott",
+      "date": "2026-11-18T00:22:44.000Z",
+      "domain": "theglobeandmail.com",
+      "image": "https://kagiproxy.com/img/9ONI-f1ZDS70SVPEAMNwYcfu5exZrtJEOYPTqoq-nepYqZ0vYW5iKyFw6A3ZcgxRZICSnm_T1hzhcCTW7Xnly5VDOwaH4KwHshs2IspexH_lciSuvNg9YU9pCVeg2JGUgnlkGX9bRTHDxhisKBuYqBi_M8Ot1N-7YEF07062rF6rExg2PnpCoPZwFrP24A_vUjsu6BYe_-HMFHTLmpN3e5eaAcAFS_CrzUC7w_wouSN41PN1IHgCLZyoz284HblcE-ZbSZurwmu9cEWtnQ",
+      "image_caption": "FILE - The Apple logo is illuminated at a store in Munich, Germany, April 2, 2026. (AP Photo/Matthias Schrader, File)",
+      "link": "https://www.theglobeandmail.com/world/article-apple-services-experience-widespread-outages/",
+      "title": "Apple services experience widespread outages"
+    },
+    {
+      "author": "Julia Nix",
+      "date": "2026-11-17T19:49:00.000Z",
+      "domain": "rp-online.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://rp-online.de/digitales/app-store-betroffen-stoerung-bei-apple-diensten_aid-158547573",
+      "title": "Mehrere Dienste gest\u00f6rt: Nach Panne bei Microsoft \u2013 jetzt gro\u00dfe Probleme bei Apple"
+    },
+    {
+      "date": "2026-11-17T19:04:07.000Z",
+      "domain": "derbund.ch",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.derbund.ch/apple-ausfall-icloud-app-store-apple-pay-betroffen-669042870375",
+      "title": "Technische St\u00f6rungen: Weltweiter Ausfall bei Apple-Diensten, auch US-Geheimdienst betroffen"
+    },
+    {
+      "date": "2026-11-18T00:45:39.000Z",
+      "domain": "nbcnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQNldibmhuQ0JMekhWNnIxOHczX3pPQlRiZFZYc3Fqb0k0WnhaYW1IVUJVMDdfVHlySmRLZXV0UnRHMHkyZmpiZFBFRUpoOWhsT2U0YWh5ZWJNRG5rSTVRREdKdVNmUmFkNEFjaFFjWll1ZTRjRUZsUFNGLXZhT1dXS3V4YUdJT1d5MEJwamV0MTVsZmpQZkllWFc3YmVMZVZXYllqU0I5bkVBRGhzTkdpcXdVTQ",
+      "title": "Apple hit by widespread outages as tech problems continue"
+    },
+    {
+      "date": "2026-11-17T23:58:15.000Z",
+      "domain": "nbcnews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxOMS1OTFlJLXRwY2VMSTlldWNzYjN3cEFMUXdoNVA4UHdJZ1Qzdkp4TWpBaTd6a1BDb3dTejU2Yk11M0hEVE9WUmFsSXZDbENsR0FTZHBJSk9rZzRDSnpGX21LQnZUVzIxQXVncUtock80QUV3YkVyMjhiWURqdlNKM1NJMzNRQzhFLUhES1R2Mm5hOVU4MndlQkJSZVpJNVVk",
+      "title": "Tech giant Apple suffers widespread outages"
+    },
+    {
+      "author": "Georgia McCarthur",
+      "date": "2026-11-18T01:24:18.000Z",
+      "domain": "wfla.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.wfla.com/news/national/string-of-major-technology-outages-raise-concerns-as-cybersecurity-expert-explains-possible-causes/",
+      "title": "String of major technology outages raises concerns as cybersecurity expert explains possible causes"
+    },
+    {
+      "date": "2026-11-17T18:26:00.000Z",
+      "domain": "thenews.com.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.thenews.com.pk/latest/1424030-apple-services-hit-by-fresh-outages-across-us",
+      "title": "Apple services hit by fresh outages across US"
+    },
+    {
+      "date": "2026-11-17T19:19:00.000Z",
+      "domain": "kktv.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMilAFBVV95cUxNXzVsRUVrRUFmQWZreDF1aHFOeWZLbmt0WnNXMWNuaDRIcF9HQ3V3czNGVkNyQU11LW1wWVVGT1Q2RlVERDNRTHc3NzNsTDVldU0yTHVRUEt2SUt3a2lkeFdNamxoQTdvT1AxdGQtZHZOUWJLa2NHUFFoc1dlN01CNzJCemxmUjFGZGdPSTBKMHJ4U05U",
+      "title": "Apple becomes latest major company hit by service outages"
+    },
+    {
+      "date": "2026-11-18T06:03:44.000Z",
+      "domain": "orf.at",
+      "image": "",
+      "image_caption": "",
+      "link": "https://orf.at/stories/3448526/",
+      "title": "Weitreichende St\u00f6rung bei Apple-Diensten"
+    },
+    {
+      "author": "MATT OTT AP Business Writer",
+      "date": "2026-11-17T21:21:12.000Z",
+      "domain": "sentinelcolorado.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://sentinelcolorado.com/uncategorized/apple-joins-a-parade-of-technology-hiccups-in-recent-days/",
+      "title": "Apple joins a parade of technology hiccups in recent days"
+    },
+    {
+      "author": "Tabitha Bland",
+      "date": "2026-11-18T04:28:57.000Z",
+      "domain": "wmtv15news.com",
+      "image": "https://kagiproxy.com/img/0J_Nxz9V-96452K3sH1Sn5FirmyITDqInFKULXKUNVSLj99l4pImVGbbdCAsQtmfoROAn8i_z9s7j6VpD7Xhei96XXqBVLVZkt2sjfARUUgQgcP4rWFe-MYkWeyOQNdjqGwSqdN9pnQs3KBSNUqsmNJLyJJuvJ59L8qC33SCK3NH-3JZ1aRE8Oxn-y885aclPDA4ztOUd7QM2rCRWxn1hZKLvT_JM3dflQaCOXHeE9UgYNrpU1XVjUpOIw",
+      "image_caption": "A string of technology outages affecting air travel, banking and widely used online services has left Americans with questions about what went wrong.",
+      "link": "https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/",
+      "title": "Apple, banks, FAA and Microsoft outages raise questions: A cybersecurity expert weighs in"
+    }
+  ],
+  "business_angle": "",
+  "category": "Technology",
+  "cluster_number": 2,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=politico.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "politico.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=firstpost.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "firstpost.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=9to5mac.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "9to5mac.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=neowin.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "neowin.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macobserver.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macobserver.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=dawn.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "dawn.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=appleinsider.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "appleinsider.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=fastcompany.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "fastcompany.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=engadget.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "engadget.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theregister.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theregister.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techjuice.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techjuice.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashable.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashable.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=freepressjournal.in\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "freepressjournal.in"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bluewin.ch\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bluewin.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=time.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "time.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidauthority.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidauthority.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bleepingcomputer.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bleepingcomputer.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mobilesyrup.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mobilesyrup.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=futurism.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "futurism.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macrumors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macrumors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=abcnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "abcnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=variety.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "variety.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=calcalistech.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "calcalistech.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sfchronicle.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "sfchronicle.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=royanews.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "royanews.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=samaa.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "samaa.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=detroitnews.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "detroitnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wctv.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wctv.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=arynews.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "arynews.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cleveland.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "cleveland.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ahram.org.eg\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ahram.org.eg"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macgadget.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macgadget.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thenational.scot\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thenational.scot"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=independent.co.uk\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "independent.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=afr.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "afr.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wsmv.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wsmv.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=inc.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "inc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nbcphiladelphia.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nbcphiladelphia.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wbay.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wbay.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=eastleighvoice.co.ke\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "eastleighvoice.co.ke"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=op-marburg.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "op-marburg.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=allsides.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "allsides.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=leparisien.fr\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "leparisien.fr"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thedailybeast.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "thedailybeast.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stirileprotv.ro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "stirileprotv.ro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=aktuality.sk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "aktuality.sk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=lalibre.be\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "lalibre.be"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=41nbc.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "41nbc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nachrichten.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nachrichten.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wgnradio.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wgnradio.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=bankier.pl\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "bankier.pl"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=koaa.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "koaa.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=euronews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "euronews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=businessinsider.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "businessinsider.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nytimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "nytimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cnbc.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "cnbc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theguardian.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "theguardian.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=cbsnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "cbsnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=time.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "time.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theverge.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "theverge.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=digitaltrends.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "digitaltrends.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thehindubusinessline.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "thehindubusinessline.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sfgate.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sfgate.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nbcnews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nbcnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=apple.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "apple.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=foxbusiness.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "foxbusiness.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wcvb.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wcvb.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=fox26houston.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "fox26houston.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wsmv.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wsmv.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=detroitnews.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "detroitnews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nbcphiladelphia.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nbcphiladelphia.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wdsu.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wdsu.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=variety.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "variety.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=calcalistech.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "calcalistech.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=royanews.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "royanews.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=theglobeandmail.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "theglobeandmail.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thedailybeast.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "thedailybeast.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macgadget.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macgadget.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sfchronicle.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "sfchronicle.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=samaa.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "samaa.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rp-online.de\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "rp-online.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=stirileprotv.ro\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "stirileprotv.ro"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=derbund.ch\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "derbund.ch"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wfla.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wfla.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thenews.com.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thenews.com.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wctv.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wctv.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=kktv.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "kktv.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=orf.at\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "orf.at"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sentinelcolorado.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sentinelcolorado.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techjuice.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techjuice.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=wmtv15news.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "wmtv15news.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udee0\ufe0f",
+  "feed_category": "Business, Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "No common cause has been established for the November 10 disruption and the November 17 outage [macobserver.com#1][ahram.org.eg#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [
+    "Airlines: United Airlines\u2019 separate technology outage lasted more than 90 minutes and delayed departing flights on Monday [thehindubusinessline.com#1]."
+  ],
+  "international_reactions": [],
+  "item_category": "Service Outage",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 65,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "WBAY",
+          "url": "https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/"
+        }
+      ],
+      "text": "Curt Esser, Appleton-based IT consultant: Esser pointed to software patches and transitions between old and new systems as possible contributors, while saying the outages did not appear related; he also cautioned that AI tools can produce faulty solutions if they lack complete information [wbay.com#2]."
+    },
+    {
+      "sources": [],
+      "text": "Tony Sabai, cybersecurity expert: Sabai said frequent upgrades and maintenance on older systems can increase the chance of widespread problems, and argued that firms may be doing more such work to identify vulnerabilities [nbcphiladelphia.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "FOX 26 Houston",
+          "url": "https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity"
+        }
+      ],
+      "text": "Dr. Ali Butt, a computer science professor at Virginia Tech, cautioned against assuming the outages were connected. He said localized technical failures are plausible and the complexity of systems can turn small problems into substantial disruptions [fox26houston.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "Apple said it was addressing problems with its systems after an internal update caused outages to some of its services.",
+    "credit": "nytimes.com",
+    "link": "https://www.nytimes.com/2026/11/17/technology/apple-down-outage-issues.html",
+    "url": "https://kagiproxy.com/img/8ex-LyjZef727SxgdYCHnTj_iw9LVvNHFaLibnjIZVcLOjUEb_Q8vvUBJlYGj7sVkx7HxCMCxdeyCfFsgeBNIN214iVK_vzwks5-2CVRvKWshlGePdL7ZMJL7Udq2M1moC0ev_M36pqIC932npPKJAYHaV8e0wb9e_jdfQ"
+  },
+  "published": "2026-11-18T12:00:13.366Z",
+  "quote": "At this point, there is no indication that these incidents are the result of a cyberattack, foreign interference, or some coordinated effort",
+  "quote_attribution": "Business Insider",
+  "quote_author": "Sen. Mark Warner, top Democrat on the Senate Intelligence Committee",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMiSEFVX3lxTE92V2hUZ2l5QVZoc3JtUnlQTnFSQnIxV0ZQSHBHTnJhWmxQRF9HdFVDN0V5XzVLNkhTVlJwMG5jdkRiM0NydGR4dg",
+    "https://news.google.com/rss/articles/CBMidEFVX3lxTFBLY2dabzlmVmtQT2FmODRlejctTnlGRGZYRV9ZaTBlMnl6bGV5Um8xMDZyOEsxRUlBZno1T3M1SUhoSWpIamdKdnZPYmxtbl80X1E1TzBZWDFvUnlsUmFfWFpyZ1pzMnFfRzZfaXJuSTlycGpp",
+    "https://www.firstpost.com/world/apple-says-no-cyberattack-behind-massive-outage-that-crippled-its-ecosystem-14060750.html",
+    "https://www.digitaltrends.com/phones/apple-services-hit-by-widespread-outage-reports-users-flag-problems-with-icloud-app-store-and-apple-pay/",
+    "https://abcnews.com/Technology/wireStory/apple-joins-parade-technology-hiccups-recent-days-138227626",
+    "https://wgnradio.com/news/is-apple-down-users-report-problems-with-ios/",
+    "https://news.google.com/rss/articles/CBMi2AFBVV95cUxQUHBvS25YS05VUjM5MkhteGw2SnVsbGctWWZ4NUhrOENDN3NkT1R1aTZxMUM2N2VDS2ktdVJ5YWF6OXd4Z2VCLVZYY05lUHhLM1FUYUxPYWQtYWk0U0VNUDNja2JVVnNPcHhpWml0S3pYYko2SEVOMHdTRzNsdXJHcHJDT2UyZ2Zudmd0aUJGUDllS3dIUWNGTW8yekJhN3hLeERRUDNfc1dGMXMtWUVRMnB3R3lNcE90YUlROFZDVGdHeXdxV0k0LUw1ZE9BeFp1QXNUT05TXzA",
+    "https://news.google.com/rss/articles/CBMilAFBVV95cUxNXzVsRUVrRUFmQWZreDF1aHFOeWZLbmt0WnNXMWNuaDRIcF9HQ3V3czNGVkNyQU11LW1wWVVGT1Q2RlVERDNRTHc3NzNsTDVldU0yTHVRUEt2SUt3a2lkeFdNamxoQTdvT1AxdGQtZHZOUWJLa2NHUFFoc1dlN01CNzJCemxmUjFGZGdPSTBKMHJ4U05U",
+    "https://news.google.com/rss/articles/CBMioAFBVV95cUxOMS1OTFlJLXRwY2VMSTlldWNzYjN3cEFMUXdoNVA4UHdJZ1Qzdkp4TWpBaTd6a1BDb3dTejU2Yk11M0hEVE9WUmFsSXZDbENsR0FTZHBJSk9rZzRDSnpGX21LQnZUVzIxQXVncUtock80QUV3YkVyMjhiWURqdlNKM1NJMzNRQzhFLUhES1R2Mm5hOVU4MndlQkJSZVpJNVVk",
+    "https://news.google.com/rss/articles/CBMiwAFBVV95cUxOS09XbGJTQVhmMFdHUlo1Y25BSEJXb2I1UmtvREVYcmpMNGJKU2t3UlpxOENTcC04MkFHcnB3RWJjMUNBczIzd2I1NUotdDVzYkZrVHdodzIzYmEzQTR2NDh5V0NfSHZUcGFzb3JwYmNIRUdlYVJjRC1vQTlkcEdpdkJ3bl93cXlZc3V4R1F0Q0ZIajNtSmQ3QTBpbkNCNjdPR083cXNCbzlScm9sR1IzazBkY3BaYWFmUkpVaXNDblI",
+    "https://www.macworld.com/article/3288577/welp-its-apples-turn-icloud-and-other-services-are-struggling-to-stay-online-today.html",
+    "https://www.cnbc.com/2026/11/17/apple-microsoft-faa-jpmorgan-outages.html",
+    "https://eastleighvoice.co.ke/news/424837/apple-users-locked-out-of-icloud-and-app-store-as-widespread-outage-hits-global-services",
+    "https://www.euronews.com/2026/11/17/us-banking-app-users-report-outages-from-software-bugs",
+    "https://news.google.com/rss/articles/CBMimgFBVV95cUxPZUlKRjItOTdLNHZCRlc1YzBnX3Ewbng1ZzNDVG5HNlVpbk1UeUVZZXkwcllJY2V3LS1UTG9uVGpaVmMzak9tVkQ1cG9nVmVLMkFyQXg1cllGQ2duVW84R1JKMlNia2puTnlNOEk4X2ZpNEx3bEJsLWN6ZFItNTFnbWp6aWxWM3FUVmVmcVFuXzRDOVA5Y28xdmFB0gGiAUFVX3lxTFA5MURsSmFZRS15S3BUcVhvWHlTTHNuRmpWZk05LUVONndaS2ZfNERZMEVTNHRrc1BSVnNFOGFJVnVDTVFpY0xTdmZnQ1dNY2lEQmR4VjFWZElHM2lNa1l2WnJSSUlOMzZtd2QtOENZUzFRVUlTVkNWNENsQ2JOOWVWSnZPZ2YtWlRMYU94S0RsLWpRTFR5VFFPMURjRVJYSW4tZw",
+    "https://news.google.com/rss/articles/CBMinwFBVV95cUxNT2duLWJ6V3ZiRm01OVhNbW9jZjBLSnFRODlyNlU3RzlhRWNVX2JyTm9McXl6VnNMNGhNbHV4Qkx2X3Y0RXhDazBrN1lWd0tOa3p5TlJQbU1vRWQtRi1jOGY5dzgwTV9RNHlhcXVHc2J2eEZpV29FcE8zbnpHaGd1OWtHMGp5ME1QVF9iZTVYemctWjBZVG55NFVfV01xM3PSAaQBQVVfeXFMTVMxT2tIeVc5elpjNzBRZVZsNnItVHhGOEk5TEJsUTktRzgwRzhuMlJXYk1Rc0x4TDA0YUFJZ1MzQU9qbWlUd0E5SmtyUkdwRHRGMmR1SUdKc2hodVp3Zl9xcGZKdmpLRHpnNko4V0ZCc0FHREJEOWMwMWlBc3F2LTJ3by11dWlPZnNzbHNYRU5BQ3JaMkdoLUttckRJQzFmYnUxX0c",
+    "https://news.google.com/rss/articles/CBMitAFBVV95cUxOWktmYjRMRmxKXy1CbTFPU0poNDNnT2VHVm1RbGRLYTFzRG50Wjg3STMxTUZwVXBqVDNXNnZJeU9nc3EzYlNoSlRfMUoyS0RITERlS1otZ0JRS0xvNVpNTE04OWZ3Y3U4bWpENjJhMS0wN0pMc1FudzJKX3NwWDhXY3l0VFpyMmdoS2ducmtRak9xSHpod0dqaHhWRjk0cGlrV0Y2aUU1QndMYU9YbGdKMHZpdlXSAcgBQVVfeXFMTV92VjItbVl0SjlXTG5feUxBWmJ6MVc0dzY5eDVNOGtvYTJCMUdEUUVPZTctYkJKdzlPaUZUUkcybE03MnEtRmhfc1NSNzhLRk9LR0FYQ1dmdGtiMjZOazJXczM2dmJINGFTOGFfTmpTc1FMVFFkWWY3N2hVOFBDaWJxbFFLR2M3M1hJblhsRDc3LVc5SWdjcWgxWjlBamxlR3pJTHk3OHRKMElmc0pldkJKRXNLQzBQQ3NtejRlTC1zX003NzQ5RXo",
+    "https://www.dawn.com/news/2045368/apple-works-to-restore-services-after-outage-caused-by-internal-update",
+    "https://news.google.com/rss/articles/CBMisgFBVV95cUxPaWg4RkxIUzZRa2pzMnZEWHJHTXhCNTd2dFF4ZWFSdDM5TUtITFBvMGRySFdzUXNzVnl6N3Qzd0NzZWJ6VmpITVZMT3pqYkVoLUxOekVUYUVqZ2NFWkFxSzhhU1MtR2c5alVvdDNQTWpRbExpQmJyWEotWEFKTEd0czBGUjd5YWd1U0U3OG42cEtmbmpfaU5JdmNjeHJiU045UWI1SE5pX19iVGg1SWNlNnVn",
+    "https://news.google.com/rss/articles/CBMipAFBVV95cUxNS01oRGJLdFFiNUtzYUdLbTJHTGlFNTJsVkRudElwQjJWMU8teDQ1bUpONW5NMlBXTUZWeUxockJMVjN0bHNmdXZhWHlBbHY1STk3Zm9zcmdVcTVKbmxfM0dLdVR4SU5idUwwZjAwczFxNkNKVVpoZnctb0M3TG5xVjJpdHBGbDhKaERscDFOTDNQbE9UU2hLeGwyNHMzSmdkSmhxWg",
+    "https://www.firstpost.com/explainers/apple-microsoft-major-outages-cause-not-cyberattacks-ai-14060791.html",
+    "https://www.pcmag.com/news/icloud-down-users-report-outages-for-apple-services",
+    "https://time.com/article/2026/11/17/apple-outage-down-update-issue/",
+    "https://news.google.com/rss/articles/CBMinAFBVV95cUxPMDV6dFR5bml5T202bF9vV216RVU5WGVjRHlGN0FfUDV6bFpjWXF6c0xYNjJBTDVhd1loVDBCaTBEc0dvdmotUndGTTFNMUdqc1Vld0FjQm1wN21vdVh6NDdkLUlua0FoMGUtV3RtX2E4eE9zTFgxLXUzX01TcVhLcnlBR29RVmx6UENUWlN2TjIxeHU5SjZNMHJSWVY",
+    "https://www.nytimes.com/2026/11/17/technology/apple-down-outage-issues.html",
+    "https://www.independent.co.uk/tech/apple-down-not-working-pay-icloud-music-app-store-iphone-status-b3086668.html",
+    "https://www.freepressjournal.in/tech/apple-outage-why-were-icloud-app-store-apple-pay-music-more-services-down",
+    "https://sentinelcolorado.com/uncategorized/apple-joins-a-parade-of-technology-hiccups-in-recent-days/",
+    "https://www.bankier.pl/wiadomosc/Awaria-szeregu-uslug-Apple-w-tym-App-Store-iCloud-i-Apple-Pay-Przyczyna-pozostaje-nieznana-9230543.html",
+    "https://www.theregister.com/security/2026/11/17/daily-disruptive-outages-that-ground-planes-and-halt-work-welcome-to-the-new-normal/5310634",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxNMHl4MS1nR0N6NVRkU3V0NGtmOEhVTHJMc2xETW5la19qaE1IWjQ3TU1ZME5pV1NVRjExWFI4Yy1LdXpCai1hMW5sZXJwbWlHU2RnUXo0S183dkNpeW8zVFZ5R1hFZXBkdngtd1NVaU83TzZuZXFKZE00N0ozQmVNUUpVenpWVWh2R1FHUXdYMUpBXzA",
+    "https://orf.at/stories/3448526/",
+    "https://news.google.com/rss/articles/CBMiuwFBVV95cUxPM1BRSlFGdnhCT0FYT0pOZjdWVDJYVWc1RG4ydFN2TDY1ZF9BQVktRi15N2FNb3lNUGxnMXVybXJaT1JOZ2hsbHQyMnBONzhFazd5WWNNeWp1cVJYd1k0MFVIUHdPajFCYVd4REt5am9CYmVUVzlhWG03YXgzZEZ3emlNdFljcDRSVzUwb0tuYkoxRVU1c2FBQmxZMkgyVklIZzdNMF91QTQxWWhYTXB1cUxWZzZBcHNrdG9v",
+    "https://www.macgadget.de/News/2026/11/17/Apple-Mehrere-Dienste-von-Ausfaellen-betroffen",
+    "https://zive.aktuality.sk/clanok/K75lNGR/apple-ma-vypadok-roznych-sluzieb-hlasia-pouzivatelia/",
+    "https://www.politico.com/news/2026/11/17/tech-outages-2026-nsa-faa-apple-what-we-know-01170887",
+    "https://www.neowin.net/news/apple-confirms-outage-as-app-store-pay-support-go-down/",
+    "https://www.fox26houston.com/news/apple-outage-banking-disruptions-raise-questions-about-technology-reliability-cybersecurity",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxPbmh0aFdkQng5TDFLYnFiNTlEVXQ4X3l0WEhwdzlyQnNCazJaNU9DbnJOS2ZTU1lvbkZBdHlCZnJMSU5MbXhDLUFVYkFsNGJXSUNqdnFhVUpPRFU4azNYSzJnT043R0VmU0pwdHZVaXhwYWpNanE5Ukoxa1hTeWFiQjJWdE4xM203WWVobmVzVm9SbXMtanlGaXE4TnVubjFsdXU4YnFMVG4yWGxX",
+    "https://mobilesyrup.com/2026/11/17/apple-icloud-outage/",
+    "https://developer.apple.com/system-status/",
+    "https://www.thenews.com.pk/latest/1424030-apple-services-hit-by-fresh-outages-across-us",
+    "https://www.businessinsider.com/tech-outages-list-microsoft-faa-apple-united-banking-2026-11",
+    "https://www.allsides.com/news/2026-11-17-0800/technology-apple-services-down-apple-pay-app-store-and-apple-support-experience-outages",
+    "https://news.google.com/rss/articles/CBMiZ0FVX3lxTE8wdWJMRnZxWC1UZmsxaVY4VXRDb0xtTzF5UDRWX18xSWFHVXVaZnh4VWpmSWNKVGw5WlZnX3hTbjhXVDlSR2Vqd001UzlpVlJhZXdKMkczSUdyeElHcEUyZk1NUTM5Rjg",
+    "https://www.wbay.com/2026/11/18/appleton-it-consultant-breaks-down-latest-nationwide-outages/",
+    "https://www.sfgate.com/tech/article/tech-outages-list-22536414.php",
+    "https://www.fastcompany.com/91644249/all-these-outages-show-how-corporate-america-needs-to-modernize-out-of-date-tech",
+    "https://news.google.com/rss/articles/CBMingFBVV95cUxQdWJPWEFuMlhPaHl3cGROdDdXR1M2clUtMGw0MWRoYXJDSzc5NTRkN1UyRTZRNW12QUMxQndaSjRpcHVjbmRzWE1DemV6WU00Rzg3NEUyMTJvenhvR0xNQ1hlQVp5dnZZVlZDM3ZKWHZSc0k5QkJPRDdBaGwxSUptb2pXMnhyT0U0NnBCQ2pqTWxneFQ0RmNMcmdybkFTUQ",
+    "https://news.google.com/rss/articles/CBMiekFVX3lxTE1lNmJPNzh3SlFOeFc5dVJpU3pxVG5JRWRoRS1hek9IR01XMXd2ZmtrRjRPdGRFUUY0ZXNES05aa3ZOUlhna2ExRDVEd3kzbTJMeHpzUWk5cUtlUmdwTF92Rlhjdkt1NFNvZnMxTHc1Y1owdXF4OFE4aDhB",
+    "https://www.wmtv15news.com/2026/11/18/apple-banks-faa-microsoft-outages-raise-questions-cybersecurity-expert-weighs/",
+    "https://news.google.com/rss/articles/CBMiswFBVV95cUxQNldibmhuQ0JMekhWNnIxOHczX3pPQlRiZFZYc3Fqb0k0WnhaYW1IVUJVMDdfVHlySmRLZXV0UnRHMHkyZmpiZFBFRUpoOWhsT2U0YWh5ZWJNRG5rSTVRREdKdVNmUmFkNEFjaFFjWll1ZTRjRUZsUFNGLXZhT1dXS3V4YUdJT1d5MEJwamV0MTVsZmpQZkllWFc3YmVMZVZXYllqU0I5bkVBRGhzTkdpcXdVTQ",
+    "https://www.derbund.ch/apple-ausfall-icloud-app-store-apple-pay-betroffen-669042870375",
+    "https://www.engadget.com/2319504/icloud-and-other-apple-services-are-down-in-an-apparent-outage/",
+    "https://www.theguardian.com/technology/2026/nov/17/gmail-apple-outage-major-disruption",
+    "https://9to5mac.com/2026/11/17/icloud-app-store-and-other-apple-services-hit-by-ongoing-outage/",
+    "https://www.op-marburg.de/wirtschaft/apple-technische-stoerung-legt-app-store-music-und-icloud-lahm-3BOPOCTA6FB4PPM347YWW4U4IY.html",
+    "https://www.androidauthority.com/apple-outage-3736240/",
+    "https://www.cbsnews.com/news/apple-outage-icloud-apple-pay-services/",
+    "https://www.bluewin.ch/de/digital/stoerung-bei-apple-diensten-li.3677211",
+    "https://www.cbsnews.com/video/tech-outage-us-spy-agency-hampered-ability-communicate-internally/",
+    "https://www.thenational.scot/news/26739125.apple-google-users-report-widespread-outages/",
+    "https://news.google.com/rss/articles/CBMihgFBVV95cUxOdHhZODlyc0x3OVVaWWxoclNTRjBhM2pqRUtlZnNqYWctY0NKczJLNEcyeFViVktlaDh2SXJQbndWcmRPMEhPdWM5MHVBaGd5ekZaQmUzeXhRU3JwSGo3VnVMOTRNQ1pHM1RlcW5wY0huVHNpTWtHMHBlazV0WnVBRHZWZWxSdw",
+    "https://www.nachrichten.at/panorama/weltspiegel/icloud-apple-music-appstore-stoerung-bei-apple-diensten;art17,4233967#ref=rss",
+    "https://www.dawn.com/news/2045364/tech-outage-wave-reaches-us-government-trump-says-all-is-fine",
+    "https://www.41nbc.com/apple-outage-marriott-technology-disruptions/",
+    "https://www.cbsnews.com/news/banks-online-service-outages-jpmorgan-chase-bank-of-america-wells-fargo/",
+    "https://stirileprotv.ro/stiri/ilikeit/serviciile-apple-printre-care-icloud-apple-pay-app-store-si-apple-music-au-fost-afectate-de-o-pana-majora.html",
+    "https://news.google.com/rss/articles/CBMirAFBVV95cUxPQkFiNjR2dnpqWmNlX2tvLThVSjJDQXRsSnNzRE12MHlIbjN6V1M3bjc0eVp2czQ3Tm5QdEs4NnJPUkJCT2FuUS10SDhtb0t3RHk5eUJmdFEzVHc5eVVwY2dIX3NfMW5pOEtVNHQ0MDBvd3JBdWxXeFZwNmJuYnBCU0p6SzE0eDFLZS1xRW4ycExiSFVqdTZNRjVqN1MzWGpzclRLQmpwbjVBTUty",
+    "https://arynews.tv/major-apple-outage-brings-app-store-icloud-apple-music-and-apple-pay-to-a-halt-worldwide",
+    "https://www.theglobeandmail.com/world/article-apple-services-experience-widespread-outages/",
+    "https://www.wbay.com/2026/11/17/apple-outage-affects-app-store-apple-music-icloud-sign-in/",
+    "https://www.macobserver.com/news/apple-outage-icloud-app-store-apple-music-and-more-services-down/",
+    "https://www.techjuice.pk/apple-hit-by-major-outage-as-icloud-apple-pay-remain-unresponsive-to-users-worldwide/",
+    "https://www.macobserver.com/news/apple-corporate-offices-reportedly-offline-as-massive-outage-hits-internal-systems/",
+    "https://www.leparisien.fr/high-tech/icloud-app-store-apple-victime-dune-panne-geante-dans-le-monde-entier-sur-plusieurs-de-ses-services-17-11-2026-6ZCYIWUR4RCFTIZNYNWVVTJLKU.php",
+    "https://appleinsider.com/articles/26/11/17/icloud-account-login-icloud-mail-services-are-having-trouble-today",
+    "https://www.koaa.com/life/tech-tips/apple-services-hit-by-outages-including-app-store-and-music",
+    "https://techcrunch.com/2026/11/17/apple-services-including-icloud-app-store-and-apple-music-hit-by-outage/",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxQUWRGU0lGZWI5cHJNLTloMEd2TExDWC1JbUVRU0padkFtTFdVSjlFbHhMY2xDV1UxX2hPc2J6U3FXZHVZQl83bmg5cHV2YUxFcFZseTlwNmhCNXdLMmNVSGhjcG15RGFjcGRLVTJMdnpQbElIb3BIVGxpcHNlQm5FWnRCVFUzNzVadE9HOUZqVkpXZw",
+    "https://news.google.com/rss/articles/CBMipgFBVV95cUxNYmwzVnVNX21ZbVpqT3NPREZXLVNtOXd1NkFNUjFGTE95VlI5UWR2aHZ5ZkhqOXNYaU5vVkpBVmNXcWdiV1BORUJTSW5CUllLSVBDXzhPTXlmSU12TUtDYzdrX3J4TDloaS1aS3hzOVBURTRXOTVqTFdTUndmamRyaUtFRFRLNS1RWlR6Tm9faXNhYkdqOGlCa3dNR3RhX2M3bFhzS2tR",
+    "https://www.macrumors.com/2026/11/17/apple-outage-internal-update/",
+    "https://www.thehindubusinessline.com/info-tech/apple-outage-adds-to-growing-list-of-technology-disruptions-affecting-major-companies/article71714312.ece",
+    "https://www.wfla.com/news/national/string-of-major-technology-outages-raise-concerns-as-cybersecurity-expert-explains-possible-causes/",
+    "https://indianexpress.com/article/technology/apple-outage-icloud-app-store-apple-pay-10967415/",
+    "https://rp-online.de/digitales/app-store-betroffen-stoerung-bei-apple-diensten_aid-158547573",
+    "https://mashable.com/tech/apple-outage-icloud-app-store-apple-pay-november-17",
+    "https://www.macrumors.com/2026/11/17/apple-accounts-experiencing-issues/",
+    "https://news.google.com/rss/articles/CBMigwFBVV95cUxQS1FzZ3h6UUJzenI2TmhvV3pwMEFiMGtMcVZWR1hqNDloYUlKOUlfSk1SZERZSVRPNm5tN1Y1eUdycm1iTlJscFJZcFpkVG05SVFPT0Z1U0M0YnZVMDRyVE9YVko1UWRzUTRvbzlzWVdEakttd0hYTjFIMGtpY21tdWFrRQ",
+    "https://www.firstpost.com/tech/apple-outage-hits-icloud-app-store-apple-pay-and-other-services-across-the-us-what-users-need-to-know-14060747.html",
+    "https://futurism.com/future-society/apple-iphone-services-suffers-major-outage",
+    "https://www.bleepingcomputer.com/news/apple/apple-reports-outages-affecting-icloud-mail-applecare-and-more/",
+    "https://www.lalibre.be/economie/digital/2026/11/17/que-se-passe-t-il-des-apple-des-utilisateurs-signalent-des-problemes-7JBMQQSGDZBRZKHE6HOWDWKH3E/"
+  ],
+  "suggested_qna": [],
+  "summary": "Apple\u2019s November 17 service outage affected more than consumer apps: developers reported trouble with App Store Connect, while Apple\u2019s status listings also showed problems with account tools, music and podcast services, and school-management systems [macrumors.com#1][bleepingcomputer.com#1]. Staff at some stores could not complete purchases; a Philadelphia customer said both checkout and the Apple Store app\u2019s self-checkout were unavailable at the Walnut Street location [nbcphiladelphia.com#1].\n\nApple said an internal update caused the disruption but did not specify what the update changed or why it affected several systems [techcrunch.com#1][freepressjournal.in#1]. Users also reported iCloud sign-in failures and device-activation errors, which can block setup of new Apple devices [9to5mac.com#1][pcmag.com#1].\n\nThe company\u2019s public status page did not always match user reports: it initially showed services as available, then added and revised incident notices throughout the day [freepressjournal.in#1][digitaltrends.com#1]. Apple listed all services as available by Tuesday evening, though users had reported lingering problems earlier that afternoon [time.com#1][techcrunch.com#1].",
+  "talking_points": [
+    "Outage reports: Reports to Downdetector began to spike around 11:40 a.m.; shortly before 1 p.m., roughly 2,000 users were reporting problems with Apple Support, Apple Pay and iCloud [time.com#1].",
+    "NSA operations: The NSA said scheduled maintenance temporarily degraded some internal systems but left mission-critical capabilities operational [theguardian.com#1][derbund.ch#1].",
+    "Hotel systems: Marriott operates 10,200 properties with more than 1.8 million rooms [thehindubusinessline.com#1][theglobeandmail.com#1].",
+    "Store disruption: At Apple\u2019s flagship Michigan Avenue store in Chicago, systems were unavailable for at least an hour and operations appeared to resume by 12:20 p.m. local time [ahram.org.eg#1]."
+  ],
+  "technical_details": [
+    "Exchange gateway defect: Microsoft\u2019s preliminary account described lock contention in an internal Windows process on some Microsoft 365 networking gateway servers. Newer machines with more cores worsened the defect, which tests focused on less powerful hardware failed to detect [theverge.com#1].",
+    "FAA network overload: The FAA pointed in part to a router upgrade in southern Arkansas that overwhelmed its telecommunications network. The root cause remained under investigation [cnbc.com#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Microsoft outage disrupted Outlook and Teams services [wmtv15news.com#1]",
+      "date": "12 November 2026",
+      "date_iso": "2026-11-12"
+    },
+    {
+      "content": "FAA communications problems triggered a nationwide flight ground stop [wmtv15news.com#1]",
+      "date": "13 November 2026",
+      "date_iso": "2026-11-13"
+    },
+    {
+      "content": "Banking and United Airlines disruptions followed earlier system failures [wmtv15news.com#1][theguardian.com#1]",
+      "date": "16 November 2026",
+      "date_iso": "2026-11-16"
+    },
+    {
+      "content": "Apple services and the NSA internal network experienced disruptions [cbsnews.com#3][theguardian.com#1]",
+      "date": "17 November 2026",
+      "date_iso": "2026-11-17"
+    }
+  ],
+  "title": "Apple\u0027s internal update disrupts developer tools and store systems",
+  "travel_advisory": "",
+  "unique_domains": 58,
+  "url": "https://www.digitaltrends.com/phones/apple-services-hit-by-widespread-outage-reports-users-flag-problems-with-icloud-app-store-and-apple-pay/",
+  "user_action_items": [
+    "Avoid repeated Apple Account sign-in attempts during verification errors: TechJuice reported that repeated attempts could lock the account. Wait for service to recover before trying again [techjuice.pk#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
