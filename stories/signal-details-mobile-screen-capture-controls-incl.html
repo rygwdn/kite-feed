@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Signal details mobile screen-capture controls, including timed opt-outs - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Signal details mobile screen-capture controls, including timed opt-outs</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> Technology</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://decrypt.co/383750/signal-os-level-ai-existential-threat-blocks-screenshots"><img src="https://kagiproxy.com/img/N6y3it0rcZuIYPR5BSeg3dA9JDxkwtlJhAeM_TljERHydBp5QDJGgpj15yzJHD1E1m8Y2VZsYGuOR06h8tRJHTdwlQFmKAG5uVJAPz4DphhQDRQ1ZdovIk6cJ4Qc8eEGvFvarCn71QsftIKqFVg" alt="Signal messaging app shown on mobile devices" title="Signal messaging app shown on mobile devices (decrypt.co)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+Signal messaging app shown on mobile devices <span class='credit'>(decrypt.co)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>Signal has detailed mobile controls designed to stop operating-system AI agents from reading chats displayed in its encrypted messaging app. The protections are available on iPhones running iOS 27 or later with Signal 8.37 or later, and on Android with Signal 8.35.1 or later <a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a>. They address the risk that agents can inspect a conversation after it has been decrypted for display, beyond Signal’s control <a href="https://www.computerbase.de/news/apps/signal-gegen-ki-siri-und-gemini-sollen-chats-nicht-mitlesen.100446/" class="footnote-ref">[12]</a><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOTVM0WGVYd0FwWkM5Y3ZuNmo0NHJpRVBBc2tzSXBfNVUwbG9vankwUnFaTFJ0Z2RNUEd1bzdGTTVrMkczR1VCQ2xjY3oyMk9iaW9QNV8xcjFDdkVpVEFjbl9GbjE4TEV0STJESFN5clo3VXhaWlpfb2pRMDNKdEc4dzlqWG5YaHNyUUs2NWZTRnJON254WDRVTDR2SDJYUXQxV3oybUh1REZydWFiRUxFLTV1UHByUnMxQnFVNmt1UkFnUQ" class="footnote-ref">[5]</a>.
+
+On iPhone, users can turn off the protection or pause it for 10 minutes; on Android, Signal activates Screen security when it detects an assistant trying to read the screen <a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a><a href="https://www.apfeltalk.de/magazin/news/signal-blockiert-screenshots-auf-dem-iphone-standardmaessig/" class="footnote-ref">[13]</a>. Signal says these screen-capture measures do not block other routes to on-device data, and it cannot reliably provide the same protection on macOS <a href="https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html" class="footnote-ref">[1]</a><a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>In order to gain access to information about you, these OS AI agents &#x27;scan&#x27; the information that&#x27;s on your screen.</p>
+
+<cite>— Meredith Whittaker, president of the Signal Foundation (The Hacker News)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Developer requests: Signal wants Apple, Google and Microsoft to offer a documented opt-out covering screen reading, file access, notifications, APIs and other operating-system pathways <a href="https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html" class="footnote-ref">[1]</a><a href="https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/" class="footnote-ref">[2]</a>.</li>
+
+<li>Agent permissions: Meta’s Muse agent accessed Signal on Android through notification permissions and on a Mac through accessibility and screenshot tools, according to reported examples <a href="https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc" class="footnote-ref">[7]</a>.</li>
+
+<li>Android override: Signal says it will restore protection after 90 days if an Android user disables it through a Screen security prompt; disabling it directly in Privacy settings does not trigger reminders <a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>Signal: The company said it is discussing with Apple and Google how to make their systems work better with privacy-sensitive apps <a href="https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/" class="footnote-ref">[2]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/">Coywolf</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Meta: Meta said agents need to see and interact with users’ computers to act on their behalf, and that Muse accesses other apps only through permissions users explicitly grant <a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc" class="footnote-ref">[7]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc">The Economic Times</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+<h2>Timeline</h2><ul>
+
+
+<li><strong>21 May 2025:</strong> Signal enabled default Windows 11 screen protection against Recall <a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a></li>
+
+
+
+<li><strong>October 2026:</strong> Apple added an Excluded Apps option in iOS 27.2 <a href="https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html" class="footnote-ref">[1]</a></li>
+
+
+
+<li><strong>20 November 2026:</strong> Signal announced default mobile screen-capture protections <a href="https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/" class="footnote-ref">[2]</a><a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a></li>
+
+
+</ul>
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Android detection limits: Signal says differences among Android manufacturers make attempted screen capture difficult to detect consistently, so its protection activates only when it recognizes an AI assistant reading the display <a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/" class="footnote-ref">[8]</a><a href="https://www.computerbase.de/news/apps/signal-gegen-ki-siri-und-gemini-sollen-chats-nicht-mitlesen.100446/" class="footnote-ref">[12]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Action Items</h2><ul>
+
+<li>Exclude Signal from Siri access on a Mac: Open System Settings, go to Siri, and add Signal to “Excluded Apps,” as Signal recommends for macOS <a href="https://www.pcmag.com/news/signal-cracks-down-on-ai-agents-says-they-threaten-users-privacy" class="footnote-ref">[4]</a>.</li>
+
+</ul>
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+<li><a href="https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/">https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/</a></li>
+
+
+
+<li><a href="https://www.apfeltalk.de/magazin/news/signal-blockiert-screenshots-auf-dem-iphone-standardmaessig/">https://www.apfeltalk.de/magazin/news/signal-blockiert-screenshots-auf-dem-iphone-standardmaessig/</a></li>
+
+
+
+<li><a href="https://www.nezavisne.com/nauka-tehnologija/hardware/Signal-uvodi-ogranicenja-za-snimanje-ekrana/993526">https://www.nezavisne.com/nauka-tehnologija/hardware/Signal-uvodi-ogranicenja-za-snimanje-ekrana/993526</a></li>
+
+
+
+<li><a href="https://decrypt.co/383750/signal-os-level-ai-existential-threat-blocks-screenshots">https://decrypt.co/383750/signal-os-level-ai-existential-threat-blocks-screenshots</a></li>
+
+
+
+<li><a href="https://www.computerbase.de/news/apps/signal-gegen-ki-siri-und-gemini-sollen-chats-nicht-mitlesen.100446/">https://www.computerbase.de/news/apps/signal-gegen-ki-siri-und-gemini-sollen-chats-nicht-mitlesen.100446/</a></li>
+
+
+
+<li><a href="https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/">https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/</a></li>
+
+
+
+<li><a href="https://www.ghacks.net/2026/11/21/signal-blocks-siri-gemini-and-other-ai-agents-from-reading-your-messages/">https://www.ghacks.net/2026/11/21/signal-blocks-siri-gemini-and-other-ai-agents-from-reading-your-messages/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc">https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNYV9reUN1a3c2WHowRDNjd0VHY3hrX2xKTHl3R3FUSWc3bDNvMUtzSDdDdTZRc2F1V2ZscnZpSmNueHNiZHp4ZmIwLVVhbE8xZWpxbDZKWGxIeDhMR3hNN01hVm5YcTFWMWt1ZVQzTi1VVFM3N0x1TWpsTm5HWkppTzdUR1Jjd3A0WnQyNlg1eDlTaEk">https://news.google.com/rss/articles/CBMikwFBVV95cUxNYV9reUN1a3c2WHowRDNjd0VHY3hrX2xKTHl3R3FUSWc3bDNvMUtzSDdDdTZRc2F1V2ZscnZpSmNueHNiZHp4ZmIwLVVhbE8xZWpxbDZKWGxIeDhMR3hNN01hVm5YcTFWMWt1ZVQzTi1VVFM3N0x1TWpsTm5HWkppTzdUR1Jjd3A0WnQyNlg1eDlTaEk</a></li>
+
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxOTVM0WGVYd0FwWkM5Y3ZuNmo0NHJpRVBBc2tzSXBfNVUwbG9vankwUnFaTFJ0Z2RNUEd1bzdGTTVrMkczR1VCQ2xjY3oyMk9iaW9QNV8xcjFDdkVpVEFjbl9GbjE4TEV0STJESFN5clo3VXhaWlpfb2pRMDNKdEc4dzlqWG5YaHNyUUs2NWZTRnJON254WDRVTDR2SDJYUXQxV3oybUh1REZydWFiRUxFLTV1UHByUnMxQnFVNmt1UkFnUQ">https://news.google.com/rss/articles/CBMiwgFBVV95cUxOTVM0WGVYd0FwWkM5Y3ZuNmo0NHJpRVBBc2tzSXBfNVUwbG9vankwUnFaTFJ0Z2RNUEd1bzdGTTVrMkczR1VCQ2xjY3oyMk9iaW9QNV8xcjFDdkVpVEFjbl9GbjE4TEV0STJESFN5clo3VXhaWlpfb2pRMDNKdEc4dzlqWG5YaHNyUUs2NWZTRnJON254WDRVTDR2SDJYUXQxV3oybUh1REZydWFiRUxFLTV1UHByUnMxQnFVNmt1UkFnUQ</a></li>
+
+
+
+<li><a href="https://www.pcmag.com/news/signal-cracks-down-on-ai-agents-says-they-threaten-users-privacy">https://www.pcmag.com/news/signal-cracks-down-on-ai-agents-says-they-threaten-users-privacy</a></li>
+
+
+
+<li><a href="https://www.techjuice.pk/signal-blocks-mobile-screenshots-ai-surveillance-threat/">https://www.techjuice.pk/signal-blocks-mobile-screenshots-ai-surveillance-threat/</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> pcmag.com, techcrunch.com, decrypt.co, ghacks.net, thehackernews.com, coywolf.com, techjuice.pk, indiatimes.com, finchannel.com, nezavisne.com, samaa.tv, computerbase.de, apfeltalk.de</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #5, 13 unique domains, 13 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "author": "The Hacker News",
+      "date": "2026-11-21T08:49:20.000Z",
+      "domain": "thehackernews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html",
+      "title": "Signal Blocks AI Agents From Reading Private Chats via Screenshots on Android and iOS"
+    },
+    {
+      "author": "Jon Henshaw",
+      "date": "2026-11-21T15:03:48.000Z",
+      "domain": "coywolf.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/",
+      "title": "Signal blocks Siri AI and Gemini from capturing your chats on iOS and Android"
+    },
+    {
+      "author": "Abdul Wasay",
+      "date": "2026-11-22T04:41:51.000Z",
+      "domain": "techjuice.pk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techjuice.pk/signal-blocks-mobile-screenshots-ai-surveillance-threat/",
+      "title": "Signal Restricts Screenshots on Android and iOS to Fight AI"
+    },
+    {
+      "date": "2026-11-21T13:48:37.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.pcmag.com/news/signal-cracks-down-on-ai-agents-says-they-threaten-users-privacy",
+      "title": "Signal Cracks Down on AI Agents, Says They Threaten Users\u2019 Privacy"
+    },
+    {
+      "date": "2026-11-21T21:37:10.000Z",
+      "domain": "techcrunch.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOTVM0WGVYd0FwWkM5Y3ZuNmo0NHJpRVBBc2tzSXBfNVUwbG9vankwUnFaTFJ0Z2RNUEd1bzdGTTVrMkczR1VCQ2xjY3oyMk9iaW9QNV8xcjFDdkVpVEFjbl9GbjE4TEV0STJESFN5clo3VXhaWlpfb2pRMDNKdEc4dzlqWG5YaHNyUUs2NWZTRnJON254WDRVTDR2SDJYUXQxV3oybUh1REZydWFiRUxFLTV1UHByUnMxQnFVNmt1UkFnUQ",
+      "title": "Signal restricts mobile screenshots as it confronts \u2018existential threat\u2019 of AI surveillance"
+    },
+    {
+      "author": "Arthur Kay",
+      "date": "2026-11-21T18:01:36.000Z",
+      "domain": "ghacks.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ghacks.net/2026/11/21/signal-blocks-siri-gemini-and-other-ai-agents-from-reading-your-messages/",
+      "title": "Signal Blocks Siri, Gemini and Other AI Agents From Reading Your Messages"
+    },
+    {
+      "date": "2026-11-21T02:31:00.000Z",
+      "domain": "indiatimes.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc",
+      "title": "Signal restricts screenshots to block AI agents from reading messages"
+    },
+    {
+      "author": "The FINANCIAL",
+      "date": "2026-11-21T12:29:17.000Z",
+      "domain": "finchannel.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/",
+      "title": "Signal screenshot restrictions target AI access to private chats"
+    },
+    {
+      "author": "Decrypt Staff",
+      "date": "2026-11-21T16:01:02.000Z",
+      "domain": "decrypt.co",
+      "image": "https://kagiproxy.com/img/l3wlzYL5mCVM1DacPhbgBIuDL0ifZ1jy1jic3QjxTUnQXFkTo45Km9EjrUm4wCZ5YXN6VPYfu1RJKTEBtPnoiUIDbBlRo_1NQMatwh7RE85iHHu6MjBYfaaIYhzChPehNfEjowBwLcEVPdCojjI",
+      "image_caption": "",
+      "link": "https://decrypt.co/383750/signal-os-level-ai-existential-threat-blocks-screenshots",
+      "title": "Signal Calls OS-Level AI an \u0027Existential Threat\u0027 and Blocks Screenshots to Fight It"
+    },
+    {
+      "author": "N.A.",
+      "date": "2026-11-21T08:40:24.000Z",
+      "domain": "nezavisne.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.nezavisne.com/nauka-tehnologija/hardware/Signal-uvodi-ogranicenja-za-snimanje-ekrana/993526",
+      "title": "Signal uvodi ograni\u010denja za snimanje ekrana"
+    },
+    {
+      "date": "2026-11-22T03:16:14.000Z",
+      "domain": "samaa.tv",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNYV9reUN1a3c2WHowRDNjd0VHY3hrX2xKTHl3R3FUSWc3bDNvMUtzSDdDdTZRc2F1V2ZscnZpSmNueHNiZHp4ZmIwLVVhbE8xZWpxbDZKWGxIeDhMR3hNN01hVm5YcTFWMWt1ZVQzTi1VVFM3N0x1TWpsTm5HWkppTzdUR1Jjd3A0WnQyNlg1eDlTaEk",
+      "title": "Signal limits mobile screenshots over AI privacy concerns"
+    },
+    {
+      "author": "Philipp Ernicke",
+      "date": "2026-11-21T17:40:00.000Z",
+      "domain": "computerbase.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.computerbase.de/news/apps/signal-gegen-ki-siri-und-gemini-sollen-chats-nicht-mitlesen.100446/",
+      "title": "Signal gegen KI: Siri und Gemini sollen Chats nicht mitlesen"
+    },
+    {
+      "author": "Apfeltalk Redaktion",
+      "date": "2026-11-22T03:00:00.000Z",
+      "domain": "apfeltalk.de",
+      "image": "https://kagiproxy.com/img/F7HKu_aPpfGvVEpXYT-ajbgHGyHxUZUFpC81t25fjhCpUiytPQ2gmXYy1loUj67mVnkChcu2JB2qgKoq-7a1OqbV08F-USY8XcA8yOhljhnbLQCWkmfU98bB5TCRGPzdzozjGMBziXQm4pMv",
+      "image_caption": "",
+      "link": "https://www.apfeltalk.de/magazin/news/signal-blockiert-screenshots-auf-dem-iphone-standardmaessig/",
+      "title": "Signal blockiert Screenshots auf dem iPhone standardm\u00e4\u00dfig"
+    }
+  ],
+  "business_angle": "",
+  "category": "Technology",
+  "cluster_number": 5,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techcrunch.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techcrunch.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=decrypt.co\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "decrypt.co"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ghacks.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ghacks.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thehackernews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thehackernews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=coywolf.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "coywolf.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techjuice.pk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techjuice.pk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indiatimes.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indiatimes.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=finchannel.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "finchannel.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nezavisne.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nezavisne.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=samaa.tv\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "samaa.tv"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerbase.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerbase.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=apfeltalk.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "apfeltalk.de"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83d\udd12",
+  "feed_category": "Technology",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Privacy",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 13,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "Coywolf",
+          "url": "https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/"
+        }
+      ],
+      "text": "Signal: The company said it is discussing with Apple and Google how to make their systems work better with privacy-sensitive apps [coywolf.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "The Economic Times",
+          "url": "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc"
+        }
+      ],
+      "text": "Meta: Meta said agents need to see and interact with users\u2019 computers to act on their behalf, and that Muse accesses other apps only through permissions users explicitly grant [indiatimes.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "Signal messaging app shown on mobile devices",
+    "credit": "decrypt.co",
+    "link": "https://decrypt.co/383750/signal-os-level-ai-existential-threat-blocks-screenshots",
+    "url": "https://kagiproxy.com/img/N6y3it0rcZuIYPR5BSeg3dA9JDxkwtlJhAeM_TljERHydBp5QDJGgpj15yzJHD1E1m8Y2VZsYGuOR06h8tRJHTdwlQFmKAG5uVJAPz4DphhQDRQ1ZdovIk6cJ4Qc8eEGvFvarCn71QsftIKqFVg"
+  },
+  "published": "2026-11-22T12:00:20.077Z",
+  "quote": "In order to gain access to information about you, these OS AI agents \u0027scan\u0027 the information that\u0027s on your screen.",
+  "quote_attribution": "The Hacker News",
+  "quote_author": "Meredith Whittaker, president of the Signal Foundation",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://coywolf.com/news/productivity/signal-blocks-siri-ai-and-gemini-from-capturing-your-chats-on-ios-and-android/",
+    "https://www.apfeltalk.de/magazin/news/signal-blockiert-screenshots-auf-dem-iphone-standardmaessig/",
+    "https://www.nezavisne.com/nauka-tehnologija/hardware/Signal-uvodi-ogranicenja-za-snimanje-ekrana/993526",
+    "https://decrypt.co/383750/signal-os-level-ai-existential-threat-blocks-screenshots",
+    "https://www.computerbase.de/news/apps/signal-gegen-ki-siri-und-gemini-sollen-chats-nicht-mitlesen.100446/",
+    "https://finchannel.com/signal-screenshot-restrictions-target-ai-access-to-private-chats/142613/tech-2/2026/11/",
+    "https://www.ghacks.net/2026/11/21/signal-blocks-siri-gemini-and-other-ai-agents-from-reading-your-messages/",
+    "https://news.google.com/rss/articles/CBMi6AFBVV95cUxPdVgwWkZnUVR0U2VrYjJ2UnVUaE95ZTFlaFMyeDhqZ1NjN1BpcFdjQndKczB2OEwzc3Z1NDd2QzlkcDM3SU9YanhYN2FaTWpWSkltYTNuS3FWU01zTFlkZTRBTTVpQ3NYdXlDY1FhclRDQXhXbDYyVElCbVRhXzhudU9HWkw1bEVrRG1jRllyVGlPTzJmZENQYUZ1MG9laXdYX3BQSG5vQW93RUFNdjB2R2h1RklMYjRfNTVTa3hOOHJQcXRtVzcwa1RwM0V1eG5kTlZ2VW81VUlHWUxGbV9kZjhmVGdEcXJB0gHuAUFVX3lxTE1PQ19Qa1FLYnJLenhxN0d0cEJMZ1p2SDBzcXZwZUxTejZkcW9Kc0ZHUGJQUzVEeG9JOTRQN1dZVWYydzlqdEFJdUVrWmYzWkFFWndRNVJGTzExTnNCTFRkbVFUMkd4aFNsV2M1UkxGVGdVMjYtd1cwSGl6U0ZOb05KX005blZNNnkyTDZOTm1RY2dBZzB3TzFFa1BGTFpDVDFCeDZjSWF1bTB6bzJLZWZfX21NeEhuVGlyN1FEdEZ0M3ZGb2pnaHFYS1d5Z3Z1Y2d0Snp0eGxSSjhqb1FfeXZVYUNKdHF6UGIyQlNNZGc",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxNYV9reUN1a3c2WHowRDNjd0VHY3hrX2xKTHl3R3FUSWc3bDNvMUtzSDdDdTZRc2F1V2ZscnZpSmNueHNiZHp4ZmIwLVVhbE8xZWpxbDZKWGxIeDhMR3hNN01hVm5YcTFWMWt1ZVQzTi1VVFM3N0x1TWpsTm5HWkppTzdUR1Jjd3A0WnQyNlg1eDlTaEk",
+    "https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxOTVM0WGVYd0FwWkM5Y3ZuNmo0NHJpRVBBc2tzSXBfNVUwbG9vankwUnFaTFJ0Z2RNUEd1bzdGTTVrMkczR1VCQ2xjY3oyMk9iaW9QNV8xcjFDdkVpVEFjbl9GbjE4TEV0STJESFN5clo3VXhaWlpfb2pRMDNKdEc4dzlqWG5YaHNyUUs2NWZTRnJON254WDRVTDR2SDJYUXQxV3oybUh1REZydWFiRUxFLTV1UHByUnMxQnFVNmt1UkFnUQ",
+    "https://www.pcmag.com/news/signal-cracks-down-on-ai-agents-says-they-threaten-users-privacy",
+    "https://www.techjuice.pk/signal-blocks-mobile-screenshots-ai-surveillance-threat/"
+  ],
+  "suggested_qna": [],
+  "summary": "Signal has detailed mobile controls designed to stop operating-system AI agents from reading chats displayed in its encrypted messaging app. The protections are available on iPhones running iOS 27 or later with Signal 8.37 or later, and on Android with Signal 8.35.1 or later [finchannel.com#1]. They address the risk that agents can inspect a conversation after it has been decrypted for display, beyond Signal\u2019s control [computerbase.de#1][techcrunch.com#1].\n\nOn iPhone, users can turn off the protection or pause it for 10 minutes; on Android, Signal activates Screen security when it detects an assistant trying to read the screen [finchannel.com#1][apfeltalk.de#1]. Signal says these screen-capture measures do not block other routes to on-device data, and it cannot reliably provide the same protection on macOS [thehackernews.com#1][finchannel.com#1].",
+  "talking_points": [
+    "Developer requests: Signal wants Apple, Google and Microsoft to offer a documented opt-out covering screen reading, file access, notifications, APIs and other operating-system pathways [thehackernews.com#1][coywolf.com#1].",
+    "Agent permissions: Meta\u2019s Muse agent accessed Signal on Android through notification permissions and on a Mac through accessibility and screenshot tools, according to reported examples [thehackernews.com#1][indiatimes.com#1].",
+    "Android override: Signal says it will restore protection after 90 days if an Android user disables it through a Screen security prompt; disabling it directly in Privacy settings does not trigger reminders [finchannel.com#1]."
+  ],
+  "technical_details": [
+    "Android detection limits: Signal says differences among Android manufacturers make attempted screen capture difficult to detect consistently, so its protection activates only when it recognizes an AI assistant reading the display [finchannel.com#1][computerbase.de#1]."
+  ],
+  "timeline": [
+    {
+      "content": "Signal enabled default Windows 11 screen protection against Recall [finchannel.com#1]",
+      "date": "21 May 2025",
+      "date_iso": "2025-05-21"
+    },
+    {
+      "content": "Apple added an Excluded Apps option in iOS 27.2 [thehackernews.com#1]",
+      "date": "October 2026",
+      "date_iso": "2026-10"
+    },
+    {
+      "content": "Signal announced default mobile screen-capture protections [coywolf.com#1][finchannel.com#1]",
+      "date": "20 November 2026",
+      "date_iso": "2026-11-20"
+    }
+  ],
+  "title": "Signal details mobile screen-capture controls, including timed opt-outs",
+  "travel_advisory": "",
+  "unique_domains": 13,
+  "url": "https://thehackernews.com/2026/11/signal-blocks-ai-agents-from-reading.html",
+  "user_action_items": [
+    "Exclude Signal from Siri access on a Mac: Open System Settings, go to Siri, and add Signal to \u201cExcluded Apps,\u201d as Signal recommends for macOS [pcmag.com#1]."
+  ]
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
