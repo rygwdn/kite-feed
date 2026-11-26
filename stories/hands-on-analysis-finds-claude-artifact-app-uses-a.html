@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/kagisearch/kite-public/main/static/kite-icon.png">
+    <title>Hands-on analysis finds Claude artifact app uses Anthropic’s Electron-based runtime - Kite Static</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+            background-color: #fff;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #34495e;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        .category {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 10px;
+        }
+        .summary {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        blockquote {
+            border-left: 4px solid #3498db;
+            padding-left: 20px;
+            margin: 20px 0;
+            font-style: italic;
+            color: #555;
+        }
+        blockquote cite {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #7f8c8d;
+        }
+        .did-you-know {
+            background-color: #fff3cd;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+        }
+        ul {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+        li {
+            margin: 8px 0;
+        }
+        .perspective {
+            background-color: #f8f9fa;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .qna {
+            background-color: #e7f3ff;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        figure.image {
+            margin: 20px 0;
+            text-align: center;
+        }
+        figure.image img {
+            border-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            max-width: 100%;
+            height: auto;
+        }
+        .caption, figcaption.caption {
+            margin-top: 10px;
+            font-size: 0.9em;
+            color: #666;
+            text-align: center;
+        }
+        .credit {
+            font-style: italic;
+        }
+        .sources {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }
+        .metadata {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f8f9fa;
+            font-size: 0.9em;
+            color: #666;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .footnote-ref {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: normal;
+            font-size: 0.9em;
+            vertical-align: super;
+            margin-left: 2px;
+        }
+        .footnote-ref:hover {
+            text-decoration: underline;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border-radius: 4px;
+        }
+        .back-link:hover {
+            background-color: #2980b9;
+            text-decoration: none;
+        }
+        details {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: #2c3e50;
+            padding: 10px;
+            user-select: none;
+        }
+        summary:hover {
+            background-color: #e9ecef;
+            border-radius: 4px;
+        }
+        pre {
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 0.85em;
+            border: 1px solid #ddd;
+        }
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <a href="https://rygwdn.github.io/kite-feed/index.html" class="back-link">← Back to Feed</a>
+    
+
+
+
+
+<h1>Hands-on analysis finds Claude artifact app uses Anthropic’s Electron-based runtime</h1>
+
+
+
+
+<p class='category'><strong>Category:</strong> AI</p>
+
+
+
+
+<figure class='image'>
+
+<a href="https://www.androidheadlines.com/2026/11/claude-install-artifacts-as-standalone-apps.html"><img src="https://kagiproxy.com/img/XnjEfI5ehu1vvia8GFUWCmAB6KUfssPNAqURQLo3WeneVL2a5axYqTNF5TC0awrij8S4hHiu36_MN3vDIjdezZq4fD-9LdMFaN8NEs-_F2AUrGK19cQ4i3yprrXjCG1_74s2Y2BjqDN1xlW68EzYHU4op-WmQqFq6A" alt="Hands-on analysis finds Claude artifact app uses Anthropic’s Electron-based runtime" title=" (androidheadlines.com)" style="max-width: 100%; height: auto;" /></a>
+
+
+<figcaption class='caption'>
+ <span class='credit'>(androidheadlines.com)</span>
+</figcaption>
+
+</figure>
+
+
+
+
+<div class='summary'><p>A hands-on analysis of a Claude app on Mac found an HTML-based tool wrapped in a small Electron launcher and managed through the main Claude app, rather than conventional native Mac software <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA" class="footnote-ref">[11]</a>. The beta lets users turn interactive tools created with Claude into separate desktop apps for Mac and Windows that can use Claude and connected services <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA" class="footnote-ref">[11]</a><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw" class="footnote-ref">[1]</a>.
+
+The desktop app mediates access to computer functions, including file-system operations, and users can grant installed tools permission to read, change or delete files <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA" class="footnote-ref">[11]</a><a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw" class="footnote-ref">[1]</a>. Anthropic does not review apps before installation; code loaded from an outside website can also change without another permission prompt <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5VZDA2UV9BNUdrZzVmSW9aWm1kVUFIZjg5OFB3NkZVR290QkZGOTlXSjQ1X3pkRE9nNWMwWUl6cHQxVGZTeVV0a3ZJZ1JMUXE3MW42TVVTblgtVFB1VHZPeE9Ja25hWHB1M0dMVG5jMzk" class="footnote-ref">[7]</a>.
+
+The tools require an internet connection and an active Claude sign-in, and AI requests count toward plan limits <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw" class="footnote-ref">[9]</a><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQeW9mSnlSM1JOUTVTRFV5TC1rOVFDUzRNNW0wRHllZlRaVjkwYV9qZDNkYVBUdDJuVVNtSkJVWkxiaUJ4VWdFbmVxVzZ0cDA4S3ZtMnVfQ25JX0N0SnFrYjJqT0VTMklTckp5MVV3ZllUU2oyTXNEa0lWWWJxUDFQWXNlamtFc3M3WDUzZHBvVjg" class="footnote-ref">[8]</a>. Anthropic’s Compliance API records app openings and access checks as artifact views, but not installations, permission decisions or actions performed on the computer <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg" class="footnote-ref">[10]</a>.</p></div>
+
+
+
+
+
+
+
+<p class="sources"><strong>Primary Source:</strong> <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw">View original article</a></p>
+
+
+
+
+
+
+<blockquote><p>These apps can do native things, like adding menu bar items, creating transparent windows, or sending notifications.</p>
+
+<cite>— Felix Rieseberg, Anthropic engineer (TestingCatalog)</cite>
+
+</blockquote>
+
+
+
+
+
+
+
+<h2>Key Points</h2><ul>
+
+<li>Permission scope: Full computer access is restricted to apps users created themselves, or—on Team and Enterprise plans—apps made within their organization; each approval covers one app version <a href="https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw" class="footnote-ref">[1]</a><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNai1YYzJid3JHV2drMl9fUnc3U0NMZVJ6VkZ6LVZaMkpMeDVrckR0LU1PSWV1dGVHWDRnQWdMcFRuRWtESF9QZFc5QkpKWUJEUHdYQ2c4MWx2Uk4tV1lCWHlZOHlKRlR2MVNtTDhhRnBfeklsQzd4OHVmQUVHd0JoRXN5dzgzazNZYnJXRHRkYzEtWk0" class="footnote-ref">[17]</a>.</li>
+
+<li>IT oversight: TechRepublic says administrators can restrict the feature through Claude organization settings or device-management policy, with the stricter rule taking precedence <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg" class="footnote-ref">[10]</a>.</li>
+
+<li>Software market: TrendingTopics says customizable Claude tools could compete with some software subscriptions <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5VM3FLcU94ZzdPX1FaNGE1eVJsOWUxdzBqeFJTdXlWVkx0YVl5VmhsTUdDdEE3MFd0WGVfNEVFWGJmZk4zXy1NOFhSa244V3duVjRvR1RQZGhJMFR6QW1BOHNmajJvbUJLbGkwRHQzQnB4eGNSVVg3cA" class="footnote-ref">[15]</a>.</li>
+
+</ul>
+
+
+
+
+<h2>Perspectives</h2>
+
+
+<div class='perspective'><p>MacStories argues the strategic concern is that users could build a Claude-centered layer of tools and mods on their Macs, shifting some of Apple’s ecosystem experience toward Anthropic <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA" class="footnote-ref">[11]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA">MacStories</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>TechRepublic recommends piloting an app with sample notes, avoiding production accounts and sensitive files, and keeping full computer access off during testing <a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg" class="footnote-ref">[10]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg">TechRepublic</a>
+
+
+</p>
+
+</div>
+
+
+
+<div class='perspective'><p>Computerworld columnist Jonny Evans urged users to be cautious about granting full system access and argued Apple should emphasize privacy, data retention and on-device AI as lower-risk alternatives <a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw" class="footnote-ref">[6]</a>.</p>
+
+<p><strong>Sources:</strong>
+
+
+<a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw">Computerworld</a>
+
+
+</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2>Technical Details</h2><ul>
+
+<li>Electron wrapper: MacStories’ inspection found a 900-kilobyte app bundle containing a 51-kilobyte Objective-C launcher and an 80-kilobyte notification helper; the launcher loads Claude’s Electron framework <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA" class="footnote-ref">[11]</a>.</li>
+
+<li>Local file access: The tested tool called Claude’s desktop API for functions such as `fs.readdir` and `childProcess.spawn`, then used macOS utilities including `df`, `du` and `mdfind` to inspect storage <a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA" class="footnote-ref">[11]</a>.</li>
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+<h2>Historical Background</h2><p>Anthropic introduced Claude artifacts in 2024 as interactive creations users could make and share; before this desktop-app beta, they ran through Claude or a browser <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw" class="footnote-ref">[9]</a><a href="https://www.ifun.de/claude-macht-aus-artefakten-eigenstaendige-mac-apps-295926/" class="footnote-ref">[22]</a>.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Business Angle</h2>
+<ul><li>The beta excludes HIPAA-ready organizations and hybrid deployments, limiting its immediate reach among some regulated or mixed-environment customers <a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNak95N3VGUTZral9OeUxMdTFPTmE5TWJ2VThkMmFOWDU4YzhGNDJYSEdFNHhyS1daTl9kVXB5S3hoMXpjdXhWM3Z6UzFydzBRWEYxYlE4QjJ0U2VDUGlGOERKdkcweDBUSlVSX2hvZEtnUExFU1owdC1MbUFUVF9CTnB1OGNRazFHTlg2bEFmQzhKSjlSVUFEemhpNjVNVWxVSDRGQW4xR0ZfQU1FLWZlNU5NTUZRT2J1MnJLU1otYXlTUQ" class="footnote-ref">[16]</a><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5VM3FLcU94ZzdPX1FaNGE1eVJsOWUxdzBqeFJTdXlWVkx0YVl5VmhsTUdDdEE3MFd0WGVfNEVFWGJmZk4zXy1NOFhSa244V3duVjRvR1RQZGhJMFR6QW1BOHNmajJvbUJLbGkwRHQzQnB4eGNSVVg3cA" class="footnote-ref">[15]</a>.</li><li>Because artifact apps can connect to services such as Gmail, Slack, Notion and Salesforce, they could complement those platforms by adding custom Claude-built interfaces to existing workplace tools <a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxONWprSmNQa2c3ckpWZTA3eU50VklIMnRaaDFWeHA4N2RlVlo3WjhVYkt0dXJ2aGllSDFSVUxfeG1kd2VlS0Iwel9VZTNLYkdaSGZVc2VTaWxXbDBFS3NpNHd5RnlQMDRqckxOTHlpYUllcFpLWExnb0ZzUXJGYTZ2OHlwSnZ1M2p3VEo1RlUybFdPQQ" class="footnote-ref">[14]</a>.</li></ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h2>Q&A</h2>
+
+
+<div class='qna'><p><strong>Q:</strong> Can every Claude artifact be installed as a desktop app?</p>
+
+<p><strong>A:</strong> No. Claude Docs, Slides and Sheets, as well as legacy artifacts and live artifacts from Claude Cowork, are among those that cannot be installed <a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw" class="footnote-ref">[9]</a>.</p>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<p><strong>Additional Sources:</strong></p><ul>
+
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikAFBVV95cUxQeW9mSnlSM1JOUTVTRFV5TC1rOVFDUzRNNW0wRHllZlRaVjkwYV9qZDNkYVBUdDJuVVNtSkJVWkxiaUJ4VWdFbmVxVzZ0cDA4S3ZtMnVfQ25JX0N0SnFrYjJqT0VTMklTckp5MVV3ZllUU2oyTXNEa0lWWWJxUDFQWXNlamtFc3M3WDUzZHBvVjg">https://news.google.com/rss/articles/CBMikAFBVV95cUxQeW9mSnlSM1JOUTVTRFV5TC1rOVFDUzRNNW0wRHllZlRaVjkwYV9qZDNkYVBUdDJuVVNtSkJVWkxiaUJ4VWdFbmVxVzZ0cDA4S3ZtMnVfQ25JX0N0SnFrYjJqT0VTMklTckp5MVV3ZllUU2oyTXNEa0lWWWJxUDFQWXNlamtFc3M3WDUzZHBvVjg</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikgFBVV95cUxONWprSmNQa2c3ckpWZTA3eU50VklIMnRaaDFWeHA4N2RlVlo3WjhVYkt0dXJ2aGllSDFSVUxfeG1kd2VlS0Iwel9VZTNLYkdaSGZVc2VTaWxXbDBFS3NpNHd5RnlQMDRqckxOTHlpYUllcFpLWExnb0ZzUXJGYTZ2OHlwSnZ1M2p3VEo1RlUybFdPQQ">https://news.google.com/rss/articles/CBMikgFBVV95cUxONWprSmNQa2c3ckpWZTA3eU50VklIMnRaaDFWeHA4N2RlVlo3WjhVYkt0dXJ2aGllSDFSVUxfeG1kd2VlS0Iwel9VZTNLYkdaSGZVc2VTaWxXbDBFS3NpNHd5RnlQMDRqckxOTHlpYUllcFpLWExnb0ZzUXJGYTZ2OHlwSnZ1M2p3VEo1RlUybFdPQQ</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQeXY3V2RQN3RhTVhiRkFzajRKek5laTF6cERpZzVwdXFKd045YjBZUzRZU2VSRlF1SnJiay1hYlZpXzU1ZVdnNUswZkRBQnV0TDR0eFBBWEFOWkdXTTJHV2N6a2VQQnhmUGFDMnFVaVpQVDVmZWk4eDhHWkFZLVhKcw">https://news.google.com/rss/articles/CBMigAFBVV95cUxQeXY3V2RQN3RhTVhiRkFzajRKek5laTF6cERpZzVwdXFKd045YjBZUzRZU2VSRlF1SnJiay1hYlZpXzU1ZVdnNUswZkRBQnV0TDR0eFBBWEFOWkdXTTJHV2N6a2VQQnhmUGFDMnFVaVpQVDVmZWk4eDhHWkFZLVhKcw</a></li>
+
+
+
+<li><a href="https://www.eweek.com/news/claude-artifacts-install-as-app-mac-windows/">https://www.eweek.com/news/claude-artifacts-install-as-app-mac-windows/</a></li>
+
+
+
+<li><a href="https://itavisen.no/2026/11/26/claude-lag-apper-windows-mac/">https://itavisen.no/2026/11/26/claude-lag-apper-windows-mac/</a></li>
+
+
+
+<li><a href="https://sixcolors.com/link/2026/11/claude-now-lets-you-vibe-code-html-mac-apps/">https://sixcolors.com/link/2026/11/claude-now-lets-you-vibe-code-html-mac-apps/</a></li>
+
+
+
+<li><a href="https://www.ithome.com.tw/news/180804">https://www.ithome.com.tw/news/180804</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMickFVX3lxTFBQY0UtSFJMSzRfelFIb3o5bHJ3N2JqNjd2V3IxdG5ZRjZfbEZhdEM3bGZ0LWVfRTFRVHMzUVk1My11M1kzYjBJa2FuMFFMOEdsTS1vLW1iRGZlOFY4VUN2eTJPcklISjd3aWhjUmdXOE9odw">https://news.google.com/rss/articles/CBMickFVX3lxTFBQY0UtSFJMSzRfelFIb3o5bHJ3N2JqNjd2V3IxdG5ZRjZfbEZhdEM3bGZ0LWVfRTFRVHMzUVk1My11M1kzYjBJa2FuMFFMOEdsTS1vLW1iRGZlOFY4VUN2eTJPcklISjd3aWhjUmdXOE9odw</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE5VM3FLcU94ZzdPX1FaNGE1eVJsOWUxdzBqeFJTdXlWVkx0YVl5VmhsTUdDdEE3MFd0WGVfNEVFWGJmZk4zXy1NOFhSa244V3duVjRvR1RQZGhJMFR6QW1BOHNmajJvbUJLbGkwRHQzQnB4eGNSVVg3cA">https://news.google.com/rss/articles/CBMieEFVX3lxTE5VM3FLcU94ZzdPX1FaNGE1eVJsOWUxdzBqeFJTdXlWVkx0YVl5VmhsTUdDdEE3MFd0WGVfNEVFWGJmZk4zXy1NOFhSa244V3duVjRvR1RQZGhJMFR6QW1BOHNmajJvbUJLbGkwRHQzQnB4eGNSVVg3cA</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMixgFBVV95cUxOTllHY3hURGNxT05YUEptekFBSjl4MXVtcVpJOWxBUWdFMmlidXRFWHl5VEVRanVLRHRQOEQ3TWFZRXBxODNUbnBPOWtGdlRDMFBVeWFYRFJ2YV9HNXhuQVlwVTB0N1o4c1FzZHBDQi16YmtIdXhmWVdqU2NjNTV6YjZ1ekVlQ2VDWVZLT1RsNXdRSUxHNVBRUlJ5aVktRHBrRTFZSGEwRFBJbDhzUXEyWGVSNHVjVm43aHd6SndFSF9iOXEtakE">https://news.google.com/rss/articles/CBMixgFBVV95cUxOTllHY3hURGNxT05YUEptekFBSjl4MXVtcVpJOWxBUWdFMmlidXRFWHl5VEVRanVLRHRQOEQ3TWFZRXBxODNUbnBPOWtGdlRDMFBVeWFYRFJ2YV9HNXhuQVlwVTB0N1o4c1FzZHBDQi16YmtIdXhmWVdqU2NjNTV6YjZ1ekVlQ2VDWVZLT1RsNXdRSUxHNVBRUlJ5aVktRHBrRTFZSGEwRFBJbDhzUXEyWGVSNHVjVm43aHd6SndFSF9iOXEtakE</a></li>
+
+
+
+<li><a href="https://www.ifun.de/claude-macht-aus-artefakten-eigenstaendige-mac-apps-295926/">https://www.ifun.de/claude-macht-aus-artefakten-eigenstaendige-mac-apps-295926/</a></li>
+
+
+
+<li><a href="https://indianexpress.com/article/technology/artificial-intelligence/anthropic-artifacts-install-as-app-desktop-10977812/">https://indianexpress.com/article/technology/artificial-intelligence/anthropic-artifacts-install-as-app-desktop-10977812/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMitwFBVV95cUxPVFFMQWtvZGREN3J6RHdaT0JVMWNKQzlhX3ExRjNuR2prQlp5alpfMDlJYi01VEFPRGxHVWIzOGpILWNRVVc2U3R3bFpDWDZHcFFvZWp6LU80d3c0M0pzM05xMVJiWExZcTg5QnFzTmZnamRHTlpuWUh0S0M4cXpOZ0t6aTJERmlpWkNxM2ltYWJWT3lBWUpyakNuNjNlUU5ROGN4Z2d5bFVTX1pYTmh2RmZWdnVWa3M">https://news.google.com/rss/articles/CBMitwFBVV95cUxPVFFMQWtvZGREN3J6RHdaT0JVMWNKQzlhX3ExRjNuR2prQlp5alpfMDlJYi01VEFPRGxHVWIzOGpILWNRVVc2U3R3bFpDWDZHcFFvZWp6LU80d3c0M0pzM05xMVJiWExZcTg5QnFzTmZnamRHTlpuWUh0S0M4cXpOZ0t6aTJERmlpWkNxM2ltYWJWT3lBWUpyakNuNjNlUU5ROGN4Z2d5bFVTX1pYTmh2RmZWdnVWa3M</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiwgFBVV95cUxNak95N3VGUTZral9OeUxMdTFPTmE5TWJ2VThkMmFOWDU4YzhGNDJYSEdFNHhyS1daTl9kVXB5S3hoMXpjdXhWM3Z6UzFydzBRWEYxYlE4QjJ0U2VDUGlGOERKdkcweDBUSlVSX2hvZEtnUExFU1owdC1MbUFUVF9CTnB1OGNRazFHTlg2bEFmQzhKSjlSVUFEemhpNjVNVWxVSDRGQW4xR0ZfQU1FLWZlNU5NTUZRT2J1MnJLU1otYXlTUQ">https://news.google.com/rss/articles/CBMiwgFBVV95cUxNak95N3VGUTZral9OeUxMdTFPTmE5TWJ2VThkMmFOWDU4YzhGNDJYSEdFNHhyS1daTl9kVXB5S3hoMXpjdXhWM3Z6UzFydzBRWEYxYlE4QjJ0U2VDUGlGOERKdkcweDBUSlVSX2hvZEtnUExFU1owdC1MbUFUVF9CTnB1OGNRazFHTlg2bEFmQzhKSjlSVUFEemhpNjVNVWxVSDRGQW4xR0ZfQU1FLWZlNU5NTUZRT2J1MnJLU1otYXlTUQ</a></li>
+
+
+
+<li><a href="https://www.macwelt.de/article/3296779/eigene-mac-apps-ohne-programmieren-das-kann-claude-jetzt.html">https://www.macwelt.de/article/3296779/eigene-mac-apps-ohne-programmieren-das-kann-claude-jetzt.html</a></li>
+
+
+
+<li><a href="https://www.techmeme.com/261125/p40#a261125p40">https://www.techmeme.com/261125/p40#a261125p40</a></li>
+
+
+
+<li><a href="https://www.rbc.ua/rus/news/claude-zapuskae-vlasni-programi-mac-i-windows-1795599494.html">https://www.rbc.ua/rus/news/claude-zapuskae-vlasni-programi-mac-i-windows-1795599494.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMifkFVX3lxTFA3cXo3LWNxNjkzcHpiUUpfY1pMYTFJSTY3aDJmZGRkeDBIcE9kT0JkU3MzbHEtSjVQUTdIZXQ2bWUwV3lFcGtoN3czdkRoaWdVN3NyLS1sYXY2amtHb1k5Qm1rRWNUT1djMnRMdHowZk5UZ0xocXE4WEktZnFZZ9IBgwFBVV95cUxOYmV4ZzBrUS1ZNjlIcTBsUHY0ckJ2YnVvX3pPRC0zb1dxalVXWjBuNW9QRzVpMUYzMWhKV214cWszT2hDVFN0Y3FQaVJkampzTEoyNkV3ZzVWNnRBNjVXUTRGaFBvYVVNTWY2VXhJTTZfN3dJeU5CemUzaHNHbnBSZGF1dw">https://news.google.com/rss/articles/CBMifkFVX3lxTFA3cXo3LWNxNjkzcHpiUUpfY1pMYTFJSTY3aDJmZGRkeDBIcE9kT0JkU3MzbHEtSjVQUTdIZXQ2bWUwV3lFcGtoN3czdkRoaWdVN3NyLS1sYXY2amtHb1k5Qm1rRWNUT1djMnRMdHowZk5UZ0xocXE4WEktZnFZZ9IBgwFBVV95cUxOYmV4ZzBrUS1ZNjlIcTBsUHY0ckJ2YnVvX3pPRC0zb1dxalVXWjBuNW9QRzVpMUYzMWhKV214cWszT2hDVFN0Y3FQaVJkampzTEoyNkV3ZzVWNnRBNjVXUTRGaFBvYVVNTWY2VXhJTTZfN3dJeU5CemUzaHNHbnBSZGF1dw</a></li>
+
+
+
+<li><a href="https://www.androidheadlines.com/2026/11/claude-install-artifacts-as-standalone-apps.html">https://www.androidheadlines.com/2026/11/claude-install-artifacts-as-standalone-apps.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMicEFVX3lxTE5VZDA2UV9BNUdrZzVmSW9aWm1kVUFIZjg5OFB3NkZVR290QkZGOTlXSjQ1X3pkRE9nNWMwWUl6cHQxVGZTeVV0a3ZJZ1JMUXE3MW42TVVTblgtVFB1VHZPeE9Ja25hWHB1M0dMVG5jMzk">https://news.google.com/rss/articles/CBMicEFVX3lxTE5VZDA2UV9BNUdrZzVmSW9aWm1kVUFIZjg5OFB3NkZVR290QkZGOTlXSjQ1X3pkRE9nNWMwWUl6cHQxVGZTeVV0a3ZJZ1JMUXE3MW42TVVTblgtVFB1VHZPeE9Ja25hWHB1M0dMVG5jMzk</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMirwFBVV95cUxPblY0RmpPeXFpeFhJOGNvNTFOdXdZWXVmSzNneWd5UFFDUDh1S215Vkl4WVdHaDFlUkpfTUhRMW9fX1hQQ0FiV3IwSHdtSVhudS1KTHZLakZwOHBNSUdzVzd1NnlIMDhrakJSNXJrZVd2QmY2R2dRM1Fkc2w4YVNxUVVlejQtamo3ZHZuNDlFSTZaWk5Ra2ZDS2FsamhNRFVQaXg4NGpIUVhDYzU2Mmc0">https://news.google.com/rss/articles/CBMirwFBVV95cUxPblY0RmpPeXFpeFhJOGNvNTFOdXdZWXVmSzNneWd5UFFDUDh1S215Vkl4WVdHaDFlUkpfTUhRMW9fX1hQQ0FiV3IwSHdtSVhudS1KTHZLakZwOHBNSUdzVzd1NnlIMDhrakJSNXJrZVd2QmY2R2dRM1Fkc2w4YVNxUVVlejQtamo3ZHZuNDlFSTZaWk5Ra2ZDS2FsamhNRFVQaXg4NGpIUVhDYzU2Mmc0</a></li>
+
+
+
+<li><a href="https://mashdigi.com/claude-desktop-app-artifacts-to-standalone-app/">https://mashdigi.com/claude-desktop-app-artifacts-to-standalone-app/</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw">https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw</a></li>
+
+
+
+<li><a href="https://www.akhbarona.com/technology/436408.html">https://www.akhbarona.com/technology/436408.html</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA">https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMikwFBVV95cUxNai1YYzJid3JHV2drMl9fUnc3U0NMZVJ6VkZ6LVZaMkpMeDVrckR0LU1PSWV1dGVHWDRnQWdMcFRuRWtESF9QZFc5QkpKWUJEUHdYQ2c4MWx2Uk4tV1lCWHlZOHlKRlR2MVNtTDhhRnBfeklsQzd4OHVmQUVHd0JoRXN5dzgzazNZYnJXRHRkYzEtWk0">https://news.google.com/rss/articles/CBMikwFBVV95cUxNai1YYzJid3JHV2drMl9fUnc3U0NMZVJ6VkZ6LVZaMkpMeDVrckR0LU1PSWV1dGVHWDRnQWdMcFRuRWtESF9QZFc5QkpKWUJEUHdYQ2c4MWx2Uk4tV1lCWHlZOHlKRlR2MVNtTDhhRnBfeklsQzd4OHVmQUVHd0JoRXN5dzgzazNZYnJXRHRkYzEtWk0</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMioAFBVV95cUxNbDRGNkhKVVA5UEtpcldBSU9HeG95QmJSNDM1UzQ3Wm1IU0VsdjRpczNHYmFXUnFPR0Ftb2MyU1p3eVNZU09pMk54MW9nZWt0MEd1V2V5UGY5YWRQZmVQa3ExZjdaYW90bFZKSkJQVkNCS2lwYzdjak1YbVhnM3luT0JIVlU1NHFPUkdPRExZTFJCVTNqMGhOUE5PUFY4UzU1">https://news.google.com/rss/articles/CBMioAFBVV95cUxNbDRGNkhKVVA5UEtpcldBSU9HeG95QmJSNDM1UzQ3Wm1IU0VsdjRpczNHYmFXUnFPR0Ftb2MyU1p3eVNZU09pMk54MW9nZWt0MEd1V2V5UGY5YWRQZmVQa3ExZjdaYW90bFZKSkJQVkNCS2lwYzdjak1YbVhnM3luT0JIVlU1NHFPUkdPRExZTFJCVTNqMGhOUE5PUFY4UzU1</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg">https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg</a></li>
+
+
+
+<li><a href="https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw">https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw</a></li>
+
+
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p><strong>Sources:</strong> inc.com, siliconangle.com, thenextweb.com, techloy.com, macrumors.com, nacionale.com, computerworld.com, betanews.com, pcmag.com, zdnet.com, techrepublic.com, macstories.net, tomsguide.com, omgubuntu.co.uk, trendingtopics.eu, testingcatalog.com, macworld.com, eweek.com, androidheadlines.com, itavisen.no, ifun.de, sixcolors.com, techmeme.com, macwelt.de, ithome.com.tw, indianexpress.com, rbc.ua, akhbarona.com, mashdigi.com</p>
+
+
+
+
+
+
+
+
+
+<p class='metadata'><strong>Metadata:</strong> Cluster #4, 29 unique domains, 30 articles</p>
+
+
+
+
+    <details>
+        <summary>View Full JSON Data</summary>
+        <pre><code>{
+  "articles": [
+    {
+      "date": "2026-11-25T16:36:46.000Z",
+      "domain": "thenextweb.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw",
+      "title": "Claude can now turn its artifacts into Mac and Windows desktop apps"
+    },
+    {
+      "date": "2026-11-25T19:02:34.000Z",
+      "domain": "techloy.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMioAFBVV95cUxNbDRGNkhKVVA5UEtpcldBSU9HeG95QmJSNDM1UzQ3Wm1IU0VsdjRpczNHYmFXUnFPR0Ftb2MyU1p3eVNZU09pMk54MW9nZWt0MEd1V2V5UGY5YWRQZmVQa3ExZjdaYW90bFZKSkJQVkNCS2lwYzdjak1YbVhnM3luT0JIVlU1NHFPUkdPRExZTFJCVTNqMGhOUE5PUFY4UzU1",
+      "title": "Anthropic lets Claude create desktop apps for Mac and Windows"
+    },
+    {
+      "date": "2026-11-25T22:36:15.000Z",
+      "domain": "techloy.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMickFVX3lxTFBQY0UtSFJMSzRfelFIb3o5bHJ3N2JqNjd2V3IxdG5ZRjZfbEZhdEM3bGZ0LWVfRTFRVHMzUVk1My11M1kzYjBJa2FuMFFMOEdsTS1vLW1iRGZlOFY4VUN2eTJPcklISjd3aWhjUmdXOE9odw",
+      "title": "Claude Artifacts Now Install as Mac and Windows Desktop Apps"
+    },
+    {
+      "date": "2026-11-25T10:27:42.000Z",
+      "domain": "macrumors.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQeXY3V2RQN3RhTVhiRkFzajRKek5laTF6cERpZzVwdXFKd045YjBZUzRZU2VSRlF1SnJiay1hYlZpXzU1ZVdnNUswZkRBQnV0TDR0eFBBWEFOWkdXTTJHV2N6a2VQQnhmUGFDMnFVaVpQVDVmZWk4eDhHWkFZLVhKcw",
+      "title": "Claude Now Lets You Install Artifacts as Desktop Apps"
+    },
+    {
+      "date": "2026-11-25T18:19:11.000Z",
+      "domain": "nacionale.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPVFFMQWtvZGREN3J6RHdaT0JVMWNKQzlhX3ExRjNuR2prQlp5alpfMDlJYi01VEFPRGxHVWIzOGpILWNRVVc2U3R3bFpDWDZHcFFvZWp6LU80d3c0M0pzM05xMVJiWExZcTg5QnFzTmZnamRHTlpuWUh0S0M4cXpOZ0t6aTJERmlpWkNxM2ltYWJWT3lBWUpyakNuNjNlUU5ROGN4Z2d5bFVTX1pYTmh2RmZWdnVWa3M",
+      "title": "Can Claude make desktop apps? Yes: \u0027Install as app\u0027 turns Claude artifacts into Mac and Windows apps"
+    },
+    {
+      "date": "2026-11-25T16:25:36.000Z",
+      "domain": "computerworld.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw",
+      "title": "Anthropic lets you install Claude \u2018artifacts\u2019 as Mac apps"
+    },
+    {
+      "date": "2026-11-25T20:18:23.000Z",
+      "domain": "betanews.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMicEFVX3lxTE5VZDA2UV9BNUdrZzVmSW9aWm1kVUFIZjg5OFB3NkZVR290QkZGOTlXSjQ1X3pkRE9nNWMwWUl6cHQxVGZTeVV0a3ZJZ1JMUXE3MW42TVVTblgtVFB1VHZPeE9Ja25hWHB1M0dMVG5jMzk",
+      "title": "Claude artifacts can now install as standalone apps on Mac and Windows"
+    },
+    {
+      "date": "2026-11-26T03:18:29.000Z",
+      "domain": "pcmag.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeW9mSnlSM1JOUTVTRFV5TC1rOVFDUzRNNW0wRHllZlRaVjkwYV9qZDNkYVBUdDJuVVNtSkJVWkxiaUJ4VWdFbmVxVzZ0cDA4S3ZtMnVfQ25JX0N0SnFrYjJqT0VTMklTckp5MVV3ZllUU2oyTXNEa0lWWWJxUDFQWXNlamtFc3M3WDUzZHBvVjg",
+      "title": "Claude AI Now Turns Artifacts Into Apps for Mac and PC"
+    },
+    {
+      "date": "2026-11-25T18:54:05.000Z",
+      "domain": "zdnet.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw",
+      "title": "You can turn Claude artifacts into Windows and Mac apps now \u2013 here\u2019s how"
+    },
+    {
+      "date": "2026-11-25T19:05:55.000Z",
+      "domain": "techrepublic.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg",
+      "title": "Claude Turns Artifacts Into Desktop Apps: What Changes on Mac and Windows"
+    },
+    {
+      "date": "2026-11-25T17:25:49.000Z",
+      "domain": "macstories.net",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA",
+      "title": "A Closer Look at Claude\u2019s Mac \u201cApps\u201d"
+    },
+    {
+      "date": "2026-11-26T06:11:15.000Z",
+      "domain": "tomsguide.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMixgFBVV95cUxOTllHY3hURGNxT05YUEptekFBSjl4MXVtcVpJOWxBUWdFMmlidXRFWHl5VEVRanVLRHRQOEQ3TWFZRXBxODNUbnBPOWtGdlRDMFBVeWFYRFJ2YV9HNXhuQVlwVTB0N1o4c1FzZHBDQi16YmtIdXhmWVdqU2NjNTV6YjZ1ekVlQ2VDWVZLT1RsNXdRSUxHNVBRUlJ5aVktRHBrRTFZSGEwRFBJbDhzUXEyWGVSNHVjVm43aHd6SndFSF9iOXEtakE",
+      "title": "Claude just got a major update that lets you build your own desktop apps \u2014 no coding required"
+    },
+    {
+      "date": "2026-11-26T03:04:39.000Z",
+      "domain": "omgubuntu.co.uk",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMifkFVX3lxTFA3cXo3LWNxNjkzcHpiUUpfY1pMYTFJSTY3aDJmZGRkeDBIcE9kT0JkU3MzbHEtSjVQUTdIZXQ2bWUwV3lFcGtoN3czdkRoaWdVN3NyLS1sYXY2amtHb1k5Qm1rRWNUT1djMnRMdHowZk5UZ0xocXE4WEktZnFZZ9IBgwFBVV95cUxOYmV4ZzBrUS1ZNjlIcTBsUHY0ckJ2YnVvX3pPRC0zb1dxalVXWjBuNW9QRzVpMUYzMWhKV214cWszT2hDVFN0Y3FQaVJkampzTEoyNkV3ZzVWNnRBNjVXUTRGaFBvYVVNTWY2VXhJTTZfN3dJeU5CemUzaHNHbnBSZGF1dw",
+      "title": "Claude artifacts can now be installed as desktop apps (just not on Linux)"
+    },
+    {
+      "date": "2026-11-25T18:54:50.000Z",
+      "domain": "inc.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikgFBVV95cUxONWprSmNQa2c3ckpWZTA3eU50VklIMnRaaDFWeHA4N2RlVlo3WjhVYkt0dXJ2aGllSDFSVUxfeG1kd2VlS0Iwel9VZTNLYkdaSGZVc2VTaWxXbDBFS3NpNHd5RnlQMDRqckxOTHlpYUllcFpLWExnb0ZzUXJGYTZ2OHlwSnZ1M2p3VEo1RlUybFdPQQ",
+      "title": "Anthropic\u0027s Claude Can Now Turn Your Workflows Into Desktop Apps. Here\u2019s How to Get Started"
+    },
+    {
+      "date": "2026-11-25T11:37:19.000Z",
+      "domain": "trendingtopics.eu",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMieEFVX3lxTE5VM3FLcU94ZzdPX1FaNGE1eVJsOWUxdzBqeFJTdXlWVkx0YVl5VmhsTUdDdEE3MFd0WGVfNEVFWGJmZk4zXy1NOFhSa244V3duVjRvR1RQZGhJMFR6QW1BOHNmajJvbUJLbGkwRHQzQnB4eGNSVVg3cA",
+      "title": "Claude Can Now Build Your Own Mac and Windows Apps"
+    },
+    {
+      "date": "2026-11-25T02:36:00.000Z",
+      "domain": "siliconangle.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNak95N3VGUTZral9OeUxMdTFPTmE5TWJ2VThkMmFOWDU4YzhGNDJYSEdFNHhyS1daTl9kVXB5S3hoMXpjdXhWM3Z6UzFydzBRWEYxYlE4QjJ0U2VDUGlGOERKdkcweDBUSlVSX2hvZEtnUExFU1owdC1MbUFUVF9CTnB1OGNRazFHTlg2bEFmQzhKSjlSVUFEemhpNjVNVWxVSDRGQW4xR0ZfQU1FLWZlNU5NTUZRT2J1MnJLU1otYXlTUQ",
+      "title": "Anthropic is trying to kill traditional desktop apps with Claude-generated desktop apps"
+    },
+    {
+      "date": "2026-11-25T12:55:43.000Z",
+      "domain": "testingcatalog.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMikwFBVV95cUxNai1YYzJid3JHV2drMl9fUnc3U0NMZVJ6VkZ6LVZaMkpMeDVrckR0LU1PSWV1dGVHWDRnQWdMcFRuRWtESF9QZFc5QkpKWUJEUHdYQ2c4MWx2Uk4tV1lCWHlZOHlKRlR2MVNtTDhhRnBfeklsQzd4OHVmQUVHd0JoRXN5dzgzazNZYnJXRHRkYzEtWk0",
+      "title": "Anthropic now allows installing artifacts as desktop apps"
+    },
+    {
+      "date": "2026-11-25T10:30:51.000Z",
+      "domain": "macworld.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://news.google.com/rss/articles/CBMirwFBVV95cUxPblY0RmpPeXFpeFhJOGNvNTFOdXdZWXVmSzNneWd5UFFDUDh1S215Vkl4WVdHaDFlUkpfTUhRMW9fX1hQQ0FiV3IwSHdtSVhudS1KTHZLakZwOHBNSUdzVzd1NnlIMDhrakJSNXJrZVd2QmY2R2dRM1Fkc2w4YVNxUVVlejQtamo3ZHZuNDlFSTZaWk5Ra2ZDS2FsamhNRFVQaXg4NGpIUVhDYzU2Mmc0",
+      "title": "Anthropic unveils Claude-powered easy button for making Mac apps"
+    },
+    {
+      "author": "eWEEK Staff",
+      "date": "2026-11-25T18:00:00.000Z",
+      "domain": "eweek.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.eweek.com/news/claude-artifacts-install-as-app-mac-windows/",
+      "title": "Claude Can Now Turn Artifacts Into Mac and Windows Apps: How It Works"
+    },
+    {
+      "author": "Jean Leon",
+      "date": "2026-11-25T15:14:54.000Z",
+      "domain": "androidheadlines.com",
+      "image": "https://kagiproxy.com/img/y7_9Xt91UB-d3Bad_ZfOHv1D8v4shLbqj_noEFXkvBivIKYNwryXCUeaq1P9NrY6sDfQf9NPanzlPokRdgoLIzHd0UShqmjECGaaNJkAsy2C5vANxnAnU5RGRfxzYKCxa-puBH-T1_swKeemcicNlPUO7dkPiB2guw",
+      "image_caption": "",
+      "link": "https://www.androidheadlines.com/2026/11/claude-install-artifacts-as-standalone-apps.html",
+      "title": "Anthropic\u0027s Claude Now Lets You Install Artifacts as Standalone Apps on Windows and Mac"
+    },
+    {
+      "author": "Trond Bie",
+      "date": "2026-11-26T07:06:23.000Z",
+      "domain": "itavisen.no",
+      "image": "https://kagiproxy.com/img/cm759hcUTP6njQ605es_bGc8VQkowVxvR_SMQYBK9EWcjvB-6I-KeMrVfspR-uIFEsYeVY2rz1idbNThA25hnw7BH82i2xFFcOibVTa5JZruMtoXjnxzqEdezKXReDLZD94F9hzrOvDiTwarc47yb07bAQL-2uCR5dODB7kJtm-iUx5nDIHv2nAb-0gMIlc",
+      "image_caption": "",
+      "link": "https://itavisen.no/2026/11/26/claude-lag-apper-windows-mac/",
+      "title": "Claude har blitt app-generator for Windows og macOS"
+    },
+    {
+      "author": "Chris",
+      "date": "2026-11-25T10:11:03.000Z",
+      "domain": "ifun.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ifun.de/claude-macht-aus-artefakten-eigenstaendige-mac-apps-295926/",
+      "title": "Claude macht aus Artefakten eigenst\u00e4ndige Mac-Apps"
+    },
+    {
+      "author": "Jason Snell",
+      "date": "2026-11-25T17:45:55.000Z",
+      "domain": "sixcolors.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://sixcolors.com/link/2026/11/claude-now-lets-you-vibe-code-html-mac-apps/",
+      "title": "Claude now lets you vibe code HTML Mac \u201capps\u201d \u21a6"
+    },
+    {
+      "date": "2026-11-25T23:20:01.000Z",
+      "domain": "techmeme.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.techmeme.com/261125/p40#a261125p40",
+      "title": "Hands-on with the \"Install as app\" feature for Claude artifacts: they are HTML apps wrapped inside an Electron shim, which is managed via the main Claude app (Federico Viticci/MacStories)"
+    },
+    {
+      "date": "2026-11-25T13:30:00.000Z",
+      "domain": "macwelt.de",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.macwelt.de/article/3296779/eigene-mac-apps-ohne-programmieren-das-kann-claude-jetzt.html",
+      "title": "Eigene Mac-Apps ohne Programmieren: Das kann Claude jetzt"
+    },
+    {
+      "author": "\u6797\u598d\u6eb1",
+      "date": "2026-11-26T02:40:05.000Z",
+      "domain": "ithome.com.tw",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.ithome.com.tw/news/180804",
+      "title": "Claude\u65b0\u529f\u80fd\u53ef\u5c07\u7269\u4ef6\u8b8a\u6210\u7368\u7acbMac\u3001Windows App"
+    },
+    {
+      "date": "2026-11-25T08:22:22.000Z",
+      "domain": "indianexpress.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://indianexpress.com/article/technology/artificial-intelligence/anthropic-artifacts-install-as-app-desktop-10977812/",
+      "title": "Anthropic now lets users download artifacts as standalone apps on Mac and Windows"
+    },
+    {
+      "author": "\u041e\u043b\u044c\u0433\u0430 \u0417\u0430\u0432\u0430\u0434\u0430",
+      "date": "2026-11-25T10:14:56.000Z",
+      "domain": "rbc.ua",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.rbc.ua/rus/news/claude-zapuskae-vlasni-programi-mac-i-windows-1795599494.html",
+      "title": "Claude \u0437\u0430\u043f\u0443\u0441\u043a\u0430\u0454 \u0432\u043b\u0430\u0441\u043d\u0456 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u0438 \u043d\u0430 Mac \u0456 Windows: \u044f\u043a\u0456 \u0434\u043e\u0437\u0432\u043e\u043b\u0438 \u043c\u043e\u0436\u0443\u0442\u044c \u0431\u0443\u0442\u0438 \u043d\u0435\u0431\u0435\u0437\u043f\u0435\u0447\u043d\u0438\u043c\u0438"
+    },
+    {
+      "date": "2026-11-25T15:42:00.000Z",
+      "domain": "akhbarona.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://www.akhbarona.com/technology/436408.html",
+      "title": "\"\u0643\u0644\u0648\u062f\" \u064a\u062a\u064a\u062d \u0644\u0644\u0645\u0633\u062a\u062e\u062f\u0645\u064a\u0646 \u0625\u0646\u0634\u0627\u0621 \u062a\u0637\u0628\u064a\u0642\u0627\u062a \u062a\u0639\u0645\u0644 \u0645\u0628\u0627\u0634\u0631\u0629 \u0639\u0644\u0649 \u062d\u0648\u0627\u0633\u064a\u0628\u0647\u0645"
+    },
+    {
+      "author": "\u694a\u53c8\u8087 (Mash Yang)",
+      "date": "2026-11-26T01:31:29.000Z",
+      "domain": "mashdigi.com",
+      "image": "",
+      "image_caption": "",
+      "link": "https://mashdigi.com/claude-desktop-app-artifacts-to-standalone-app/",
+      "title": "\u804a\u5929\u6846\u53ea\u662f\u904e\u6e21\uff01Anthropic\u63a8Claude\u65b0\u529f\u80fd\u8b93\u5c0d\u8a71\u7269\u4ef6\u4e00\u9375\u8b8a\u8eabMac\uff0fWindows\u7368\u7acbApp"
+    }
+  ],
+  "business_angle": [
+    "The beta excludes HIPAA-ready organizations and hybrid deployments, limiting its immediate reach among some regulated or mixed-environment customers [siliconangle.com#1][trendingtopics.eu#1].",
+    "Because artifact apps can connect to services such as Gmail, Slack, Notion and Salesforce, they could complement those platforms by adding custom Claude-built interfaces to existing workplace tools [inc.com#1]."
+  ],
+  "category": "AI",
+  "cluster_number": 4,
+  "did_you_know": "",
+  "domains": [
+    {
+      "favicon": "/api/favicon-proxy?domain=inc.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "inc.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=siliconangle.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "siliconangle.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=thenextweb.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "thenextweb.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techloy.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techloy.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macrumors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macrumors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=nacionale.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "nacionale.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=computerworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "computerworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=betanews.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "betanews.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=pcmag.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "pcmag.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=zdnet.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "zdnet.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techrepublic.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techrepublic.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macstories.net\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macstories.net"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=tomsguide.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "tomsguide.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=omgubuntu.co.uk\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "omgubuntu.co.uk"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=trendingtopics.eu\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "trendingtopics.eu"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=testingcatalog.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "testingcatalog.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macworld.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macworld.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=eweek.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "eweek.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=androidheadlines.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "androidheadlines.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=itavisen.no\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "itavisen.no"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ifun.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ifun.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=sixcolors.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "sixcolors.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=techmeme.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "techmeme.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=macwelt.de\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "macwelt.de"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=ithome.com.tw\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "ithome.com.tw"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=indianexpress.com\u0026quality=fast",
+      "isPaywalled": true,
+      "name": "indianexpress.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=rbc.ua\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "rbc.ua"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=akhbarona.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "akhbarona.com"
+    },
+    {
+      "favicon": "/api/favicon-proxy?domain=mashdigi.com\u0026quality=fast",
+      "isPaywalled": false,
+      "name": "mashdigi.com"
+    }
+  ],
+  "economic_implications": "",
+  "emoji": "\ud83e\udde9",
+  "feed_category": "AI",
+  "future_outlook": "",
+  "geopolitical_context": "",
+  "heading_level": 1,
+  "historical_background": "Anthropic introduced Claude artifacts in 2024 as interactive creations users could make and share; before this desktop-app beta, they ran through Claude or a browser [zdnet.com#1][ifun.de#1].",
+  "humanitarian_impact": "",
+  "industry_impact": [],
+  "international_reactions": [],
+  "item_category": "Ai Software",
+  "key_players": [],
+  "location": "",
+  "number_of_titles": 30,
+  "perspectives": [
+    {
+      "sources": [
+        {
+          "name": "MacStories",
+          "url": "https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA"
+        }
+      ],
+      "text": "MacStories argues the strategic concern is that users could build a Claude-centered layer of tools and mods on their Macs, shifting some of Apple\u2019s ecosystem experience toward Anthropic [macstories.net#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "TechRepublic",
+          "url": "https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg"
+        }
+      ],
+      "text": "TechRepublic recommends piloting an app with sample notes, avoiding production accounts and sensitive files, and keeping full computer access off during testing [techrepublic.com#1]."
+    },
+    {
+      "sources": [
+        {
+          "name": "Computerworld",
+          "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw"
+        }
+      ],
+      "text": "Computerworld columnist Jonny Evans urged users to be cautious about granting full system access and argued Apple should emphasize privacy, data retention and on-device AI as lower-risk alternatives [computerworld.com#1]."
+    }
+  ],
+  "primary_image": {
+    "caption": "",
+    "credit": "androidheadlines.com",
+    "link": "https://www.androidheadlines.com/2026/11/claude-install-artifacts-as-standalone-apps.html",
+    "url": "https://kagiproxy.com/img/XnjEfI5ehu1vvia8GFUWCmAB6KUfssPNAqURQLo3WeneVL2a5axYqTNF5TC0awrij8S4hHiu36_MN3vDIjdezZq4fD-9LdMFaN8NEs-_F2AUrGK19cQ4i3yprrXjCG1_74s2Y2BjqDN1xlW68EzYHU4op-WmQqFq6A"
+  },
+  "published": "2026-11-26T12:00:14.495Z",
+  "quote": "These apps can do native things, like adding menu bar items, creating transparent windows, or sending notifications.",
+  "quote_attribution": "TestingCatalog",
+  "quote_author": "Felix Rieseberg, Anthropic engineer",
+  "scientific_significance": [],
+  "secondary_image": null,
+  "source_urls": [
+    "https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw",
+    "https://news.google.com/rss/articles/CBMikAFBVV95cUxQeW9mSnlSM1JOUTVTRFV5TC1rOVFDUzRNNW0wRHllZlRaVjkwYV9qZDNkYVBUdDJuVVNtSkJVWkxiaUJ4VWdFbmVxVzZ0cDA4S3ZtMnVfQ25JX0N0SnFrYjJqT0VTMklTckp5MVV3ZllUU2oyTXNEa0lWWWJxUDFQWXNlamtFc3M3WDUzZHBvVjg",
+    "https://news.google.com/rss/articles/CBMikgFBVV95cUxONWprSmNQa2c3ckpWZTA3eU50VklIMnRaaDFWeHA4N2RlVlo3WjhVYkt0dXJ2aGllSDFSVUxfeG1kd2VlS0Iwel9VZTNLYkdaSGZVc2VTaWxXbDBFS3NpNHd5RnlQMDRqckxOTHlpYUllcFpLWExnb0ZzUXJGYTZ2OHlwSnZ1M2p3VEo1RlUybFdPQQ",
+    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQeXY3V2RQN3RhTVhiRkFzajRKek5laTF6cERpZzVwdXFKd045YjBZUzRZU2VSRlF1SnJiay1hYlZpXzU1ZVdnNUswZkRBQnV0TDR0eFBBWEFOWkdXTTJHV2N6a2VQQnhmUGFDMnFVaVpQVDVmZWk4eDhHWkFZLVhKcw",
+    "https://www.eweek.com/news/claude-artifacts-install-as-app-mac-windows/",
+    "https://itavisen.no/2026/11/26/claude-lag-apper-windows-mac/",
+    "https://sixcolors.com/link/2026/11/claude-now-lets-you-vibe-code-html-mac-apps/",
+    "https://www.ithome.com.tw/news/180804",
+    "https://news.google.com/rss/articles/CBMickFVX3lxTFBQY0UtSFJMSzRfelFIb3o5bHJ3N2JqNjd2V3IxdG5ZRjZfbEZhdEM3bGZ0LWVfRTFRVHMzUVk1My11M1kzYjBJa2FuMFFMOEdsTS1vLW1iRGZlOFY4VUN2eTJPcklISjd3aWhjUmdXOE9odw",
+    "https://news.google.com/rss/articles/CBMieEFVX3lxTE5VM3FLcU94ZzdPX1FaNGE1eVJsOWUxdzBqeFJTdXlWVkx0YVl5VmhsTUdDdEE3MFd0WGVfNEVFWGJmZk4zXy1NOFhSa244V3duVjRvR1RQZGhJMFR6QW1BOHNmajJvbUJLbGkwRHQzQnB4eGNSVVg3cA",
+    "https://news.google.com/rss/articles/CBMixgFBVV95cUxOTllHY3hURGNxT05YUEptekFBSjl4MXVtcVpJOWxBUWdFMmlidXRFWHl5VEVRanVLRHRQOEQ3TWFZRXBxODNUbnBPOWtGdlRDMFBVeWFYRFJ2YV9HNXhuQVlwVTB0N1o4c1FzZHBDQi16YmtIdXhmWVdqU2NjNTV6YjZ1ekVlQ2VDWVZLT1RsNXdRSUxHNVBRUlJ5aVktRHBrRTFZSGEwRFBJbDhzUXEyWGVSNHVjVm43aHd6SndFSF9iOXEtakE",
+    "https://www.ifun.de/claude-macht-aus-artefakten-eigenstaendige-mac-apps-295926/",
+    "https://indianexpress.com/article/technology/artificial-intelligence/anthropic-artifacts-install-as-app-desktop-10977812/",
+    "https://news.google.com/rss/articles/CBMitwFBVV95cUxPVFFMQWtvZGREN3J6RHdaT0JVMWNKQzlhX3ExRjNuR2prQlp5alpfMDlJYi01VEFPRGxHVWIzOGpILWNRVVc2U3R3bFpDWDZHcFFvZWp6LU80d3c0M0pzM05xMVJiWExZcTg5QnFzTmZnamRHTlpuWUh0S0M4cXpOZ0t6aTJERmlpWkNxM2ltYWJWT3lBWUpyakNuNjNlUU5ROGN4Z2d5bFVTX1pYTmh2RmZWdnVWa3M",
+    "https://news.google.com/rss/articles/CBMiwgFBVV95cUxNak95N3VGUTZral9OeUxMdTFPTmE5TWJ2VThkMmFOWDU4YzhGNDJYSEdFNHhyS1daTl9kVXB5S3hoMXpjdXhWM3Z6UzFydzBRWEYxYlE4QjJ0U2VDUGlGOERKdkcweDBUSlVSX2hvZEtnUExFU1owdC1MbUFUVF9CTnB1OGNRazFHTlg2bEFmQzhKSjlSVUFEemhpNjVNVWxVSDRGQW4xR0ZfQU1FLWZlNU5NTUZRT2J1MnJLU1otYXlTUQ",
+    "https://www.macwelt.de/article/3296779/eigene-mac-apps-ohne-programmieren-das-kann-claude-jetzt.html",
+    "https://www.techmeme.com/261125/p40#a261125p40",
+    "https://www.rbc.ua/rus/news/claude-zapuskae-vlasni-programi-mac-i-windows-1795599494.html",
+    "https://news.google.com/rss/articles/CBMifkFVX3lxTFA3cXo3LWNxNjkzcHpiUUpfY1pMYTFJSTY3aDJmZGRkeDBIcE9kT0JkU3MzbHEtSjVQUTdIZXQ2bWUwV3lFcGtoN3czdkRoaWdVN3NyLS1sYXY2amtHb1k5Qm1rRWNUT1djMnRMdHowZk5UZ0xocXE4WEktZnFZZ9IBgwFBVV95cUxOYmV4ZzBrUS1ZNjlIcTBsUHY0ckJ2YnVvX3pPRC0zb1dxalVXWjBuNW9QRzVpMUYzMWhKV214cWszT2hDVFN0Y3FQaVJkampzTEoyNkV3ZzVWNnRBNjVXUTRGaFBvYVVNTWY2VXhJTTZfN3dJeU5CemUzaHNHbnBSZGF1dw",
+    "https://www.androidheadlines.com/2026/11/claude-install-artifacts-as-standalone-apps.html",
+    "https://news.google.com/rss/articles/CBMicEFVX3lxTE5VZDA2UV9BNUdrZzVmSW9aWm1kVUFIZjg5OFB3NkZVR290QkZGOTlXSjQ1X3pkRE9nNWMwWUl6cHQxVGZTeVV0a3ZJZ1JMUXE3MW42TVVTblgtVFB1VHZPeE9Ja25hWHB1M0dMVG5jMzk",
+    "https://news.google.com/rss/articles/CBMirwFBVV95cUxPblY0RmpPeXFpeFhJOGNvNTFOdXdZWXVmSzNneWd5UFFDUDh1S215Vkl4WVdHaDFlUkpfTUhRMW9fX1hQQ0FiV3IwSHdtSVhudS1KTHZLakZwOHBNSUdzVzd1NnlIMDhrakJSNXJrZVd2QmY2R2dRM1Fkc2w4YVNxUVVlejQtamo3ZHZuNDlFSTZaWk5Ra2ZDS2FsamhNRFVQaXg4NGpIUVhDYzU2Mmc0",
+    "https://mashdigi.com/claude-desktop-app-artifacts-to-standalone-app/",
+    "https://news.google.com/rss/articles/CBMigAFBVV95cUxQdVN0ck1jSHMyZFl3X1Y4aDBRMGZLaTJQMEYyUlZkbE5iazE5cTBfcFhpWjM2cTFYNWctRWFMaV84a2NEazNSelhRYkloeHFkWFg5TDg3bVQtOXBCWEJWLTFRU2dWOXVkbGl6WVFlTHhkdllGRmFlVVRpakMtMjN0Qw",
+    "https://www.akhbarona.com/technology/436408.html",
+    "https://news.google.com/rss/articles/CBMieEFVX3lxTE4zcEdJZmRLbWdycGdBbzRLMWpZVUVwZHhRRlZQNjlyNHVBaTBmbFhscXdLLXFVMEtaV2ttc2pfQ0JfLXVHRUE1cG1XaVdyeFBzdGpZbExDWHB4eE82cko0UHk0RDdWdEEwWnY0SzFzTDNRODN6SW9YbA",
+    "https://news.google.com/rss/articles/CBMikwFBVV95cUxNai1YYzJid3JHV2drMl9fUnc3U0NMZVJ6VkZ6LVZaMkpMeDVrckR0LU1PSWV1dGVHWDRnQWdMcFRuRWtESF9QZFc5QkpKWUJEUHdYQ2c4MWx2Uk4tV1lCWHlZOHlKRlR2MVNtTDhhRnBfeklsQzd4OHVmQUVHd0JoRXN5dzgzazNZYnJXRHRkYzEtWk0",
+    "https://news.google.com/rss/articles/CBMioAFBVV95cUxNbDRGNkhKVVA5UEtpcldBSU9HeG95QmJSNDM1UzQ3Wm1IU0VsdjRpczNHYmFXUnFPR0Ftb2MyU1p3eVNZU09pMk54MW9nZWt0MEd1V2V5UGY5YWRQZmVQa3ExZjdaYW90bFZKSkJQVkNCS2lwYzdjak1YbVhnM3luT0JIVlU1NHFPUkdPRExZTFJCVTNqMGhOUE5PUFY4UzU1",
+    "https://news.google.com/rss/articles/CBMifEFVX3lxTFBHSXZZSVI4U2hpUm9DMUdHQ2RGQmxKVHp6ekNxc3VVWm9qbEdqYVRsZ0t6YlZhX013SlNqNnotbDJvUFFLYVhoYmh1M010WWdmMjlCYzgyc1ZSSVktcEtRRFR4Q0VLdFVWOEFBRFBhSmhQb3pEcWtPdzhkdmg",
+    "https://news.google.com/rss/articles/CBMiqgFBVV95cUxQNTluN3NCeXBFdnNtdk9RUE0zN0xScVY3enlWaUl6ZFViRENLTWptMEFXblpoT2REdDZjUF9kQlgwdzJ0RDczTlBDYWQtS1ZHa3AxZkRnMk8zYkdOcTlwcVlHWHZQTmtHT1NBM0h0YmU2SEJna3pSNm41X3g5am4wSVhKWUo0TVgtRDBjdGFuaVk3bmJnMGdpSzRERzJkWUpzUHZJOFpFMnlQdw"
+  ],
+  "suggested_qna": [
+    {
+      "answer": "No. Claude Docs, Slides and Sheets, as well as legacy artifacts and live artifacts from Claude Cowork, are among those that cannot be installed [zdnet.com#1].",
+      "question": "Can every Claude artifact be installed as a desktop app?"
+    }
+  ],
+  "summary": "A hands-on analysis of a Claude app on Mac found an HTML-based tool wrapped in a small Electron launcher and managed through the main Claude app, rather than conventional native Mac software [macstories.net#1]. The beta lets users turn interactive tools created with Claude into separate desktop apps for Mac and Windows that can use Claude and connected services [macstories.net#1][thenextweb.com#1].\n\nThe desktop app mediates access to computer functions, including file-system operations, and users can grant installed tools permission to read, change or delete files [macstories.net#1][thenextweb.com#1]. Anthropic does not review apps before installation; code loaded from an outside website can also change without another permission prompt [thenextweb.com#1][betanews.com#1].\n\nThe tools require an internet connection and an active Claude sign-in, and AI requests count toward plan limits [zdnet.com#1][pcmag.com#1]. Anthropic\u2019s Compliance API records app openings and access checks as artifact views, but not installations, permission decisions or actions performed on the computer [techrepublic.com#1].",
+  "talking_points": [
+    "Permission scope: Full computer access is restricted to apps users created themselves, or\u2014on Team and Enterprise plans\u2014apps made within their organization; each approval covers one app version [thenextweb.com#1][testingcatalog.com#1].",
+    "IT oversight: TechRepublic says administrators can restrict the feature through Claude organization settings or device-management policy, with the stricter rule taking precedence [techrepublic.com#1].",
+    "Software market: TrendingTopics says customizable Claude tools could compete with some software subscriptions [trendingtopics.eu#1]."
+  ],
+  "technical_details": [
+    "Electron wrapper: MacStories\u2019 inspection found a 900-kilobyte app bundle containing a 51-kilobyte Objective-C launcher and an 80-kilobyte notification helper; the launcher loads Claude\u2019s Electron framework [macstories.net#1].",
+    "Local file access: The tested tool called Claude\u2019s desktop API for functions such as `fs.readdir` and `childProcess.spawn`, then used macOS utilities including `df`, `du` and `mdfind` to inspect storage [macstories.net#1]."
+  ],
+  "timeline": [],
+  "title": "Hands-on analysis finds Claude artifact app uses Anthropic\u2019s Electron-based runtime",
+  "travel_advisory": "",
+  "unique_domains": 29,
+  "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxQMDQwVEhMUGlwVmh0dFdzQXhFdUs3LWZwQlQyN0xWamlrVTlaU1BMNmdLUFNPdGhvdWlEeFF4SC0xLUIxdkwtcjd4aGZMd0w3NWgtS1NmdFZDclZ6OFhoOTM1OVRDSFlBbjN5Y0NVRGxkc0lHcFpyejRvbzVnUVFNMmNEazFwdw",
+  "user_action_items": []
+}</code></pre>
+    </details>
+    <footer>
+        <p>Generated from <a href="https://news.kagi.com">Kagi News</a> data</p>
+    </footer>
+</body>
+</html>
